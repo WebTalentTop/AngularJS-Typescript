@@ -5,8 +5,7 @@ import { Component } from '@angular/core';
 import "rxjs/add/operator/map";
 
 @Component({
-    selector: 'edit-buildLevels',
-    styleUrls: ['app/body/Admin/Vehicle/BuildLevels/Edit/edit.component.css'], 
+    selector: 'edit',
     templateUrl: 'app/body/Admin/Vehicle/BuildLevels/Edit/edit.component.html'
 })
 export class EditComponent {
@@ -17,7 +16,7 @@ export class EditComponent {
     description: string;
     model:any;
 
-    constructor(private route: ActivatedRoute, private platformService: PlatformService) {
+    constructor(private route:ActivatedRoute, private platformService: PlatformService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
         platformService.getPlatformById(this.id).subscribe(res => this.model = res);
