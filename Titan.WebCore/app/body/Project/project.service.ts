@@ -1,3 +1,5 @@
+/// <reference path="../../../typings/globals/core-js/index.d.ts" />
+/// <reference path="../../../typings/shim.d.ts" />
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';

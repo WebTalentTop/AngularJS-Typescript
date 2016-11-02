@@ -3,9 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from '../project.service'
 
 @Component({
-    moduleId: module.id,
+    //moduleId: module.id,
     selector: 'project-detail-main',
-    templateUrl: 'project-detail-main.component.html'
+    templateUrl: 'app/body/Project/DetailsMain/project-detail-main.component.html'
 })
 export class ProjectDetailMainComponent implements OnInit {
 

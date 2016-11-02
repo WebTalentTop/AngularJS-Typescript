@@ -1,4 +1,4 @@
-<h1 [innerHTML]="title"></h1>
+<!--<h1 [innerHTML]="title"></h1>
 <p-dataTable [value]="gridData"
              [lazy]="true"
              [paginator]="true"
@@ -8,5 +8,6 @@
     <p-column *ngFor="let col of cols" [field]="col.Field" [header]="col.Header" [sortable]="col.Sortable" [filter]="col.Filter" filterMatchMode="contains" [hidden]="col.Hidden"></p-column>
 
 
-</p-dataTable>
+</p-dataTable>-->
+<grid-data [gridValues]="gridData" [colsData] ="cols" [confInfos]="confInfo" (lazyLoad)="loadFreshDepartments($event)" [title]="title"></grid-data>
 <button (click)="onProjectDetailsClick()">Load Details</button>
