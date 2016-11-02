@@ -1,0 +1,88 @@
+<h1>Torque Book</h1>
+<div class="ui-g-12" *ngIf="BuildLevels">
+    <div class="ui-grid-row">
+        <!--<div class="ui-grid-col-2"></div>-->
+        <div class="ui-grid-col-12">
+            <p-treeTable [value]="BuildLevels" [style]="{'margin-top':'30px'}"
+                (onNodeExpand)="nodeExpand($event)">
+                <header>Build Levels</header>
+                <p-column field="name" header="Name"></p-column>
+                <p-column field="description" header="Description"></p-column>
+                <p-column header="Action">
+                    <template let-col let-node="rowData" pTemplate type="body">
+                        <button type="button" *ngIf="canAdd(node.data.rowType)" pButton [label]="getLabel(node.data.rowType)" (click)="onAdd(node.data.rowType, node.data.id, $event)"></button>
+                    </template>
+                </p-column>
+            </p-treeTable>
+            <!--<button pButton type="<sub></sub>mit" label="Add" icon="ui-icon-plus" iconPos="left"
+                (click)="onAddTorqueBook()"></button>-->
+            <!--[disabled]="!projectForm.valid"-->
+        </div>
+        <!--<div class="ui-grid-col-4"></div>-->
+    </div>
+</div>
+
+<p-dialog header="Add Torque Book" [(visible)]="displayAddTorqueBook" modal="modal" showEffect="fade">
+    <form #torqueBookForm>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+                Torque Book Name*:
+            </div>
+            <div class="ui-grid-col-8">
+                <input type="text" pInputText
+                        [(ngModel)]="newTorqueBookName"
+                        name="newTorqueBookName"
+                        #newTorqueBookNameRef
+                        placeholder="Required"
+                        maxlength="255"
+                        class="form-control" required />
+            </div>
+            <!--{{newTorqueBookNameRef.errors}}-->
+            <div class="ui-grid-col-4" *ngIf="newTorqueBookNameRef.errors?.required">
+                {{newTorqueBookNameRef.errors | json}} this field is required
+            </div>
+
+            <div class="ui-grid-col-4" *ngIf="newTorqueBookNameRef.errors?.maxlength">
+                Maximum length reached {{newTorqueBookNameRef.errors?.minlength.requiredLength}}.
+            </div>
+        </div>
+    </form>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-check" (click)="onAddTorqueBookConfirmation()" label="Add"></button>
+            <button type="button" pButton icon="fa-close" (click)="onAddTorqueBookCancel()" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Add Torque Sheet" [(visible)]="displayAddTorqueSheet" modal="modal" showEffect="fade">
+    <form #torqueSheetForm>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4">
+                Torque Sheet Name*:
+            </div>
+            <div class="ui-grid-col-8">
+                <input type="text" pInputText
+                        [(ngModel)]="newTorqueSheetName"
+                        name="newTorqueSheetName"
+                        #newTorqueSheetNameRef
+                        placeholder="Required"
+                        maxlength="255"
+                        class="form-control" required />
+            </div>
+            <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.required">
+                {{newTorqueSheetNameRef.errors | json}} this field is required
+            </div>
+
+            <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.maxlength">
+                Maximum length reached {{newTorqueSheetNameRef.errors?.minlength.requiredLength}}.
+            </div>
+        </div>
+    </form>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetConfirmation()" label="Add"></button>
+            <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetCancel()" label="Cancel"></button>
+        </div>
+    </footer>
+</p-dialog>

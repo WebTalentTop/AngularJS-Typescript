@@ -1,0 +1,11 @@
+﻿.form-control{
+    width: 100px;
+    height: 30px;
+    padding: 7px;
+}
+
+@media screen {
+    .ui-md-2 {
+        width: 11%;
+    }
+}

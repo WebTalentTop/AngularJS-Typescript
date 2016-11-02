@@ -1,0 +1,244 @@
+﻿<div [ngClass]="{'layout-wrapper':true,'layout-compact':layoutCompact}">
+
+    <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
+            'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
+        <!-- Top Bar -->
+        <div class="topbar clearfix">
+            <div class="topbar-left">
+                <div class="logo"></div>
+            </div>
+            <div class="topbar-right">
+                <a id="menu-button" href="#">
+                    <i></i>
+                </a>
+
+                <a id="topbar-menu-button" href="#">
+                    <i class="material-icons">menu</i>
+                </a>
+                <!--<ul class="topbar-items fadeInDown animated">
+                    <li class="profile-item" [hidden]="profileMode!='top'&&layoutMode!='horizontal'">
+                        <a href="#">
+                            <div class="profile-image"></div>
+                            <span class="topbar-item-name">Jane Williams</span>
+                        </a>
+
+                        <ul class="ultima-menu animated">
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">person</i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">security</i>
+                                    <span>Privacy</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">settings_applications</i>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">power_settings_new</i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="topbar-icon material-icons">settings</i>
+                            <span class="topbar-item-name">Settings</span>
+                        </a>
+                        <ul class="ultima-menu animated">
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">palette</i>
+                                    <span>Change Theme</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">favorite_border</i>
+                                    <span>Favorites</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">lock</i>
+                                    <span>Lock Screen</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">wallpaper</i>
+                                    <span>Wallpaper</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="topbar-icon material-icons animated swing">message</i>
+                            <span class="topbar-badge animated rubberBand">5</span>
+                            <span class="topbar-item-name">Messages</span>
+                        </a>
+                        <ul class="ultima-menu animated">
+                            <li role="menuitem">
+                                <a href="#" class="topbar-message">
+                                    <img src="resources/layout/images/avatar1.png" width="35" />
+                                    <span>Give me a call</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="topbar-message">
+                                    <img src="resources/layout/images/avatar2.png" width="35" />
+                                    <span>Sales reports attached</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="topbar-message">
+                                    <img src="resources/layout/images/avatar3.png" width="35" />
+                                    <span>About your invoice</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="topbar-message">
+                                    <img src="resources/layout/images/avatar2.png" width="35" />
+                                    <span>Meeting today at 10pm</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="topbar-message">
+                                    <img src="resources/layout/images/avatar4.png" width="35" />
+                                    <span>Out of office</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="topbar-icon material-icons">timer</i>
+                            <span class="topbar-badge animated rubberBand">4</span>
+                            <span class="topbar-item-name">Notifications</span>
+                        </a>
+                        <ul class="ultima-menu animated">
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">bug_report</i>
+                                    <span>Pending tasks</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">event</i>
+                                    <span>Meeting today at 3pm</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">file_download</i>
+                                    <span>Download documents</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#">
+                                    <i class="material-icons">flight</i>
+                                    <span>Book flight</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="search-item">
+                        <span class="md-inputfield">
+                            <input type="text">
+                            <label>Search</label>
+                            <i class="topbar-icon material-icons">search</i>
+                        </span>
+
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+
+        <!-- Menu -->
+        <div [ngClass]="{'layout-menu':true,'layout-menu-dark':darkMenu}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <!--<div class="profile" [hidden]="profileMode!='inline'||layoutMode=='horizontal'">
+                        <div class="profile-image"></div>
+                        <a id="profile-options" href="#">
+                            <span class="profile-name">Jane Williams</span>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </a>
+                    </div>
+                    <ul id="profile-menu" class="ultima-menu" [hidden]="profileMode!='inline'">
+                        <li role="menuitem">
+                            <a href="#" class="ripplelink">
+                                <i class="material-icons">person</i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#" class="ripplelink">
+                                <i class="material-icons">security</i>
+                                <span>Privacy</span>
+                            </a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#" class="ripplelink">
+                                <i class="material-icons">settings_application</i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="#" class="ripplelink">
+                                <i class="material-icons">power_settings_new</i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                    -->
+                    <ul id="main-menu" class="ultima-menu clearfix">
+                        <li role="menuitem"><a  routerLink="calendar"><i class="fa ui-icon-calendar"></i><span>Calendar</span></a></li>
+                        <li role="menuitem">
+                            <a routerLink="testcatalog" class="ripplelink"><i class="material-icons">palette</i><span>Test Catalog</span></a>
+                        </li>
+                        <li role="menuitem">
+                            <a routerLink="project" class="ripplelink"><i class="material-icons">settings_application</i><span>Project</span></a>
+                        </li>
+                        <li id="menuform:um_components" role="menuitem">
+                            <a routerLink="testfacilities" class="ripplelink"><i class="material-icons">list</i><span>Test Facilities</span></a>
+                        </li>
+                        <li id="menuform:um_default" role="menuitem">
+                            <a routerLink="testrequest" class="ripplelink"><i class="material-icons">get_app</i><span>Test Request</span></a>
+                        </li>
+                        <li role="menuitem">
+                            <a routerLink="vehicle" class="ripplelink"><i class="material-icons">menu</i><span>Vehicle</span></a>
+                        </li>
+                        <li role="menuitem"><a routerLink="workrequest" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">build</i><span>Work Requet</span></a></li>
+                        <li role="menuitem"><a routerLink="equipment" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">find_in_page</i><span>Equipment</span></a></li>
+                        <li role="menuitem"><a routerLink="lookup" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">find_in_page</i><span>Lookup</span></a></li>
+                        <li role="menuitem"><a routerLink="admin" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">find_in_page</i><span>Admin</span></a></li>
+                        <li role="menuitem"><a routerLink="problemtracking" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">find_in_page</i><span>Problem Tracking</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-main">
+            <titan-body></titan-body>
+
+            <div class="footer">
+                <div class="card clearfix">
+                    <span class="footer-text-left"> 12Th Wonder LLC </span>
+                    <span class="footer-text-right"><span class="ui-icon ui-icon-copyright"></span>  <span> Copy rights </span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

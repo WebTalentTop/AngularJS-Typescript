@@ -1,0 +1,23 @@
+﻿.body{
+   
+    font-family: Arial;
+font-weight: bold;
+}
+
+.form-control{
+    width: auto;
+    font-size: 17px;
+    padding-left: 80px;
+}
+.panel
+{
+    font-family:Arial;
+    line-height: 1.5;
+    padding: 0.5em;
+    /*padding-left: 50px;*/
+}
+
+.panel-heading{
+    font-weight: bold;
+    font-size: 20px;
+}

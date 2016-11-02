@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<titan-web>
+        <div class="splash-screen">
+            <div class="splash-container">
+                <div class="logo"></div>
+                <div class="load-bar">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+</titan-web>
+   @section Scripts {
+    <script>
+            System.config({ packages: { 'app': { defaultExtension: 'js' } }, });
+            System.import('app/main').then(null, console.error.bind(console));
+    </script>
+}

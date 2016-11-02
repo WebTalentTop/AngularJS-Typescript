@@ -1,0 +1,21 @@
+<h1 [innerHTML]="title"></h1>
+<p-dataTable [value]="gridValues"
+             [lazy]="true"
+             [paginator]="true"
+             [rows]="5"
+             [(selection)]="selectedItem"
+             selectionMode="single"
+             (onRowSelect)="onRowSelect($event)"
+             [totalRecords]="confInfos.TotalRecords"
+             (onLazyLoad)="lazyLoad.emit($event)">
+    <p-column *ngFor="let col of colsData"
+              [field]="col.Field"
+              [header]="col.Header"
+              [sortable]="col.Sortable"
+              [filter]="col.Filter"
+              filterMatchMode="contains"
+              [hidden]="col.Hidden">
+    </p-column>
+
+
+</p-dataTable>
