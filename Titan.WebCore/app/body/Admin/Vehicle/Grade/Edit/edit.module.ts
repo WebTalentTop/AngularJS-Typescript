@@ -5,7 +5,6 @@ import { EditComponent } from "./edit.component";
 import { PlatformService} from '../../../../../shared/services/platform.services';
 
 import { ButtonModule, InputTextareaModule, InputTextModule, PanelModule } from 'primeng/primeng';
-import { DataTableModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import editRoutes from "./edit.routes";
 
@@ -15,4 +14,4 @@ import editRoutes from "./edit.routes";
     declarations: [EditComponent]
 })
 
-export default class EditModule{}
+export default class EditModule { }

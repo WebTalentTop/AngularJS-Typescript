@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
             <h1>Edit Grade</h1>
-            <form #platformForm="ngForm" (ngSubmit)="onSubmit(gradeForm.value)">
+            <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
                 <p-panel>
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                         <div class="ui-grid-row">
@@ -57,14 +57,14 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2"></div>
                             <div class="ui-grid-col-2">
-                                <button pButton type="submit" [disabled]="!gradeForm.valid" label="Edit" icon="fa ui-icon-add" iconPos="left"></button>
+                                <button pButton type="submit" [disabled]="!platformForm.valid" label="Edit" icon="fa ui-icon-edit" iconPos="left"></button>
                             </div>
                             <div class="ui-grid-col-4"></div>
                         </div>
                         <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-                        Form Submitted
-                        <br>
-                    </div>-->
+                            Form Submitted
+                            <br>
+                        </div>-->
                     </div>
                 </p-panel>
             </form>

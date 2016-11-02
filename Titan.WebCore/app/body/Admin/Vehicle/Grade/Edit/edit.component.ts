@@ -14,18 +14,17 @@ export class EditComponent {
     id;
     username: string;
     description: string;
-    model:any;
+    model: any;
 
-    constructor(private route:ActivatedRoute, private platformService: PlatformService) {
+    constructor(private route: ActivatedRoute, private platformService: PlatformService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        platformService.getPlatformById(this.id).subscribe(res => this.model = res);
-        //{
-        //    console.log("---- Inside Constructor PlatformById ----",
-        //        res); this.username = res.Name;
-        //    this.description = res.Description; this.model = res});
-        //console.log(this.model);
-
+        platformService.getPlatformById(this.id).subscribe(res => {
+            console.log("---- Inside Constructor PlatformById ----",
+                res); this.username = res.Name;
+            this.description = res.Description; this.model = res
+        });
+        console.log(this.model);
     }
 
     ngOnInit() {
@@ -33,7 +32,7 @@ export class EditComponent {
 
     onSubmit(formRef) {
         console.log(formRef);
-        let platformData: any = { id: this.id, name: '', description: '', locale: ''};
+        let platformData: any = { id: this.id, name: '', description: '', locale: '' };
         platformData.name = formRef.username;
         platformData.description = formRef.description;
         platformData.locale = "en-us";
