@@ -1,8 +1,41 @@
-<div class="ui-g-12">
+<!--<div class="ui-g-12">
     <h1 [innerHTML]="title"></h1>
 
     <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Platform</a>
-    <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987">Edit Platform</a>
+    <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Platform</a>
 
     <grid-data [gridValues]="gridData" [colsData]="cols" [confInfos]="confInfo" (lazyLoad)="loadFreshDepartments($event)" [title]="title"></grid-data>
+</div>-->
+
+
+<!DOCTYPE html>
+<!--<div class="ui-g">-->
+<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1> {{title}}</h1>
+        <div class="ui-grid-row">
+            <!--<h1 [innerHTML]="title"></h1>-->
+
+            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Platform</a>
+            <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Platform</a>
+        </div>
+    </div>
+</div>
+
+<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1> Platform Grid </h1>
+        <span class="label">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span><br><br>
+        <table class="table table-bordered"></table>
+        <div class="ui-grid-row">
+            <p-dataTable [value]="gridData"
+                         [lazy]="true"
+                         [paginator]="true"
+                         [rows]="15"
+                         [totalRecords]="confInfo.TotalRecords"
+                         (onLazyLoad)="loadFreshDepartments($event)">
+                <p-column *ngFor="let col of cols" [field]="col.Field" [header]="col.Header" [sortable]="col.Sortable" [filter]="col.Filter" filterMatchMode="contains" [hidden]="col.Hidden"></p-column>
+            </p-dataTable>
+        </div>
+    </div>
 </div>

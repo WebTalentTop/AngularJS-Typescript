@@ -9,7 +9,7 @@ import { GridComponent } from '../../../../shared/UIComponents/GridComponent/gri
     templateUrl: 'app/body/Admin/Vehicle/Platform/platform.component.html'
 })
 export class PlatformComponent {
-    title = "Platform Grid view";
+    title = "Platform View";
     gridData = [];
     confInfo:any = {};
     cols = [];
