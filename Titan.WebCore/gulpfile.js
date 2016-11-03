@@ -57,6 +57,11 @@ gulp.task("html", function () {
     gulp.src(root_path.app + "**/*.html", { base: root_path.app })
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
+
+gulp.task('htmlwatch', function () {
+    gulp.watch(root_path.app + "**/*.html", ['html']);
+});
+
 gulp.task("css", function () {
     gulp.src(root_path.app + "**/*.css", { base: root_path.app })
         .pipe(gulp.dest(root_path.webroot + "app/"));

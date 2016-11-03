@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { ProjectService} from '../project.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, ButtonModule, DropdownModule, detailsRoutes],
+    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, 
+        ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
     providers: [ProjectService],
-    declarations: [DetailsComponent]
+    declarations: [DetailsComponent],
+    exports:[DetailsComponent]
 })
 
 export default class DetailsModule { }

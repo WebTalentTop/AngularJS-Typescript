@@ -272,8 +272,8 @@ declare namespace NodeJS {
     }
 
     export interface ReadWriteStream extends ReadableStream, WritableStream {
-        pause(): ReadWriteStream;
-        resume(): ReadWriteStream;
+      pause(): ReadWriteStream;
+      resume(): ReadWriteStream;
     }
 
     export interface Events extends EventEmitter { }
@@ -447,7 +447,7 @@ declare namespace NodeJS {
     }
 }
 
-interface IterableIterator<T> { }
+interface IterableIterator<T> {}
 
 /**
  * @deprecated
@@ -1033,7 +1033,7 @@ declare module "https" {
         requestCert?: boolean;
         rejectUnauthorized?: boolean;
         NPNProtocols?: any;
-        SNICallback?: (servername: string, cb: (err: Error, ctx: tls.SecureContext) => any) => any;
+        SNICallback?: (servername: string, cb:(err:Error,ctx:tls.SecureContext)=>any) => any;
     }
 
     export interface RequestOptions extends http.RequestOptions {
@@ -1846,7 +1846,7 @@ declare module "fs" {
     }
 
     export const constants: Constants;
-
+    
     /** Tests a user's permissions for the file specified by path. */
     export function access(path: string | Buffer, callback: (err: NodeJS.ErrnoException) => void): void;
     export function access(path: string | Buffer, mode: number, callback: (err: NodeJS.ErrnoException) => void): void;
@@ -2189,7 +2189,7 @@ declare module "tls" {
         requestCert?: boolean;
         rejectUnauthorized?: boolean;
         NPNProtocols?: string[] | Buffer;
-        SNICallback?: (servername: string, cb: (err: Error, ctx: SecureContext) => any) => any;
+        SNICallback?: (servername: string, cb:(err:Error,ctx:SecureContext)=>any) => any;
         ecdhCurve?: string;
         dhparam?: string | Buffer;
         handshakeTimeout?: number;
@@ -2205,7 +2205,7 @@ declare module "tls" {
         port?: number;
         socket?: net.Socket;
         pfx?: string | Buffer
-        key?: string | string[] | Buffer | Buffer[];
+        key?: string |string[] | Buffer | Buffer[];
         passphrase?: string;
         cert?: string | string[] | Buffer | Buffer[];
         ca?: string | Buffer | (string | Buffer)[];
@@ -2437,7 +2437,7 @@ declare module "stream" {
     }
     namespace internal {
 
-        export class Stream extends internal { }
+        export class Stream extends internal {}
 
         export interface ReadableOptions {
             highWaterMark?: number;
@@ -2465,8 +2465,8 @@ declare module "stream" {
             highWaterMark?: number;
             decodeStrings?: boolean;
             objectMode?: boolean;
-            write?: (chunk: string | Buffer, encoding: string, callback: Function) => any;
-            writev?: (chunks: { chunk: string | Buffer, encoding: string }[], callback: Function) => any;
+            write?: (chunk: string|Buffer, encoding: string, callback: Function) => any;
+            writev?: (chunks: {chunk: string|Buffer, encoding: string}[], callback: Function) => any;
         }
 
         export class Writable extends events.EventEmitter implements NodeJS.WritableStream {
@@ -2503,7 +2503,7 @@ declare module "stream" {
         }
 
         export interface TransformOptions extends ReadableOptions, WritableOptions {
-            transform?: (chunk: string | Buffer, encoding: string, callback: Function) => any;
+            transform?: (chunk: string|Buffer, encoding: string, callback: Function) => any;
             flush?: (callback: Function) => any;
         }
 
@@ -2941,7 +2941,7 @@ declare module "v8" {
         space_available_size: number;
         physical_space_size: number;
     }
-    export function getHeapStatistics(): { total_heap_size: number, total_heap_size_executable: number, total_physical_size: number, total_avaialble_size: number, used_heap_size: number, heap_size_limit: number };
+    export function getHeapStatistics() : {total_heap_size: number, total_heap_size_executable: number, total_physical_size: number, total_avaialble_size: number, used_heap_size: number, heap_size_limit: number};
     export function getHeapSpaceStatistics(): HeapSpaceInfo[];
     export function setFlagsFromString(flags: string): void;
 }

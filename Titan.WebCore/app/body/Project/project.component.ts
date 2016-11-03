@@ -7,7 +7,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 
 @Component({
     selector: 'project',
-    templateUrl: 'project.component.html'
+    templateUrl: 'app/body/Project/project.component.html'
 })
 
 export class ProjectComponent {
@@ -27,7 +27,7 @@ export class ProjectComponent {
         // Pass along the hero id if available
         // so that the HeroList component can select that hero.
         //this.router.navigate(['/hero', hero.id]);
-        this.router.navigate(['/details', { projectId: projectId }]);
+        this.router.navigate(['/detailsmain', { projectId: projectId }]);
     }
 
     ngOnInit() {

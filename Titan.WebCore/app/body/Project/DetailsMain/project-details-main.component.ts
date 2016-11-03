@@ -5,9 +5,9 @@ import { ProjectService } from '../project.service'
 @Component({
     //moduleId: module.id,
     selector: 'project-detail-main',
-    templateUrl: 'app/body/Project/DetailsMain/project-detail-main.component.html'
+    templateUrl: 'app/body/Project/DetailsMain/project-details-main.component.html'
 })
-export class ProjectDetailMainComponent implements OnInit {
+export class ProjectDetailsMainComponent implements OnInit {
 
     //public ProjectDetails:any;
     constructor(
@@ -17,6 +17,7 @@ export class ProjectDetailMainComponent implements OnInit {
 
 
     ngOnInit() { 
+        console.log("test");
         // this.route.params.forEach((params: Params) => {
         //     let projectId = params['projectId']; // (+) converts string 'id' to a number
         //     //let locale = params['locale'];
