@@ -21,7 +21,7 @@ export class ProjectComponent {
 
     }
 
-    onProjectDetailsClick(){ 
+    onProjectDetailsClick(){
         let projectId = '53FE9592-1A9B-07D0-85D7-006A30BCD348';
         console.log(projectId);
         // Pass along the hero id if available
@@ -44,14 +44,9 @@ export class ProjectComponent {
     loadFreshDepartments(event: LazyLoadEvent) {
         setTimeout(() => {
 //            this.logger.logConsole("----------insede settimeout: ", event);
-            let gf = this.getGridFilterValues(event);
-            console.log("GF--------", gf);
+            this.getGridFilterValues(event);
 
-            let js = JSON.stringify(gf);
-                console.log("JS--------", js);
-
-  //          this.logger.logConsole("----------- GridFilter ---------", this.gridFilter);
-    //        this.logger.logConsole("-------- Grid Filter JS --------", JSON.parse(js));
+            let js = JSON.stringify(this.gridFilter);
             this.dataService.postProjectGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     this.logger.logConsole("------ ResData in postCustomersFilterSummary -----", res);
@@ -87,7 +82,7 @@ export class ProjectComponent {
             }
         }
         //this.gridFilter = { sortColumns: sortColumn, pageNumber: pageNumber, pageSize: 5, whereConditions: filters };
-        return this.gridFilter = {
+        this.gridFilter = {
             isPaging: true,
             sortColumns: sortColumn,
             locale: "en-us",
