@@ -112,7 +112,7 @@ gulp.task("tsCompile", function () {
 });
 
 
-gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourcemap', 'ts']);
+gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
