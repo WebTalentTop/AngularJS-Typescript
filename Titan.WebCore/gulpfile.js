@@ -111,6 +111,9 @@ gulp.task("tsCompile", function () {
         .js.pipe(gulp.dest(root_path.webroot + "app/"));
 });
 
+
+gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourcemap', 'ts']);
+
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
 gulp.task("copy-dev-res-all", ["ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
