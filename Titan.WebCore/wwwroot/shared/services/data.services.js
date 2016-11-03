@@ -10,27 +10,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var gridApiUrl_1 = require('./apiUrlConst/gridApiUrl');
 require('rxjs/Rx');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var DataService = (function () {
-    function DataService(_http) {
-        this._http = _http;
-        this.baseUrl = 'http://localhost:9998/api/departmentgrid/GetGridData';
+    function DataService(http) {
+        this.http = http;
         this.headers = new http_1.Headers({
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
+            'Content-Type': 'application/json'
         });
+        this.body = {
+            "locale": "en-us",
+            "defaultLocale": "en-us",
+            "PageNumber": 1,
+            "PageSize": 15,
+            "IsPaging": true
+        };
+        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
-    DataService.prototype.getCustomersSummary = function () {
-        return this._http.get("" + this.baseUrl, { headers: this.headers })
+    DataService.prototype.postDepartmentGridData = function () {
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.departmentGridUrl, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postDepartmentGridDataFilter = function (filterBody) {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.departmentGridUrl, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postProjectGridData = function () {
+        console.log("---- postProjectGridData", gridApiUrl_1.GridApiUrl.projectGridUrl);
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.projectGridUrl, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postProjectGridDataFilter = function (filterBody) {
+        console.log("---- postProjectGridDataFilter", gridApiUrl_1.GridApiUrl.projectGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.projectGridUrl, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postPlatformGridData = function () {
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.platformGridUrl, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postPlatformGridDataFilter = function (filterBody) {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.platformGridUrl, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postEquipmentGridData = function () {
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.equipmentGridUrl, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    };
+    DataService.prototype.postEquipmentGridDataFilter = function (filterBody) {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post("" + gridApiUrl_1.GridApiUrl.equipmentGridUrl, filterBody, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     };
     DataService.prototype.getJson = function (response) {
-        console.log(response.json());
+        console.log("In Data Service response.json() call: ", response.json());
         return response.json();
     };
     DataService.prototype.checkErrors = function (response) {

@@ -1,23 +1,25 @@
-
-  {
-    "compileOnSave": true,
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "removeComments": false,
-      "noImplicitAny": false,
-      "outDir": "./wwwroot/"
-    },
-    "exclude": [
-      "node_modules",
-      "wwwroot",
-      "wwwroot/lib",
-      "wwwroot/libs",
-      "wwwroot/lib-npm",
-      "typings"
-    ]
-  }
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "outDir": "./wwwroot/"
+  },
+  "include": [
+    "app/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "wwwroot/lib",
+    "wwwroot/libs",
+    "wwwroot/lib-npm",
+    "typings"
+  ]
+}
