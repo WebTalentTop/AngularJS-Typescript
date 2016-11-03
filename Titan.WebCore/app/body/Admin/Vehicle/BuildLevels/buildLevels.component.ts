@@ -1,6 +1,9 @@
 ﻿import { DataService } from '../../../../shared/services/data.services';
+import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
     selector: 'build-levels',
@@ -8,7 +11,7 @@ import { Component } from '@angular/core';
     templateUrl: 'app/body/Admin/Vehicle/BuildLevels/buildlevels.component.html'
 })
 export class BuildLevelsComponent {
-    title = "Build Levels View";
+    //title = "Build Levels";
     gridData = [];
     confInfo: any = {};
     cols = [];
