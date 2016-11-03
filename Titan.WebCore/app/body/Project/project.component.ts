@@ -6,7 +6,6 @@ import {Router} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
-    moduleId: module.id,
     selector: 'project',
     templateUrl: 'project-temp.component.html'
 })
@@ -45,8 +44,11 @@ export class ProjectComponent {
     loadFreshDepartments(event: LazyLoadEvent) {
         setTimeout(() => {
 //            this.logger.logConsole("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
+            let gf = this.getGridFilterValues(event);
+            console.log("GF--------", gf);
+
+            let js = JSON.stringify(gf);
+                console.log("JS--------", js);
 
   //          this.logger.logConsole("----------- GridFilter ---------", this.gridFilter);
     //        this.logger.logConsole("-------- Grid Filter JS --------", JSON.parse(js));
@@ -63,7 +65,9 @@ export class ProjectComponent {
       //  console.log("---------- Event ---------", event);
 
     }
+
     private getGridFilterValues(event: LazyLoadEvent) {
+        console.log("----- GridFilterValues Called -------");
         let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
         let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
         let filters = [];
@@ -83,8 +87,9 @@ export class ProjectComponent {
             }
         }
         //this.gridFilter = { sortColumns: sortColumn, pageNumber: pageNumber, pageSize: 5, whereConditions: filters };
-        this.gridFilter = {
+        return this.gridFilter = {
             isPaging: true,
+            sortColumns: sortColumn,
             locale: "en-us",
             defaultLocale: "en-us",pageNumber: pageNumber, pageSize: 5};
     }
