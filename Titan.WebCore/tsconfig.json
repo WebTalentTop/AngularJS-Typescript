@@ -10,7 +10,7 @@
       "experimentalDecorators": true,
       "removeComments": false,
       "noImplicitAny": false,
-      "outDir": "./wwwroot/app/"
+      "outDir": "./wwwroot/"
     },
     "exclude": [
       "node_modules",
