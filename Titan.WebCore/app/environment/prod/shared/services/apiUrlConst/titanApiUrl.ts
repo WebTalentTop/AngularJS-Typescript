@@ -1,1 +1,0 @@
-export const titanApiUrl = "http://titanapi.12thwonder.com/api/";
