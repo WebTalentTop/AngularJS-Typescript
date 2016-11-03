@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>TitanDB</id>
+    <title>Titan DB</title>
+    <version>1.0.0</version>
+    <authors>12th Wonder LLC</authors>
+    <owners>12th Wonder LLC</owners>
+    <licenseUrl>http://12thWonder.com</licenseUrl>
+    <projectUrl>http://12thWonder.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Titan</description>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="..\Titan.DataBase\bin\Release\*.*" target="Content"/>
+    <file src="..\Titan.DataBase\bin\Release\dbo\*.*" target="Content\dbo"/>
+    <file src="..\Titan.DataBase\bin\Release\dbo\data\*.*" target="Content\dbo\data"/>
+    <file src="..\Titan.DataBase\bin\Release\dbo\data\gridConfiguration\*.*" target="Content\dbo\data\gridConfiguration"/>
+    <file src="..\Scripts\DeployDacPac.ps1" target="Content\Scripts"/>
+  </files>
+</package>

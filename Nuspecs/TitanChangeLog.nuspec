@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>TitanChangeLog</id>
+    <title>Titan Change Log</title>
+    <version>1.0.0</version>
+    <authors>12th Wonder LLC</authors>
+    <owners>12th Wonder LLC</owners>
+    <licenseUrl>http://12thWonder.com</licenseUrl>
+    <projectUrl>http://12thWonder.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Titan Portal</description>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="..\ChangeLog.txt" target="Content"/>
+    <file src="..\Scripts\ReadChangeLog.ps1" target="Content"/>
+  </files>
+</package>
