@@ -7,7 +7,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 
 @Component({
     selector: 'project',
-    templateUrl: 'project.component.html'
+    templateUrl: 'app/body/Project/project.component.html'
 })
 
 export class ProjectComponent {
