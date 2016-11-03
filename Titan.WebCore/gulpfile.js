@@ -97,7 +97,14 @@ gulp.task("copy-qalocation",
         return gulp.src(apiServiceQAUrl + '*.ts')
             .pipe(gulp.dest(apiServiceDestinationUrl));
     });
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("tsconfig.json");
 
+gulp.task("tsCompile", function () {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest(root_path.webroot + "app/"));
+});
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
