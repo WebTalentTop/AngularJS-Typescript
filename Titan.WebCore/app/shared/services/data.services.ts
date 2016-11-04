@@ -97,6 +97,25 @@ export class DataService {
     }
 
 
+    postTitanUserGridData(): Observable<any> {
+        console.log("---- postTitanUserGridData", GridApiUrl.titanuserGridUrl);
+        return this.http.post(`${GridApiUrl.titanuserGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postTitanUserGridDataFilter(filterBody): Observable<any> {
+        console.log("---- postTitanUserGridDataFilter", GridApiUrl.titanuserGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.titanuserGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+
     postPlatformGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.platformGridUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
