@@ -184,6 +184,25 @@ export class DataService {
         //.map(this.getJson);
     }
 
+    postTenantGridData(): Observable<any> {
+        console.log("---- postTenantGridData", GridApiUrl.tenantGridUrl);
+        return this.http.post(`${GridApiUrl.tenantGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postTenantGridDataFilter(filterBody): Observable<any> {
+        console.log("---- postTenantGridDataFilter", GridApiUrl.tenantGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.tenantGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ",response.json());

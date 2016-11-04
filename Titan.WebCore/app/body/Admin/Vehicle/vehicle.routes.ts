@@ -11,6 +11,7 @@ const routes = [
     { path: 'titanuser', loadChildren: 'app/body/Admin/Vehicle/TitanUser/titanuser.module' },
     { path: 'market', loadChildren: 'app/body/Admin/Vehicle/Market/market.module' },
     { path: 'project', loadChildren: 'app/body/Admin/Vehicle/Project/project.module' },
+    { path: 'tenant', loadChildren: 'app/body/Admin/Vehicle/Tenant/tenant.module' },
     //{ path: 'framenumber', loadChildren: 'app/body/Admin/Vehicle/FrameNumber/framenumber.module' },
     //{ path: 'grade', loadChildren: 'app/body/Admin/Vehicle/Grade/grade.module' },
     //{ path: 'enginecode', loadChildren: 'app/body/Admin/Vehicle/EngineCode/enginecode.module' },
