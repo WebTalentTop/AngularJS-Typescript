@@ -57,6 +57,46 @@ export class DataService {
         //.map(this.getJson);
     }
 
+
+
+    postBuildLevelGridData(): Observable<any> {
+        console.log("---- postBuildLevelGridData", GridApiUrl.buildlevelGridUrl);
+        return this.http.post(`${GridApiUrl.buildlevelGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+         //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postBuildLevelGridDataFilter(filterBody): Observable<any> {
+        console.log("---- postBuildLevelGridDataFilter", GridApiUrl.buildlevelGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.buildlevelGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+         //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+
+    postTitanRoleGridData(): Observable<any> {
+        console.log("---- postTitanRoleGridData", GridApiUrl.titanroleGridUrl);
+        return this.http.post(`${GridApiUrl.titanroleGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postTitanRoleGridDataFilter(filterBody): Observable<any> {
+        console.log("---- postTitanRoleGridDataFilter", GridApiUrl.titanroleGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.titanroleGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+
     postPlatformGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.platformGridUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
