@@ -6,11 +6,11 @@ import {Router} from '@angular/router';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
 
 @Component({
-    selector: 'market-grid',
-    templateUrl: 'app/body/Admin/Vehicle/Market/market.component.html'
+    selector: 'project-grid',
+    templateUrl: 'app/body/Admin/Vehicle/Project/project.component.html'
 })
-export class MarketComponent {
-    //title = "Market Grid view";
+export class ProjectComponent {
+    //title = "Project Grid view";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -22,7 +22,7 @@ export class MarketComponent {
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postMarketGridData()
+        this.dataService.postProjectGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -45,7 +45,7 @@ export class MarketComponent {
 
                 console.log("----------- GridFilter ---------", this.gridFilter);
                 console.log("-------- Grid Filter JS --------", JSON.parse(js));
-                this.dataService.postMarketGridDataFilter(JSON.parse(js))
+                this.dataService.postProjectGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
