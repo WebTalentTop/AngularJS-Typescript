@@ -165,6 +165,26 @@ export class DataService {
         //.map(this.getJson);
     }
 
+
+    postMarketGridData(): Observable<any> {
+        console.log("---- postMarketGridData", GridApiUrl.marketGridUrl);
+        return this.http.post(`${GridApiUrl.marketGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postMarketGridDataFilter(filterBody): Observable<any> {
+        console.log("---- postMarketGridDataFilter", GridApiUrl.marketGridUrl);
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.marketGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ",response.json());
         return response.json();

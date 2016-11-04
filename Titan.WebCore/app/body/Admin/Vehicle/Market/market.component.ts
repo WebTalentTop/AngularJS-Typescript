@@ -1,6 +1,9 @@
 import { DataService } from '../../../../shared/services/data.services';
+import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
 
 @Component({
     selector: 'market-grid',
@@ -13,13 +16,13 @@ export class MarketComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private router: Router, private logger: LoggerService) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postPlatformGridData()
+        this.dataService.postMarketGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -42,7 +45,7 @@ export class MarketComponent {
 
                 console.log("----------- GridFilter ---------", this.gridFilter);
                 console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postPlatformGridDataFilter(JSON.parse(js))
+                this.dataService.postMarketGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
@@ -75,6 +78,8 @@ export class MarketComponent {
             }
         }
         this.gridFilter = {
+            isPaging: true,
+            sortColumns: sortColumn,
             locale: "en-us",
             defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
         };
