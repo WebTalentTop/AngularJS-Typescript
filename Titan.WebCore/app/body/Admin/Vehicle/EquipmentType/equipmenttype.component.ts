@@ -6,24 +6,23 @@ import { Component } from '@angular/core';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
-    selector: 'titanuser',
-    templateUrl: 'app/body/Admin/Vehicle/TitanUser/titanuser.component.html'
+    selector: 'EquipmentType',
+    templateUrl: 'app/body/Admin/Vehicle/EquipmentType/equipmenttype.component.html'
 })
-export class TitanUserComponent {
-    //title = "TitanUser view";
-
+export class EquipmentTypeComponent {
+    //title = "EquipmentType";
     gridData = [];
     confInfo: any = {};
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService, private router: Router, private logger: LoggerService) {
+    constructor(private dataService: DataService) {
 
     }
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postTitanUserGridData()
+        this.dataService.postEquipmentTypeGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -46,7 +45,7 @@ export class TitanUserComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postTitanUserGridDataFilter(JSON.parse(js))
+            this.dataService.postEquipmentTypeGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

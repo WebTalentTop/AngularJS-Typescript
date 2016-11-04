@@ -1,0 +1,73 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>Edit Grade</h1>
+            <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+                <p-panel>
+                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                Grade Name *:
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <input type="text"
+                                       id="username"
+                                       name="username"
+                                       pInputText
+                                       [(ngModel)]="username"
+                                       #usernameRef="ngModel"
+                                       placeholder="Required"
+                                       minlength="3"
+                                       class="form-control" required />
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="usernameRef.errors?.required">
+                                {{usernameRef.errors | json}} this field is required
+                            </div>
+
+                            <div class="ui-grid-col-4" *ngIf="usernameRef.errors?.minlength">
+                                Minimum length is required {{usernameRef.errors.minlength.requiredLength}}.
+                            </div>
+                            <!--<div class="ui-grid-col-4">
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="platformForm.errors?.required">
+                                    <i class="fa fa-close"></i>
+                                    Platform name is required
+                                </div>
+                                <div *ngIf="usernameRef.errors?.minlength">
+                                    This field must be longer than {{usernameRef.errors?.minlength.requiredLength}} characters. You only typed {{usernameRef.errors?.minlength.actualLength}}
+                                </div>
+
+                            </div>-->
+                        </div>
+
+                        <!--<div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                Description:
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <textarea type="text"
+                                          pInputTextArea
+                                          id="description"
+                                          class="form-control" required
+                                          name="description"
+                                          row="20"
+                                          [(ngModel)]="description"></textarea>
+                            </div>
+                            <div class="ui-grid-col-4">{{ description | json }}</div>
+                        </div>-->
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-2">
+                                <button pButton type="submit" [disabled]="!platformForm.valid" label="Edit" icon="fa ui-icon-edit" iconPos="left"></button>
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                        <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
+                            Form Submitted
+                            <br>
+                        </div>-->
+                    </div>
+                </p-panel>
+            </form>
+        </div>
+    </div>
+</div>

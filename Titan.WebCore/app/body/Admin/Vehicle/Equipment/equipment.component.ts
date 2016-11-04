@@ -22,7 +22,7 @@ export class EquipmentComponent {
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postPlatformGridData()
+        this.dataService.postEquipmentGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -45,7 +45,7 @@ export class EquipmentComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postPlatformGridDataFilter(JSON.parse(js))
+            this.dataService.postEquipmentGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

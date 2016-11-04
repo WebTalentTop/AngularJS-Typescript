@@ -148,6 +148,23 @@ export class DataService {
         //.map(this.getJson);
     }
 
+
+    postEquipmentTypeGridData(): Observable<any> {
+        return this.http.post(`${GridApiUrl.equipmenttypeGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postEquipmentTypeGridDataFilter(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${GridApiUrl.equipmenttypeGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ",response.json());
         return response.json();
