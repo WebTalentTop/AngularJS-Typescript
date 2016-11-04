@@ -1,3 +1,3 @@
 "use strict";
-exports.titanApiUrl = "http://titanapi-prepod.12thwonder.com/api/";
+exports.titanApiUrl = "http://titanapi-preprod.12thwonder.com/api/";
 //# sourceMappingURL=titanApiUrl.js.map

@@ -10,22 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var buildlevels_component_1 = require("./buildlevels.component");
+var equipment_component_1 = require("./equipment.component");
 var primeng_1 = require('primeng/primeng');
+var equipment_routes_1 = require("./equipment.routes");
 var grid_module_1 = require('../../../../shared/UIComponents/GridComponent/grid.module');
-var buildlevels_routes_1 = require("./buildlevels.routes");
-var BuildLevelsModule = (function () {
-    function BuildLevelsModule() {
+var EquipmentModule = (function () {
+    function EquipmentModule() {
     }
-    BuildLevelsModule = __decorate([
+    EquipmentModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule, primeng_1.DataTableModule, grid_module_1.GridModule, buildlevels_routes_1.default],
-            declarations: [buildlevels_component_1.BuildLevelsComponent]
+            imports: [common_1.CommonModule, primeng_1.DataTableModule, grid_module_1.GridModule, equipment_routes_1.default],
+            declarations: [equipment_component_1.EquipmentComponent]
         }), 
         __metadata('design:paramtypes', [])
-    ], BuildLevelsModule);
-    return BuildLevelsModule;
+    ], EquipmentModule);
+    return EquipmentModule;
 }());
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = BuildLevelsModule;
-//# sourceMappingURL=buildLevels.module.js.map
+exports.default = EquipmentModule;
+//# sourceMappingURL=equipment.module.js.map

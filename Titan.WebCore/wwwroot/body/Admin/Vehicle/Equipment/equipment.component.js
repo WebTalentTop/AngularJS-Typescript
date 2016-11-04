@@ -10,16 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var data_services_1 = require('../../../../shared/services/data.services');
 var core_1 = require('@angular/core');
-var BuildLevelsComponent = (function () {
-    function BuildLevelsComponent(dataService) {
+var EquipmentComponent = (function () {
+    function EquipmentComponent(dataService) {
         this.dataService = dataService;
-        //title = "Build Levels";
+        //title = "Equipment";
         this.gridData = [];
         this.confInfo = {};
         this.cols = [];
         this.gridFilter = {};
     }
-    BuildLevelsComponent.prototype.ngOnInit = function () {
+    EquipmentComponent.prototype.ngOnInit = function () {
         var _this = this;
         var resData;
         this.dataService.postPlatformGridData()
@@ -35,7 +35,7 @@ var BuildLevelsComponent = (function () {
         console.log("The Whole MyValues After Service Call: ", this.gridData);
         console.log("The Whole configuration Info values: ", this.confInfo);
     };
-    BuildLevelsComponent.prototype.loadFreshDepartments = function (event) {
+    EquipmentComponent.prototype.loadFreshDepartments = function (event) {
         var _this = this;
         setTimeout(function () {
             console.log("----------insede settimeout: ", event);
@@ -54,7 +54,7 @@ var BuildLevelsComponent = (function () {
         }, 250);
         console.log("---------- Event ---------", event);
     };
-    BuildLevelsComponent.prototype.getGridFilterValues = function (event) {
+    EquipmentComponent.prototype.getGridFilterValues = function (event) {
         var sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
         var pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
         var filters = [];
@@ -78,15 +78,14 @@ var BuildLevelsComponent = (function () {
             defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
         };
     };
-    BuildLevelsComponent = __decorate([
+    EquipmentComponent = __decorate([
         core_1.Component({
-            selector: 'build-levels',
-            styleUrls: ['app/body/Admin/Vehicle/BuildLevels/buildlevels.component.css'],
-            templateUrl: 'app/body/Admin/Vehicle/BuildLevels/buildlevels.component.html'
+            selector: 'Equipment-grid',
+            templateUrl: 'app/body/Admin/Vehicle/Equipment/equipment.component.html'
         }), 
         __metadata('design:paramtypes', [data_services_1.DataService])
-    ], BuildLevelsComponent);
-    return BuildLevelsComponent;
+    ], EquipmentComponent);
+    return EquipmentComponent;
 }());
-exports.BuildLevelsComponent = BuildLevelsComponent;
-//# sourceMappingURL=buildLevels.component.js.map
+exports.EquipmentComponent = EquipmentComponent;
+//# sourceMappingURL=equipment.component.js.map
