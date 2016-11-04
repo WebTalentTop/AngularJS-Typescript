@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
-    selector: 'titan-role',
+    selector: 'titanrole',
     templateUrl: 'app/body/Admin/Vehicle/TitanRole/titanrole.component.html'
 })
 export class TitanRoleComponent {

@@ -1,7 +1,9 @@
+import { DataService } from '../../../../shared/services/data.services';
+import { LoggerService } from '../../../../shared/services/logger.service';
 import { PlatformService } from '../../../../shared/services/platform.services';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
-
+import {Router} from '@angular/router';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
@@ -9,7 +11,7 @@ import { GridComponent } from '../../../../shared/UIComponents/GridComponent/gri
     templateUrl: 'app/body/Admin/Vehicle/Platform/platform.component.html'
 })
 export class PlatformComponent {
-    title = "Platform View";
+    //title = "Platform View";
     gridData = [];
     confInfo:any = {};
     cols = [];
