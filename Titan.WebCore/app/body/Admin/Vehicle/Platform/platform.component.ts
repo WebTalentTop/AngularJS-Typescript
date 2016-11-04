@@ -79,6 +79,8 @@ export class PlatformComponent {
             }
         }
         this.gridFilter = {
+            isPaging: true,
+            sortColumns: sortColumn,
             locale: "en-us",
             defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
         };

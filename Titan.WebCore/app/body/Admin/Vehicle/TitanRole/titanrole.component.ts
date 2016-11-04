@@ -1,17 +1,16 @@
 ﻿import { DataService } from '../../../../shared/services/data.services';
-import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { LoggerService } from '../../../../shared/services/logger.service';
 import {Router} from '@angular/router';
+import { Component } from '@angular/core';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
-    selector: 'build-levels',
-    styleUrls: ['app/body/Admin/Vehicle/BuildLevels/buildlevels.component.css'],
-    templateUrl: 'app/body/Admin/Vehicle/BuildLevels/buildlevels.component.html'
+    selector: 'titanrole',
+    templateUrl: 'app/body/Admin/Vehicle/TitanRole/titanrole.component.html'
 })
-export class BuildLevelsComponent {
-    //title = "Build Levels";
+export class TitanRoleComponent {
+    //title = "TitanRole view";
     gridData = [];
     confInfo: any = {};
     cols = [];
@@ -23,7 +22,7 @@ export class BuildLevelsComponent {
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postBuildLevelGridData()
+        this.dataService.postTitanRoleGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -46,7 +45,7 @@ export class BuildLevelsComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postBuildLevelGridDataFilter(JSON.parse(js))
+            this.dataService.postTitanRoleGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
