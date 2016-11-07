@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     templateUrl: 'app/body/gridview.component.html'
 })
 export class EquipmentComponent {
-    title = "Equipment Grid";
+    title = "Equipment";
     gridData = [];
     confInfo:any = {};
     cols = [];
