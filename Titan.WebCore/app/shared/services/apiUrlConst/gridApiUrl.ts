@@ -5,10 +5,9 @@ export class GridApiUrl {
     public static platformGridUrl: string = titanApiUrl + 'platformGrid/GetGridData';
     public static departmentGridUrl: string = titanApiUrl + 'departmentGrid/GetGridData';
     public static equipmentGridUrl: string = titanApiUrl + 'equipmentgrid/GetGridData';
-    public static equipmenttypeGridUrl: string = titanApiUrl + 'equipmenttypegrid/GetGridData';
     public static titanroleGridUrl: string = titanApiUrl + 'titanrolegrid/GetGridData';
     public static titanuserGridUrl: string = titanApiUrl + 'titanuserGrid/GetGridData';
     public static marketGridUrl: string = titanApiUrl + 'marketGrid/GetGridData';
     public static tenantGridUrl: string = titanApiUrl + 'tenantGridUrl/GetGridData';
-    public static testfacilityGridUrl: string = titanApiUrl + 'testfacilityGridUrl/GetGridData';
+    public static testFacilityGridUrl: string = titanApiUrl + 'testFacilityGrid/GetGridData';
 }

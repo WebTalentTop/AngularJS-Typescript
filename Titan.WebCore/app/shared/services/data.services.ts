@@ -26,24 +26,24 @@ export class DataService {
     postDepartmentGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.departmentGridUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
-        //this.checkErrors)
+        //.map(this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     postDepartmentGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${GridApiUrl.departmentGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
+            .map(this.getJson)
+        .map(this.checkErrors)
+        .catch(err => Observable.throw(err))
+        .map(this.getJson);
     }
 
     postProjectGridData(): Observable<any> {
         console.log("---- postProjectGridData", GridApiUrl.projectGridUrl);
         return this.http.post(`${GridApiUrl.projectGridUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
-        //this.checkErrors)
+        //.map(this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
@@ -52,7 +52,7 @@ export class DataService {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${GridApiUrl.projectGridUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
-        //this.checkErrors)
+        //.map(this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
@@ -118,34 +118,34 @@ export class DataService {
 
     postPlatformGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.platformGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
+            .map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            //.map(this.getJson);
     }
     postPlatformGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${GridApiUrl.platformGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson)
+            .map(this.checkErrors)
+            .catch(err => Observable.throw(err))
             .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
     }
 
     postEquipmentGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.equipmentGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson)
+            .map(this.checkErrors)
+            .catch(err => Observable.throw(err))
             .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
     }
     postEquipmentGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${GridApiUrl.equipmentGridUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson)
+            .map(this.checkErrors)
+            .catch(err => Observable.throw(err))
             .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
     }
 
 

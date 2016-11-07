@@ -1,21 +1,21 @@
 <h1 [innerHTML]="title"></h1>
-<p-dataTable [value]="gridValues"
+<p-dataTable [value]="gridData"
              [lazy]="true"
              [paginator]="true"
              [rows]="5"
              [(selection)]="selectedItem"
-             selectionMode="single"
-             (onRowSelect)="onRowSelect($event)"
-             [totalRecords]="confInfos.TotalRecords"
-             (onLazyLoad)="lazyLoad.emit($event)">
-    <p-column *ngFor="let col of colsData"
+             [totalRecords]="confInfo.TotalRecords"
+             (onLazyLoad)="loadFresh($event)">
+    <p-column *ngFor="let col of cols"
               [field]="col.Field"
               [header]="col.Header"
               [sortable]="col.Sortable"
-              [filter]="col.Filter"
+              [filter]="col.ShowFilter"
               filterMatchMode="contains"
               [hidden]="col.Hidden">
+        <template let-col let-item="rowData" *ngIf="checkLinkable(col.Field)" pTemplate type="body">
+
+           <a (click)="navigateTo(item[idField])">{{item[col.field]}}</a>
+        </template>
     </p-column>
-
-
 </p-dataTable>
