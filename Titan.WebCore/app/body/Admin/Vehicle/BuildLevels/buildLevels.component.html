@@ -1,14 +1,3 @@
-<!--<div class="ui-g">-->
-<!--<div class="ui-g-12">
-    <div class="card card-w-title">
-        <h1> {{title}}</h1>
-        <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Build Levels</a>
-            <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Build Levels</a>
-        </div>
-    </div>
-</div>-->
-
 <!DOCTYPE html>
 <div class="ui-g-12">
     <div class="card card-w-title">
@@ -17,16 +6,7 @@
             <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Build Levels</a>
             <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Build Levels</a>
             
-                <grid-data [gridValues]="gridData" [colsData]="cols" [confInfos]="confInfo" (lazyLoad)="loadFreshDepartments($event)" [title]="title"></grid-data>
-            
-            <!--<p-dataTable [value]="gridData"
-                         [lazy]="true"
-                         [paginator]="true"
-                         [rows]="15"
-                         [totalRecords]="confInfo.TotalRecords"
-                         (onLazyLoad)="loadFreshDepartments($event)">
-                <p-column *ngFor="let col of cols" [field]="col.Field" [header]="col.Header" [sortable]="col.Sortable" [filter]="col.Filter" filterMatchMode="contains" [hidden]="col.Hidden"></p-column>
-            </p-dataTable>-->
+                <grid-data [gridData]="gridData" [cols]="cols" [confInfo]="confInfo" (lazyLoad)="loadFreshDepartments($event)" [title]="title"></grid-data>
         </div>
     </div>
 </div>
