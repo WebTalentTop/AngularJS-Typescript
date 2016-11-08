@@ -6,4 +6,4 @@ const routes = [
     //{ path: 'details', loadChildren: 'app/body/Project/Details/details.module'}
 ];
 
-export default RouterModule.forChild(routes);
+export default RouterModule.forChild(routes); 

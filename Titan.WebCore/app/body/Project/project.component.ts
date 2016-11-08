@@ -3,7 +3,7 @@ import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
-import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component'; 
 
 @Component({
     selector: 'project',
@@ -27,7 +27,7 @@ export class ProjectComponent {
         // Pass along the hero id if available
         // so that the HeroList component can select that hero.
         //this.router.navigate(['/hero', hero.id]);
-        this.router.navigate(['/detailsmain', { projectId: projectId }]);
+        this.router.navigate(['detailsmain', { projectId: projectId }]);
     }
 
     ngOnInit() {

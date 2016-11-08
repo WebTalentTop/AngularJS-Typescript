@@ -2,7 +2,7 @@
     <h1> Project Details </h1>
 
     <h4>Please fill out Project Information</h4>
-    <form #projectForm >
+    <form #projectForm>
         <p-panel *ngIf="ProjectDetails">
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
@@ -11,13 +11,13 @@
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" pInputText
-                                [(ngModel)]="ProjectDetails.code"
-                                name="Code"
-                                #CodeRef
-                                placeholder="Required"
-                                minlength="3"
-                                maxlength="10"
-                                class="form-control" required />
+                               [(ngModel)]="ProjectDetails.code"
+                               name="Code"
+                               #CodeRef
+                               placeholder="Required"
+                               minlength="3"
+                               maxlength="10"
+                               class="form-control" required />
                     </div>
                     <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.required">
                         {{CodeRef.errors | json}} this field is required
@@ -42,10 +42,10 @@
                             </template>
                         </p-dropdown>-->
                         <input type="text" pInputText
-                                [(ngModel)]="ProjectDetails.platformName"
-                                name="PlatformName"
-                                #PlatformNameRef
-                                class="form-control" />
+                               [(ngModel)]="ProjectDetails.platformName"
+                               name="PlatformName"
+                               #PlatformNameRef
+                               class="form-control" />
                     </div>
                 </div>
 
@@ -75,10 +75,10 @@
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" pInputText
-                                [(ngModel)]="ProjectDetails.estimatedCost"
-                                name="EstimatedCost"
-                                #EstimatedCostRef
-                                class="form-control" />
+                               [(ngModel)]="ProjectDetails.estimatedCost"
+                               name="EstimatedCost"
+                               #EstimatedCostRef
+                               class="form-control" />
                     </div>
                 </div>
 
@@ -88,12 +88,12 @@
                     </div>
                     <div class="ui-grid-col-6">
                         <textarea type="text"
-                                    pInputTextArea
-                                    class="form-control"
-                                    name="description"
-                                    #PlatformDescriptionRef
-                                    row="20"
-                                    [(ngModel)]="ProjectDetails.platformDescription"></textarea>
+                                  pInputTextArea
+                                  class="form-control"
+                                  name="description"
+                                  #PlatformDescriptionRef
+                                  row="20"
+                                  [(ngModel)]="ProjectDetails.platformDescription"></textarea>
                     </div>
 
 
@@ -103,7 +103,7 @@
                     <div class="ui-grid-col-2"></div>
                     <div class="ui-grid-col-2">
                         <button pButton type="submit" label="Save" icon="ui-icon-save" iconPos="left"
-                            (click)="onSubmit()"></button>
+                                (click)="onSubmit()"></button>
                         <!--[disabled]="!projectForm.valid"-->
                     </div>
                     <div class="ui-grid-col-4"></div>
@@ -114,7 +114,7 @@
                 </div>-->
             </div>
         </p-panel>
-    </form> 
+    </form>
 
 </div>
 

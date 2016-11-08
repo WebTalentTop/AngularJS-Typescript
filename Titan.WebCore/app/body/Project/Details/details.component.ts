@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from '../project.service'
 
-@Component({
+@Component({    
     selector: 'project-detail',
     templateUrl: 'app/body/Project/Details/details.component.html'
 })

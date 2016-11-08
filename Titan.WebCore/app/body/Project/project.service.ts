@@ -14,6 +14,8 @@ export class ProjectService extends BaseService{
     private getTorqueBooksByBuildLevelIdUrl: string = 'http://localhost:9998/api/TorqueBook/GetTorqueBooksByBuildLevel?projectId=';
     private getTorqueSheetsByTorqueBookIdUrl: string = 'http://localhost:9998/api/TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
     private putProjectDetailsUrl: string = 'http://localhost:9998/api/project/Put';
+    private putTorqueSheetTemplateUrl: string = 'http://localhost:9998/api/TorqueSheet/PutTorqueSheetTemplate';
+    private getTorqueSheetUrl: string = 'http://localhost:9998/api/TorqueSheet/Get?id=';
     private postTorqueBookUrl: string = 'http://localhost:9998/api/TorqueBook/Post';
     private postTorqueSheetUrl: string = 'http://localhost:9998/api/TorqueSheet/Post';
     private getBuildLevelsUrl: string = 'http://localhost:9998/api/project/GetProjectBuildLevels?projectId=';
@@ -28,12 +30,25 @@ export class ProjectService extends BaseService{
         //.map(this.getJson);
     }
 
+    getTorqueSheet(id): Observable<any> {
+        return this.http.get(this.getTorqueSheetUrl + id)
+            .map(super.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     putProjectDetails(filterBody): Observable<any> {
         return this.http.put(this.putProjectDetailsUrl, filterBody)
             .map(this.getJson)
         //.chec
-        // .catch(err => Observable.throw(err))
+        // .catch(err => Observable.throw(err)) 
         // .map(this.getJson);
+    }
+
+    putTorqueSheetTemplate(filterBody): Observable<any> {
+        return this.http.put(this.putTorqueSheetTemplateUrl, filterBody)
+            .map(this.getJson)
     }
 
     getBuildLevels(projectId): Observable<any> {

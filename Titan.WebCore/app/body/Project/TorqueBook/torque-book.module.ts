@@ -14,7 +14,7 @@ import torqueBookRoutes from "./torque-book.routes";
         ButtonModule, DropdownModule,TreeTableModule,SharedModule,DialogModule, torqueBookRoutes],
     providers: [ProjectService],
     declarations: [TorqueBookComponent],
-    exports:[TorqueBookComponent]
+    exports:[TorqueBookComponent, CommonModule]
 })
 
 export default class TorqueBookModule { }

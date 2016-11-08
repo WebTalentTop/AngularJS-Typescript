@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from '../project.service'
+import { ProjectService } from '../project.service';
+//import { DetailsComponent } from "./../Details/details.component"
 
 @Component({
     //moduleId: module.id,
@@ -13,7 +14,7 @@ export class ProjectDetailsMainComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ProjectService) {}
+        private service: ProjectService) {} 
 
 
     ngOnInit() { 

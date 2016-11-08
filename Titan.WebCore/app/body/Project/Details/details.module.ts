@@ -13,7 +13,7 @@ import detailsRoutes from "./details.routes";
         ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
     providers: [ProjectService],
     declarations: [DetailsComponent],
-    exports:[DetailsComponent]
+    exports:[DetailsComponent, CommonModule]
 })
 
 export default class DetailsModule { }

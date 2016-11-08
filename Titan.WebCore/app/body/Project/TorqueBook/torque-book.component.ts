@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from '../project.service'
+import { TorquesheetService } from './../../../shared/services/torquesheet.service'
+
 declare var $:any;
 @Component({
-    moduleId: module.id,
     selector: 'torque-book',
-    templateUrl: 'torque-book.component.html'
+    templateUrl: 'app/body/Project/TorqueBook/torque-book.component.html'
 })
 export class TorqueBookComponent implements OnInit {
     public displayAddTorqueBook:boolean;
@@ -18,14 +19,21 @@ export class TorqueBookComponent implements OnInit {
     public newTorqueBookName:string;
     public newTorqueSheetName:string;
     public projectId:string;
-    
+    public displaySelectTemplate:boolean;
+    public torquesheetTemplates:any;
+    public selectedTemplate:any;
+    public displayTorqueSheetTemplate:boolean;
+    public modifyingTorqueSheet: any;
+    public displayTorqueSheetTemplateSelection: boolean;
+    public spreadInstance: any;
     @ViewChild('torqueBookForm') torqueBookForm: any;
     @ViewChild('torqueSheetForm') torqueSheetForm: any;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ProjectService) {}
+        private service: ProjectService,
+        private torqueSheetService: TorquesheetService) {}
 
 
     ngOnInit() { 
@@ -45,6 +53,21 @@ export class TorqueBookComponent implements OnInit {
         return false;
     }
 
+    canSelectTemplate(data){
+        if ((data.rowType == "BuildLevel" || data.rowType == "TorqueBook") || data.contents != null)
+            return false;
+        return true;
+    }
+
+    canEditTemplate(data) {
+        if ((data.rowType == "BuildLevel" || data.rowType == "TorqueBook"))
+            return false;
+
+        if (data.contents == null)
+            return false;
+        return true;
+    }
+
     getLabel(rowType){
         if(rowType == "BuildLevel")
             return "Add Torque Book";
@@ -57,6 +80,74 @@ export class TorqueBookComponent implements OnInit {
             this.onAddTorqueBook(id, event);
         else if(rowType == "TorqueBook")
             this.onAddTorqueSheet(id, event);
+    }
+
+    onAddTemplate(data, event, displayTorqueSheetTemplateSelection) {
+        this.modifyingTorqueSheet = data;
+        this.displayTorqueSheetTemplateSelection = displayTorqueSheetTemplateSelection;
+        this.displaySelectTemplate = true;
+        if (displayTorqueSheetTemplateSelection) {
+            this.torqueSheetService.getAllTorqueSheetTemplates().subscribe(templates => {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Template",
+                    value: null
+                });
+                for (let template of templates.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template
+                    }
+                    resultMap.push(temp);
+                }
+                this.torquesheetTemplates = resultMap;
+            });
+        } else {
+            this.service.getTorqueSheet(data.id).subscribe(res => {
+                this.initializeTemplate(res.contents);
+            });
+        }
+    }
+
+    onAddTorqueSheetTemplateConfirmation() {
+        var data = {
+            id: this.modifyingTorqueSheet.id,
+            contents: JSON.stringify(this.spreadInstance.toJSON())
+        }
+        this.service.putTorqueSheetTemplate(data).subscribe(res => {
+            this.closeTemplateWindow();
+            console.log('Success')
+        });
+    }
+
+    onAddTorqueSheetTemplateCancel() {
+        this.closeTemplateWindow();
+    }
+
+    closeTemplateWindow() {
+        $("#torqueSheetSpreadContainer").html("");
+        this.displayTorqueSheetTemplate = false; 
+        this.displaySelectTemplate = false;
+        this.modifyingTorqueSheet = null;
+        //this.spreadInstance = null;
+    }
+
+    onTemplateChange(event, value){
+        //console.log(this.selectedTemplate);
+        this.initializeTemplate(this.selectedTemplate.contents);
+    }
+
+    initializeTemplate(contents) {
+        $("#torqueSheetSpreadContainer").html("");
+        this.displayTorqueSheetTemplate = true;
+        var obj = this;
+        setTimeout(function () {
+            obj.spreadInstance = new GcSpread.Sheets.Spread($("#torqueSheetSpreadContainer").get(0));
+            obj.spreadInstance.isPaintSuspended(true);
+            console.log(contents);
+            obj.spreadInstance.fromJSON(JSON.parse(contents));
+            obj.spreadInstance.isPaintSuspended(false);
+        }, 200);
     }
 
     onAddTorqueBook(buildLevelId, event){
