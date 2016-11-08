@@ -1,10 +1,14 @@
-import { DataService } from './../../shared/services/data.services';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
+import { TestFacilityService } from './../../shared/services/testfacility.services';
+import { LoggerService } from './../../shared/services/logger.service';
+import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import {Router} from '@angular/router'
+import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+
 
 @Component({
     selector: 'test-facilities',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/TestFacilities/testfacilities.component.html'
 })
 export class TestFacilitiesComponent {
     title = "Test Facilities";
@@ -12,18 +16,18 @@ export class TestFacilitiesComponent {
     confInfo:any = {};
     cols = [];
     gridFilter = {};
+    idField:string;
+    linkFieldId:string;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: TestFacilityService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postDepartmentGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
                 //console.log("-------- Cols --------", this.cols);
@@ -34,49 +38,9 @@ export class TestFacilitiesComponent {
         console.log("The Whole configuration Info values: ", this.confInfo);
     }
 
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
-
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postDepartmentGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-        console.log("---------- Event ---------",event);
-
+    navigateDetails(id:string){
+        this.router.navigate(['testfacilities/details', id]);
     }
-    private getGridFilterValues(event: LazyLoadEvent) {
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
-                }
-                console.log("------- filters ----------", filters);
-            }
-        }
-        this.gridFilter = {
-            locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
-        };
-    }
+
+   
 }

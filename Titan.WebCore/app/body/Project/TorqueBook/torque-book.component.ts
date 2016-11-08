@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from '../project.service'
+import { ProjectService } from './../../../shared/services/project.services'
 import { TorquesheetService } from './../../../shared/services/torquesheet.service'
 
 declare var $:any;
@@ -103,7 +103,7 @@ export class TorqueBookComponent implements OnInit {
                 this.torquesheetTemplates = resultMap;
             });
         } else {
-            this.service.getTorqueSheet(data.id).subscribe(res => {
+            this.torqueSheetService.getTorqueSheet(data.id).subscribe(res => {
                 this.initializeTemplate(res.contents);
             });
         }
@@ -114,7 +114,7 @@ export class TorqueBookComponent implements OnInit {
             id: this.modifyingTorqueSheet.id,
             contents: JSON.stringify(this.spreadInstance.toJSON())
         }
-        this.service.putTorqueSheetTemplate(data).subscribe(res => {
+        this.torqueSheetService.putTorqueSheetTemplate(data).subscribe(res => {
             this.closeTemplateWindow();
             console.log('Success')
         });
@@ -193,12 +193,12 @@ export class TorqueBookComponent implements OnInit {
             var tempId = this.torqueBookIdForAddingTorqueSheet;
             var container = $(this.torqueBookElmForAddingTorqueSheet).closest("div.ui-treetable-row");
             
-            this.service.postTorqueSheet(postData).subscribe(res => {
+            this.torqueSheetService.postTorqueSheet(postData).subscribe(res => {
                 var expandImg = $("span.ui-treetable-toggler.fa-caret-right", container);
                 if(expandImg != null && expandImg.length > 0)
                     expandImg.trigger("click");
                 else{
-                    this.service.getTorqueSheets(this.torqueBookIdForAddingTorqueSheet).subscribe(a => {
+                    this.torqueSheetService.getTorqueSheets(this.torqueBookIdForAddingTorqueSheet).subscribe(a => {
                         for(var buildLevel of this.BuildLevels){
                             if(buildLevel.children != null){
                                 for(var torqueBook of buildLevel.children){
@@ -235,7 +235,7 @@ export class TorqueBookComponent implements OnInit {
                 });
             }
             else if(event.node.data.rowType == "TorqueBook"){
-                this.service.getTorqueSheets(event.node.data.id).subscribe(a => {
+                this.torqueSheetService.getTorqueSheets(event.node.data.id).subscribe(a => {
                     event.node.children = a.$values;
                 });
             }            

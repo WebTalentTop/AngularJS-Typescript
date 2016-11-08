@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     templateUrl: 'app/body/gridview.component.html'
 })
 export class CalendarComponent {
-    title = "Calendar Grid";
+    title = "Calendar";
     gridData = [];
     confInfo:any = {};
     cols = [];

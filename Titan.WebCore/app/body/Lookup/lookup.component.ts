@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     templateUrl: 'app/body/gridview.component.html'
 })
 export class LookupComponent {
-    title = "Lookup Grid";
+    title = "Lookup";
     gridData = [];
     confInfo:any = {};
     cols = [];

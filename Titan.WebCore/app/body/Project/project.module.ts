@@ -27,10 +27,11 @@ import { DetailsComponent } from "./Details/details.component";
 import { ProjectDetailsMainComponent } from "./DetailsMain/project-details-main.component";
 import { RouterModule } from "@angular/router";
 import { DataTableModule } from 'primeng/primeng';
+
+import { ProjectService } from '../../shared/services/project.services';
 import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 //import {router} from './project-routing.module';
 import projectRoutes from "./project.routes";
-import { ProjectService } from './project.service';
 import { FormsModule, Validator} from '@angular/forms';
 import { CalendarModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     TabViewModule, TreeTableModule, TreeNode, SharedModule, DialogModule, Header, Footer } from 'primeng/primeng';

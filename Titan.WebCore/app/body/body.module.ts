@@ -18,6 +18,7 @@ import {EquipmentComponent} from './Equipment/equipment.component';
 import {ProjectComponent} from './Project/project.component';
 import { DataService } from '../shared/services/data.services';
 import { PlatformService } from '../shared/services/platform.services';
+
 //import { enableProdMode} from '@angular/core';
 //enableProdMode();
 import appRoutes from './body.routes';

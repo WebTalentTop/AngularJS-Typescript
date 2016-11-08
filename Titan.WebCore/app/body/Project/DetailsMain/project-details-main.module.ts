@@ -5,7 +5,7 @@ import { ProjectDetailsMainComponent } from "./project-details-main.component";
 //import  TorqueBookModule  from "./../TorqueBook/torque-book.module";
 //import  DetailsModule  from "./../Details/details.module";
 //import  TempModule  from "./../Temp/temp.module";
-import { ProjectService} from '../project.service';
+import { ProjectService} from './../../../shared/services/project.services';
 //import { TorqueBookComponent } from "./../TorqueBook/torque-book.component"
 //import { DetailsComponent } from "./../Details/details.component"
 

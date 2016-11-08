@@ -1,4 +1,4 @@
-import { DataService } from './../../shared/services/data.services';
+import { ProjectService } from './../../shared/services/project.services';
 import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -11,13 +11,14 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 })
 
 export class ProjectComponent {
-    title = "Project Grid";
+    title = "Project";
     gridData = [];
     confInfo: any = {};
     cols = [];
     gridFilter = {};
+    idField:string ;
 
-    constructor(private dataService: DataService, private router:Router, private logger: LoggerService) {
+    constructor(private dataService: ProjectService, private router:Router, private logger: LoggerService) {
 
     }
 
@@ -32,7 +33,7 @@ export class ProjectComponent {
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postProjectGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;
@@ -40,52 +41,9 @@ export class ProjectComponent {
                 this.confInfo = res.Configuration;
             });
     }
-
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-//            this.logger.logConsole("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-
-            let js = JSON.stringify(this.gridFilter);
-            this.dataService.postProjectGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    this.logger.logConsole("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-      //  console.log("---------- Event ---------", event);
-
+    navigateDetails(id:string){
+        this.router.navigate(['project/detailsmain', id]);
     }
 
-    private getGridFilterValues(event: LazyLoadEvent) {
-        console.log("----- GridFilterValues Called -------");
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
-                }
-                this.logger.logConsole("------- filters ----------", filters);
-            }
-        }
-        //this.gridFilter = { sortColumns: sortColumn, pageNumber: pageNumber, pageSize: 5, whereConditions: filters };
-        this.gridFilter = {
-            isPaging: true,
-            sortColumns: sortColumn,
-            locale: "en-us",
-            defaultLocale: "en-us",pageNumber: pageNumber, pageSize: 5};
-    }
+
 }
