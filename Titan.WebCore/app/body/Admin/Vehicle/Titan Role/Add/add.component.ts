@@ -5,9 +5,9 @@ import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
-    selector: 'add-grade',
-    styleUrls: ['app/body/Admin/Vehicle/Grade/Add/add.component.css'], 
-    templateUrl: 'app/body/Admin/Vehicle/Grade/Add/add.component.html'
+    selector: 'add-titanrole',
+    styleUrls: ['app/body/Admin/Vehicle/TitanRole/Add/add.component.css'], 
+    templateUrl: 'app/body/Admin/Vehicle/TitanRole/Add/add.component.html'
 })
 
 export class AddComponent {

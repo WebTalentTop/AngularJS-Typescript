@@ -6,10 +6,10 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: 'edit',
-    templateUrl: 'app/body/Admin/Vehicle/Grade/Edit/edit.component.html'
+    templateUrl: 'app/body/Admin/Vehicle/Equipment/Edit/edit.component.html'
 })
 export class EditComponent {
-    title = "Grade Edit";
+    title = "Equipment Edit";
 
     id;
     username: string;
