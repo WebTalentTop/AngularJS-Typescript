@@ -1,57 +1,24 @@
-
 <div class="ui-g-12">
     <h1> {{title}}</h1>
 
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Titan User Information </h3>
+        <h3> Add Titan User </h3>
         <br />
         <p-panel>
             <header></header>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"  style="margin: 10px 0px">
-                    <div class="ui-grid-row body">
-                            <div class="ui-grid-row">
-                                    <div class="ui-grid-col-6">
-                                        Titan User Name *
-                                    </div>
-                                    <div class="ui-grid-col-6">
-                                        <input type="text"
-                                               id="username"
-                                               name="username"
-                                               pInputText
-                                               [(ngModel)]="username"
-                                               placeholder="12th Wonder LLC"
-                                               class="form-control" required />
-                                    </div>
-                                </div>
-                    <!--<div class="ui-grid-col-4">
-                            {{username | json }}
-                        </div>
-                    </div>
-
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row body">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
+                        <div class="ui-grid-col-6">
+                            Titan User Name *
                         </div>
                         <div class="ui-grid-col-6">
-                        </div>
-                        <div class="ui-grid-col-4">
+                            <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="12th Wonder LLC" class="form-control"
+                                required />
                         </div>
                     </div>
-                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                Project Name
-                            </div>
-                            <div class="ui-grid-col-6">
-                                <textarea type="text"
-                                          pInputTextArea
-                                          id="description"
-                                          class="form-control" required
-                                          name="description"
-                                          [(ngModel)]="description"></textarea>
-                            </div>
-                        </div>
-                        <div class="ui-grid-col-4">{{ description | json }}</div>-->
                 </div>
+
                 <div class="ui-grid-row">
                     <br />
                     <div class="ui-grid-row body">
