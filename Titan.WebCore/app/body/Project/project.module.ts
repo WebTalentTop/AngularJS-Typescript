@@ -12,10 +12,10 @@
 //import {  ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, TabViewModule } from 'primeng/primeng';
 
 //@NgModule({
-//    imports: [CommonModule, DataTableModule, GridModule,//ProjectDetailsMainModule, 
+//    imports: [CommonModule, DataTableModule, GridModule,//ProjectDetailsMainModule,
 //        projectRoutes, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, TabViewModule],
 //    declarations: [ProjectComponent, ProjectDetailsMainComponent, DetailsComponent],
-//    providers:[ProjectService] 
+//    providers:[ProjectService]
 //})
 
 //export default class ProjectModule { }
@@ -24,7 +24,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ProjectComponent } from "./project.component";
 import { DetailsComponent } from "./Details/details.component";
-import { ProjectDetailsMainComponent } from "./DetailsMain/project-details-main.component";
 import { RouterModule } from "@angular/router";
 import { DataTableModule } from 'primeng/primeng';
 
@@ -43,8 +42,8 @@ import { TorquesheetService } from './../../shared/services/torquesheet.service'
     imports: [CalendarModule, DropdownModule, GridModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule,
         PanelModule, CommonModule, DataTableModule, projectRoutes, FormsModule, TreeTableModule,
         SharedModule, DialogModule],
-    declarations: [ProjectComponent, DetailsComponent, TemplatesComponent, ProjectDetailsMainComponent, TorqueBookComponent],
-    providers: [ProjectService, TorquesheetService] 
+    declarations: [ProjectComponent, DetailsComponent, TemplatesComponent, TorqueBookComponent],
+    providers: [ProjectService, TorquesheetService]
 })
 
 export default class ProjectModule {  }
