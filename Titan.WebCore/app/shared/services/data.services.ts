@@ -39,6 +39,13 @@ export class DataService {
         .map(this.getJson);
     }
 
+ postEquipmnetTypeGridData(): Observable<any> {
+        return this.http.post(`${GridApiUrl.departmentGridUrl}`, this.body, { headers: this.headers })
+            .map(this.getJson);
+        //.map(this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postProjectGridData(): Observable<any> {
         console.log("---- postProjectGridData", GridApiUrl.projectGridUrl);
         return this.http.post(`${GridApiUrl.projectGridUrl}`, this.body, { headers: this.headers })
@@ -56,65 +63,6 @@ export class DataService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
-
-
-    postBuildLevelGridData(): Observable<any> {
-        console.log("---- postBuildLevelGridData", GridApiUrl.buildlevelGridUrl);
-        return this.http.post(`${GridApiUrl.buildlevelGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-         //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postBuildLevelGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postBuildLevelGridDataFilter", GridApiUrl.buildlevelGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.buildlevelGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-         //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-
-    postTitanRoleGridData(): Observable<any> {
-        console.log("---- postTitanRoleGridData", GridApiUrl.titanroleGridUrl);
-        return this.http.post(`${GridApiUrl.titanroleGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postTitanRoleGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postTitanRoleGridDataFilter", GridApiUrl.titanroleGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.titanroleGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-
-    postTitanUserGridData(): Observable<any> {
-        console.log("---- postTitanUserGridData", GridApiUrl.titanuserGridUrl);
-        return this.http.post(`${GridApiUrl.titanuserGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postTitanUserGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postTitanUserGridDataFilter", GridApiUrl.titanuserGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.titanuserGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
 
     postPlatformGridData(): Observable<any> {
         return this.http.post(`${GridApiUrl.platformGridUrl}`, this.body, { headers: this.headers })
@@ -147,81 +95,6 @@ export class DataService {
             .catch(err => Observable.throw(err))
             .map(this.getJson);
     }
-
-
-    postEquipmentTypeGridData(): Observable<any> {
-        return this.http.post(`${GridApiUrl.equipmenttypeGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postEquipmentTypeGridDataFilter(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.equipmenttypeGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-
-    postMarketGridData(): Observable<any> {
-        console.log("---- postMarketGridData", GridApiUrl.marketGridUrl);
-        return this.http.post(`${GridApiUrl.marketGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postMarketGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postMarketGridDataFilter", GridApiUrl.marketGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.marketGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-    postTestFacilityGridData(): Observable<any> {
-        console.log("---- postTestFacilityGridData", GridApiUrl.testfacilityGridUrl);
-        return this.http.post(`${GridApiUrl.testfacilityGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postTestFacilityGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postTestFacilityGridDataFilter", GridApiUrl.testfacilityGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.testfacilityGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-
-    postTenantGridData(): Observable<any> {
-        console.log("---- postTenantGridData", GridApiUrl.tenantGridUrl);
-        return this.http.post(`${GridApiUrl.tenantGridUrl}`, this.body, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-    postTenantGridDataFilter(filterBody): Observable<any> {
-        console.log("---- postTenantGridDataFilter", GridApiUrl.tenantGridUrl);
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${GridApiUrl.tenantGridUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson);
-        //this.checkErrors)
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ",response.json());

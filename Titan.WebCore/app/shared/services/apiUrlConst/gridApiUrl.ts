@@ -5,6 +5,7 @@ export class GridApiUrl {
     public static platformGridUrl: string = titanApiUrl + 'platformGrid/GetGridData';
     public static departmentGridUrl: string = titanApiUrl + 'departmentGrid/GetGridData';
     public static equipmentGridUrl: string = titanApiUrl + 'equipmentgrid/GetGridData';
+    public static equipmentTypeGridUrl: string = titanApiUrl + 'equipmentTypeGrid/GetGridData';
     public static titanroleGridUrl: string = titanApiUrl + 'titanrolegrid/GetGridData';
     public static titanuserGridUrl: string = titanApiUrl + 'titanuserGrid/GetGridData';
     public static marketGridUrl: string = titanApiUrl + 'marketGrid/GetGridData';
