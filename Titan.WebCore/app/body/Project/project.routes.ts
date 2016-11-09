@@ -1,5 +1,4 @@
 ﻿import { ProjectComponent } from "./project.component";
-import { ProjectDetailsMainComponent } from "./DetailsMain/project-details-main.component";
 import { RouterModule } from "@angular/router";
 
 const routes = [
