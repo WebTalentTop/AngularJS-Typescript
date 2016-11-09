@@ -18,8 +18,9 @@ p-panel .ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all
  { 
     font-size: 15px ;
     display:inline-block;
-    width: auto;
+    width: 120px;
     background-color: gray;
+     
     }
 
 p-panel #footer 

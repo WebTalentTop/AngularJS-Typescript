@@ -1,74 +1,45 @@
-
 <div class="ui-g-12">
     <h1> {{title}}</h1>
 
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> * Project Information </h3>
+        <h3> Project Information </h3>
         <br />
         <p-panel>
             <header></header>
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Organization Name
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text"
-                               id="username"
-                               name="username"
-                               pInputText
-                               [(ngModel)]="username"
-                               placeholder="12th Wonder LLC"
-                               class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-                        {{username | json }}
-                    </div>
-                </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                    </div>
-                </div>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row body">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Project Name
+                        <div class="ui-grid-col-6">
+                            Project Name *
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text"
-                                      pInputTextArea
-                                      id="description"
-                                      class="form-control" required
-                                      name="description"
-                                      [(ngModel)]="description"></textarea>
+                            <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="12th Wonder LLC" class="form-control"
+                                required />
                         </div>
                     </div>
-                    <div class="ui-grid-col-4">{{ description | json }}</div>
                 </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2"></div>
-                    <div class="ui-grid-col-2">
 
-                        <button pButton type="submit" label="Add Project">  </button>
+                <div class="ui-grid-row">
+                    <br />
+                    <div class="ui-grid-row body">
+                        <div class="ui-grid-col-3"></div>
+                        <div class="ui-grid-col-3">
+
+                            <button pButton type="submit" label="Add">  </button>
+                        </div>
+                        <div class="ui-grid-col-4"></div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3">
+                        </div>
+                        <div class="ui-grid-col-6">
+                        </div>
+
+                        <button id="cancel" pButton type="submit" label="Cancel">  </button>
                     </div>
                     <div class="ui-grid-col-4"></div>
                 </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                    </div>
-                    <div class="ui-grid-col-5">
-                    </div>
-
-                    <button id="cancel" pButton type="submit" label="Cancel">  </button>
-                </div>
-                <div class="ui-grid-col-4"></div>
             </div>
             <br />
             <br />

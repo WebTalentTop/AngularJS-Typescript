@@ -1,7 +1,7 @@
 import { PlatformService} from '../../../../../shared/services/platform.services';
 import { ActivatedRoute} from '@angular/router';
-import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import { InputTextModule, PanelModule } from 'primeng/primeng';
 import "rxjs/add/operator/map";
 
 @Component({
@@ -19,7 +19,11 @@ export class EditComponent {
     constructor(private route:ActivatedRoute, private platformService: PlatformService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        platformService.getPlatformById(this.id).subscribe(res => this.model = res);
+        platformService.getPlatformById(this.id).subscribe(res => {
+            console.log("---- Inside Constructor PlatformById ----",
+                res); this.username = res.Name;
+            this.description = res.Description; this.model = res});
+        console.log(this.model);
     }
 
     ngOnInit() {
