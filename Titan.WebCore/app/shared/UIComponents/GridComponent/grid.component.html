@@ -17,5 +17,7 @@
 
            <a (click)="navigateTo(item[idField])">{{item[col.field]}}</a>
         </template>
+        <template let-col let-item="rowData" *ngIf="col.Field === 'date'" pTemplate type="body">
+        </template>
     </p-column>
 </p-dataTable>
