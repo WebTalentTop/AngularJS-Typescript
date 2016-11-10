@@ -1,4 +1,8 @@
 ﻿import { TestFacilityService } from '../../../shared/services/testfacility.services';
+import { TestFacilityRoleService } from '../../../shared/services/testFacilityRoleService';
+import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
+import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachmentService';
+import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
@@ -14,7 +18,9 @@ export class DetailsComponent {
     formConfiguration:any;
     formObject:any;
 
-    id:string;
+    id: string;
+    TestFacilityAttachments: ITestFacilityAttachment[];
+    TestFacilityRoles: ITestFacilityRole[];
 
     model:any = {
                 id:'', 
@@ -32,7 +38,9 @@ export class DetailsComponent {
 
     constructor(
         private route:ActivatedRoute, 
-        private dataService: TestFacilityService
+        private dataService: TestFacilityService,
+        private testfacilityroleservice: TestFacilityRoleService,
+        private testfacilityattachmentservice: TestFacilityAttachmentService
     ){
         this.route.params.subscribe(params => this.id = params['id']);
         console.log("---- TF Details ID Param -----", this.id);
@@ -47,6 +55,17 @@ export class DetailsComponent {
                 this.model = res.formObject;
                 console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 console.log("----- Result of formObject -----", this.model);
+            });
+        this.testfacilityroleservice.getByIdusing(this.id)
+            .subscribe(TestFacilityRoles => {
+                console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.TestFacilityRoles = TestFacilityRoles;
+            });
+
+        this.testfacilityattachmentservice.getByIdusing(this.id)
+            .subscribe(TestFacilityAttachments => {
+                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                this.TestFacilityAttachments = TestFacilityAttachments;
             });
     }
     onBeforeUpload(event){
