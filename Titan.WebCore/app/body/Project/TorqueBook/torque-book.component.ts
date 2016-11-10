@@ -38,7 +38,7 @@ export class TorqueBookComponent {
 
     ngOnInit() { 
         this.route.params.forEach((params: Params) => {
-            this.projectId = params['projectId']; // (+) converts string 'id' to a number
+            this.projectId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
              this.service.getBuildLevels(this.projectId).subscribe(a => {

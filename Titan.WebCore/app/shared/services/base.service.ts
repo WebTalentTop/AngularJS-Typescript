@@ -6,6 +6,18 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 export class BaseService {
+    headers: Headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    body = {
+        "locale": "en-us",
+        "defaultLocale": "en-us",
+        "PageNumber": 1,
+        "PageSize": 5,
+        "IsPaging": true
+    };
+
     constructor() {}
     
     public getJson(response: Response) {

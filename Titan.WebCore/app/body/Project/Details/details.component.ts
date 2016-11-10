@@ -19,7 +19,9 @@ export class DetailsComponent {
 
     ngOnInit() { 
         this.route.params.forEach((params: Params) => {
-            this.projectId = params['projectId']; // (+) converts string 'id' to a number
+            this.route.params.subscribe(params => console.log(params['id']));
+
+            this.projectId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
             this.service.getProjectDetails(this.projectId).subscribe(ProjectDetails => {

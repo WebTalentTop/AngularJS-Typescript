@@ -28,7 +28,9 @@ export class ProjectComponent {
         // Pass along the hero id if available
         // so that the HeroList component can select that hero.
         //this.router.navigate(['/hero', hero.id]);
-        this.router.navigate(['detailsmain', { projectId: projectId }]);
+    //    this.router.navigate(['detailsmain', { projectId: projectId }]);
+        //this.router.navigate(['project/detailsmain', { id: projectId }]);
+        this.router.navigate(['project/detailsmain', projectId]);
     }
 
     ngOnInit() {
@@ -43,6 +45,7 @@ export class ProjectComponent {
     }
     navigateDetails(id:string){
         this.router.navigate(['project/detailsmain', id]);
+        //this.router.navigate(['project/detailsmain', { id: id }]);
     }
 
 
