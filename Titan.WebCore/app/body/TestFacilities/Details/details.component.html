@@ -138,6 +138,34 @@
                                 <br>
                             </div>-->
                         </div>
+                        <div></div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-2">
+                                Select file:
+                                <input type="file" (change)="changeListener($event)">
+                            </div>
+                            <p-dataTable [value]="TestFacilityAttachments">
+                                <p-column field="name" header="Name"></p-column>
+                                <p-column field="path" header="Path"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </p-panel>
+                    <p-panel>
+                        <div class="ui-grid-col-4"></div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"><b>Test Facility Users</b></div>
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-2">
+                                Select User:
+                                <input type="file" (change)="changeListener($event)">
+                            </div>
+                            <p-dataTable [value]="TestFacilityRoles">
+                                <p-column field="name" header="Name"></p-column>
+                                <p-column field="role" header="Role"></p-column>
+                            </p-dataTable>
+                        </div>
                     </p-panel>
                 </form>
             </p-tabPanel>

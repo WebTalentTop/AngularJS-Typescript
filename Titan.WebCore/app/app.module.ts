@@ -8,7 +8,8 @@ import { FooterModule }   from './footer/footer.module';
 import { SidenavModule }   from './sidenav/sidenav.module';
 import { AppComponent }   from './app.component';
 //import { routing }   from './app.routing.3';
-
+import { DataTableModule } from 'primeng/primeng';
+import { DataGridModule } from 'primeng/primeng';
 //import { DataService } from './shared/services/data.services';
 import { enableProdMode} from '@angular/core';
 
@@ -107,6 +108,9 @@ import appRoutes from "./app.routing";
         HttpModule,
         FormsModule,
         HeaderModule,
+        DataGridModule,
+        DataTableModule,
+        
         BodyModule,
         //FooterModule,
         //SidenavModule,
