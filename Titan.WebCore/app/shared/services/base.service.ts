@@ -10,14 +10,7 @@ export class BaseService {
     
     public getJson(response: Response) {
         //console.log("In Data Service response.json() call: ",response.json());
-        let body;
-
-        // check if empty, before call json
-        if (response.text()) {
-            body = response.json();
-        }
-
-        return body || {};
+        return response.json();
     }
 
     public checkErrors(response: Response): Response {

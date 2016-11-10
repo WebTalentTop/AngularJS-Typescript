@@ -14,10 +14,11 @@
                                     <input pInputText
                                            id="Id"
                                            name="Id"
-                                           [(ngModel)]="id"
+                                           [(ngModel)]="model.id"
                                            #testFacilityIdRef="ngModel"
                                            class="form-control"
                                            disabled="disabled" />
+
                                 </div>
                                 <div class="ui-grid-4"></div>
                             </div>
@@ -28,10 +29,10 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <input type="text"
-                                           id="testFacilityName"
-                                           name="username"
+                                           id="name"
+                                           name="name"
                                            pInputText
-                                           [(ngModel)]="testFacilityName"
+                                           [(ngModel)]="model.name"
                                            #testFacilityNameRef="ngModel"
                                            placeholder="Required"
                                            minlength="3"
@@ -145,6 +146,21 @@
             </p-tabPanel>
             <p-tabPanel header="Tests" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
                 After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+            </p-tabPanel>
+            <p-tabPanel header="Attachments" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
+                    <h2>Attachments</h2>
+                    <p-growl [value]="msgs"></p-growl>
+
+                    <p-fileUpload [name]="testFacility" url="http://titanapi-local.12thwonder.com/api/file/SaveFile" 
+                        (onBeforeUpload)="onBeforeUpload($event)"
+                        (onUpload)="onUpload($event)" 
+                            multiple="multiple" accept="image/*" maxFileSize="1000000">
+                        <template pTemplate type="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                        </template>        
+                </p-fileUpload>
             </p-tabPanel>
         </p-tabView>
     </div>
