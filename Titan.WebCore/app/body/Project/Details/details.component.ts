@@ -7,7 +7,7 @@ import { ProjectService } from './../../../shared/services/project.services'
     selector: 'project-detail',
     templateUrl: 'app/body/Project/Details/details.component.html'
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
 
     public ProjectDetails:any;
     public projectId:string; 

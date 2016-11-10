@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from './../../../shared/services/project.services';
+import { TemplatesComponent} from '../Templates/templates.component';
 //import { DetailsComponent } from "./../Details/details.component"
 
 @Component({
@@ -8,8 +9,8 @@ import { ProjectService } from './../../../shared/services/project.services';
     selector: 'project-detail-main',
     templateUrl: 'app/body/Project/DetailsMain/project-details-main.component.html'
 })
-export class ProjectDetailsMainComponent implements OnInit {
-
+export class ProjectDetailsMainComponent {
+    id:string;
     //public ProjectDetails:any;
     constructor(
         private route: ActivatedRoute,
@@ -19,6 +20,8 @@ export class ProjectDetailsMainComponent implements OnInit {
 
     ngOnInit() { 
         console.log("test");
+          this.route.params.subscribe(params => this.id = params['id']);
+        console.log("---- TF Details ID Param -----", this.id);
         // this.route.params.forEach((params: Params) => {
         //     let projectId = params['projectId']; // (+) converts string 'id' to a number
         //     //let locale = params['locale'];

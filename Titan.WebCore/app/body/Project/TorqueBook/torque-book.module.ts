@@ -17,4 +17,4 @@ import torqueBookRoutes from "./torque-book.routes";
     exports:[TorqueBookComponent, CommonModule]
 })
 
-export default class TorqueBookModule { }
+export class TorqueBookModule { }

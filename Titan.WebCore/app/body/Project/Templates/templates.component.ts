@@ -8,7 +8,7 @@ declare var $: JQueryStatic;
     selector: 'torquesheet-template',
     templateUrl: 'app/body/Project/Templates/templates.component.html'
 })
-export class TemplatesComponent implements OnInit {
+export class TemplatesComponent {
 
     public displayAddTorqueSheetTemplate:boolean;
     public projectId: string; 

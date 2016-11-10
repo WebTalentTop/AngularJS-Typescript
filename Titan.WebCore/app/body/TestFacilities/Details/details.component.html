@@ -99,15 +99,15 @@
                                 <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
                             </div>
                             <!-- Test Facility Operation Hours -->
-                            <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
+                           <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
                             
 
                             <!-- Test Facility Operation Hours -->
-                            <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
+                            <!--  <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
 
 
                             <!-- Test Facility Operation Hours -->
-                            <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
+                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
 
                             <!-- Test Facility Description -->
                             <div class="ui-grid-row">
@@ -128,7 +128,7 @@
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2"></div>
                                 <div class="ui-grid-col-2">
-                                    <button pButton type="submit" [disabled]="!platformForm.valid" label="Edit" icon="ui-icon-add" iconPos="left"></button>
+                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Edit" icon="ui-icon-add" iconPos="left"></button>
                                 </div>
                                 <div class="ui-grid-col-4"></div>
                             </div>

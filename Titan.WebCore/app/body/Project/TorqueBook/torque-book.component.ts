@@ -8,7 +8,7 @@ declare var $:any;
     selector: 'torque-book',
     templateUrl: 'app/body/Project/TorqueBook/torque-book.component.html'
 })
-export class TorqueBookComponent implements OnInit {
+export class TorqueBookComponent {
     public displayAddTorqueBook:boolean;
     public displayAddTorqueSheet:boolean;
     public BuildLevels:any;
