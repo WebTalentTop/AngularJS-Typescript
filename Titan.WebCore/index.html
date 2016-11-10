@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+    <meta name="viewport" content="width=device-width" />
+    
+    <script src="library/lib/shim.min.js"></script>
+    <script src="library/lib/zone.js"></script>
+    <script src="library/lib/Reflect.js"></script>
+    <script src="library/lib/system.src.js"></script>
+    <script src="library/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Layout CSS -->
+    <link rel="stylesheet" type="text/css" href="library/icons/css/font-awesome.min.css" />
+    <link id="theme-css" rel="stylesheet" type="text/css" href="library/resources/theme/theme-indigo.css">
+    <link rel="stylesheet" type="text/css" href="library/resources/layout/css/animate.css">
+    <link id="layout-css" rel="stylesheet" type="text/css" href="library/resources/layout/css/layout-indigo.css">
+
+    <!-- PrimeNG CSS -->
+    <link rel="stylesheet" type="text/css" href="library/resources/demo/css/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="library/primengThemes/primeng.min.css" />
+    <!-- 1. Load libraries -->
+    <script src="library/resources/demo/js/jquery.deps.js"></script>    <!-- Calendar -->
+    <script src="library/resources/layout/js/layout.js"></script>       <!-- Menu -->
+    <script src="library/resources/demo/js/charts.min.js"></script>     <!-- Charts -->
+    <script src="library/resources/demo/js/moment.js"></script>         <!-- Schedule -->
+    <script src="library/resources/demo/js/fullcalendar.js"></script>   <!-- Schedule -->
+    <script src="library/resources/demo/js/quill.min.js"></script>      <!-- Editor -->
+
+    
+    
+    
+
+    <link href="library/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="systemjs.config.js"></script>
+
+    
+    <link rel="stylesheet" type="text/css" href="library/css/primeng-modification.css" />
+    <script>
+        System.import('dist/app/')
+            .catch(function (err) { console.error(err); });
+    </script>
+</head>
+<body>
+    <div>
+       <titan-web>
+        <div class="splash-screen">
+            <div class="splash-container">
+                <div class="logo"></div>
+                <div class="load-bar">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+</titan-web>
+    </div>
+ 
+</body>
+</html>
