@@ -76,7 +76,11 @@ export class DetailsComponent {
         for(let file of event.files){
             this.uploadedFiles.push(file);
         }
-
+        this.testfacilityattachmentservice.getByIdusing(this.id)
+            .subscribe(TestFacilityAttachments => {
+                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                this.TestFacilityAttachments = TestFacilityAttachments;
+            });
         
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
