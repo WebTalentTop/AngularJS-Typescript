@@ -173,6 +173,7 @@ body {
                     position: relative;
                     overflow: scroll;
                     overflow-x: hidden;
+                    background-color: #424242;
                 }  
                 
                 > ul:last-child {
@@ -361,13 +362,14 @@ body {
                 span {
                     display: inline-block;
                     vertical-align: middle;
+                    color: #ffffff;
                 }
             }
             
             &.active-menuitem {
                 > a {
                     color: $primaryColor;
-                    background-color: #e8e8e8;
+                    background-color: #ff5722;
                     
                     i:last-child {
                         @include rotate(-180deg);
@@ -497,7 +499,7 @@ body {
                     @include transition(color .3s);
                     
                     &:hover {
-                        color: #e8e8e8;
+                        color: #ff5722;
                     }
                 }
                 

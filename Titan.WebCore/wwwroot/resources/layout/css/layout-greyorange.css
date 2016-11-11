@@ -1053,7 +1053,7 @@ body {
     .layout-container .topbar .topbar-right .topbar-items .search-item input:focus ~ label {
       top: -5px;
       font-size: 12px;
-      color: red; }
+      color: #757575; }
     .layout-container .topbar .topbar-right .topbar-items .search-item input.ui-state-filled ~ label {
       display: none; }
     .layout-container .topbar .topbar-right .topbar-items .search-item label {
@@ -1080,7 +1080,8 @@ body {
     height: 100%;
     position: relative;
     overflow: scroll;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    background-color: #424242; }
   .layout-container .layout-menu > .nano > .nano-content > ul:last-child {
     margin-top: 16px;
     padding-bottom: 120px; }
@@ -1232,7 +1233,8 @@ body {
       background-color: #e8e8e8; }
     .layout-container .ultima-menu li a span {
       display: inline-block;
-      vertical-align: middle; }
+      vertical-align: middle;
+      color: #ffffff; }
   .layout-container .ultima-menu li.active-menuitem > a {
     color: #757575;
     background-color: #e8e8e8; }
@@ -1355,7 +1357,7 @@ body {
     -webkit-box-shadow: none;
     -moz-box-shadow: none; }
     .layout-container.menu-layout-horizontal .topbar .topbar-left {
-      background-color: red;
+      background-color: #757575;
       box-shadow: none;
       -webkit-box-shadow: none;
       -moz-box-shadow: none; }
@@ -1424,7 +1426,7 @@ body {
           .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li ul ul ul ul ul li a {
             padding-left: 96px; }
         .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li > ul li.active-menuitem > a {
-          color: red;
+          color: #757575;
           background-color: #e8e8e8; }
       .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a {
         color: #ffffff;
@@ -1529,7 +1531,7 @@ body {
         display: inline-block;
         vertical-align: middle; }
     .layout-container .topbar .topbar-right .topbar-items > li.active-top-menu > a {
-      color: red; }
+      color: #757575; }
     .layout-container .topbar .topbar-right .topbar-items > li.active-top-menu > ul {
       display: block; }
       .layout-container .topbar .topbar-right .topbar-items > li.active-top-menu > ul li a {
@@ -1554,7 +1556,7 @@ body {
       .layout-container .topbar .topbar-right .topbar-items > li.search-item input:focus ~ label,
       .layout-container .topbar .topbar-right .topbar-items > li.search-item input.ui-state-filled ~ label {
         top: -20px;
-        color: red; }
+        color: #757575; }
       .layout-container .topbar .topbar-right .topbar-items > li.search-item label {
         top: 1px;
         color: #212121; }
