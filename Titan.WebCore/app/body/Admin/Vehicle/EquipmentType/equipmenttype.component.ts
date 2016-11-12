@@ -1,4 +1,4 @@
-﻿import { DataService } from '../../../../shared/services/data.services';
+﻿import { EquipmentTypeService } from '../../../../shared/services/equipmenttype.services';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import {Router} from '@angular/router';
@@ -16,13 +16,13 @@ export class EquipmentTypeComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: EquipmentTypeService) {
 
     }
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postEquipmentTypeGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -45,7 +45,7 @@ export class EquipmentTypeComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postEquipmentTypeGridDataFilter(JSON.parse(js))
+            this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

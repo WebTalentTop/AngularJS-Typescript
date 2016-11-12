@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataTable, LazyLoadEvent} from 'primeng/primeng';
+import { SpinnerComponent } from '../SpinnerComponent/spinner.component';
 
 @Component({
     selector: 'grid-data',

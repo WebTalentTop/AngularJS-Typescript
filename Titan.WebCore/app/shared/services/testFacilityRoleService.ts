@@ -38,7 +38,7 @@ export class TestFacilityRoleService {
              console.log('---------getbyusing testdata---------',data); 
              return data.$values
             });
-        .catch(err => Observable.throw(err))
+        //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
 

@@ -1,4 +1,4 @@
-﻿import { DataService } from '../../../../shared/services/data.services';
+﻿import { TitanUserService } from '../../../../shared/services/titanuser.services';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import {Router} from '@angular/router';
@@ -17,13 +17,13 @@ export class TitanUserComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService, private router: Router, private logger: LoggerService) {
+    constructor(private dataService: TitanUserService, private router: Router, private logger: LoggerService) {
 
     }
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postTitanUserGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -46,7 +46,7 @@ export class TitanUserComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postTitanUserGridDataFilter(JSON.parse(js))
+            this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

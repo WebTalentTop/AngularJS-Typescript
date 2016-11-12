@@ -9,7 +9,7 @@ import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module'
 import testTemplateRoutes from "./testtemplate.routes";
 
 @NgModule({
-    imports: [CommonModule,RouterModule, DataTableModule, InputTextModule,DropdownModule, InputTextareaModule, TabViewModule,GridModule, testFacilitiesRoutes],
+    imports: [CommonModule,RouterModule, DataTableModule, InputTextModule,DropdownModule, InputTextareaModule, TabViewModule,GridModule, testTemplateRoutes],
     providers: [TestTemplateService],
     declarations: [TestTemplateComponent]
 })

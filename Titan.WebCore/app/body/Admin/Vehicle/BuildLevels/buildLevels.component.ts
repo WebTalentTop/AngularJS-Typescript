@@ -1,4 +1,4 @@
-﻿import { DataService } from '../../../../shared/services/data.services';
+﻿import { BuildLevelService } from '../../../../shared/services/buildlevel.services';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -17,13 +17,13 @@ export class BuildLevelsComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService, private router: Router, private logger: LoggerService) {
+    constructor(private dataService: BuildLevelService, private router: Router, private logger: LoggerService) {
 
     }
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postBuildLevelGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -46,7 +46,7 @@ export class BuildLevelsComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postBuildLevelGridDataFilter(JSON.parse(js))
+            this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

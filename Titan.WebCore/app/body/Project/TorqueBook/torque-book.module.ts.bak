@@ -7,10 +7,11 @@ import { ProjectService} from './../../../shared/services/project.services';
 import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     TreeTableModule,TreeNode,SharedModule, DialogModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
+import torqueBookRoutes from "./torque-book.routes";
 
 @NgModule({
     imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, 
-        ButtonModule, DropdownModule,TreeTableModule,SharedModule,DialogModule],
+        ButtonModule, DropdownModule,TreeTableModule,SharedModule,DialogModule, torqueBookRoutes],
     providers: [ProjectService],
     declarations: [TorqueBookComponent],
     exports:[TorqueBookComponent, CommonModule]

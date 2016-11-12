@@ -5,7 +5,8 @@
              [rows]="5"
              [(selection)]="selectedItem"
              [totalRecords]="confInfo.TotalRecords"
-             (onLazyLoad)="loadFresh($event)">
+             (onLazyLoad)="loadFresh($event)"
+             *ngIf="gridData.length >0">
     <p-column *ngFor="let col of cols"
               [field]="col.Field"
               [header]="col.Header"
@@ -21,3 +22,7 @@
         </template>
     </p-column>
 </p-dataTable>
+
+<div *ngIf="gridData.length === 0">
+    <spinner></spinner>
+</div>

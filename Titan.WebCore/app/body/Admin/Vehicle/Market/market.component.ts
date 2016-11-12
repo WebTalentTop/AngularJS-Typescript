@@ -1,4 +1,4 @@
-import { DataService } from '../../../../shared/services/data.services';
+import { MarketService } from '../../../../shared/services/market.services';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -16,13 +16,13 @@ export class MarketComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService, private router: Router, private logger: LoggerService) {
+    constructor(private dataService: MarketService, private router: Router, private logger: LoggerService) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postMarketGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -45,7 +45,7 @@ export class MarketComponent {
 
                 console.log("----------- GridFilter ---------", this.gridFilter);
                 console.log("-------- Grid Filter JS --------", JSON.parse(js));
-                this.dataService.postMarketGridDataFilter(JSON.parse(js))
+                this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
