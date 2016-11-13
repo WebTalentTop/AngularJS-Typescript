@@ -121,7 +121,7 @@ export class GridComponent {
             isPaging: true,
             sortColumns: sortColumn,
             locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5, whereConditions: filters
+            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: this.confInfo.PageSize, whereConditions: filters
         };
     }
 }

@@ -2,7 +2,7 @@
 <p-dataTable [value]="gridData"
              [lazy]="true"
              [paginator]="true"
-             [rows]="5"
+             [rows]="confInfo.PageSize"
              [(selection)]="selectedItem"
              [totalRecords]="confInfo.TotalRecords"
              (onLazyLoad)="loadFresh($event)"
@@ -22,7 +22,6 @@
         </template>
     </p-column>
 </p-dataTable>
-
 <div *ngIf="gridData.length === 0">
     <spinner></spinner>
 </div>
