@@ -1,22 +1,22 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestTemplateApiUrl} from './apiUrlConst/testTemplateApiUrls';
+import { TestTypeApiUrl} from './apiUrlConst/testTypeApiUrls';
 import { BaseService } from './base.service'
+
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class TestTemplateService extends BaseService {
-
+export class TestTypeService extends BaseService {
     constructor(private http: Http) {
         super();
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D"); 
     }
 
     postGridData(): Observable<any> {
-        return this.http.post(`${TestTemplateApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+        return this.http.post(`${TestTypeApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -24,7 +24,7 @@ export class TestTemplateService extends BaseService {
     }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestTemplateApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestTypeApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -33,8 +33,9 @@ export class TestTemplateService extends BaseService {
 
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestTemplateApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err));
+        return this.http.post(`${TestTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+            .catch(err => Observable.throw(err))
+            .map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -43,15 +44,23 @@ export class TestTemplateService extends BaseService {
 
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${TestTemplateApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${TestTypeApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson)
+            .map(this.checkErrors)
+            .catch(err => Observable.throw(err))
             .map(this.getJson);
-            //.map(this.checkErrors)
-            //.catch(err => Observable.throw(err))
-            //.map(this.getJson);
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${TestTemplateApiUrl.getByIdUrl}${id}`, { headers: this.headers })
+        return this.http.get(`${TestTypeApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getAll(): Observable<any> {
+        return this.http.get(`${TestTypeApiUrl.getAllUrl}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

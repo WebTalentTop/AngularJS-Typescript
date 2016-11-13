@@ -1,6 +1,4 @@
-﻿import { Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
-
+import { Component} from '@angular/core';
 import { TestTemplateService } from './../../../shared/services/testtemplate.services';
 import { TestTypeService } from './../../../shared/services/testtype.services';
 import { TestModeService } from './../../../shared/services/testmode.services';
@@ -9,42 +7,32 @@ import {Router} from '@angular/router'
 import { SelectItem } from 'primeng/primeng';
 
 @Component({
-    selector: 'details-testtemplate',
-    templateUrl: 'app/body/TestTemplate/Details/details.component.html'
+    selector: 'add-testtemplate',
+    styleUrls: ['app/body/TestTemplate/Add/add.component.css'], 
+    templateUrl: 'app/body/TestTemplate/Add/add.component.html'
 })
-export class DetailsComponent {
-    public testTemplate: any;
+
+export class AddComponent {
+    public testTemplate:any;
     public testTypes: any;
     public testModes: Array<any> = new Array();
     constructor(private testTemplateService: TestTemplateService, private testTypeService: TestTypeService,
-        private testModeService: TestModeService, private router: Router,
-        private route:ActivatedRoute
-    ){
-        
+        private testModeService: TestModeService, private router: Router) {
+
     }
 
     ngOnInit() {
+        this.testTemplate = new Object();
         this.getTestType();
         var testMode = {
             label: "Select Test Type to Populate",
             value: null
         };
         this.testModes.push(testMode);
-        this.route.params.subscribe(params => {
-        console.log(params);
-            console.log("---- TF Details ID Param -----", params['id']);
-            this.testTemplateService.getById(params['id']).subscribe(res => {
-                this.testTemplate = res;
-                if (this.testTemplate.testTypeId != null) {
-                    this.onTestTypeChange();
-                }
-            });
-        });
-
     }
 
-    getTestType() {
-        //    testTypes
+    getTestType(){
+//    testTypes
         this.testTypeService.getAll().subscribe(response => {
             this.testTypes = new Array();
             if (response != null) {
@@ -70,7 +58,7 @@ export class DetailsComponent {
         this.testModes = new Array();
         //this.testModes
         this.testModeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
-            if (response != null && response.$values.length > 0) {
+            if (response != null && response.$values.length > 0) { 
                 var resultMap = new Array();
                 resultMap.push({
                     label: "Select Test Mode",
@@ -87,7 +75,7 @@ export class DetailsComponent {
             }
             else {
                 var testMode = [{
-                    label: "No Modes available",
+                    label: "No Modes available", 
                     value: null
                 }];
                 this.testModes = testMode;
@@ -97,10 +85,21 @@ export class DetailsComponent {
     }
 
     onSubmit() {
-        
-        this.testTemplateService.postUpdate(this.testTemplate).subscribe(res => {
-            console.log(res)
-            //this.router.navigate(['testemplate/details', res.$values.id]);
+        // console.log(formRef);
+        // console.log(this.username);
+        // console.log(this.description);
+        // formRef.locale = "en-us";
+        // formRef.isDeleted = false;
+        // let platformData: any = {name: '', description: '', locale:'', isDeleted: false};
+        // platformData.name = formRef.username;
+        // platformData.description = formRef.description;
+        // platformData.locale = "en-us";
+
+        // console.log(platformData);
+        this.testTemplateService.postAdd(this.testTemplate).subscribe(res => {
+            console.log('fjdalhfkj ' + res)
+            this.router.navigate(['testtemplate/details', res]);
         });
     }
 }
+                                                                          

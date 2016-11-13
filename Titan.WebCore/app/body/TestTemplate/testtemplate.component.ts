@@ -8,7 +8,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 
 @Component({
     selector: 'test-template',
-    templateUrl: 'app/body/TestTemplate/testemplate.component.html'
+    templateUrl: 'app/body/TestTemplate/testtemplate.component.html'
 })
 export class TestTemplateComponent {
     title = "Test Template";

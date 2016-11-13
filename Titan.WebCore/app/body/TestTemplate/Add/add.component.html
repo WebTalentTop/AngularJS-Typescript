@@ -1,0 +1,104 @@
+<div class="ui-g-12">
+    <h1> Test Template</h1>
+
+    <form #testTemplateForm="ngForm" (ngSubmit)="onSubmit()">
+        <h3> Add Test Template</h3>
+        <br />
+        <p-panel>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px"
+                 *ngIf="testTemplate">
+                <!--<div class="ui-grid-row body">-->
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Test Template Name*:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel"
+                               [(ngModel)]="testTemplate.name" maxlength="255" placeholder="Name" class="form-control"
+                               required />
+                    </div>
+                    <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
+                        Template Name field is required
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Description*:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <textarea type="text"
+                               pInputTextArea
+                               class="form-control" required
+                               name="testTemplateDescription"
+                               row="20" maxlength="4000"
+                               #testTemplateDescriptionRef="ngModel"
+                               [(ngModel)]="testTemplate.description" ></textarea>
+                    </div>
+                    <div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
+                        Description field is required
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Test Type:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <p-dropdown [options]="testTypes" [(ngModel)]="testTemplate.testTypeId" (onChange)="onTestTypeChange()" name="testType">
+
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Test Mode:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <p-dropdown [options]="testModes" [(ngModel)]="testTemplate.testModeId" name="testMode">
+
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Estimated Cost:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="number" name="estimatedCost" pInputText #estimatedCostRef="ngModel"
+                               [(ngModel)]="testTemplate.estimatedCost" max="999999999999" placeholder="Estimated Cost" class="form-control"
+                               required />
+                    </div>
+                    <!--<div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
+                        Template Name field is required
+                    </div>-->
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <br />
+                <div class="ui-grid-row body">
+                    <div class="ui-grid-col-3"> </div>
+                    <div class="ui-grid-col-3">
+                        <button pButton type="submit" label="Add" [disabled]="!testTemplateForm.form.valid">  </button>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button pButton label="Cancel" routerLink="/testtemplate">  </button>
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3">
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+
+                </div>
+                <div class="ui-grid-col-4"></div>
+            </div>
+            <!--</div>-->
+        </p-panel>
+    </form>
+</div>

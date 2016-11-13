@@ -1,7 +1,7 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <h3>Details</h3>
-<p-tabView>
+        <p-tabView>
             <p-tabPanel header="Details" leftIcon="fa fa-calendar">
                 <h1>Details Panel</h1>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
@@ -100,16 +100,15 @@
                                 <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
                             </div>
                             <!-- Test Facility Operation Hours -->
-                           <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
-                            
+                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
 
-                            <!-- Test Facility Operation Hours -->
+
+                             <!-- Test Facility Operation Hours -->
                             <!--  <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
 
 
                             <!-- Test Facility Operation Hours -->
-                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
-
+                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
                             <!-- Test Facility Description -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -176,18 +175,18 @@
                 After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
             </p-tabPanel>
             <p-tabPanel header="Attachments" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                    <h2>Attachments</h2>
-                    <p-growl [value]="msgs"></p-growl>
+                <h2>Attachments</h2>
+                <p-growl [value]="msgs"></p-growl>
 
-                    <p-fileUpload [name]="testFacility" url="http://titanapi-local.12thwonder.com/api/file/SaveFile" 
-                        (onBeforeUpload)="onBeforeUpload($event)"
-                        (onUpload)="onUpload($event)" 
-                            multiple="multiple" accept="image/*" maxFileSize="1000000">
-                        <template pTemplate type="content">
-                            <ul *ngIf="uploadedFiles.length">
-                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                            </ul>
-                        </template>        
+                <p-fileUpload [name]="testFacility" url="http://titanapi-local.12thwonder.com/api/file/SaveFile"
+                              (onBeforeUpload)="onBeforeUpload($event)"
+                              (onUpload)="onUpload($event)"
+                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+                    <template pTemplate type="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                        </ul>
+                    </template>
                 </p-fileUpload>
             </p-tabPanel>
         </p-tabView>

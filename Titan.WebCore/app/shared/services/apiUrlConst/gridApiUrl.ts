@@ -9,4 +9,6 @@ export class GridApiUrl {
     public static marketGridUrl: string = titanApiUrl + 'marketGrid/GetGridData';
     public static buildLevelGridUrl: string = titanApiUrl + 'buildLevelGrid/GetGridData';
     public static tenantGridUrl: string = titanApiUrl + 'tenantGrid/GetGridData';
+    public static testTypeGridUrl: string = titanApiUrl + 'testTypeGrid/GetGridData';
+    public static testModeGridUrl: string = titanApiUrl + 'testModeGrid/GetGridData';
 }

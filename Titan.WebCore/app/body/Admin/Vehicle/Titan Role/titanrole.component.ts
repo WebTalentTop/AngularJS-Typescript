@@ -22,17 +22,19 @@ export class TitanRoleComponent {
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postTitanRoleGridData()
-            .subscribe(res => {
-                resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
+        //Commenting to move on.
 
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
+        //this.dataService.postTitanRoleGridData()
+        //    .subscribe(res => {
+        //        resData = res;
+        //        console.log("Inside of Service Call in BodyComponent: ", resData);
+
+        //        this.gridData = res.Data;
+        //        this.cols = res.Configuration.Columns;
+        //        //console.log("-------- Cols --------", this.cols);
+        //        this.confInfo = res.Configuration;
+        //        //console.log("------- Configuration --------", this.confInfo);
+        //    });
         console.log("The Whole MyValues After Service Call: ", this.gridData);
         console.log("The Whole configuration Info values: ", this.confInfo);
     }
@@ -45,14 +47,15 @@ export class TitanRoleComponent {
 
             console.log("----------- GridFilter ---------", this.gridFilter);
             console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postTitanRoleGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
+            //Commenting to move on.
+            //this.dataService.postTitanRoleGridDataFilter(JSON.parse(js))
+            //    .subscribe(res => {
+            //        console.log("------ ResData in postCustomersFilterSummary -----", res);
+            //        let resData = res;
+            //        this.gridData = res.Data;
+            //        this.confInfo = res.Configuration;
+            //        this.cols = res.Configuration.Columns;
+            //    });
         },
             250);
         console.log("---------- Event ---------", event);

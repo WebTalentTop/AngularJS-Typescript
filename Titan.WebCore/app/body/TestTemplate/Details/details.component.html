@@ -1,114 +1,113 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <h3>Details</h3>
-<p-tabView>
+        <p-tabView>
             <p-tabPanel header="Details" leftIcon="fa fa-calendar">
                 <h1>Details Panel</h1>
-                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                <form #testTemplateForm="ngForm" (ngSubmit)="onSubmit()">
                     <p-panel>
-                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                            <!-- Test Template Id -->
-                            <!--<div class="ui-grid-row">
-                                <div class="ui-grid-col-2">Test Template Id</div>
-                                <div class="ui-grid-col-6">
-                                    <input pInputText
-                                           id="Id"
-                                           name="Id"
-                                           [(ngModel)]="id"
-                                           #testTemplateIdRef="ngModel"
-                                           class="form-control"
-                                           disabled="disabled" />
-                                </div>
-                                <div class="ui-grid-4"></div>
-                            </div>-->
-                            <!-- Test Template Name -->
+                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px"
+                             *ngIf="testTemplate">
+                            <!--<div class="ui-grid-row body">-->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Name
+                                    Test Template Name*:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text"
-                                           id="testTemplateName"
-                                           name="username"
-                                           pInputText
-                                           [(ngModel)]="testTemplateName"
-                                           #testTemplateNameRef="ngModel"
-                                           placeholder="Required"
-                                           minlength="3"
-                                           class="form-control" required />
+                                    <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel"
+                                           [(ngModel)]="testTemplate.name" maxlength="255" placeholder="Name" class="form-control"
+                                           required />
                                 </div>
                                 <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
-                                    {{testTemplateNameRef.errors | json}} this field is required
-                                </div>
-
-                                <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.minlength">
-                                    Minimum length is required {{testTemplateNameRef.errors.minlength.requiredLength}}.
+                                    Template Name field is required
                                 </div>
                             </div>
 
-                            <!-- Test Template Building # -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Description:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text"
-                                           pInputText
-                                           id="buildingNumber"
-                                           class="form-control" required
-                                           name="buildingNumber"
-                                           row="20"
-                                           #tfBuildingNumberRef="ngModel"
-                                           [(ngModel)]="buildingNumber" />
-                                </div>
-                                <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
-                            </div>
-                            
-                            <!--<p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
-                            
-
-                            <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
-
-
-                            <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
-
-                            <!-- Test Template Description -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Description:
+                                    Description*:
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <textarea type="text"
                                               pInputTextArea
-                                              id="description"
                                               class="form-control" required
-                                              name="description"
-                                              row="20"
-                                              [(ngModel)]="description"></textarea>
+                                              name="testTemplateDescription"
+                                              row="20" maxlength="4000"
+                                              #testTemplateDescriptionRef="ngModel"
+                                              [(ngModel)]="testTemplate.description"></textarea>
                                 </div>
-                                <div class="ui-grid-col-4">{{ description | json }}</div>
+                                <div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
+                                    Description field is required
+                                </div>
                             </div>
 
                             <div class="ui-grid-row">
-                                <div class="ui-grid-col-2"></div>
                                 <div class="ui-grid-col-2">
-                                    <button pButton type="submit" [disabled]="!platformForm.valid" label="Edit" icon="ui-icon-add" iconPos="left"></button>
+                                    Test Type:
                                 </div>
-                                <div class="ui-grid-col-4"></div>
+                                <div class="ui-grid-col-6">
+                                    <p-dropdown [options]="testTypes" [(ngModel)]="testTemplate.testTypeId" (onChange)="onTestTypeChange()" name="testType">
+
+                                    </p-dropdown>
+                                </div>
                             </div>
-                            <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-                                Form Submitted
-                                <br>
-                            </div>-->
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Test Mode:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <p-dropdown [options]="testModes" [(ngModel)]="testTemplate.testModeId" name="testMode">
+
+                                    </p-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Estimated Cost:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <input type="number" name="estimatedCost" pInputText #estimatedCostRef="ngModel"
+                                           [(ngModel)]="testTemplate.estimatedCost" max="999999999999" placeholder="Estimated Cost" class="form-control"
+                                           required />
+                                </div>
+                                <!--<div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
+                                    Template Name field is required
+                                </div>-->
+                            </div>
                         </div>
+
+                        <div class="ui-grid-row">
+                            <br />
+                            <div class="ui-grid-row body">
+                                <div class="ui-grid-col-3"> </div>
+                                <div class="ui-grid-col-3">
+                                    <button pButton type="submit" label="Save" [disabled]="!testTemplateForm.form.valid">  </button>
+                                </div>
+                                <!--<div class="ui-grid-col-4">
+                                    <button pButton label="Cancel" routerLink="/testtemplate">  </button>
+                                </div>-->
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-3">
+                                </div>
+                                <div class="ui-grid-col-6">
+                                </div>
+
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                        <!--</div>-->
                     </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Equipment" leftIcon="fa fa-print">
-                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+            <p-tabPanel header="Requirements" leftIcon="fa fa-print">
+                Requirements
             </p-tabPanel>
-            <p-tabPanel header="Tests" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+            <p-tabPanel header="Steps" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
+                Steps
             </p-tabPanel>
         </p-tabView>
     </div>
