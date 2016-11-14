@@ -1,8 +1,9 @@
 ﻿import { TestFacilityService } from '../../../shared/services/testfacility.services';
-import { TestFacilityRoleService } from '../../../shared/services/TestFacilityRoleService';
+import { TestFacilityRoleService } from '../../../shared/services/testFacilityRoleService';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/TestFacilityAttachmentService';
+import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachmentService';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
+import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'app/body/TestFacilities/Details/details.component.html'
 })
 export class DetailsComponent {
+
     username: string;
     details: string;
 
@@ -25,7 +27,7 @@ export class DetailsComponent {
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
-    uploadedFiles: ITestFacilityAttachment[] = [];
+
     model: any = {
         id: '',
         isDeleted: false,
@@ -55,7 +57,6 @@ export class DetailsComponent {
         console.log('tes---', event);
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
-
     ngOnInit() {
         this.dataService.getById(this.id)
             .subscribe(res => {
@@ -82,10 +83,23 @@ export class DetailsComponent {
 
             });
     }
+
     onBeforeUpload(event) {
-        console.log("---------- onBeforeUpload ---------", event);
-        event.formData.append("id", this.id);
+
+        for (let file of event.files) {
+            this.uploadedFiles.push(file);
+
+        }
     }
+    onDelete(id) {
+        this.testfacilityattachmentservice.DeleteAttachmentsById(id)
+        //    .subscribe(res => {
+        //      console.log('-----------  TestFacilitiesroles------------------', res);
+        //  this.TestFacilityAttachments = TestFacilityAttachments;
+        //   });
+
+    }
+
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
         console.log('---------------buttonclick---------------', TestFacilityAttachment);
         // return this.http.get(`${TestFacilityApiUrl.getfilesByIdUrl}/${path}`, { headers: this.headers })
@@ -97,8 +111,11 @@ export class DetailsComponent {
 
     onUpload(event) {
         for (let file of event.files) {
+
             this.uploadedFiles.push(file);
+
         }
+
         this.testfacilityattachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
@@ -108,5 +125,6 @@ export class DetailsComponent {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
+
 
 }
