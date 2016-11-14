@@ -1,6 +1,9 @@
-﻿import { titanApiUrl } from './titanApiUrl'
-export class DepartmentpiUrl {
-    public static platformPostCreatedUrl: string = titanApiUrl + 'department';
-    public static platformPostUpdateUrl: string = titanApiUrl + 'department';
-    public static platformGetByIdUrl: string = titanApiUrl + 'platform';
+﻿import { titanApiUrl } from './titanApiUrl';
+import { GridApiUrl } from './gridApiUrls';
+
+export class DepartmentApiUrl {
+    public static gridApiUrl:string  = GridApiUrl.departmentGridUrl;
+    public static postCreatedUrl: string = titanApiUrl + 'department';
+    public static postUpdateUrl: string = titanApiUrl + 'department';
+    public static getByIdUrl: string = titanApiUrl + 'platform';
 }

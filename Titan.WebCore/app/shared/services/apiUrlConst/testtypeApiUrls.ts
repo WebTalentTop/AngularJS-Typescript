@@ -1,5 +1,6 @@
 ﻿import { titanApiUrl } from './titanApiUrl';
-import { GridApiUrl } from './gridApiUrl';
+import { GridApiUrl } from './gridApiUrls';
+
 export class TestTypeApiUrl {
     public static gridApiUrl: string = GridApiUrl.testTypeGridUrl;
     public static postCreatedUrl: string = titanApiUrl + 'testType';

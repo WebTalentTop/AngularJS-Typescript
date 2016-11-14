@@ -1,8 +1,9 @@
 import { titanApiUrl } from './titanApiUrl';
-import { GridApiUrl } from './gridApiUrl';
+import { GridApiUrl } from './gridApiUrls';
+
 export class ProjectApiUrl {
-    public static getProjectDetailsUrl: string = titanApiUrl + 'project/Get?id=';
     public static gridApiUrl: string = GridApiUrl.projectGridUrl;
+    public static getProjectDetailsUrl: string = titanApiUrl + 'project/Get?id=';
     public static postCreatedUrl: string = titanApiUrl + 'project';
     public static postUpdateUrl: string = titanApiUrl + 'project';
     public static getByIdUrl: string = titanApiUrl + 'project';
