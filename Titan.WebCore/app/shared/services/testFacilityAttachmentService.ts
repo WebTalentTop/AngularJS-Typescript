@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { TestFacilityAttachmentApiUrl} from './apiUrlConst/testFacilityAttachmentApiUrl';
-import {ITestFacilityAttachment} from './definitions/ITestFacilityAttachment';
-import {DataGridModule} from 'primeng/primeng';
+import { TestFacilityAttachmentApiUrl } from './apiUrlConst/testFacilityAttachmentApiUrl';
+import { ITestFacilityAttachment } from './definitions/ITestFacilityAttachment';
+import { DataGridModule } from 'primeng/primeng';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -19,7 +19,7 @@ export class TestFacilityAttachmentService {
         "locale": "en-us",
         "defaultLocale": "en-us",
         "PageNumber": 1,
-        "PageSize": 15,
+        "PageSize": 5,
         "IsPaging": true
     };
 
@@ -29,19 +29,33 @@ export class TestFacilityAttachmentService {
 
     getByIdusing(id): Observable<ITestFacilityAttachment[]> {
         return this.http.get(`${TestFacilityAttachmentApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
-            
-      //     .toPromise()
-        //  .then(res => <ITestFacilityRole[]> res.json().data)
-         // .then(data => { return data; });
-         .map(this.getJson)
-         .map(data=> {
-             console.log('---------getbyusing testdata---------',data); 
-             return data.$values
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
             });
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
 
+    DeleteAttachmentsById(id): Observable<Response> {
+        return this.http.get(`${TestFacilityAttachmentApiUrl.DeleteAttachmentsByIdUrl}/${id}`, { headers: this.headers })
+
+        //     .toPromise()
+        //  .then(res => <ITestFacilityRole[]> res.json().data)
+        // .then(data => { return data; });
+        // .map(this.getJson)
+        //  .map(data=> {
+        //  console.log('---------getbyusing testdata---------',data); 
+        //     return data.$values
+        //    });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();
