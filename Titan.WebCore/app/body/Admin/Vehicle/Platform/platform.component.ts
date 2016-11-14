@@ -1,6 +1,5 @@
-import { DataService } from '../../../../shared/services/data.services';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { PlatformService } from '../../../../shared/services/platform.services';
+import { PlatformService } from '../../../../shared/services';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
@@ -17,13 +16,13 @@ export class PlatformComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: PlatformService) {
+    constructor(private service: PlatformService) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postPlatformGridData()
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -46,7 +45,7 @@ export class PlatformComponent {
 
                 console.log("----------- GridFilter ---------", this.gridFilter);
                 console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postPlatformGridDataFilter(JSON.parse(js))
+            this.service.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

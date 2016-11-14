@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { PlatformService } from '../../../../../shared/services/platform.services';
+import { BuildLevelService } from '../../../../../shared/services';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
@@ -16,7 +16,7 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private platformService: PlatformService) {
+    constructor(private service: BuildLevelService) {
 
     }
 
@@ -29,12 +29,12 @@ export class AddComponent {
         console.log(this.description);
         formRef.locale = "en-us";
         formRef.isDeleted = false;
-        let platformData: any = {name: '', description: '', locale:'', isDeleted: false};
-        platformData.name = formRef.username;
-        platformData.description = formRef.description;
-        platformData.locale = "en-us";
+        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        formData.name = formRef.username;
+        formData.description = formRef.description;
+        formData.locale = "en-us";
 
-        console.log(platformData);
-        this.platformService.postAddPlatform(platformData).subscribe(res => console.log(res));
+        console.log(formData);
+        this.service.postAdd(formData).subscribe(res => console.log(res));
     }
 }

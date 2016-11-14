@@ -1,4 +1,4 @@
-import { PlatformService} from '../../../../../shared/services/platform.services';
+import { ProjectService} from '../../../../../shared/services';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -16,10 +16,10 @@ export class EditComponent {
     description: string;
     model:any;
 
-    constructor(private route:ActivatedRoute, private platformService: PlatformService) {
+    constructor(private route:ActivatedRoute, private service: ProjectService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        platformService.getPlatformById(this.id).subscribe(res => this.model = res);
+        service.getById(this.id).subscribe(res => this.model = res);
     }
 
     ngOnInit() {
@@ -27,12 +27,12 @@ export class EditComponent {
 
     onSubmit(formRef) {
         console.log(formRef);
-        let platformData: any = { id: this.id, name: '', description: '', locale: ''};
-        platformData.name = formRef.username;
-        platformData.description = formRef.description;
-        platformData.locale = "en-us";
+        let formData: any = { id: this.id, name: '', description: '', locale: ''};
+        formData.name = formRef.username;
+        formData.description = formRef.description;
+        formData.locale = "en-us";
 
-        console.log(platformData);
-        //this.platformService.postUpdatePlatform(platformData).subscribe(res => console.log(res));
+        console.log(formData);
+        //this.service.postUpdate(formData).subscribe(res => console.log(res));
     }
 }

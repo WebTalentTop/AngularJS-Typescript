@@ -1,4 +1,4 @@
-import { PlatformService} from '../../../../../shared/services/platform.services';
+import { BuildLevelService} from '../../../../../shared/services';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -16,10 +16,10 @@ export class EditComponent {
     description: string;
     model:any;
 
-    constructor(private route:ActivatedRoute, private platformService: PlatformService) {
+    constructor(private route:ActivatedRoute, private service: BuildLevelService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        platformService.getPlatformById(this.id).subscribe(res => this.model = res);
+        service.getById(this.id).subscribe(res => this.model = res);
     }
 
     ngOnInit() {

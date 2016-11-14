@@ -2,7 +2,7 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
-import { ProjectService} from './../../../shared/services/project.services';
+import { ProjectService} from './../../../shared/services';
 
 import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

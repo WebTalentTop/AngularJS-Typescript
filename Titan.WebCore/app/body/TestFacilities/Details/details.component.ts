@@ -1,7 +1,7 @@
-﻿import { TestFacilityService } from '../../../shared/services/testfacility.services';
-import { TestFacilityRoleService } from '../../../shared/services/testFacilityRoleService';
+﻿import { TestFacilityService } from '../../../shared/services';
+import { TestFacilityRoleService } from '../../../shared/services';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachmentService';
+import { TestFacilityAttachmentService } from '../../../shared/services';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';

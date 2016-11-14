@@ -1,4 +1,4 @@
-import { ProjectService } from './../../shared/services/project.services';
+import { ProjectService } from './../../shared/services';
 import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -18,24 +18,13 @@ export class ProjectComponent {
     gridFilter = {};
     idField:string ;
 
-    constructor(private dataService: ProjectService, private router:Router, private logger: LoggerService) {
+    constructor(private service: ProjectService, private router:Router, private logger: LoggerService) {
 
-    }
-
-    onProjectDetailsClick(){
-        let projectId = '53FE9592-1A9B-07D0-85D7-006A30BCD348';
-        console.log(projectId);
-        // Pass along the hero id if available
-        // so that the HeroList component can select that hero.
-        //this.router.navigate(['/hero', hero.id]);
-    //    this.router.navigate(['detailsmain', { projectId: projectId }]);
-        //this.router.navigate(['project/detailsmain', { id: projectId }]);
-        this.router.navigate(['project/detailsmain', projectId]);
     }
 
     ngOnInit() {
         let resData: any;
-        this.dataService.postGridData()
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;
@@ -45,7 +34,6 @@ export class ProjectComponent {
     }
     navigateDetails(id:string){
         this.router.navigate(['project/detailsmain', id]);
-        //this.router.navigate(['project/detailsmain', { id: id }]);
     }
 
 

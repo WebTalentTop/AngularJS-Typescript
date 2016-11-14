@@ -4,13 +4,11 @@ import { TestTemplateComponent } from "./testtemplate.component";
 
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { TestTemplateService } from '../../shared/services/testtemplate.services';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
 import testTemplateRoutes from "./testtemplate.routes";
 
 @NgModule({
     imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, InputTextareaModule, TabViewModule, GridModule, testTemplateRoutes],
-    providers: [TestTemplateService],
     declarations: [TestTemplateComponent]
 })
 

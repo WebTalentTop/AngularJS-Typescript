@@ -1,4 +1,4 @@
-import { DataService } from './../../shared/services/data.services';
+import { DepartmentService } from './../../shared/services';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 
@@ -13,13 +13,13 @@ export class DepartmentComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DepartmentService) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postDepartmentGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -42,7 +42,7 @@ export class DepartmentComponent {
 
                 console.log("----------- GridFilter ---------", this.gridFilter);
                 console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postDepartmentGridDataFilter(JSON.parse(js))
+            this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;

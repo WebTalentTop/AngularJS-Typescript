@@ -1,6 +1,8 @@
-﻿import { Component } from '@angular/core';
+﻿import { TestTemplateService } from '../../../shared/services';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule   } from 'primeng/primeng';
+import { Component } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { TestTemplateService } from '../../../shared/services'
+
 @Component({
     selector: 'details-testtemplate',
     templateUrl: 'app/body/TestTemplate/Details/details.component.html'

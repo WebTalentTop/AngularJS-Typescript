@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from './../../../shared/services/project.services'
+import { ProjectService } from './../../../shared/services'
 
 @Component({    
     selector: 'project-detail',

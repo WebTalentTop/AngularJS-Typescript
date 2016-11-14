@@ -1,4 +1,4 @@
-import { PlatformService} from '../../../../../shared/services/platform.services';
+import { EquipmentService} from '../../../../../shared/services';
 import { ActivatedRoute} from '@angular/router';
 import { Component } from '@angular/core';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
@@ -16,10 +16,10 @@ export class EditComponent {
     description: string;
     model: any;
 
-    constructor(private route: ActivatedRoute, private platformService: PlatformService) {
+    constructor(private route: ActivatedRoute, private service: EquipmentService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        platformService.getPlatformById(this.id).subscribe(res => {
+        service.getById(this.id).subscribe(res => {
             console.log("---- Inside Constructor PlatformById ----",
                 res); this.username = res.Name;
             this.description = res.Description; this.model = res

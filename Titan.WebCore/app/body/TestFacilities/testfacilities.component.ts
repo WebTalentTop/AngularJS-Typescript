@@ -1,4 +1,4 @@
-import { TestFacilityService } from './../../shared/services/testfacility.services';
+import { TestFacilityService } from './../../shared/services';
 import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -19,13 +19,13 @@ export class TestFacilitiesComponent {
     idField:string;
     linkFieldId:string;
 
-    constructor(private dataService: TestFacilityService, private router:Router) {
+    constructor(private service: TestFacilityService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postGridData()
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;

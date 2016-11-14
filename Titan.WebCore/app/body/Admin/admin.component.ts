@@ -1,5 +1,3 @@
-import { DataService } from './../../shared/services/data.services';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,8 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
-    constructor(private dataService: DataService) {
+    constructor() {}
 
-    }
     ngOnInit() {}
 }
