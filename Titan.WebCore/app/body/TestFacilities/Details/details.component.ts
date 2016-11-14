@@ -92,7 +92,7 @@ export class DetailsComponent {
         }
     }
     onDelete(id) {
-        this.testfacilityattachmentservice.DeleteAttachmentsById(id)
+      //  this.testfacilityattachmentservice.DeleteAttachmentsById(id)
         //    .subscribe(res => {
         //      console.log('-----------  TestFacilitiesroles------------------', res);
         //  this.TestFacilityAttachments = TestFacilityAttachments;
