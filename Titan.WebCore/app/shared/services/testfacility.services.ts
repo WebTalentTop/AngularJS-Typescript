@@ -68,6 +68,40 @@ export class TestFacilityService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getEquipmentsById(id): Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.getEquipmentDetailsByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getEquipmentsByIdusing(id): Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.getEquipmentDetailsByIdUrl}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getfilesByIdusing(path) {
+
+        //     .toPromise()
+        //  .then(res => <ITestFacilityRole[]> res.json().data)
+        // .then(data => { return data; });
+        //  .map(this.getJson)
+        // .map(data=> {
+        //   console.log('---------getbyusing testdata---------',data); 
+        // return data.$values
+        // });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());

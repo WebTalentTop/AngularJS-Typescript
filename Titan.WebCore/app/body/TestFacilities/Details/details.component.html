@@ -1,8 +1,8 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <h3>Details</h3>
-<p-tabView>
-            <p-tabPanel header="Details" leftIcon="fa fa-calendar">
+        <p-tabView>
+            <p-tabPanel header="Details" id="details" leftIcon="fa fa-calendar">
                 <h1>Details Panel</h1>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                     <p-panel>
@@ -100,16 +100,15 @@
                                 <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
                             </div>
                             <!-- Test Facility Operation Hours -->
-                           <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
-                            
+                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
 
-                            <!-- Test Facility Operation Hours -->
+
+                             <!-- Test Facility Operation Hours -->
                             <!--  <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
 
 
                             <!-- Test Facility Operation Hours -->
-                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
-
+                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
                             <!-- Test Facility Description -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -139,18 +138,7 @@
                             </div>-->
                         </div>
                         <div></div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>
-                            <div class="ui-grid-col-2"></div>
-                            <div class="ui-grid-col-2">
-                                Select file:
-                                <input type="file" (change)="changeListener($event)">
-                            </div>
-                            <p-dataTable [value]="TestFacilityAttachments">
-                                <p-column field="name" header="Name"></p-column>
-                                <p-column field="path" header="Path"></p-column>
-                            </p-dataTable>
-                        </div>
+
                     </p-panel>
                     <p-panel>
                         <div class="ui-grid-col-4"></div>
@@ -167,27 +155,57 @@
                             </p-dataTable>
                         </div>
                     </p-panel>
+                    <p-panel>
+                        <div class="ui-grid-col-4"></div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"><b>Test Facility Equipments</b></div>
+                            <div class="ui-grid-col-2"></div>
+                            <p-dataTable [value]="TestFacilityEquipments">
+                                <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
+                                <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Equipment" leftIcon="fa fa-print">
+            <p-tabPanel header="Equipment" id="equipment" leftIcon="fa fa-print">
                 Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
             </p-tabPanel>
-            <p-tabPanel header="Tests" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
+            <p-tabPanel header="Tests" id="tests" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
                 After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
             </p-tabPanel>
-            <p-tabPanel header="Attachments" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                    <h2>Attachments</h2>
-                    <p-growl [value]="msgs"></p-growl>
+            <p-tabPanel header="Attachments" id="attachments" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
+                <h2>Attachments</h2>
+                <p-growl [value]="msgs"></p-growl>
 
-                    <p-fileUpload [name]="testFacility" url="http://titanapi-local.12thwonder.com/api/file/SaveFile" 
-                        (onBeforeUpload)="onBeforeUpload($event)"
-                        (onUpload)="onUpload($event)" 
-                            multiple="multiple" accept="image/*" maxFileSize="1000000">
-                        <template pTemplate type="content">
-                            <ul *ngIf="uploadedFiles.length">
-                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                            </ul>
-                        </template>        
+                <p-fileUpload [name]="testFacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}"
+                              (onBeforeUpload)="onBeforeUpload($event)"
+                              (onUpload)="onUpload($event)"
+                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+                    <template pTemplate type="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                        </ul>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>
+                            <div class="ui-grid-col-2"></div>
+
+                            <p-dataTable [value]="TestFacilityAttachments">
+                                <p-column field="name" header="Name"></p-column>
+
+                                <p-column>
+                                    <template pTemplate type="header">
+                                        <button type="button" pButton icon="fa-refresh"></button>
+                                    </template>
+                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+
+                                        <a href="http://localhost:9998/api/TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
+
+                                    </template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </template>
                 </p-fileUpload>
             </p-tabPanel>
         </p-tabView>

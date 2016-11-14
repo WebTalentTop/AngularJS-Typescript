@@ -5,4 +5,7 @@ export class TestFacilityApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'testFacility';
     public static postUpdateUrl: string = titanApiUrl + 'testFacility';
     public static getByIdUrl: string = titanApiUrl + 'testFacility';
+    public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
+    public static getfilesByIdUrl: string = titanApiUrl + 'testFacilityAttachment/file';
+
 }
