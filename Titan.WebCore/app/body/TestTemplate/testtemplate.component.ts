@@ -1,4 +1,5 @@
 import { TestTemplateService } from './../../shared/services/testtemplate.service';
+import { ProjectService } from './../../shared/services/project.service';
 import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -11,7 +12,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
     templateUrl: 'app/body/TestTemplate/testtemplate.component.html'
 })
 export class TestTemplateComponent {
-    title = "Test Template";
+    // title = "Test Template";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -19,13 +20,13 @@ export class TestTemplateComponent {
     idField:string;
     linkFieldId:string;
 
-    constructor(private dataService: TestTemplateService, private router:Router) {
+    constructor(private service: ProjectService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postGridData()
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;

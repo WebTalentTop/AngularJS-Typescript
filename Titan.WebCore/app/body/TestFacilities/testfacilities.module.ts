@@ -5,7 +5,7 @@ import { TestFacilitiesComponent } from "./testfacilities.component";
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { TestFacilityService } from '../../shared/services/testfacility.service';
-import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
+import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 import testFacilitiesRoutes from "./testfacilities.routes";
 
 @NgModule({
