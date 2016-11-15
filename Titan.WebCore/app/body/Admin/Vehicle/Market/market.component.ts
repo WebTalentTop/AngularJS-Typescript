@@ -1,4 +1,4 @@
-import { MarketService } from '../../../../shared/services';
+import { MarketService } from '../../../../shared/services/market.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';

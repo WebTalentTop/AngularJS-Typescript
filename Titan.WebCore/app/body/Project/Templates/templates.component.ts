@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { TorquesheetService } from './../../../shared/services'
+import { TorquesheetService } from './../../../shared/services/torquesheet.service'
 declare var $: JQueryStatic;
 @Component({    
     selector: 'torquesheet-template',

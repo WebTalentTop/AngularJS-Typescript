@@ -1,4 +1,4 @@
-import { EquipmentService } from './../../shared/services';
+import { EquipmentService } from './../../shared/services/equipment.service';
 import { DataTable } from 'primeng/primeng';
 import { LazyLoadEvent} from 'primeng/primeng';
 import { Component } from '@angular/core';

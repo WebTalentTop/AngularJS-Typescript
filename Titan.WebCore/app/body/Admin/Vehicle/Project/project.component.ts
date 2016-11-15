@@ -1,4 +1,4 @@
-import { ProjectService } from '../../../../shared/services';
+import { ProjectService } from '../../../../shared/services/project.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';

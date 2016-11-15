@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ProjectService } from '../../../../../shared/services';
+import { ProjectService } from '../../../../../shared/services/project.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';

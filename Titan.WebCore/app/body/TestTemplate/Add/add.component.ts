@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
-import { TestTemplateService } from './../../../shared/services/testtemplate.services';
-import { TestTypeService } from './../../../shared/services/testtype.services';
-import { TestModeService } from './../../../shared/services/testmode.services';
+import { TestTemplateService } from './../../../shared/services/testtemplate.service';
+import { TestTypeService } from './../../../shared/services/testtype.service';
+import { TestModeService } from './../../../shared/services/testmode.service';
 import { Validators } from '@angular/forms';
 import {Router} from '@angular/router'
 import { SelectItem } from 'primeng/primeng';

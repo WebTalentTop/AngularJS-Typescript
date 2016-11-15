@@ -43,7 +43,7 @@ export class PlatformService {
 
     postAddPlatform(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${PlatformApiUrl.platformPostCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${PlatformApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson).catch(err => Observable.throw(err))
         .map(this.getJson);
 
@@ -54,7 +54,7 @@ export class PlatformService {
 
     postUpdatePlatform(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${PlatformApiUrl.platformPostUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${PlatformApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
@@ -62,7 +62,7 @@ export class PlatformService {
     }
 
     getPlatformById(id): Observable<any> {
-        return this.http.get(`${PlatformApiUrl.platformGetByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${PlatformApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

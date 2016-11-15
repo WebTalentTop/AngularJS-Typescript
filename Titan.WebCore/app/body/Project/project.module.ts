@@ -5,7 +5,7 @@ import { ProjectComponent } from "./project.component";
 import { RouterModule } from "@angular/router";
 import { DataTableModule } from 'primeng/primeng';
 
-import { ProjectService } from '../../shared/services';
+import { ProjectService } from '../../shared/services/project.service';
 import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 //import {router} from './project-routing.module';
 import projectRoutes from "./project.routes";

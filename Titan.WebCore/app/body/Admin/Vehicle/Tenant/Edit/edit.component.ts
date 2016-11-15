@@ -1,4 +1,4 @@
-import { TenantService} from '../../../../../shared/services';
+import { TenantService} from '../../../../../shared/services/tenant.service';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';

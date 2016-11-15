@@ -8,7 +8,7 @@ import {TemplatesModule} from '../Templates/templates.module';
 //import  TorqueBookModule  from "./../TorqueBook/torque-book.module";
 //import  DetailsModule  from "./../Details/details.module";
 //import  TempModule  from "./../Temp/temp.module";
-import { ProjectService} from './../../../shared/services';
+import { ProjectService} from './../../../shared/services/project.service';
 //import { TorqueBookComponent } from "./../TorqueBook/torque-book.component"
 //import { DetailsComponent } from "./../Details/details.component"
 

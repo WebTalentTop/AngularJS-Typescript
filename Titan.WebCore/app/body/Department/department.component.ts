@@ -1,4 +1,4 @@
-import { DepartmentService } from './../../shared/services';
+import { DepartmentService } from './../../shared/services/department.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 

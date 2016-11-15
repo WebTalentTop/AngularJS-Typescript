@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestModeApiUrl} from './apiUrlConst';
+import { TestModeApiUrl} from './apiUrlConst/TestModeApiUrls';
 import { BaseService } from './base.service'
 
 import 'rxjs/Rx';

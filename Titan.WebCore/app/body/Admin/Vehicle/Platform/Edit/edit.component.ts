@@ -1,4 +1,4 @@
-import { PlatformService} from '../../../../../shared/services';
+import { PlatformService} from '../../../../../shared/services/platform.service';
 import { ActivatedRoute} from '@angular/router';
 import { Component } from '@angular/core';
 import { InputTextModule, PanelModule } from 'primeng/primeng';

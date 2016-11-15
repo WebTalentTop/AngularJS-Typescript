@@ -1,4 +1,4 @@
-import { MarketService} from '../../../../../shared/services';
+import { MarketService} from '../../../../../shared/services/market.service';
 import { ActivatedRoute} from '@angular/router';
 import { Component } from '@angular/core';
 import { InputTextModule, PanelModule } from 'primeng/primeng';

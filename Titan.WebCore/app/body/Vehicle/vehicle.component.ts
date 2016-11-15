@@ -1,4 +1,4 @@
-import { PlatformService } from './../../shared/services';
+import { VehicleService } from './../../shared/services/vehicle.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 
@@ -13,7 +13,7 @@ export class VehicleComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private service: PlatformService) {
+    constructor(private service: VehicleService) {
 
     }
 

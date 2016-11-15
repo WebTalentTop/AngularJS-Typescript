@@ -17,7 +17,7 @@ export class BuildLevelService {
         "locale": "en-us",
         "defaultLocale": "en-us",
         "PageNumber": 1,
-        "PageSize": 5,
+        "PageSize": 15,
         "IsPaging": true
     };
 

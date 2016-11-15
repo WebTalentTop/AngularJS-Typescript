@@ -1,4 +1,4 @@
-import { BuildLevelService} from '../../../../../shared/services';
+import { BuildLevelService} from '../../../../../shared/services/buildlevel.service';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';

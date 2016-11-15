@@ -1,4 +1,4 @@
-﻿import { titanApiUrl } from '../apiUrlConst';
+﻿import { titanApiUrl } from './titanApiUrl';
 import { GridApiUrl } from './gridApiUrls';
 
 export class BuildLevelApiUrl {

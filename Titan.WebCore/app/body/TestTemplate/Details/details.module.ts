@@ -2,9 +2,9 @@
 import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
-import { TestTypeService} from './../../../shared/services';
-import { TestModeService } from './../../../shared/services';
-import { TestTemplateService} from './../../../shared/services';
+import { TestTypeService} from './../../../shared/services/testtype.service';
+import { TestModeService } from './../../../shared/services/testmode.service';
+import { TestTemplateService} from './../../../shared/services/testtemplate.service';
 
 import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

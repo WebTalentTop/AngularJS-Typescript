@@ -5,9 +5,11 @@ import { DataTableModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 import marketRoutes from "./market.routes";
+import { MarketService } from '../../../../shared/services/market.service';
 
 @NgModule({
     imports: [CommonModule, DataTableModule, GridModule, marketRoutes],
+    providers:[MarketService],
     declarations: [MarketComponent]
 })
 

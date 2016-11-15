@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { TitanRoleService } from '../../../../../shared/services';
+import { TitanRoleService } from '../../../../../shared/services/titanrole.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';

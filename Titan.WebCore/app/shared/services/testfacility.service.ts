@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestFacilityApiUrl} from './apiUrlConst';
+import { TestFacilityApiUrl} from './apiUrlConst/TestFacilityApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -69,6 +69,20 @@ export class TestFacilityService {
         //.map(this.getJson);
     }
 
+ getEquipmentsByIdusing(id): Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.getEquipmentDetailsByIdUrl}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

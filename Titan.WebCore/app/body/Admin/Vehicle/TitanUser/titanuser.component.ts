@@ -1,4 +1,4 @@
-﻿import { TitanUserService } from '../../../../shared/services';
+﻿import { TitanUserService } from '../../../../shared/services/titanuser.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import {Router} from '@angular/router';

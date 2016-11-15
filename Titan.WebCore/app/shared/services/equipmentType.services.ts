@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { EquipmentTypeApiUrl} from './apiUrlConst/equipmentTypeApiUrls';
+import { EquipmentTypeApiUrl} from './apiUrlConst/equipmenttypeApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -17,7 +17,7 @@ export class EquipmentTypeService {
         "locale": "en-us",
         "defaultLocale": "en-us",
         "PageNumber": 1,
-        "PageSize": 5,
+        "PageSize": 15,
         "IsPaging": true
     };
 

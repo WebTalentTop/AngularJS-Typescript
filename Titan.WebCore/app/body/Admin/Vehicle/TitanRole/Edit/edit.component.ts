@@ -1,4 +1,4 @@
-import { TitanRoleService} from '../../../../../shared/services';
+import { TitanRoleService} from '../../../../../shared/services/titanrole.service';
 import { ActivatedRoute} from '@angular/router';
 import { Component } from '@angular/core';
 import { InputTextModule, PanelModule } from 'primeng/primeng';

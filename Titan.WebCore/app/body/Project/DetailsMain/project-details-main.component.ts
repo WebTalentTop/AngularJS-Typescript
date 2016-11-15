@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from './../../../shared/services';
+import { ProjectService } from './../../../shared/services/project.service';
 import { TemplatesComponent} from '../Templates/templates.component';
 //import { DetailsComponent } from "./../Details/details.component"
 

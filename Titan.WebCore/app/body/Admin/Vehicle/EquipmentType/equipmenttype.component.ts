@@ -1,4 +1,4 @@
-﻿import { EquipmentTypeService } from '../../../../shared/services';
+﻿import { EquipmentTypeService } from '../../../../shared/services/equipmentType.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { Router} from '@angular/router';

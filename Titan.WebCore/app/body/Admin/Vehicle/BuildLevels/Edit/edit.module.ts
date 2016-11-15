@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { EditComponent } from "./edit.component";
-import { BuildLevelService} from '../../../../../shared/services';
+import { BuildLevelService} from '../../../../../shared/services/buildlevel.service';
 
 import { ButtonModule, InputTextareaModule, InputTextModule, PanelModule } from 'primeng/primeng';
 import { DataTableModule } from 'primeng/primeng';

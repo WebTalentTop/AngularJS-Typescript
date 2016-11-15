@@ -1,7 +1,7 @@
-﻿import { TestFacilityService } from '../../../shared/services/testfacility.services';
-import { TestFacilityRoleService } from '../../../shared/services/testFacilityRoleService';
+﻿import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachmentService';
+import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
@@ -77,6 +77,7 @@ export class DetailsComponent {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
+       
         this.dataService.getEquipmentsByIdusing(this.id)
             .subscribe(res => {
                 this.TestFacilityEquipments = res;

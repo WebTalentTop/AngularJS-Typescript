@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { TestTemplateService } from '../../../shared/services'
+import { TestTemplateService } from '../../../shared/services/testtemplate.service'
 @Component({
     selector: 'details-testtemplate',
     templateUrl: 'app/body/TestTemplate/Details/details.component.html'

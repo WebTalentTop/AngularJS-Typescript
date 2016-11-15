@@ -1,4 +1,4 @@
-﻿import { BuildLevelService } from '../../../../shared/services';
+﻿import { BuildLevelService } from '../../../../shared/services/buildLevel.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';

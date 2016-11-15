@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { TestFacilityAttachmentApiUrl} from './apiUrlConst';
+import { TestFacilityAttachmentApiUrl} from './apiUrlConst/TestFacilityAttachmentApiUrls';
 import {ITestFacilityAttachment} from './definitions/ITestFacilityAttachment';
 import {DataGridModule} from 'primeng/primeng';
 import 'rxjs/add/operator/toPromise';
