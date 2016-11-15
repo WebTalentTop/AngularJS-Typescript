@@ -13,10 +13,7 @@ const routes = [
     { path: 'project', loadChildren: 'app/body/Admin/Vehicle/Project/project.module' },
     { path: 'tenant', loadChildren: 'app/body/Admin/Vehicle/Tenant/tenant.module' },
     { path: 'testfacility', loadChildren: 'app/body/Admin/Vehicle/TestFacility/testfacility.module' },
-    //{ path: 'framenumber', loadChildren: 'app/body/Admin/Vehicle/FrameNumber/framenumber.module' },
-    //{ path: 'grade', loadChildren: 'app/body/Admin/Vehicle/Grade/grade.module' },
-    //{ path: 'enginecode', loadChildren: 'app/body/Admin/Vehicle/EngineCode/enginecode.module' },
-
+    { path: 'verificationmethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/verificationmethod.module' },
   ];
 
 export default RouterModule.forChild(routes);
