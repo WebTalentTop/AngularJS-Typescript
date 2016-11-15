@@ -259,7 +259,7 @@
   opacity: 0.99; }
 
 .splash-screen {
-  background-color: #3F51B5;
+  background-color: #757575;
   height: 100%;
   padding-top: 250px; }
   .splash-screen .splash-container {
@@ -967,7 +967,7 @@ body {
       position: relative;
       left: -16px;
       top: 3px;
-      background-color: #FF650A;
+      background-color: #ff5722;
       -moz-border-radius: 50%;
       -webkit-border-radius: 50%;
       border-radius: 50%;
@@ -1145,10 +1145,10 @@ body {
       .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a i {
         color: #ffffff; }
       .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li a:hover {
-        background-color: #676767; }
+        background-color: #ff5722; }
     .layout-container .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a {
       color: #ffffff;
-      background-color: #FF650A; }
+      background-color: #FF5722; }
 
 .layout-container.menu-layout-overlay .layout-menu {
   margin-left: -250px; }
@@ -1230,7 +1230,7 @@ body {
       -webkit-transition: transform 0.3s;
       transition: transform 0.3s; }
     .layout-container .ultima-menu li a:hover {
-      background-color: #e8e8e8; }
+      background-color: #ff5722; }
     .layout-container .ultima-menu li a span {
       display: inline-block;
       vertical-align: middle;
@@ -1279,7 +1279,7 @@ body {
 
 .ajax-loader {
   font-size: 32px;
-  color: #FF650A; }
+  color: #FF5722; }
 
 @media (min-width: 1025px) {
   .layout-container .topbar-items {
@@ -1300,7 +1300,7 @@ body {
           position: absolute;
           right: -5px;
           top: -5px;
-          background-color: #FF650A;
+          background-color: #FF5722;
           color: #ffffff;
           -moz-border-radius: 50%;
           -webkit-border-radius: 50%;
@@ -1430,7 +1430,7 @@ body {
           background-color: #ff5722; }
       .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a {
         color: #ffffff;
-        background-color: #FF650A; }
+        background-color: #FF5722; }
         .layout-container.menu-layout-horizontal .layout-menu ul.ultima-menu > li.active-menuitem > a i {
           color: #ffffff; }
     .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark {
@@ -1438,12 +1438,12 @@ body {
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li a {
         color: #ffffff; }
         .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li a:hover {
-          background-color: #676767; }
+          background-color: #ff5722; }
           .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li a:hover i {
             color: #ffffff; }
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li.active-menuitem > a {
         color: #ffffff;
-        background-color: #FF650A; }
+        background-color: #FF5722; }
       .layout-container.menu-layout-horizontal .layout-menu.layout-menu-dark ul.ultima-menu li ul {
         background-color: #424242; }
   .layout-container.menu-layout-horizontal .layout-main {
@@ -1516,7 +1516,7 @@ body {
         position: absolute;
         left: 30px;
         top: 10px;
-        background-color: #FF650A;
+        background-color: #FF5722;
         color: #ffffff;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
