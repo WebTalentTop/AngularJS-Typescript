@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { VerificationMethodApiUrl} from './apiUrlConst/VerificationMethodApiUrls';
+import { TestVerificationMethodApiUrl} from './apiUrlConst/TestVerificationMethodApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class VerificationMethodService {
+export class TestVerificationMethodService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
     });
@@ -26,7 +26,7 @@ export class VerificationMethodService {
     }
 
     postGridData(): Observable<any> {
-        return this.http.post(`${VerificationMethodApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+        return this.http.post(`${TestVerificationMethodApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -34,7 +34,7 @@ export class VerificationMethodService {
     }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${VerificationMethodApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestVerificationMethodApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -43,7 +43,7 @@ export class VerificationMethodService {
 
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${VerificationMethodApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestVerificationMethodApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -54,7 +54,7 @@ export class VerificationMethodService {
 
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${VerificationMethodApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${TestVerificationMethodApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
@@ -62,7 +62,7 @@ export class VerificationMethodService {
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${VerificationMethodApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${TestVerificationMethodApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

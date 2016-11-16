@@ -1,7 +1,7 @@
-import { VerificationMethodService} from '../../../../../shared/services/verificationmethod.service';
-import { ActivatedRoute} from '@angular/router';
-import { Component } from '@angular/core';
+import { TestVerificationMethodService } from '../../../../../shared/services/testverificationMethod.service';
+import { ActivatedRoute } from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
+import { Component } from '@angular/core';
 import "rxjs/add/operator/map";
 
 @Component({
@@ -9,35 +9,31 @@ import "rxjs/add/operator/map";
     templateUrl: 'app/body/Admin/Vehicle/VerificationMethod/Edit/edit.component.html'
 })
 export class EditComponent {
-    title = "VerificationMethod Edit";
+    title = "TestVerificationMethod Edit";
 
     id;
     username: string;
     description: string;
     model: any;
 
-    constructor(private route: ActivatedRoute, private service: VerificationMethodService) {
+    constructor(private route: ActivatedRoute, private service: TestVerificationMethodService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
-        service.getById(this.id).subscribe(res => {
-            console.log("---- Inside Constructor PlatformById ----",
-                res); this.username = res.Name;
-            this.description = res.Description; this.model = res
-        });
-        console.log(this.model);
+        service.getById(this.id).subscribe(res => this.model = res);
     }
 
     ngOnInit() {
     }
 
+
     onSubmit(formRef) {
         console.log(formRef);
-        let platformData: any = { id: this.id, name: '', description: '', locale: '' };
-        platformData.name = formRef.username;
-        platformData.description = formRef.description;
-        platformData.locale = "en-us";
+        let formData: any = { id: this.id, name: '', description: '', locale: '' };
+        formData.name = formRef.username;
+        formData.description = formRef.description;
+        formData.locale = "en-us";
 
-        console.log(platformData);
-        //this.platformService.postUpdatePlatform(platformData).subscribe(res => console.log(res));
+        console.log(formData);
+        //this.service.postUpdate(formData).subscribe(res => console.log(res));
     }
 }

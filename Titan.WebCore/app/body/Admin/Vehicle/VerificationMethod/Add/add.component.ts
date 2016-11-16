@@ -1,11 +1,11 @@
 import { Component} from '@angular/core';
-import { VerificationMethodService } from '../../../../../shared/services/verificationmethod.service';
+import { TestVerificationMethodService } from '../../../../../shared/services/testverificationMethod.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
-    selector: 'add-equipment',
+    selector: 'add-testverificationMethod',
     styleUrls: ['app/body/Admin/Vehicle/VerificationMethod/Add/add.component.css'], 
     templateUrl: 'app/body/Admin/Vehicle/VerificationMethod/Add/add.component.html'
 })
@@ -16,7 +16,7 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private service: VerificationMethodService) {
+    constructor(private service: TestVerificationMethodService) {
 
     }
 

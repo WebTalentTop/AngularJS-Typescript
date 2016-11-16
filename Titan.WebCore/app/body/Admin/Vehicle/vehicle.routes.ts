@@ -13,7 +13,7 @@ const routes = [
     { path: 'project', loadChildren: 'app/body/Admin/Vehicle/Project/project.module' },
     { path: 'tenant', loadChildren: 'app/body/Admin/Vehicle/Tenant/tenant.module' },
     { path: 'testfacility', loadChildren: 'app/body/Admin/Vehicle/TestFacility/testfacility.module' },
-    { path: 'verificationmethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/verificationmethod.module' },
+    { path: 'testverificationMethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/testverificationMethod.module' },
   ];
 
 export default RouterModule.forChild(routes);
