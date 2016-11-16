@@ -22,7 +22,14 @@ export class BaseService {
     
     public getJson(response: Response) {
         //console.log("In Data Service response.json() call: ",response.json());
-        return response.json();
+        let body;
+
+        // check if empty, before call json
+        if (response.text()) {
+            body = response.json();
+        }
+
+        return body || {};
     }
 
     public checkErrors(response: Response): Response {

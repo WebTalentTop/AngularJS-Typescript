@@ -16,6 +16,7 @@ export class GridApiUrl {
     public static testFacilityGridUrl: string = titanApiUrl + 'testFacilityGrid/GetGridData';
     public static testModeGridUrl: string = titanApiUrl + 'testModeGrid/GetGridData';
     public static testTemplateGridUrl: string = titanApiUrl + 'testTemplateGrid/GetGridData';
+    public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementGrid/GetGridData';
     public static testFacilityAttachmentGridUrl: string = titanApiUrl + 'testFacilityAttachmentGrid/GetGridData';
     public static testTypeGridUrl: string = titanApiUrl + 'testTypeGrid/GetGridData';
     public static titanRoleGridUrl: string = titanApiUrl + 'titanRoleGrid/GetGridData';

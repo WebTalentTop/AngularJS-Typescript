@@ -34,8 +34,8 @@ export class TestTemplateService extends BaseService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestTemplateApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err))
-            .map(this.getJson);
+            .map(this.getJson);//.catch(err => Observable.throw(err))
+            //.map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -45,16 +45,15 @@ export class TestTemplateService extends BaseService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${TestTemplateApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson)
-            .map(this.checkErrors)
-            .catch(err => Observable.throw(err))
             .map(this.getJson);
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            //.map(this.getJson);
     }
 
     getById(id): Observable<any> {
         return this.http.get(`${TestTemplateApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
+            .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }

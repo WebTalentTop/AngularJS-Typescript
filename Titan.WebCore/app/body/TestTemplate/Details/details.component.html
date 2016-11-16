@@ -104,7 +104,10 @@
                 </form>
             </p-tabPanel>
             <p-tabPanel header="Requirements" leftIcon="fa fa-print">
-                Requirements
+                <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" 
+                    (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
+                    [minLength]="1" placeholder="Search By Reference#" field="name" [multiple]="true">
+                </p-autoComplete>
             </p-tabPanel>
             <p-tabPanel header="Steps" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
                 Steps

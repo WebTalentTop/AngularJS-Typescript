@@ -1,4 +1,4 @@
-﻿import { VerificationMethodService } from '../../../../shared/services/verificationmethod.service';
+﻿import { TestVerificationMethodService } from '../../../../shared/services/testVerificationmethod.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -16,7 +16,7 @@ export class VerificationMethodComponent {
     cols = [];
     gridFilter = {};
 
-    constructor(private service: VerificationMethodService) {
+    constructor(private service: TestVerificationMethodService) {
 
     }
 

@@ -35,7 +35,7 @@ export class TestTypeService extends BaseService {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .catch(err => Observable.throw(err))
-            .map(this.getJson);
+            .map(this.getJson); 
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))

@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "outDir": "./wwwroot/"
+    "outDir": "./wwwroot/app/"
   },
   "include": [
     "app/**/*"
