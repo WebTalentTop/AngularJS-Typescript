@@ -22,4 +22,5 @@ export class GridApiUrl {
     public static titanUserGridUrl: string = titanApiUrl + 'titanUserGrid/GetGridData';
     public static vehicleGridUrl: string = titanApiUrl + 'vehicleGrid/GetGridData';
     public static testverificationMethodGridUrl: string = titanApiUrl + 'testverificationMethodGrid/GetGridData';
+    public static testStatusGridUrl: string = titanApiUrl + 'testStatusGrid/GetGridData';
 }

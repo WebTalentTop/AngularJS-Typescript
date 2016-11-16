@@ -14,6 +14,7 @@ const routes = [
     { path: 'tenant', loadChildren: 'app/body/Admin/Vehicle/Tenant/tenant.module' },
     { path: 'testfacility', loadChildren: 'app/body/Admin/Vehicle/TestFacility/testfacility.module' },
     { path: 'testverificationMethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/testverificationMethod.module' },
+    { path: 'testStatus', loadChildren: 'app/body/Admin/Vehicle/TestStatus/testStatus.module' },
   ];
 
 export default RouterModule.forChild(routes);
