@@ -1871,13 +1871,11 @@ body .layout-wrapper.layout-compact {
     body .layout-wrapper.layout-compact .ui-paginator .ui-paginator-pages {
       vertical-align: middle;
       margin: 0 4px 0 10px; 
-      background-color: #ff5722
       }
       
       body .layout-wrapper.layout-compact .ui-paginator .ui-paginator-pages a {
         padding: 1px 6px;
         margin-right: 2px; 
-        background-color: #ff5722
         }
         body .layout-wrapper.layout-compact .ui-paginator .ui-paginator-pages a:last-child {
           margin-right: 0; }
