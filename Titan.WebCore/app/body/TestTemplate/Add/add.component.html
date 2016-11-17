@@ -5,38 +5,31 @@
         <h3> Add Test Template</h3>
         <br />
         <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px"
-                 *ngIf="testTemplate">
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="testTemplate">
                 <!--<div class="ui-grid-row body">-->
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Test Template Name*:
+                        Test Template Name *:
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel"
-                               [(ngModel)]="testTemplate.name" maxlength="255" placeholder="Name" class="form-control"
-                               required />
+                        <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name" maxlength="255"
+                            placeholder="Name" class="form-control" required />
                     </div>
                     <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
-                        Template Name field is required
+                        * 
                     </div>
                 </div>
 
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Description*:
+                        Description *:
                     </div>
                     <div class="ui-grid-col-6">
-                        <textarea type="text"
-                               pInputTextArea
-                               class="form-control" required
-                               name="testTemplateDescription"
-                               row="20" maxlength="4000"
-                               #testTemplateDescriptionRef="ngModel"
-                               [(ngModel)]="testTemplate.description" ></textarea>
+                        <textarea type="text" pInputTextArea class="form-control" required name="testTemplateDescription" row="20" maxlength="4000"
+                            #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description"></textarea>
                     </div>
                     <div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
-                        Description field is required
+                        *
                     </div>
                 </div>
 
@@ -67,9 +60,8 @@
                         Estimated Cost:
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="number" name="estimatedCost" pInputText #estimatedCostRef="ngModel"
-                               [(ngModel)]="testTemplate.estimatedCost" max="999999999999" placeholder="Estimated Cost" class="form-control"
-                               required />
+                        <input type="number" name="estimatedCost" pInputText #estimatedCostRef="ngModel" [(ngModel)]="testTemplate.estimatedCost"
+                            max="999999999999" placeholder="Estimated Cost" class="form-control" required />
                     </div>
                     <!--<div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
                         Template Name field is required

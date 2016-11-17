@@ -21,7 +21,7 @@
                                        class="form-control" required />
                             </div>
                             <div class="ui-grid-col-4" *ngIf="usernameRef.errors?.required">
-                                {{usernameRef.errors | json}} this field is required
+                                {{usernameRef.errors | json}} *
                             </div>
 
                             <div class="ui-grid-col-4" *ngIf="usernameRef.errors?.minlength">

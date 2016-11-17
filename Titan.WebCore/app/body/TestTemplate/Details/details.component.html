@@ -11,7 +11,7 @@
                             <!--<div class="ui-grid-row body">-->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Test Template Name*:
+                                    Test Template Name *:
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel"
@@ -19,13 +19,13 @@
                                            required />
                                 </div>
                                 <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
-                                    Template Name field is required
+                                    * 
                                 </div>
                             </div>
 
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Description*:
+                                    Description *:
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <textarea type="text"
@@ -37,7 +37,7 @@
                                               [(ngModel)]="testTemplate.description"></textarea>
                                 </div>
                                 <div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
-                                    Description field is required
+                                    *
                                 </div>
                             </div>
 
@@ -104,10 +104,7 @@
                 </form>
             </p-tabPanel>
             <p-tabPanel header="Requirements" leftIcon="fa fa-print">
-                <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" 
-                    (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                    [minLength]="1" placeholder="Search By Reference#" field="name" [multiple]="true">
-                </p-autoComplete>
+                Requirements
             </p-tabPanel>
             <p-tabPanel header="Steps" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
                 Steps
