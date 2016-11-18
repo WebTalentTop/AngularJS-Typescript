@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <h3>Details</h3>
         <p-tabView (onChange)="handleChange($event)">
-            <p-tabPanel header="Details" id='details' leftIcon="fa fa-calendar">
+            <p-tabPanel header="Details ||" id='details'>
                 <h1>Details Panel</h1>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                     <p-panel>
@@ -11,13 +11,8 @@
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">Test Facility Id</div>
                                 <div class="ui-grid-col-6">
-                                    <input pInputText
-                                           id="Id"
-                                           name="Id"
-                                           [(ngModel)]="model.id"
-                                           #testFacilityIdRef="ngModel"
-                                           class="form-control"
-                                           disabled="disabled" />
+                                    <input pInputText id="Id" name="Id" [(ngModel)]="model.id" #testFacilityIdRef="ngModel" class="form-control" disabled="disabled"
+                                    />
 
                                 </div>
                                 <div class="ui-grid-4"></div>
@@ -28,23 +23,12 @@
                                     Name *
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text"
-                                           id="name"
-                                           name="name"
-                                           pInputText
-                                           [(ngModel)]="model.name"
-                                           #testFacilityNameRef="ngModel"
-                                           placeholder="Required"
-                                           minlength="3"
-                                           class="form-control" required />
+                                    <input type="text" id="name" name="name" pInputText [(ngModel)]="model.name" #testFacilityNameRef="ngModel" placeholder="Required"
+                                        minlength="3" class="form-control" required />
                                 </div>
-                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
-                                    {{testFacilityNameRef.errors | json}} this field is required
-                                </div>
+                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required"> </div>
 
-                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">
-                                    Minimum length is required {{testFacilityNameRef.errors.minlength.requiredLength}}.
-                                </div>
+                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength"> </div>
                             </div>
                             <!-- Test Facility Location -->
                             <div class="ui-grid-row">
@@ -52,14 +36,8 @@
                                     Location:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text"
-                                              pInputTextArea
-                                              id="location"
-                                              class="form-control" required
-                                              name="location"
-                                              row="20"
-                                              #tfLocationRef="ngModel"
-                                              [(ngModel)]="location"></textarea>
+                                    <textarea type="text" pInputTextArea id="location" class="form-control" required name="location" row="20" #tfLocationRef="ngModel"
+                                        [(ngModel)]="location"></textarea>
                                 </div>
                                 <div class="ui-grid-col-4">{{ location | json }}</div>
                             </div>
@@ -70,14 +48,8 @@
                                     Address:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text"
-                                              pInputTextArea
-                                              id="address"
-                                              class="form-control" required
-                                              name="address"
-                                              row="20"
-                                              #tfAddressRef="ngModel"
-                                              [(ngModel)]="address"></textarea>
+                                    <textarea type="text" pInputTextArea id="address" class="form-control" required name="address" row="20" #tfAddressRef="ngModel"
+                                        [(ngModel)]="address"></textarea>
                                 </div>
                                 <div class="ui-grid-col-4">{{ address | json }}</div>
                             </div>
@@ -88,14 +60,8 @@
                                     Description:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text"
-                                           pInputText
-                                           id="buildingNumber"
-                                           class="form-control" required
-                                           name="buildingNumber"
-                                           row="20"
-                                           #tfBuildingNumberRef="ngModel"
-                                           [(ngModel)]="buildingNumber" />
+                                    <input type="text" pInputText id="buildingNumber" class="form-control" required name="buildingNumber" row="20" #tfBuildingNumberRef="ngModel"
+                                        [(ngModel)]="buildingNumber" />
                                 </div>
                                 <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
                             </div>
@@ -115,13 +81,7 @@
                                     Description:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text"
-                                              pInputTextArea
-                                              id="description"
-                                              class="form-control" required
-                                              name="description"
-                                              row="20"
-                                              [(ngModel)]="description"></textarea>
+                                    <textarea type="text" pInputTextArea id="description" class="form-control" required name="description" row="20" [(ngModel)]="description"></textarea>
                                 </div>
                                 <div class="ui-grid-col-4">{{ description | json }}</div>
                             </div>
@@ -167,19 +127,26 @@
                     </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Equipment" id="equipment" leftIcon="fa fa-print">
-                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+            <p-tabPanel header="Equipment ||" id="equipment">
+                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
+                Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
+                of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
+                local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
+                brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
+                business. With Fanucci gone, Vito's communal stature grows.
             </p-tabPanel>
-            <p-tabPanel header="Tests" id="tests" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+            <p-tabPanel header="Tests ||" id="tests">
+                After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
+                and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
+                Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would
+                one day be completely legitimate.
             </p-tabPanel>
-            <p-tabPanel header="Attachments" id="attachments" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
+            <p-tabPanel header="Attachments ||" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}"
-                              (onUpload)="onUpload($event)"
-                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+                <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                    multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
                             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

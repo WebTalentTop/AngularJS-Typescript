@@ -5724,7 +5724,10 @@ body {
           border-color: #FF650A;
           border-style: solid; }
           body .ui-tabview .ui-tabview-nav > li.ui-state-active a {
-            color: #424242; }
+            color: #424242; 
+            background-color: lightgray;
+            font-weight: bold;
+            }
           body .ui-tabview .ui-tabview-nav > li.ui-state-active > .fa-close {
             color: #FF650A; }
         body .ui-tabview .ui-tabview-nav > li.ui-tabview-outline {

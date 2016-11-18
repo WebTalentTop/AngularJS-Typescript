@@ -38,6 +38,7 @@ export class TestTemplateComponent {
     }
 
     navigateDetails(id:string){
+        console.log("----- TestTemplate Navigate Details -----", id);
         this.router.navigate(['testemplate/details', id]);
     }
 

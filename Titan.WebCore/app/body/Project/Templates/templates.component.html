@@ -1,25 +1,18 @@
 ﻿<button (click)="onAddTorqueSheetTemplate()">Add Template</button>
 <button (click)="onViewTorqueSheetTemplate()">View Template</button>
 
- <p-dialog header="Add Torque Sheet Template" [(visible)]="displayAddTorqueSheetTemplate" modal="modal" 
-           showEffect="fade" width="800">
+<p-dialog header="Add Torque Sheet Template" [(visible)]="displayAddTorqueSheetTemplate" modal="modal" showEffect="fade"
+    width="800">
     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
         <div class="ui-grid-row">
             <div class="ui-grid-col-3">
                 Template Name *:
             </div>
             <div class="ui-grid-col-6">
-                <input type="text" pInputText
-                        [(ngModel)]="TemplateName"
-                        name="CTemplateNameode"
-                        #TemplateNameRef
-                        placeholder="Required"                            
-                        maxlength="255"
-                        class="form-control" required />
+                <input type="text" pInputText [(ngModel)]="TemplateName" name="CTemplateNameode" #TemplateNameRef placeholder="Required"
+                    maxlength="255" class="form-control" required />
             </div>
-            <div class="ui-grid-col-4" *ngIf="TemplateNameRef.errors?.required">
-                {{TemplateNameRef.errors | json}} this field is required
-            </div>
+            <div class="ui-grid-col-4" *ngIf="TemplateNameRef.errors?.required"> * </div>
         </div>
     </div>
     <div id="spreadContainer" style="width: 800px; height: 300px; border: 1px solid gray">
