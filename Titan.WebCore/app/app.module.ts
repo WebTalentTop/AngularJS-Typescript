@@ -1,17 +1,17 @@
 ﻿
-import { NgModule }      from '@angular/core';
-import { HttpModule} from '@angular/http';
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule} from '@angular/forms';
-import { HeaderModule }   from './header/header.module';
-import { FooterModule }   from './footer/footer.module';
-import { SidenavModule }   from './sidenav/sidenav.module';
-import { AppComponent }   from './app.component';
+import { FormsModule } from '@angular/forms';
+import { HeaderModule } from './header/header.module';
+import { FooterModule } from './footer/footer.module';
+import { SidenavModule } from './sidenav/sidenav.module';
+import { AppComponent } from './app.component';
 //import { routing }   from './app.routing.3';
 import { DataTableModule } from 'primeng/primeng';
 import { DataGridModule } from 'primeng/primeng';
 //import { DataService } from './shared/services/data.services';
-import { enableProdMode} from '@angular/core';
+import { enableProdMode } from '@angular/core';
 
 //import { DataTableModule } from 'primeng/primeng';
 
@@ -30,10 +30,10 @@ import { enableProdMode} from '@angular/core';
 //import {DataGridModule} from 'primeng/primeng';
 //import {DataListModule} from 'primeng/primeng';
 //import {DataScrollerModule} from 'primeng/primeng';
-//import {DataTableModule} from 'primeng/primeng';
-//import {DialogModule} from 'primeng/primeng';
+import { DataTableModule } from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
 //import {DragDropModule} from 'primeng/primeng';
-//import {DropdownModule} from 'primeng/primeng';
+import { DropdownModule } from 'primeng/primeng';
 //import {EditorModule} from 'primeng/primeng';
 //import {FieldsetModule} from 'primeng/primeng';
 //import {FileUploadModule} from 'primeng/primeng';
@@ -110,7 +110,7 @@ import appRoutes from "./app.routing";
         HeaderModule,
         DataGridModule,
         DataTableModule,
-        
+
         BodyModule,
         //FooterModule,
         //SidenavModule,
@@ -130,9 +130,9 @@ import appRoutes from "./app.routing";
         //DataListModule,
         //DataScrollerModule,
         //DataTableModule,
-        //DialogModule,
+        DialogModule,
         //DragDropModule,
-        //DropdownModule,
+        DropdownModule,
         //EditorModule,
         //FieldsetModule,
         //FileUploadModule,

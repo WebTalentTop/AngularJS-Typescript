@@ -1,8 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { EquipmentTypeApiUrl} from './apiUrlConst/EquipmentTypeApiUrls';
-
+import { EquipmentTypeApiUrl} from './apiUrlConst/equipmenttypeApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
@@ -17,7 +16,7 @@ export class EquipmentTypeService {
         "locale": "en-us",
         "defaultLocale": "en-us",
         "PageNumber": 1,
-        "PageSize": 15,
+        "PageSize": 5,
         "IsPaging": true
     };
 
@@ -40,7 +39,12 @@ export class EquipmentTypeService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+   DeleteEquipmentsById(id): any
+   {
+       return this.http.post(`${EquipmentTypeApiUrl.postdeleteUrl}/${id}`, { headers: this.headers })
+       .map(this.getJson);
+     
+    }
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${EquipmentTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
@@ -63,6 +67,14 @@ export class EquipmentTypeService {
 
     getById(id): Observable<any> {
         return this.http.get(`${EquipmentTypeApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+     getSubTypesById(id): Observable<any> {
+        return this.http.get(`${EquipmentTypeApiUrl.getSubTypesByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

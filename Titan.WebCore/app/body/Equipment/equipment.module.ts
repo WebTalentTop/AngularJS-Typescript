@@ -1,13 +1,16 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { EquipmentComponent } from "./equipment.component";
+import {EquipmentComponent } from "./equipment.component";
 
-import { DataTableModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, InputTextModule,FileUploadModule, InputTextareaModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import equipmentRoutes from './equipment.routes';
+import { EquipmentService } from '../../shared/services/equipment.service';
+import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
+import equipmentRoutes from "./equipment.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, equipmentRoutes],
+    imports: [CommonModule,RouterModule, DataTableModule, InputTextModule,DropdownModule, InputTextareaModule, TabViewModule,GridModule,equipmentRoutes],
+     providers:[EquipmentService],
     declarations: [EquipmentComponent]
 })
 

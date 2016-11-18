@@ -6,64 +6,86 @@
                 <h1>Details Panel</h1>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                     <p-panel>
+
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                             <!-- Test Facility Id -->
-                            <div class="ui-grid-row">
+                            <!--<div class="ui-grid-row">
                                 <div class="ui-grid-col-2">Test Facility Id</div>
                                 <div class="ui-grid-col-6">
-                                    <input pInputText id="Id" name="Id" [(ngModel)]="model.id" #testFacilityIdRef="ngModel" class="form-control" disabled="disabled"
-                                    />
+                                    <input pInputText
+                                           [(ngModel)]="testFacility.id"
+                                           #testFacilityIdRef="ngModel"
+                                           class="form-control"
+                                           disabled="disabled" />
 
                                 </div>
                                 <div class="ui-grid-4"></div>
-                            </div>
+                            </div>-->
                             <!-- Test Facility Name -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Name *
+                                    Name
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text" id="name" name="name" pInputText [(ngModel)]="model.name" #testFacilityNameRef="ngModel" placeholder="Required"
-                                        minlength="3" class="form-control" required />
+                                    <input type="text"
+                                           pInputText
+                                           name="name"
+                                           [(ngModel)]="testFacility.name"
+                                           placeholder="Required"
+                                           minlength="3"
+                                           class="form-control" required />
                                 </div>
-                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required"> </div>
-
-                                <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength"> </div>
+                                <div class="ui-grid-col-4">
+                                </div>
                             </div>
                             <!-- Test Facility Location -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Location:
+                                    Address1:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea id="location" class="form-control" required name="location" row="20" #tfLocationRef="ngModel"
-                                        [(ngModel)]="location"></textarea>
+                                    <textarea type="text"
+                                              pInputTextArea
+                                              name="addressLine1"
+                                              class="form-control" required
+                                              row="20"
+                                              [(ngModel)]="address.addressLine1"></textarea>
                                 </div>
-                                <div class="ui-grid-col-4">{{ location | json }}</div>
+                                <div class="ui-grid-col-4">{{ address | json }}</div>
                             </div>
 
                             <!-- Test Facility Address -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Address:
+                                    Address2:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea id="address" class="form-control" required name="address" row="20" #tfAddressRef="ngModel"
-                                        [(ngModel)]="address"></textarea>
+                                    <textarea type="text"
+                                              pInputTextArea
+                                              class="form-control" required
+                                              row="20"
+                                              name="addresLine2"
+                                              #tfAddressRef="ngModel"
+                                              [(ngModel)]="address.addressLine2"></textarea>
                                 </div>
-                                <div class="ui-grid-col-4">{{ address | json }}</div>
+                                <div class="ui-grid-col-4"></div>
                             </div>
 
                             <!-- Test Facility Building # -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Description:
+                                    City:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text" pInputText id="buildingNumber" class="form-control" required name="buildingNumber" row="20" #tfBuildingNumberRef="ngModel"
-                                        [(ngModel)]="buildingNumber" />
+                                    <input type="text"
+                                           pInputText
+                                           class="form-control" required
+                                           row="20"
+                                           name="city"
+                                           #tfBuildingNumberRef="ngModel"
+                                           [(ngModel)]="address.city" />
                                 </div>
-                                <div class="ui-grid-col-4">{{ buildingNumber | json }}</div>
+                                <div class="ui-grid-col-4">{{ address.City | json }}</div>
                             </div>
                             <!-- Test Facility Operation Hours -->
                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
@@ -78,12 +100,31 @@
                             <!-- Test Facility Description -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Description:
+                                    State:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea id="description" class="form-control" required name="description" row="20" [(ngModel)]="description"></textarea>
+                                    <input type="text"
+                                           pInputText
+                                           class="form-control" required
+                                           row="20"
+                                           name="state"
+                                           [(ngModel)]="address.state" />
                                 </div>
-                                <div class="ui-grid-col-4">{{ description | json }}</div>
+                                <div class="ui-grid-col-4"></div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Postal Code:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <input type="text"
+                                           pInputText
+                                           class="form-control" required
+                                           row="20"
+                                           name="postalCode"
+                                           [(ngModel)]="address.postalCode" />
+                                </div>
+                                <div class="ui-grid-col-4"></div>
                             </div>
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2"></div>
@@ -146,7 +187,7 @@
                 <p-growl [value]="msgs"></p-growl>
 
                 <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
-                    multiple="multiple" accept="image/*" maxFileSize="1000000">
+                              multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
                             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

@@ -1,15 +1,18 @@
-import { EquipmentService }  from './../../shared/services/equipment.service';
-import { DataTable } from 'primeng/primeng';
-import { LazyLoadEvent} from 'primeng/primeng';
+import { EquipmentTypeService } from './../../shared/services/equipmentType.service';
+import { LoggerService } from './../../shared/services/logger.service';
+import {FileUploadModule} from 'primeng/primeng';
+import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
-import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import {Router} from '@angular/router'
+import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import {DropdownModule} from 'primeng/primeng';
 
 @Component({
-    selector: 'equipment',
-      templateUrl: 'app/body/Equipment/equipment.component.html'
+    selector: 'test-facilities',
+    templateUrl: 'app/body/EquipmentType/equipmenttype.component.html'
 })
-export class EquipmentComponent {
+export class EquipmentTypeComponent {
+    title = "EquipmentType";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -17,17 +20,15 @@ export class EquipmentComponent {
     idField:string;
     linkFieldId:string;
 
-    constructor(private service: EquipmentService, private router:Router) {
+    constructor(private dataService: EquipmentTypeService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.service.postGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
                 //console.log("-------- Cols --------", this.cols);
@@ -38,8 +39,9 @@ export class EquipmentComponent {
         console.log("The Whole configuration Info values: ", this.confInfo);
     }
 
-      navigateDetails(id:string){
-        this.router.navigate(['equipment/details', id]);
+    navigateDetails(id:string){
+        this.router.navigate(['equipmenttype/details', id]);
     }
-      
+
+   
 }

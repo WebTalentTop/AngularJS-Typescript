@@ -53,14 +53,14 @@ export class DetailsComponent {
     }
 
     filterTestRequirements(event) {
-        this.testRequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
+        this.testrequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
             this.filteredTestRequirements = filteredList;
         });
     }
 
     getTestType() {
         //    testTypes
-        this.testTypeService.getAll().subscribe(response => {
+        this.testtypeService.getAll().subscribe(response => {
             this.testTypes = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -84,7 +84,7 @@ export class DetailsComponent {
     onTestTypeChange() {
         this.testModes = new Array();
         //this.testModes
-        this.testModeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
+        this.testmodeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
             if (response != null && response.$values.length > 0) {
                 var resultMap = new Array();
                 resultMap.push({
