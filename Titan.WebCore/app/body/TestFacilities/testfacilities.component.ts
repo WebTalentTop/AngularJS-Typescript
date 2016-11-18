@@ -11,7 +11,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
     templateUrl: 'app/body/TestFacilities/testfacilities.component.html'
 })
 export class TestFacilitiesComponent {
-    title = "Test Facilities";
+    // title = "Test Facilities";
     gridData = [];
     confInfo:any = {};
     cols = [];

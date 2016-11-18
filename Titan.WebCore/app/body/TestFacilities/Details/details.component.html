@@ -3,10 +3,9 @@
         <h3>Details</h3>
         <p-tabView (onChange)="handleChange($event)">
             <p-tabPanel header="Details ||" id='details'>
-                <h1>Details Panel</h1>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                    <br/>
                     <p-panel>
-
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                             <!-- Test Facility Id -->
                             <!--<div class="ui-grid-row">
@@ -24,7 +23,7 @@
                             <!-- Test Facility Name -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Name
+                                    Name *
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <input type="text"
@@ -51,7 +50,7 @@
                                               row="20"
                                               [(ngModel)]="address.addressLine1"></textarea>
                                 </div>
-                                <div class="ui-grid-col-4">{{ address | json }}</div>
+                                <div class="ui-grid-col-4"> </div>
                             </div>
 
                             <!-- Test Facility Address -->
@@ -85,7 +84,7 @@
                                            #tfBuildingNumberRef="ngModel"
                                            [(ngModel)]="address.city" />
                                 </div>
-                                <div class="ui-grid-col-4">{{ address.City | json }}</div>
+                                <div class="ui-grid-col-4"> </div>
                             </div>
                             <!-- Test Facility Operation Hours -->
                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
@@ -141,6 +140,7 @@
                         <div></div>
 
                     </p-panel>
+                    <br/><br/><br/>
                     <p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
@@ -152,8 +152,7 @@
                             </p-dataTable>
                         </div>
                     </p-panel>
-
-
+                    <br/><br/><br/>
                     <p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
