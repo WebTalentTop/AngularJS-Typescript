@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 
-
 @Component({
     selector: 'test-template',
     templateUrl: 'app/body/TestTemplate/testtemplate.component.html'
