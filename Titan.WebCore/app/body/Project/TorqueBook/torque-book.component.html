@@ -1,12 +1,12 @@
-<h1>Torque Book</h1>
+<!--<h1>Torque Book</h1>-->
 <div class="ui-g-12" *ngIf="BuildLevels">
     <div class="ui-grid-row">
         <!--<div class="ui-grid-col-2"></div>-->
         <div class="ui-grid-col-12">
             <p-treeTable [value]="BuildLevels" [style]="{'margin-top':'30px'}"
                          (onNodeExpand)="nodeExpand($event)">
-                <header>Build Levels</header>
-                <p-column field="name" header="Name"></p-column>
+                <header></header>
+                <p-column field="name" header="Build Level"></p-column>
                 <p-column field="description" header="Description"></p-column>
                 <p-column header="Action">
                     <template let-col let-node="rowData" pTemplate type="body">
