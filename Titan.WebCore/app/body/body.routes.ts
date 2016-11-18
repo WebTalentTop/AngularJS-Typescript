@@ -5,6 +5,8 @@ import { RouterModule } from "@angular/router";
 const routes = [
     { path: 'department', loadChildren: 'app/body/department/department.module' },
     { path: 'equipment', loadChildren: 'app/body/equipment/equipment.module' },
+    { path: 'equipmenttype', loadChildren: 'app/body/equipmenttype/equipmenttype.module' },
+
     { path: 'project', loadChildren: 'app/body/project/project.module' },
     { path: 'admin', loadChildren: 'app/body/admin/admin.module' },
     { path: 'calendar', loadChildren: 'app/body/calendar/calendar.module' },
