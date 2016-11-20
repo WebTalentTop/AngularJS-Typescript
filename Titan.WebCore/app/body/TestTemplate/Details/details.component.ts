@@ -1,12 +1,12 @@
 ﻿import { Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TestTemplateService } from '../../../shared/services/testtemplate.service'
 import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 @Component({
@@ -19,17 +19,17 @@ export class DetailsComponent {
     public testModes: Array<any> = new Array();
     public selectedTestRequirements: Array<any> = new Array();
     public filteredTestRequirements: Array<any> = new Array();
-    public filteredSelectedTestRequirements: Array<any> = new Array();    
+    public filteredSelectedTestRequirements: Array<any> = new Array();
     constructor(
-        private testTemplateService: TestTemplateService, 
+        private testTemplateService: TestTemplateService,
         private testtypeService: TestTypeService,
-        private testmodeService: TestModeService, 
+        private testmodeService: TestModeService,
         private router: Router,
-        private route:ActivatedRoute, 
+        private route: ActivatedRoute,
         private testrequirementService: TestRequirementService,
-		private confirmationService: ConfirmationService
-    ){
-        
+        private confirmationService: ConfirmationService
+    ) {
+
     }
 
     ngOnInit() {
@@ -40,21 +40,21 @@ export class DetailsComponent {
         };
         this.testModes.push(testMode);
         this.route.params.subscribe(params => {
-        console.log(params);
+            console.log(params);
             this.testTemplateService.getById(params['id']).subscribe(res => {
                 this.testTemplate = res;
                 if (this.testTemplate.testTypeId != null) {
                     this.onTestTypeChange();
                 }
             });
-             this.testTemplateService.getTestTemplateRequirements(params['id']).subscribe(res => {
+            this.testTemplateService.getTestTemplateRequirements(params['id']).subscribe(res => {
                 this.selectedTestRequirements = res.$values;
             });
 
         });
     }
 
-    onDelete(testRequirement){
+    onDelete(testRequirement) {
         this.confirmationService.confirm({
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
@@ -62,19 +62,19 @@ export class DetailsComponent {
             accept: () => {
                 this.testTemplateService.postDeleteTestTemplateRequirement(
                     this.testTemplate.id,
-                        testRequirement.id
+                    testRequirement.id
                 ).subscribe(res => {
                     this.selectedTestRequirements = res.$values;
                 });
             }
         });
 
-        
+
     }
 
-    onAddTestRequirement(){
+    onAddTestRequirement() {
         var selectedTestRequirementIds = new Array();
-        for(var sel of this.filteredSelectedTestRequirements){
+        for (var sel of this.filteredSelectedTestRequirements) {
             selectedTestRequirementIds.push(sel.id);
         }
         var inputDto = {
@@ -146,10 +146,10 @@ export class DetailsComponent {
     }
 
     onSubmit() {
-        
+
         this.testTemplateService.postUpdate(this.testTemplate).subscribe(res => {
             console.log(res)
-            //this.router.navigate(['testemplate/details', res.$values.id]);
+            //this.router.navigate(['testtemplate/details', res.$values.id]);
         });
     }
 }

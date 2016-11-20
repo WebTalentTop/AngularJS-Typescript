@@ -3,7 +3,7 @@
         <h3>Details</h3>
         <p-tabView>
             <p-tabPanel header="Details ||">
-                <h1>Details Panel</h1>
+                <!--<h1>Details Panel</h1>-->
                 <form #testTemplateForm="ngForm" (ngSubmit)="onSubmit()">
                     <p-panel>
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="testTemplate">
@@ -38,7 +38,7 @@
                                 <div class="ui-grid-col-2">
                                     Test Type:
                                 </div>
-                                <div class="ui-grid-col-6">
+                                <div class="ui-grid-col-6" >
                                     <p-dropdown [options]="testTypes" [(ngModel)]="testTemplate.testTypeId" (onChange)="onTestTypeChange()" name="testType">
 
                                     </p-dropdown>
@@ -87,7 +87,6 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                 </div>
-
                             </div>
                             <div class="ui-grid-col-4"></div>
                         </div>
@@ -95,21 +94,22 @@
                     </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Requirements" leftIcon="fa fa-print">
+            <p-tabPanel header="Requirements ||">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
                         Search by Reference#:
                     </div>
-                    <div class="ui-grid-col-8">
-                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
-                                (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                                [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
-                        </p-autoComplete> 
-                    </div>
                     <div class="ui-grid-col-2">
-                        <button class="btn btn-default" (click)="onAddTestRequirement()">Add Requirement</button>
+                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" (completeMethod)="filterTestRequirements($event)"
+                            styleClass="wid100" [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
+                        </p-autoComplete>
+                    </div>
+
+                    <div class="ui-grid-col-2">
+                        <button pButton type="submit" class="btn btn-default" label="Add Requirement" (click)="onAddTestRequirement()"> </button>
                     </div>
                 </div>
+                <br/><br/>
                 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
                 <div class="ui-grid-row">
                     <p-dataTable [value]="selectedTestRequirements">
@@ -126,8 +126,8 @@
                     </p-dataTable>
                 </div>
             </p-tabPanel>
-            <p-tabPanel header="Steps" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                Steps 
+            <p-tabPanel header="Steps ||">
+                Steps
             </p-tabPanel>
         </p-tabView>
     </div>
