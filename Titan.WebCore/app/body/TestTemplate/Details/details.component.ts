@@ -88,7 +88,7 @@ export class DetailsComponent {
 
     filterTestRequirements(event) {
         this.testrequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
-            this.filteredTestRequirements = filteredList;
+            this.filteredTestRequirements = filteredList.$values;
         });
     }
 
