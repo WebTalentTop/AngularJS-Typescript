@@ -41,7 +41,10 @@ export class TestFacilityAttachmentService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    DeleteAttachmentsById(AttachmentId): Observable<any> {
+        return this.http.delete(`${TestFacilityAttachmentApiUrl.DeleteAttachmentsByIdUrl}/${AttachmentId}`, { headers: this.headers });
 
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

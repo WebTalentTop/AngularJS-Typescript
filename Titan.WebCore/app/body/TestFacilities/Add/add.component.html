@@ -6,18 +6,23 @@
         <h3> Add Test Facility </h3>
         <p-panel>
             <!--<header>Test Facility Information</header>-->
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">-->
+
+                <header>Test Facility Information</header>
+
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Test Facility Name *
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Test Facility Name *
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Please enter Test Facility Name"
+                                   class="form-control" required />
+                        </div>
+                        <div class="ui-grid-4"></div>
                     </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Please enter Test Facility Name"
-                            class="form-control" required />
-                    </div>
-                    <div class="ui-grid-4"></div>
                 </div>
-            </div>
+            <!--</div>-->
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
@@ -86,10 +91,13 @@
                     <div class="ui-grid-col-6">
                     </div>
                     <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="submit" label="Cancel">  </button>
+                        <button id="cancel" pButton type="button" label="Cancel"  routerLink="/testfacilities">  </button>
                         </div>
                 </div>
             </div>
+
+
+
             </p-panel>
             <br />
             <br />

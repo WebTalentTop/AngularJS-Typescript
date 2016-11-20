@@ -7,6 +7,7 @@ import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITe
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'details-testfacility',
@@ -46,6 +47,7 @@ export class DetailsComponent {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private dataService: TestFacilityService,
         private testfacilityroleservice: TestFacilityRoleService,
         private testfacilityattachmentservice: TestFacilityAttachmentService
@@ -88,6 +90,35 @@ export class DetailsComponent {
 
             });
     }
+    onSubmit(formRef) {
+        console.log(formRef);
+        console.log(this.testFacility.name);
+        formRef.isDeleted = false;
+        let formData: any = {
+            name: '',
+            address: {
+                addressLine1: '',
+                addressLine2: '',
+                city: '',
+                state: '',
+                postalCode: '',
+            }
+        };
+        formData.name = formRef.name;
+        formData.address.addressLine1 = formRef.addressLine1;
+        formData.address.addressLine2 = formRef.addressLine2;
+        formData.address.city = formRef.city;
+        formData.address.state = formRef.state;
+        formData.address.postalCode = formRef.postalCode;
+        formData.locale = "en-us";
+        console.log(formData);
+        this.dataService.postUpdate(formData).subscribe(res => {
+            console.log("-------- Test Facility Adding new result ----- ", res);
+            if (!res.errorMessage) {
+                this.router.navigate(["/testfacilities/details/", res.result.id]);
+            }
+        });
+    }
 
     onBeforeUpload(event) {
 
@@ -96,12 +127,18 @@ export class DetailsComponent {
 
         }
     }
-    onDelete(id) {
-        //  this.testfacilityattachmentservice.DeleteAttachmentsById(id)
-        //    .subscribe(res => {
-        //      console.log('-----------  TestFacilitiesroles------------------', res);
-        //  this.TestFacilityAttachments = TestFacilityAttachments;
-        //   });
+    onDelete(TestFacilityAttachment: ITestFacilityAttachment) {
+        console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testfacilityattachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
+            .subscribe(res => {
+
+                this.testfacilityattachmentservice.getByIdusing(this.id)
+                    .subscribe(TestFacilityAttachments => {
+                        console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                        this.TestFacilityAttachments = TestFacilityAttachments;
+                    });
+            });
+         
 
     }
 

@@ -1,5 +1,5 @@
 export interface ITestFacilityAttachment {
-Id;
+    id;
     name;
     path;
 }

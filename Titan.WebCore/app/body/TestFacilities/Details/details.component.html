@@ -27,14 +27,24 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <input type="text"
+                                           id="name"
                                            pInputText
                                            name="name"
                                            [(ngModel)]="testFacility.name"
-                                           placeholder="Required"
+                                            #testFacilityNameRef="ngModel"
+                                           placeholder="Required-min(3)"
                                            minlength="3"
-                                           class="form-control" required />
+                                           class="form-control" required row="20" />
                                 </div>
                                 <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
+                                        <!--<i class="fa fa-close"></i>-->
+                                     *
+                                      
+                                    </div>
+                                    <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">
+                                      (MinLength-3)
+                                    </div>
                                 </div>
                             </div>
                             <!-- Test Facility Location -->
@@ -48,11 +58,18 @@
                                               name="addressLine1"
                                               class="form-control" required
                                               row="20"
-                                              [(ngModel)]="address.addressLine1"></textarea>
-                                </div>
-                                <div class="ui-grid-col-4"> </div>
-                            </div>
+                                              [(ngModel)]="address.addressLine1" #tfAddress1Ref="ngModel"></textarea>
+                                </div>                           
 
+                                <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
+                                <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">
+                                        <!--<i class="fa fa-close"></i>-->
+                                      *
+                                    </div>
+                                </div>
+                            
+                                </div>
                             <!-- Test Facility Address -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -67,7 +84,11 @@
                                               #tfAddressRef="ngModel"
                                               [(ngModel)]="address.addressLine2"></textarea>
                                 </div>
-                                <div class="ui-grid-col-4"></div>
+                                <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="tfAddressRef.errors?.required">
+                                       *
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Test Facility Building # -->
@@ -84,7 +105,16 @@
                                            #tfBuildingNumberRef="ngModel"
                                            [(ngModel)]="address.city" />
                                 </div>
-                                <div class="ui-grid-col-4"> </div>
+
+                             
+
+                                <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="tfBuildingNumberRef.errors?.required">
+                                       *
+                                      
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- Test Facility Operation Hours -->
                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
@@ -107,9 +137,13 @@
                                            class="form-control" required
                                            row="20"
                                            name="state"
-                                           [(ngModel)]="address.state" />
+                                           [(ngModel)]="address.state" #tfstateRef="ngModel" />
                                 </div>
-                                <div class="ui-grid-col-4"></div>
+                                <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">
+                                       *
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -121,16 +155,22 @@
                                            class="form-control" required
                                            row="20"
                                            name="postalCode"
-                                           [(ngModel)]="address.postalCode" />
+                                           [(ngModel)]="address.postalCode"  #tfpostalCodeRef="ngModel" />
                                 </div>
-                                <div class="ui-grid-col-4"></div>
+                                <div class="ui-grid-col-4">
+                                    <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">
+                                     *
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2"></div>
                                 <div class="ui-grid-col-2">
-                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Edit" icon="ui-icon-add" iconPos="left"></button>
+                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Edit" icon="ui-icon-add" iconPos="left" ></button>
                                 </div>
-                                <div class="ui-grid-col-4"></div>
+                                <div class="ui-grid-col-4">
+                                  
+                                </div>
                             </div>
                             <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
                                 Form Submitted

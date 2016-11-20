@@ -1,9 +1,9 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { DataTable, TabViewModule, DialogModule, SelectItem,Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component,OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { DataTable, TabViewModule, DialogModule, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipmentSubtype';
 import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
@@ -16,242 +16,212 @@ import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrat
 export class DetailsComponent implements OnInit {
 
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('','','','','','');    
-      CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('','','');    
-    selectedsubType: IEquipmentSubtype;    
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
+    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '');
+    selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
     IsSubType: boolean;
-    EquipmentsubTypes: IEquipmentSubtype[]=[];
-    CalibrationForms: ICalibrationForm[]=[];
+    EquipmentsubTypes: IEquipmentSubtype[] = [];
+    CalibrationForms: ICalibrationForm[] = [];
     username: string;
-    details:string;   
+    details: string;
     id: string;
     msgs: Message[];
     entityType: string = '';
-     entityId: string = '';
+    entityId: string = '';
     filepath: string = "TestFacility";
-   //  CalibrationForms:any ;
-     displayDialogForm: boolean;
-    // CalibrationForms: SelectItem[] ; 
-selectedCalibration: string = '';
-   // selectedCar: string = 'BMW';
-      cities: SelectItem[];
+    displayDialogForm: boolean;
+   
+    selectedCalibration: string = '';
+   
+    cities: SelectItem[];
     selectedcity: any;
-  /*  data: {
-    model: null,
-    availableOptions: [
-      {id: '1', name: 'Option A'},
-      {id: '2', name: 'Option B'},
-      {id: '3', name: 'Option C'}
-    ]
-   };*/
-    
-    selectedstring : string = null;
-    model:any = {
-                id:'', 
-                isDeleted:false, 
-                parentId:'',
-                description:'',
-                subtype1:'',
-                subtype2:'',
-                name:'', 
-                createdOn:'', 
-                modifiedOn:'',
-                userCreatedById:'',
-                userInChargedId:'',
-                userModifiedById:''
+    selectedstring: string = null;
+    model: any = {
+        id: '',
+        isDeleted: false,
+        parentId: '',
+        description: '',
+        subtype1: '',
+        subtype2: '',
+        name: '',
+        createdOn: '',
+        modifiedOn: '',
+        userCreatedById: '',
+        userInChargedId: '',
+        userModifiedById: ''
     };
 
-    
+
     uploadedFiles: any[] = [];
 
     constructor(
-        private route:ActivatedRoute, 
+        private route: ActivatedRoute,
         private dataService: EquipmentTypeService
+
+    ) {
       
-    ){
-       /* this.cities = [];
-        this.cities.push({label:'Select City', value:null});
-        this.cities.push({label:'New York', value:{id:1, name: 'New York', code: 'NY'}});
-        this.cities.push({label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}});
-        this.cities.push({label:'London', value:{id:3, name: 'London', code: 'LDN'}});
-        this.cities.push({label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}});
-        this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});*/
         this.CalibrationForms = [];
-        this.CalibrationForms.push({id:'1',name: 'Audi', description: 'Audi'});
-        this.CalibrationForms.push({id:'2',name: 'BMW', description: 'BMW'});
-        this.CalibrationForms.push({id:'3',name: 'Fiat', description: 'Fiat'});
-        this.CalibrationForms.push({id:'4',name: 'Ford', description: 'Ford'});
-        this.CalibrationForms.push({id:'5',name: 'Honda', description: 'Honda'});
-        this.CalibrationForms.push({id:'6',name: 'Jaguar', description: 'Jaguar'});
-        this.CalibrationForms.push({id:'7',name: 'Mercedes', description: 'Mercedes'});
-        this.CalibrationForms.push({id:'8',name: 'Renault', description: 'Renault'});
-        this.CalibrationForms.push({id:'9',name: 'VW', description: 'VW'});
-        this.CalibrationForms.push({id:'10',name: 'Volvo', description: 'Volvo'});
-      // this.selectedCalibration="BMW";
+        this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi' });
+        this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW' });
+        this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat' });
+        this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford' });
+        this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda' });
+        this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar' });
+        this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes' });
+        this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault' });
+        this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW' });
+        this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo' });
+        // this.selectedCalibration="BMW";
         this.route.params.subscribe(params => this.id = params['id']);
-          this.model.id = this.id;
+        this.model.id = this.id;
         console.log("---- TF Details ID Param -----", this.id);
     }
-   handleChange(event)
-   {
-       console.log('tes---',event);
-       console.log('-------targetid-------',event.originalEvent.target.innerText);
-   }
+    handleChange(event) {
+        console.log('tes---', event);
+        console.log('-------targetid-------', event.originalEvent.target.innerText);
+    }
     ngOnInit() {
         this.dataService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
-               //this.formObject = res.formObject;
+                //this.formObject = res.formObject;
                 this.model = res;
-                this.model.id=res.id;
-                this.model.parentId=res.parentId;
-                this.model.name=res.name;
+                this.model.id = res.id;
+                this.model.parentId = res.parentId;
+                this.model.name = res.name;
                 this.model.description = res.description;
-              //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
+                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
                 console.log("----- Result of formObject -----", this.model);
-                 this.dataService.getSubTypesById(this.model.id)
+                this.dataService.getSubTypesById(this.model.id)
                     .subscribe(result => {
-                    this.EquipmentsubTypes = result.$values;                
-                    console.log("----- Result of formObject -----", this.model);
-                });      
+                        this.EquipmentsubTypes = result.$values;
+                        console.log("----- Result of formObject -----", this.model);
+                    });
             });
 
-         //   this.EquipmentSubType = { name:'', description: '', calibrationform: '', frequency: ''}  
+        //   this.EquipmentSubType = { name:'', description: '', calibrationform: '', frequency: ''}  
     }
 
-        
-onEdit()
-{
-    console.log('d---------------updateddescriptions-------------',this.model);
-    
-        this.EquipmentsubTypes.forEach((subtype: any) => 
-        {
-            
-           this.dataService.postAdd(subtype)
-            .subscribe(res1 =>
-            {   
-               
-                console.log("----- Result of subtypes creation -----", res1);
-            });   
+
+    onEdit() {
+        console.log('d---------------updateddescriptions-------------', this.model);
+
+        this.EquipmentsubTypes.forEach((subtype: any) => {
+
+            this.dataService.postAdd(subtype)
+                .subscribe(res1 => {
+
+                    console.log("----- Result of subtypes creation -----", res1);
+                });
         });
 
-         this.EquipmentsubTypes.forEach((subtype: any) => 
-               {
-                this.dataService.postUpdate(subtype)
-                    .subscribe(res2 =>
-                    {              
-                       
-
-                    //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                       // console.log("----- Result of formObject -----", this.model);
-                    });   
+        this.EquipmentsubTypes.forEach((subtype: any) => {
+            this.dataService.postUpdate(subtype)
+                .subscribe(res2 => {
                 });
+        });
 
-                   this.dataService.postUpdate(this.model)
-                                .subscribe(res =>
-                                {              
-                                    this.model = res;
-                                    this.model.name=res.name;
-                                    this.model.description = res.description;
-                                    this.msgs = [];
-                                    this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
-                                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                                 //   console.log("----- Result of formObject -----", this.model);
-                                });   
-       
-         
-   }
+        this.dataService.postUpdate(this.model)
+            .subscribe(res => {
+                this.model = res;
+                this.model.name = res.name;
+                this.model.description = res.description;
+                this.msgs = [];
+                this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
+                //   console.log("----- Result of formObject -----", this.model);
+            });
+
+
+    }
 
     showDialogToAdd() {
         this.newsubType = true;
-        this.selectedCalibration=null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('','','','','',this.id);
+        this.selectedCalibration = null;
+        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
         this.displayDialog = true;
         // this.IsSubType= true;
     }
-     showDialogToAddForm() {       
-       this.displayDialogForm = true;
-       this.selectedCalibration=null;
-        this.CalibrationForm = new PrimeCalibrationForm('','','');
+    showDialogToAddForm() {
+        this.displayDialogForm = true;
+        this.selectedCalibration = null;
+        this.CalibrationForm = new PrimeCalibrationForm('', '', '');
         //this.IsSubType= false;
     }
-    ok()
-    {
-        this.CalibrationForms.push(this.CalibrationForm); 
-        this.EquipmentSubType.calibrationform= this.CalibrationForm.name; 
-        this.selectedCalibration=this.CalibrationForm.name;       
+    ok() {
+        this.CalibrationForms.push(this.CalibrationForm);
+        this.EquipmentSubType.calibrationform = this.CalibrationForm.name;
+        this.selectedCalibration = this.CalibrationForm.name;
         this.displayDialogForm = false;
     }
-    cancel()
-    {
-       this.displayDialogForm = false;
+    cancel() {
+        this.displayDialogForm = false;
     }
     save() {
-     //   this.EquipmentSubType = EquipmentSubType.name;
-        if(this.newsubType)
+        //   this.EquipmentSubType = EquipmentSubType.name;
+        if (this.newsubType)
             this.EquipmentsubTypes.push(this.EquipmentSubType);
-            
+
         else
             this.EquipmentsubTypes[this.findSelectedCarIndex()] = this.EquipmentSubType;
-        
+
         this.EquipmentSubType = null;
         this.displayDialog = false;
     }
-onCalibrationFormChange(event) {
-   //   this.selectedCalibration=(event.target.selectedOptions[0].innerText); 
-    // this.EquipmentSubType.calibrationform= (event.target.selectedOptions[0].innerText);
-    this.selectedCalibration=(event); 
-     this.EquipmentSubType.calibrationform= (event);
-    
-}
+    onCalibrationFormChange(event) {
+        //   this.selectedCalibration=(event.target.selectedOptions[0].innerText); 
+        // this.EquipmentSubType.calibrationform= (event.target.selectedOptions[0].innerText);
+        this.selectedCalibration = (event);
+        this.EquipmentSubType.calibrationform = (event);
+
+    }
     delete() {
         this.EquipmentsubTypes.splice(this.findSelectedCarIndex(), 1);
-       
+
         this.dataService.DeleteEquipmentsById(this.selectedsubType.id)
-            .subscribe(res =>
-            {              
+            .subscribe(res => {
                 // call get method to refresh grid
-                  this.dataService.getSubTypesById(this.model.id)
+                this.dataService.getSubTypesById(this.model.id)
                     .subscribe(result => {
-                    this.EquipmentsubTypes = result.$values;                
-                   
-                });     
-              //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                
-            });   
-       // this.EquipmentSubType = null;
+                        this.EquipmentsubTypes = result.$values;
+
+                    });
+                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
+
+            });
+        // this.EquipmentSubType = null;
         this.displayDialog = false;
-    }    
-    
+    }
+
     onRowSelect(event) {
         this.newsubType = false;
         this.EquipmentSubType = this.clonesubType(event.data);
-          this.EquipmentSubType.calibrationform=event.data.calibrationform;
-        this.selectedCalibration=event.data.calibrationform;
+        this.EquipmentSubType.calibrationform = event.data.calibrationform;
+        this.selectedCalibration = event.data.calibrationform;
         this.displayDialog = true;
     }
-    
-   clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
-        let newType = new PrimeEquipmentSubType(sub.id,sub.name,sub.description,sub.calibrationform,sub.frequency,sub.parentId);
-        for(let prop in sub) {
+
+    clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
+        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.parentId);
+        for (let prop in sub) {
             newType[prop] = sub[prop];
         }
         return newType;
     }
-    
+
     findSelectedCarIndex(): number {
         return this.EquipmentsubTypes.indexOf(this.selectedsubType);
-    }  
+    }
 }
 
 class PrimeEquipmentSubType implements IEquipmentSubtype {
-    
-    constructor(public id,public name, public description, public calibrationform, public frequency,public parentId) {        
+
+    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public parentId) {
     }
 }
 class PrimeCalibrationForm implements ICalibrationForm {
-    
-    constructor(public id,public name, public description) {        
+
+    constructor(public id, public name, public description) {
     }
 }
