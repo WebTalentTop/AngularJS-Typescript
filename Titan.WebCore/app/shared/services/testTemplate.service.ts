@@ -2,25 +2,15 @@
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { TestTemplateApiUrl} from './apiUrlConst/TestTemplateApiUrls';
+import { BaseService } from './base.service'
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class TestTemplateService {
-    headers: Headers = new Headers({
-        'Content-Type': 'application/json'
-    });
-
-    body = {
-        "locale": "en-us",
-        "defaultLocale": "en-us",
-        "PageNumber": 1,
-        "PageSize": 15,
-        "IsPaging": true
-    };
-
+export class TestTemplateService extends BaseService {
     constructor(private http: Http) {
+        super();
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
 
@@ -68,20 +58,18 @@ export class TestTemplateService {
         //.map(this.getJson);
     }
 
-    private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
-        return response.json();
+    postAddTestRequirements(filterBody, testTemplateId): Observable<any> {
+        return this.http.post(`${TestTemplateApiUrl.postAddTestTemplateRequirementUrl}` + testTemplateId, filterBody, { headers: this.headers })
+            .map(this.getJson);
     }
 
-    private checkErrors(response: Response): Response {
-        if (response.status >= 200 && response.status <= 300) {
-            return response;
-        }
-        else {
-            var error = new Error(response.statusText);
-            error['response'] = response;
-            console.error(error);
-            throw error;
-        }
+    getTestTemplateRequirements(testTemplateId): Observable<any> {
+        return this.http.get(`${TestTemplateApiUrl.getTestTemplateRequirementUrl}` + testTemplateId, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    postDeleteTestTemplateRequirement(testTemplateId, testRequirementId): Observable<any> {
+        return this.http.put(`${TestTemplateApiUrl.postDeleteTestTemplateRequirementUrl}` + testTemplateId + '&testRequirementId=' + testRequirementId, null, { headers: this.headers })
+            .map(this.getJson);
     }
 }

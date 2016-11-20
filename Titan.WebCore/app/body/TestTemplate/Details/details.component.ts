@@ -6,7 +6,7 @@ import { TestModeService } from '../../../shared/services/testmode.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
 import {Router} from '@angular/router'
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 @Component({
     selector: 'details-testtemplate',
@@ -21,7 +21,8 @@ export class DetailsComponent {
     public filteredSelectedTestRequirements: Array<any> = new Array();
     constructor(private testTemplateService: TestTemplateService, private testTypeService: TestTypeService,
         private testModeService: TestModeService, private router: Router,
-        private route:ActivatedRoute, private testRequirementService: TestRequirementService
+        private route:ActivatedRoute, private testRequirementService: TestRequirementService,
+        private confirmationService: ConfirmationService
     ){
         
     }
@@ -35,20 +36,54 @@ export class DetailsComponent {
         this.testModes.push(testMode);
         this.route.params.subscribe(params => {
         console.log(params);
-            console.log("---- TF Details ID Param -----", params['id']);
             this.testTemplateService.getById(params['id']).subscribe(res => {
                 this.testTemplate = res;
                 if (this.testTemplate.testTypeId != null) {
                     this.onTestTypeChange();
                 }
             });
+             this.testTemplateService.getTestTemplateRequirements(params['id']).subscribe(res => {
+                this.selectedTestRequirements = res.$values;
+            });
+
+        });
+    }
+
+    onDelete(testRequirement){
+        this.confirmationService.confirm({
+            message: 'Do you want to delete this record?',
+            header: 'Delete Confirmation',
+            icon: 'fa fa-trash',
+            accept: () => {
+                this.testTemplateService.postDeleteTestTemplateRequirement(
+                    this.testTemplate.id,
+                        testRequirement.id
+                ).subscribe(res => {
+                    this.selectedTestRequirements = res.$values;
+                });
+            }
         });
 
+        
+    }
+
+    onAddTestRequirement(){
+        var selectedTestRequirementIds = new Array();
+        for(var sel of this.filteredSelectedTestRequirements){
+            selectedTestRequirementIds.push(sel.id);
+        }
+        var inputDto = {
+            testRequirementList: selectedTestRequirementIds
+        }
+        this.testTemplateService.postAddTestRequirements(selectedTestRequirementIds, this.testTemplate.id).subscribe(filteredList => {
+            this.selectedTestRequirements = filteredList.$values;
+            this.filteredSelectedTestRequirements = null;
+        });
     }
 
     filterTestRequirements(event) {
         this.testRequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
-            this.filteredTestRequirements = filteredList;
+            this.filteredTestRequirements = filteredList.$values;
         });
     }
 

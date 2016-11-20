@@ -45,9 +45,6 @@ export class TestRequirementService extends BaseService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${TestRequirementApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson)
-            .map(this.checkErrors)
-            .catch(err => Observable.throw(err))
             .map(this.getJson);
     }
 
@@ -63,4 +60,6 @@ export class TestRequirementService extends BaseService {
         return this.http.get(`${TestRequirementApiUrl.filterByTestTemplateIdUrl}` + testTemplateId + '&filterString=' + filterString, { headers: this.headers })
             .map(this.getJson);
     }
+
+    
 }

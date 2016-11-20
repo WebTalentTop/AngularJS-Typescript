@@ -104,10 +104,38 @@
                 </form>
             </p-tabPanel>
             <p-tabPanel header="Requirements" leftIcon="fa fa-print">
-                Requirements
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Search by Reference#:
+                    </div>
+                    <div class="ui-grid-col-8">
+                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
+                                (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
+                                [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
+                        </p-autoComplete> 
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <button class="btn btn-default" (click)="onAddTestRequirement()">Add Requirement</button>
+                    </div>
+                </div>
+                <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+                <div class="ui-grid-row">
+                    <p-dataTable [value]="selectedTestRequirements">
+                        <p-column field="referenceNumber" header="Reference#"></p-column>
+                        <p-column field="title" header="Title"></p-column>
+                        <p-column>
+                            <template pTemplate type="header">
+                                Action
+                            </template>
+                            <template let-testRequirement="rowData" pTemplate type="body">
+                                <button type="button" pButton (click)="onDelete(testRequirement)" icon="fa-trash"></button>
+                            </template>
+                        </p-column>
+                    </p-dataTable>
+                </div>
             </p-tabPanel>
             <p-tabPanel header="Steps" leftIcon="fa fa-bell-o" rightIcon="fa-bookmark-o">
-                Steps
+                Steps 
             </p-tabPanel>
         </p-tabView>
     </div>

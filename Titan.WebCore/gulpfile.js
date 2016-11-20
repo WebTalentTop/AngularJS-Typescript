@@ -78,6 +78,10 @@ gulp.task("ts", function () {
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
 
+gulp.task('tswatch', function () {
+    gulp.watch(root_path.app + "**/*.ts", ['ts']);
+});
+
 gulp.task("copy-@types", function () {
     return gulp.src(root_path.nmSrc + '/es6-shim/es6-sh*', {
         base: root_path.nmSrc + '/es6-shim/'
