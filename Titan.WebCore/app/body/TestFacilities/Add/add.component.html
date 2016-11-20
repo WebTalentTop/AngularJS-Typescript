@@ -1,0 +1,98 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+    <!--<h1> {{title}}</h1>
+    <p-tabView>-->
+    <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+        <h3> Add Test Facility </h3>
+        <p-panel>
+            <!--<header>Test Facility Information</header>-->
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Test Facility Name *
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Please enter Test Facility Name"
+                            class="form-control" required />
+                    </div>
+                    <div class="ui-grid-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Address 1
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="addressLine1" name="addressLine1" pInputText [(ngModel)]="addressLine1" placeholeder="Please enter street address"
+                            class="form-control" required/>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Address 2
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="addressLine2" name="addressLine2" pInputText [(ngModel)]="addressLine2" placeholeder="Please enter street address"
+                            class="form-control"/>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        City
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="city" name="city" pInputText [(ngModel)]="city" placeholeder="Please enter city"
+                            class="form-control" required/>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        State
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="state" name="state" pInputText [(ngModel)]="state" placeholeder="Please enter state"
+                            class="form-control" required/>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Postal Code
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="postalCode" name="postalCode" pInputText [(ngModel)]="postalCode" placeholeder="Please enter postal code"
+                            class="form-control" required/>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <button id="add" pButton type="submit" label="Add">  </button>
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button id="cancel" pButton type="submit" label="Cancel">  </button>
+                        </div>
+                </div>
+            </div>
+            </p-panel>
+            <br />
+            <br />
+        </form>
+    </div>
+</div>

@@ -24,6 +24,8 @@ export class DetailsComponent {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
+    testFacility = { name: '' };
+    address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
@@ -62,6 +64,8 @@ export class DetailsComponent {
             .subscribe(res => {
                 this.formConfiguration = res.formConfiguration;
                 this.formObject = res.formObject;
+                this.address = res.address;
+                this.testFacility = res.testFacility;
                 this.model = res.formObject;
                 console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 console.log("----- Result of formObject -----", this.model);
@@ -77,7 +81,7 @@ export class DetailsComponent {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
-       
+
         this.dataService.getEquipmentsByIdusing(this.id)
             .subscribe(res => {
                 this.TestFacilityEquipments = res;
@@ -93,7 +97,7 @@ export class DetailsComponent {
         }
     }
     onDelete(id) {
-      //  this.testfacilityattachmentservice.DeleteAttachmentsById(id)
+        //  this.testfacilityattachmentservice.DeleteAttachmentsById(id)
         //    .subscribe(res => {
         //      console.log('-----------  TestFacilitiesroles------------------', res);
         //  this.TestFacilityAttachments = TestFacilityAttachments;

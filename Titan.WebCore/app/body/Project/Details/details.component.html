@@ -1,9 +1,10 @@
 <div class="ui-g-12">
-    <h1> Project Details </h1>
+    <!--<h1> Project Details </h1>-->
 
-    <h4>Please fill out Project Information</h4>
+    <!--<h4>Please fill out Project Information</h4>-->
     <form #projectForm>
-        <p-panel *ngIf="ProjectDetails">
+        <br/>
+        <p-panel *ngIf="ProjectDetails" >
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
@@ -19,13 +20,9 @@
                                maxlength="10"
                                class="form-control" required />
                     </div>
-                    <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.required">
-                        {{CodeRef.errors | json}} this field is required
-                    </div>
+                    <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.required"> * </div>
 
-                    <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.minlength">
-                        Minimum length is required {{CodeRef.errors.minlength.requiredLength}}.
-                    </div>
+                    <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.minlength"> * </div>
                 </div>
 
                 <div class="ui-grid-row">

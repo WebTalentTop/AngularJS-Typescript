@@ -90,8 +90,7 @@ export class TestFacilityService {
 
     private checkErrors(response: Response): Response {
         if (response.status >= 200 && response.status <= 300) {
-            return response;
-        }
+            return response;        }
         else {
             var error = new Error(response.statusText);
             error['response'] = response;

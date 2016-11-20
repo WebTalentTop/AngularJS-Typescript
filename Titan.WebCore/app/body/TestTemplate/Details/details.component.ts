@@ -5,6 +5,7 @@ import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import {Router} from '@angular/router'
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
@@ -18,11 +19,15 @@ export class DetailsComponent {
     public testModes: Array<any> = new Array();
     public selectedTestRequirements: Array<any> = new Array();
     public filteredTestRequirements: Array<any> = new Array();
-    public filteredSelectedTestRequirements: Array<any> = new Array();
-    constructor(private testTemplateService: TestTemplateService, private testTypeService: TestTypeService,
-        private testModeService: TestModeService, private router: Router,
-        private route:ActivatedRoute, private testRequirementService: TestRequirementService,
-        private confirmationService: ConfirmationService
+    public filteredSelectedTestRequirements: Array<any> = new Array();    
+    constructor(
+        private testTemplateService: TestTemplateService, 
+        private testtypeService: TestTypeService,
+        private testmodeService: TestModeService, 
+        private router: Router,
+        private route:ActivatedRoute, 
+        private testrequirementService: TestRequirementService,
+		private confirmationService: ConfirmationService
     ){
         
     }
@@ -82,14 +87,14 @@ export class DetailsComponent {
     }
 
     filterTestRequirements(event) {
-        this.testRequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
-            this.filteredTestRequirements = filteredList.$values;
+        this.testrequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
+            this.filteredTestRequirements = filteredList;
         });
     }
 
     getTestType() {
         //    testTypes
-        this.testTypeService.getAll().subscribe(response => {
+        this.testtypeService.getAll().subscribe(response => {
             this.testTypes = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -113,7 +118,7 @@ export class DetailsComponent {
     onTestTypeChange() {
         this.testModes = new Array();
         //this.testModes
-        this.testModeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
+        this.testmodeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
             if (response != null && response.$values.length > 0) {
                 var resultMap = new Array();
                 resultMap.push({

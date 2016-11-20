@@ -1,16 +1,18 @@
-import { TestTemplateService } from './../../shared/services/testTemplate.service';
+import { EquipmentTypeService } from './../../shared/services/equipmentType.service';
 import { LoggerService } from './../../shared/services/logger.service';
+import {FileUploadModule} from 'primeng/primeng';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import {DropdownModule} from 'primeng/primeng';
 
 @Component({
-    selector: 'test-template',
-    templateUrl: 'app/body/TestTemplate/testtemplate.component.html'
+    selector: 'test-facilities',
+    templateUrl: 'app/body/EquipmentType/equipmenttype.component.html'
 })
-export class TestTemplateComponent {
-    // title = "Test Template";
+export class EquipmentTypeComponent {
+    title = "EquipmentType";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -18,13 +20,13 @@ export class TestTemplateComponent {
     idField:string;
     linkFieldId:string;
 
-    constructor(private service: TestTemplateService, private router:Router,  private logger: LoggerService) {
+    constructor(private dataService: EquipmentTypeService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.service.postGridData()
+        this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;
@@ -38,8 +40,7 @@ export class TestTemplateComponent {
     }
 
     navigateDetails(id:string){
-        console.log("----- TestTemplate Navigate Details -----", id);
-        this.router.navigate(['testemplate/details', id]);
+        this.router.navigate(['equipmenttype/details', id]);
     }
 
    

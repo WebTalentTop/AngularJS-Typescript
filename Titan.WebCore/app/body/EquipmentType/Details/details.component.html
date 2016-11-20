@@ -1,0 +1,203 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Edit EquipmentType</h3>
+                    <p-growl [value]="msgs"></p-growl>
+                <ul class="rightIconNav pull-right mb10">
+                    <li> <button pButton type="submit" label="Edit" icon="ui-icon-add" iconPos="left" (click)="onEdit()"></button></li>
+                </ul>
+            </div>
+        </div>
+        <p-tabView (onChange)="handleChange($event)">
+            <!-- <p-tabPanel header="Details" id='details' leftIcon="fa fa-calendar">-->
+                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- Add Equipment Type Start -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Equipment Type</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form class="">
+                                            <div class="col-sm-12">
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label col-sm-12 pl0">Name</label>
+                                                    <input type="text" name="name" placeholder="Name" class="form-control" [(ngModel)]="model.name" #equipmentTypeNameRef="ngModel">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label col-sm-12 pl0">Frequency</label>
+                                                    <input type="text" name="frequency" placeholder="Frequency" class="form-control">
+                                                </div>
+
+                                         
+                                                <div class="form-group col-sm-12 col-md-12">
+                                                    <label class="control-label col-sm-12 pl0 mb15">Description</label><br/>
+                                                    <textarea rows="5" cols="30" name="description" class="form-control" placeholder="Description" #etDescriptionRef="ngModel"
+                                                        [(ngModel)]="model.description"></textarea>
+
+                                                </div>
+                                            
+                                            </div>
+
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add Equipment Type End -->
+                            <!-- Calibration forms Start -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Calibration Forms</div>
+                                        <div class="panel-body">
+                                            <table class="table table-bordered" id="calibration">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Created by</th>
+                                                        <th>Time Stamp</th>
+                                                        <th>Approved by</th>
+                                                        <th>Clone</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Calibration forms End -->
+                            <!-- Create New Form Start -->
+                        
+                            <div class="row">
+                                  <div class="form-group col-sm-6 col-md-4">
+                                                                    <label class="control-label">Calibration forms</label>
+                                                                <!--  <p-dropdown id="calform" [options]="cities" [(model)]="selectedcity" [autoWidth]="false"></p-dropdown>-->
+                                                            
+                                                                                                                                          <select [(ngModel)]="selectedCalibration" class="form-control" name="calform"width="300" style="width: 300px">
+              <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
+          </select>
+                                                                
+                                                                </div>
+                                                              
+                                                          <p-dialog header="Add New Calibration Form" [(visible)]="displayDialogForm" [responsive]="true" showEffect="fade" [modal]="true">
+                                                        <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="CalibrationForm">
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="name">Name</label></div>
+                                                                <div class="ui-grid-col-8"><input pInputText name="name" [(ngModel)]="CalibrationForm.name"
+                                                                    /></div>
+                                                            </div>
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="description">Description</label></div>
+                                                                <div class="ui-grid-col-8"><input pInputText name="description"  [(ngModel)]="CalibrationForm.description"
+                                                                    /></div>
+                                                            </div>                                                        
+                                                            
+                                                        </div>
+                                                        <footer>
+                                                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                                <button type="button" pButton icon="fa-close" (click)="cancel()" label="Cancel"></button>
+                                                                <button type="button" pButton icon="fa-check" (click)="ok()" label="ok"></button>
+                                                            </div>
+                                                        </footer>
+                                                    </p-dialog>
+                                                                
+                               <div class="col-sm-12">
+                                     <div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left"
+                                                                    (click)="showDialogToAddForm()" label="Add Calibration Form"></button></div>
+                                   <!-- <a class="btn btn-success waves-effect" href="./equipment/details/{{entityId}}"><i class="fa fa-plus"></i> Add  a Calibration Form</a>-->
+                                </div>
+                            </div>
+                            <!-- Create New Form End -->
+                            <!-- Add Sub Types Start -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Sub Types</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form>
+                                            <div class="form-group clearfix">
+                                                <!--  <div class="col-sm-3">
+                                                      <input type="text" class="form-control" placeholder=" 2 Wheel Dyno" name="subtype1" [(ngModel)]="model.subtype1" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" placeholder="4 Wheel Dyno" name="subtype2" [(ngModel)]="model.subtype2" />
+                                                    </div>-->
+                                                <div class="ui-grid-row">
+                                                    <div class="ui-grid-col-2"><b>Equipment SubTypes</b></div>
+                                                    <div class="ui-grid-col-2"></div>
+                                                    <p-dataTable [value]="EquipmentsubTypes" selectionMode="single" [(selection)]="selectedsubType" (onRowSelect)="onRowSelect($event)"
+                                                        [paginator]="true" rows="15" [responsive]="true">
+                                                        <p-column field="name" header="Equipment Sub Type Name" sortable="true"></p-column>
+                                                        <p-column field="description" header="Description" sortable="true"></p-column>
+                                                        <p-column field="calibrationform" header="Calibration Form" sortable="true"></p-column>
+                                                        <p-column field="frequency" header="Frequency" sortable="true"></p-column>
+                                                        <footer>
+                                                            <div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left"
+                                                                    (click)="showDialogToAdd()" label="Add"></button></div>
+                                                        </footer>
+                                                    </p-dataTable>
+                                                      
+                                                    <p-dialog header="SubType Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+                                                        <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="EquipmentSubType">
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="name">Name</label></div>
+                                                                <div class="ui-grid-col-8"><input pInputText name="name" [(ngModel)]="EquipmentSubType.name"   #equipmentSubTypeNameRef="ngModel"
+                                                                    /></div>
+                                                            </div>
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="description">Description</label></div>
+                                                                <div class="ui-grid-col-8"><input pInputText name="description" [(ngModel)]="EquipmentSubType.description" #equipmentSubTypedescriptionRef="ngModel"
+                                                                    /></div>
+                                                            </div>
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="calibrationform">Calibration Form</label></div>
+                                                                 <select [(ngModel)]="selectedCalibration" class="form-control" name="calibrationform" width="300" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
+                                                                            <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
+                                                                        </select>
+                                                                     <!-- <div class="ui-grid-col-8"><input pInputText name="calibrationform" [(ngModel)]="EquipmentSubType.calibrationform" #equipmentSubTypecalibrationformRef="ngModel"
+                                                                    /></div>-->
+                                                                     <div class="col-sm-12">
+
+                                                                    <div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left"
+                                                                    (click)="showDialogToAddForm()" label="Add New"></button></div>
+                                                               </div>
+                                                                 
+                                                            </div>
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="frequency">Frequency</label></div>
+                                                                <div class="ui-grid-col-8"><input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"
+                                                                    /></div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <footer>
+                                                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                                <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+                                                                <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+                                                            </div>
+                                                        </footer>
+                                                    </p-dialog>
+                                                      
+                                                </div>
+                                            </div>
+                                        </form>
+                                       
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Add Sub Types End -->
+
+                         
+
+                        </div>
+                    </div>
+                </form>
+    <!--  </p-tabPanel>-->
+        </p-tabView>
+    </div>
+</div>
