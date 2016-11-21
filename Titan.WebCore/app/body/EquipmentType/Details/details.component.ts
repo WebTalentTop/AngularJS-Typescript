@@ -31,7 +31,7 @@ export class DetailsComponent implements OnInit {
     entityId: string = '';
     filepath: string = "TestFacility";
     displayDialogForm: boolean;
-   
+    emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
    
     cities: SelectItem[];
@@ -39,17 +39,15 @@ export class DetailsComponent implements OnInit {
     selectedstring: string = null;
     model: any = {
         id: '',
-        isDeleted: false,
+       // isdeleted: '0',
         parentId: '',
         description: '',
-        subtype1: '',
-        subtype2: '',
-        name: '',
-        createdOn: '',
-        modifiedOn: '',
-        userCreatedById: '',
-        userInChargedId: '',
-        userModifiedById: ''
+         name: ''
+        //createdOn: '',
+        //modifiedOn: '',
+        //userCreatedById: '',
+        //userInChargedId: '',
+        //userModifiedById: ''
     };
 
 
@@ -82,7 +80,7 @@ export class DetailsComponent implements OnInit {
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
     ngOnInit() {
-        this.dataService.getById(this.id)
+        this.dataService.getById(this.id) 
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
@@ -90,7 +88,7 @@ export class DetailsComponent implements OnInit {
                 this.model.id = res.id;
                 this.model.parentId = res.parentId;
                 this.model.name = res.name;
-                this.model.description = res.description;
+                this.model.description = res.description; 
                 //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
                 console.log("----- Result of formObject -----", this.model);
                 this.dataService.getSubTypesById(this.model.id)
@@ -107,13 +105,28 @@ export class DetailsComponent implements OnInit {
     onEdit() {
         console.log('d---------------updateddescriptions-------------', this.model);
 
+        this.dataService.postUpdate(this.model)
+            .subscribe(res => {
+                //this.model = res;
+                //this.model.name = res.name;
+                //this.model.description = res.description;
+                //this.msgs = [];
+                //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
+                //   console.log("----- Result of formObject -----", this.model);
+            });
+
+
         this.EquipmentsubTypes.forEach((subtype: any) => {
+            console.log('----------isdeleted----', subtype);
+            console.log('----------isdeleted----', subtype.isdeleted);
+           // if (subtype.isdeleted =='' )
+                this.dataService.postAdd(subtype)
+                    .subscribe(res1 => {
 
-            this.dataService.postAdd(subtype)
-                .subscribe(res1 => {
-
-                    console.log("----- Result of subtypes creation -----", res1);
-                });
+                        console.log("----- Result of subtypes creation -----", res1);
+                    });
+          
         });
 
         this.EquipmentsubTypes.forEach((subtype: any) => {
@@ -122,18 +135,7 @@ export class DetailsComponent implements OnInit {
                 });
         });
 
-        this.dataService.postUpdate(this.model)
-            .subscribe(res => {
-                this.model = res;
-                this.model.name = res.name;
-                this.model.description = res.description;
-                this.msgs = [];
-                this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                //   console.log("----- Result of formObject -----", this.model);
-            });
-
-
+      
     }
 
     showDialogToAdd() {

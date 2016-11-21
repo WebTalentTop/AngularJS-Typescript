@@ -48,8 +48,8 @@ export class EquipmentTypeService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${EquipmentTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err))
-            .map(this.getJson);
+          //  .map(this.getJson).catch(err => Observable.throw(err))
+          //  .map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -59,10 +59,10 @@ export class EquipmentTypeService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${EquipmentTypeApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson)
-            .map(this.checkErrors)
-            .catch(err => Observable.throw(err))
-            .map(this.getJson);
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+           // .map(this.getJson);
     }
 
     getById(id): Observable<any> {
