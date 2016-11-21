@@ -11,7 +11,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 })
 
 export class ProjectComponent {
-    title = "Project";
+    // title = "Project";
     gridData = [];
     confInfo: any = {};
     cols = [];
