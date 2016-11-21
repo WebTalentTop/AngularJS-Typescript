@@ -10,6 +10,7 @@ import {Router} from '@angular/router'
       templateUrl: 'app/body/Equipment/equipment.component.html'
 })
 export class EquipmentComponent {
+    title = "Equipment";
     gridData = [];
     confInfo:any = {};
     cols = [];
