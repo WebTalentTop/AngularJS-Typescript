@@ -95,6 +95,7 @@ export class DetailsComponent {
         console.log(this.testFacility.name);
         formRef.isDeleted = false;
         let formData: any = {
+            id:this.id,
             name: '',
             address: {
                 addressLine1: '',
@@ -104,6 +105,7 @@ export class DetailsComponent {
                 postalCode: '',
             }
         };
+        formData.id = this.id;
         formData.name = formRef.name;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
