@@ -7,5 +7,6 @@ export class TestFacilityApiUrl {
     public static getByIdUrl: string = titanApiUrl + 'testFacility/get';
     public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
     public static getfilesByIdUrl: string = titanApiUrl + 'testFacilityAttachment/file';
+    public static getNotifications:string = titanApiUrl + 'testFacility/CheckNotifications';
 
 }

@@ -82,7 +82,16 @@ export class TestFacilityService {
             });
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
-    }
+}
+
+getNotifications(id):Observable<any> {
+    return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
+    .map(this.getJson)
+    .map(data => {
+        console.log("Notification data --------", data);
+        return data.$values    
+    });
+}
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

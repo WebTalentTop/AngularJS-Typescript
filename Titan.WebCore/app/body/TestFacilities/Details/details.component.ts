@@ -4,7 +4,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -17,6 +17,9 @@ export class DetailsComponent {
 
     username: string;
     details: string;
+
+    notificationMsgs: Message[] = [];
+    notifications:any;
 
     formConfiguration: any;
     formObject: any;
@@ -74,6 +77,18 @@ export class DetailsComponent {
                 console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 console.log("----- Result of formObject -----", this.model);
             });
+            if(this.id){
+                this.dataService.getNotifications(this.id)
+                    .subscribe(res => {
+                        if(res){
+                            this.notifications = res;
+                        }
+
+                        this.notifications.forEach(x=> {
+                            this.notificationMsgs.push({severity: 'warn', summary: x.ruleMessage, detail: x.description});
+                        })
+                    })
+            }
         this.testfacilityroleservice.getByIdusing(this.id)
             .subscribe(TestFacilityRoles => {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
