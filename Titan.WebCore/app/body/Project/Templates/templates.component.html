@@ -1,5 +1,8 @@
-﻿<button (click)="onAddTorqueSheetTemplate()">Add Template</button>
-<button (click)="onViewTorqueSheetTemplate()">View Template</button>
+﻿<!--<button (click)="onAddTorqueSheetTemplate()">Add Template</button>
+<button (click)="onViewTorqueSheetTemplate()">View Template</button>-->
+
+<button pButton type="submit" label="Add Template" icon="ui-icon-add" iconPos="left" (click)="onAddTorqueSheetTemplate()"></button>
+<button pButton type="submit" label="View Template" icon="ui-icon-pageview" iconPos="left" (click)="onViewTorqueSheetTemplate()"></button>
 
 <p-dialog header="Add Torque Sheet Template" [(visible)]="displayAddTorqueSheetTemplate" modal="modal" showEffect="fade"
     width="800">
@@ -19,8 +22,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Add"></button>
             <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetTemplateCancel()" label="Cancel"></button>
+            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Add"></button>
         </div>
     </footer>
 </p-dialog>
