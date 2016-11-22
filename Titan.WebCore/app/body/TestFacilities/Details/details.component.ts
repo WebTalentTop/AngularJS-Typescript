@@ -115,6 +115,7 @@ export class DetailsComponent {
             id:this.id,
             name: '',
             address: {
+                
                 id:'',
                 addressLine1: '',
                 addressLine2: '',
@@ -134,14 +135,15 @@ export class DetailsComponent {
         formData.locale = "en-us";
         console.log(formData);
         this.dataService.postUpdate(formData).subscribe(res => {
-            this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
+           
             if (!res.errorMessage) {
                 this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
-           // this.msgs = [];
-         //  this.msgs.push({ severity: 'info', summary: 'saved', detail: '', + formRef.name });
+          
         });
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+       
     }
 
     onBeforeUpload(event) {
@@ -162,9 +164,8 @@ export class DetailsComponent {
                         this.TestFacilityAttachments = TestFacilityAttachments;
                     });
             });
-         
-
     }
+         
 
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
         console.log('---------------buttonclick---------------', TestFacilityAttachment);
