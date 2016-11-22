@@ -22,6 +22,7 @@ export class DetailsComponent {
     formObject: any;
     formEquipmentObject: any;
     id: string;
+    addressid: any;
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
@@ -67,6 +68,7 @@ export class DetailsComponent {
                 this.formConfiguration = res.formConfiguration;
                 this.formObject = res.formObject;
                 this.address = res.address;
+                this.addressid = res.address.id
                 this.testFacility = res.testFacility;
                 this.model = res.formObject;
                 console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
@@ -98,6 +100,7 @@ export class DetailsComponent {
             id:this.id,
             name: '',
             address: {
+                id:'',
                 addressLine1: '',
                 addressLine2: '',
                 city: '',
@@ -107,6 +110,7 @@ export class DetailsComponent {
         };
         formData.id = this.id;
         formData.name = formRef.name;
+        formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
         formData.address.city = formRef.city;
@@ -115,10 +119,13 @@ export class DetailsComponent {
         formData.locale = "en-us";
         console.log(formData);
         this.dataService.postUpdate(formData).subscribe(res => {
-            console.log("-------- Test Facility Adding new result ----- ", res);
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
             if (!res.errorMessage) {
                 this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
+           // this.msgs = [];
+         //  this.msgs.push({ severity: 'info', summary: 'saved', detail: '', + formRef.name });
         });
     }
 
