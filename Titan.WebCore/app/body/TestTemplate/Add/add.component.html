@@ -28,18 +28,17 @@
                             <textarea type="text" pInputTextArea class="form-control" required name="testTemplateDescription" row="20" maxlength="4000"
                                 #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description"></textarea>
                         </div>
-                        <div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
+                        <!--<div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
                             *
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                             Test Type:
                         </div>
-                        <div class="ui-grid-col-6">
-                            <p-dropdown [options]="testTypes" [(ngModel)]="testTemplate.testTypeId" (onChange)="onTestTypeChange()" name="testType">
-
+                        <div class="ui-grid-col-10">
+                            <p-dropdown [options]="testTypes" [(ngModel)]="testTemplate.testTypeId" [style]="{'width':'auto'}" (onChange)="onTestTypeChange()" name="testType">
                             </p-dropdown>
                         </div>
                     </div>
@@ -48,8 +47,8 @@
                         <div class="ui-grid-col-2">
                             Test Mode:
                         </div>
-                        <div class="ui-grid-col-6">
-                            <p-dropdown [options]="testModes" [(ngModel)]="testTemplate.testModeId" (onChange)="onTestModeChange()" name="testMode">
+                        <div class="ui-grid-col-10">
+                            <p-dropdown [options]="testModes" [(ngModel)]="testTemplate.testModeId"  (onChange)="onTestModeChange()" name="testMode">
                             </p-dropdown>
                         </div>
                     </div>
