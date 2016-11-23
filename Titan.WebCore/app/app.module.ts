@@ -15,7 +15,7 @@ import { enableProdMode } from '@angular/core';
 //import { DataTableModule } from 'primeng/primeng';
 
 //import {AccordionModule} from 'primeng/primeng';
-//import {AutoCompleteModule} from 'primeng/primeng';
+import {AutoCompleteModule} from 'primeng/primeng';
 //import {BreadcrumbModule} from 'primeng/primeng';
 //import {ButtonModule} from 'primeng/primeng';
 //import {CalendarModule} from 'primeng/primeng';
@@ -114,7 +114,7 @@ import appRoutes from "./app.routing";
         //FooterModule,
         //SidenavModule,
         //AccordionModule,
-        //AutoCompleteModule,
+        AutoCompleteModule,
         //BreadcrumbModule,
         //ButtonModule,
         //CalendarModule,

@@ -7,6 +7,10 @@ export class TestFacilityApiUrl {
     public static getByIdUrl: string = titanApiUrl + 'testFacility/get';
     public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
     public static getfilesByIdUrl: string = titanApiUrl + 'testFacilityAttachment/file';
-    public static getNotifications:string = titanApiUrl + 'testFacility/CheckNotifications';
+    public static getNotifications: string = titanApiUrl + 'testFacility/CheckNotifications';
+    public static getRoles: string = titanApiUrl + 'testFacility/GetRoles';
+    public static filterUserNames: string = titanApiUrl + 'testFacility/FilterByUserNames';
+    public static PostAddUserRolesUrl: string = titanApiUrl + 'testFacility/PostUserRoles';
+    
 
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestFacilityApiUrl} from './apiUrlConst/TestFacilityApiUrls';
+import { TestFacilityApiUrl } from './apiUrlConst/TestFacilityApiUrls';
+
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -11,6 +12,7 @@ import 'rxjs/add/observable/throw';
 export class TestFacilityService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
+       // 'Access-Control-Allow-Origin': '*'
     });
 
     body = {
@@ -22,6 +24,7 @@ export class TestFacilityService {
     };
 
     constructor(private http: Http) {
+      
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
 
@@ -83,7 +86,14 @@ export class TestFacilityService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
 }
-
+ getRoles(): Observable<any> {
+     return this.http.get(`${TestFacilityApiUrl.getRoles}`, { headers: this.headers })
+         .map(this.getJson)
+         .map(data => {
+             console.log("Notification data --------", data);
+             return data.$values
+         });
+ }
 getNotifications(id):Observable<any> {
     return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
     .map(this.getJson)
@@ -91,7 +101,15 @@ getNotifications(id):Observable<any> {
         console.log("Notification data --------", data);
         return data.$values    
     });
+ }
+    filterByUserNames(filterString): Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.filterUserNames}/${filterString}`, { headers: this.headers })
+            .map(this.getJson);
 }
+    postAddUserNames(filterBody, testFacilityId,testFacilityRoleId): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.PostAddUserRolesUrl}/${testFacilityId}/${testFacilityRoleId}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

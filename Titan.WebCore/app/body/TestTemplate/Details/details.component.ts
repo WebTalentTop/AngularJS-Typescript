@@ -72,8 +72,8 @@ export class DetailsComponent {
 
     }
 
-    onAddTestRequirement() {
-        var selectedTestRequirementIds = new Array();
+     onAddTestRequirement() {
+       var selectedTestRequirementIds = new Array();
         for (var sel of this.filteredSelectedTestRequirements) {
             selectedTestRequirementIds.push(sel.id);
         }
@@ -83,6 +83,7 @@ export class DetailsComponent {
         this.testTemplateService.postAddTestRequirements(selectedTestRequirementIds, this.testTemplate.id).subscribe(filteredList => {
             this.selectedTestRequirements = filteredList.$values;
             this.filteredSelectedTestRequirements = null;
+
         });
     }
 

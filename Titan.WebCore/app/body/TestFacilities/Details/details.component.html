@@ -188,6 +188,32 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2"><b>Test Facility Users</b>
                 </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Search by UserName#:
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)" name="username"
+                                        styleClass="wid100" [minLength]="1" placeholder="Search By UserName#" field="firstName" [multiple]="true">
+                        </p-autoComplete>
+                        <ul>
+                            <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
+                        </ul>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            User Role:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <button pButton type="button" class="btn btn-default" label="Add User" (click)="onAddUserRole()"> </button>
+                    </div>
+                </div>
                 <div class="ui-grid-col-2"></div>
                 <p-dataTable [value]="TestFacilityRoles">
                     <p-column field="name" header="Name" sortable="true"></p-column>

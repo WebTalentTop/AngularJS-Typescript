@@ -6,8 +6,10 @@ import { ITestFacilityAttachment } from '../../../shared/services/definitions/IT
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 @Component({
     selector: 'details-testfacility',
@@ -19,8 +21,15 @@ export class DetailsComponent {
     details: string;
 
     notificationMsgs: Message[] = [];
-    notifications:any;
+    notifications: any;
 
+    testTemplate: any;
+    userRoles: any;
+    testModes: Array<any> = new Array();
+    selectedUserNames: Array<any> = new Array();
+    filteredUserNames: Array<any> = new Array();
+    filteredSelectedUserNames: Array<any> = new Array();
+    selectedRole: any;
     formConfiguration: any;
     formObject: any;
     formEquipmentObject: any;
@@ -66,6 +75,7 @@ export class DetailsComponent {
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
     ngOnInit() {
+        this.getUserRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
                 this.formConfiguration = res.formConfiguration;
@@ -88,7 +98,8 @@ export class DetailsComponent {
                             this.notificationMsgs.push({severity: 'warn', summary: x.ruleMessage, detail: x.description});
                         })
                     })
-            }
+        }
+       
         this.testfacilityroleservice.getByIdusing(this.id)
             .subscribe(TestFacilityRoles => {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
@@ -106,6 +117,74 @@ export class DetailsComponent {
                 this.TestFacilityEquipments = res;
 
             });
+    }
+    onUserRoleChange(event) {
+        console.log('------event------------', event)
+       this.selectedRole = (event.value);
+     //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    getUserRoles() {
+        //    userRoles
+        this.dataService.getRoles().subscribe(response => {
+            this.userRoles = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select User Role",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.userRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    onAddUserRole() {
+
+        if (this.filteredSelectedUserNames.length == 0)
+        {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Search any user to add', detail: '' });
+            return null;
+        }
+        if (this.selectedRole == null)
+        {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Please select Role', detail: '' });
+            return null;
+        }
+        var selectedUserNames = new Array();
+        for (var sel of this.filteredSelectedUserNames) {
+            selectedUserNames.push(sel.id);
+        }
+        //var inputDto = {
+        //    testRequirementList: selectedTestRequirementIds
+        //}
+        this.dataService.postAddUserNames(selectedUserNames, this.id, this.selectedRole).subscribe(filteredList => {
+            this.selectedUserNames = filteredList.$values;
+            this.filteredSelectedUserNames = null;
+            this.testfacilityroleservice.getByIdusing(this.id)
+                .subscribe(TestFacilityRoles => {
+                    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.TestFacilityRoles = TestFacilityRoles;
+                });
+        });
+
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
+    }
+
+    filterUserNames(event) {
+        this.dataService.filterByUserNames(event.query).subscribe(filteredList => {
+            this.filteredUserNames = filteredList.$values;
+        });
     }
     onSubmit(formRef) {
         console.log(formRef);

@@ -28,7 +28,7 @@ export class TestFacilityRoleService {
     }
 
     getByIdusing(id): Observable<ITestFacilityRole[]> {
-        return this.http.get(`${TestFacilityRoleApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${TestFacilityRoleApiUrl.getRolesByTestFacilityIdUrl}/${id}`, { headers: this.headers })
             
       //     .toPromise()
         //  .then(res => <ITestFacilityRole[]> res.json().data)
@@ -41,6 +41,8 @@ export class TestFacilityRoleService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
+   
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
