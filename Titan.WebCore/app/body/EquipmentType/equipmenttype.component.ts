@@ -12,7 +12,7 @@ import {DropdownModule} from 'primeng/primeng';
     templateUrl: 'app/body/EquipmentType/equipmenttype.component.html'
 })
 export class EquipmentTypeComponent {
-    title = "EquipmentType";
+    // title = "EquipmentType";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -20,13 +20,13 @@ export class EquipmentTypeComponent {
     idField:string;
     linkFieldId:string;
 
-    constructor(private dataService: EquipmentTypeService, private router:Router) {
+    constructor(private service: EquipmentTypeService, private router:Router) {
 
     }
 
     ngOnInit() {
         let resData:any;
-        this.dataService.postGridData()
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;

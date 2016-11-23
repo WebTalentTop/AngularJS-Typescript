@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { EquipmentTypeApiUrl} from './apiUrlConst/equipmenttypeApiUrls';
+import { EquipmentTypeApiUrl } from './apiUrlConst/equipmenttypeApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
@@ -16,7 +16,7 @@ export class EquipmentTypeService {
         "locale": "en-us",
         "defaultLocale": "en-us",
         "PageNumber": 1,
-        "PageSize": 5,
+        "PageSize": 15,
         "IsPaging": true
     };
 
@@ -39,17 +39,16 @@ export class EquipmentTypeService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-   DeleteEquipmentsById(id): any
-   {
-       return this.http.post(`${EquipmentTypeApiUrl.postdeleteUrl}/${id}`, { headers: this.headers })
-       .map(this.getJson);
-     
+
+    DeleteEquipmentsById(id): any {
+        return this.http.post(`${EquipmentTypeApiUrl.postdeleteUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson);
     }
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${EquipmentTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-          //  .map(this.getJson).catch(err => Observable.throw(err))
-          //  .map(this.getJson);
+        //  .map(this.getJson).catch(err => Observable.throw(err))
+        //  .map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -59,10 +58,10 @@ export class EquipmentTypeService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${EquipmentTypeApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            //.map(this.getJson)
-            //.map(this.checkErrors)
-            //.catch(err => Observable.throw(err))
-           // .map(this.getJson);
+        //.map(this.getJson)
+        //.map(this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        // .map(this.getJson);
     }
 
     getById(id): Observable<any> {
@@ -73,7 +72,7 @@ export class EquipmentTypeService {
         //.map(this.getJson);
     }
 
-     getSubTypesById(id): Observable<any> {
+    getSubTypesById(id): Observable<any> {
         return this.http.get(`${EquipmentTypeApiUrl.getSubTypesByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
