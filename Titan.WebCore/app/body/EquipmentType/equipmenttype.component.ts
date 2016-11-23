@@ -8,7 +8,7 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 import {DropdownModule} from 'primeng/primeng';
 
 @Component({
-    selector: 'test-facilities',
+    selector: 'equipment-type',
     templateUrl: 'app/body/EquipmentType/equipmenttype.component.html'
 })
 export class EquipmentTypeComponent {
