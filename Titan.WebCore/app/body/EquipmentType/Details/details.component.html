@@ -1,16 +1,18 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
+        <h3>Edit EquipmentType</h3>
+        <div class="card card-w-title">
         <div class="row">
             <div class="col-sm-12">
-                <h3>Edit EquipmentType</h3>
+                
                     <p-growl [value]="msgs"></p-growl>
-                <ul class="rightIconNav pull-right mb10">
-                    <li> <button pButton type="submit" label="Edit" icon="ui-icon-add" iconPos="left" (click)="onEdit()"></button></li>
-                </ul>
+                <!--<ul class="rightIconNav pull-right mb10">-->
+                    <button pButton type="submit" label="Edit Equipment Type" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>
+                <!--</ul>-->
             </div>
         </div>
-        <p-tabView (onChange)="handleChange($event)">
-            <!-- <p-tabPanel header="Details" id='details' leftIcon="fa fa-calendar">-->
+        <!--<p-tabView (onChange)="handleChange($event)">-->
+             <!--<p-panel > -->
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                     <div class="row">
                         <div class="col-sm-12">
@@ -31,9 +33,9 @@
                                                 </div>
 
                                          
-                                                <div class="form-group col-sm-12 col-md-12">
+                                                <div class="form-group col-sm-12 col-md-8">
                                                     <label class="control-label col-sm-12 pl0 mb15">Description</label><br/>
-                                                    <textarea rows="5" cols="30" name="description" class="form-control" placeholder="Description" #etDescriptionRef="ngModel"
+                                                    <textarea rows="4" cols="20" name="description" class="form-control" placeholder="Description" #etDescriptionRef="ngModel"
                                                         [(ngModel)]="model.description"></textarea>
 
                                                 </div>
@@ -78,7 +80,7 @@
                                                                     <label class="control-label">Calibration forms</label>
                                                                 <!--  <p-dropdown id="calform" [options]="cities" [(model)]="selectedcity" [autoWidth]="false"></p-dropdown>-->
                                                             
-                                                                                                                                          <select [(ngModel)]="selectedCalibration" class="form-control" name="calform"width="300" style="width: 300px">
+<select [(ngModel)]="selectedCalibration" class="form-control" name="calform"width="300" style="width: 300px">
               <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
           </select>
                                                                 
@@ -112,6 +114,7 @@
                                    <!-- <a class="btn btn-success waves-effect" href="./equipment/details/{{entityId}}"><i class="fa fa-plus"></i> Add  a Calibration Form</a>-->
                                 </div>
                             </div>
+                            <br />
                             <!-- Create New Form End -->
                             <!-- Add Sub Types Start -->
                             <div class="panel panel-default">
@@ -127,7 +130,7 @@
                                                         <input type="text" class="form-control" placeholder="4 Wheel Dyno" name="subtype2" [(ngModel)]="model.subtype2" />
                                                     </div>-->
                                                 <div class="ui-grid-row">
-                                                    <div class="ui-grid-col-2"><b>Equipment SubTypes</b></div>
+                                                    <div class="ui-grid-col-2"><strong>Equipment SubTypes</strong></div>
                                                     <div class="ui-grid-col-2"></div>
                                                     <p-dataTable [value]="EquipmentsubTypes" selectionMode="single" [(selection)]="selectedsubType" (onRowSelect)="onRowSelect($event)"
                                                         [paginator]="true" rows="15" [responsive]="true">
@@ -135,11 +138,13 @@
                                                         <p-column field="description" header="Description" sortable="true"></p-column>
                                                         <p-column field="calibrationform" header="Calibration Form" sortable="true"></p-column>
                                                         <p-column field="frequency" header="Frequency" sortable="true"></p-column>
-                                                        <footer>
-                                                            <div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left"
-                                                                    (click)="showDialogToAdd()" label="Add"></button></div>
-                                                        </footer>
+                                                        <!--<footer>
+                                                        </footer>-->
                                                     </p-dataTable>
+                                                    <br />
+                                                            <div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left"
+                                                                    (click)="showDialogToAdd()" label="Add SubType"></button></div>
+
                                                       
                                                     <p-dialog header="SubType Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
                                                         <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="EquipmentSubType">
@@ -191,13 +196,11 @@
                                 </div>
                             </div>
                             <!-- Add Sub Types End -->
-
-                         
-
                         </div>
                     </div>
                 </form>
-    <!--  </p-tabPanel>-->
-        </p-tabView>
+     <!--</p-panel>-->
+        <!--</p-tabView>-->
+    </div>
     </div>
 </div>
