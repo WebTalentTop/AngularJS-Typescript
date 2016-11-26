@@ -1,4 +1,4 @@
-import { TenantService} from '../../../../../shared/services/tenant.service';
+import { MilestoneEventService} from '../../../../../shared/services/milestoneEvent.service';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -6,17 +6,17 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: 'edit',
-    templateUrl: 'app/body/Admin/Vehicle/Tenant/Edit/edit.component.html'
+    templateUrl: 'app/body/Admin/Vehicle/MilestoneEvent/Edit/edit.component.html'
 })
 export class EditComponent {
-    title = "Tenant Edit";
+    title = "MilestoneEvent Edit";
 
     id;
     username: string;
     description: string;
     model:any;
 
-    constructor(private route:ActivatedRoute, private service: TenantService) {
+    constructor(private route:ActivatedRoute, private service: MilestoneEventService) {
         route.params.subscribe(params => this.id = params['id']);
         console.log(this.id);
         service.getById(this.id).subscribe(res => this.model = res);
