@@ -15,6 +15,7 @@ const routes = [
     { path: 'testfacility', loadChildren: 'app/body/Admin/Vehicle/TestFacility/testfacility.module' },
     { path: 'testverificationMethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/testverificationMethod.module' },
     { path: 'testStatus', loadChildren: 'app/body/Admin/Vehicle/TestStatus/testStatus.module' },
+    { path: 'milestoneEvent', loadChildren: 'app/body/Admin/Vehicle/MilestoneEvent/milestoneEvent.module' },
   ];
 
 export default RouterModule.forChild(routes);
