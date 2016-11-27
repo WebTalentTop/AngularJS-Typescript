@@ -4,11 +4,13 @@ import { MilestoneEventComponent } from "./milestoneEvent.component";
 import { DataTableModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
-import MilestoneEventRoutes from "./milestoneEvent.routes";
+
 import { MilestoneEventService } from '../../../../shared/services/milestoneEvent.service';
 
+import milestoneEventRoutes from "./milestoneEvent.routes";
+
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, MilestoneEventRoutes],
+    imports: [CommonModule, DataTableModule, GridModule, milestoneEventRoutes],
     providers: [MilestoneEventService],
     declarations: [MilestoneEventComponent]
 })

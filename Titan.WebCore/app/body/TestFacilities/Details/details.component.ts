@@ -4,7 +4,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -87,19 +87,19 @@ export class DetailsComponent {
                 console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 console.log("----- Result of formObject -----", this.model);
             });
-            if(this.id){
-                this.dataService.getNotifications(this.id)
-                    .subscribe(res => {
-                        if(res){
-                            this.notifications = res;
-                        }
+        if (this.id) {
+            this.dataService.getNotifications(this.id)
+                .subscribe(res => {
+                    if (res) {
+                        this.notifications = res;
+                    }
 
-                        this.notifications.forEach(x=> {
-                            this.notificationMsgs.push({severity: 'warn', summary: x.ruleMessage, detail: x.description});
-                        })
+                    this.notifications.forEach(x => {
+                        this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                     })
+                })
         }
-       
+
         this.testfacilityroleservice.getByIdusing(this.id)
             .subscribe(TestFacilityRoles => {
                 console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
@@ -120,8 +120,8 @@ export class DetailsComponent {
     }
     onUserRoleChange(event) {
         console.log('------event------------', event)
-       this.selectedRole = (event.value);
-     //   this.EquipmentSubType.calibrationform = (event);
+        this.selectedRole = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     getUserRoles() {
@@ -148,14 +148,12 @@ export class DetailsComponent {
     }
     onAddUserRole() {
 
-        if (this.filteredSelectedUserNames.length == 0)
-        {
+        if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
             this.msgs.push({ severity: 'info', summary: 'Search any user to add', detail: '' });
             return null;
         }
-        if (this.selectedRole == null)
-        {
+        if (this.selectedRole == null) {
             this.msgs = [];
             this.msgs.push({ severity: 'info', summary: 'Please select Role', detail: '' });
             return null;
@@ -177,8 +175,8 @@ export class DetailsComponent {
                 });
         });
 
-         this.msgs = [];
-         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
     }
 
     filterUserNames(event) {
@@ -191,11 +189,11 @@ export class DetailsComponent {
         console.log(this.testFacility.name);
         formRef.isDeleted = false;
         let formData: any = {
-            id:this.id,
+            id: this.id,
             name: '',
             address: {
-                
-                id:'',
+
+                id: '',
                 addressLine1: '',
                 addressLine2: '',
                 city: '',
@@ -214,15 +212,15 @@ export class DetailsComponent {
         formData.locale = "en-us";
         console.log(formData);
         this.dataService.postUpdate(formData).subscribe(res => {
-           
+
             if (!res.errorMessage) {
                 this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
-          
+
         });
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
-       
+
     }
 
     onBeforeUpload(event) {
@@ -244,7 +242,7 @@ export class DetailsComponent {
                     });
             });
     }
-         
+
 
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
         console.log('---------------buttonclick---------------', TestFacilityAttachment);
