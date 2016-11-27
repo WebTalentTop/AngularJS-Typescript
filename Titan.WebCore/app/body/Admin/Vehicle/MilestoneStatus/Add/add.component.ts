@@ -1,19 +1,19 @@
 import { Component} from '@angular/core';
-import { MilestoneEventService } from '../../../../../shared/services/milestoneEvent.service';
+import { MilestoneStatusService } from '../../../../../shared/services/milestoneStatus.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
-    selector: 'add-milestoneEvent',
-    templateUrl: 'app/body/Admin/Vehicle/MilestoneEvent/Add/add.component.html'
+    selector: 'add-milestoneStatus',
+    templateUrl: 'app/body/Admin/Vehicle/MilestoneStatus/Add/add.component.html'
 })
 
 export class AddComponent {
     username: string;
     description:string;
 
-    constructor(private service: MilestoneEventService) {
+    constructor(private service: MilestoneStatusService) {
 
     }
 
