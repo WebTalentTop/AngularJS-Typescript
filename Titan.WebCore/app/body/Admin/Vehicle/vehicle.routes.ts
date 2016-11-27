@@ -18,6 +18,7 @@ const routes = [
     { path: 'milestoneEvent', loadChildren: 'app/body/Admin/Vehicle/MilestoneEvent/milestoneEvent.module' },
     { path: 'milestoneStatus', loadChildren: 'app/body/Admin/Vehicle/MilestoneStatus/milestoneStatus.module' },
     { path: 'permission', loadChildren: 'app/body/Admin/Vehicle/Permission/permission.module' },
+    { path: 'projectStatus', loadChildren: 'app/body/Admin/Vehicle/ProjectStatus/projectStatus.module' },
   ];
 
 export default RouterModule.forChild(routes);
