@@ -1,0 +1,35 @@
+<div class="ui-g-12">
+
+    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+        <h3> Add Permission </h3>
+        <br />
+        <p-panel>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Permission Name *
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="12th Wonder LLC" class="form-control"
+                            required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button id="cancel" pButton type="button" label="Cancel">  </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        </p-panel>
+    </form>
+</div>

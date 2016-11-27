@@ -35,7 +35,7 @@ export class DetailsComponent {
 
     constructor(
         private route:ActivatedRoute, 
-        private dataService: EquipmentService,
+        private dataService: EquipmentService
    
     ){
         this.route.params.subscribe(params => this.id = params['id']);

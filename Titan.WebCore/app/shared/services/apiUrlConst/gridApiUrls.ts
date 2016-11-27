@@ -26,4 +26,5 @@ export class GridApiUrl {
     public static testStatusGridUrl: string = titanApiUrl + 'testStatusGrid/GetGridData';
     public static milestoneEventGridUrl: string = titanApiUrl + 'milestoneEventGrid/GetGridData';
     public static milestoneStatusGridUrl: string = titanApiUrl + 'milestoneStatusGrid/GetGridData';
+    public static permissionGridUrl: string = titanApiUrl + 'permissionGrid/GetGridData';
 }

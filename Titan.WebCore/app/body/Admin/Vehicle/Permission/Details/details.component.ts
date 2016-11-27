@@ -1,24 +1,24 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MilestoneStatusService } from '../../../../../shared/services/milestoneStatus.service'
+import { PermissionService } from '../../../../../shared/services/permission.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
 
 @Component({
-    selector: 'milestoneStatus-detail',
-    templateUrl: 'app/body/Admin/Vehicle/MilestoneStatus/Details/details.component.html'
+    selector: 'permission-detail',
+    templateUrl: 'app/body/Admin/Vehicle/Permission/Details/details.component.html'
 })
 export class DetailsComponent {
     username: string;
     details: string;
 
     id: string;
-    entityType: string = "MilestoneStatus";
+    entityType: string = "Permission";
     entityId: string = this.id;
-    filepath: string = "MilestoneStatus";
-    milestoneStatus = { name: '' };
+    filepath: string = "Permission";
+    permission = { name: '' };
     selectedUserNames: Array<any> = new Array();
     filteredUserNames: Array<any> = new Array();
     filteredSelectedUserNames: Array<any> = new Array();
@@ -29,10 +29,7 @@ export class DetailsComponent {
         id: '',
         isDeleted: false,
         name: '',
-        createdOn: '',
-        modifiedOn: '',
-        userCreatedById: '',
-        userModifiedById: ''
+        description: ''
     };
 
 
@@ -40,13 +37,13 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public MilestoneStatusDetails: any;
-    public MilestoneStatusId: string;
+    public PermissionDetails: any;
+    public PermissionId: string;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: MilestoneStatusService
+        private service: PermissionService,
     )
     { }
 
@@ -55,13 +52,13 @@ export class DetailsComponent {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
 
-            this.MilestoneStatusId = params['id']; // (+) converts string 'id' to a number
+            this.PermissionId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
-            this.service.getById(this.MilestoneStatusId).subscribe(MilestoneStatusDetails => {
-                this.MilestoneStatusDetails = MilestoneStatusDetails;
-                this.MilestoneStatusDetails.id = this.MilestoneStatusId;
-                console.log(this.MilestoneStatusDetails);
+            this.service.getById(this.PermissionId).subscribe(PermissionDetails => {
+                this.PermissionDetails = PermissionDetails;
+                this.PermissionDetails.id = this.PermissionId;
+                console.log(this.PermissionDetails);
             });
         });
     }
@@ -69,7 +66,7 @@ export class DetailsComponent {
 
     onSubmit(formRef) {
         console.log("inside");
-        console.log(this.milestoneStatus.name);
+        console.log(this.permission.name);
         formRef.isDeleted = false;
         let formData: any = {
             id: this.id,
@@ -79,8 +76,8 @@ export class DetailsComponent {
         formData.id = this.id;
         formData.name = formRef.name;
         
-        this.service.postUpdate(this.MilestoneStatusDetails).subscribe(MilestoneStatusDetails => {
-            console.log(MilestoneStatusDetails);
+        this.service.postUpdate(this.PermissionDetails).subscribe(PermissionDetails => {
+            console.log(PermissionDetails);
         });
     }
 }
