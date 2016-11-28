@@ -12,7 +12,7 @@
                         Schedule Name *
                     </div>
                     <div class="ui-grid-col-4">
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="milestoneEvent.name" #milestoneEventNameRef="ngModel" placeholder="Schedule Name"
+                        <input type="text" id="name" pInputText name="name" [(ngModel)]="schedule.name" #scheduleNameRef="ngModel" placeholder="Schedule Name"
                             minlength="3" class="form-control" required row="20" />
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         RecurranceCronExpression *
                     </div>
                     <div class="ui-grid-col-4">
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="RecurranceCronExpression.name" #milestoneEventNameRef="ngModel" placeholder="RecurranceCronExpression"
+                        <input type="text" id="name" pInputText name="name" [(ngModel)]="schedule.RecurranceCronExpression" #scheduleNameRef="ngModel" placeholder="RecurranceCronExpression"
                             minlength="3" class="form-control" required row="20" />
                     </div>
                 </div>

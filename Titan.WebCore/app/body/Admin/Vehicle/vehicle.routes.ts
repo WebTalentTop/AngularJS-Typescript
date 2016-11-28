@@ -21,6 +21,7 @@ const routes = [
     { path: 'projectStatus', loadChildren: 'app/body/Admin/Vehicle/ProjectStatus/projectStatus.module' },
     { path: 'projectRole', loadChildren: 'app/body/Admin/Vehicle/ProjectRole/projectRole.module' },
     { path: 'schedule', loadChildren: 'app/body/Admin/Vehicle/schedule/schedule.module' },
+    { path: 'shift', loadChildren: 'app/body/Admin/Vehicle/Shift/shift.module' },
   ];
 
 export default RouterModule.forChild(routes);
