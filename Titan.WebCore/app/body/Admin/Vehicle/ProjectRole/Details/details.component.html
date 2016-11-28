@@ -1,5 +1,5 @@
 ﻿<div class="ui-g-10">
-    <h3>Edit Project Status </h3>
+    <h3>Edit Project Role </h3>
 
     <!--<p-growl [value]="msgs"></p-growl>-->
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -9,10 +9,10 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Project Status Name *
+                        Project  Role Name *
                     </div>
                     <div class="ui-grid-col-4">
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="projectStatus.name" #milestoneEventNameRef="ngModel" placeholder="Required"
+                        <input type="text" id="name" pInputText name="name" [(ngModel)]="milestoneEvent.name" #milestoneEventNameRef="ngModel" placeholder="Required"
                             minlength="3" class="form-control" required row="20" />
                     </div>
                 </div>
@@ -22,8 +22,8 @@
                         Description *:
                     </div>
                     <div class="ui-grid-col-6">
-                        <textarea type="text" pInputTextArea class="form-control" required name="projectStatusDescription" row="20" maxlength="4000"
-                            #projectStatusDescriptionRef="ngModel" [(ngModel)]="projectStatus.description"></textarea>
+                        <textarea type="text" pInputTextArea class="form-control" required name="projectRoleDescription" row="20" maxlength="4000"
+                            #projectRoleDescriptionRef="ngModel" [(ngModel)]="projectRole.description"></textarea>
                     </div>
                 </div>
 

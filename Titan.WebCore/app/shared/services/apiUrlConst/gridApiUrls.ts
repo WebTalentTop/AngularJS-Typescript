@@ -28,4 +28,5 @@ export class GridApiUrl {
     public static milestoneStatusGridUrl: string = titanApiUrl + 'milestoneStatusGrid/GetGridData';
     public static permissionGridUrl: string = titanApiUrl + 'permissionGrid/GetGridData';
     public static projectStatusGridUrl: string = titanApiUrl + 'projectStatusGrid/GetGridData';
+    public static projectRoleGridUrl: string = titanApiUrl + 'projectRoleGrid/GetGridData';
 }

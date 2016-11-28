@@ -9,7 +9,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Milestone Event Name *
+                        Permission Name *
                     </div>
                     <div class="ui-grid-col-4">
                         <input type="text" id="name" pInputText name="name" [(ngModel)]="permission.name" #permissionNameRef="ngModel" placeholder="Required"
@@ -17,13 +17,17 @@
                     </div>
                 </div>
 
+
                 <div class="ui-grid-row">
-                    <div class="form-group col-sm-12 col-md-8">
-                        <label class="control-label col-sm-12 pl0 mb15">Description</label><br/>
-                        <textarea rows="4" cols="20" name="description" class="form-control" placeholder="Description" #etDescriptionRef="ngModel"
-                            [(ngModel)]="model.description"></textarea>
+                    <div class="ui-grid-col-2">
+                        Description *:
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <textarea type="text" pInputTextArea class="form-control" required name="permissionDescription" row="20" maxlength="4000"
+                            #permissionDescriptionRef="ngModel" [(ngModel)]="permission.description"></textarea>
                     </div>
                 </div>
+
 
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
