@@ -595,5 +595,4 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
-
 }
