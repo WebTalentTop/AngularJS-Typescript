@@ -18,18 +18,20 @@ export class DetailsComponent {
     entityType: string = "ProjectStatus";
     entityId: string = this.id;
     filepath: string = "ProjectStatus";
-    projectStatus = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    projectStatus = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    ProjectStatusDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        description: ''
+        description: '',
+        userCreatedById: '',
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
+
     };
 
 
@@ -37,7 +39,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public ProjectStatusDetails: any;
+    //public ProjectStatusDetails: any;
     public ProjectStatusId: string;
 
     constructor(
@@ -56,8 +58,8 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.ProjectStatusId).subscribe(ProjectStatusDetails => {
-                this.ProjectStatusDetails = ProjectStatusDetails;
-                this.ProjectStatusDetails.id = this.ProjectStatusId;
+                this.ProjectStatusDetails = ProjectStatusDetails.result;
+               // this.ProjectStatusDetails.id = this.ProjectStatusId;
                 console.log(this.ProjectStatusDetails);
             });
         });
@@ -65,19 +67,21 @@ export class DetailsComponent {
 
 
     onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.projectStatus.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
+        //console.log("inside");
+        //console.log(this.projectStatus.name);
+        //formRef.isDeleted = false;
+        //let formData: any = {
+        //    id: this.id,
+        //    name: '',
+        //};
         
-        formData.id = this.id;
-        formData.name = formRef.name;
-        
+        //formData.id = this.id;
+        //formData.name = formRef.name;
+
         this.service.postUpdate(this.ProjectStatusDetails).subscribe(ProjectStatusDetails => {
-            console.log(ProjectStatusDetails);
+           // console.log(ProjectStatusDetails);
         });
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }
