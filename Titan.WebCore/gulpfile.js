@@ -20,8 +20,7 @@ root_path.primeResources = "./resources/";
 var apiServiceLocalOption1Url = "./EnvironmentApiUrl/localoption1/";
 var apiServiceLocalOption2Url = "./EnvironmentApiUrl/localoption2/";
 var apiServicePreProdUrl = "./EnvironmentApiUrl/preprod/";
-var apiServiceQAUrl = "./EnvironmentApiUrl/qa/";
-var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
+var apiServiceQAUrl = "./EnvironmentApiUrl/qa/";var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
 
 
 root_path.package_lib = root_path.webroot + "lib-npm/";

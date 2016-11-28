@@ -189,7 +189,6 @@ export class DetailsComponent implements AfterViewInit {
     }
     ngOnInit() {
 
-
         this.getUserRoles();
         this.getTestFacilities();
         this.getTestModes();
@@ -596,7 +595,5 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
-
-
 
 }

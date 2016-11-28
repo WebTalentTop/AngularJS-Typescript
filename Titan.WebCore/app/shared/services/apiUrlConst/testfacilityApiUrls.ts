@@ -1,6 +1,9 @@
 ﻿import { titanApiUrl } from './titanApiUrl';
+import { localizationApiUrl } from './localizationApiUrl';
 import { GridApiUrl } from './gridApiUrls';
+
 export class TestFacilityApiUrl {
+
     public static gridApiUrl:string  = GridApiUrl.testFacilityGridUrl;
     public static postCreatedUrl: string = titanApiUrl + 'testFacility/post';
     public static postUpdateUrl: string = titanApiUrl + 'testFacility/update';
@@ -13,6 +16,5 @@ export class TestFacilityApiUrl {
     public static getFilteredEvents: string = titanApiUrl + 'testFacility/GetFilteredEvents';
     public static filterUserNames: string = titanApiUrl + 'testFacility/FilterByUserNames';
     public static PostAddUserRolesUrl: string = titanApiUrl + 'testFacility/PostUserRoles';
-    
-
+    public static getDetailsTabLocJs:string = localizationApiUrl;
 }

@@ -24,7 +24,10 @@ export class TestFacilityService {
     };
 
     constructor(private http: Http) {
-      
+        /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
+        this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
+        this.headers.append('Content-Type', 'application/json');*/
+        this.headers.append('Accept', 'application/json');
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
 
@@ -72,7 +75,7 @@ export class TestFacilityService {
         //.map(this.getJson);
     }
 
- getEquipmentsByIdusing(id): Observable<any> {
+ 	getEquipmentsByIdusing(id): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getEquipmentDetailsByIdUrl}/${id}`, { headers: this.headers })
 
             //     .toPromise()
@@ -86,6 +89,7 @@ export class TestFacilityService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
  getTestFacilities(): Observable<any> {
      return this.http.get(`${TestFacilityApiUrl.getAllUrl}`, { headers: this.headers })
          .map(this.getJson)
@@ -96,7 +100,18 @@ export class TestFacilityService {
      //.catch(err => Observable.throw(err))
      //.map(this.getJson);
  }
- getRoles(): Observable<any> {
+
+    getNotifications(id): Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
+
+    getRoles(): Observable<any> {
+
      return this.http.get(`${TestFacilityApiUrl.getRoles}`, { headers: this.headers })
          .map(this.getJson)
          .map(data => {
@@ -104,6 +119,7 @@ export class TestFacilityService {
              return data.$values
          });
  }
+
  getFilteredEvents(teststatus, buildlevels, projectcodes, testroles, testfacilitys, testtypes, testmodes): Observable < any > {
      return this.http.get(`${TestFacilityApiUrl.getFilteredEvents}/${teststatus}/${buildlevels}/${projectcodes}/${testroles}/${testfacilitys}/${testtypes}/${testmodes}/`, { headers: this.headers })
          .map(this.getJson)
@@ -112,14 +128,7 @@ export class TestFacilityService {
              return data.$values
          });
  }
-getNotifications(id):Observable<any> {
-    return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
-    .map(this.getJson)
-    .map(data => {
-        console.log("Notification data --------", data);
-        return data.$values    
-    });
- }
+
     filterByUserNames(filterString): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.filterUserNames}/${filterString}`, { headers: this.headers })
             .map(this.getJson);
@@ -128,6 +137,14 @@ getNotifications(id):Observable<any> {
         return this.http.post(`${TestFacilityApiUrl.PostAddUserRolesUrl}/${testFacilityId}/${testFacilityRoleId}`, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
+	getLocalizationInformationObservable(resourceSetName,cultureName):Observable<any> {
+        return this.http.get(`${TestFacilityApiUrl.getDetailsTabLocJs}${resourceSetName}&cultureName=${cultureName}`)
+            .map(res =>{
+                console.log('data in getLoc ---------', res.json().Resources[0]);
+                return res.json().Resources[0];
+            });
+        //.map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();
@@ -135,7 +152,8 @@ getNotifications(id):Observable<any> {
 
     private checkErrors(response: Response): Response {
         if (response.status >= 200 && response.status <= 300) {
-            return response;        }
+            return response;
+        }
         else {
             var error = new Error(response.statusText);
             error['response'] = response;
