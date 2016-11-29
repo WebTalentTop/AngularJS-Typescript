@@ -14,22 +14,23 @@ export class DetailsComponent {
     username: string;
     details: string;
 
-    id: string;
+id: string;
     entityType: string = "Permission";
     entityId: string = this.id;
     filepath: string = "Permission";
-    permission = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    permission = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    PermissionDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        description: ''
+        description: '',
+        userCreatedById: '',
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

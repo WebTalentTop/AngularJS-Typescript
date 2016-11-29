@@ -15,27 +15,22 @@ export class DetailsComponent {
     details: string;
 
     id: string;
-    entityType: string = "ProjectRole";
+    entityType: string = "projectRole";
     entityId: string = this.id;
-    filepath: string = "ProjectRole";
-    projectRole = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    filepath: string = "projectRole";
+    projectRole = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    ProjectRoleDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        createdOn: '',
-        modifiedOn: '',
-        deletedOn: '',
+        description: '',
         userCreatedById: '',
-        userDeletedById: '',
         userModifiedById: '',
-        userDeletedOn: ''
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

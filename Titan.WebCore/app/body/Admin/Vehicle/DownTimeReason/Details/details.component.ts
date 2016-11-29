@@ -14,28 +14,24 @@ export class DetailsComponent {
     username: string;
     details: string;
 
+
     id: string;
     entityType: string = "DownTimeReason";
     entityId: string = this.id;
     filepath: string = "DownTimeReason";
-    downTimeReason = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    DownTimeReason = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    DownTimeReasonDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        createdOn: '',
-        modifiedOn: '',
-        deletedOn: '',
+        description: '',
         userCreatedById: '',
-        locale:'',
-        description:'',
-        userModifiedById: ''
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

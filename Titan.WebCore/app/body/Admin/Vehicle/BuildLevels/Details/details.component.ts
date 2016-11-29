@@ -17,19 +17,20 @@ export class DetailsComponent {
     id: string;
     entityType: string = "BuildLevel";
     entityId: string = this.id;
-    filepath: string = "BuildLevels";
-    buildLevel = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    filepath: string = "BuildLevel";
+    buildLevel = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    BuildLevelDetails: any = {
         id: '',
-        // isDeleted: false,
+        isDeleted: false,
         name: '',
-        description: ''
+        description: '',
+        userCreatedById: '',
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

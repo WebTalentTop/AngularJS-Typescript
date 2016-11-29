@@ -18,21 +18,19 @@ export class DetailsComponent {
     entityType: string = "MilestoneStatus";
     entityId: string = this.id;
     filepath: string = "MilestoneStatus";
-    milestoneStatus = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    milestoneStatus = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    MilestoneStatusDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        createdOn: '',
-        modifiedOn: '',
+        description: '',
         userCreatedById: '',
-        userModifiedById: ''
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

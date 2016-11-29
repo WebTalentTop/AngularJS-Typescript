@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 const routes = [
     { path: '', component: MarketComponent },
     { path: 'add', loadChildren: 'app/body/Admin/Vehicle/Market/Add/add.module' },
-    { path: 'edit/:id', loadChildren: 'app/body/Admin/Vehicle/Market/Edit/edit.module' }
+    { path: 'details/:id', loadChildren: 'app/body/Admin/Vehicle/Market/Details/details.module'}
 ];
 
 export default RouterModule.forChild(routes);

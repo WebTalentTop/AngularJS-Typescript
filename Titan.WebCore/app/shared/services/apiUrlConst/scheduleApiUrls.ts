@@ -3,7 +3,7 @@ import { GridApiUrl } from './gridApiUrls';
 
 export class ScheduleApiUrl {
     public static gridApiUrl:string  = GridApiUrl.scheduleGridUrl;
-    public static postCreatedUrl: string = titanApiUrl + 'schedule';
-    public static postUpdateUrl: string = titanApiUrl + 'schedule';
-    public static getByIdUrl: string = titanApiUrl + 'schedule';
+    public static postCreatedUrl: string = titanApiUrl + 'schedule/post';
+    public static postUpdateUrl: string = titanApiUrl + 'schedule/put';
+    public static getByIdUrl: string = titanApiUrl + 'schedule/get';
 }

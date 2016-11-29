@@ -1,40 +1,59 @@
 ﻿<div class="ui-g-10">
-    <h3>Edit DownTime Reason</h3>
+    <div class="card card-w-title">
+        <h1>Edit DownTime Reason </h1>
 
-    <!--<p-growl [value]="msgs"></p-growl>-->
-    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-        <br/>
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        DownTime Reason Name *
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            DownTime Reason Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="DownTimeReasonDetails.name" #downTimeReasonDetailsNameRef="ngModel"
+                                placeholder="DownTime Reason Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-grid-col-4" *ngIf="downTimeReasonDetailsNameRef.errors?.required">
+                                <!--<i class="fa fa-close"></i>-->
+                                *
+
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="ui-grid-col-4">
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="downTimeReason.name" #downTimeReasonNameRef="ngModel" placeholder="DownTime Reason"
-                            minlength="3" class="form-control" required row="20" />
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description * :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #downTimeReasonDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="DownTimeReasonDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-grid-col-4" *ngIf="downTimeReasonDetailsDescriptionRef.errors?.required">
+                                <!--<i class="fa fa-close"></i>-->
+                                *
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Description *:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="text" pInputTextArea class="form-control" required name="downTimeReasonDescription" row="20" maxlength="4000"
-                            #downTimeReasonDescriptionRef="ngModel" [(ngModel)]="downTimeReason.description"></textarea>
-                    </div>
-                </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                    </div>
-                    <div class="ui-grid-col-2">
-                        <button id="edit" pButton type="button" icon="ui-icon-edit" label="Edit">  </button>
-                    </div>
-                </div>
-            </div>
-        </p-panel>
-    </form>
+            </p-panel>
+        </form>
+    </div>
 </div>

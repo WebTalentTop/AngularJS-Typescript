@@ -7,11 +7,20 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Entity Field Name *
+                        EntityField Name *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="Required" class="form-control"
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Entity Field Name" class="form-control"
                             required />
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Entity Field Description *
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" placeholder="Entity Field Description" class="form-control"
+                               required />
                     </div>
                 </div>
             </div>
@@ -24,7 +33,7 @@
                     <div class="ui-grid-col-6">
                     </div>
                     <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel">  </button>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/entityField">  </button>
                     </div>
                 </div>
             </div>

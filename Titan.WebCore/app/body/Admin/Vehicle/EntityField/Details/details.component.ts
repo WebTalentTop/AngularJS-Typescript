@@ -18,20 +18,19 @@ export class DetailsComponent {
     entityType: string = "EntityField";
     entityId: string = this.id;
     filepath: string = "EntityField";
-    entityField = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    entityField = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    EntityFieldDetails: any = {
         id: '',
         isDeleted: false,
-        IsRequired:'',
-        CreatedOn:'',
-        AllowMultiSelect:'',
-        description: ''
+        name: '',
+        description: '',
+        userCreatedById: '',
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 

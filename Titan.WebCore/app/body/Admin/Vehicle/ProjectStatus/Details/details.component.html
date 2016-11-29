@@ -1,5 +1,6 @@
-﻿<div class="ui-g-10">
-    <h3>Edit Project Status </h3>
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+    <h1>Edit Project Status </h1>
 
     <p-growl [value]="msgs"></p-growl>
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -9,7 +10,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Project Status Name *: 
+                        Project Status Name * : 
                     </div>
                     <div class="ui-grid-col-4">
 
@@ -28,7 +29,7 @@
 
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Description *:
+                        Description * :
                     </div>
                     <div class="ui-grid-col-6">
                         <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #projectStatusDetailsDescriptionRef="ngModel"
@@ -54,4 +55,5 @@
             </div>
         </p-panel>
     </form>
+</div>
 </div>

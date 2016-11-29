@@ -29,6 +29,8 @@ export class AddComponent {
         let formData: any = {name: '', description: '', locale:'', isDeleted: false};
         formData.name = formRef.username;
         formData.description = formRef.description;
+        formData.startTime = formRef.startTime;
+        formData.endTime = formRef.endTime;
         formData.locale = "en-us";
 
         console.log(formData);

@@ -1,5 +1,6 @@
-﻿<div class="ui-g-10">
-    <h3>Edit Entity Field </h3>
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+    <h1>Edit Entity Field </h1>
 
     <p-growl [value]="msgs"></p-growl>
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -9,18 +10,20 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Entity Field Name * :
+                        EntityField Name * : 
                     </div>
                     <div class="ui-grid-col-4">
 
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="EntityFieldDetails.name" #entityFieldNameRef="ngModel" placeholder="Required"
-                            minlength="3" class="form-control" required row="20" />
+                        <input type="text" pInputText name="name" [(ngModel)]="EntityFieldDetails.name" #entityFieldDetailsNameRef="ngModel"
+                            placeholder="Entity Field Name" minlength="3" class="form-control" required row="20" />
                     </div>
                     <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="entityFieldNameRef.errors?.required">
+                        <div class="ui-grid-col-4" *ngIf="entityFieldDetailsNameRef.errors?.required">
                             <!--<i class="fa fa-close"></i>-->
                             *
+
                         </div>
+
                     </div>
                 </div>
 
@@ -29,13 +32,16 @@
                         Description * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #entityFieldDescriptionRef="ngModel"
-                            [(ngModel)]="entityFieldDetails.description"></textarea>
+                        <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #entityFieldDetailsDescriptionRef="ngModel"
+                            [(ngModel)]="EntityFieldDetails.description"></textarea>
                     </div>
                     <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="entityFieldDescriptionRef.errors?.required">
+                        <div class="ui-grid-col-4" *ngIf="entityFieldDetailsDescriptionRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
                             *
+
                         </div>
+
                     </div>
                 </div>
 
@@ -49,4 +55,5 @@
             </div>
         </p-panel>
     </form>
+</div>
 </div>

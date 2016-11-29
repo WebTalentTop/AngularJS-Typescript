@@ -10,7 +10,7 @@ import { GridComponent } from '../../../../shared/UIComponents/GridComponent/gri
     templateUrl: 'app/body/Admin/Vehicle/Market/market.component.html'
 })
 export class MarketComponent {
-    //title = "Market Grid view";
+    //title = "Market Grid";
     gridData = [];
     confInfo:any = {};
     cols = [];
@@ -58,6 +58,8 @@ export class MarketComponent {
         console.log("---------- Event ---------",event);
 
     }
+
+
     private getGridFilterValues(event: LazyLoadEvent) {
         let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
         let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
@@ -83,5 +85,8 @@ export class MarketComponent {
             locale: "en-us",
             defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
         };
+    }
+        navigateDetails(id:string){
+        this.router.navigate(['vehicle/market/details', id]);
     }
 }

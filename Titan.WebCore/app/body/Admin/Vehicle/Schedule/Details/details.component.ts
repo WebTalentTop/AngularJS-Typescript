@@ -18,20 +18,19 @@ export class DetailsComponent {
     entityType: string = "Schedule";
     entityId: string = this.id;
     filepath: string = "Schedule";
-    schedule = { name: '' };
-    selectedUserNames: Array<any> = new Array();
-    filteredUserNames: Array<any> = new Array();
-    filteredSelectedUserNames: Array<any> = new Array();
+    schedule = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
-    model: any = {
+    ScheduleDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
-        StartTimeUTC: '',
-        EndTimeUTC:'',
-        RecurranceCronExpression:''
+        recurranceCronExpression:'',
+        userCreatedById: '',
+        userModifiedById: '',
+        createdOn: '',
+        modifiedOn: ''
     };
 
 
