@@ -9,8 +9,8 @@ import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, 
-        ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
+    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule,
+        ButtonModule, DropdownModule, CalendarModule, GrowlModule, detailsRoutes],
     providers: [ProjectStatusService],
     declarations: [DetailsComponent],
     exports: [DetailsComponent]
