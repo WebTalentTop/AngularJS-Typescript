@@ -31,4 +31,5 @@ export class GridApiUrl {
     public static projectRoleGridUrl: string = titanApiUrl + 'projectRoleGrid/GetGridData';
     public static scheduleGridUrl: string = titanApiUrl + 'scheduleGrid/GetGridData';
     public static shiftGridUrl: string = titanApiUrl + 'shiftGrid/GetGridData';
+    public static downTimeReasonGridUrl: string = titanApiUrl + 'downTimeReasonGrid/GetGridData';
 }
