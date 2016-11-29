@@ -3,7 +3,7 @@ import { RouterModule } from "@angular/router";
 
 const routes = [
     {   path: '', component: VehicleComponent },
-    { path: 'buildLevels', loadChildren: 'app/body/Admin/Vehicle/BuildLevels/buildLevels.module' },
+    { path: 'buildLevel', loadChildren: 'app/body/Admin/Vehicle/BuildLevels/buildLevel.module' },
     { path: 'equipment', loadChildren: 'app/body/Admin/Vehicle/Equipment/equipment.module' },
     { path: 'equipmenttype', loadChildren: 'app/body/Admin/Vehicle/EquipmentType/equipmenttype.module' },
     { path: 'titanrole', loadChildren: 'app/body/Admin/Vehicle/TitanRole/titanrole.module' },

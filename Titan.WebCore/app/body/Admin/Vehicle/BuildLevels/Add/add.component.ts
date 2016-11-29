@@ -5,16 +5,13 @@ import { SelectItem } from 'primeng/primeng';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
-    selector: 'add-platform',
-    styleUrls: ['app/body/Admin/Vehicle/BuildLevels/Add/add.component.css'], 
+    selector: 'add-buildLevel',
     templateUrl: 'app/body/Admin/Vehicle/BuildLevels/Add/add.component.html'
 })
 
 export class AddComponent {
     username: string;
     description:string;
-    //constructor(private dataService: PlatformService) {
-    //        }
 
     constructor(private service: BuildLevelService) {
 

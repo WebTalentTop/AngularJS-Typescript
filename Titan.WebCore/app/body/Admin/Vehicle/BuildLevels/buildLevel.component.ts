@@ -1,29 +1,28 @@
-﻿import { BuildLevelService } from '../../../../shared/services/buildLevel.service';
+import { BuildLevelService } from '../../../../shared/services/buildLevel.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
 
 @Component({
-    selector: 'build-levels',
-    styleUrls: ['app/body/Admin/Vehicle/BuildLevels/buildlevels.component.css'],
-    templateUrl: 'app/body/Admin/Vehicle/BuildLevels/buildlevels.component.html'
+    selector: 'buildLevel-grid',
+    templateUrl: 'app/body/Admin/Vehicle/BuildLevels/buildLevel.component.html'
 })
-export class BuildLevelsComponent {
-    //title = "Build Levels";
+export class BuildLevelComponent {
+    //title = "BuildLevel Grid";
     gridData = [];
-    confInfo: any = {};
+    confInfo:any = {};
     cols = [];
     gridFilter = {};
 
-    constructor(private dataService: BuildLevelService, private router: Router, private logger: LoggerService) {
+    constructor(private service: BuildLevelService, private router: Router, private logger: LoggerService) {
 
     }
 
     ngOnInit() {
-        let resData: any;
-        this.dataService.postGridData()
+        let resData:any;
+        this.service.postGridData()
             .subscribe(res => {
                 resData = res;
                 console.log("Inside of Service Call in BodyComponent: ", resData);
@@ -44,9 +43,9 @@ export class BuildLevelsComponent {
             this.getGridFilterValues(event);
             let js = JSON.stringify(this.gridFilter);
 
-            console.log("----------- GridFilter ---------", this.gridFilter);
-            console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.dataService.postGridDataFilter(JSON.parse(js))
+                console.log("----------- GridFilter ---------", this.gridFilter);
+                console.log("-------- Grid Filter JS --------", JSON.parse(js));
+                this.service.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
                     console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
@@ -56,9 +55,11 @@ export class BuildLevelsComponent {
                 });
         },
             250);
-        console.log("---------- Event ---------", event);
+        console.log("---------- Event ---------",event);
 
     }
+
+
     private getGridFilterValues(event: LazyLoadEvent) {
         let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
         let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
@@ -84,5 +85,8 @@ export class BuildLevelsComponent {
             locale: "en-us",
             defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
         };
+    }
+        navigateDetails(id:string){
+        this.router.navigate(['vehicle/buildLevel/details', id]);
     }
 }
