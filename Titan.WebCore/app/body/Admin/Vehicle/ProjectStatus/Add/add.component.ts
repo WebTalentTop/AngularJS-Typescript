@@ -33,11 +33,14 @@ export class AddComponent {
         formData.locale = "en-us";
 
         console.log(formData);
-        this.service.postAdd(formData).subscribe(res => {
-            //  console.log(res)
-            this.router.navigate(["/vehicle/projectStatus/details/", res]);
-        }
-                   );
+        this.service.postAdd(formData).subscribe(res => 
+          console.log(res)
+           // this.router.navigate(["/vehicle/projectStatus/", res]);
+        
+
+            );
+        this.router.navigate(["/vehicle/projectStatus"]);
+                  // );
        
     }
 }
