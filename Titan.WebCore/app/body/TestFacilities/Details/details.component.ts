@@ -4,7 +4,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
