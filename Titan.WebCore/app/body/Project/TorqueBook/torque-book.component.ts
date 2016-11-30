@@ -17,7 +17,8 @@ export class TorqueBookComponent {
     public torqueBookIdForAddingTorqueSheet: string;
     public torqueBookElmForAddingTorqueSheet: any;
     public newTorqueBookName:string;
-    public newTorqueSheetName:string;
+    public newTorqueSheetNameId:string;
+    public torqueSheetNames:any;
     public projectId:string;
     public displaySelectTemplate:boolean;
     public torquesheetTemplates:any;
@@ -159,19 +160,40 @@ export class TorqueBookComponent {
     onAddTorqueSheet(torqueBookId, event){
         this.torqueBookIdForAddingTorqueSheet = torqueBookId;
         this.torqueBookElmForAddingTorqueSheet = event.srcElement;
+        this.getTorqueBooksTorqueSheetNames(torqueBookId);
         this.displayAddTorqueSheet = true;
+    }
+
+    getTorqueBooksTorqueSheetNames(torqueBookId){
+        this.torqueSheetService.getTorqueBooksTorqueSheetNames(torqueBookId).subscribe(a => {
+            if(a.isSuccess){
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Name",
+                    value: null
+                });
+                for (let template of a.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.torqueSheetNames = resultMap;
+            }
+        });
     }
 
     onAddTorqueBookConfirmation(){
         //if(this.torqueBookForm.valid){
             var postData = {projectId: this.projectId, buildLevelId: this.buildLevelIdForAddingTorqueBook,
-                name: this.newTorqueBookName};
+                name: this.newTorqueBookName}; 
             var tempId = this.buildLevelIdForAddingTorqueBook;
             this.service.postTorqueBook(postData).subscribe(res => {
                 var container = $(this.buildLevelElmForAddingTorqueBook).closest("div.ui-treetable-row");
                 var expandImg = $("span.ui-treetable-toggler.fa-caret-right", container);
                 if(expandImg != null && expandImg.length > 0)
-                    expandImg.trigger("click");
+                    expandImg.trigger("click"); 
                 else{
                     this.service.getTorqueBooks(this.projectId, this.buildLevelIdForAddingTorqueBook).subscribe(a => {
                         for(var buildLevel of this.BuildLevels){
@@ -189,7 +211,7 @@ export class TorqueBookComponent {
     onAddTorqueSheetConfirmation(){
         //if(this.torqueSheetForm.valid){
             var postData = {torqueBookId: this.torqueBookIdForAddingTorqueSheet,
-                name: this.newTorqueSheetName};
+                nameId: this.newTorqueSheetNameId};
             var tempId = this.torqueBookIdForAddingTorqueSheet;
             var container = $(this.torqueBookElmForAddingTorqueSheet).closest("div.ui-treetable-row");
             

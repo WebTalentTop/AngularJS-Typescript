@@ -7,5 +7,5 @@ export class TorqueSheetApiUrl {
     public static putTorqueSheetTemplateUrl: string = titanApiUrl + 'TorqueSheetTemplate/Put';
     public static postTorqueSheetUrl: string = titanApiUrl + 'TorqueSheet/Post';
     public static getTorqueSheetsByTorqueBookIdUrl: string = titanApiUrl + 'TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
-    
+    public static getTorqueBooksTorqueSheetNamesUrl: string = titanApiUrl + 'TorqueSheetName/GetAll?torqueBookId=';
 }

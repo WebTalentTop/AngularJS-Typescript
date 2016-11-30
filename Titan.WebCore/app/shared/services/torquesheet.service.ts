@@ -35,6 +35,14 @@ export class TorquesheetService extends BaseService{
         // .map(this.getJson);
     }
 
+    getTorqueBooksTorqueSheetNames(torqueBookId): Observable<any> {
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueBooksTorqueSheetNamesUrl }`+ torqueBookId)
+            .map(super.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     getTorqueSheets(torqueBookId): Observable<any> {
         return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetsByTorqueBookIdUrl }`+ torqueBookId)
             .map(super.getJson);
