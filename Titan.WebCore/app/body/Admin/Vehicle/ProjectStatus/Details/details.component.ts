@@ -67,16 +67,6 @@ export class DetailsComponent {
 
 
     onSubmit(formRef) {
-        //console.log("inside");
-        //console.log(this.projectStatus.name);
-        //formRef.isDeleted = false;
-        //let formData: any = {
-        //    id: this.id,
-        //    name: '',
-        //};
-        
-        //formData.id = this.id;
-        //formData.name = formRef.name;
 
         this.service.postUpdate(this.ProjectStatusDetails).subscribe(ProjectStatusDetails => {
            // console.log(ProjectStatusDetails);
