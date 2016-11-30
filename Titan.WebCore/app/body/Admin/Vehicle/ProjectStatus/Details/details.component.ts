@@ -59,7 +59,7 @@ export class DetailsComponent {
 
             this.service.getById(this.ProjectStatusId).subscribe(ProjectStatusDetails => {
                 this.ProjectStatusDetails = ProjectStatusDetails.result;
-               // this.ProjectStatusDetails.id = this.ProjectStatusId;
+              
                 console.log(this.ProjectStatusDetails);
             });
         });

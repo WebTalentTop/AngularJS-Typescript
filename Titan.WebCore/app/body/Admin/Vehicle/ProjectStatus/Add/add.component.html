@@ -32,8 +32,8 @@
                         Project Status Description *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #projectStatusDetailsDescriptionRef="ngModel"
-                            placeholder="Required" class="form-control" required />
+                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #projectStatusDetailsDescriptionRef="ngModel"
+                            placeholder="Required" class="form-control  col-sm-12" required ></textarea>
                     </div>
                     <div class="ui-grid-col-4">
                         <div class="ui-grid-col-4" *ngIf="projectStatusDetailsNameRef.errors?.required">
