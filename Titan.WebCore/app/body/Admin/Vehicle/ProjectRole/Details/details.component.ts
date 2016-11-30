@@ -80,5 +80,7 @@ export class DetailsComponent {
         this.service.postUpdate(this.ProjectRoleDetails).subscribe(ProjectRoleDetails => {
             console.log(ProjectRoleDetails);
         });
+        this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }

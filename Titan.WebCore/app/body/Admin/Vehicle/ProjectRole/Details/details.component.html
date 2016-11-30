@@ -1,57 +1,62 @@
-﻿<div class="ui-g-10">
-    <h3>Edit Project Role </h3>
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit Project Role </h1>
 
-    <p-growl [value]="msgs"></p-growl>
-    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-        <br/>
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Project Role Name * : 
-                    </div>
-                    <div class="ui-grid-col-4">
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Project Role Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
 
-                        <input type="text" pInputText name="name" [(ngModel)]="ProjectRoleDetails.name" #projectRoleDetailsNameRef="ngModel"
-                            placeholder="Required" minlength="3" class="form-control" required row="20" />
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="projectRoleDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-                            *
+                            <input type="text" pInputText name="name" [(ngModel)]="ProjectRoleDetails.name" #projectRoleDetailsNameRef="ngModel"
+                                placeholder="Required" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Project Role Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsNameRef.errors?.minlength">
+                                (MinLength-3)
+                            </div>
 
                         </div>
-
                     </div>
-                </div>
 
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #projectRoleDetailsDescriptionRef="ngModel"
-                            [(ngModel)]="ProjectRoleDetails.description"></textarea>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="projectRoleDetailsDescriptionRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-                            *
-
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description * :
                         </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #projectRoleDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="ProjectRoleDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <!--<div class="ui-grid-col-4" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
+                            <i class="fa fa-close"></i>
+                           <span> Please enter Project Description Name</span> 
 
+                        </div>-->
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Project Role Description
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                    </div>
-                    <div class="ui-grid-col-2">
-                        <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
-                    </div>
-                </div>
-            </div>
-        </p-panel>
-    </form>
+            </p-panel>
+        </form>
+    </div>
 </div>
