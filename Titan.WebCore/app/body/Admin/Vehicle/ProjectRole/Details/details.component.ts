@@ -57,7 +57,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.ProjectRoleId).subscribe(ProjectRoleDetails => {
-                this.ProjectRoleDetails = ProjectRoleDetails;
+                this.ProjectRoleDetails = ProjectRoleDetails.result;
                 this.ProjectRoleDetails.id = this.ProjectRoleId;
                 console.log(this.ProjectRoleDetails);
             });
@@ -66,16 +66,16 @@ export class DetailsComponent {
 
 
     onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.projectRole.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
+        //console.log("inside");
+        //console.log(this.projectRole.name);
+        //formRef.isDeleted = false;
+        //let formData: any = {
+        //    id: this.id,
+        //    name: '',
+        //};
         
-        formData.id = this.id;
-        formData.name = formRef.name;
+        //formData.id = this.id;
+        //formData.name = formRef.name;
         
         this.service.postUpdate(this.ProjectRoleDetails).subscribe(ProjectRoleDetails => {
             console.log(ProjectRoleDetails);
