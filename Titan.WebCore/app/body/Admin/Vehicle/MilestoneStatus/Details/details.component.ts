@@ -80,5 +80,7 @@ export class DetailsComponent {
         this.service.postUpdate(this.MilestoneStatusDetails).subscribe(MilestoneStatusDetails => {
             console.log(MilestoneStatusDetails);
         });
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }

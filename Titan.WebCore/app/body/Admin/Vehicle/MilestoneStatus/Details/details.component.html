@@ -1,40 +1,43 @@
 ﻿<div class="ui-g-12">
-    <h3>Edit Milestone Status </h3>
+    <div class="card card-w-title">
+        <h1>Edit Milestone Status </h1>
 
-    <p-growl [value]="msgs"></p-growl>
-    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
             <br/>
             <p-panel>
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Milestone Status Name *
+                            Milestone Status Name * :
                         </div>
-                        <div class="ui-grid-col-6">
-                        <input type="text" id="name" pInputText name="name" [(ngModel)]="MilestoneStatusDetails.name" #milestoneStatusNameRef="ngModel"
-                            placeholder="Required" minlength="3" class="form-control" required row="20" />
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="milestoneStatusNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-                            *
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="MilestoneStatusDetails.name" #milestoneStatusDetailsNameRef="ngModel"
+                                placeholder="Required" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneStatusDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Milestone Status Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneStatusDetailsNameRef.errors?.minlength">
+                                (MinLength-3)
+                            </div>
 
                         </div>
-
                     </div>
-                </div>
 
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
-                        <div class="ui-grid-col-4">
-                            <button id="edit" pButton type="button" label="Edit">  </button>
+                        <div class="ui-grid-col-2">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
                         </div>
                     </div>
-
+                </div>
             </p-panel>
         </form>
+    </div>
 </div>

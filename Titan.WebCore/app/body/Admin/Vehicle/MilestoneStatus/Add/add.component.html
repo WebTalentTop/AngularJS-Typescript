@@ -10,8 +10,19 @@
                         Milestone Status Name *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="12th Wonder LLC" class="form-control"
-                            required />
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Milestone Status Name" minlength="3" #milestoneStatusDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="milestoneStatusDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneStatusDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -19,12 +30,12 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
                     </div>
                     <div class="ui-grid-col-6">
                     </div>
                     <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/milestoneStatus">  </button>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/milestoneStatus">  </button>
                     </div>
                 </div>
             </div>
