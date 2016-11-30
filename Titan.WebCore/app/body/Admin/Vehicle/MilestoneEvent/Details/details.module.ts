@@ -10,7 +10,7 @@ import detailsRoutes from "./details.routes";
 
 @NgModule({
     imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule,GrowlModule, InputTextModule, PanelModule, 
-        ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
+        ButtonModule, DropdownModule, CalendarModule,GrowlModule, detailsRoutes],
     providers: [MilestoneEventService],
     declarations: [DetailsComponent],
     exports: [DetailsComponent]

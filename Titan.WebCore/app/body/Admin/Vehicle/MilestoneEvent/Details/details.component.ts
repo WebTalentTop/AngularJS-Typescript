@@ -78,7 +78,9 @@ export class DetailsComponent {
         formData.name = formRef.name;
         
         this.service.postUpdate(this.MilestoneEventDetails).subscribe(MilestoneEventDetails => {
-            console.log(MilestoneEventDetails);
+            //console.log(MilestoneEventDetails);
         });
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }
