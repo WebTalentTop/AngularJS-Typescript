@@ -5,7 +5,6 @@ import { FormsModule} from '@angular/forms';
 import { TestFacilityService } from '../../../shared/services/testFacility.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
-
 import { DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";

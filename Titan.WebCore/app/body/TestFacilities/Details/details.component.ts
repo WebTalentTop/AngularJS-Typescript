@@ -1,22 +1,55 @@
-﻿import { TestFacilityService } from '../../../shared/services/testfacility.service';
+﻿
+
+import { TestFacilityService } from '../../../shared/services/testfacility.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
+declare var $: JQueryStatic;
+declare var fullcalendardef: FullCalendar.Calendar;
+//declare var fullCalendardef: Calendar;
+//let $ = require('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js');
+//let $ = require('../../../shared/services/fullcalendar.js');
+
 @Component({
     selector: 'details-testfacility',
     templateUrl: 'app/body/TestFacilities/Details/details.component.html'
 })
-export class DetailsComponent {
-
+export class DetailsComponent implements AfterViewInit {
+    ngAfterViewInit() {
+    $('#calendar').fullCalendar({
+        theme: true,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        defaultDate: '2016-09-12',
+        events: [
+            {
+                title: 'All Day Event',
+                start: '2016-11-01'
+            },
+            {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2016-11-28'
+            }
+        ],
+        // navLinks: true, // can click day/week names to navigate views
+        editable: true
+        //eventLimit: true
+    });
+       
+   }
     username: string;
     details: string;
 
@@ -75,6 +108,8 @@ export class DetailsComponent {
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
     ngOnInit() {
+
+      
         this.getUserRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
