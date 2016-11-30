@@ -1,12 +1,18 @@
+
 <div class="ui-g-12">
     <div class="card card-w-title">
         <h1> Titan Role </h1>
+
         <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New TitanRole</a>
-            <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit TitanRole</a>
+            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Titan Role</a>
 
-            <grid-data [gridData]="gridData" [cols]="cols" [confInfo]="confInfo" (lazyLoad)="loadFreshDepartments($event)" [title]="title"></grid-data>
-
+            <p-messages [value]="msgs"></p-messages>
+            <grid-data [gridData]="gridData"
+                       [cols]='cols'
+                       [confInfo]="confInfo"
+                       [dataService]="service"
+                       (navigateToDetails)="navigateDetails($event)"
+                       [title]="title"></grid-data>
         </div>
     </div>
 </div>

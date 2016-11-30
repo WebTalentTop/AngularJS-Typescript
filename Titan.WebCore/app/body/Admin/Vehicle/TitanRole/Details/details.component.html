@@ -1,0 +1,57 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit Titan Role </h1>
+
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Titan Role Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="TitanRoleDetails.name" #titanRoleDetailsNameRef="ngModel"
+                                placeholder="TitanRole Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="titanRoleDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TitanRole Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="titanRoleDetailsNameRef.errors?.minlength">
+                                (MinLength-3)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                           TitanRole Description * :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #titanRoleDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="TitanRoleDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="titanRoleDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TitanRole Description
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        </div>
+                    </div>
+                </div>
+            </p-panel>
+        </form>
+    </div>
+</div>
