@@ -3,7 +3,7 @@ import { GridApiUrl }  from './gridApiUrls';
 
 export class PlatformApiUrl {
     public static gridApiUrl:string  = GridApiUrl.platformGridUrl;
-    public static postCreatedUrl: string = titanApiUrl + 'platform';
-    public static postUpdateUrl: string = titanApiUrl + 'platform';
-    public static getByIdUrl: string = titanApiUrl + 'platform';
+    public static postCreatedUrl: string = titanApiUrl + 'platform/post';
+    public static postUpdateUrl: string = titanApiUrl + 'platform/put';
+    public static getByIdUrl: string = titanApiUrl + 'platform/get';
 }
