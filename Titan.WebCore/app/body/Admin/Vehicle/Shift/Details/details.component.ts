@@ -22,7 +22,7 @@ export class DetailsComponent {
     formConfiguration: any;
     formObject: any;
 
-    ShiftDetails: any = {
+    public ShiftDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -39,7 +39,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public ShiftDetails: any;
+    //public ShiftDetails: any;
     public ShiftId: string;
 
     constructor(

@@ -22,7 +22,7 @@ export class DetailsComponent {
     formConfiguration: any;
     formObject: any;
 
-    ScheduleDetails: any = {
+    public ScheduleDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -38,7 +38,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public ScheduleDetails: any;
+    //public ScheduleDetails: any;
     public ScheduleId: string;
 
     constructor(

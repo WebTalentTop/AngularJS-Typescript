@@ -22,7 +22,7 @@ export class DetailsComponent {
     formConfiguration: any;
     formObject: any;
 
-    MilestoneStatusDetails: any = {
+    public MilestoneStatusDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -38,7 +38,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public MilestoneStatusDetails: any;
+    //public MilestoneStatusDetails: any;
     public MilestoneStatusId: string;
 
     constructor(

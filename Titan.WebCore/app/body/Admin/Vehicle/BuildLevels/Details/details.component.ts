@@ -38,7 +38,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public BuildLevelDetails: any;
+    //public BuildLevelDetails: any;
     public BuildLevelId: string;
 
     constructor(

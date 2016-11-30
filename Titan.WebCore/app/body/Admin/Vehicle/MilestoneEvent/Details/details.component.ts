@@ -22,7 +22,7 @@ export class DetailsComponent {
     formConfiguration: any;
     formObject: any;
 
-    MilestoneEventDetails: any = {
+    public MilestoneEventDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -38,7 +38,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public MilestoneEventDetails: any;
+    //public MilestoneEventDetails: any;
     public MilestoneEventId: string;
 
     constructor(

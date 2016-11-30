@@ -38,7 +38,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public EntityFieldDetails: any;
+    //public EntityFieldDetails: any;
     public EntityFieldId: string;
 
     constructor(

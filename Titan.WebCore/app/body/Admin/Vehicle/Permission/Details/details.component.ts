@@ -22,7 +22,7 @@ id: string;
     formConfiguration: any;
     formObject: any;
 
-    PermissionDetails: any = {
+    public PermissionDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -38,7 +38,7 @@ id: string;
     uploadedFiles: any[] = [];
 
 
-    public PermissionDetails: any;
+    //public PermissionDetails: any;
     public PermissionId: string;
 
     constructor(

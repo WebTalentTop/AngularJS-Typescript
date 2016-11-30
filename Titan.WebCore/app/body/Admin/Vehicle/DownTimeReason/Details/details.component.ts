@@ -39,7 +39,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
 
-    public DownTimeReasonDetails: any;
+    //public DownTimeReasonDetails: any;
     public DownTimeReasonId: string;
 
     constructor(
@@ -68,7 +68,7 @@ export class DetailsComponent {
 
     onSubmit(formRef) {
         console.log("inside");
-        console.log(this.downTimeReason.name);
+        console.log(this.DownTimeReason.name);
         formRef.isDeleted = false;
         let formData: any = {
             id: this.id,
