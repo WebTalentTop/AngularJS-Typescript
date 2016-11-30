@@ -5,7 +5,7 @@
 
         <div class="ui-grid-row">
             <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Project Status</a>
-            <div class="ui-message ui-messages-success ui-corner-all"><p-messages [value]="msgs"></p-messages></div>
+            <p-messages [value]="msgs"></p-messages>
           
             <grid-data [gridData]="gridData"
                        [cols]='cols'
