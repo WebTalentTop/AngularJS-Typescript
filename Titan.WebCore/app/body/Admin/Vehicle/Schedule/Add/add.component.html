@@ -7,11 +7,54 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Schedule Name *
+                        RecurranceCron Expression * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="12th Wonder LLC" class="form-control"
-                            required />
+                        <input type="text" id="recurranceCronExpression" name="recurranceCronExpression" pInputText [(ngModel)]="recurranceCronExpression" placeholder="RecurranceCron Expression" minlength="3" #scheduleDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="scheduleDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="scheduleDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                         StartTime UTC * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="startTimeUTC" name="startTimeUTC" pInputText [(ngModel)]="startTimeUTC" #scheduleDetailsStartTimeUTCRef="ngModel"
+                            placeholder="startTimeUTC" class="form-control" required />
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="scheduleDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>                                                    
+                            *-->
+                        </div>
+                    </div>
+                </div>
+                 <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                         EndTime UTC * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="endTimeUTC" name="endTimeUTC" pInputText [(ngModel)]="endTimeUTC" #scheduleDetailsEndTimeUTCRef="ngModel"
+                            placeholder="EndTimeUTC" class="form-control" required />
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="scheduleDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>                                                    
+                            *-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -19,12 +62,12 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
                     </div>
                     <div class="ui-grid-col-6">
                     </div>
                     <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel">  </button>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/schedule">  </button>
                     </div>
                 </div>
             </div>
