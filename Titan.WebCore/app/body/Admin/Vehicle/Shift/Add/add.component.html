@@ -10,18 +10,43 @@
                         Shift Name *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="username" name="username" pInputText [(ngModel)]="username" placeholder="Shift Name" class="form-control"
-                            required />
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Shift Name" minlength="3" #shiftDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="shiftDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="shiftDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="ui-grid-row">
+
                     <div class="ui-grid-col-2">
                         Start Time *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="startTime" name="startTime" pInputText [(ngModel)]="startTime" placeholder="Start Time" class="form-control"
-                            required />
+                        <input type="text" id="startTime" name="startTime" pInputText [(ngModel)]="startTime" placeholder="Start Time" minlength="3"
+                            #shiftDetailsStartTimeRef="ngModel" class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="shiftDetailsStartTimeRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="shiftDetailsStartTimeRef.errors?.minlength">
+                            (MinLength-3)
+
+                        </div>
                     </div>
                 </div>
 
@@ -30,24 +55,39 @@
                         End Time *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="endTime" name="endTime" pInputText [(ngModel)]="endTime" placeholder="End Time" class="form-control"
-                            required />
+                        <input type="text" id="endTime" name="endTime" pInputText [(ngModel)]="endTime" placeholder="End Time" minlength="3" #shiftDetailsEndTimeRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="shiftDetailsEndTimeRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="shiftDetailsEndTimeRef.errors?.minlength">
+                            (MinLength-3)
+
+                        </div>
+
                     </div>
                 </div>
             </div>
 
+
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
                     </div>
                     <div class="ui-grid-col-6">
                     </div>
                     <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel">  </button>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/shift">  </button>
                     </div>
                 </div>
             </div>
+
             <br />
             <br />
         </p-panel>

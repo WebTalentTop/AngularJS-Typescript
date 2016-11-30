@@ -81,5 +81,7 @@ export class DetailsComponent {
         this.service.postUpdate(this.ShiftDetails).subscribe(ShiftDetails => {
             console.log(ShiftDetails);
         });
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }
