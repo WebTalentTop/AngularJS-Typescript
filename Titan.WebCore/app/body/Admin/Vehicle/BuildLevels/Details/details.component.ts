@@ -80,5 +80,7 @@ export class DetailsComponent {
         this.service.postUpdate(this.BuildLevelDetails).subscribe(BuildLevelDetails => {
             console.log(BuildLevelDetails);
         });
+        this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }
