@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { EntityFieldComponent } from "./entityField.component";
-import { DataTableModule } from 'primeng/primeng';
+import { DataTableModule,  MessagesModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 
@@ -10,7 +10,7 @@ import { EntityFieldService } from '../../../../shared/services/entityField.serv
 import entityFieldRoutes from "./entityField.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, entityFieldRoutes],
+    imports: [CommonModule, DataTableModule, GridModule, entityFieldRoutes,  MessagesModule, GrowlModule],
     providers: [EntityFieldService],
     declarations: [EntityFieldComponent]
 })

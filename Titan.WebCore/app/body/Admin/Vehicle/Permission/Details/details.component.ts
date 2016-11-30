@@ -65,22 +65,11 @@ id: string;
     }
 
 
-    onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.permission.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
-        
-        formData.id = this.id;
-        formData.name = formRef.name;
-        
+   onSubmit(formRef) {
+
         this.service.postUpdate(this.PermissionDetails).subscribe(PermissionDetails => {
-            console.log(PermissionDetails);
         });
-        this.msgs = [];
+         this.msgs = [];
          this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }

@@ -7,20 +7,17 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        EntityField Name *
+                        Entity Field Description * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Entity Field Name" class="form-control"
-                            required />
+                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #entityFieldDetailsDescriptionRef="ngModel"
+                            placeholder="Entity Field description" class="form-control" required />
                     </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Entity Field Description *
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" placeholder="Entity Field Description" class="form-control"
-                               required />
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="entityFieldDetailsDescriptionRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>                                                    
+                            *-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,7 +25,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
                     </div>
                     <div class="ui-grid-col-6">
                     </div>

@@ -64,21 +64,11 @@ export class DetailsComponent {
         });
     }
 
-
     onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.entityField.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
-        
-        formData.id = this.id;
-        formData.name = formRef.name;
-        
+
         this.service.postUpdate(this.EntityFieldDetails).subscribe(EntityFieldDetails => {
-            console.log(EntityFieldDetails);
         });
+         this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }

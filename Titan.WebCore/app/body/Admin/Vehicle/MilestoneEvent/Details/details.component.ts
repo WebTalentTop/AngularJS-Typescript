@@ -65,20 +65,9 @@ export class DetailsComponent {
     }
 
 
-    onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.milestoneEvent.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
-        
-        formData.id = this.id;
-        formData.name = formRef.name;
-        
+   onSubmit(formRef) {
+
         this.service.postUpdate(this.MilestoneEventDetails).subscribe(MilestoneEventDetails => {
-            //console.log(MilestoneEventDetails);
         });
          this.msgs = [];
          this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });

@@ -66,20 +66,9 @@ export class DetailsComponent {
     }
 
 
-    onSubmit(formRef) {
-        console.log("inside");
-        console.log(this.shift.name);
-        formRef.isDeleted = false;
-        let formData: any = {
-            id: this.id,
-            name: '',
-        };
-        
-        formData.id = this.id;
-        formData.name = formRef.name;
-        
+   onSubmit(formRef) {
+
         this.service.postUpdate(this.ShiftDetails).subscribe(ShiftDetails => {
-            console.log(ShiftDetails);
         });
          this.msgs = [];
          this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
