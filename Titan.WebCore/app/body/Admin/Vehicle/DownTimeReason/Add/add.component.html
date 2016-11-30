@@ -7,11 +7,23 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        DownTimeReason Name *
+                        DownTime Reason Name *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="DownTime Reason Name" class="form-control"
-                            required />
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="DownTime Reason Name" minlength="3" #downTimeReasonDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="downTimeReasonDetailsNameRef.errors?.required">
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="downTimeReasonDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+
+                        </div>
+
                     </div>
                 </div>
                 <div class="ui-grid-row">
@@ -19,8 +31,14 @@
                         DownTime Reason Description *
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" placeholder="Description" class="form-control"
-                               required />
+                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #downTimeReasonDetailsDescriptionRef="ngModel"
+                            placeholder="DownTime Reason Description" class="form-control" required />
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="downTimeReasonDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>                                                    
+                            *-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,7 +46,7 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" icon="ui-icon-add" label="Add">  </button>
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
                     </div>
                     <div class="ui-grid-col-6">
                     </div>
