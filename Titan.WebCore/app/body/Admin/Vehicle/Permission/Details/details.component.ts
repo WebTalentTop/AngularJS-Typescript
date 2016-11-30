@@ -80,5 +80,7 @@ id: string;
         this.service.postUpdate(this.PermissionDetails).subscribe(PermissionDetails => {
             console.log(PermissionDetails);
         });
+        this.msgs = [];
+         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
     }
 }

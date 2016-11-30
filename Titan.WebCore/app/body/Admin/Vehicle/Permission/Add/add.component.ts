@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { PermissionService } from '../../../../../shared/services/permission.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
@@ -13,7 +14,7 @@ export class AddComponent {
     username: string;
     description:string;
 
-    constructor(private service: PermissionService) {
+    constructor(private service: PermissionService, private router: Router, private route: ActivatedRoute) {
 
     }
 
@@ -27,11 +28,25 @@ export class AddComponent {
         formRef.locale = "en-us";
         formRef.isDeleted = false;
         let formData: any = {name: '', description: '', locale:'', isDeleted: false};
-        formData.name = formRef.username;
+        formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";
-
+        let added: any="true";
         console.log(formData);
-        this.service.postAdd(formData).subscribe(res => console.log(res));
+        this.service.postAdd(formData).subscribe(res => {
+            console.log('--------------res result------------', +res)
+
+            // this.router.navigate(["/vehicle/Permission/", res]);
+            if (res.isSuccess) {
+                //this.router.navigate([], {q})
+                this.router.navigate(["/vehicle/permission"], { queryParams: { page: 1 } });
+               
+            }
+           
+        }
+            );
+     
+                  // );
+       
     }
 }
