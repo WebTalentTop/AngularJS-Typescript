@@ -1,59 +1,57 @@
 ﻿<div class="ui-g-12">
     <div class="card card-w-title">
-    <h1>Edit Market </h1>
+        <h1>Edit Market </h1>
 
-    <p-growl [value]="msgs"></p-growl>
-    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-        <br/>
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Market Name * : 
-                    </div>
-                    <div class="ui-grid-col-4">
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Market Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
 
-                        <input type="text" pInputText name="name" [(ngModel)]="MarketDetails.name" #marketDetailsNameRef="ngModel"
-                            placeholder="Market Name" minlength="3" class="form-control" required row="20" />
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="marketDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-                            *
+                            <input type="text" pInputText name="name" [(ngModel)]="MarketDetails.name" #marketDetailsNameRef="ngModel"
+                                placeholder="Market Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Market Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.minlength">
+                                (MinLength-3)
+                            </div>
 
                         </div>
-
                     </div>
-                </div>
 
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Market Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #marketDetailsDescriptionRef="ngModel"
-                            [(ngModel)]="MarketDetails.description"></textarea>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="marketDetailsDescriptionRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-                            *
-
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                           Market Description * :
                         </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #marketDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="MarketDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Market Description
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                    </div>
-                    <div class="ui-grid-col-2">
-                        <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
-                    </div>
-                </div>
-            </div>
-        </p-panel>
-    </form>
-</div>
+            </p-panel>
+        </form>
+    </div>
 </div>
