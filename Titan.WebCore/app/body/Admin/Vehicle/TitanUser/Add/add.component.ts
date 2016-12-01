@@ -22,15 +22,22 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
-        console.log(formRef);
-        console.log(this.username);
-        console.log(this.description);
-        formRef.locale = "en-us";
-        formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
-        formData.name = formRef.name;
-        formData.description = formRef.description;
-        formData.locale = "en-us";
+        //console.log(formRef);
+        //console.log(this.username);
+        //console.log(this.description);
+        //formRef.locale = "en-us";
+        //formRef.isDeleted = false;
+        let formData: any = {id:'',
+            username: '', firstName: '', lastName: '', emailAddress: '', defaultLocale: '', isDeleted: 'false', departmentId: '1945203B-8261-7BAA-D1FA-9FD4B71D89EB',  userCreatedById: '',
+            userModifiedById: '',
+            createdOn: '',
+            modifiedOn: ''};
+        formData.username = formRef.username;
+        formData.lastName = formRef.lastName;
+        formData.firstName = formRef.firstName;
+      //  formData.displayName = formRef.displayName;
+        formData.emailAddress = formRef.emailAddress;
+       
         let added: any="true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
