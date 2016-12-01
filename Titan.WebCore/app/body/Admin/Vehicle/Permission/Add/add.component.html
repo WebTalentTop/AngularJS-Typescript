@@ -10,7 +10,7 @@
                         Permission Name * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Permission Name" minlength="3" #permissionDetailsNameRef="ngModel"
+                        <input type="text" name="name" pInputText [(ngModel)]="name" placeholder="Permission Name" minlength="3" #permissionDetailsNameRef="ngModel"
                             class="form-control" required />
                     </div>
 
@@ -29,8 +29,11 @@
                         Permission Description * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #permissionDetailsDescriptionRef="ngModel"
+
+                      
+                        <input type="text" name="description" pInputText [(ngModel)]="description" #permissionDetailsDescriptionRef="ngModel"
                             placeholder="Permission Description" class="form-control" required />
+
                     </div>
                     <div class="ui-grid-col-4">
                         <div class="ui-grid-col-4" *ngIf="permissionDetailsDescriptionRef.errors?.required">

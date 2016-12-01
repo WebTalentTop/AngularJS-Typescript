@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BuildLevelComponent } from "./buildLevel.component";
-import { DataTableModule,  MessagesModule, GrowlModule } from 'primeng/primeng';
+import { DataTableModule,  MessagesModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 
@@ -10,7 +10,7 @@ import { BuildLevelService } from '../../../../shared/services/buildLevel.servic
 import buildLevelRoutes from "./buildLevel.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, buildLevelRoutes,  MessagesModule, GrowlModule],
+    imports: [CommonModule, DataTableModule, GridModule, buildLevelRoutes,  MessagesModule],
     providers: [BuildLevelService],
     declarations: [BuildLevelComponent]
 })
