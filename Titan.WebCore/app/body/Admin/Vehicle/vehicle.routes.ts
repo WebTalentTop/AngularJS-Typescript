@@ -23,7 +23,8 @@ const routes = [
     { path: 'schedule', loadChildren: 'app/body/Admin/Vehicle/schedule/schedule.module' },
     { path: 'shift', loadChildren: 'app/body/Admin/Vehicle/Shift/shift.module' },
     { path: 'downTimeReason', loadChildren: 'app/body/Admin/Vehicle/DownTimeReason/downTimeReason.module' },
-   { path: 'entityField', loadChildren: 'app/body/Admin/Vehicle/EntityField/entityField.module' },
+    { path: 'entityField', loadChildren: 'app/body/Admin/Vehicle/EntityField/entityField.module' },
+    { path: 'contact', loadChildren: 'app/body/Admin/Vehicle/Contact/contact.module' },
   ];
 
 export default RouterModule.forChild(routes);

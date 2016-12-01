@@ -1,0 +1,92 @@
+<div class="ui-g-12">
+
+    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+        <h3> Add Contact </h3>
+        <br />
+        <p-panel>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Contact Name * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Contact Name" minlength="3" #contactDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="contactDetailsNameRef.errors?.required">
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="contactDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Phone Number * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="phoneNumber" name="phoneNumber" pInputText [(ngModel)]="phoneNumber" placeholder="Phone Number" minlength="3"
+                            #contactDetailsPhoneNumberRef="ngModel" class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="contactDetailsPhoneNumberRef.errors?.required">
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="contactDetailsPhoneNumberRef.errors?.minlength">
+                            (MinLength-3)
+                        </div>
+
+                    </div>
+                </div>
+            
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Email Address * :
+                </div>
+                <div class="ui-grid-col-6">
+                    <input type="text" id="emailAddress" name="emailAddress" pInputText [(ngModel)]="emailAddress" placeholder="Email Address"
+                        minlength="3" #contactDetailsEmailAddressRef="ngModel" class="form-control" required />
+                </div>
+
+                <div class="ui-grid-col-4">
+
+                    <div class="ui-grid-col-4" *ngIf="contactDetailsEmailAddressRef.errors?.required">
+
+                    </div>
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="contactDetailsEmailAddressRef.errors?.minlength">
+                        (MinLength-3)
+                    </div>
+
+                </div>
+            </div>
+            
+            </div>
+
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/contact">  </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        </p-panel>
+    </form>
+</div>
