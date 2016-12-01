@@ -43,7 +43,7 @@ export class DetailsComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: TestVerificationMethodService,
+        private service: TestVerificationMethodService
     )
     { }
     ngOnInit() {

@@ -45,8 +45,7 @@ id: string;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: PermissionService,
-    )
+        private service: PermissionService    )
     { }
 
 

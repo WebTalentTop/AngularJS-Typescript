@@ -45,8 +45,7 @@ export class DetailsComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: DownTimeReasonService,
-    )
+        private service: DownTimeReasonService    )
     { }
 
 

@@ -1,32 +1,27 @@
-﻿<div class="ui-grid-col-6">
-    <input type="text" placeholder="Search admin Settings" class="form-control" display="right" />
-</div>
+﻿<div class="ui-g-12">
+    <h1> Lookups </h1>
+    <div class="card card-w-title">
+    
+    <h1 style="border-bottom:groove; border-bottom-color:lightred"></h1>
+    <h4> Calendar Lookups </h4>
+    <div class="ui-grid-row small-width">
+     
+    </div>
 
-<div class="ui-g-12">
-    <h1>{{ title }}</h1>
+    <h1 style="border-bottom:groove; border-bottom-color:lightyellow"></h1>
+    <h4> Employee </h4>
+    <div class="ui-grid-row small-width">
+                
+    </div>
 
     <h1 style="border-bottom:groove; border-bottom-color:lightblue"></h1>
-    <h4> Account Settings </h4>
+    <h4> Equipment </h4>
     <div class="ui-grid-row small-width">
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Vehicle </span></a>
-        </div>
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Portals </span></a>
-        </div>
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Phone </span></a>
-        </div>
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Feedback Widget </span></a>
-        </div>
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Mobihelp </span></a>
-        </div>
+       
     </div>
 
     <h1 style="border-bottom:groove; border-bottom-color:aquamarine"></h1>
-    <h4> Vehicle Lookups </h4>
+    <h4> Project </h4>
     <div class="ui-grid-row small-width">
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/vehicle/buildLevel']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Build Levels </span></a>
@@ -79,9 +74,7 @@
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/vehicle/schedule']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Schedule </span></a>
         </div>
-        <div class="ui-g-2 ui-md-2">
-            <a [routerLink]="['/vehicle/shift']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Shift </span></a>
-        </div>
+
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/vehicle/testVerificationMethod']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Verification Method </span></a>
         </div>
@@ -91,10 +84,21 @@
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/vehicle/contact']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Contact </span></a>
         </div>
+        <div class="ui-g-2 ui-md-2">
+            <a [routerLink]="['/vehicle/shift']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Shift </span></a>
+        </div>
     </div>
 
+
+    <h1 style="border-bottom:groove; border-bottom-color:lightblue"></h1>
+    <h4> Roles and Permission </h4>
+    <div class="ui-grid-row small-width">
+       
+    </div>
+
+    
     <h1 style="border-bottom:groove; border-bottom-color: lightpink"></h1>
-    <h4> Lookups </h4>
+    <h4> Test Facility </h4>
     <div class="ui-grid-row small-width">
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Project </span></a>
@@ -117,15 +121,35 @@
     </div>
 
     <h1 style="border-bottom:groove; border-bottom-color:lightgray"></h1>
-    <h4> BMR Lookups </h4>
+    <h4> Test Request </h4>
     <div class="ui-grid-row small-width">
         <div class="ui-g-2 ui-md-2 small-width">
             <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Build Lot </span></a>
         </div>
     </div>
 
+     <h1 style="border-bottom:groove; border-bottom-color:lightgray"></h1>
+    <h4> Test Template </h4>
+    <div class="ui-grid-row small-width">
+        <div class="ui-g-2 ui-md-2 small-width">
+            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Account </span></a>
+        </div>
+        <div class="ui-g-2 ui-md-2">
+            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Plans & Billing </span></a>
+        </div>
+        <div class="ui-g-2 ui-md-2">
+            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Import data from Zendesk </span></a>
+        </div>
+        <div class="ui-g-2 ui-md-2">
+            <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Day Pass </span></a>
+        </div>
+        <div class="ui-g-2 ui-md-2">
+            <a [routerLink]="['vehicle/equipmenttype']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Equipment Type </span></a>
+        </div>
+    </div>
+
     <h1 style="border-bottom:groove; border-bottom-color:lightgray"></h1>
-    <h4> Configurations </h4>
+    <h4> Vehicle </h4>
     <div class="ui-grid-row small-width">
         <div class="ui-g-2 ui-md-2 small-width">
             <a [routerLink]="['/vehicle']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Account </span></a>
@@ -142,4 +166,5 @@
         <div class="ui-g-2 ui-md-2">
             <a [routerLink]="['/equipmenttype']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Equipment Type </span></a>
         </div>
+    </div>
     </div>

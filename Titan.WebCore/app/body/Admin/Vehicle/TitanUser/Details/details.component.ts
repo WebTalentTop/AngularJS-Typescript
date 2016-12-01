@@ -48,7 +48,7 @@ export class DetailsComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: TitanUserService,
+        private service: TitanUserService
     )
     { }
 

@@ -45,7 +45,7 @@ export class DetailsComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ProjectStatusService,
+        private service: ProjectStatusService
     )
     { }
 
