@@ -1,5 +1,4 @@
-﻿
-
+﻿import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
@@ -33,17 +32,44 @@ export class DetailsComponent implements AfterViewInit {
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
         defaultDate: '2016-09-12',
-        events: [
-            {
-                title: 'All Day Event',
-                start: '2016-11-01'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2016-11-28'
-            }
-        ],
+
+        events: function (start, end, timezone, callback) {
+            $.ajax({
+                url: titanApiUrl + 'TestFacility/Schedule',
+                type: 'POST',
+                data: {
+                    startdate: '1-1-2016',
+                    enddate: '12-31-2018',
+
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
+                success: function (result) {
+                    var events = [];
+                  
+                    $.each(result.calendarEvents.$values, function (index, element) {
+                        element.start = element.start;
+                        element.end = element.end;
+                        element.title = element.title;
+                        element.url = element.url;
+                        events.push(element);
+                    });
+                    callback(events);
+                }
+            })
+        },
+        //events: [
+        //    {
+        //        title: 'All Day Event',
+        //        start: '2016-11-01'
+        //    },
+        //    {
+        //        title: 'Click for Google',
+        //        url: 'http://google.com/',
+        //        start: '2016-11-28'
+        //    }
+        //],
         // navLinks: true, // can click day/week names to navigate views
         editable: true
         //eventLimit: true
