@@ -23,15 +23,16 @@ export class AddComponent {
     }
     onSubmit(formRef) {
         console.log(formRef);
-        console.log(this.username);
-        console.log(this.description);
-        formRef.locale = "en-us";
-        formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        //console.log(this.username);
+        //console.log(this.description);
+        //formRef.locale = "en-us";
+        //formRef.isDeleted = false;
+        let formData: any = {id:'', name: '', description: '', isDeleted: false};
         formData.name = formRef.name;
         formData.description = formRef.description;
-        formData.locale = "en-us";
-        let added: any="true";
+       //formData.defaultLocale = "en-us";
+        formData.isDeleted = "false";
+      
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
             console.log('--------------res result------------', +res)

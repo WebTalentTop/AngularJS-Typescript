@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PermissionService } from '../../../../../shared/services/permission.service'
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,  InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
 
@@ -27,6 +27,7 @@ id: string;
         isDeleted: false,
         name: '',
         description: ''
+       // defaultLocale: ''
      //   userCreatedById: '',
       //  userModifiedById: '',
       //  createdOn: '',

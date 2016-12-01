@@ -1,6 +1,6 @@
 import { PermissionService } from '../../../../shared/services/permission.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { DataTable, LazyLoadEvent, Message } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'

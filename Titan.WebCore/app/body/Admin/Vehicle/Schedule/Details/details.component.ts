@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ScheduleService } from '../../../../../shared/services/schedule.service'
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,  InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
 
@@ -23,16 +23,12 @@ export class DetailsComponent {
     formObject: any;
 
     public ScheduleDetails: any = {
-        id: '',
-        isDeleted: false,
-        name: '',
+        id:'',
+        isDeleted: false,     
         recurranceCronExpression:'',
         startTimeUTC:'',
-        endTimeUTC:'',
-        userCreatedById: '',
-        userModifiedById: '',
-        createdOn: '',
-        modifiedOn: ''
+        endTimeUTC:''
+        
     };
 
 
@@ -59,7 +55,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.ScheduleId).subscribe(ScheduleDetails => {
-                this.ScheduleDetails = ScheduleDetails;
+                this.ScheduleDetails = ScheduleDetails.result;
                 this.ScheduleDetails.id = this.ScheduleId;
                 console.log(this.ScheduleDetails);
             });

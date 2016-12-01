@@ -27,11 +27,11 @@ export class AddComponent {
         console.log(this.description);
         formRef.locale = "en-us";
         formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', recurranceCronExpression:'', locale:'', isDeleted: false};
-        formData.name = formRef.name;
+        let formData: any = { startTimeUTC: '', endTimeUTC: '', recurranceCronExpression:'', defaultlocale:'', isDeleted: false};
+        formData.startTimeUTC = formRef.startTimeUTC;
         formData.recurranceCronExpression = formRef.recurranceCronExpression;
-        formData.description = formRef.description;
-        formData.locale = "en-us";
+        formData.endTimeUTC = formRef.endTimeUTC;
+        formData.defaultlocale = "en-us";
         let added: any="true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
