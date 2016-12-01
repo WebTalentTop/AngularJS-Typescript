@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
-import { TestVerificationMethodService} from '../../../../../shared/services/testverificationMethod.service';
+import { TestVerificationMethodService} from '../../../../../shared/services/testVerificationMethod.service';
 
 import { DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

@@ -13,7 +13,7 @@ const routes = [
     { path: 'project', loadChildren: 'app/body/Admin/Vehicle/Project/project.module' },
     { path: 'tenant', loadChildren: 'app/body/Admin/Vehicle/Tenant/tenant.module' },
     { path: 'testfacility', loadChildren: 'app/body/Admin/Vehicle/TestFacility/testfacility.module' },
-    { path: 'testverificationMethod', loadChildren: 'app/body/Admin/Vehicle/VerificationMethod/testverificationMethod.module' },
+    { path: 'testVerificationMethod', loadChildren: 'app/body/Admin/Vehicle/TestVerificationMethod/testVerificationMethod.module' },
     { path: 'testStatus', loadChildren: 'app/body/Admin/Vehicle/TestStatus/testStatus.module' },
     { path: 'milestoneEvent', loadChildren: 'app/body/Admin/Vehicle/MilestoneEvent/milestoneEvent.module' },
     { path: 'milestoneStatus', loadChildren: 'app/body/Admin/Vehicle/MilestoneStatus/milestoneStatus.module' },

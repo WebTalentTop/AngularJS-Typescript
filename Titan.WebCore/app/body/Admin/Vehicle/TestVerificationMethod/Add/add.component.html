@@ -1,0 +1,59 @@
+<div class="ui-g-12">
+
+    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+        <h3> Add Test Verification Method </h3>
+        <br />
+        <p-panel>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Test Verification Method Name * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Test Verification Method Name" minlength="3" #testVerificationMethodDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="testVerificationMethodDetailsNameRef.errors?.required">
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsNameRef.errors?.minlength">
+                            (MinLength-3)
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                         Description * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #testVerificationMethodDetailsDescriptionRef="ngModel"
+                            placeholder="TestVerification Method Description" class="form-control  col-sm-12" required ></textarea>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="testVerificationMethodDetailsNameRef.errors?.required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/testVerificationMethod">  </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        </p-panel>
+    </form>
+</div>

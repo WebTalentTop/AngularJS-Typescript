@@ -1,6 +1,6 @@
 ﻿<div class="ui-g-12">
     <div class="card card-w-title">
-        <h1>Edit Project Status </h1>
+        <h1>Edit Test Verification Method </h1>
 
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -10,19 +10,19 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Project Status Name * :
+                            TestVerification Method Name*:
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <input type="text" pInputText name="name" [(ngModel)]="ProjectStatusDetails.name" #projectStatusDetailsNameRef="ngModel"
-                                placeholder="Required" minlength="3" class="form-control" required row="20" />
+                            <input type="text" pInputText name="name" [(ngModel)]="TestVerificationMethodDetails.name" #testVerificationMethodDetailsNameRef="ngModel"
+                                placeholder="TestVerification Method Name" minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Project Status Name
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TestVerification Method Name
                             </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsNameRef.errors?.minlength">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsNameRef.errors?.minlength">
                                 MinLength-3
                             </div>
 
@@ -35,12 +35,12 @@
                         </div>
                         <div class="ui-grid-col-6">
                             <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
-                                #projectStatusDetailsDescriptionRef="ngModel" [(ngModel)]="ProjectStatusDetails.description"></textarea>
+                                #testVerificationMethodDetailsDescriptionRef="ngModel" [(ngModel)]="TestVerificationMethodDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Project Status Description
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TestVerification Method Description
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             IsActive :
                         </div>
                         <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="ProjectStatusDetails.isDeleted" name="isDeleted" #projectStatusDetailsisDeletedRef="ngModel"
+                            <p-toggleButton [(ngModel)]="TestVerificationMethodDetails.isDeleted" name="isDeleted" #testVerificationMethodDetailsisDeletedRef="ngModel"
                                 [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
                         </div>
                         <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/projectStatus" [style]="{'width':'20px'}">  </button>
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/testVerificationMethod" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>

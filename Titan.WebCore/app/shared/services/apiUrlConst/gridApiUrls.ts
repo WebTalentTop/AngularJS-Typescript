@@ -22,7 +22,7 @@ export class GridApiUrl {
     public static titanRoleGridUrl: string = titanApiUrl + 'titanRoleGrid/GetGridData';
     public static titanUserGridUrl: string = titanApiUrl + 'titanUserGrid/GetGridData';
     public static vehicleGridUrl: string = titanApiUrl + 'vehicleGrid/GetGridData';
-    public static testverificationMethodGridUrl: string = titanApiUrl + 'testverificationMethodGrid/GetGridData';
+    public static testVerificationMethodGridUrl: string = titanApiUrl + 'testVerificationMethodGrid/GetGridData';
     public static testStatusGridUrl: string = titanApiUrl + 'testStatusGrid/GetGridData';
     public static milestoneEventGridUrl: string = titanApiUrl + 'milestoneEventGrid/GetGridData';
     public static milestoneStatusGridUrl: string = titanApiUrl + 'milestoneStatusGrid/GetGridData';
