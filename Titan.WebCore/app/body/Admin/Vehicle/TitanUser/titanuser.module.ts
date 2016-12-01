@@ -1,14 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { TitanUserComponent } from "./titanuser.component";
-import { DataTableModule } from 'primeng/primeng';
+import { TitanUserComponent } from "./titanUser.component";
+import { DataTableModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import TitanUserRoutes from "./titanuser.routes";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
-import { TitanUserService } from '../../../../shared/services/titanuser.service';
+
+import { TitanUserService } from '../../../../shared/services/titanUser.service';
+
+import titanUserRoutes from "./titanUser.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, TitanUserRoutes],
+    imports: [CommonModule, DataTableModule, GridModule, titanUserRoutes, MessagesModule, GrowlModule],
     providers: [TitanUserService],
     declarations: [TitanUserComponent]
 })
