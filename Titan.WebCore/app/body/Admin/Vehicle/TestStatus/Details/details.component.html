@@ -1,6 +1,6 @@
 ﻿<div class="ui-g-12">
     <div class="card card-w-title">
-        <h1>Edit Project Status </h1>
+        <h1>Edit Test Status </h1>
 
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -10,23 +10,19 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Project Status Name * :
+                            Test Status Name * :
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <input type="text" pInputText name="name" [(ngModel)]="ProjectStatusDetails.name" #projectStatusDetailsNameRef="ngModel"
+                            <input type="text" pInputText name="name" [(ngModel)]="TestStatusDetails.name" #testStatusDetailsNameRef="ngModel"
                                 placeholder="Required" minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
-                            <!--<div class="ui-grid-col-4" *ngIf="projectStatusDetailsNameRef.errors?.required">
-                            <i class="fa fa-close"></i>
-                           <span> Please enter Project Status Name </span> 
 
-                        </div>-->
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Project Status Name
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Test Status Name
                             </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsNameRef.errors?.minlength">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsNameRef.errors?.minlength">
                                 MinLength-3
                             </div>
 
@@ -35,20 +31,16 @@
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Description * :
+                           TEst Status Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250" #projectStatusDetailsDescriptionRef="ngModel"
-                                [(ngModel)]="ProjectStatusDetails.description"></textarea>
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250" #testStatusDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="TestStatusDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
-                            <!--<div class="ui-grid-col-4" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
-                            <i class="fa fa-close"></i>
-                           <span> Please enter Project Description Name</span> 
 
-                        </div>-->
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Project Status Description
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Test Status Description
                             </div>
                         </div>
                     </div>
@@ -57,7 +49,7 @@
                             IsActive :
                         </div>
                         <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="ProjectStatusDetails.isDeleted" name="isDeleted" #projectStatusDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
+                            <p-toggleButton [(ngModel)]="TestStatusDetails.isDeleted" name="isDeleted" #testStatusDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
                         </div>
                     <div class="ui-grid-row">
@@ -67,7 +59,7 @@
                             <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
                         </div>                       
                         <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/projectStatus" [style]="{'width':'20px'}">  </button>
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/testStatus" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>
