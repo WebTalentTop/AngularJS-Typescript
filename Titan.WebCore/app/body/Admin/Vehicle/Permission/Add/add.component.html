@@ -7,7 +7,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Permission Name *
+                        Permission Name * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Permission Name" minlength="3" #permissionDetailsNameRef="ngModel"
@@ -17,28 +17,23 @@
                     <div class="ui-grid-col-4">
 
                         <div class="ui-grid-col-4" *ngIf="permissionDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
                         </div>
                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="permissionDetailsNameRef.errors?.minlength">
                             (MinLength-3)
-
                         </div>
 
                     </div>
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Permission Description *
+                        Permission Description * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #permissionDetailsDescriptionRef="ngModel"
-                            placeholder="Required" class="form-control" required />
+                            placeholder="Permission Description" class="form-control" required />
                     </div>
                     <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="permissionDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
+                        <div class="ui-grid-col-4" *ngIf="permissionDetailsDescriptionRef.errors?.required">
                         </div>
                     </div>
                 </div>

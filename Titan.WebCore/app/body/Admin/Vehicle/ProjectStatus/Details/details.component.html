@@ -38,8 +38,8 @@
                             Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250" #projectStatusDetailsDescriptionRef="ngModel"
-                                [(ngModel)]="ProjectStatusDetails.description"></textarea>
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
+                                #projectStatusDetailsDescriptionRef="ngModel" [(ngModel)]="ProjectStatusDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
                             <!--<div class="ui-grid-col-4" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
@@ -57,15 +57,16 @@
                             IsActive :
                         </div>
                         <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="ProjectStatusDetails.isDeleted" name="isDeleted" #projectStatusDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
+                            <p-toggleButton [(ngModel)]="ProjectStatusDetails.isDeleted" name="isDeleted" #projectStatusDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
-                        </div>
+                    </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
                         <div class="ui-grid-col">
                             <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>                       
+                        </div>
                         <div class="ui-grid-col">
                             <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/projectStatus" [style]="{'width':'20px'}">  </button>
                         </div>
