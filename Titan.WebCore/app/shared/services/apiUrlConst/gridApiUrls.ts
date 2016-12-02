@@ -34,4 +34,5 @@ export class GridApiUrl {
     public static downTimeReasonGridUrl: string = titanApiUrl + 'downTimeReasonGrid/GetGridData';
     public static entityFieldGridUrl: string = titanApiUrl + 'entityFieldGrid/GetGridData';
     public static contactGridUrl: string = titanApiUrl + 'contactgrid/GetGridData';
+    public static accessGroupGridUrl: string = titanApiUrl + 'accessGroupgrid/GetGridData';
 }

@@ -1,0 +1,73 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit Access Group </h1>
+
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Access Group Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="AccessGroupDetails.name" #accessGroupDetailsNameRef="ngModel"
+                                placeholder="Access Group Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Access Group Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsNameRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description * :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
+                                #accessGroupDetailsDescriptionRef="ngModel" [(ngModel)]="AccessGroupDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Access Group Description
+                            </div>
+                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="AccessGroupDetails.isDeleted" name="isDeleted" #accessGroupDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/accessGroup" [style]="{'width':'20px'}">  </button>
+                        </div>
+                    </div>
+                </div>
+            </p-panel>
+        </form>
+    </div>
+</div>

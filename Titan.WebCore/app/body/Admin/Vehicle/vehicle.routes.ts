@@ -25,6 +25,7 @@ const routes = [
     { path: 'downTimeReason', loadChildren: 'app/body/Admin/Vehicle/DownTimeReason/downTimeReason.module' },
     { path: 'entityField', loadChildren: 'app/body/Admin/Vehicle/EntityField/entityField.module' },
     { path: 'contact', loadChildren: 'app/body/Admin/Vehicle/Contact/contact.module' },
+    { path: 'accessGroup', loadChildren: 'app/body/Admin/Vehicle/AccessGroup/accessGroup.module' },
   ];
 
 export default RouterModule.forChild(routes);
