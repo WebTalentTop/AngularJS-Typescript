@@ -22,7 +22,7 @@
                                 <i class="fa fa-close"></i> Please enter Project Role Name
                             </div>
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsNameRef.errors?.minlength">
-                                (MinLength-3)
+                                MinLength-3
                             </div>
 
                         </div>
@@ -33,17 +33,16 @@
                             Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control  col-sm-12" required name="description" row="20" maxlength="4000" #projectRoleDetailsDescriptionRef="ngModel"
+                            <textarea type="text" pInputTextArea class="form-control  col-sm-12" required name="description" row="50" maxlength="250" #projectRoleDetailsDescriptionRef="ngModel"
                                 [(ngModel)]="ProjectRoleDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
-                            <!--<div class="ui-grid-col-4" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
-                            <i class="fa fa-close"></i>
-                           <span> Please enter Project Description Name</span> 
-
-                        </div>-->
+      
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter Project Role Description
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectRoleDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
                             </div>
                         </div>
                     </div>

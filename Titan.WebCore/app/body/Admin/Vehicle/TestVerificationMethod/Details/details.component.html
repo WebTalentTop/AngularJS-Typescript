@@ -42,6 +42,9 @@
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter TestVerification Method Description
                             </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testVerificationMethodDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
                         </div>
                     </div>
                     <div class="ui-grid-row">
