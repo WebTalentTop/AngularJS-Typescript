@@ -35,4 +35,5 @@ export class GridApiUrl {
     public static entityFieldGridUrl: string = titanApiUrl + 'entityFieldGrid/GetGridData';
     public static contactGridUrl: string = titanApiUrl + 'contactgrid/GetGridData';
     public static accessGroupGridUrl: string = titanApiUrl + 'accessGroupgrid/GetGridData';
+    public static accessGridUrl: string = titanApiUrl + 'accessgrid/GetGridData';
 }

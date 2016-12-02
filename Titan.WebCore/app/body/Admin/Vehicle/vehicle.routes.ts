@@ -26,6 +26,7 @@ const routes = [
     { path: 'entityField', loadChildren: 'app/body/Admin/Vehicle/EntityField/entityField.module' },
     { path: 'contact', loadChildren: 'app/body/Admin/Vehicle/Contact/contact.module' },
     { path: 'accessGroup', loadChildren: 'app/body/Admin/Vehicle/AccessGroup/accessGroup.module' },
+    { path: 'access', loadChildren: 'app/body/Admin/Vehicle/Access/access.module' },
   ];
 
 export default RouterModule.forChild(routes);
