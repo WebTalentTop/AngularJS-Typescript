@@ -7,10 +7,11 @@ import { TestFacilityRoleService } from '../../../shared/services/testFacilityRo
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
+import {MultiSelectModule} from 'primeng/primeng';
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, AutoCompleteModule, FormsModule, DataTableModule, TabViewModule, CalendarModule,ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, detailsRoutes],
+    imports: [CommonModule, RouterModule, AutoCompleteModule,MultiSelectModule ,FormsModule, DataTableModule, TabViewModule, CalendarModule,ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, detailsRoutes],
     providers: [TestFacilityService, TestFacilityRoleService, TestFacilityAttachmentService],
     declarations: [DetailsComponent]
 })
