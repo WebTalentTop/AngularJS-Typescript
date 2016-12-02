@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { PlatformService} from '../../../../../shared/services/platform.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CalendarModule, GrowlModule } from 'primeng/primeng';
+import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule,ToggleButtonModule, PanelModule, DropdownModule, CalendarModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule,
+    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule,ToggleButtonModule, InputTextModule, PanelModule,
         ButtonModule, DropdownModule, CalendarModule, GrowlModule, detailsRoutes],
     providers: [PlatformService],
     declarations: [DetailsComponent],

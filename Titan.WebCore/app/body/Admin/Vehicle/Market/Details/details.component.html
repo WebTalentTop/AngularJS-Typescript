@@ -22,7 +22,7 @@
                                 <i class="fa fa-close"></i> Please enter Market Name
                             </div>
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.minlength">
-                                (MinLength-3)
+                                MinLength-3
                             </div>
 
                         </div>
@@ -33,21 +33,36 @@
                            Market Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #marketDetailsDescriptionRef="ngModel"
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="50" maxlength="250" #marketDetailsDescriptionRef="ngModel"
                                 [(ngModel)]="MarketDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter Market Description
                             </div>
+                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="MarketDetails.isDeleted" name="isDeleted" #marketDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
                     </div>
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
-                        <div class="ui-grid-col-2">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                         <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/market" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>

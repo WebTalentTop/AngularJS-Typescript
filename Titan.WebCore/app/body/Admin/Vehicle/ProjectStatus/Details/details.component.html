@@ -42,6 +42,9 @@
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter Project Status Description
                             </div>
+                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="projectStatusDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
                         </div>
                     </div>
                     <div class="ui-grid-row">

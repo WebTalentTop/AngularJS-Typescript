@@ -7,7 +7,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Build Level Name *
+                        Build Level Name * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Build Level Name" minlength="3" #buildLevelDetailsNameRef="ngModel"
@@ -21,7 +21,7 @@
 
                         </div>
                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="buildLevelDetailsNameRef.errors?.minlength">
-                            (MinLength-3)
+                            MinLength-3
 
                         </div>
 
@@ -29,11 +29,11 @@
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Build Level Description *
+                        Build Level Description * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #buildLevelDetailsDescriptionRef="ngModel"
-                            placeholder="Required" class="form-control" required />
+                            placeholder="Build Level Description" row="50" maxlength="250" class="form-control" required />
                     </div>
                     <div class="ui-grid-col-4">
                         <div class="ui-grid-col-4" *ngIf="buildLevelDetailsNameRef.errors?.required">

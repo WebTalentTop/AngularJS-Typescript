@@ -19,7 +19,7 @@
                         <div class="ui-grid-col-4" *ngIf="permissionDetailsNameRef.errors?.required">
                         </div>
                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="permissionDetailsNameRef.errors?.minlength">
-                            (MinLength-3)
+                            MinLength-3
                         </div>
 
                     </div>
@@ -30,9 +30,9 @@
                     </div>
                     <div class="ui-grid-col-6">
 
-                      
-                        <input type="text" name="description" pInputText [(ngModel)]="description" #permissionDetailsDescriptionRef="ngModel"
-                            placeholder="Permission Description" class="form-control" required />
+
+                        <input type="text" name="description" pInputText [(ngModel)]="description" #permissionDetailsDescriptionRef="ngModel" placeholder="Permission Description"
+                            class="form-control" required />
 
                     </div>
                     <div class="ui-grid-col-4">

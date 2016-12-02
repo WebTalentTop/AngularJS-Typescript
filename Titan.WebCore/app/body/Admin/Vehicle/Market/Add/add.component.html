@@ -7,7 +7,7 @@
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Market Name *
+                        Market Name * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Market Name" minlength="3" #marketDetailsNameRef="ngModel"
@@ -21,7 +21,7 @@
 
                         </div>
                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.minlength">
-                            (MinLength-3)
+                            MinLength-3
 
                         </div>
 
@@ -29,7 +29,7 @@
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Market Description *
+                        Market Description * :
                     </div>
                     <div class="ui-grid-col-6">
                         <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #marketDetailsDescriptionRef="ngModel"
