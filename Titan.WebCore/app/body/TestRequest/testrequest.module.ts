@@ -1,17 +1,17 @@
-import { NgModule } from "@angular/core";
+﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TestRequestComponent } from "./testrequest.component";
-import { FormsModule} from '@angular/forms';
-import { TestFacilityService } from '../../shared/services/testfacility.service';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule  } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import testrequestRoutes from "./testrequest.routes";
+import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
+import testRequestRoutes from "./testrequest.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, testrequestRoutes],
+    imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, InputTextareaModule, TabViewModule, GridModule, testRequestRoutes],
     providers: [TestFacilityService],
     declarations: [TestRequestComponent]
 })
 
-export default class DetailsModule { }
+export default class TestRequestModule { }

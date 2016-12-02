@@ -1,72 +1,78 @@
-import { TestFacilityService } from '../../shared/services/testfacility.service';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+﻿import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { LoggerService } from './../../shared/services/logger.service';
+import { LazyLoadEvent } from 'primeng/primeng';
+import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router'
+import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
 
+
+declare var $: JQueryStatic;
+declare var fullcalendardef: FullCalendar.Calendar;
 @Component({
     selector: 'test-request',
     templateUrl: 'app/body/TestRequest/testrequest.component.html'
 })
-export class TestRequestComponent {
+export class TestRequestComponent implements AfterViewInit {
+    
+    ngAfterViewInit() {
+        $('#calendar').fullCalendar({
+            theme: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            defaultDate: '2016-09-12',
 
-    username: string;
-    details:string;
+           // events:
+            //function (start, end, timezone, callback) {
+            //    $.ajax({
+            //        url: titanApiUrl + 'TestFacility/Schedule',
+            //        type: 'POST',
+            //        data: {
+            //            startdate: '1-1-2016',
+            //            enddate: '12-31-2018',
 
-    formConfiguration:any;
-    formObject:any;
-    formEquipmentObject:any;
-    id: string;
-    entityType: string = "TestFacility";
-     entityId: string = this.id;
-    filepath: string = "TestFacility";
- 
-    model:any = {
-                id:'', 
-                isDeleted:false, 
-                name:'', 
-                createdOn:'', 
-                modifiedOn:'',
-                userCreatedById:'',
-                userInChargedId:'',
-                userModifiedById:''
-    };
-    msgs:Message[];
-    uploadedFiles: any[] = [];
+            //        },
+            //        error: function () {
+            //            alert('there was an error while fetching events!');
+            //        },
+            //        success: function (result) {
+            //            var events = [];
 
-    constructor(
-        private route:ActivatedRoute, 
-        private dataService: TestFacilityService
-   
-    ){
-        this.route.params.subscribe(params => this.id = params['id']);
-          this.entityId = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
+            //            $.each(result.calendarEvents.$values, function (index, element) {
+            //                element.start = element.start;
+            //                element.end = element.end;
+            //                element.title = element.title;
+            //                element.url = element.url;
+            //                events.push(element);
+            //            });
+            //            callback(events);
+            //        }
+            //    })
+            //},
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: '2016-12-01'
+                },
+                {
+                    title: 'Click for Event',
+                    url: './testrequest/details/1',
+                    start: '2016-12-28'
+                }
+            ],
+            // navLinks: true, // can click day/week names to navigate views
+            editable: true
+            //eventLimit: true
+        });
+
     }
-   handleChange(event)
-   {
-
-       console.log('tes---',event);
-       console.log('-------targetid-------',event.originalEvent.target.innerText);
-   }
     ngOnInit() {
-        //this.dataService.getById(this.id)
-        //    .subscribe(res =>
-        //    {
-        //        this.formConfiguration = res.formConfiguration;
-        //        this.formObject = res.formObject;
-        //        this.model = res.formObject;
-        //        console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-        //        console.log("----- Result of formObject -----", this.model);
-        //    });
-      
-        // this.dataService.getEquipmentsByIdusing(this.id)
-          //  .subscribe(res =>
-            //{
-              //  this.TestFacilityEquipments = res;
-                                       
-           // });
+   
     }
 
-  
+   
 
 }
