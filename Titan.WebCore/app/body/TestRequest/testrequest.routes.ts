@@ -1,4 +1,4 @@
-﻿import { TestRequestComponent } from "./testrequest.component";
+import { TestRequestComponent } from "./testrequest.component";
 import { RouterModule } from "@angular/router";
 
 const routes = [

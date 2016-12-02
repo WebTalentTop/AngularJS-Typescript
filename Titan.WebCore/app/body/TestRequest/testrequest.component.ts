@@ -1,82 +1,72 @@
-import { PlatformService } from './../../shared/services/platform.service';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
+import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'test-request',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/TestRequest/testrequest.component.html'
 })
 export class TestRequestComponent {
-    title = "Test Request";
-    gridData = [];
-    confInfo:any = {};
-    cols = [];
-    gridFilter = {};
 
-    constructor(private service: PlatformService) {
+    username: string;
+    details:string;
 
+    formConfiguration:any;
+    formObject:any;
+    formEquipmentObject:any;
+    id: string;
+    entityType: string = "TestFacility";
+     entityId: string = this.id;
+    filepath: string = "TestFacility";
+ 
+    model:any = {
+                id:'', 
+                isDeleted:false, 
+                name:'', 
+                createdOn:'', 
+                modifiedOn:'',
+                userCreatedById:'',
+                userInChargedId:'',
+                userModifiedById:''
+    };
+    msgs:Message[];
+    uploadedFiles: any[] = [];
+
+    constructor(
+        private route:ActivatedRoute, 
+        private dataService: TestFacilityService
+   
+    ){
+        this.route.params.subscribe(params => this.id = params['id']);
+          this.entityId = this.id;
+        console.log("---- TF Details ID Param -----", this.id);
     }
+   handleChange(event)
+   {
 
+       console.log('tes---',event);
+       console.log('-------targetid-------',event.originalEvent.target.innerText);
+   }
     ngOnInit() {
-        let resData:any;
-        this.service.postGridData()
-            .subscribe(res => {
-                resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
+        //this.dataService.getById(this.id)
+        //    .subscribe(res =>
+        //    {
+        //        this.formConfiguration = res.formConfiguration;
+        //        this.formObject = res.formObject;
+        //        this.model = res.formObject;
+        //        console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
+        //        console.log("----- Result of formObject -----", this.model);
+        //    });
+      
+        // this.dataService.getEquipmentsByIdusing(this.id)
+          //  .subscribe(res =>
+            //{
+              //  this.TestFacilityEquipments = res;
+                                       
+           // });
     }
 
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
+  
 
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.service.postGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-        console.log("---------- Event ---------",event);
-
-    }
-    private getGridFilterValues(event: LazyLoadEvent) {
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
-                }
-                console.log("------- filters ----------", filters);
-            }
-        }
-        this.gridFilter = {
-            locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
-        };
-    }
 }
