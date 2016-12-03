@@ -9,7 +9,7 @@
         <script src="libs/zone.js"></script>
         <script src="libs/Reflect.js"></script>
         <script src="libs/system.src.js"></script>*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <!-- Layout CSS -->
     @*<link rel="stylesheet" type="text/css" href="library/icons/css/font-awesome.min.css" />*@
@@ -19,24 +19,24 @@
     <link id="layout-css" rel="stylesheet" type="text/css" href="resources/layout/css/layout-greyorange.css">
 
     <!-- PrimeNG CSS -->
-    <link rel="stylesheet" type="text/css" href="resources/demo/css/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.css" />
     <link rel="stylesheet" type="text/css" href="lib/primeng/resources/primeng.min.css" />
     @*<link rel="stylesheet" type="text/css" href="resources/theme/theme-purple-amber.css" />*@
 
     <!-- 1. Load libraries -->
     <script src="resources/demo/js/jquery.deps.js"></script>    <!-- Calendar -->
     <script src="resources/layout/js/layout.js"></script>       <!-- Menu -->
-    <script src="resources/demo/js/charts.min.js"></script>     <!-- Charts -->
-    <script src="resources/demo/js/moment.js"></script>         <!-- Schedule -->
-    <script src="resources/demo/js/fullcalendar.js"></script>   <!-- Schedule -->
+    @*<script src="resources/demo/js/charts.min.js"></script>*@     <!-- Charts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.js"></script>         <!-- Schedule -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>   <!-- Schedule -->
     <script src="resources/demo/js/quill.min.js"></script>      <!-- Editor -->
 
     <script src="~/resources/spreadjs/gcspread.sheets.all.9.40.20161.0.min.js"></script>
     <link id="layout-spreadjs-css" rel="stylesheet" type="text/css" href="resources/spreadjs/css/gcspread.sheets.9.40.20161.0.css">
 
     @*<link rel="stylesheet" type="text/css" href="~/primengThemes/theme.css" />
-    <link rel="stylesheet" type="text/css" href="~/icons/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="~/primengThemes/primeng.min.css" />*@
+        <link rel="stylesheet" type="text/css" href="~/icons/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="~/primengThemes/primeng.min.css" />*@
     <script src="/lib-npm/es6-shim/es6-shim.js"></script>
 
     <script src="libs/zone.js"></script>
@@ -59,8 +59,9 @@
     </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
     @RenderSection("scripts", required: false)
 
 </body>
 </html>
+
