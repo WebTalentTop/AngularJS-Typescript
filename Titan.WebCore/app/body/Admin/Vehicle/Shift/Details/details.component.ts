@@ -58,7 +58,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.ShiftId).subscribe(ShiftDetails => {
-                this.ShiftDetails = ShiftDetails;
+                this.ShiftDetails = ShiftDetails.result;
                 this.ShiftDetails.id = this.ShiftId;
                 console.log(this.ShiftDetails);
             });

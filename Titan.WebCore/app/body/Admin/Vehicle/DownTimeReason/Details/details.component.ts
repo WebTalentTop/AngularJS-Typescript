@@ -57,7 +57,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.DownTimeReasonId).subscribe(DownTimeReasonDetails => {
-                this.DownTimeReasonDetails = DownTimeReasonDetails;
+                this.DownTimeReasonDetails = DownTimeReasonDetails.result;
                 this.DownTimeReasonDetails.id = this.DownTimeReasonId;
                 console.log(this.DownTimeReasonDetails);
             });

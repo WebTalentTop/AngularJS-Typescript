@@ -1,8 +1,8 @@
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { DataTable, TabViewModule,  LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
+import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-
+declare var $: JQueryStatic;
 @Component({
     selector: 'details-testrequest',
     templateUrl: 'app/body/TestRequest/Details/details.component.html'
