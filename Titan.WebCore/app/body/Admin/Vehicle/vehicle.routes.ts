@@ -27,6 +27,7 @@ const routes = [
     // { path: 'contact', loadChildren: 'app/body/Admin/Vehicle/Contact/contact.module' },
     { path: 'accessGroup', loadChildren: 'app/body/Admin/Vehicle/AccessGroup/accessGroup.module' },
     { path: 'access', loadChildren: 'app/body/Admin/Vehicle/Access/access.module' },
+    { path: 'role', loadChildren: 'app/body/Admin/Vehicle/Role/role.module' },
   ];
 
 export default RouterModule.forChild(routes);
