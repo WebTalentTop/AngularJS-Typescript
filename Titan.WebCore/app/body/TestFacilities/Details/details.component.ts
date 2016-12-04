@@ -23,59 +23,7 @@ declare var fullcalendardef: FullCalendar.Calendar;
     templateUrl: 'app/body/TestFacilities/Details/details.component.html'
 })
 export class DetailsComponent implements AfterViewInit {
-    ngAfterViewInit() {
-    $('#calendar').fullCalendar({
-        theme: true,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        defaultDate: '2016-09-12',
 
-        events: function (start, end, timezone, callback) {
-            $.ajax({
-                url: titanApiUrl + 'TestFacility/Schedule',
-                type: 'POST',
-                data: {
-                    startdate: '1-1-2016',
-                    enddate: '12-31-2018',
-
-                },
-                error: function () {
-                    alert('there was an error while fetching events!');
-                },
-                success: function (result) {
-                    var events = [];
-                  
-                    $.each(result.calendarEvents.$values, function (index, element) {
-                        element.start = element.start;
-                        element.end = element.end;
-                        element.title = element.title;
-                        element.url = element.url;
-                        events.push(element);
-                    });
-                    callback(events);
-                }
-            })
-        },
-        //events: [
-        //    {
-        //        title: 'All Day Event',
-        //        start: '2016-11-01'
-        //    },
-        //    {
-        //        title: 'Click for Google',
-        //        url: 'http://google.com/',
-        //        start: '2016-11-28'
-        //    }
-        //],
-        // navLinks: true, // can click day/week names to navigate views
-        editable: true
-        //eventLimit: true
-    });
-       
-   }
     username: string;
     details: string;
 
@@ -102,7 +50,9 @@ export class DetailsComponent implements AfterViewInit {
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
-
+    // Hide show Tab Panels
+    displayEquipmentTab: boolean = false;
+    displayScheduleTab: boolean = false;
     model: any = {
         id: '',
         isDeleted: false,
@@ -128,14 +78,66 @@ export class DetailsComponent implements AfterViewInit {
         this.entityId = this.id;
         console.log("---- TF Details ID Param -----", this.id);
     }
-    handleChange(event) {
+    ngAfterViewInit() {
 
-        console.log('tes---', event);
+    }
+    handleChange(event) {
+        console.log('--------tab changed---', event);
         console.log('-------targetid-------', event.originalEvent.target.innerText);
+        if (event.originalEvent.currentTarget.classList.contains("equipment")) {
+            this.displayEquipmentTab = true;
+        } else if (!this.displayScheduleTab && event.originalEvent.currentTarget.classList.contains("schedule")) {
+            this.displayScheduleTab = true;
+            $("#calendar").parent('.ui-tabview-panel').show();
+            let ref = this;
+            setTimeout(function () { ref.initSchedule(); }, 10);
+        }
+
+
+    }
+    initSchedule() {
+        $('#calendar').fullCalendar({
+            theme: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            defaultDate: '2016-09-12',
+
+            events: function (start, end, timezone, callback) {
+                $.ajax({
+                    url: titanApiUrl + 'TestFacility/Schedule',
+                    type: 'POST',
+                    data: {
+                        startdate: '1-1-2016',
+                        enddate: '12-31-2018',
+
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+
+                        $.each(result.calendarEvents.$values, function (index, element) {
+                            element.start = element.start;
+                            element.end = element.end;
+                            element.title = element.title;
+                            element.url = element.url;
+                            events.push(element);
+                        });
+                        callback(events);
+                    }
+                })
+            },
+            editable: true
+
+        });
     }
     ngOnInit() {
 
-      
+
         this.getUserRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
@@ -330,6 +332,7 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
+
 
 
 }
