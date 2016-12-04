@@ -1,4 +1,4 @@
-import { RoleService } from '../../../../shared/services/role.service';
+import { MilestoneService } from '../../../../shared/services/milestone.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -6,18 +6,18 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
 
 @Component({
-    selector: 'role-grid',
-    templateUrl: 'app/body/Admin/Vehicle/Role/role.component.html'
+    selector: 'milestone-grid',
+    templateUrl: 'app/body/Admin/Vehicle/Milestone/milestone.component.html'
 })
-export class RoleComponent {
-    //title = "Role Grid";
+export class MilestoneComponent {
+    //title = "Milestone Grid";
     gridData = [];
     confInfo:any = {};
     cols = [];
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: RoleService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private service: MilestoneService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
     
@@ -51,6 +51,6 @@ export class RoleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/role/details', id]);
+        this.router.navigate(['vehicle/milestone/details', id]);
     }
 }

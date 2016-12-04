@@ -36,4 +36,6 @@ export class GridApiUrl {
     public static contactGridUrl: string = titanApiUrl + 'contactgrid/GetGridData';
     public static accessGroupGridUrl: string = titanApiUrl + 'accessGroupgrid/GetGridData';
     public static accessGridUrl: string = titanApiUrl + 'accessgrid/GetGridData';
+    public static roleGridUrl: string = titanApiUrl + 'rolegrid/GetGridData';
+    public static milestoneGridUrl: string = titanApiUrl + 'milestonegrid/GetGridData';
 }

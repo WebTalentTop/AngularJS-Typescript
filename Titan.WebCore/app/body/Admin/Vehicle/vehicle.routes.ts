@@ -28,6 +28,7 @@ const routes = [
     { path: 'accessGroup', loadChildren: 'app/body/Admin/Vehicle/AccessGroup/accessGroup.module' },
     { path: 'access', loadChildren: 'app/body/Admin/Vehicle/Access/access.module' },
     { path: 'role', loadChildren: 'app/body/Admin/Vehicle/Role/role.module' },
+    { path: 'milestone', loadChildren: 'app/body/Admin/Vehicle/Milestone/milestone.module' },
   ];
 
 export default RouterModule.forChild(routes);

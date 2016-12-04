@@ -18,7 +18,7 @@ export class DetailsComponent {
     entityType: string = "Milestone";
     entityId: string = this.id;
     filepath: string = "Milestone";
-    milestone = { name: '' };   
+    Milestone = { name: '' };   
     formConfiguration: any;
     formObject: any;
 
