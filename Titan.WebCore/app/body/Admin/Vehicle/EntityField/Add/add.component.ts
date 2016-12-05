@@ -27,7 +27,22 @@ export class AddComponent {
         console.log(this.description);
         formRef.locale = "en-us";
         formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = {
+           
+            description: '',
+             isDeleted: false,
+            entityIdentifierId :'',
+           
+          allowMultiSelect :'',
+          isRequired :'',
+          isInitialized :'',
+          tenantId :'',
+          userCreatedById :'',
+          createdOn :'',
+          userModifiedById :'',
+          modifiedOn :''
+         
+        };
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";

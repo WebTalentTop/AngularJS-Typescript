@@ -58,7 +58,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.ShiftId).subscribe(ShiftDetails => {
-                this.ShiftDetails = ShiftDetails;
+                this.ShiftDetails = ShiftDetails.result;
                 this.ShiftDetails.id = this.ShiftId;
                 console.log(this.ShiftDetails);
             });
@@ -71,6 +71,6 @@ export class DetailsComponent {
         this.service.postUpdate(this.ShiftDetails).subscribe(ShiftDetails => {
         });
          this.msgs = [];
-         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
+         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

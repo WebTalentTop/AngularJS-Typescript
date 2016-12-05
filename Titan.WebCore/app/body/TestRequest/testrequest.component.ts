@@ -1,82 +1,78 @@
-import { PlatformService } from './../../shared/services/platform.service';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
-import { Component } from '@angular/core';
+﻿import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { LoggerService } from './../../shared/services/logger.service';
+import { LazyLoadEvent } from 'primeng/primeng';
+import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router'
+import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
 
+
+declare var $: JQueryStatic;
+declare var fullcalendardef: FullCalendar.Calendar;
 @Component({
     selector: 'test-request',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/TestRequest/testrequest.component.html'
 })
-export class TestRequestComponent {
-    title = "Test Request";
-    gridData = [];
-    confInfo:any = {};
-    cols = [];
-    gridFilter = {};
+export class TestRequestComponent implements AfterViewInit {
+    
+    ngAfterViewInit() {
+        $('#calendar').fullCalendar({
+            theme: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            defaultDate: '2016-09-12',
 
-    constructor(private service: PlatformService) {
+           // events:
+            //function (start, end, timezone, callback) {
+            //    $.ajax({
+            //        url: titanApiUrl + 'TestFacility/Schedule',
+            //        type: 'POST',
+            //        data: {
+            //            startdate: '1-1-2016',
+            //            enddate: '12-31-2018',
 
-    }
+            //        },
+            //        error: function () {
+            //            alert('there was an error while fetching events!');
+            //        },
+            //        success: function (result) {
+            //            var events = [];
 
-    ngOnInit() {
-        let resData:any;
-        this.service.postGridData()
-            .subscribe(res => {
-                resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
-    }
-
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
-
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.service.postGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-        console.log("---------- Event ---------",event);
-
-    }
-    private getGridFilterValues(event: LazyLoadEvent) {
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
+            //            $.each(result.calendarEvents.$values, function (index, element) {
+            //                element.start = element.start;
+            //                element.end = element.end;
+            //                element.title = element.title;
+            //                element.url = element.url;
+            //                events.push(element);
+            //            });
+            //            callback(events);
+            //        }
+            //    })
+            //},
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: '2016-12-01'
+                },
+                {
+                    title: 'Click for Event',
+                    url: './testrequest/details/1',
+                    start: '2016-12-28'
                 }
-                console.log("------- filters ----------", filters);
-            }
-        }
-        this.gridFilter = {
-            locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
-        };
+            ],
+            // navLinks: true, // can click day/week names to navigate views
+            editable: true
+            //eventLimit: true
+        });
+
     }
+    ngOnInit() {
+   
+    }
+
+   
+
 }

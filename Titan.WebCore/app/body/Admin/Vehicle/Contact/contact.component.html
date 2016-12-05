@@ -6,7 +6,8 @@
         <div class="ui-grid-row">
             <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Contact</a>
             <p-messages [value]="msgs"></p-messages>
-          
+          <div class="ui-messages-success">
+          </div>
             <grid-data [gridData]="gridData"
                        [cols]='cols'
                        [confInfo]="confInfo"

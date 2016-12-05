@@ -14,8 +14,8 @@
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <input type="text" pInputText name="name" [(ngModel)]="BuildLevelDetails.name" #buildLevelDetailsNameRef="ngModel"
-                                placeholder="Build Level Name" minlength="3" class="form-control" required row="20" />
+                            <input type="text" pInputText name="name" [(ngModel)]="BuildLevelDetails.name" #buildLevelDetailsNameRef="ngModel" placeholder="Build Level Name"
+                                minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
 
@@ -23,7 +23,7 @@
                                 <i class="fa fa-close"></i> Please enter Build Level Name
                             </div>
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="buildLevelDetailsNameRef.errors?.minlength">
-                                (MinLength-3)
+                                MinLength-3
                             </div>
 
                         </div>
@@ -34,7 +34,7 @@
                             Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #buildLevelDetailsDescriptionRef="ngModel"
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="50" maxlength="250" #buildLevelDetailsDescriptionRef="ngModel"
                                 [(ngModel)]="BuildLevelDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
@@ -42,14 +42,27 @@
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="buildLevelDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter Build Level Description
                             </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="buildLevelDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
                         </div>
                     </div>
-
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="BuildLevelDetails.isDeleted" name="isDeleted" #buildLevelDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
-                        <div class="ui-grid-col-2">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/buildLevel" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>

@@ -67,6 +67,6 @@ export class DetailsComponent {
         this.service.postUpdate(this.MarketDetails).subscribe(MarketDetails => {
         });
          this.msgs = [];
-         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
+         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

@@ -2,6 +2,7 @@ import { titanApiUrl } from './titanApiUrl';
 
 export class GridApiUrl {
     public static buildLevelGridUrl: string = titanApiUrl + 'buildLevelGrid/GetGridData';
+    public static roleGridUrl: string = titanApiUrl + 'roleGrid/GetGridData';
     public static calendarGridUrl: string = titanApiUrl + 'calendarGrid/GetGridData';
     public static lookupGridUrl: string = titanApiUrl + 'lookupGrid/GetGridData';
     public static departmentGridUrl: string = titanApiUrl + 'departmentGrid/GetGridData';
@@ -14,6 +15,7 @@ export class GridApiUrl {
     public static projectGridUrl: string = titanApiUrl + 'projectGrid/GetGridData';
     public static tenantGridUrl: string = titanApiUrl + 'tenantGrid/GetGridData';
     public static testFacilityGridUrl: string = titanApiUrl + 'testFacilityGrid/GetGridData';
+    public static stepGridUrl: string = titanApiUrl + 'stepGrid/GetGridData';
     public static testModeGridUrl: string = titanApiUrl + 'testModeGrid/GetGridData';
     public static testTemplateGridUrl: string = titanApiUrl + 'testTemplateGrid/GetGridData';
     public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementGrid/GetGridData';
@@ -34,4 +36,16 @@ export class GridApiUrl {
     public static downTimeReasonGridUrl: string = titanApiUrl + 'downTimeReasonGrid/GetGridData';
     public static entityFieldGridUrl: string = titanApiUrl + 'entityFieldGrid/GetGridData';
     public static contactGridUrl: string = titanApiUrl + 'contactgrid/GetGridData';
+    public static accessGroupGridUrl: string = titanApiUrl + 'accessGroupgrid/GetGridData';
+    public static accessGridUrl: string = titanApiUrl + 'accessgrid/GetGridData';
+    public static roleGridUrl: string = titanApiUrl + 'rolegrid/GetGridData';
+    public static milestoneGridUrl: string = titanApiUrl + 'milestonegrid/GetGridData';
+    public static milestoneCategoryGridUrl: string = titanApiUrl + 'milestoneCategorygrid/GetGridData';
+    public static milestoneTypeGridUrl: string = titanApiUrl + 'milestoneTypegrid/GetGridData';
+    public static gradeGridUrl: string = titanApiUrl + 'gradegrid/GetGridData';
+    public static modelNameGridUrl: string = titanApiUrl + 'modelNamegrid/GetGridData';
+    public static modelYearGridUrl: string = titanApiUrl + 'modelYeargrid/GetGridData';
+    public static maintenanceFrequencyGridUrl: string = titanApiUrl + 'maintenanceFrequencygrid/GetGridData';
+    public static vehicleTypeGridUrl: string = titanApiUrl + 'vehicleTypegrid/GetGridData';
+    public static requirementItemTypeGridUrl: string = titanApiUrl + 'requirementItemTypegrid/GetGridData';
 }

@@ -4,8 +4,9 @@
         <h1> Build Levels </h1>
         <div class="ui-grid-row">
             <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Build Level</a>
-            
+            <div class="ui-messages-success">
             <p-messages [value]="msgs"></p-messages>
+            </div>
             <grid-data [gridData]="gridData"
                        [cols]='cols'
                        [confInfo]="confInfo"

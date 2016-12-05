@@ -70,6 +70,6 @@ id: string;
         this.service.postUpdate(this.PermissionDetails).subscribe(PermissionDetails => {
         });
          this.msgs = [];
-         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
+         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

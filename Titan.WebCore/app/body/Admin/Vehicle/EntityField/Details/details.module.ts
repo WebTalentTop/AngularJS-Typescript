@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { EntityFieldService} from '../../../../../shared/services/entityField.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, GrowlModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule,ToggleButtonModule, PanelModule, GrowlModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, 
+    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule,ToggleButtonModule, InputTextModule, PanelModule, 
         ButtonModule, DropdownModule, GrowlModule, CalendarModule, detailsRoutes],
     providers: [EntityFieldService],
     declarations: [DetailsComponent],

@@ -1,0 +1,54 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit Milestone </h1>
+
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Milestone Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="MilestoneDetails.name" #milestoneDetailsNameRef="ngModel"
+                                placeholder="Milestone Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Milestone Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneDetailsNameRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="MilestoneDetails.isDeleted" name="isDeleted" #milestoneDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/milestone" [style]="{'width':'20px'}">  </button>
+                        </div>
+                    </div>
+                </div>
+            </p-panel>
+        </form>
+    </div>
+</div>

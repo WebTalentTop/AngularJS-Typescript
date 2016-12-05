@@ -57,7 +57,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.DownTimeReasonId).subscribe(DownTimeReasonDetails => {
-                this.DownTimeReasonDetails = DownTimeReasonDetails;
+                this.DownTimeReasonDetails = DownTimeReasonDetails.result;
                 this.DownTimeReasonDetails.id = this.DownTimeReasonId;
                 console.log(this.DownTimeReasonDetails);
             });
@@ -69,6 +69,6 @@ export class DetailsComponent {
         this.service.postUpdate(this.DownTimeReasonDetails).subscribe(DownTimeReasonDetails => {
         });
          this.msgs = [];
-         this.msgs.push({ severity: 'info', summary: 'Saved', detail: '' });
+         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

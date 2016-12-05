@@ -4,25 +4,27 @@
 
         <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
         <p-tabView (onChange)="handleChange($event)">
+
+
             <p-tabPanel header="Details ||" id='details'>
                 <p-growl [value]="msgs"></p-growl>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                    <br/>
+                    <br />
                     <p-panel>
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                             <!-- Test Facility Id -->
                             <!--<div class="ui-grid-row">
-                    <div class="ui-grid-col-2">Test Facility Id</div>
-                    <div class="ui-grid-col-6">
-                        <input pInputText
-                               [(ngModel)]="testFacility.id"
-                               #testFacilityIdRef="ngModel"
-                               class="form-control"
-                               disabled="disabled"/>
+                                <div class="ui-grid-col-2">Test Facility Id</div>
+                                <div class="ui-grid-col-6">
+                                    <input pInputText
+                                           [(ngModel)]="testFacility.id"
+                                           #testFacilityIdRef="ngModel"
+                                           class="form-control"
+                                           disabled="disabled"/>
 
-                    </div>
-                    <div class="ui-grid-4"></div>
-                </div>-->
+                                </div>
+                                <div class="ui-grid-4"></div>
+                            </div>-->
                             <!-- Test Facility Name -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -30,7 +32,7 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel" placeholder="Required-min(3)"
-                                        minlength="3" class="form-control" required row="20" />
+                                           minlength="3" class="form-control" required row="20" />
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
@@ -50,7 +52,7 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <textarea type="text" pInputTextArea name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
-                                        #tfAddress1Ref="ngModel"></textarea>
+                                              #tfAddress1Ref="ngModel"></textarea>
                                 </div>
 
                                 <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
@@ -69,7 +71,7 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     <textarea type="text" pInputTextArea class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
-                                        #tfAddress2Ref="ngModel"></textarea>
+                                              #tfAddress2Ref="ngModel"></textarea>
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
@@ -84,8 +86,7 @@
                                     City:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city"
-                                    />
+                                    <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city" />
                                 </div>
 
 
@@ -102,11 +103,11 @@
                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
 
 
-                <!-- Test Facility Operation Hours -->
+                            <!-- Test Facility Operation Hours -->
                             <!-- <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
 
 
-                <!-- Test Facility Operation Hours -->
+                            <!-- Test Facility Operation Hours -->
                             <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
                             <!-- Test Facility Description -->
                             <div class="ui-grid-row">
@@ -114,8 +115,7 @@
                                     State:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                    />
+                                    <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">
@@ -128,8 +128,7 @@
                                     Postal Code:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
-                                    />
+                                    <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">
@@ -147,18 +146,19 @@
                                 </div>
                             </div>
                             <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-                    Form Submitted
-                    <br>
-                </div>-->
+                                Form Submitted
+                                <br>
+                            </div>-->
                         </div>
                         <div></div>
 
                     </p-panel>
-                    <br/><br/><br/>
+                    <br /><br /><br />
                     <p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-2"><b>Test Facility Users</b>
+                            <div class="ui-grid-col-2">
+                                <b>Test Facility Users</b>
                             </div>
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -166,8 +166,8 @@
                                 </div>
                                 <div class="ui-grid-col-2">
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                        name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
-                                        field="firstName" [multiple]="true">
+                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
+                                                    field="firstName" [multiple]="true">
                                     </p-autoComplete>
                                     <ul>
                                         <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
@@ -194,11 +194,12 @@
                             </p-dataTable>
                         </div>
                     </p-panel>
-                    <br/><br/><br/>
+                    <br /><br /><br />
                     <p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-2"><b>Test Facility Equipments</b>
+                            <div class="ui-grid-col-2">
+                                <b>Test Facility Equipments</b>
                             </div>
                             <div class="ui-grid-col-2"></div>
                             <p-dataTable [value]="TestFacilityEquipments">
@@ -210,79 +211,83 @@
                     </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Equipment ||" id="equipment">
-                Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
-                Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
-                of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
-                local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
-                brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
-                business. With Fanucci gone, Vito's communal stature grows.
+
+            <p-tabPanel header="Equipment ||" id="equipment" headerStyleClass="equipment">
+                <div *ngIf="displayEquipmentTab">
+                    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
+                    Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
+                    of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
+                    local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
+                    brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
+                    business. With Fanucci gone, Vito's communal stature grows.
+                </div>
+
             </p-tabPanel>
 
-            <p-tabPanel header="Schedule ||" id="schedule">
+
+            <p-tabPanel header="Schedule ||" id="schedule" headerStyleClass="schedule">
                 <div class="card card-w-title">
+                   
                     <div class="row">
                         <div class="ui-grid-col-1">
-                            Project Code : 
+                            Project Code :
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Status : 
+                             Status :
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                            <b> Person Incharge: </b>
+                             Person Incharge: 
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                            <b> Vehicle : </b>
+                             Vehicle :
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                     </div>
+
                 </div>
-
-
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!--<div class="mb15">Next Calibration Date : Jul-15-2016</div>-->
-                                    <div id="calendar">
-                                        <!--
-                                            <p-calendar [(ngModel)]="date8" name="date8" [inline]="true"></p-calendar>-->
-                                    </div>
-                                </div>
+
+                        <div class="row" id="scheduleCalendarContainer">
+                            <div id="calendar">
                             </div>
+
                         </div>
+
                     </div>
                 </div>
 
             </p-tabPanel>
+
+
             <p-tabPanel header="Tests ||" id="tests">
                 After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
                 and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
                 Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would
                 one day be completely legitimate.
             </p-tabPanel>
+
             <p-tabPanel header="Attachments ||" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
                 <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
-                    multiple="multiple" accept="image/*" maxFileSize="1000000">
+                              multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
                             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -314,6 +319,9 @@
                     </template>
                 </p-fileUpload>
             </p-tabPanel>
+
+
         </p-tabView>
     </div>
+    
 </div>

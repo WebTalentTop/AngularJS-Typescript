@@ -14,8 +14,8 @@
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <input type="text" pInputText name="name" [(ngModel)]="PlatformDetails.name" #platformDetailsNameRef="ngModel"
-                                placeholder="Platform Name" minlength="3" class="form-control" required row="20" />
+                            <input type="text" pInputText name="name" [(ngModel)]="PlatformDetails.name" #platformDetailsNameRef="ngModel" placeholder="Platform Name"
+                                minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
 
@@ -23,7 +23,7 @@
                                 <i class="fa fa-close"></i> Please enter Platform Name
                             </div>
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="platformDetailsNameRef.errors?.minlength">
-                                (MinLength-3)
+                                MinLength-3
                             </div>
 
                         </div>
@@ -31,10 +31,10 @@
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                           Platform Description * :
+                            Platform Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="20" maxlength="4000" #platformDetailsDescriptionRef="ngModel"
+                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="50" maxlength="250" #platformDetailsDescriptionRef="ngModel"
                                 [(ngModel)]="PlatformDetails.description"></textarea>
                         </div>
 
@@ -43,14 +43,27 @@
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="platformDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter Platform Description
                             </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="platformDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
                         </div>
                     </div>
-
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="PlatformDetails.isDeleted" name="isDeleted" #platformDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
-                        <div class="ui-grid-col-2">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Edit">  </button>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/platform" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>
