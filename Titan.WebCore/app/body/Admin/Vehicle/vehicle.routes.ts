@@ -29,6 +29,7 @@ const routes = [
     { path: 'access', loadChildren: 'app/body/Admin/Vehicle/Access/access.module' },
     { path: 'role', loadChildren: 'app/body/Admin/Vehicle/Role/role.module' },
     { path: 'milestone', loadChildren: 'app/body/Admin/Vehicle/Milestone/milestone.module' },
+    { path: 'milestoneCategory', loadChildren: 'app/body/Admin/Vehicle/MilestoneCategory/milestoneCategory.module' },
   ];
 
 export default RouterModule.forChild(routes);

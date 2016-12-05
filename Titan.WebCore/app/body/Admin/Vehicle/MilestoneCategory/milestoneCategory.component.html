@@ -1,10 +1,13 @@
-﻿<div class="ui-g-12">
-    <div class="card card-w-title">
-        <h1> Test Facility </h1>
-        <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Test Facility</a>
-            <!--<a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Test Facility</a>-->
 
+<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1> Milestone Category </h1>
+
+        <div class="ui-grid-row">
+            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Milestone Category</a>
+            <div class="ui-messages-success">
+                <p-messages [value]="msgs"></p-messages>
+            </div>
             <grid-data [gridData]="gridData"
                        [cols]='cols'
                        [confInfo]="confInfo"
