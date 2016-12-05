@@ -41,4 +41,5 @@ export class GridApiUrl {
     public static milestoneCategoryGridUrl: string = titanApiUrl + 'milestoneCategorygrid/GetGridData';
     public static milestoneTypeGridUrl: string = titanApiUrl + 'milestoneTypegrid/GetGridData';
     public static gradeGridUrl: string = titanApiUrl + 'gradegrid/GetGridData';
+    public static modelNameGridUrl: string = titanApiUrl + 'modelNamegrid/GetGridData';
 }
