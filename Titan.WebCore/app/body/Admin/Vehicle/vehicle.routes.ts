@@ -35,6 +35,7 @@ const routes = [
     { path: 'modelName', loadChildren: 'app/body/Admin/Vehicle/ModelName/modelName.module' },
     { path: 'modelYear', loadChildren: 'app/body/Admin/Vehicle/ModelYear/modelYear.module' },
     { path: 'maintenanceFrequency', loadChildren: 'app/body/Admin/Vehicle/MaintenanceFrequency/maintenanceFrequency.module' },
+    { path: 'vehicleType', loadChildren: 'app/body/Admin/Vehicle/VehicleType/vehicleType.module' },
   ];
 
 export default RouterModule.forChild(routes);
