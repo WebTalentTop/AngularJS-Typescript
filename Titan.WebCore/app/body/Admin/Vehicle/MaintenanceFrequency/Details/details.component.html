@@ -1,0 +1,97 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit Maintenance Frequency </h1>
+
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Maintenance Frequency Number * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="number" [(ngModel)]="MaintenanceFrequencyDetails.number" #maintenanceFrequencyDetailsNumberRef="ngModel"
+                                placeholder="Maintenance Frequency Number" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsNumberRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Maintenance Frequency Number
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsNumberRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description * :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
+                           placeholder="Description" #maintenanceFrequencyDetailsDescriptionRef="ngModel" [(ngModel)]="MaintenanceFrequencyDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Maintenance Frequency Description
+                            </div>
+                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Range * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="range" [(ngModel)]="MaintenanceFrequencyDetails.range" #maintenanceFrequencyDetailsRangeRef="ngModel"
+                                placeholder="Maintenance Frequency Range" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsRangeRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Maintenance Frequency Number
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsRangeRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="MaintenanceFrequencyDetails.isDeleted" name="isDeleted" #maintenanceFrequencyDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/maintenanceFrequency" [style]="{'width':'20px'}">  </button>
+                        </div>
+                    </div>
+                </div>
+            
+            </p-panel>
+        </form>
+    </div>
+</div>
