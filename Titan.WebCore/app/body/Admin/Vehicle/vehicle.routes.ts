@@ -33,6 +33,7 @@ const routes = [
     { path: 'milestoneType', loadChildren: 'app/body/Admin/Vehicle/MilestoneType/milestoneType.module' },
     { path: 'grade', loadChildren: 'app/body/Admin/Vehicle/Grade/grade.module' },
     { path: 'modelName', loadChildren: 'app/body/Admin/Vehicle/ModelName/modelName.module' },
+    { path: 'modelYear', loadChildren: 'app/body/Admin/Vehicle/ModelYear/modelYear.module' },
   ];
 
 export default RouterModule.forChild(routes);

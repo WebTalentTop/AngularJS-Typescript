@@ -1,0 +1,86 @@
+<div class="ui-g-12">
+
+    <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+        <h3> Add ModelYear </h3>
+        <br />
+        <p-panel>
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        ModelYear Name * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="ModelYear Name" minlength="3" #modelYearDetailsNameRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="modelYearDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="modelYearDetailsNameRef.errors?.minlength">
+                            MinLength-3
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        ModelYear Description * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #modelYearDetailsDescriptionRef="ngModel"
+                            placeholder="ModelYear Description" class="form-control  col-sm-12" required ></textarea>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <div class="ui-grid-col-4" *ngIf="modelYearDetailsNameRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>                                                    
+                            *-->
+                        </div>
+                    </div>
+                </div>
+                 
+                  <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        ModelYear * :
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="number" name="number" pInputText [(ngModel)]="number" placeholder="ModelYear" minlength="3" #modelYearDetailsNumberRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="modelYearDetailsNumberRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="modelYearDetailsNumberRef.errors?.minlength">
+                            MinLength-3
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-grid-row">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
+                    </div>
+                    <div class="ui-grid-col-6">
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/modelYear">  </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        </p-panel>
+    </form>
+</div>
