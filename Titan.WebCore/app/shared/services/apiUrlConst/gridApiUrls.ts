@@ -46,4 +46,5 @@ export class GridApiUrl {
     public static modelYearGridUrl: string = titanApiUrl + 'modelYeargrid/GetGridData';
     public static maintenanceFrequencyGridUrl: string = titanApiUrl + 'maintenanceFrequencygrid/GetGridData';
     public static vehicleTypeGridUrl: string = titanApiUrl + 'vehicleTypegrid/GetGridData';
+    public static requirementItemTypeGridUrl: string = titanApiUrl + 'requirementItemTypegrid/GetGridData';
 }
