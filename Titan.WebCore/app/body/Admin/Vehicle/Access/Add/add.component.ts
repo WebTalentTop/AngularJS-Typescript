@@ -27,14 +27,14 @@ export class AddComponent {
         //console.log(this.description);
         //formRef.locale = "en-us";
         //formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = {name: '', statusId: '', tenantId:'', isDeleted: false};
         formData.name = formRef.name;
-        formData.description = formRef.description;
-        formData.locale = "en-us";
+       // formData.description = formRef.description;
+      
         let added: any="true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
-            console.log('--------------res result------------', +res)
+            console.log('--------------res result------------', +res);
 
             // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {

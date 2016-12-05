@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EntityFieldService } from '../../../../../shared/services/entityField.service'
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
 
@@ -57,7 +57,7 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getById(this.EntityFieldId).subscribe(EntityFieldDetails => {
-                this.EntityFieldDetails = EntityFieldDetails;
+                this.EntityFieldDetails = EntityFieldDetails.result;
                 this.EntityFieldDetails.id = this.EntityFieldId;
                 console.log(this.EntityFieldDetails);
             });

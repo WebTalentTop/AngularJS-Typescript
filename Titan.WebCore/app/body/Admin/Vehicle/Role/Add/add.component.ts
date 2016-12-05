@@ -27,10 +27,10 @@ export class AddComponent {
         //console.log(this.description);
         //formRef.locale = "en-us";
         //formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = {name: '', statusId: '', tenantId:'', isDeleted: false};
         formData.name = formRef.name;
-        formData.description = formRef.description;
-        formData.locale = "en-us";
+       // formData.description = formRef.description;
+        //formData.locale = "en-us";
         let added: any="true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
