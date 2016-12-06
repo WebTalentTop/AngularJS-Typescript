@@ -37,7 +37,8 @@ const routes = [
     { path: 'maintenanceFrequency', loadChildren: 'app/body/Admin/Vehicle/MaintenanceFrequency/maintenanceFrequency.module' },
     { path: 'vehicleType', loadChildren: 'app/body/Admin/Vehicle/VehicleType/vehicleType.module' },
     { path: 'requirementItemType', loadChildren: 'app/body/Admin/Vehicle/RequirementItemType/requirementItemType.module' },
-     { path: 'sensorType', loadChildren: 'app/body/Admin/Vehicle/SensorType/sensorType.module' },
+    { path: 'sensorType', loadChildren: 'app/body/Admin/Vehicle/SensorType/sensorType.module' },
+    { path: 'stepFrequency', loadChildren: 'app/body/Admin/Vehicle/StepFrequency/stepFrequency.module' },
   ];
 
 export default RouterModule.forChild(routes);

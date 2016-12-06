@@ -1,0 +1,19 @@
+
+<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1> Step Frequency </h1>
+
+        <div class="ui-grid-row">
+            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Step Frequency</a>
+            <div class="ui-messages-success">
+                <p-messages [value]="msgs"></p-messages>
+            </div>
+            <grid-data [gridData]="gridData"
+                       [cols]='cols'
+                       [confInfo]="confInfo"
+                       [dataService]="service"
+                       (navigateToDetails)="navigateDetails($event)"
+                       [title]="title"></grid-data>
+        </div>
+    </div>
+</div>
