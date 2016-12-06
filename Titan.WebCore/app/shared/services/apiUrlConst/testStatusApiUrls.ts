@@ -1,7 +1,7 @@
 import { titanApiUrl } from './titanApiUrl'
 import { GridApiUrl }  from './gridApiUrls';
 
-export class testStatusApiUrl {
+export class TestStatusApiUrl {
     public static gridApiUrl:string  = GridApiUrl.testStatusGridUrl;
     public static postCreatedUrl: string = titanApiUrl + 'testStatus/post';
     public static postUpdateUrl: string = titanApiUrl + 'testStatus/put';

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestStatusApiUrl} from './apiUrlConst/TestStatusApiUrls';
+import { TestStageApiUrl} from './apiUrlConst/TestStageApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class TestStatusService {
+export class TestStageService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
     });
@@ -26,7 +26,7 @@ export class TestStatusService {
     }
 
     postGridData(): Observable<any> {
-        return this.http.post(`${testStatusApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+        return this.http.post(`${TestStageApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -34,7 +34,7 @@ export class TestStatusService {
     }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestStatusApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestStageApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -43,7 +43,7 @@ export class TestStatusService {
 
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestStatusApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestStageApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -54,7 +54,7 @@ export class TestStatusService {
 
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${TestStatusApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${TestStageApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
@@ -62,7 +62,7 @@ export class TestStatusService {
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${TestStatusApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${TestStageApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
