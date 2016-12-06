@@ -2,7 +2,7 @@ import { titanApiUrl } from './titanApiUrl';
 
 export class GridApiUrl {
     public static buildLevelGridUrl: string = titanApiUrl + 'buildLevelGrid/GetGridData';
-    public static roleGridUrl: string = titanApiUrl + 'roleGrid/GetGridData';
+    //public static roleGridUrl: string = titanApiUrl + 'roleGrid/GetGridData';
     public static calendarGridUrl: string = titanApiUrl + 'calendarGrid/GetGridData';
     public static lookupGridUrl: string = titanApiUrl + 'lookupGrid/GetGridData';
     public static departmentGridUrl: string = titanApiUrl + 'departmentGrid/GetGridData';
