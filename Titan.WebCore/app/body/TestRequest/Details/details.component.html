@@ -455,7 +455,7 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form">
+                                <form  #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                                     <div class="row">
 
                                         <div class="form-group col-sm-6 col-md-4">
@@ -519,184 +519,42 @@
                                                 Test
                                                 Stage
                                             </label>
-                                            <select name=""
-                                                    id="testMode"
-                                                    class="form-control">
-                                                <option value="0"
-                                                        selected="selected">
-                                                    ---- Select ----
-                                                </option>
-                                                <option value="1">
-                                                    -1
-                                                    Ground contact limit
-                                                </option>
-                                                <option value="2">
-                                                    -1
-                                                    Parking brake fixing
-                                                    point strength
-                                                </option>
-                                                <option value="3">
-                                                    -4
-                                                    B-pedal bracket
-                                                    fixing point
-                                                    durability
-                                                </option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength FT +
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength FT -
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength FH +
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength FH -
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MT +
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MT -
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MB +
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MB -
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MH +
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -1 Assy. Static
-                                                    Strength MH -
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -2 Assy.
-                                                    Durability FT
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -2 Assy.
-                                                    Durability FH
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -2 Assy.
-                                                    Durability MT
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -2 Assy.
-                                                    Durability MB
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -2 Assy.
-                                                    Durability Torsion
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -3 Knuckle MH
-                                                    Durability
-                                                </option>
-                                                option>
-                                                <option>
-                                                    -4 Chassis
-                                                    Impact
-                                                </option>
-                                                option>
+                                            <p-dropdown [options]="testStages" (onChange)="onTestStageChange($event)" name="testStage" [style]="{'width':'150px'}">
 
-                                            </select>
+                                            </p-dropdown>
                                         </div>
                                         <div class="form-group col-sm-6 col-md-4">
                                             <label class="control-label">
                                                 Activity
                                             </label>
-                                            <select name="" id=""
-                                                    class="form-control">
-                                                <option value="">
-                                                    ----
-                                                    Select ----
-                                                </option>
-                                                <option value=""
-                                                        selected="selected">
-                                                    A314
-                                                </option>
-                                                <option value="">
-                                                    2C31
-                                                </option>
-                                                <option value="">
-                                                    2C52
-                                                </option>
-                                                <option value="">
-                                                    1D52
-                                                </option>
-                                                <option value="">
-                                                    2C76
-                                                </option>
-                                                <option value="">
-                                                    6C09
-                                                </option>
-                                                <option value="">
-                                                    7C15
-                                                </option>
-                                                <option value="">
-                                                    2VB
-                                                </option>
-                                            </select>
+                                            <p-dropdown [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntry" [style]="{'width':'150px'}">
+
+                                            </p-dropdown>
                                         </div>
                                         <div class="form-group col-sm-6 col-md-4">
                                             <label class="control-label">
                                                 Down Time
                                             </label>
-                                            <select name="" id=""
-                                                    class="form-control">
-                                                <option value=""
-                                                        selected="selected">
-                                                    ---- Select ----
-                                                </option>
-                                                <option value="">
-                                                    Prototype
-                                                </option>
-                                                <option value="">
-                                                    Phase
-                                                    1
-                                                </option>
-                                                <option value="">
-                                                    Phase
-                                                    2
-                                                </option>
-                                                <option value="">
-                                                    Production
-                                                </option>
-                                            </select>
+                                            <p-dropdown [options]="downTimeReasons" (onChange)="onDownTimeReasonChange($event)" name="downTimeReason" [style]="{'width':'150px'}">
+
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="form-group col-sm-6 col-md-4">
+                                            <h3> Estimated Duration </h3>
+                                            <p-calendar [(ngModel)]="estimateDuration" name="estimateDuration" [timeOnly]="true"></p-calendar>
                                         </div>
                                         <div class="form-group col-sm-6 col-md-4">
                                             <label class="control-label">
-                                                Estimate Time
+                                             Actual   End Time
                                             </label>
-                                            <div class="input-group">
+                                            <p-calendar [(ngModel)]="endTime" name="endTime" showTime="showTime" [showIcon]="true"></p-calendar>
+                                        </div>
+                                        <div class="form-group col-sm-6 col-md-4">
+                                            <label class="control-label">
+                                            Actual    Start Time
+                                            </label>
+                                            <p-calendar [(ngModel)]="startTime" name="startTime" showTime="showTime" [showIcon]="true"></p-calendar>
+                                            <!--<div class="input-group">
                                                 <input type="text"
                                                        class="form-control"
                                                        placeholder="mm/dd/yyyy"
@@ -704,32 +562,23 @@
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-calendar"></i>
                                                 </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                                Actual Time
-                                            </label>
-                                            <div class="input-group">
-                                                <input type="text"
-                                                       class="form-control"
-                                                       placeholder="mm/dd/yyyy"
-                                                       id="TestStartDate">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-calendar"></i>
-                                                </span>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="form-group col-sm-12 col-md-8">
                                             <label class="control-label col-sm-12 pl0 mb15">Notes</label><br />
-                                            <textarea rows="4" cols="170" name="notes" class="form-control" placeholder="Notes"></textarea>
+                                            <!--<textarea rows="4" cols="170" name="notes" class="form-control" placeholder="Notes"></textarea>-->
+                                            <div id="editor-container"></div>
                                         </div>
 
                                     </div>
                                     <div class="form-group col-sm-6 col-md-4">
-                                        <a href="#" class="btn btn-success">
-                                            Save
-                                        </a>
+                                        <div class="ui-grid-col-2"></div>
+                                        <div class="ui-grid-col-2">
+                                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-edit" iconPos="left"></button>
+                                        </div>
+                                        <div class="ui-grid-col-4">
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -748,13 +597,13 @@
                                                     <div class="table-responsive" style="min-height:400px;">
                                                         <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
                                         class="grid"></div>-->
-                                                        <p-dataTable [paginator]="true" rows="15" [responsive]="true">
-                                                            <p-column header="Date" sortable="true"></p-column>
-                                                            <p-column header="TestStage" sortable="true"></p-column>
-                                                            <p-column header="Estimate Time" sortable="true"></p-column>
-                                                            <p-column header="Actual Time" sortable="true"></p-column>
-                                                            <p-column header="Downtime" sortable="true"></p-column>
-                                                            <p-column header="Notes" sortable="true"></p-column>
+                                                        <p-dataTable [value]="TrackingList" [paginator]="true" rows="15" [responsive]="true">
+                                                            <p-column header="Date" field="startDate" sortable="true"></p-column>
+                                                            <p-column header="TestStage" field="testStageName" sortable="true"></p-column>
+                                                            <p-column header="Estimate Time" field="estimateDuration" sortable="true"></p-column>
+                                                            <p-column header="Actual Time" field="actualDuration" sortable="true"></p-column>
+                                                            <p-column header="Downtime" field="downTimeReason" sortable="true"></p-column>
+                                                            <p-column header="Notes" field="description" sortable="true"></p-column>
 
                                                         </p-dataTable>
                                                     </div>

@@ -1,5 +1,5 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
-import { DataTable, TabViewModule,  LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
@@ -32,6 +32,7 @@ export class DetailsComponent implements AfterViewInit {
     testStages: any;
     hourEntries: any;
     downTimeReasons: any;
+    estimateDuration: any;
     formConfiguration:any;
     formObject:any;
     formEquipmentObject: any;
@@ -47,7 +48,7 @@ export class DetailsComponent implements AfterViewInit {
     filepath: string = "TestFacility";
     TrackingList: any;
     startTime: any;
-    endTime: any;
+    endTime: Date;
     model:any = {
                 id:'', 
                 isDeleted:false, 
@@ -80,16 +81,16 @@ export class DetailsComponent implements AfterViewInit {
        this.getTestStages();
        this.getHourEntryByEntityIdentifierId();
        this.getDownTimeReasons();
-       this.dataService.GetProjectId(this.id)
-           .subscribe(res => {
-               this.projectId = res.$values;
+       //this.dataService.GetProjectId(this.id)
+       //    .subscribe(res => {
+       //        this.projectId = res.$values;
 
-               //this.formConfiguration = res.formConfiguration;
-               //this.formObject = res.formObject;
-               //this.model = res.formObject;
-               //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-               //console.log("----- Result of formObject -----", this.model);
-           });     
+       //        //this.formConfiguration = res.formConfiguration;
+       //        //this.formObject = res.formObject;
+       //        //this.model = res.formObject;
+       //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
+       //        //console.log("----- Result of formObject -----", this.model);
+       //    });     
         this.dataService.GetTrackingListByEntityId(this.id)
             .subscribe(res =>
             {
@@ -227,6 +228,7 @@ export class DetailsComponent implements AfterViewInit {
           projectId: '53FE9592-1A9B-07D0-85D7-006A30BCD348',
           testStageId: this.selectedTestStageId,
           isDownTime: false,
+          estimateDuration: this.estimateDuration,
           downTimeReasonId: this.selectedDownTimeReasonId,
           description: quill.getText(),         
           tenantId: '',
