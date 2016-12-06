@@ -40,6 +40,7 @@ const routes = [
     { path: 'sensorType', loadChildren: 'app/body/Admin/Vehicle/SensorType/sensorType.module' },
     { path: 'stepFrequency', loadChildren: 'app/body/Admin/Vehicle/StepFrequency/stepFrequency.module' },
     { path: 'stepType', loadChildren: 'app/body/Admin/Vehicle/StepType/stepType.module' },
+    { path: 'testMode', loadChildren: 'app/body/Admin/Vehicle/TestMode/testMode.module' },
   ];
 
 export default RouterModule.forChild(routes);
