@@ -50,4 +50,5 @@ export class GridApiUrl {
     public static requirementItemTypeGridUrl: string = titanApiUrl + 'requirementItemTypegrid/GetGridData';
     public static sensorTypeGridUrl: string = titanApiUrl + 'sensorTypegrid/GetGridData';
     public static stepFrequencyGridUrl: string = titanApiUrl + 'stepFrequencygrid/GetGridData';
+    public static stepTypeGridUrl: string = titanApiUrl + 'stepTypegrid/GetGridData';
 }
