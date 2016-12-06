@@ -26,7 +26,7 @@ export class TestStatusService {
     }
 
     postGridData(): Observable<any> {
-        return this.http.post(`${testStatusApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+        return this.http.post(`${TestStatusApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
