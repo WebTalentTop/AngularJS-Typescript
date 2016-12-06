@@ -19,6 +19,7 @@ export class GridComponent {
     linkFieldId:string;
     linkableFields:any;
     navigateToDetails = new EventEmitter();
+    lazyLoadingData:boolean = false;
     
     gridFilter = {};
     constructor(){}
@@ -90,6 +91,7 @@ export class GridComponent {
                     this.gridData = res.Data;
                     this.confInfo = res.Configuration;
                     this.cols = res.Configuration.Columns;
+                    this.lazyLoadingData = true;
                     this.cols.filter(x=> {if (x.Header === "Id") { this.idField = x.Field;} return x;});
                     this.cols.filter(x=> {if (x.Header === "Name"){ this.linkFieldId = x.Field} return x});
                 });
