@@ -45,6 +45,7 @@ const routes = [
     { path: 'testRequirement', loadChildren: 'app/body/Admin/Vehicle/TestRequirement/testRequirement.module' },
     { path: 'testActivity', loadChildren: 'app/body/Admin/Vehicle/TestActivity/testActivity.module' },
     { path: 'priority', loadChildren: 'app/body/Admin/Vehicle/Priority/priority.module' },
+    { path: 'judgement', loadChildren: 'app/body/Admin/Vehicle/Judgement/judgement.module' },
   ];
 
 export default RouterModule.forChild(routes);

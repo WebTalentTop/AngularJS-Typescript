@@ -1,6 +1,6 @@
 ﻿<div class="ui-g-12">
     <div class="card card-w-title">
-        <h1>Edit Priority </h1>
+        <h1>Edit Judgement </h1>
 
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
@@ -10,19 +10,19 @@
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Priority Name * :
+                            Judgement Name * :
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <input type="text" pInputText name="name" [(ngModel)]="PriorityDetails.name" #priorityDetailsNameRef="ngModel"
-                                placeholder="Priority Name" minlength="3" class="form-control" required row="20" />
+                            <input type="text" pInputText name="name" [(ngModel)]="JudgementDetails.name" #judgementDetailsNameRef="ngModel"
+                                placeholder="Judgement Name" minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="priorityDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Priority Name
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="judgementDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Judgement Name
                             </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="priorityDetailsNameRef.errors?.minlength">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="judgementDetailsNameRef.errors?.minlength">
                                 MinLength-3
                             </div>
 
@@ -35,14 +35,14 @@
                         </div>
                         <div class="ui-grid-col-6">
                             <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
-                                #priorityDetailsDescriptionRef="ngModel" [(ngModel)]="PriorityDetails.description"></textarea>
+                                #judgementDetailsDescriptionRef="ngModel" [(ngModel)]="JudgementDetails.description"></textarea>
                         </div>
                         <div class="ui-grid-col-4">
 
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="priorityDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Priority Description
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="judgementDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Judgement Description
                             </div>
-                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="priorityDetailsDescriptionRef.errors?.maxlength">
+                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="judgementDetailsDescriptionRef.errors?.maxlength">
                                 MaxLength-250
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                             <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
                         </div>
                         <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/priority" [style]="{'width':'20px'}">  </button>
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/judgement" [style]="{'width':'20px'}">  </button>
                         </div>
                     </div>
                 </div>
