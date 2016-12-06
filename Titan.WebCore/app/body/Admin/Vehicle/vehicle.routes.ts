@@ -41,6 +41,7 @@ const routes = [
     { path: 'stepFrequency', loadChildren: 'app/body/Admin/Vehicle/StepFrequency/stepFrequency.module' },
     { path: 'stepType', loadChildren: 'app/body/Admin/Vehicle/StepType/stepType.module' },
     { path: 'testMode', loadChildren: 'app/body/Admin/Vehicle/TestMode/testMode.module' },
+    { path: 'testType', loadChildren: 'app/body/Admin/Vehicle/TestType/testType.module' },
   ];
 
 export default RouterModule.forChild(routes);
