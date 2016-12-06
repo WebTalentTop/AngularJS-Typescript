@@ -54,4 +54,5 @@ export class GridApiUrl {
     public static testModeGridUrl: string = titanApiUrl + 'testModegrid/GetGridData';
     public static testTypeGridUrl: string = titanApiUrl + 'testTypegrid/GetGridData';
     public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementgrid/GetGridData';
+    public static testActivityGridUrl: string = titanApiUrl + 'testActivitygrid/GetGridData';
 }

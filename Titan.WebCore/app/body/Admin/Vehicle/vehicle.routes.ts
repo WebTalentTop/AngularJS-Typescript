@@ -43,6 +43,7 @@ const routes = [
     { path: 'testMode', loadChildren: 'app/body/Admin/Vehicle/TestMode/testMode.module' },
     { path: 'testType', loadChildren: 'app/body/Admin/Vehicle/TestType/testType.module' },
     { path: 'testRequirement', loadChildren: 'app/body/Admin/Vehicle/TestRequirement/testRequirement.module' },
+    { path: 'testActivity', loadChildren: 'app/body/Admin/Vehicle/TestActivity/testActivity.module' },
   ];
 
 export default RouterModule.forChild(routes);
