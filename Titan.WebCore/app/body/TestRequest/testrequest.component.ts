@@ -59,7 +59,7 @@ export class TestRequestComponent implements AfterViewInit {
                 },
                 {
                     title: 'Click for Event',
-                    url: titanApiUrl + 'timeEntry/get/{91A42406-060C-467E-8528-373EB69AB726}',
+                    url: titanApiUrl + 'timeEntry/get/{B4E2A8E1-ABA0-43E7-A9F1-6748DAB85FDD}',
                     type:'GET',
                     start: '2016-12-28'
                 }
@@ -74,6 +74,6 @@ export class TestRequestComponent implements AfterViewInit {
    
     }
 
-   
+    
 
 }
