@@ -48,9 +48,9 @@ export class GridApiUrl {
     public static sensorTypeGridUrl: string = titanApiUrl + 'sensorTypegrid/GetGridData';
     public static stepFrequencyGridUrl: string = titanApiUrl + 'stepFrequencygrid/GetGridData';
     public static stepTypeGridUrl: string = titanApiUrl + 'stepTypegrid/GetGridData';
-    public static testModeGridUrl: string = titanApiUrl + 'testModegrid/GetGridData';
-    public static testTypeGridUrl: string = titanApiUrl + 'testTypegrid/GetGridData';
-    public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementgrid/GetGridData';
+    //public static testModeGridUrl: string = titanApiUrl + 'testModegrid/GetGridData';
+    //public static testTypeGridUrl: string = titanApiUrl + 'testTypegrid/GetGridData';
+    //public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementgrid/GetGridData';
     public static testActivityGridUrl: string = titanApiUrl + 'testActivitygrid/GetGridData';
     public static priorityGridUrl: string = titanApiUrl + 'prioritygrid/GetGridData';
     public static judgementGridUrl: string = titanApiUrl + 'judgementgrid/GetGridData';
