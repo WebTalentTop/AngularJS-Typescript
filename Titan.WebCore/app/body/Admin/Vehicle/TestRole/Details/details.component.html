@@ -1,0 +1,73 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1>Edit TestRole </h1>
+
+        <p-growl [value]="msgs"></p-growl>
+        <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
+            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+            <br/>
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            TestRole Name * :
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="name" [(ngModel)]="TestRoleDetails.name" #testRoleDetailsNameRef="ngModel"
+                                placeholder="TestRole Name" minlength="3" class="form-control" required row="20" />
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRoleDetailsNameRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TestRole Name
+                            </div>
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRoleDetailsNameRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description * :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
+                                #testRoleDetailsDescriptionRef="ngModel" [(ngModel)]="TestRoleDetails.description"></textarea>
+                        </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRoleDetailsDescriptionRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter TestRole Description
+                            </div>
+                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRoleDetailsDescriptionRef.errors?.maxlength">
+                                MaxLength-250
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            IsActive :
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-toggleButton [(ngModel)]="TestRoleDetails.isDeleted" name="isDeleted" #testRoleDetailsisDeletedRef="ngModel"
+                                [style]="{'width':'50px'}"></p-toggleButton>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
+                        </div>
+                        <div class="ui-grid-col">
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/testRole" [style]="{'width':'20px'}">  </button>
+                        </div>
+                    </div>
+                </div>
+            </p-panel>
+        </form>
+    </div>
+</div>
