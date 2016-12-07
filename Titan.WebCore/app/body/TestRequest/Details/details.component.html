@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <h3>Details</h3>
         <p-tabView (onChange)="handleChange($event)">
-           
+
             <p-tabPanel header="Info ||" id="info">
                 <div class="row">
                     <div class="col-sm-12">
@@ -287,14 +287,14 @@
                                                                 </select>
                                                             </div>
                                                             <!-- <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label">Part #</label>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
-                                                                    <option value="">P1234</option>
-                                                                    <option value="">P23456</option>
-                                                                    <option value="">XY2345</option>
-                                                                </select>
-                                                            </div>-->
+                                                            <label class="control-label">Part #</label>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
+                                                                <option value="">P1234</option>
+                                                                <option value="">P23456</option>
+                                                                <option value="">XY2345</option>
+                                                            </select>
+                                                        </div>-->
 
                                                             <div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label">
@@ -324,14 +324,14 @@
                                                                 </div>
                                                             </div>
                                                             <!--<div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label">Process Flow</label>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
-                                                                    <option value="">Defau</option>
-                                                                    <option value="">B028-2-1-1</option>
-                                                                    <option value="">C028-3-1-1</option>
-                                                                </select>
-                                                            </div>-->
+                                                            <label class="control-label">Process Flow</label>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
+                                                                <option value="">Defau</option>
+                                                                <option value="">B028-2-1-1</option>
+                                                                <option value="">C028-3-1-1</option>
+                                                            </select>
+                                                        </div>-->
 
 
 
@@ -418,13 +418,12 @@
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="table-responsive" style="min-height:400px;">
                                             <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
-                                                 class="grid"></div>-->
-                                            <p-dataTable
-                                                         [paginator]="true" rows="15" [responsive]="true">
-                                                <p-column  header="PartNumber" sortable="true"></p-column>
+                                             class="grid"></div>-->
+                                            <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+                                                <p-column header="PartNumber" sortable="true"></p-column>
                                                 <p-column header="DrawingNumber" sortable="true"></p-column>
-                                                <p-column  header="Quantity Requested" sortable="true"></p-column>
-                                                <p-column header="Comments" sortable="true"></p-column>                                               
+                                                <p-column header="Quantity Requested" sortable="true"></p-column>
+                                                <p-column header="Comments" sortable="true"></p-column>
                                             </p-dataTable>
                                         </div>
                                     </div>
@@ -444,166 +443,208 @@
                         </div>
                     </div>
                 </div>
-    
-    </p-tabPanel>
-   
-    <p-tabPanel header="AddTimeEntry ||" id="timeentry">
-        <div class="panel panel-default">
-            <div class="panel-heading">Login</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-12">
+
+            </p-tabPanel>
+
+            <p-tabPanel header="AddTimeEntry ||" id="timeentry">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Hour Tracking</div>
+                    <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form  #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                                    <div class="row">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                                            <div class="row">
 
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                                Test
-                                                Step
-                                            </label>
-                                            <select name="" id=""
-                                                    class="form-control">
-                                                <option value=""
-                                                        selected="selected">
-                                                    ---- Select ----
-                                                </option>
-                                                <option value="">
-                                                    Front
-                                                    Suspension
-                                                </option>
-                                                <option value="">
-                                                    Rear
-                                                    Suspension
-                                                </option>
-                                                <option value="">
-                                                    Spring
-                                                </option>
-                                                <option value="">
-                                                    Front
-                                                    Axle
-                                                </option>
-                                                <option value="">
-                                                    Rear
-                                                    Axle
-                                                </option>
-                                                <option value="">
-                                                    Wheel
-                                                </option>
-                                                <option value="">
-                                                    Chasis
-                                                    mount
-                                                </option>
-                                                <option value="">
-                                                    Stabi
-                                                    Bar
-                                                </option>
-                                                <option value="">
-                                                    Mount
-                                                </option>
-                                                <option value="">
-                                                    Steering
-                                                </option>
-                                                <option value="">
-                                                    Ground
-                                                    Contact
-                                                </option>
-                                                <option value="">
-                                                    Tailgate
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                                Test
-                                                Stage
-                                            </label>
-                                            <p-dropdown [options]="testStages" (onChange)="onTestStageChange($event)" name="testStage" [style]="{'width':'150px'}">
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Test
+                                                        Step
+                                                    </label>
+                                                    <select name="" id=""
+                                                            class="form-control">
+                                                        <option value=""
+                                                                selected="selected">
+                                                            ---- Select ----
+                                                        </option>
+                                                        <option value="">
+                                                            Front
+                                                            Suspension
+                                                        </option>
+                                                        <option value="">
+                                                            Rear
+                                                            Suspension
+                                                        </option>
+                                                        <option value="">
+                                                            Spring
+                                                        </option>
+                                                        <option value="">
+                                                            Front
+                                                            Axle
+                                                        </option>
+                                                        <option value="">
+                                                            Rear
+                                                            Axle
+                                                        </option>
+                                                        <option value="">
+                                                            Wheel
+                                                        </option>
+                                                        <option value="">
+                                                            Chasis
+                                                            mount
+                                                        </option>
+                                                        <option value="">
+                                                            Stabi
+                                                            Bar
+                                                        </option>
+                                                        <option value="">
+                                                            Mount
+                                                        </option>
+                                                        <option value="">
+                                                            Steering
+                                                        </option>
+                                                        <option value="">
+                                                            Ground
+                                                            Contact
+                                                        </option>
+                                                        <option value="">
+                                                            Tailgate
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Test
+                                                        Stage
+                                                    </label>
+                                                    <p-dropdown [options]="testStages" (onChange)="onTestStageChange($event)" name="testStage" [style]="{'width':'150px'}">
 
-                                            </p-dropdown>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                                Activity
-                                            </label>
-                                            <p-dropdown [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntry" [style]="{'width':'150px'}">
+                                                    </p-dropdown>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Activity
+                                                    </label>
+                                                    <p-dropdown [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntry" [style]="{'width':'150px'}">
 
-                                            </p-dropdown>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                                Down Time
-                                            </label>
-                                            <p-dropdown [options]="downTimeReasons" (onChange)="onDownTimeReasonChange($event)" name="downTimeReason" [style]="{'width':'150px'}">
+                                                    </p-dropdown>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Down Time
+                                                    </label>
+                                                    <p-dropdown [options]="downTimeReasons" (onChange)="onDownTimeReasonChange($event)" name="downTimeReason" [style]="{'width':'150px'}">
 
-                                            </p-dropdown>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <h3> Estimated Duration </h3>
-                                            <p-calendar [(ngModel)]="estimateDuration" name="estimateDuration" [timeOnly]="true"></p-calendar>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                             Actual   End Time
-                                            </label>
-                                            <p-calendar [(ngModel)]="endTime" name="endTime" showTime="showTime" [showIcon]="true" icon="fa-calendar"></p-calendar>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <label class="control-label">
-                                            Actual    Start Time
-                                            </label>
-                                            <p-calendar [(ngModel)]="startTime" name="startTime" showTime="showTime" [showIcon]="true"></p-calendar>
-                                            <!--<div class="input-group">
-                                                <input type="text"
-                                                       class="form-control"
-                                                       placeholder="mm/dd/yyyy"
-                                                       id="TestStartDate">
-                                                <span class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-calendar"></i>
-                                                </span>
-                                            </div>-->
-                                        </div>
-                                        <div class="form-group col-sm-12 col-md-8">
-                                            <label class="control-label col-sm-12 pl0 mb15">Notes</label><br />
-                                            <!--<textarea rows="4" cols="170" name="notes" class="form-control" placeholder="Notes"></textarea>-->
-                                            <div id="editor-container"></div>
-                                        </div>
+                                                    </p-dropdown>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <h3> Estimated Duration </h3>
+                                                    <p-calendar [(ngModel)]="estimateDuration" name="estimateDuration" [timeOnly]="true"></p-calendar>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Actual   End Time
+                                                    </label>
+                                                    <p-calendar [(ngModel)]="endTime" name="endTime" showTime="showTime" [showIcon]="true" icon="fa-calendar"></p-calendar>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-md-4">
+                                                    <label class="control-label">
+                                                        Actual    Start Time
+                                                    </label>
+                                                    <p-calendar [(ngModel)]="startTime" name="startTime" showTime="showTime" [showIcon]="true"></p-calendar>
+                                                    <!--<div class="input-group">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           placeholder="mm/dd/yyyy"
+                                                           id="TestStartDate">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>-->
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-8">
+                                                    <label class="control-label col-sm-12 pl0 mb15">Notes</label><br />
+                                                    <!--<textarea rows="4" cols="170" name="notes" class="form-control" placeholder="Notes"></textarea>-->
+                                                    <div id="editor-container"></div>
+                                                </div>
 
+                                            </div>
+                                            <div class="form-group col-sm-6 col-md-4">
+                                                <div class="ui-grid-col-2"></div>
+                                                <div class="ui-grid-col-2">
+                                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-edit" iconPos="left"></button>
+                                                </div>
+                                                <div class="ui-grid-col-4">
+
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group col-sm-6 col-md-4">
-                                        <div class="ui-grid-col-2"></div>
-                                        <div class="ui-grid-col-2">
-                                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-edit" iconPos="left"></button>
-                                        </div>
-                                        <div class="ui-grid-col-4">
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><strong>Tracking List</strong></div>
+
+
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="table-responsive" style="min-height:400px;">
+                                                            <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
+                                                        class="grid"></div>-->
+                                                            <p-dataTable [value]="TrackingList" [paginator]="true" rows="15" [responsive]="true">
+                                                                <p-column header="Date" field="startDate" sortable="true"></p-column>
+                                                                <p-column header="TestStage" field="testStageName" sortable="true"></p-column>
+                                                                <p-column header="Estimate Time" field="estimateDuration" sortable="true"></p-column>
+                                                                <p-column header="Actual Time" field="actualDuration" sortable="true"></p-column>
+                                                                <p-column header="Downtime" field="downTimeReason" sortable="true"></p-column>
+                                                                <p-column header="Notes" field="description" sortable="true"></p-column>
+
+                                                            </p-dataTable>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
+            </p-tabPanel>
+
+            <p-tabPanel header="Sensor ||" id="timeentry">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Sensor Info</div>
+                    <div class="panel-body">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><strong>Tracking List</strong></div>
-                                    
-
-                                        <div class="panel-body">
-
+                            
+                                <!--<div class="ui-g-12">
+                                    <div class="card card-w-title">
+                                        <h1> Sensor Information </h1>-->
+                                        <div class="ui-grid-row">
+                                            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>
+                                            <!--<a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Test Facility</a>-->
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                                     <div class="table-responsive" style="min-height:400px;">
-                                                        <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
-                                        class="grid"></div>-->
-                                                        <p-dataTable [value]="TrackingList" [paginator]="true" rows="15" [responsive]="true">
-                                                            <p-column header="Date" field="startDate" sortable="true"></p-column>
-                                                            <p-column header="TestStage" field="testStageName" sortable="true"></p-column>
-                                                            <p-column header="Estimate Time" field="estimateDuration" sortable="true"></p-column>
-                                                            <p-column header="Actual Time" field="actualDuration" sortable="true"></p-column>
-                                                            <p-column header="Downtime" field="downTimeReason" sortable="true"></p-column>
-                                                            <p-column header="Notes" field="description" sortable="true"></p-column>
+                                                        <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+
+                                                            <p-column header="Sensor Name" sortable="true"></p-column>
+
+                                                            <p-column header="Comments" sortable="true"></p-column>
 
                                                         </p-dataTable>
                                                     </div>
@@ -611,20 +652,19 @@
 
 
                                             </div>
-
-
-
-
+                                            <!--<grid-data [gridData]="gridData"
+                                               [cols]='cols'
+                                               [confInfo]="confInfo"
+                                               [dataService]="service"
+                                               (navigateToDetails)="navigateDetails($event)"
+                                               [title]="title"></grid-data>-->
                                         </div>
-                                        </div>
-                            </div>
-                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <!--</div>
+                                
 
-</p-tabPanel>
-    </p-tabView>
+                            </div>-->
+                            </div></div></div>
+            </p-tabPanel>
+        </p-tabView>
 </div>
 </div>

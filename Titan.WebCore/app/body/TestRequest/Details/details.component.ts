@@ -1,7 +1,10 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
+//import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GridComponent } from '../../../shared/UIComponents/GridComponent/grid.component';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Router } from '@angular/router';
 declare var $: JQueryStatic;
@@ -27,6 +30,12 @@ export class DetailsComponent implements AfterViewInit {
        // quill.g
     }
    // qui
+    gridData = [];
+    confInfo: any = {};
+    cols = [];
+    gridFilter = {};
+    idField: string;
+    linkFieldId: string;
     username: string;
     details:string;
     testStages: any;
@@ -36,7 +45,7 @@ export class DetailsComponent implements AfterViewInit {
     formConfiguration:any;
     formObject:any;
     formEquipmentObject: any;
-    TimeEntryTypeId: any = '945356CD-A143-4174-B699-0E6E2533394A';
+    TimeEntryTypeId: any;
     selectedTestStageId: any;
     selectedTimeEntryTypeId: any;
     selectedDownTimeReasonId: any;
@@ -64,7 +73,9 @@ export class DetailsComponent implements AfterViewInit {
 
     constructor(
         private route:ActivatedRoute, 
-        private dataService: TimeEntryService
+        private dataService: TimeEntryService,
+        private service: EquipmentTypeService,
+        private router: Router
    
     ){
         this.route.params.subscribe(params => this.id = params['id']);
@@ -81,6 +92,16 @@ export class DetailsComponent implements AfterViewInit {
        this.getTestStages();
        this.getHourEntryByEntityIdentifierId();
        this.getDownTimeReasons();
+       let resData: any;
+       this.service.postGridData()
+           .subscribe(res => {
+               resData = res;
+               this.gridData = res.Data;
+               this.cols = res.Configuration.Columns;
+               //console.log("-------- Cols --------", this.cols);
+               this.confInfo = res.Configuration;
+               //console.log("------- Configuration --------", this.confInfo);
+           });
        //this.dataService.GetProjectId(this.id)
        //    .subscribe(res => {
        //        this.projectId = res.$values;
@@ -260,6 +281,9 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 
+    }
+    navigateDetails(id: string) {
+        this.router.navigate(['testrequest/sensor/details/', id]);
     }
 
   
