@@ -49,6 +49,7 @@ const routes = [
     { path: 'testStage', loadChildren: 'app/body/Admin/Vehicle/TestStage/testStage.module' },
     { path: 'testRole', loadChildren: 'app/body/Admin/Vehicle/TestRole/testRole.module' },
     { path: 'units', loadChildren: 'app/body/Admin/Vehicle/Units/units.module' },
+    { path: 'operatingHours', loadChildren: 'app/body/Admin/Vehicle/OperatingHours/operatingHours.module' },
   ];
 
 export default RouterModule.forChild(routes);

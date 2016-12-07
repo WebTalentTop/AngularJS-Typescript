@@ -57,4 +57,5 @@ export class GridApiUrl {
     public static testStageGridUrl: string = titanApiUrl + 'testStagegrid/GetGridData';
     public static testRoleGridUrl: string = titanApiUrl + 'testRolegrid/GetGridData';
     public static unitsGridUrl: string = titanApiUrl + 'unitsgrid/GetGridData';
+    public static operatingHoursGridUrl: string = titanApiUrl + 'operatingHoursgrid/GetGridData';
 }
