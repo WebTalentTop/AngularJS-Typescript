@@ -75,11 +75,7 @@
 .ui-icon-gear { @include icon-override("settings"); }
 .ui-icon-calendar { @include icon-override("calendar"); }
 .ui-icon-snapchat-square { @include icon-override("snapchat_square"); }
-<<<<<<< HEAD
 .ui-icon-universal-access { @include icon-override("universal_access"); }
-
-=======
->>>>>>> origin/master
 .ui-icon-date-range { @include icon-override("date_range"); }
 .ui-icon-trash { @include icon-override("delete_forever"); }
 .ui-icon-notice { @include icon-override("error_outline"); }
