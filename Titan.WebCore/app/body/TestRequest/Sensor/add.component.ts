@@ -1,4 +1,5 @@
-import { TimeEntryService } from '../../../shared/services/timeEntry.service';
+import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -29,7 +30,7 @@ export class AddComponent {
    //// qui
    // username: string;
    // details:string;
-   // testStages: any;
+    Sensors: any;
    // hourEntries: any;
    // downTimeReasons: any;
    // estimateDuration: any;
@@ -37,14 +38,14 @@ export class AddComponent {
    // formObject:any;
    // formEquipmentObject: any;
    // TimeEntryTypeId: any;
-   // selectedTestStageId: any;
+   selectedSensorTypeId: any;
    // selectedTimeEntryTypeId: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
-   // id: string;
-   // entityType: string = "TestFacility";
-   //  entityId: string = this.id;
+   id: any;
+   entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
+    entityId: any;
    // filepath: string = "TestFacility";
    // TrackingList: any;
    // startTime: any;
@@ -62,24 +63,25 @@ export class AddComponent {
    // msgs:Message[];
    // uploadedFiles: any[] = [];
 
-   // constructor(
-   //     private route:ActivatedRoute, 
-   //     private dataService: TimeEntryService,
-   //     private router: Router
+    constructor(
+        private route:ActivatedRoute, 
+        private dataService: TestRequestSensorService,
+        private equipmenttypeservice: EquipmentTypeService,
+        private router: Router
    
-   // ){
-   //     this.route.params.subscribe(params => this.id = params['id']);
-   //       this.entityId = this.id;
-   //     console.log("---- TF Details ID Param -----", this.id);
-   // }
-   //handleChange(event)
-   //{
+    ){
+        this.route.params.subscribe(params => this.id = params['id']);
+          this.entityId = this.id;
+        console.log("---- TF Details ID Param -----", this.id);
+    }
+   handleChange(event)
+   {
 
-   //    console.log('tes---',event);
-   //    console.log('-------targetid-------',event.originalEvent.target.innerText);
-   //}
-   //ngOnInit() {
-   //    this.getTestStages();
+       console.log('tes---',event);
+       console.log('-------targetid-------',event.originalEvent.target.innerText);
+   }
+   ngOnInit() {
+       this.getSensorList();
    //    this.getHourEntryByEntityIdentifierId();
    //    this.getDownTimeReasons();
    //    //this.dataService.GetProjectId(this.id)
@@ -104,13 +106,13 @@ export class AddComponent {
    //             //console.log("----- Result of formObject -----", this.model);
    //         });     
        
-   //}
-   //onTestStageChange(event) {
-   //    console.log('------event------------', event)
-   //    this.selectedTestStageId = (event.value);
-   //    //   this.EquipmentSubType.calibrationform = (event);
+   }
+   onSensorChange(event) {
+       console.log('------event------------', event)
+       this.selectedSensorTypeId = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
 
-   //}
+   }
 
    //onDownTimeReasonChange(event) {
    //    console.log('------event------------', event)
@@ -125,28 +127,28 @@ export class AddComponent {
    //    //   this.EquipmentSubType.calibrationform = (event);
 
    //}
-   //getTestStages() {
-   //     //    userRoles
-   //    this.dataService.getTestStages().subscribe(response => {
-   //        this.testStages = new Array();
-   //         if (response != null) {
-   //             var resultMap = new Array();
-   //             resultMap.push({
-   //                 label: "--Select--",
-   //                 value: null
-   //             });
-   //             for (let template of response) {
-   //                 var temp = {
-   //                     label: template.name,
-   //                     value: template.id
-   //                 }
-   //                 resultMap.push(temp);
-   //             }
-   //             this.testStages = resultMap;
-   //         }
-   //         console.log(response);
-   //     });
-   //}
+   getSensorList() {
+        //    userRoles
+       this.equipmenttypeservice.getSensorList().subscribe(response => {
+           this.Sensors = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "--Select--",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.Sensors = resultMap;
+            }
+            console.log(response);
+        });
+   }
 
    //getDownTimeReasons() {
    //    //    userRoles
@@ -193,6 +195,35 @@ export class AddComponent {
    //        console.log(response);
    //    });
    //}
+   onSubmit(formRef) {
+       formRef.isDeleted = false;
+       let formData: any = {
+          
+           SensorTypeId: this.selectedSensorTypeId,
+
+          TestRequestId : this.id,       
+         
+         
+         IsCompleted :'false',       
+         IsDeleted :'false'
+          
+       };
+       //formData.name = formRef.name;
+       //formData.address.addressLine1 = formRef.addressLine1;
+       //formData.address.addressLine2 = formRef.addressLine2;
+       //formData.address.city = formRef.city;
+       //formData.address.state = formRef.state;
+       //formData.address.postalCode = formRef.postalCode;
+       //formData.locale = "en-us";
+       console.log(formData);
+       this.dataService.postAdd(formData).subscribe(res => {
+           console.log("-------- Test Sensor Adding new result ----- ", res);
+           if (res.IsSuccess) {
+               this.router.navigate(["/testrequest/details/", this.id]);
+           }
+       });
+   }
+
    // onSubmit(formRef) {
    //     console.log(formRef);
    //  //   console.log(this.testFacility.name);

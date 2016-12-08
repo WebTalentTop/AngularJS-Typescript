@@ -539,14 +539,17 @@
                                                     </p-dropdown>
                                                 </div>
                                                 <div class="form-group col-sm-6 col-md-4">
-                                                    <h3> Estimated Duration </h3>
+                                                    <label class="control-label">
+                                                        Estimate Duration
+                                                    </label>
                                                     <p-calendar [(ngModel)]="estimateDuration" name="estimateDuration" [timeOnly]="true"></p-calendar>
                                                 </div>
                                                 <div class="form-group col-sm-6 col-md-4">
                                                     <label class="control-label">
                                                         Actual   End Time
                                                     </label>
-                                                    <p-calendar [(ngModel)]="endTime" name="endTime" showTime="showTime" [showIcon]="true" icon="fa-calendar"></p-calendar>
+                                                    <p-calendar id="endTime" [(ngModel)]="endTime" name="endTime" showTime="true" hourFormat="24"></p-calendar>
+                                                    <!--<p-calendar [(ngModel)]="endTime" name="endTime" [showTime]="true" [showIcon]="true" icon="fa-calendar"></p-calendar>-->
                                                 </div>
                                                 <div class="form-group col-sm-6 col-md-4">
                                                     <label class="control-label">
@@ -635,16 +638,24 @@
                                     <div class="card card-w-title">
                                         <h1> Sensor Information </h1>-->
                                         <div class="ui-grid-row">
-                                            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>
+                                            <a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>
                                             <!--<a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Test Facility</a>-->
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                                     <div class="table-responsive" style="min-height:400px;">
-                                                        <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+                                                        <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
+                                                            <p-column header="Sensor Name" field="name" sortable="true"></p-column>
+                                                           
 
-                                                            <p-column header="Sensor Name" sortable="true"></p-column>
-
-                                                            <p-column header="Comments" sortable="true"></p-column>
+                                                            <p-column header="Comments" field="comments" sortable="true"></p-column>
+                                                            <p-column>
+                                                                <template pTemplate type="header">
+                                                                    <button type="button" pButton icon="fa-refresh"></button>
+                                                                </template>
+                                                                <template let-sensorrow="rowData" pTemplate type="body">
+                                                                    <a routerLink="details/{{sensorrow.id}}/{{entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>                                                                   
+                                                                </template>
+                                                            </p-column>
 
                                                         </p-dataTable>
                                                     </div>

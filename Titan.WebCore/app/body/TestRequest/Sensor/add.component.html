@@ -19,7 +19,7 @@
                                                Select Sensor *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <p-dropdown [options]="testStages" (onChange)="onTestStageChange($event)" name="testStage" [style]="{'width':'200px'}">
+                                                <p-dropdown [options]="Sensors" (onChange)="onSensorChange($event)" name="sensor" [style]="{'width':'200px'}">
 
                                                 </p-dropdown>
                                             </div>
@@ -30,7 +30,7 @@
                                                 Upload File:
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                                                <p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                                                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                                             <!--<template pTemplate type="content">
                                                 <ul *ngIf="uploadedFiles.length">
@@ -65,7 +65,7 @@
                                             <div class="ui-grid-col-6">
                                             </div>
                                             <div class="ui-grid-col-4">
-                                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/testrequest/details/0">  </button>
+                                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
                                             </div>
                                         </div>
                                     </div>

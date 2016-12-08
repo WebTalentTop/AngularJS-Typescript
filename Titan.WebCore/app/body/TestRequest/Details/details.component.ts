@@ -1,7 +1,8 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
+import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
+import {  Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridComponent } from '../../../shared/UIComponents/GridComponent/grid.component';
@@ -34,6 +35,7 @@ export class DetailsComponent implements AfterViewInit {
     confInfo: any = {};
     cols = [];
     gridFilter = {};
+    sensorRequests: any;
     idField: string;
     linkFieldId: string;
     username: string;
@@ -75,6 +77,7 @@ export class DetailsComponent implements AfterViewInit {
         private route:ActivatedRoute, 
         private dataService: TimeEntryService,
         private service: EquipmentTypeService,
+        private testrequestsensorserice: TestRequestSensorService,
         private router: Router
    
     ){
@@ -93,15 +96,17 @@ export class DetailsComponent implements AfterViewInit {
        this.getHourEntryByEntityIdentifierId();
        this.getDownTimeReasons();
        let resData: any;
-       this.service.postGridData()
+       this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId)
            .subscribe(res => {
-               resData = res;
-               this.gridData = res.Data;
-               this.cols = res.Configuration.Columns;
-               //console.log("-------- Cols --------", this.cols);
-               this.confInfo = res.Configuration;
+               this.sensorRequests = res.result;
+             //  resData = res;
+               //this.gridData = res.Data;
+               //this.cols = res.Configuration.Columns;
+               ////console.log("-------- Cols --------", this.cols);
+               //this.confInfo = res.Configuration;
                //console.log("------- Configuration --------", this.confInfo);
            });
+
        //this.dataService.GetProjectId(this.id)
        //    .subscribe(res => {
        //        this.projectId = res.$values;

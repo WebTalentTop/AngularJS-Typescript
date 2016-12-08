@@ -8,4 +8,6 @@ export class EquipmentTypeApiUrl {
     public static postdeleteUrl: string = titanApiUrl + 'equipmentType/DeleteEquipments';
     public static getByIdUrl: string = titanApiUrl + 'equipmentType';
     public static getSubTypesByIdUrl: string = titanApiUrl + 'equipmentType/GetEquipmentSubTypes';
+    public static getSensorListUrl: string = titanApiUrl + 'equipmentType/GetAllEquipmentTypes';
+  
 }

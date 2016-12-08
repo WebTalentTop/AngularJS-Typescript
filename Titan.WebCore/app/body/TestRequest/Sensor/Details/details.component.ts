@@ -1,8 +1,10 @@
 ﻿//import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 //import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestRequestSensorService } from '../../../../shared/services/testrequestsensor.service';
+import { EquipmentTypeService } from '../../../../shared/services/equipmentType.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 //import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-//import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../../shared/services/testFacilityAttachment.service';
 //import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 //import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
@@ -19,7 +21,7 @@ declare var fullcalendardef: FullCalendar.Calendar;
 //let $ = require('../../../shared/services/fullcalendar.js');
 
 @Component({
-    selector: 'details-testfacility',
+    selector: 'details-sensor',
     templateUrl: 'app/body/TestRequest/Sensor/Details/details.component.html'
 })
 export class DetailsComponent {
@@ -40,10 +42,13 @@ export class DetailsComponent {
     //formConfiguration: any;
     //formObject: any;
     //formEquipmentObject: any;
-    //id: string;
-    //addressid: any;
-    //entityType: string = "TestFacility";
-    //entityId: string = this.id;
+    id: any;
+    uploadedFiles: any[] = [];
+    Sensors: any;
+    selectedSensorTypeId: any;
+    entityId: any;
+    entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
+    testRequestSensorId: any;
     //filepath: string = "TestFacility";
     //testFacility = { name: '' };
     //address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
@@ -67,17 +72,23 @@ export class DetailsComponent {
     //msgs: Message[];
     //uploadedFiles: any[] = [];
 
-    //constructor(
-    //    private route: ActivatedRoute,
-    //    private router: Router,
-    //    private dataService: TestFacilityService,
-    //    private testfacilityroleservice: TestFacilityRoleService,
-    //    private testfacilityattachmentservice: TestFacilityAttachmentService
-    //) {
-    //    this.route.params.subscribe(params => this.id = params['id']);
-    //    this.entityId = this.id;
-    //    console.log("---- TF Details ID Param -----", this.id);
-    //}
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private equipmenttypeservice: EquipmentTypeService,
+
+        private dataService: TestRequestSensorService,
+        //private testfacilityroleservice: TestFacilityRoleService,
+        private testfacilityattachmentservice: TestFacilityAttachmentService
+    ) {
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.entityId = params['entityId'];
+        });
+        this.testRequestSensorId = this.id;
+       // this.entityId=
+        console.log("---- TF Details ID Param -----", this.id);
+    }
     //ngAfterViewInit() {
 
     //}
@@ -135,21 +146,24 @@ export class DetailsComponent {
 
     //    });
     //}
-    //ngOnInit() {
+    ngOnInit() {
 
-
+        this.getSensorList();
     //    this.getUserRoles();
-    //    this.dataService.getById(this.id)
-    //        .subscribe(res => {
-    //            this.formConfiguration = res.formConfiguration;
-    //            this.formObject = res.formObject;
-    //            this.address = res.address;
-    //            this.addressid = res.address.id
-    //            this.testFacility = res.testFacility;
-    //            this.model = res.formObject;
-    //            console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-    //            console.log("----- Result of formObject -----", this.model);
-    //        });
+        this.dataService.getById(this.id)
+            .subscribe(res => {
+              //  this.entityId = res.result.entityId;
+                this.selectedSensorTypeId = res.result.sensorTypeId;
+               
+            });
+        // getSensorAttachmentsByEntityIdUrl
+        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.entityId).subscribe(
+            res => {
+                this.uploadedFiles = res.$values;
+            }
+        );
+        // get entityId by calling testrequest table for testrequestsensorId
+
     //    if (this.id) {
     //        this.dataService.getNotifications(this.id)
     //            .subscribe(res => {
@@ -180,7 +194,35 @@ export class DetailsComponent {
     //            this.TestFacilityEquipments = res;
 
     //        });
-    //}
+    }
+    onSensorChange(event) {
+        console.log('------event------------', event)
+        this.selectedSensorTypeId = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    getSensorList() {
+        //    userRoles
+        this.equipmenttypeservice.getSensorList().subscribe(response => {
+            this.Sensors = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "--Select--",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.Sensors = resultMap;
+            }
+            console.log(response);
+        });
+    }
     //onUserRoleChange(event) {
     //    console.log('------event------------', event)
     //    this.selectedRole = (event.value);
