@@ -38,7 +38,8 @@ export class AddComponent {
    // formObject:any;
    // formEquipmentObject: any;
    // TimeEntryTypeId: any;
-   selectedSensorTypeId: any;
+    selectedSensorTypeId: any;
+    comment: any;
    // selectedTimeEntryTypeId: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
@@ -208,6 +209,17 @@ export class AddComponent {
          IsDeleted :'false'
           
        };
+       let formCommentData: any = {
+
+           Comment: this.comment,
+
+           TestRequestId: this.id,
+
+
+          
+           IsDeleted: 'false'
+
+       };
        //formData.name = formRef.name;
        //formData.address.addressLine1 = formRef.addressLine1;
        //formData.address.addressLine2 = formRef.addressLine2;
@@ -216,12 +228,25 @@ export class AddComponent {
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
        console.log(formData);
-       this.dataService.postAdd(formData).subscribe(res => {
+       this.dataService.postAdd(formData,this.comment).subscribe(res => {
            console.log("-------- Test Sensor Adding new result ----- ", res);
            if (res.IsSuccess) {
                this.router.navigate(["/testrequest/details/", this.id]);
            }
        });
+       //this.dataService.postCommentAdd(formCommentData).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
+
+       //this.dataService.postAdd(formData).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
    }
 
    // onSubmit(formRef) {

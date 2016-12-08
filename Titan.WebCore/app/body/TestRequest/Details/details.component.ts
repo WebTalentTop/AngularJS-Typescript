@@ -220,6 +220,39 @@ export class DetailsComponent implements AfterViewInit {
    }
     onSubmit(formRef) {
         console.log(formRef);
+        if (this.selectedTestStageId == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Stage', detail: '' });
+            return null;
+        }
+        if (this.selectedDownTimeReasonId == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select DownTimeReason', detail: '' });
+            return null;
+        }
+        if (this.selectedTimeEntryTypeId == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select activity', detail: '' });
+            return null;
+        }
+        if (this.estimateDuration == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please Estimate Duration', detail: '' });
+            return null;
+        }
+        if (this.startTime == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please start Time', detail: '' });
+            return null;
+        }
+        if (this.endTime == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please End Time', detail: '' });
+            return null;
+        }
+
+
+
      //   console.log(this.testFacility.name);
         formRef.isDeleted = false;
         //let formData: any = {

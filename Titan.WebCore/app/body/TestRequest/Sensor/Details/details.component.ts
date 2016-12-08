@@ -44,7 +44,11 @@ export class DetailsComponent {
     //formEquipmentObject: any;
     id: any;
     uploadedFiles: any[] = [];
+    PIC: any;
     Sensors: any;
+    departmentId: any;
+    comment: any;
+    testRequestSensorCommentId: any;
     selectedSensorTypeId: any;
     entityId: any;
     entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
@@ -153,8 +157,18 @@ export class DetailsComponent {
         this.dataService.getById(this.id)
             .subscribe(res => {
               //  this.entityId = res.result.entityId;
-                this.selectedSensorTypeId = res.result.sensorTypeId;
+                this.selectedSensorTypeId = res.result.sensorTypeId;     
+                this.PIC = res.result.pic;
+                this.departmentId = res.result.departmentId;
+                       
                
+            });
+        this.dataService.getSensorCommentIdByTestRequestSensorId(this.testRequestSensorId)
+            .subscribe(res => {
+                //  this.entityId = res.result.entityId;
+                this.testRequestSensorCommentId = res.result.id;
+                this.comment = res.result.comment;
+
             });
         // getSensorAttachmentsByEntityIdUrl
         this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.entityId).subscribe(
@@ -289,6 +303,55 @@ export class DetailsComponent {
     //        this.filteredUserNames = filteredList.$values;
     //    });
     //}
+    onSubmit(formRef) {
+        formRef.isDeleted = false;
+        let formData: any = {
+
+            SensorTypeId: this.selectedSensorTypeId,
+            PIC: this.PIC,
+            Id: this.testRequestSensorId,
+            TestRequestId: this.entityId,
+            IsCompleted: 'false',
+            IsDeleted: 'false',
+            DepartmentId: this.departmentId
+
+        };
+        let formCommentData: any = {
+
+            Comment: this.comment,
+            Id: this.testRequestSensorCommentId,
+            TestRequestSensorId: this.id,
+            IsDeleted: 'false'
+
+        };
+        //formData.name = formRef.name;
+        //formData.address.addressLine1 = formRef.addressLine1;
+        //formData.address.addressLine2 = formRef.addressLine2;
+        //formData.address.city = formRef.city;
+        //formData.address.state = formRef.state;
+        //formData.address.postalCode = formRef.postalCode;
+        //formData.locale = "en-us";
+        console.log(formData);
+        this.dataService.postUpdate(formData).subscribe(res => {
+            console.log("-------- Test Sensor Adding new result ----- ", res);
+            if (res.IsSuccess) {
+                this.router.navigate(["/testrequest/details/", this.id]);
+            }
+        });
+        this.dataService.postCommentUpdate(formCommentData).subscribe(res => {
+            console.log("-------- Test Sensor Adding new result ----- ", res);
+            if (res.IsSuccess) {
+                this.router.navigate(["/testrequest/details/", this.id]);
+            }
+        });
+
+        //this.dataService.postAdd(formData).subscribe(res => {
+        //    console.log("-------- Test Sensor Adding new result ----- ", res);
+        //    if (res.IsSuccess) {
+        //        this.router.navigate(["/testrequest/details/", this.id]);
+        //    }
+        //});
+    }
     //onSubmit(formRef) {
     //    console.log(formRef);
     //    console.log(this.testFacility.name);
