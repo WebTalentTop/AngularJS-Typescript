@@ -50,6 +50,7 @@ export class DetailsComponent {
     comment: any;
     testRequestSensorCommentId: any;
     selectedSensorTypeId: any;
+    msgs: Message[]=[];
     entityId: any;
     entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
     testRequestSensorId: any;

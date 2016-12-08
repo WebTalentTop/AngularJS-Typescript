@@ -11,7 +11,7 @@ import {MultiSelectModule} from 'primeng/primeng';
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, AutoCompleteModule,MultiSelectModule ,FormsModule, DataTableModule, TabViewModule, CalendarModule,ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, detailsRoutes],
+    imports: [CommonModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule,  detailsRoutes],
     providers: [TestFacilityService, TestFacilityRoleService, TestFacilityAttachmentService],
     declarations: [DetailsComponent]
 })
