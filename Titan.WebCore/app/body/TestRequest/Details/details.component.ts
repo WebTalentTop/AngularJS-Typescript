@@ -247,7 +247,7 @@ export class DetailsComponent implements AfterViewInit {
         }
         if (this.endTime == null || this.endTime == "") {
             this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please seelect End Time', detail: '' });
+            this.msgs.push({ severity: 'error', summary: 'Please select End Time', detail: '' });
             return null;
         }
 

@@ -67,7 +67,7 @@ export class TestRequestSensorService {
 
     postAdd(filterBody,comment): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody,{ headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))
