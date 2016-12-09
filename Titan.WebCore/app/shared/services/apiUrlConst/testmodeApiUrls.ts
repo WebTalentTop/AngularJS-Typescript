@@ -7,5 +7,6 @@ export class TestModeApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'testMode/put';
     public static getByIdUrl: string = titanApiUrl + 'testMode/Get';
     public static getAllUrl: string = titanApiUrl + 'testMode/GetAll';
+    public static getAllTestTypesUrl: string = titanApiUrl + 'testTypes/GetByTenantId';
     public static getAllByTestTypeIdUrl: string = titanApiUrl + 'testMode/GetAllByTestType?testTypeId=';
 }

@@ -265,32 +265,32 @@ export class AddComponent {
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
        console.log(formData);
-       //let xhr = new XMLHttpRequest();
-       //let path = titanApiUrl + 'testrequestsensor/post/' + this.comment;
-       //xhr.onreadystatechange = function state_change() {
-       //    if (xhr.readyState == 4) {// 4 = "loaded"
-       //        if (xhr.status == 200) {// 200 = OK
-       //            // ...our code here...
-       //            alert('ok');
-       //        }
-       //        else {
-       //            alert("Problem retrieving XML data");
-       //        }
-       //    }
-       //};
-       //xhr.open('POST', path, false);
-       //xhr.setRequestHeader("Content-Type", "multipart/form-data");
-       //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+       let xhr = new XMLHttpRequest();
+       let path = titanApiUrl + 'testrequestsensor/post/uploadfile';
+       xhr.onreadystatechange = function state_change() {
+           if (xhr.readyState == 4) {// 4 = "loaded"
+               if (xhr.status == 200) {// 200 = OK
+                   // ...our code here...
+                   alert('ok');
+               }
+               else {
+                   alert("Problem retrieving XML data");
+               }
+           }
+       };
+       xhr.open('POST', path, false);
+       xhr.setRequestHeader("Content-Type", "multipart/form-data");
+       xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
        
       
-       ////  xhr.withCredentials = true;
-       //xhr.send(formData);
-       this.dataService.postAdd(formData,this.comment).subscribe(res => {
-           console.log("-------- Test Sensor Adding new result ----- ", res);
-           if (res.IsSuccess) {
-               this.router.navigate(["/testrequest/details/", this.id]);
-           }
-       });
+       //  xhr.withCredentials = true;
+       xhr.send(null);
+       //this.dataService.postAdd(formData,this.comment).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
        
        //this.dataService.postCommentAdd(formCommentData).subscribe(res => {
        //    console.log("-------- Test Sensor Adding new result ----- ", res);

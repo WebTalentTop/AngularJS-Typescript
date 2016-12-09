@@ -21,8 +21,8 @@ export class DetailsComponent {
     testMode = { name: '' };   
     formConfiguration: any;
     formObject: any;
-
-    TestModeDetails: any = {
+    testTypeDetails: any;
+    testModeDetails: any = {
         id: '',
         isDeleted: false,
         name: '',
@@ -55,10 +55,13 @@ export class DetailsComponent {
             this.TestModeId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            this.service.getAllTestTypes().subscribe(TestTypesList => {
+                this.testTypeDetails = TestTypesList.result;
+            });
             this.service.getById(this.TestModeId).subscribe(TestModeDetails => {
-                this.TestModeDetails = TestModeDetails.result;
+                this.testModeDetails = TestModeDetails.result;
               
-                console.log(this.TestModeDetails);
+                //console.log(this.TestModeDetails);
             });
         });
     }
@@ -66,7 +69,7 @@ export class DetailsComponent {
 
     onSubmit(formRef) {
 
-        this.service.postUpdate(this.TestModeDetails).subscribe(TestModeDetails => {
+        this.service.postUpdate(this.testModeDetails).subscribe(TestModeDetails => {
         });
          this.msgs = [];
          this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
