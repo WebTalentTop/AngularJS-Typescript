@@ -10,7 +10,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class TestRequestSensorService {
     headers: Headers = new Headers({
-        'Content-Type': 'application/json'
+      //  'Content-Type': 'application/json',
+      //  'Content-Type': 'multipart/form-data',
         // 'Access-Control-Allow-Origin': '*'
     });
 
@@ -24,7 +25,9 @@ export class TestRequestSensorService {
 
     constructor(private http: Http) {
 
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    //  this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+       
+
     }
 
     //postGridData(): Observable<any> {
@@ -43,20 +46,45 @@ export class TestRequestSensorService {
     //    //.map(this.getJson);
     //}
 
-    //postUpdate(filterBody): Observable<any> {
-    //    console.log("-------- Post Customers FilterBody --------", filterBody);
-    //    return this.http.post(`${TimeEntryApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-    //        .map(this.getJson).catch(err => Observable.throw(err))
-    //        .map(this.getJson);
-
-    //    //this.checkErrors)
-    //    //.catch(err => Observable.throw(err))
-    //    //.map(this.getJson);
-    //}
-
-    postAdd(filterBody): Observable<any> {
+    postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${TestReqestSensorApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    postCommentUpdate(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.put(`${TestReqestSensorApiUrl.postCommentUpdateUrl}`, filterBody, { headers: this.headers })
+            .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    postAdd(filterBody,comment): Observable<any> {
+     let   multipartheaders: Headers = new Headers({
+            //  'Content-Type': 'application/json',
+             'Content-Type': 'multipart/form-data',
+            // 'Access-Control-Allow-Origin': '*'
+        });
+     //  this.headers.append("content-Type", "multipart/form-data");
+     // console.log("-------- Post Customers FilterBody --------", filterBody);
+     return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: multipartheaders })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
+    postCommentAdd(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postCommentCreatedUrl}`, filterBody, { headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))
@@ -71,6 +99,13 @@ export class TestRequestSensorService {
     }
     getById(id): Observable<any> {
         return this.http.get(`${TestReqestSensorApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getSensorCommentIdByTestRequestSensorId(id): Observable<any> {
+        return this.http.get(`${TestReqestSensorApiUrl.getSensorCommentIdByTestRequestSensorIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

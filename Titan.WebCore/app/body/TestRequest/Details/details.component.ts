@@ -2,7 +2,7 @@ import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import {  Message } from 'primeng/primeng';
+import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridComponent } from '../../../shared/UIComponents/GridComponent/grid.component';
@@ -59,7 +59,7 @@ export class DetailsComponent implements AfterViewInit {
     filepath: string = "TestFacility";
     TrackingList: any;
     startTime: any;
-    endTime: Date;
+    endTime: any;
     model:any = {
                 id:'', 
                 isDeleted:false, 
@@ -220,6 +220,39 @@ export class DetailsComponent implements AfterViewInit {
    }
     onSubmit(formRef) {
         console.log(formRef);
+        if (this.selectedTestStageId == null || this.selectedTestStageId == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Stage', detail: '' });
+            return null;
+        }
+        if (this.selectedDownTimeReasonId == null || this.selectedDownTimeReasonId == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select DownTimeReason', detail: '' });
+            return null;
+        }
+        if (this.selectedTimeEntryTypeId == null || this.selectedTimeEntryTypeId == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select activity', detail: '' });
+            return null;
+        }
+        if (this.estimateDuration == null || this.estimateDuration == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Estimate Duration', detail: '' });
+            return null;
+        }
+        if (this.startTime == null || this.startTime == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select start Time', detail: '' });
+            return null;
+        }
+        if (this.endTime == null || this.endTime == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select End Time', detail: '' });
+            return null;
+        }
+
+
+
      //   console.log(this.testFacility.name);
         formRef.isDeleted = false;
         //let formData: any = {
@@ -284,7 +317,7 @@ export class DetailsComponent implements AfterViewInit {
 
         });
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+        this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
 
     }
     navigateDetails(id: string) {

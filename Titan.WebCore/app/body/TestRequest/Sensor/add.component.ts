@@ -1,9 +1,11 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
+//import { UUID } from 'angular2-uuid'
 import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 declare var quilldef: Quill.Quill;
@@ -31,6 +33,10 @@ export class AddComponent {
    // username: string;
    // details:string;
     Sensors: any;
+    fileData: any[] = [];
+    
+    uploadedFiles: any[] = [];
+   
    // hourEntries: any;
    // downTimeReasons: any;
    // estimateDuration: any;
@@ -38,7 +44,8 @@ export class AddComponent {
    // formObject:any;
    // formEquipmentObject: any;
    // TimeEntryTypeId: any;
-   selectedSensorTypeId: any;
+    selectedSensorTypeId: any;
+    comment: any;
    // selectedTimeEntryTypeId: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
@@ -49,17 +56,18 @@ export class AddComponent {
    // filepath: string = "TestFacility";
    // TrackingList: any;
    // startTime: any;
-   // endTime: Date;
-   // model:any = {
+    // endTime: Date;
+    fileInfo: any = {
    //             id:'', 
-   //             isDeleted:false, 
-   //             name:'', 
+        //             isDeleted:false, 
+         name: ''
    //             createdOn:'', 
    //             modifiedOn:'',
    //             userCreatedById:'',
    //             userInChargedId:'',
    //             userModifiedById:''
-   // };
+    };
+    
    // msgs:Message[];
    // uploadedFiles: any[] = [];
 
@@ -72,7 +80,8 @@ export class AddComponent {
     ){
         this.route.params.subscribe(params => this.id = params['id']);
           this.entityId = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
+          console.log("---- TF Details ID Param -----", this.id);
+         // this.fileData= this.fileInfo[];
     }
    handleChange(event)
    {
@@ -106,6 +115,24 @@ export class AddComponent {
    //             //console.log("----- Result of formObject -----", this.model);
    //         });     
        
+   }
+   onBeforeUpload(event) {
+       for (let file of event.files) {
+            this.fileInfo.name = file.name;
+
+           this.fileData.push(this.fileInfo);
+           this.uploadedFiles.push(file);
+          // this.fileInfo.name = '';
+       }
+
+       //this.testfacilityattachmentservice.getByIdusing(this.id)
+       //    .subscribe(TestFacilityAttachments => {
+       //        console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+       //        this.TestFacilityAttachments = TestFacilityAttachments;
+       //    });
+
+       //this.msgs = [];
+       //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
    }
    onSensorChange(event) {
        console.log('------event------------', event)
@@ -195,6 +222,12 @@ export class AddComponent {
    //        console.log(response);
    //    });
    //}
+   //selectFile($event): void {
+   //    var inputValue = $event.target;
+   //    this.file = inputValue.files[0];
+   //    console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
+   //}
+    
    onSubmit(formRef) {
        formRef.isDeleted = false;
        let formData: any = {
@@ -205,9 +238,25 @@ export class AddComponent {
          
          
          IsCompleted :'false',       
-         IsDeleted :'false'
+         IsDeleted: 'false'
+        
           
        };
+       let formCommentData: any = {
+
+           Comment: this.comment,
+
+           TestRequestId: this.id,
+
+
+          
+           IsDeleted: 'false'
+
+       };
+       for (let i of this.fileData)
+       {
+
+       }
        //formData.name = formRef.name;
        //formData.address.addressLine1 = formRef.addressLine1;
        //formData.address.addressLine2 = formRef.addressLine2;
@@ -216,12 +265,46 @@ export class AddComponent {
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
        console.log(formData);
-       this.dataService.postAdd(formData).subscribe(res => {
+       //let xhr = new XMLHttpRequest();
+       //let path = titanApiUrl + 'testrequestsensor/post/' + this.comment;
+       //xhr.onreadystatechange = function state_change() {
+       //    if (xhr.readyState == 4) {// 4 = "loaded"
+       //        if (xhr.status == 200) {// 200 = OK
+       //            // ...our code here...
+       //            alert('ok');
+       //        }
+       //        else {
+       //            alert("Problem retrieving XML data");
+       //        }
+       //    }
+       //};
+       //xhr.open('POST', path, false);
+       //xhr.setRequestHeader("Content-Type", "multipart/form-data");
+       //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+       
+      
+       ////  xhr.withCredentials = true;
+       //xhr.send(formData);
+       this.dataService.postAdd(formData,this.comment).subscribe(res => {
            console.log("-------- Test Sensor Adding new result ----- ", res);
            if (res.IsSuccess) {
                this.router.navigate(["/testrequest/details/", this.id]);
            }
        });
+       
+       //this.dataService.postCommentAdd(formCommentData).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
+
+       //this.dataService.postAdd(formData).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
    }
 
    // onSubmit(formRef) {

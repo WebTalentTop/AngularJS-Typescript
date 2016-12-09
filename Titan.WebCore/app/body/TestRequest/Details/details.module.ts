@@ -7,12 +7,12 @@ import { EquipmentTypeService } from '../../../shared/services/equipmentType.ser
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, DropdownModule, PanelModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, detailRoutes],
+    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, detailRoutes],
     providers: [TimeEntryService, EquipmentTypeService, TestRequestSensorService],
     declarations: [DetailsComponent]
 })
