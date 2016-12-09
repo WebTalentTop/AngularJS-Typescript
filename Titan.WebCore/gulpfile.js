@@ -127,11 +127,11 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./library/resources'));
 });
 
-gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
+gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
-gulp.task("copy-dev-res-all", ["ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
+gulp.task("copy-dev-res-all", ['sass', "ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
 
 gulp.task("copy-front-dev-only", ['css', 'html']);
 gulp.task("copy-dev-ts-sourceMap", ["ts", 'sourceMap']);
