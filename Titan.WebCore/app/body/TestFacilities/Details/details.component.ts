@@ -103,15 +103,15 @@ export class DetailsComponent implements AfterViewInit {
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay,listMonth'
             },
-            defaultDate: '2016-09-12',
+            //defaultDate: '2016-09-12',
 
             events: function (start, end, timezone, callback) {
                 $.ajax({
                     url: titanApiUrl + 'TestFacility/Schedule',
                     type: 'POST',
                     data: {
-                        startdate: '1-1-2016',
-                        enddate: '12-31-2018',
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
 
                     },
                     error: function () {
@@ -141,14 +141,14 @@ export class DetailsComponent implements AfterViewInit {
         this.getUserRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
-                this.formConfiguration = res.formConfiguration;
-                this.formObject = res.formObject;
+                //this.formConfiguration = res.formConfiguration;
+                //this.formObject = res.formObject;
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
-                this.model = res.formObject;
-                console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-                console.log("----- Result of formObject -----", this.model);
+                //this.model = res.formObject;
+                //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
+                //console.log("----- Result of formObject -----", this.model);
             });
         if (this.id) {
             this.dataService.getNotifications(this.id)
