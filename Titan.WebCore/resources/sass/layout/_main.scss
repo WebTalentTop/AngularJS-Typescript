@@ -173,7 +173,6 @@ body {
                     position: relative;
                     overflow: scroll;
                     overflow-x: hidden;
-                    background-color: #424242;
                 }  
                 
                 > ul:last-child {
@@ -269,7 +268,7 @@ body {
                         }
                         
                         &:hover {
-                            background-color: #ff5722;
+                            background-color: $darkMenuHoverColor;
                         }
                     }
                     
@@ -356,20 +355,19 @@ body {
                 }
                 
                 &:hover {
-                    background-color: #ff5722;
+                    background-color: $hoverBgColor;
                 }
                 
                 span {
                     display: inline-block;
                     vertical-align: middle;
-                    color: #ffffff;
                 }
             }
             
             &.active-menuitem {
                 > a {
                     color: $primaryColor;
-                    background-color: #ff5722;
+                    background-color: #e8e8e8;
                     
                     i:last-child {
                         @include rotate(-180deg);
@@ -499,7 +497,7 @@ body {
                     @include transition(color .3s);
                     
                     &:hover {
-                        color: #ff5722;
+                        color: #e8e8e8;
                     }
                 }
                 
@@ -634,7 +632,7 @@ body {
                             }
                             
                             &:hover {
-                                background-color: #ff5722;
+                                background-color: #e8e8e8;
                                 color: $textColor;
                                 
                                 i {
@@ -705,7 +703,7 @@ body {
                                 &.active-menuitem {
                                     > a {
                                         color: $primaryColor;
-                                        background-color: #ff5722;
+                                        background-color: #e8e8e8;
                                     }
                                 }
                             }
@@ -733,7 +731,7 @@ body {
                                 color: #ffffff;
                                 
                                 &:hover {
-                                    background-color: #ff5722;
+                                    background-color: $darkMenuHoverColor;
                                     
                                     i {
                                         color: #ffffff;
@@ -852,7 +850,7 @@ body {
                             }
                             
                             &:hover {
-                                background-color: #ff5722;
+                                background-color: #e8e8e8;
                             }
                             
                             .topbar-item-name {

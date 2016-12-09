@@ -155,10 +155,10 @@ Ultima = {
             }
         });
         
-        this.menu.off('mouseenter.ultima').on('mouseenter.ultima','> li > a', function(e) {    
+        this.menu.off('mouseenter.ultima').on('mouseenter.ultima','> li', function(e) {    
             if($this.isHorizontal() && $this.isDesktop()) {
-                var link = $(this),
-                item = link.parent(),
+                var item = $(this),
+                link = item.children('a'),
                 submenu = item.children('ul');
                 
                 if(!item.hasClass('active-menuitem')) {
@@ -230,12 +230,16 @@ Ultima = {
             $this.topbarLinkClick = true;
         });
         
-        $(document.body).off('click.ultima').on('click.ultima', function() {
+        $(document.body).off('click.ultima').on('click', function() {
             if($this.isHorizontal() && !$this.horizontalMenuClick && $this.isDesktop()) {
                 $this.deactivateHorizontalMenu();
             }
+            
             if(!$this.topbarMenuClick && !$this.topbarLinkClick) {
                 $this.topbarItems.find('.active-top-menu').removeClass('active-top-menu');
+            }
+            
+            if(!$this.topbarMenuClick && !$this.topbarLinkClick) {
                 $this.topbarItems.removeClass('topbar-items-visible');
             }
             
