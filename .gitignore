@@ -261,3 +261,6 @@ Titan.WebCore/typings.json
 # The built web site can be rebuilt at any time.
 Titan.WebCore/library/
 Titan.WebCore/wwwroot/
+
+# Log Files and Directories to Exclude
+npm-debug.log
