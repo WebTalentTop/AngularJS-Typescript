@@ -22,6 +22,7 @@ export class DetailsComponent {
     formConfiguration: any;
     formObject: any;
     testTypeDetails: any;
+    selectedTestTypes: any;
     testModeDetails: any = {
         id: '',
         isDeleted: false,
@@ -30,7 +31,8 @@ export class DetailsComponent {
         userCreatedById: '',
         userModifiedById: '',
         createdOn: '',
-        modifiedOn: ''
+        modifiedOn: '',
+        TestTypeIdList: this.selectedTestTypes
 
     };
 
@@ -56,11 +58,14 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getAllTestTypes().subscribe(TestTypesList => {
-                this.testTypeDetails = TestTypesList.result;
+               this.testTypeDetails = TestTypesList.$values;
+
+               
+
             });
             this.service.getById(this.TestModeId).subscribe(TestModeDetails => {
-                this.testModeDetails = TestModeDetails.result;
-              
+                this.testModeDetails = TestModeDetails;
+                this.selectedTestTypes = TestModeDetails.testTypeIdList.$values;
                 //console.log(this.TestModeDetails);
             });
         });
