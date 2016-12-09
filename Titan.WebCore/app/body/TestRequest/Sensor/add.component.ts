@@ -1,4 +1,5 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -221,6 +222,12 @@ export class AddComponent {
    //        console.log(response);
    //    });
    //}
+   //selectFile($event): void {
+   //    var inputValue = $event.target;
+   //    this.file = inputValue.files[0];
+   //    console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
+   //}
+    
    onSubmit(formRef) {
        formRef.isDeleted = false;
        let formData: any = {
@@ -231,8 +238,8 @@ export class AddComponent {
          
          
          IsCompleted :'false',       
-         IsDeleted: 'false',
-         files: this.fileData
+         IsDeleted: 'false'
+        
           
        };
        let formCommentData: any = {
@@ -258,7 +265,27 @@ export class AddComponent {
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
        console.log(formData);
-       this.dataService.postAdd(formData, this.comment).subscribe(res => {
+       //let xhr = new XMLHttpRequest();
+       //let path = titanApiUrl + 'testrequestsensor/post/' + this.comment;
+       //xhr.onreadystatechange = function state_change() {
+       //    if (xhr.readyState == 4) {// 4 = "loaded"
+       //        if (xhr.status == 200) {// 200 = OK
+       //            // ...our code here...
+       //            alert('ok');
+       //        }
+       //        else {
+       //            alert("Problem retrieving XML data");
+       //        }
+       //    }
+       //};
+       //xhr.open('POST', path, false);
+       //xhr.setRequestHeader("Content-Type", "multipart/form-data");
+       //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+       
+      
+       ////  xhr.withCredentials = true;
+       //xhr.send(formData);
+       this.dataService.postAdd(formData,this.comment).subscribe(res => {
            console.log("-------- Test Sensor Adding new result ----- ", res);
            if (res.IsSuccess) {
                this.router.navigate(["/testrequest/details/", this.id]);

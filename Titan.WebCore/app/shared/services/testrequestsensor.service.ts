@@ -10,7 +10,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class TestRequestSensorService {
     headers: Headers = new Headers({
-        'Content-Type': 'application/json'
+      //  'Content-Type': 'application/json',
+      //  'Content-Type': 'multipart/form-data',
         // 'Access-Control-Allow-Origin': '*'
     });
 
@@ -24,7 +25,9 @@ export class TestRequestSensorService {
 
     constructor(private http: Http) {
 
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    //  this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+       
+
     }
 
     //postGridData(): Observable<any> {
@@ -66,8 +69,14 @@ export class TestRequestSensorService {
     }
 
     postAdd(filterBody,comment): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody,{ headers: this.headers })
+     let   multipartheaders: Headers = new Headers({
+            //  'Content-Type': 'application/json',
+             'Content-Type': 'multipart/form-data',
+            // 'Access-Control-Allow-Origin': '*'
+        });
+     //  this.headers.append("content-Type", "multipart/form-data");
+     // console.log("-------- Post Customers FilterBody --------", filterBody);
+     return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: multipartheaders })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))
