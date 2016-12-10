@@ -14,10 +14,10 @@
                         </div>
                         <div class="ui-grid-col-4">
                             <!--[(ngModel)]="testModeDetails.name" #testModeDetailsNameRef="ngModel"-->
-                            <input type="text" pInputText name="testmodename"  [(ngModel)]="testModeDetails.name" #testModeDetailsNameRef="ngModel"
+                            <input type="text" pInputText name="testmodename" 
                                 placeholder="TestMode Name" minlength="3" class="form-control" required row="20" />
                         </div>
-                        <div class="ui-grid-col-4">
+                        <!--<div class="ui-grid-col-4">
 
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsNameRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter TestMode Name
@@ -26,16 +26,25 @@
                                 MinLength-3
                             </div>
 
-                        </div>
+                        </div>-->
                         <div class="ui-grid-col-4">
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
                                     Select Test Type:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <!--[(ngModel)]="testModeDetails.testTypeIdList"-->
-                                    <p-multiSelect [options]="testTypeDetails" [(ngModel)]="selectedTestTypes" #testTypeList="ngModel"  name="testType"></p-multiSelect>
+                                 
+                                    <!--<p-multiSelect [options]="testTypeDetails" [(ngModel)]="selectedTestTypes" #testTypeList="ngModel"  name="testType"></p-multiSelect>-->
+                                    <p-pickList [source]="allTestTypes" [target]="selectedTestTypes">
+                                        <template let-testtype>
+                                            <div class="ui-helper-clearfix">
+                                                <!--<img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px" />-->
+                                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{testtype.label}}</div>
+                                            </div>
+                                        </template>
+                                    </p-pickList>
                                 </div>
+                              
                                 <div class="ui-grid-col-4"></div>
                             </div>
                         </div>
@@ -47,11 +56,11 @@
                             Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <!--[(ngModel)]="testModeDetails.description"  #testModeDetailsDescriptionRef="ngModel"-->
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" [(ngModel)]="testModeDetails.description" required name="description" #testModeDetailsDescriptionRef="ngModel" row="50" maxlength="250"
+                            <!--[(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"-->
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12"  required name="description"  row="50" maxlength="250"
                                 ></textarea>
                         </div>
-                        <div class="ui-grid-col-4">
+                        <!--<div class="ui-grid-col-4">
 
                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsDescriptionRef.errors?.required">
                                 <i class="fa fa-close"></i> Please enter TestMode Description
@@ -59,7 +68,7 @@
                              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsDescriptionRef.errors?.maxlength">
                                 MaxLength-250
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                    
                     <div class="ui-grid-row">

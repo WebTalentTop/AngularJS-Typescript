@@ -13,7 +13,20 @@ import { Validators } from '@angular/forms';
 export class DetailsComponent {
     username: string;
     details: string;
+    testTypeDetails: any = {
+    id: '',
+    isDeleted: false,
+    name: '',
+    description: '',
+    userCreatedById: '',
+    userModifiedById: '',
+    createdOn: '',
+    modifiedOn: '',
+    //selectedTestTypeIdList:
+    // allTestTypeIdList:
+    TestTypeIdList: ''
 
+};
     id: string;
     entityType: string = "TestMode";
     entityId: string = this.id;
@@ -21,21 +34,11 @@ export class DetailsComponent {
     testMode = { name: '' };   
     formConfiguration: any;
     formObject: any;
-    testTypeDetails: any;
-    selectedTestTypes: any;
-    testModeDetails: any = {
-        id: '',
-        isDeleted: false,
-        name: '',
-        description: '',
-        userCreatedById: '',
-        userModifiedById: '',
-        createdOn: '',
-        modifiedOn: '',
-        TestTypeIdList: this.selectedTestTypes
-
-    };
-
+    //testTypeDetails: any;
+    selectedTestTypeIdList: any[] = [];
+    selectedTestTypes: any[];
+    allTestTypes: any[];
+    
 
     msgs: Message[];
     uploadedFiles: any[] = [];
@@ -51,30 +54,40 @@ export class DetailsComponent {
 
 
     ngOnInit() {
+        this.selectedTestTypes = [];
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
 
             this.TestModeId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
-            this.service.getAllTestTypes().subscribe(TestTypesList => {
-               this.testTypeDetails = TestTypesList.$values;
+            //this.service.getAllTestTypes().subscribe(TestTypesList => {
+            //    this.testTypeDetails = TestTypesList.result;
+            //    this.allTestTypes = this.testTypeDetails.allTestTypeIdList.$values;
+            //    this.selectedTestTypes = this.testTypeDetails.selectedTestTypeIdList.$values;
 
                
 
-            });
+            //});
             this.service.getById(this.TestModeId).subscribe(TestModeDetails => {
-                this.testModeDetails = TestModeDetails;
-                this.selectedTestTypes = TestModeDetails.testTypeIdList.$values;
-                //console.log(this.TestModeDetails);
+                this.testTypeDetails = TestModeDetails.result;
+                this.allTestTypes = this.testTypeDetails.allTestTypeIdList.$values;
+                this.selectedTestTypes = this.testTypeDetails.selectedTestTypeIdList.$values;
+
             });
         });
     }
 
 
     onSubmit(formRef) {
+        this.selectedTestTypes.forEach((testtype, index) => {
+           
+            this.selectedTestTypeIdList.push(testtype.value);
 
-        this.service.postUpdate(this.testModeDetails).subscribe(TestModeDetails => {
+        });
+
+        this.testTypeDetails.testTypeIdList = this.selectedTestTypeIdList;
+        this.service.postUpdate(this.testTypeDetails).subscribe(TestModeDetails => {
         });
          this.msgs = [];
          this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });

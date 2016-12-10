@@ -18,9 +18,17 @@
                             <div class="ui-grid-col-2">
                                 Select Test Type:
                             </div>
-                            <div class="ui-grid-col-6">
+                            <p-pickList [source]="allTestTypes" [target]="selectedTestTypes">
+                                <template let-testtype>
+                                    <div class="ui-helper-clearfix">
+                                        <!--<img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px" />-->
+                                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{testtype.label}}</div>
+                                    </div>
+                                </template>
+                            </p-pickList>
+                            <!--<div class="ui-grid-col-6">
                                 <p-multiSelect [options]="testTypeDetails" [(ngModel)]="selectedTestTypes" name="testType"></p-multiSelect>
-                            </div>
+                            </div>-->
                             <div class="ui-grid-col-4"></div>
                         </div>
                     </div>

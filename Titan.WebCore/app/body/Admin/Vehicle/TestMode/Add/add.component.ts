@@ -14,15 +14,22 @@ export class AddComponent {
     username: string;
     description:string;
     testTypeDetails: any;
-    selectedTestTypes: any;
+    selectedTestTypeIdList: any[] = [];
+
+    selectedTestTypeIds: any = { Id: '' };
+
+    selectedTestTypes: any[];
+    allTestTypes: any[];
     constructor(private service: TestModeService, private router: Router, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
-
+        this.selectedTestTypes = [];
         this.service.getAllTestTypes().subscribe(TestTypesList => {
-            this.testTypeDetails = TestTypesList.$values;
+            this.testTypeDetails = TestTypesList.result;
+            this.allTestTypes = this.testTypeDetails;
+          //  this.selectedTestTypes = this.testTypeDetails.selectedTestTypeIdList.$values;
             //if (TestTypesList != null) {
             //    var resultMap = new Array();
             //    this.testTypeDetails = TestTypesList.$values;
@@ -45,7 +52,13 @@ export class AddComponent {
         //console.log(this.description);
         //formRef.locale = "en-us";
         //formRef.isDeleted = false;
-        let formData: any = { name: '', description: '', locale: '', isDeleted: false, TestTypeIdList: this.selectedTestTypes };
+        this.selectedTestTypes.forEach((testtype, index) =>
+        {
+            this.selectedTestTypeIds.Id = testtype.value;
+            this.selectedTestTypeIdList.push(testtype.value);
+
+        });
+        let formData: any = { name: '', description: '', locale: '', isDeleted: false, TestTypeIdList: this.selectedTestTypeIdList };
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";
