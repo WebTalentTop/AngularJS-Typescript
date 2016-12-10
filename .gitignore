@@ -260,7 +260,7 @@ Titan.WebCore/typings.json
 # Additional Build Files and Directories to Exclude
 # The built web site can be rebuilt at any time.
 Titan.WebCore/library/
-Titan.WebCore/wwwroot/
+#Titan.WebCore/wwwroot/
 
 # Log Files and Directories to Exclude
 npm-debug.log
