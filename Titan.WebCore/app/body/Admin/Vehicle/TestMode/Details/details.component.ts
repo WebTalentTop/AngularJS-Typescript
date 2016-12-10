@@ -80,6 +80,13 @@ export class DetailsComponent {
 
 
     onSubmit(formRef) {
+
+        if (this.selectedTestTypes.length == 0) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'select atleast one TestType', detail: '' });
+            return null;
+
+        }
         this.selectedTestTypes.forEach((testtype, index) => {
            
             this.selectedTestTypeIdList.push(testtype.value);
@@ -88,8 +95,10 @@ export class DetailsComponent {
 
         this.testTypeDetails.testTypeIdList = this.selectedTestTypeIdList;
         this.service.postUpdate(this.testTypeDetails).subscribe(TestModeDetails => {
+           
+
         });
-         this.msgs = [];
-         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

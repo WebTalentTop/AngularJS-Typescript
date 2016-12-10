@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { TestModeService } from '../../../../../shared/services/testMode.service';
 import { Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, Message } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
@@ -17,7 +17,7 @@ export class AddComponent {
     selectedTestTypeIdList: any[] = [];
 
     selectedTestTypeIds: any = { Id: '' };
-
+    msgs: Message[] = [];
     selectedTestTypes: any[];
     allTestTypes: any[];
     constructor(private service: TestModeService, private router: Router, private route: ActivatedRoute) {
@@ -47,13 +47,15 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
-        //console.log(formRef);
-        //console.log(this.username);
-        //console.log(this.description);
-        //formRef.locale = "en-us";
-        //formRef.isDeleted = false;
-        this.selectedTestTypes.forEach((testtype, index) =>
-        {
+        if (this.selectedTestTypes.length == 0) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'select atleast one TestType', detail: '' });
+
+
+        }
+        else
+            {
+        this.selectedTestTypes.forEach((testtype, index) => {
             this.selectedTestTypeIds.Id = testtype.value;
             this.selectedTestTypeIdList.push(testtype.value);
 
@@ -62,7 +64,7 @@ export class AddComponent {
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";
-        let added: any="true";
+        let added: any = "true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
             console.log('--------------res result------------', +res)
@@ -71,13 +73,13 @@ export class AddComponent {
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
                 this.router.navigate(["/vehicle/testMode"], { queryParams: { page: 1 } });
-               
+
             }
-           
+
         }
-            );
-     
-                  // );
-       
+        );
+
+        // );
+    }
     }
 }
