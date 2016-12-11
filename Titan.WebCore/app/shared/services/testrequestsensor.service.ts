@@ -69,22 +69,27 @@ export class TestRequestSensorService {
     }
 
     postAdd(filterBody,comment): Observable<any> {
-     let   multipartheaders: Headers = new Headers({
-            //  'Content-Type': 'application/json',
-             'Content-Type': 'multipart/form-data',
-            // 'Access-Control-Allow-Origin': '*'
-        });
+     //let   multipartheaders: Headers = new Headers({
+     //       //  'Content-Type': 'application/json',
+     //        'Content-Type': 'multipart/form-data',
+     //       // 'Access-Control-Allow-Origin': '*'
+     //   });
      //  this.headers.append("content-Type", "multipart/form-data");
-     // console.log("-------- Post Customers FilterBody --------", filterBody);
-     return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: multipartheaders })
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
     postCommentAdd(filterBody): Observable<any> {
+        let multipartheaders: Headers = new Headers({
+            //  'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data;boundary=---------------------------99614912995'
+            // 'Access-Control-Allow-Origin': '*'
+        });
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestReqestSensorApiUrl.postCommentCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TestReqestSensorApiUrl.postCommentCreatedUrl}`, filterBody, { headers: multipartheaders })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))

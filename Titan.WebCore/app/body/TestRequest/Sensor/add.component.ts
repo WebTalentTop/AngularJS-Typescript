@@ -52,7 +52,8 @@ export class AddComponent {
    // selectedHourEntry: any ;
    id: any;
    entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
-    entityId: any;
+   entityId: any;
+   formData: any;
    // filepath: string = "TestFacility";
    // TrackingList: any;
    // startTime: any;
@@ -118,9 +119,9 @@ export class AddComponent {
    }
    onBeforeUpload(event) {
        for (let file of event.files) {
-            this.fileInfo.name = file.name;
+           // this.fileInfo.name = file.name;
 
-           this.fileData.push(this.fileInfo);
+           //this.fileData.push(this.fileInfo);
            this.uploadedFiles.push(file);
           // this.fileInfo.name = '';
        }
@@ -227,36 +228,51 @@ export class AddComponent {
    //    this.file = inputValue.files[0];
    //    console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
    //}
-    
-   onSubmit(formRef) {
-       formRef.isDeleted = false;
-       let formData: any = {
-          
-           SensorTypeId: this.selectedSensorTypeId,
+   uploadFile(event)
+   {
+       for (let file of event.files) {
 
-          TestRequestId : this.id,       
+           this.formData = new FormData();
+           this.formData.append('file', file);
+       }
+
+       //this.dataService.postCommentAdd(null).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
+
+   }
+   onSubmit(formRef) {
+       //formRef.isDeleted = false;
+       //let formData: any = {
+          
+       //    SensorTypeId: this.selectedSensorTypeId,
+
+       //   TestRequestId : this.id,       
          
          
-         IsCompleted :'false',       
-         IsDeleted: 'false'
+       //  IsCompleted :'false',       
+       //  IsDeleted: 'false'
         
           
-       };
-       let formCommentData: any = {
+       //};
+       //let formCommentData: any = {
 
-           Comment: this.comment,
+       //    Comment: this.comment,
 
-           TestRequestId: this.id,
+       //    TestRequestId: this.id,
 
 
           
-           IsDeleted: 'false'
+       //    IsDeleted: 'false'
 
-       };
-       for (let i of this.fileData)
-       {
+       //};
+       //for (let i of this.fileData)
+       //{
 
-       }
+       //}
        //formData.name = formRef.name;
        //formData.address.addressLine1 = formRef.addressLine1;
        //formData.address.addressLine2 = formRef.addressLine2;
@@ -264,40 +280,41 @@ export class AddComponent {
        //formData.address.state = formRef.state;
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
-       console.log(formData);
-       let xhr = new XMLHttpRequest();
-       let path = titanApiUrl + 'testrequestsensor/post/uploadfile';
-       xhr.onreadystatechange = function state_change() {
-           if (xhr.readyState == 4) {// 4 = "loaded"
-               if (xhr.status == 200) {// 200 = OK
-                   // ...our code here...
-                   alert('ok');
-               }
-               else {
-                   alert("Problem retrieving XML data");
-               }
-           }
-       };
-       xhr.open('POST', path, false);
-       xhr.setRequestHeader("Content-Type", "multipart/form-data");
-       xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    //   console.log(formData);
+       //let xhr = new XMLHttpRequest();
+       //let path = titanApiUrl + 'testrequestsensor/post/uploadfile';
+       //xhr.onreadystatechange = function state_change() {
+       //    if (xhr.readyState == 4) {// 4 = "loaded"
+       //        if (xhr.status == 200) {// 200 = OK
+       //            // ...our code here...
+       //            alert('ok');
+       //        }
+       //        else {
+       //            alert("Problem retrieving XML data");
+       //        }
+       //    }
+       //};
+       //xhr.open('POST', path, false);
+       //xhr.setRequestHeader("Content-Type", "multipart/form-data");
+       //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
        
       
        //  xhr.withCredentials = true;
-       xhr.send(null);
+     //  xhr.send(null);
        //this.dataService.postAdd(formData,this.comment).subscribe(res => {
        //    console.log("-------- Test Sensor Adding new result ----- ", res);
        //    if (res.IsSuccess) {
        //        this.router.navigate(["/testrequest/details/", this.id]);
        //    }
        //});
-       
-       //this.dataService.postCommentAdd(formCommentData).subscribe(res => {
-       //    console.log("-------- Test Sensor Adding new result ----- ", res);
-       //    if (res.IsSuccess) {
-       //        this.router.navigate(["/testrequest/details/", this.id]);
-       //    }
-       //});
+       var fd = new FormData();
+       fd.append('files', this.uploadedFiles[0]);
+       this.dataService.postCommentAdd(fd).subscribe(res => {
+           console.log("-------- Test Sensor Adding new result ----- ", res);
+           if (res.IsSuccess) {
+               this.router.navigate(["/testrequest/details/", this.id]);
+           }
+       });
 
        //this.dataService.postAdd(formData).subscribe(res => {
        //    console.log("-------- Test Sensor Adding new result ----- ", res);
