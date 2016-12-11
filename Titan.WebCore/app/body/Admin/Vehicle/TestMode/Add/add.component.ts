@@ -13,12 +13,30 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 export class AddComponent {
     username: string;
     description:string;
-
+    testTypeDetails: any;
+    selectedTestTypes: any;
     constructor(private service: TestModeService, private router: Router, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
+
+        this.service.getAllTestTypes().subscribe(TestTypesList => {
+            this.testTypeDetails = TestTypesList.$values;
+            //if (TestTypesList != null) {
+            //    var resultMap = new Array();
+            //    this.testTypeDetails = TestTypesList.$values;
+            //    for (let template of TestTypesList.$values) {
+            //        var temp = {
+            //            label: template.name,
+            //            value: template.id
+            //        }
+            //        resultMap.push(temp);
+            //    }
+            //    this.testTypeDetails = resultMap;
+            //}
+
+        });
 
     }
     onSubmit(formRef) {
@@ -27,7 +45,7 @@ export class AddComponent {
         //console.log(this.description);
         //formRef.locale = "en-us";
         //formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = { name: '', description: '', locale: '', isDeleted: false, TestTypeIdList: this.selectedTestTypes };
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";

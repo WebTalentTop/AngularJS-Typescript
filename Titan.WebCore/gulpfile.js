@@ -6,7 +6,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 
 "use strict";
 var gulp = require("gulp");
-//var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 
 var root_path = {
     webroot: "./wwwroot/",
@@ -117,22 +117,21 @@ gulp.task("tsCompile", function () {
         .js.pipe(gulp.dest(root_path.webroot + "app/"));
 });
 
-//gulp.task('sass', function () {
-//    gulp.src(root_path.primeResources + '**/*.scss')
-//        .pipe(sass())
-//        .pipe(gulp.dest(function (f) {
-//            console.log("--- F.base ----", f.base);
-//            return f.base;
-//        }))
-//        .pipe(gulp.dest('./library/resources'));
-//});
+gulp.task('sass', function () {
+    gulp.src(root_path.primeResources + '**/*-titan.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(function (f) {
+            console.log("--- F.base ----", f.base);
+            return f.base;
+        }))
+        .pipe(gulp.dest('./library/resources'));
+});
 
-
-gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
+gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
-gulp.task("copy-dev-res-all", ["ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
+gulp.task("copy-dev-res-all", ['sass', "ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
 
 gulp.task("copy-front-dev-only", ['css', 'html']);
 gulp.task("copy-dev-ts-sourceMap", ["ts", 'sourceMap']);

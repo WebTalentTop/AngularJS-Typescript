@@ -79,6 +79,13 @@ export class EquipmentTypeService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getSensorList(): Observable<any> {
+        return this.http.get(`${EquipmentTypeApiUrl.getSensorListUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());

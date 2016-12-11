@@ -1,0 +1,104 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <h3>Details</h3>
+        <p-tabView (onChange)="handleChange($event)">
+
+            <p-tabPanel header="Edit ||" id="info">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">Edit Sensor Test Request</div>
+                            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+                                <!--<h3> Add Test Facility </h3>-->
+                                <p-panel>
+                                    <!--<header>Test Facility Information</header>-->
+                                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                Select Sensor *
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                                <p-dropdown [options]="Sensors" [(ngModel)]="selectedSensorTypeId" (onChange)="onSensorChange($event)" name="sensor" [style]="{'width':'200px'}">
+
+                                                </p-dropdown>
+                                            </div>
+                                            <div class="ui-grid-4"></div>
+                                        </div>
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                Upload File:
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                                <p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{testRequestSensorId}}" (onUpload)="onUpload($event)"
+                                                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                                    <!--<template pTemplate type="content">
+                                                    <ul *ngIf="uploadedFiles.length">
+                                                        <li *ngFor="let file of uploadedFiles">{{file.name}} <a href="http://localhost:9998/api/TestFacilityAttachment/file/{{file.id}}">download</a></li>
+                                                    </ul>
+
+                                                </template>-->
+                                                </p-fileUpload>
+                                            </div>
+                                        </div>
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                Attachments:
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                                <!--<p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                                                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                                    <template pTemplate type="content">
+                                                        <ul *ngIf="uploadedFiles.length">
+                                                            <li *ngFor="let file of uploadedFiles">{{file.name}} <a href="http://localhost:9998/api/TestFacilityAttachment/file/{{file.id}}">download</a></li>
+                                                        </ul>
+
+                                                    </template>
+                                                </p-fileUpload>-->
+                                                <ul *ngIf="uploadedFiles.length">
+                                                    <li *ngFor="let file of uploadedFiles">{{file.name}}<a href="http://localhost:9998/api/TestFacilityAttachment/file/{{file.id}}">download</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                Comments:
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                                <textarea type="text" pInputTextArea class="form-control" required row="20" name="comment" [(ngModel)]="comment"></textarea>
+                                            </div>
+                                            <div class="ui-grid-col-4">
+                                                <!--<div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
+                                                *
+                                            </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                <button id="add" pButton type="submit" label="Save">  </button>
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                            </div>
+                                            <div class="ui-grid-col-4">
+                                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-panel>
+                                <br />
+                                <br />
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- Form End -->
+
+
+            </p-tabPanel>
+
+
+        </p-tabView>
+    </div>
+</div>

@@ -13,8 +13,8 @@
                             TestMode Name * :
                         </div>
                         <div class="ui-grid-col-4">
-
-                            <input type="text" pInputText name="name" [(ngModel)]="TestModeDetails.name" #testModeDetailsNameRef="ngModel"
+                            <!--[(ngModel)]="testModeDetails.name" #testModeDetailsNameRef="ngModel"-->
+                            <input type="text" pInputText name="testmodename"  [(ngModel)]="testModeDetails.name" #testModeDetailsNameRef="ngModel"
                                 placeholder="TestMode Name" minlength="3" class="form-control" required row="20" />
                         </div>
                         <div class="ui-grid-col-4">
@@ -27,6 +27,19 @@
                             </div>
 
                         </div>
+                        <div class="ui-grid-col-4">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Select Test Type:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <!--[(ngModel)]="testModeDetails.testTypeIdList"-->
+                                    <p-multiSelect [options]="testTypeDetails" [(ngModel)]="selectedTestTypes" #testTypeList="ngModel"  name="testType"></p-multiSelect>
+                                </div>
+                                <div class="ui-grid-col-4"></div>
+                            </div>
+                        </div>
+                      
                     </div>
 
                     <div class="ui-grid-row">
@@ -34,8 +47,9 @@
                             Description * :
                         </div>
                         <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
-                                #testModeDetailsDescriptionRef="ngModel" [(ngModel)]="TestModeDetails.description"></textarea>
+                            <!--[(ngModel)]="testModeDetails.description"  #testModeDetailsDescriptionRef="ngModel"-->
+                            <textarea type="text" pInputTextArea class="form-control col-sm-12" [(ngModel)]="testModeDetails.description" required name="description" #testModeDetailsDescriptionRef="ngModel" row="50" maxlength="250"
+                                ></textarea>
                         </div>
                         <div class="ui-grid-col-4">
 

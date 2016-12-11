@@ -51,6 +51,12 @@ export class TestModeService extends BaseService {
             .map(this.getJson);
     }
 
+    getAllTestTypes(): Observable<any> {
+        return this.http.get(`${TestModeApiUrl.getAllTestTypesUrl}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getById(id): Observable<any> {
         return this.http.get(`${TestModeApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson);
