@@ -1,7 +1,7 @@
 ﻿import { StepService } from '../../../shared/services/step.service';
 import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, 
     DropdownModule, SelectItem, ConfirmationService } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -44,6 +44,14 @@ export class DetailsComponent {
     public stepTypesLoaded:boolean;
     public stepFrequenciesLoaded:boolean;
 
+    @Input() isDisplayComponentInPopUp: boolean;
+    @Input() private set stepId(id: string) {
+        this.id = id;
+        if (this.stepTypesLoaded && this.stepFrequenciesLoaded)
+            this.getDetails(this.id);
+    }
+    @Output() onEditComplete: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
     constructor(
         private service: StepService,
         private route: ActivatedRoute,
@@ -63,17 +71,19 @@ export class DetailsComponent {
         this.getStepFrequencies();
     }
 
-    getDetails(id){
-        this.service.getById(id).subscribe(response => {
-            if (response != null && response.isSuccess) {
-                this.stepDetails = response.result; 
-                this.stepDetails.stepTypeDetailIds = this.stepDetails.stepTypeDetailIds.$values;
-                this.onRepeatChange(this.stepDetails.repeatStep);
-                this.stepDetails.repeatStep = this.stepDetails.repeatStep.toString();
-                this.onStepFrequencyChange();
-                this.onStepTypeChange();
-            }
-        });
+    getDetails(id) {
+        if (id != undefined) {
+            this.service.getById(id).subscribe(response => {
+                if (response != null && response.isSuccess) {
+                    this.stepDetails = response.result;
+                    this.stepDetails.stepTypeDetailIds = this.stepDetails.stepTypeDetailIds.$values;
+                    this.onRepeatChange(this.stepDetails.repeatStep);
+                    this.stepDetails.repeatStep = this.stepDetails.repeatStep.toString();
+                    this.onStepFrequencyChange();
+                    this.onStepTypeChange();
+                }
+            });
+        }
     }
 
       onStepTypeChange(){
@@ -155,8 +165,20 @@ export class DetailsComponent {
         this.service.postUpdate(this.stepDetails).subscribe(res => { 
             console.log(res);
             if (res.isSuccess){
-                this.router.navigate(["/step/"]);
+                if (!this.isDisplayComponentInPopUp) {
+                    this.router.navigate(["/step/"]);
+                } else {
+                    this.onEditComplete.emit(res.result);
+                }
             }
         });
+    }
+
+    onCancel() {
+        if (!this.isDisplayComponentInPopUp) {
+            this.router.navigate(["/step/"]);
+        } else {
+            this.onCancelComplete.emit(true);
+        }
     }
 }

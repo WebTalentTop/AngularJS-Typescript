@@ -1,0 +1,83 @@
+<div class="ui-g-12">
+    <div class="card card-w-title">
+        <form #procedureForm="ngForm" (ngSubmit)="onSubmit()">
+
+            <h2> Add Test Procedure</h2>
+            <br />
+            <p-panel>
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="procedure">
+                    <!--<div class="ui-grid-row body">-->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Name *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input type="text" name="procedureName" pInputText #procedureNameRef="ngModel" [(ngModel)]="procedure.name" maxlength="255"
+                                placeholder="Name" class="form-control" required />
+                        </div>
+                        <div class="ui-grid-col-4" *ngIf="procedureNameRef.errors?.required">
+                            Name field is required
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Test Type:
+                        </div>
+                        <div class="ui-grid-col-10">
+                            <p-dropdown [options]="testTypes" [(ngModel)]="procedure.testTypeId" [style]="{'width':'auto'}" 
+                                (onChange)="onTestTypeChange()" name="testType" required>
+                            </p-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Test Mode:
+                        </div>
+                        <div class="ui-grid-col-10">
+                            <p-dropdown [options]="testModes" [(ngModel)]="procedure.testModeId" name="testMode" required>
+                            </p-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Estimated Time:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input type="number" name="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
+                                max="999" placeholder="Estimated Time" class="form-control" />
+                        </div>
+                        <!--<div class="ui-grid-col-4" *ngIf="procedureNameRef.errors?.required">
+                        Template Name field is required
+                    </div>-->
+                    </div>
+                </div>
+
+                <div class="ui-grid-row">
+                    <br />
+                    <div class="ui-grid-row body">
+                        <div class="ui-grid-col-3"> </div>
+                        <div class="ui-grid-col-3">
+                            <button pButton type="submit" label="Add" [disabled]="!procedureForm.form.valid">  </button>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <button pButton label="Cancel" routerLink="/procedure">  </button>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3">
+                        </div>
+                        <div class="ui-grid-col-6">
+                        </div>
+
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+                <!--</div>-->
+            </p-panel>
+        </form>
+    </div>
+</div>

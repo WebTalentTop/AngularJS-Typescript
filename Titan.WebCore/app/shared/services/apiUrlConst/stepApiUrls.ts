@@ -8,4 +8,5 @@ export class StepApiUrl {
     public static getStepFrequenciesUrl: string = titanApiUrl + 'Step/getStepFrequencies';
     public static getStepTypesUrl: string = titanApiUrl + 'Step/getStepTypes';
     public static getStepTypeDetailsUrl: string = titanApiUrl + 'Step/getStepTypeDetails?stepTypeId=';
+    public static filterByProcedureIdUrl: string = titanApiUrl + 'Step/filterByProcedureId?procedureId='; 
 }

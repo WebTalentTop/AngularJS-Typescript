@@ -7,4 +7,5 @@ export class TestRequirementApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'testRequirement/put';
     public static getByIdUrl: string = titanApiUrl + 'testRequirement/get';
     public static filterByTestTemplateIdUrl: string = titanApiUrl + 'testRequirement/filterByTestTemplateId?testTemplateId='; 
+    public static filterByProcedureIdUrl: string = titanApiUrl + 'testRequirement/filterByProcedureId?procedureId='; 
 }

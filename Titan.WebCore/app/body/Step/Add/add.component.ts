@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input,  Output, EventEmitter } from '@angular/core';
 import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, 
     DropdownModule, SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
@@ -40,7 +40,11 @@ export class AddComponent {
     public stepTypeDetailList:any;
     public stepTypeDetailLabelText: string = "";
     public showRepeatDetails:boolean;
-    public showTestOrCycle:boolean;
+    public showTestOrCycle: boolean;
+
+    @Input() isDisplayComponentInPopUp: boolean;
+    @Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
     constructor(private service: StepService, private router: Router) {
 
     }
@@ -122,10 +126,21 @@ export class AddComponent {
     onSubmit(formRef) {
         
         this.service.postAdd(this.stepDetails).subscribe(res => { 
-            console.log(res);
-            if (res.isSuccess){
-                this.router.navigate(["/step/details/", res.result]);
+            if (res.isSuccess) {
+                if (!this.isDisplayComponentInPopUp) {
+                    this.router.navigate(["/step/details/", res.result]);
+                } else {
+                    this.onAddComplete.emit(true);
+                }
             }
         });
+    }
+
+    onCancel() {
+        if (!this.isDisplayComponentInPopUp) {
+            this.router.navigate(["/step/"]);
+        } else {
+            this.onCancelComplete.emit(true);
+        }
     }
 }

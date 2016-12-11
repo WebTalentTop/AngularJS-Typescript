@@ -1,13 +1,13 @@
-import { NgModule } from "@angular/core";
+﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
-import { AddComponent } from "./add.component";
+import { DetailsComponent } from "./details.component";
 import { StepService} from '../../../shared/services/step.service';
 
 import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, 
     RadioButtonModule, MultiSelectModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import addRoutes from "./add.routes";
+//import addRoutes from "./details.routes";
 
 @NgModule({
     imports: [
@@ -21,12 +21,11 @@ import addRoutes from "./add.routes";
         ButtonModule,
         DropdownModule, 
         RadioButtonModule,
-        MultiSelectModule,
-        addRoutes
+        MultiSelectModule
         ],
     providers: [StepService],
-    declarations: [AddComponent],
-    exports:[AddComponent]
+    exports:[DetailsComponent],
+    declarations: [DetailsComponent]
 })
 
-export default class AddModule{}
+export default class DetailsSharedModule { }

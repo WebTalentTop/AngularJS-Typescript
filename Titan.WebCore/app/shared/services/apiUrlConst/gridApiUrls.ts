@@ -2,7 +2,7 @@ import { titanApiUrl } from './titanApiUrl';
 
 export class GridApiUrl {
     public static buildLevelGridUrl: string = titanApiUrl + 'buildLevelGrid/GetGridData';
-    //public static roleGridUrl: string = titanApiUrl + 'roleGrid/GetGridData';
+    public static roleGridUrl: string = titanApiUrl + 'roleGrid/GetGridData';
     public static calendarGridUrl: string = titanApiUrl + 'calendarGrid/GetGridData';
     public static lookupGridUrl: string = titanApiUrl + 'lookupGrid/GetGridData';
     public static departmentGridUrl: string = titanApiUrl + 'departmentGrid/GetGridData';
@@ -16,8 +16,12 @@ export class GridApiUrl {
     public static tenantGridUrl: string = titanApiUrl + 'tenantGrid/GetGridData';
     public static testFacilityGridUrl: string = titanApiUrl + 'testFacilityGrid/GetGridData';
     public static stepGridUrl: string = titanApiUrl + 'stepGrid/GetGridData';
+    public static testModeGridUrl: string = titanApiUrl + 'testModeGrid/GetGridData';
     public static testTemplateGridUrl: string = titanApiUrl + 'testTemplateGrid/GetGridData';
+    public static procedureGridUrl: string = titanApiUrl + 'procedureGrid/GetGridData';
+    public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementGrid/GetGridData';
     public static testFacilityAttachmentGridUrl: string = titanApiUrl + 'testFacilityAttachmentGrid/GetGridData';
+    public static testTypeGridUrl: string = titanApiUrl + 'testTypeGrid/GetGridData';
     public static titanRoleGridUrl: string = titanApiUrl + 'titanRoleGrid/GetGridData';
     public static titanUserGridUrl: string = titanApiUrl + 'titanUserGrid/GetGridData';
     public static vehicleGridUrl: string = titanApiUrl + 'vehicleGrid/GetGridData';
@@ -35,7 +39,6 @@ export class GridApiUrl {
     public static contactGridUrl: string = titanApiUrl + 'contactgrid/GetGridData';
     public static accessGroupGridUrl: string = titanApiUrl + 'accessGroupgrid/GetGridData';
     public static accessGridUrl: string = titanApiUrl + 'accessgrid/GetGridData';
-    public static roleGridUrl: string = titanApiUrl + 'rolegrid/GetGridData';
     public static milestoneGridUrl: string = titanApiUrl + 'milestonegrid/GetGridData';
     public static milestoneCategoryGridUrl: string = titanApiUrl + 'milestoneCategorygrid/GetGridData';
     public static milestoneTypeGridUrl: string = titanApiUrl + 'milestoneTypegrid/GetGridData';
@@ -48,9 +51,6 @@ export class GridApiUrl {
     public static sensorTypeGridUrl: string = titanApiUrl + 'sensorTypegrid/GetGridData';
     public static stepFrequencyGridUrl: string = titanApiUrl + 'stepFrequencygrid/GetGridData';
     public static stepTypeGridUrl: string = titanApiUrl + 'stepTypegrid/GetGridData';
-    public static testModeGridUrl: string = titanApiUrl + 'testModegrid/GetGridData';
-    public static testTypeGridUrl: string = titanApiUrl + 'testTypegrid/GetGridData';
-    public static testRequirementGridUrl: string = titanApiUrl + 'testRequirementgrid/GetGridData';
     public static testActivityGridUrl: string = titanApiUrl + 'testActivitygrid/GetGridData';
     public static priorityGridUrl: string = titanApiUrl + 'prioritygrid/GetGridData';
     public static judgementGridUrl: string = titanApiUrl + 'judgementgrid/GetGridData';

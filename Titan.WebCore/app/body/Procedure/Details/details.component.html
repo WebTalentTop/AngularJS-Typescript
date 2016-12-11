@@ -1,0 +1,191 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <h3>Details</h3>
+        <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+        <p-tabView>
+            <p-tabPanel header="Details ||">
+                <!--<h1>Details Panel</h1>-->
+                <form #procedureForm="ngForm" (ngSubmit)="onSubmit()">
+                    <p-panel>
+                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="procedure">
+                            <!--<div class="ui-grid-row body">-->
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Name *:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <input type="text" name="procedureName" pInputText #procedureNameRef="ngModel" [(ngModel)]="procedure.name" maxlength="255"
+                                        placeholder="Name" class="form-control" required />
+                                </div>
+                                <div class="ui-grid-col-4" *ngIf="procedureNameRef.errors?.required">
+                                    *
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Test Type:
+                                </div>
+                                <div class="ui-grid-col-10" >
+                                    <p-dropdown [options]="testTypes" [(ngModel)]="procedure.testTypeId" [style]="{'width':'auto'}" (onChange)="onTestTypeChange()" name="testTypeId"
+                                        required>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Test Mode:
+                                </div>
+                                <div class="ui-grid-col-10">
+                                    <p-dropdown [options]="testModes" [(ngModel)]="procedure.testModeId" [style]="{'width':'auto'}" name="testModeId" required>
+
+                                    </p-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Estimated Time:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <input type="number" name="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
+                                        max="999" placeholder="Estimated Time" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-grid-row">
+                            <br />
+                            <div class="ui-grid-row body">
+                                <div class="ui-grid-col-3"> </div>
+                                <div class="ui-grid-col-3">
+                                    <button pButton type="submit" label="Save" [disabled]="!procedureForm.form.valid">  </button>
+                                </div>
+                                <!--<div class="ui-grid-col-4">
+                                    <button pButton label="Cancel" routerLink="/testtemplate">  </button>
+                                </div>-->
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-3">
+                                </div>
+                                <div class="ui-grid-col-6">
+                                </div>
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                        <!--</div>-->
+                    </p-panel>
+                </form>
+            </p-tabPanel>
+            <p-tabPanel header="Requirements ||">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Search by Reference#:
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" (completeMethod)="filterTestRequirements($event)"
+                            styleClass="wid100" [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
+                        </p-autoComplete>
+                    </div>
+
+                    <div class="ui-grid-col-2">
+                        <button pButton type="submit" class="btn btn-default" label="Add Requirement" (click)="onAddTestRequirement()"> </button>
+                    </div>
+                </div>
+                <br/><br/>
+                <div class="ui-grid-row">
+                    <p-dataTable [value]="selectedTestRequirements">
+                        <p-column field="referenceNumber" header="Reference#"></p-column>
+                        <p-column field="title" header="Title"></p-column>
+                        <p-column>
+                            <template pTemplate type="header">
+                                Action
+                            </template>
+                            <template let-testRequirement="rowData" pTemplate type="body">
+                                <button type="button" pButton (click)="onDelete(testRequirement, 1)" icon="fa-trash"></button>
+                            </template>
+                        </p-column>
+                    </p-dataTable>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Steps ||">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Search by Step Name:
+                    </div>
+                    <div class="ui-grid-col-2">
+                        <p-autoComplete [(ngModel)]="filteredSelectedSteps" [suggestions]="filteredSteps" (completeMethod)="filterSteps($event)"
+                                        styleClass="wid100" [minLength]="1" placeholder="Search By Step Name" field="name" [multiple]="true">
+                        </p-autoComplete>
+                    </div>
+
+                    <div class="ui-grid-col-2">
+                        <button pButton type="submit" class="btn btn-default" label="Add Step(s)" (click)="onAddStep()"> </button>
+                    </div>
+                </div>
+                <br />
+                <button (click)="onAddNewStep()" pButton icon="fa-external-link-square" label="Add New Step"></button>
+                <br />
+                <p-dialog header="Add Step" [(visible)]="displayAddStep" width="600">
+                    <add-step [isDisplayComponentInPopUp]="true" (onAddComplete)="onAddStepComplete($event)" (onCancelComplete)="onCancelStepComplete($event)"></add-step>
+                </p-dialog>
+                <p-dialog header="Edit Step" [(visible)]="displayEditStep" width="600">
+                    <details-step [isDisplayComponentInPopUp]="true" [stepId]="editStepId" (onEditComplete)="onEditStepComplete($event)" (onCancelComplete)="onEditCancelStepComplete($event)"></details-step>
+                </p-dialog>
+
+                <p-dataList [value]="selectedSteps">
+                    <header>
+                        Selected Steps
+                    </header>
+                    <template let-step>
+                        <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-10">
+                                    <div class="ui-grid ui-grid-responsive ui-fluid">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">Name: </div>
+                                            <div class="ui-grid-col-2">{{step.name}}</div>
+                                            <div class="ui-grid-col-2">Step Type: </div>
+                                            <div class="ui-grid-col-2">{{step.stepTypeName}}</div>
+                                            <div class="ui-grid-col-2">Repeat: </div>
+                                            <div class="ui-grid-col-2">{{(step.repeatStep ? 'Yes' : 'No')}}</div>
+                                        </div>
+                                        <div class="ui-grid-row">
+                                        </div>
+                                        <div class="ui-grid-row" *ngIf="step.repeatStep">
+                                            <div class="ui-grid-col-2">Step Frequency: </div>
+                                            <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
+                                            <div class="ui-grid-col-2">Test % / # of Cycles: </div>
+                                            <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-col-2" style="text-align:center">
+                                    <button type="button" pButton (click)="onDelete(step, 2)" icon="fa fa-trash"></button>
+                                    <button type="button" pButton (click)="onEditStep(step)" icon="fa fa-pencil-square-o"></button>
+                                </div>
+                            </div>                            
+                        </div>
+                    </template>
+                </p-dataList>
+                
+                <!--<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>-->
+                <!--<div class="ui-grid-row">
+                    <p-dataTable [value]="selectedSteps">
+                        <p-column field="name" header="Name"></p-column>
+                        <p-column>
+                            <template pTemplate type="header">
+                                Action
+                            </template>
+                            <template let-Step="rowData" pTemplate type="body">
+                                
+                            </template>
+                        </p-column>
+                    </p-dataTable>
+                </div>-->
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

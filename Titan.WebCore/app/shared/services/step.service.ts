@@ -93,4 +93,9 @@ export class StepService extends BaseService{
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
+    filterByProcedureId(procedureId, filterString): Observable<any> {
+        return this.http.get(`${StepApiUrl.filterByProcedureIdUrl}` + procedureId + '&filterString=' + filterString, { headers: this.headers })
+            .map(this.getJson);
+    }
 }

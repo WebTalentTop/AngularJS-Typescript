@@ -17,6 +17,7 @@ const routes = [
     { path: 'testtempalte', loadChildren: 'app/body/TestTemplate/testtemplate.module' },
     { path: 'testfacilities', loadChildren: 'app/body/TestFacilities/testfacilities.module' },
     { path: 'step', loadChildren: 'app/body/Step/step.module' },
+    { path: 'procedure', loadChildren: 'app/body/Procedure/procedure.module' },
     { path: 'testrequest', loadChildren: 'app/body/TestRequest/testrequest.module' },
     { path: 'vehicle', loadChildren: 'app/body/Vehicle/vehicle.module' },
     { path: 'testtemplate', loadChildren: 'app/body/TestTemplate/testtemplate.module' }

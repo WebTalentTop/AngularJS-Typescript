@@ -61,5 +61,8 @@ export class TestRequirementService extends BaseService {
             .map(this.getJson);
     }
 
-    
+    filterByProcedureId(procedureId, filterString): Observable<any> {
+        return this.http.get(`${TestRequirementApiUrl.filterByProcedureIdUrl}` + procedureId + '&filterString=' + filterString, { headers: this.headers })
+            .map(this.getJson);
+    }
 }
