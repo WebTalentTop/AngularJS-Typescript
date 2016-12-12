@@ -71,8 +71,8 @@ export class DetailsComponent {
             //});
             this.service.getById(this.TestModeId).subscribe(TestModeDetails => {
                 this.testTypeDetails = TestModeDetails.result;
-                this.allTestTypes = this.testTypeDetails.allTestTypes.$values;
-                this.selectedTestTypes = this.testTypeDetails.selectedTestTypes.$values;
+                this.allTestTypes = this.testTypeDetails.allTestTypesList;
+                this.selectedTestTypes = this.testTypeDetails.selectedTestTypesList;
 
             });
         });
