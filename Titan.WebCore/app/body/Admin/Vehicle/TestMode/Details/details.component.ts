@@ -72,7 +72,7 @@ export class DetailsComponent {
             this.service.getById(this.TestModeId).subscribe(TestModeDetails => {
                 this.testTypeDetails = TestModeDetails.result;
                 this.allTestTypes = this.testTypeDetails.allTestTypesList.$values;
-                this.selectedTestTypes = this.testTypeDetails.selectedTestTypesList.$values;
+                this.selectedTestTypes = this.testTypeDetails.selectedTestTypesList;
 
             });
         });
@@ -81,6 +81,7 @@ export class DetailsComponent {
 
     onSubmit(formRef) {
 
+        this.selectedTestTypeIdList = [];
         if (this.selectedTestTypes.length == 0) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'select atleast one TestType', detail: '' });
