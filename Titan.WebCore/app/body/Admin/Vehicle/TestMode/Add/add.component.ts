@@ -47,7 +47,14 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
-        if (this.selectedTestTypes.length == 0) {
+        
+            if (formRef.description == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please enter description', detail: '' });
+
+
+        }
+        else if (this.selectedTestTypes.length == 0) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'select atleast one TestType', detail: '' });
 
