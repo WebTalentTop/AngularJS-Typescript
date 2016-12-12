@@ -6,7 +6,7 @@
         <p-tabView (onChange)="handleChange($event)">
 
 
-            <p-tabPanel header="Details ||" id='details'>
+            <p-tabPanel header="Details" id='details'>
                 <p-growl [value]="msgs"></p-growl>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                     <br />
@@ -212,7 +212,7 @@
                 </form>
             </p-tabPanel>
 
-            <p-tabPanel header="Equipment ||" id="equipment" headerStyleClass="equipment">
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <div *ngIf="displayEquipmentTab">
                     Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
                     Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
@@ -225,9 +225,9 @@
             </p-tabPanel>
 
 
-            <p-tabPanel header="Schedule ||" id="schedule" headerStyleClass="schedule">
+            <p-tabPanel header="Schedule" id="schedule" headerStyleClass="schedule">
                 <div class="card card-w-title">
-                   
+
                     <div class="row">
                         <div class="ui-grid-col-1">
                             Project Code :
@@ -244,7 +244,7 @@
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Person Incharge: 
+                             Person Incharge:
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
@@ -275,14 +275,14 @@
             </p-tabPanel>
 
 
-            <p-tabPanel header="Tests ||" id="tests">
+            <p-tabPanel header="Tests" id="tests">
                 After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
                 and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
                 Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would
                 one day be completely legitimate.
             </p-tabPanel>
 
-            <p-tabPanel header="Attachments ||" id="attachments">
+            <p-tabPanel header="Attachments" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
@@ -323,5 +323,5 @@
 
         </p-tabView>
     </div>
-    
+
 </div>
