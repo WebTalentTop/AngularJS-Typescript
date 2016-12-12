@@ -195,7 +195,7 @@
                         </div>
                     </p-panel>
                     <br /><br /><br />
-                    <p-panel>
+                    <!--<p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
@@ -208,19 +208,26 @@
                                 <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
                             </p-dataTable>
                         </div>
-                    </p-panel>
+                    </p-panel>-->
                 </form>
             </p-tabPanel>
 
-            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
-                <div *ngIf="displayEquipmentTab">
-                    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
-                    Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
-                    of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
-                    local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
-                    brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
-                    business. With Fanucci gone, Vito's communal stature grows.
-                </div>
+
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">          
+                <p-panel>
+                    <div class="ui-grid-col-4"></div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            <b>Test Facility Equipments</b>
+                        </div>
+                        <div class="ui-grid-col-2"></div>
+                        <p-dataTable [value]="TestFacilityEquipments">
+                            <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
+                            <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
+                            <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
+                        </p-dataTable>
+                    </div>
+                </p-panel>
 
             </p-tabPanel>
 
