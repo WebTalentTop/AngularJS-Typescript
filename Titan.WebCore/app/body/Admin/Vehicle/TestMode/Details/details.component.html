@@ -57,8 +57,9 @@
                         </div>
                         <div class="ui-grid-col-6">
                             <!--[(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"-->
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" [(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"  required name="description"  row="50" maxlength="250"
-                                ></textarea>
+                            <!--<textarea type="text" pInputTextArea class="form-control col-sm-12" [(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"  required name="description"  row="50" maxlength="250"
+                                ></textarea>-->
+                            <p-editor name="description" [(ngModel)]="testTypeDetails.description" [style]="{'height':'320px'}"></p-editor>
                         </div>
                         <!--<div class="ui-grid-col-4">
 
