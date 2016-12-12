@@ -51,15 +51,16 @@
                         TestMode Description * :
                     </div>
                     <div class="ui-grid-col-6">
-                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #testModeDetailsDescriptionRef="ngModel"
-                            placeholder="TestMode Description" class="form-control  col-sm-12" required ></textarea>
+                        <!--<textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #testModeDetailsDescriptionRef="ngModel"
+                            placeholder="TestMode Description" class="form-control  col-sm-12" required ></textarea>-->
+                        <p-editor name="description" [(ngModel)]="description"  [style]="{'height':'320px'}"></p-editor>
                     </div>
-                    <div class="ui-grid-col-4">
+                    <!--<div class="ui-grid-col-4">
                         <div class="ui-grid-col-4" *ngIf="testModeDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
+                            <i class="fa fa-close"></i>                                                    
+                            *
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
