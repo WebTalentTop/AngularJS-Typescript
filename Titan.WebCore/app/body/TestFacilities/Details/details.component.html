@@ -240,28 +240,28 @@
                             Project Code :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Status :
+                             Test Status :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Person Incharge:
+                             Test Roles:
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Vehicle :
+                             Build Levels :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                     </div>

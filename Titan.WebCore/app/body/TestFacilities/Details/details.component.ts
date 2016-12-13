@@ -1,5 +1,9 @@
 ﻿import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestRoleService } from '../../../shared/services/testRole.service';
+import { ProjectService } from '../../../shared/services/project.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
@@ -32,11 +36,19 @@ export class DetailsComponent implements AfterViewInit {
 
     testTemplate: any;
     userRoles: any;
+    testRoles: any;
+    buildLevels: any;
+    projectCodes: any;
+    testStatus: any;
     testModes: Array<any> = new Array();
     selectedUserNames: Array<any> = new Array();
     filteredUserNames: Array<any> = new Array();
     filteredSelectedUserNames: Array<any> = new Array();
     selectedRole: any;
+    selectedTestRoles: any[];
+    selectedBuildLevels: any[];
+    selectedTestStatuses: any[];
+    selectedProjectCodes: any[];
     formConfiguration: any;
     formObject: any;
     formEquipmentObject: any;
@@ -72,6 +84,11 @@ export class DetailsComponent implements AfterViewInit {
         private router: Router,
         private dataService: TestFacilityService,
         private testfacilityroleservice: TestFacilityRoleService,
+        private buildlevelservice: BuildLevelService,
+        private teststatusservice: TestStatusService,
+        private testroleservice: TestRoleService,
+        private projectservice: ProjectService,
+
         private testfacilityattachmentservice: TestFacilityAttachmentService
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -139,6 +156,10 @@ export class DetailsComponent implements AfterViewInit {
 
 
         this.getUserRoles();
+        this.getBuildLevels();
+        this.getTestStatus();
+        this.getProjectCodes();
+        this.getTestRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
@@ -187,6 +208,36 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onTestRoleChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestRoles = (event.value);
+       
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onBuildLevelChange(event) {
+        console.log('------event------------', event)
+        this.selectedBuildLevels = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onProjectCodeChange(event) {
+        console.log('------event------------', event)
+        this.selectedProjectCodes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestStatusChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestStatuses = (event.value);
+        //this.dataService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
+        //    .subscribe(TestFacilityEvents => {
+        //        console.log('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
+        //        //this.TestFacilityEvents = TestFacilityEvents;
+        //    });
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     getUserRoles() {
         //    userRoles
         this.dataService.getRoles().subscribe(response => {
@@ -205,6 +256,94 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.userRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getTestRoles() {
+        //    userRoles
+        this.testroleservice.getTestRoles().subscribe(response => {
+            this.testRoles = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getTestStatus() {
+        //    userRoles
+        this.teststatusservice.getTestStatus().subscribe(response => {
+            this.testStatus = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Status",
+                //    value: null
+                //});
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testStatus = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getProjectCodes() {
+        //    userRoles
+        this.projectservice.getProjectCodes().subscribe(response => {
+            this.projectCodes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Project Code",
+                //    value: null
+                //});
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.code,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.projectCodes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getBuildLevels() {
+        //    userRoles
+        this.buildlevelservice.getBuildLevels().subscribe(response => {
+            this.buildLevels = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Build Level",
+                //    value: null
+                //});
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.buildLevels = resultMap;
             }
             console.log(response);
         });

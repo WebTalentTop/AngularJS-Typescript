@@ -94,6 +94,14 @@ export class TestFacilityService {
              return data.$values
          });
  }
+ getFilteredEvents(teststatus, buildlevels, projectcodes, testroles, testfacilitys, testtypes, testmodes): Observable < any > {
+     return this.http.get(`${TestFacilityApiUrl.getFilteredEvents}/${teststatus}/${buildlevels}/${projectcodes}/${testroles}/${testfacilitys}/${testtypes}/${testmodes}/`, { headers: this.headers })
+         .map(this.getJson)
+         .map(data => {
+             console.log("Notification data --------", data);
+             return data.$values
+         });
+ }
 getNotifications(id):Observable<any> {
     return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
     .map(this.getJson)

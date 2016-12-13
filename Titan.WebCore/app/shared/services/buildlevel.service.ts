@@ -68,7 +68,17 @@ export class BuildLevelService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getBuildLevels(): Observable<any> {
+        return this.http.get(`${BuildLevelApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

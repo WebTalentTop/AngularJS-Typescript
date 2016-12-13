@@ -68,7 +68,16 @@ export class TestRoleService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getTestRoles(): Observable<any> {
+        return this.http.get(`${TestRoleApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();
