@@ -127,7 +127,7 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./library/resources'));
 });
 
-gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts']);
+gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts', 'NMprimeResources', 'primeResources']);
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
