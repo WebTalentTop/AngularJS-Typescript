@@ -82,21 +82,12 @@ export class DetailsComponent {
     onSubmit(formRef) {
 
         this.selectedTestTypeIdList = [];
-         if (testTypeDetails.description == null) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please enter description', detail: '' });
-            return null;
-
-        }
-
-       
         if (this.selectedTestTypes.length == 0) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'select atleast one TestType', detail: '' });
             return null;
 
         }
-
         this.selectedTestTypes.forEach((testtype, index) => {
            
             this.selectedTestTypeIdList.push(testtype.value);
