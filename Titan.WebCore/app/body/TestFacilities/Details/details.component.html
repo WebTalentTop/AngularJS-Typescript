@@ -293,7 +293,7 @@
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                <p-fileUpload [name]="testfacility" url="http://titanapi-preprod.12thwonder.com/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -310,7 +310,7 @@
                                         <button type="button" pButton icon="fa-refresh"></button>
                                     </template>
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <a href="http://localhost:9998/api/TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
+                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
                                     </template>
                                 </p-column>
                                 <p-column>
