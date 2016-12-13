@@ -9,27 +9,14 @@ import { GridComponent } from '../../../shared/UIComponents/GridComponent/grid.c
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Router } from '@angular/router';
 declare var $: JQueryStatic;
-declare var quilldef: Quill.Quill;
+
 @Component({
     selector: 'details-testrequest',
     templateUrl: 'app/body/TestRequest/Details/details.component.html'
 })
 export class DetailsComponent implements AfterViewInit {
-    ngAfterViewInit() {
-      //  var editor = new Quill('#editor');
-        var quill = new Quill('#editor-container', {
-            modules: {
-                toolbar: [
-                    [{ header: [1, 2, true] }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
-                ]
-            },
-            placeholder: 'Compose an epic...',
-            theme: 'snow'  // or 'bubble'
-        });
-       // quill.g
-    }
+   ngAfterViewInit(){
+   }
    // qui
     gridData = [];
     confInfo: any = {};
@@ -61,10 +48,10 @@ export class DetailsComponent implements AfterViewInit {
     startTime: any;
     endTime: any;
     model:any = {
-                id:'', 
-                isDeleted:false, 
-                name:'', 
-                createdOn:'', 
+                id:'',
+                isDeleted:false,
+                name:'',
+                createdOn:'',
                 modifiedOn:'',
                 userCreatedById:'',
                 userInChargedId:'',
@@ -74,12 +61,12 @@ export class DetailsComponent implements AfterViewInit {
     uploadedFiles: any[] = [];
 
     constructor(
-        private route:ActivatedRoute, 
+        private route:ActivatedRoute,
         private dataService: TimeEntryService,
         private service: EquipmentTypeService,
         private testrequestsensorserice: TestRequestSensorService,
         private router: Router
-   
+
     ){
         this.route.params.subscribe(params => this.id = params['id']);
           this.entityId = this.id;
@@ -116,19 +103,19 @@ export class DetailsComponent implements AfterViewInit {
        //        //this.model = res.formObject;
        //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
        //        //console.log("----- Result of formObject -----", this.model);
-       //    });     
+       //    });
         this.dataService.GetTrackingListByEntityId(this.id)
             .subscribe(res =>
             {
                 this.TrackingList = res.$values;
-               
+
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
                 //this.model = res.formObject;
                 //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //console.log("----- Result of formObject -----", this.model);
-            });     
-       
+            });
+
    }
    onTestStageChange(event) {
        console.log('------event------------', event)
@@ -214,7 +201,7 @@ export class DetailsComponent implements AfterViewInit {
                }
                this.hourEntries = resultMap;
            }
-          
+
            console.log(response);
        });
    }
@@ -268,15 +255,8 @@ export class DetailsComponent implements AfterViewInit {
         //        postalCode: '',
         //    }
         //};
-        var quill = new Quill('#editor-container');
-     //   var delta = quill.getContents();
-        var text = quill.getText();
-       // var test = quill.setText(text);
-        var format = quill.getFormat(0);
-        var quilltext = quill.formatText(0, 0, format);
-       
-       
-       
+
+
         let formData: any = {
            timeEntryTypeId: this.selectedTimeEntryTypeId,
           entityTypeId : '',
@@ -289,13 +269,13 @@ export class DetailsComponent implements AfterViewInit {
           isDownTime: false,
           estimateDuration: this.estimateDuration,
           downTimeReasonId: this.selectedDownTimeReasonId,
-          description: quill.getText(),         
+          description:'',
           tenantId: '',
           userCreatedById: '' ,
           id : ' '
 
         };
-       
+
       //  formData.id = this.id;
       //  formData.name = formRef.name;
         //formData.address.id = this.addressid;
@@ -324,6 +304,6 @@ export class DetailsComponent implements AfterViewInit {
         this.router.navigate(['testrequest/sensor/details/', id]);
     }
 
-  
+
 
 }
