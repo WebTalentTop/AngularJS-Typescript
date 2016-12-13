@@ -4,6 +4,10 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from './header/header.module';
+import { EntityEventService } from './shared/services/entityEvent.service';
+import { FormSchemaService } from './shared/services/formSchema.service';
+import { FormSchemaCategoryService } from './shared/services/formSchemaCategory.service';
+import { FormSchemaFieldDataTypeService } from './shared/services/formSchemaFieldDataType.service';
 import { FooterModule } from './footer/footer.module';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { AppComponent } from './app.component';
@@ -195,6 +199,8 @@ import appRoutes from "./app.routing";
         //Documentation
     ],
     //providers: [DataService],
+
+    providers: [EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
