@@ -7,7 +7,7 @@ import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.mo
 
 import { HolidayService } from '../../../../shared/services/holiday.service';
 
-import holidayRoutes from "./Holiday.routes";
+import holidayRoutes from "./holiday.routes";
 
 @NgModule({
     imports: [CommonModule, DataTableModule, GridModule, holidayRoutes, MessagesModule, GrowlModule],
