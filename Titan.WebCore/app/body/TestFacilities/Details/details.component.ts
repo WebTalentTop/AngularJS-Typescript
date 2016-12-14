@@ -4,6 +4,8 @@ import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/project.service';
+import { TestModeService } from '../../../shared/services/testMode.service';
+import { TestTypeService } from '../../../shared/services/testType.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
@@ -39,6 +41,9 @@ export class DetailsComponent implements AfterViewInit {
     testRoles: any;
     buildLevels: any;
     projectCodes: any;
+    testFacilities: any;
+    testAllModes: any;
+    testTypes: any;
     testStatus: any;
     testModes: Array<any> = new Array();
     selectedUserNames: Array<any> = new Array();
@@ -46,6 +51,9 @@ export class DetailsComponent implements AfterViewInit {
     filteredSelectedUserNames: Array<any> = new Array();
     selectedRole: any;
     selectedTestRoles: any[];
+    selectedTestFacilities: any[];
+    selectedTestTypes: any[];
+    selectedTestModes: any[];
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
@@ -88,6 +96,8 @@ export class DetailsComponent implements AfterViewInit {
         private teststatusservice: TestStatusService,
         private testroleservice: TestRoleService,
         private projectservice: ProjectService,
+        private testmodeservice: TestModeService,
+        private testtypeservice: TestTypeService,
 
         private testfacilityattachmentservice: TestFacilityAttachmentService
     ) {
@@ -156,6 +166,9 @@ export class DetailsComponent implements AfterViewInit {
 
 
         this.getUserRoles();
+        this.getTestFacilities();
+        this.getTestModes();
+        this.getTestTypes();
         this.getBuildLevels();
         this.getTestStatus();
         this.getProjectCodes();
@@ -227,6 +240,24 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onTestFacilityChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestFacilities = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestModeChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestModes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestTypeChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestTypes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     onTestStatusChange(event) {
         console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
@@ -270,7 +301,7 @@ export class DetailsComponent implements AfterViewInit {
                 //    label: "Select Test Role",
                 //    value: null
                 //});
-                for (let template of response) {
+                for (let template of response.$values) {
                     var temp = {
                         label: template.name,
                         value: template.id
@@ -282,6 +313,75 @@ export class DetailsComponent implements AfterViewInit {
             console.log(response);
         });
     }
+    getTestFacilities() {
+        //    userRoles
+        this.dataService.getTestFacilities().subscribe(response => {
+            this.testFacilities = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testFacilities = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getTestModes() {
+        //    userRoles
+        this.testmodeservice.getAllTestModes().subscribe(response => {
+            this.testAllModes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testAllModes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getTestTypes() {
+        //    userRoles
+        this.testtypeservice.getAllTestTypes().subscribe(response => {
+            this.testTypes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.label,
+                        value: template.value
+                    }
+                    resultMap.push(temp);
+                }
+                this.testTypes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
     getTestStatus() {
         //    userRoles
         this.teststatusservice.getTestStatus().subscribe(response => {

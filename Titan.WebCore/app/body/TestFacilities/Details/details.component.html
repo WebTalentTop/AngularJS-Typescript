@@ -244,6 +244,27 @@
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
+                            Test Facility :
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
+                            Test Mode :
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
+                            Test Type :
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
                              Test Status :
                         </div>
                         <div class="ui-grid-col-2">

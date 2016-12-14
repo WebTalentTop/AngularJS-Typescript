@@ -85,7 +85,17 @@ export class TestFacilityService {
             });
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
-}
+    }
+ getTestFacilities(): Observable<any> {
+     return this.http.get(`${TestFacilityApiUrl.getAllUrl}`, { headers: this.headers })
+         .map(this.getJson)
+         .map(data => {
+             console.log("Notification data --------", data);
+             return data.$values
+         });
+     //.catch(err => Observable.throw(err))
+     //.map(this.getJson);
+ }
  getRoles(): Observable<any> {
      return this.http.get(`${TestFacilityApiUrl.getRoles}`, { headers: this.headers })
          .map(this.getJson)

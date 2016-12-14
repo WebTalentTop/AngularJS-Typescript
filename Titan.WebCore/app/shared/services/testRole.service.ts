@@ -71,10 +71,11 @@ export class TestRoleService {
     getTestRoles(): Observable<any> {
         return this.http.get(`${TestRoleApiUrl.getAllUrl}`, { headers: this.headers })
             .map(this.getJson)
-            .map(data => {
-                console.log("Notification data --------", data);
-                return data.$values
-            });
+            ;
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
