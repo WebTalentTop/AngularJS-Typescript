@@ -2,49 +2,49 @@
   "_args": [
     [
       {
-        "raw": "@angular/compiler@2.0.0",
+        "raw": "@angular/compiler@~2.1.1",
         "scope": "@angular",
         "escapedName": "@angular%2fcompiler",
         "name": "@angular/compiler",
-        "rawSpec": "2.0.0",
-        "spec": "2.0.0",
-        "type": "version"
+        "rawSpec": "~2.1.1",
+        "spec": ">=2.1.1 <2.2.0",
+        "type": "range"
       },
-      "C:\\12thWonder\\BitBucket\\TitanV1\\Titan.WebCore"
+      "C:\\12thWonder\\BitBucket\\WebCore\\Titan.WebCore"
     ]
   ],
-  "_from": "@angular/compiler@2.0.0",
-  "_id": "@angular/compiler@2.0.0",
+  "_from": "@angular/compiler@>=2.1.1 <2.2.0",
+  "_id": "@angular/compiler@2.1.2",
   "_inCache": true,
   "_location": "/@angular/compiler",
-  "_nodeVersion": "5.4.1",
+  "_nodeVersion": "6.7.0",
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/compiler-2.0.0.tgz_1473906733963_0.030384444165974855"
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/compiler-2.1.2.tgz_1477593257580_0.1431256786454469"
   },
   "_npmUser": {
     "name": "angular",
     "email": "angular-core+npm@google.com"
   },
-  "_npmVersion": "3.9.2",
+  "_npmVersion": "3.10.3",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "@angular/compiler@2.0.0",
+    "raw": "@angular/compiler@~2.1.1",
     "scope": "@angular",
     "escapedName": "@angular%2fcompiler",
     "name": "@angular/compiler",
-    "rawSpec": "2.0.0",
-    "spec": "2.0.0",
-    "type": "version"
+    "rawSpec": "~2.1.1",
+    "spec": ">=2.1.1 <2.2.0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.0.0.tgz",
-  "_shasum": "724e7c68ac177aa933aa75a6b4cb11e5aa795d2c",
+  "_resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.1.2.tgz",
+  "_shasum": "bd2a6c558de5350bdd43aa8e8de757943ac01d2a",
   "_shrinkwrap": null,
-  "_spec": "@angular/compiler@2.0.0",
-  "_where": "C:\\12thWonder\\BitBucket\\TitanV1\\Titan.WebCore",
+  "_spec": "@angular/compiler@~2.1.1",
+  "_where": "C:\\12thWonder\\BitBucket\\WebCore\\Titan.WebCore",
   "author": {
     "name": "angular"
   },
@@ -56,8 +56,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "724e7c68ac177aa933aa75a6b4cb11e5aa795d2c",
-    "tarball": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.0.0.tgz"
+    "shasum": "bd2a6c558de5350bdd43aa8e8de757943ac01d2a",
+    "tarball": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.1.2.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "license": "MIT",
@@ -72,7 +72,7 @@
   "name": "@angular/compiler",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/core": "^2.0.0"
+    "@angular/core": "2.1.2"
   },
   "readme": "ERROR: No README data found!",
   "repository": {
@@ -81,5 +81,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.0.0"
+  "version": "2.1.2"
 }
