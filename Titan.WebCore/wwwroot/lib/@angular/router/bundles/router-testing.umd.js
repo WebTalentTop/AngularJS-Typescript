@@ -1,5 +1,5 @@
 /**
- * @license Angular v3.1.2
+ * @license @angular/router v3.0.0
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -48,30 +48,11 @@
             /**
              * @docsNotRequired
              */
-            this._stubbedModules = {};
+            this.stubbedModules = {};
         }
-        Object.defineProperty(SpyNgModuleFactoryLoader.prototype, "stubbedModules", {
-            /**
-             * @docsNotRequired
-             */
-            get: function () { return this._stubbedModules; },
-            /**
-             * @docsNotRequired
-             */
-            set: function (modules) {
-                var res = {};
-                for (var _i = 0, _a = Object.keys(modules); _i < _a.length; _i++) {
-                    var t = _a[_i];
-                    res[t] = this.compiler.compileModuleAsync(modules[t]);
-                }
-                this._stubbedModules = res;
-            },
-            enumerable: true,
-            configurable: true
-        });
         SpyNgModuleFactoryLoader.prototype.load = function (path) {
-            if (this._stubbedModules[path]) {
-                return this._stubbedModules[path];
+            if (this.stubbedModules[path]) {
+                return this.compiler.compileModuleAsync(this.stubbedModules[path]);
             }
             else {
                 return Promise.reject(new Error("Cannot find module " + path));
@@ -102,7 +83,7 @@
      * ```
      * beforeEach(() => {
      *   TestBed.configureTestModule({
-     *     imports: [
+     *     modules: [
      *       RouterTestingModule.withRoutes(
      *         [{path: '', component: BlankCmp}, {path: 'simple', component: SimpleCmp}])]
      *       )
@@ -138,7 +119,7 @@
                                     _angular_router.UrlSerializer, _angular_router.RouterOutletMap, _angular_common.Location, _angular_core.NgModuleFactoryLoader, _angular_core.Compiler, _angular_core.Injector, ROUTES
                                 ]
                             },
-                            { provide: _angular_router.PreloadingStrategy, useExisting: _angular_router.NoPreloading }, _angular_router.provideRoutes([])
+                            _angular_router.provideRoutes([])
                         ]
                     },] },
         ];

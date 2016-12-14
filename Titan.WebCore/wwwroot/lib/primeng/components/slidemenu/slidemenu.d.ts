@@ -3,8 +3,8 @@ import { DomHandler } from '../dom/domhandler';
 import { MenuItem } from '../common/api';
 import { Router } from '@angular/router';
 export declare class SlideMenuSub implements OnDestroy {
-    slideMenu: SlideMenu;
-    router: Router;
+    protected slideMenu: SlideMenu;
+    protected router: Router;
     item: MenuItem;
     root: boolean;
     backLabel: string;
@@ -18,9 +18,9 @@ export declare class SlideMenuSub implements OnDestroy {
     ngOnDestroy(): void;
 }
 export declare class SlideMenu implements AfterViewInit, OnDestroy {
-    el: ElementRef;
-    domHandler: DomHandler;
-    renderer: Renderer;
+    protected el: ElementRef;
+    protected domHandler: DomHandler;
+    protected renderer: Renderer;
     model: MenuItem[];
     popup: boolean;
     style: any;
@@ -30,11 +30,10 @@ export declare class SlideMenu implements AfterViewInit, OnDestroy {
     effectDuration: any;
     easing: string;
     backLabel: string;
-    container: any;
-    documentClickListener: any;
-    preventDocumentDefault: any;
+    protected container: any;
+    protected documentClickListener: any;
+    protected preventDocumentDefault: any;
     left: number;
-    animating: boolean;
     constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer);
     ngAfterViewInit(): void;
     toggle(event: any): void;

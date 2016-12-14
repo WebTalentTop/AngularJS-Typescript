@@ -64,7 +64,6 @@ body {
         
         .topbar-right {
             padding: 15px;
-            position: relative;
             
             #menu-button {
                 color: $accentTextColor;
@@ -102,12 +101,11 @@ body {
             
             #topbar-menu-button {
                 display: none;
+                float: right;
                 color: #ffffff;
                 vertical-align: middle;
                 height: 36px;
-                position: absolute;
-                top: 20px;
-                right: 25px;
+                margin: 5px 10px 0 0;
 
                 @include transition(all .3s);
                 
@@ -175,6 +173,7 @@ body {
                     position: relative;
                     overflow: scroll;
                     overflow-x: hidden;
+                    background-color: #424242;
                 }  
                 
                 > ul:last-child {
@@ -270,7 +269,7 @@ body {
                         }
                         
                         &:hover {
-                            background-color: $darkMenuHoverColor;
+                            background-color: #ff5722;
                         }
                     }
                     
@@ -357,19 +356,20 @@ body {
                 }
                 
                 &:hover {
-                    background-color: $hoverBgColor;
+                    background-color: #ff5722;
                 }
                 
                 span {
                     display: inline-block;
                     vertical-align: middle;
+                    color: #ffffff;
                 }
             }
             
             &.active-menuitem {
                 > a {
                     color: $primaryColor;
-                    background-color: #e8e8e8;
+                    background-color: #ff5722;
                     
                     i:last-child {
                         @include rotate(-180deg);
@@ -499,7 +499,7 @@ body {
                     @include transition(color .3s);
                     
                     &:hover {
-                        color: #e8e8e8;
+                        color: #ff5722;
                     }
                 }
                 
@@ -634,7 +634,7 @@ body {
                             }
                             
                             &:hover {
-                                background-color: #e8e8e8;
+                                background-color: #ff5722;
                                 color: $textColor;
                                 
                                 i {
@@ -705,7 +705,7 @@ body {
                                 &.active-menuitem {
                                     > a {
                                         color: $primaryColor;
-                                        background-color: #e8e8e8;
+                                        background-color: #ff5722;
                                     }
                                 }
                             }
@@ -733,7 +733,7 @@ body {
                                 color: #ffffff;
                                 
                                 &:hover {
-                                    background-color: $darkMenuHoverColor;
+                                    background-color: #ff5722;
                                     
                                     i {
                                         color: #ffffff;
@@ -852,7 +852,7 @@ body {
                             }
                             
                             &:hover {
-                                background-color: #e8e8e8;
+                                background-color: #ff5722;
                             }
                             
                             .topbar-item-name {
@@ -921,7 +921,6 @@ body {
                                 color: $textColor;
                                 
                                 &:focus {
-                                    margin-bottom: -1px;
                                     border-color: $dividerColor;
                                 }
                             }
@@ -965,18 +964,6 @@ body {
                     &.topbar-items-visible {
                         display: block;
                     }
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 399px) {
-    .layout-container {
-        .topbar {
-            .topbar-right {
-                #topbar-menu-button {
-                    right: 15px;
                 }
             }
         }

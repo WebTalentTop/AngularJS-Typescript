@@ -17,12 +17,6 @@ var PickList = (function () {
     function PickList(el, domHandler) {
         this.el = el;
         this.domHandler = domHandler;
-        this.showSourceControls = true;
-        this.showTargetControls = true;
-        this.onMoveToSource = new core_1.EventEmitter();
-        this.onMoveToTarget = new core_1.EventEmitter();
-        this.selectedItemsSource = [];
-        this.selectedItemsTarget = [];
     }
     PickList.prototype.ngAfterViewChecked = function () {
         if (this.movedUp || this.movedDown) {
@@ -38,24 +32,22 @@ var PickList = (function () {
             this.reorderedListElement = null;
         }
     };
-    PickList.prototype.onItemClick = function (event, item, selectedItems) {
+    PickList.prototype.selectItem = function (event, item) {
         var metaKey = (event.metaKey || event.ctrlKey);
-        var index = this.findIndexInSelection(item, selectedItems);
+        var index = this.findIndexInSelection(item);
         var selected = (index != -1);
         if (selected && metaKey) {
-            selectedItems.splice(index, 1);
+            this.selectedItems.splice(index, 1);
         }
         else {
-            if (!metaKey) {
-                selectedItems.length = 0;
-            }
-            selectedItems.push(item);
+            this.selectedItems = (metaKey) ? this.selectedItems || [] : [];
+            this.selectedItems.push(item);
         }
     };
-    PickList.prototype.moveUp = function (listElement, list, selectedItems) {
-        if (selectedItems && selectedItems.length) {
-            for (var i = 0; i < selectedItems.length; i++) {
-                var selectedItem = selectedItems[i];
+    PickList.prototype.moveUp = function (listElement, list) {
+        if (this.selectedItems) {
+            for (var i = 0; i < this.selectedItems.length; i++) {
+                var selectedItem = this.selectedItems[i];
                 var selectedItemIndex = this.findIndexInList(selectedItem, list);
                 if (selectedItemIndex != 0) {
                     var movedItem = list[selectedItemIndex];
@@ -71,10 +63,10 @@ var PickList = (function () {
             this.reorderedListElement = listElement;
         }
     };
-    PickList.prototype.moveTop = function (listElement, list, selectedItems) {
-        if (selectedItems && selectedItems.length) {
-            for (var i = 0; i < selectedItems.length; i++) {
-                var selectedItem = selectedItems[i];
+    PickList.prototype.moveTop = function (listElement, list) {
+        if (this.selectedItems) {
+            for (var i = 0; i < this.selectedItems.length; i++) {
+                var selectedItem = this.selectedItems[i];
                 var selectedItemIndex = this.findIndexInList(selectedItem, list);
                 if (selectedItemIndex != 0) {
                     var movedItem = list.splice(selectedItemIndex, 1)[0];
@@ -87,10 +79,10 @@ var PickList = (function () {
             listElement.scrollTop = 0;
         }
     };
-    PickList.prototype.moveDown = function (listElement, list, selectedItems) {
-        if (selectedItems && selectedItems.length) {
-            for (var i = selectedItems.length - 1; i >= 0; i--) {
-                var selectedItem = selectedItems[i];
+    PickList.prototype.moveDown = function (listElement, list) {
+        if (this.selectedItems) {
+            for (var i = this.selectedItems.length - 1; i >= 0; i--) {
+                var selectedItem = this.selectedItems[i];
                 var selectedItemIndex = this.findIndexInList(selectedItem, list);
                 if (selectedItemIndex != (list.length - 1)) {
                     var movedItem = list[selectedItemIndex];
@@ -106,10 +98,10 @@ var PickList = (function () {
             this.reorderedListElement = listElement;
         }
     };
-    PickList.prototype.moveBottom = function (listElement, list, selectedItems) {
-        if (selectedItems && selectedItems.length) {
-            for (var i = selectedItems.length - 1; i >= 0; i--) {
-                var selectedItem = selectedItems[i];
+    PickList.prototype.moveBottom = function (listElement, list) {
+        if (this.selectedItems) {
+            for (var i = this.selectedItems.length - 1; i >= 0; i--) {
+                var selectedItem = this.selectedItems[i];
                 var selectedItemIndex = this.findIndexInList(selectedItem, list);
                 if (selectedItemIndex != (list.length - 1)) {
                     var movedItem = list.splice(selectedItemIndex, 1)[0];
@@ -123,62 +115,50 @@ var PickList = (function () {
         }
     };
     PickList.prototype.moveRight = function (targetListElement) {
-        if (this.selectedItemsSource && this.selectedItemsSource.length) {
-            for (var i = 0; i < this.selectedItemsSource.length; i++) {
-                var selectedItem = this.selectedItemsSource[i];
+        if (this.selectedItems) {
+            for (var i = 0; i < this.selectedItems.length; i++) {
+                var selectedItem = this.selectedItems[i];
                 if (this.findIndexInList(selectedItem, this.target) == -1) {
                     this.target.push(this.source.splice(this.findIndexInList(selectedItem, this.source), 1)[0]);
                 }
             }
-            this.onMoveToTarget.emit({
-                items: this.selectedItemsSource
-            });
-            this.selectedItemsSource = [];
+            this.selectedItems = [];
         }
     };
     PickList.prototype.moveAllRight = function () {
-        if (this.source) {
+        if (this.selectedItems) {
             for (var i = 0; i < this.source.length; i++) {
                 this.target.push(this.source[i]);
             }
-            this.onMoveToTarget.emit({
-                items: this.source
-            });
             this.source.splice(0, this.source.length);
-            this.selectedItemsSource = [];
+            this.selectedItems = [];
         }
     };
     PickList.prototype.moveLeft = function (sourceListElement) {
-        if (this.selectedItemsTarget && this.selectedItemsTarget.length) {
-            for (var i = 0; i < this.selectedItemsTarget.length; i++) {
-                var selectedItem = this.selectedItemsTarget[i];
+        if (this.selectedItems) {
+            for (var i = 0; i < this.selectedItems.length; i++) {
+                var selectedItem = this.selectedItems[i];
                 if (this.findIndexInList(selectedItem, this.source) == -1) {
                     this.source.push(this.target.splice(this.findIndexInList(selectedItem, this.target), 1)[0]);
                 }
             }
-            this.onMoveToSource.emit({
-                items: this.selectedItemsTarget
-            });
-            this.selectedItemsTarget = [];
+            this.selectedItems = [];
         }
     };
     PickList.prototype.moveAllLeft = function () {
-        if (this.target) {
+        if (this.selectedItems) {
             for (var i = 0; i < this.target.length; i++) {
                 this.source.push(this.target[i]);
             }
-            this.onMoveToSource.emit({
-                items: this.target
-            });
             this.target.splice(0, this.target.length);
-            this.selectedItemsTarget = [];
+            this.selectedItems = [];
         }
     };
-    PickList.prototype.isSelected = function (item, selectedItems) {
-        return this.findIndexInSelection(item, selectedItems) != -1;
+    PickList.prototype.isSelected = function (item) {
+        return this.findIndexInSelection(item) != -1;
     };
-    PickList.prototype.findIndexInSelection = function (item, selectedItems) {
-        return this.findIndexInList(item, selectedItems);
+    PickList.prototype.findIndexInSelection = function (item) {
+        return this.findIndexInList(item, this.selectedItems);
     };
     PickList.prototype.findIndexInList = function (item, list) {
         var index = -1;
@@ -231,29 +211,13 @@ var PickList = (function () {
         __metadata('design:type', Object)
     ], PickList.prototype, "targetStyle", void 0);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PickList.prototype, "showSourceControls", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PickList.prototype, "showTargetControls", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PickList.prototype, "onMoveToSource", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PickList.prototype, "onMoveToTarget", void 0);
-    __decorate([
         core_1.ContentChild(core_1.TemplateRef), 
         __metadata('design:type', core_1.TemplateRef)
     ], PickList.prototype, "itemTemplate", void 0);
     PickList = __decorate([
         core_1.Component({
             selector: 'p-pickList',
-            template: "\n        <div [class]=\"styleClass\" [ngStyle]=\"style\" [ngClass]=\"{'ui-picklist ui-widget ui-helper-clearfix': true,'ui-picklist-responsive': responsive}\">\n            <div class=\"ui-picklist-source-controls ui-picklist-buttons\" *ngIf=\"showSourceControls\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-up\" (click)=\"moveUp(sourcelist,source,selectedItemsSource)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-up\" (click)=\"moveTop(sourcelist,source,selectedItemsSource)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-down\" (click)=\"moveDown(sourcelist,source,selectedItemsSource)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-down\" (click)=\"moveBottom(sourcelist,source,selectedItemsSource)\"></button>\n                </div>\n            </div>\n            <div class=\"ui-picklist-listwrapper ui-picklist-source-wrapper\" [ngClass]=\"{'ui-picklist-listwrapper-nocontrols':!showSourceControls}\">\n                <div class=\"ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr\" *ngIf=\"sourceHeader\">{{sourceHeader}}</div>\n                <ul #sourcelist class=\"ui-widget-content ui-picklist-list ui-picklist-source ui-corner-bottom\" [ngStyle]=\"sourceStyle\">\n                    <li *ngFor=\"let item of source\" [ngClass]=\"{'ui-picklist-item':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(item,selectedItemsSource)}\"\n                        (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"onItemClick($event,item,selectedItemsSource)\">\n                        <template [pTemplateWrapper]=\"itemTemplate\" [item]=\"item\"></template>\n                    </li>\n                </ul>\n            </div>\n            <div class=\"ui-picklist-buttons\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-right\" (click)=\"moveRight(targetlist)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-right\" (click)=\"moveAllRight()\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-left\" (click)=\"moveLeft(sourcelist)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-left\" (click)=\"moveAllLeft()\"></button>\n                </div>\n            </div>\n            <div class=\"ui-picklist-listwrapper ui-picklist-target-wrapper\" [ngClass]=\"{'ui-picklist-listwrapper-nocontrols':!showSourceControls}\">\n                <div class=\"ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr\" *ngIf=\"targetHeader\">{{targetHeader}}</div>\n                <ul #targetlist class=\"ui-widget-content ui-picklist-list ui-picklist-target ui-corner-bottom\" [ngStyle]=\"targetStyle\">\n                    <li *ngFor=\"let item of target\" [ngClass]=\"{'ui-picklist-item':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(item,selectedItemsTarget)}\"\n                        (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"onItemClick($event,item,selectedItemsTarget)\">\n                        <template [pTemplateWrapper]=\"itemTemplate\" [item]=\"item\"></template>\n                    </li>\n                </ul>\n            </div>\n            <div class=\"ui-picklist-target-controls ui-picklist-buttons\" *ngIf=\"showTargetControls\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-up\" (click)=\"moveUp(targetlist,target,selectedItemsTarget)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-up\" (click)=\"moveTop(targetlist,target,selectedItemsTarget)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-down\" (click)=\"moveDown(targetlist,target,selectedItemsTarget)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-down\" (click)=\"moveBottom(targetlist,target,selectedItemsTarget)\"></button>\n                </div>\n            </div>\n        </div>\n    ",
+            template: "\n        <div [class]=\"styleClass\" [ngStyle]=\"style\" [ngClass]=\"{'ui-picklist ui-widget ui-helper-clearfix': true, 'ui-picklist-responsive': responsive}\">\n            <div class=\"ui-picklist-source-controls ui-picklist-buttons\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-up\" (click)=\"moveUp(sourcelist,source)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-up\" (click)=\"moveTop(sourcelist,source)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-down\" (click)=\"moveDown(sourcelist,source)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-down\" (click)=\"moveBottom(sourcelist,source)\"></button>\n                </div>\n            </div>\n            <div class=\"ui-picklist-listwrapper ui-picklist-source-wrapper\">\n                <div class=\"ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr\" *ngIf=\"sourceHeader\">{{sourceHeader}}</div>\n                <ul #sourcelist class=\"ui-widget-content ui-picklist-list ui-picklist-source ui-corner-bottom\" [ngStyle]=\"sourceStyle\">\n                    <li *ngFor=\"let item of source\" [ngClass]=\"{'ui-picklist-item':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(item)}\"\n                        (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"selectItem($event,item)\">\n                        <template [pTemplateWrapper]=\"itemTemplate\" [item]=\"item\"></template>\n                    </li>\n                </ul>\n            </div>\n            <div class=\"ui-picklist-buttons\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-right\" (click)=\"moveRight(targetlist)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-right\" (click)=\"moveAllRight()\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-left\" (click)=\"moveLeft(sourcelist)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-left\" (click)=\"moveAllLeft()\"></button>\n                </div>\n            </div>\n            <div class=\"ui-picklist-listwrapper ui-picklist-target-wrapper\">\n                <div class=\"ui-picklist-caption ui-widget-header ui-corner-tl ui-corner-tr\" *ngIf=\"targetHeader\">{{targetHeader}}</div>\n                <ul #targetlist class=\"ui-widget-content ui-picklist-list ui-picklist-target ui-corner-bottom\" [ngStyle]=\"targetStyle\">\n                    <li *ngFor=\"let item of target\" [ngClass]=\"{'ui-picklist-item':true,'ui-state-hover':(hoveredItem==item),'ui-state-highlight':isSelected(item)}\"\n                        (mouseenter)=\"hoveredItem=item\" (mouseleave)=\"hoveredItem=null\" (click)=\"selectItem($event,item)\">\n                        <template [pTemplateWrapper]=\"itemTemplate\" [item]=\"item\"></template>\n                    </li>\n                </ul>\n            </div>\n            <div class=\"ui-picklist-target-controls ui-picklist-buttons\">\n                <div class=\"ui-picklist-buttons-cell\">\n                    <button type=\"button\" pButton icon=\"fa-angle-up\" (click)=\"moveUp(targetlist,target)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-up\" (click)=\"moveTop(targetlist,target)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-down\" (click)=\"moveDown(targetlist,target)\"></button>\n                    <button type=\"button\" pButton icon=\"fa-angle-double-down\" (click)=\"moveBottom(targetlist,target)\"></button>\n                </div>\n            </div>\n        </div>\n    ",
             providers: [domhandler_1.DomHandler]
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, domhandler_1.DomHandler])

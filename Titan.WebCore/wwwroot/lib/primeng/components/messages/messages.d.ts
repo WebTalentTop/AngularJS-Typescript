@@ -5,7 +5,6 @@ export declare class Messages {
     hasMessages(): boolean;
     getSeverityClass(): string;
     clear(event: any): void;
-    readonly icon: string;
 }
 export declare class MessagesModule {
 }

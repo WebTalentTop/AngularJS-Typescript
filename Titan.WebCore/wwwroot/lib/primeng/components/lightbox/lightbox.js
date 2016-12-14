@@ -48,7 +48,6 @@ var Lightbox = (function () {
         var _this = this;
         setTimeout(function () {
             _this.currentImage = image;
-            _this.captionText = image.title;
         }, 1000);
     };
     Lightbox.prototype.show = function () {

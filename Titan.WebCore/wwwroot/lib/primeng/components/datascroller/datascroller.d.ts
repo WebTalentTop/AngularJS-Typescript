@@ -1,9 +1,9 @@
 import { ElementRef, AfterViewInit, OnDestroy, DoCheck, Renderer, EventEmitter, IterableDiffers, TemplateRef } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
 export declare class DataScroller implements AfterViewInit, DoCheck, OnDestroy {
-    el: ElementRef;
-    renderer: Renderer;
-    domHandler: DomHandler;
+    protected el: ElementRef;
+    protected renderer: Renderer;
+    protected domHandler: DomHandler;
     value: any[];
     rows: number;
     lazy: boolean;
@@ -17,8 +17,8 @@ export declare class DataScroller implements AfterViewInit, DoCheck, OnDestroy {
     footer: any;
     itemTemplate: TemplateRef<any>;
     loader: any;
-    dataToRender: any[];
-    first: number;
+    protected dataToRender: any[];
+    protected first: number;
     differ: any;
     scrollFunction: any;
     contentElement: any;
@@ -26,7 +26,6 @@ export declare class DataScroller implements AfterViewInit, DoCheck, OnDestroy {
     ngAfterViewInit(): void;
     ngDoCheck(): void;
     load(): void;
-    reset(): void;
     isEmpty(): boolean;
     createLazyLoadMetadata(): any;
     bindScrollListener(): void;

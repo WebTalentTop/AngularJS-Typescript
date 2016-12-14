@@ -93,20 +93,9 @@ var Password = (function () {
         else
             return 1 + 0.5 * (x / (x + y / 4));
     };
-    Object.defineProperty(Password.prototype, "disabled", {
-        get: function () {
-            return this.el.nativeElement.disabled;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Password.prototype, "filled", {
-        get: function () {
-            return this.el.nativeElement.value != '';
-        },
-        enumerable: true,
-        configurable: true
-    });
+    Password.prototype.isDisabled = function () {
+        return this.el.nativeElement.disabled;
+    };
     Password.prototype.ngOnDestroy = function () {
         this.panel.removeChild(this.meter);
         this.panel.removeChild(this.info);
@@ -171,8 +160,7 @@ var Password = (function () {
                 '[class.ui-widget]': 'true',
                 '[class.ui-state-hover]': 'hover',
                 '[class.ui-state-focus]': 'focus',
-                '[class.ui-state-disabled]': 'disabled',
-                '[class.ui-state-filled]': 'filled'
+                '[class.ui-state-disabled]': 'isDisabled()'
             },
             providers: [domhandler_1.DomHandler]
         }), 

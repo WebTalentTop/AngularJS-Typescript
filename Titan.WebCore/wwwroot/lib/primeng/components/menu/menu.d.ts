@@ -3,10 +3,10 @@ import { DomHandler } from '../dom/domhandler';
 import { MenuItem } from '../common/api';
 import { Router } from '@angular/router';
 export declare class Menu implements AfterViewInit, OnDestroy {
-    el: ElementRef;
-    domHandler: DomHandler;
-    renderer: Renderer;
-    router: Router;
+    protected el: ElementRef;
+    protected domHandler: DomHandler;
+    protected renderer: Renderer;
+    protected router: Router;
     model: MenuItem[];
     popup: boolean;
     style: any;

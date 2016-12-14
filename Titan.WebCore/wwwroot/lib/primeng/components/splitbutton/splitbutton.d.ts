@@ -3,10 +3,10 @@ import { DomHandler } from '../dom/domhandler';
 import { MenuItem } from '../common/api';
 import { Router } from '@angular/router';
 export declare class SplitButton implements OnInit, OnDestroy {
-    el: ElementRef;
-    domHandler: DomHandler;
-    renderer: Renderer;
-    router: Router;
+    protected el: ElementRef;
+    protected domHandler: DomHandler;
+    protected renderer: Renderer;
+    protected router: Router;
     model: MenuItem[];
     icon: string;
     iconPos: string;
@@ -16,15 +16,20 @@ export declare class SplitButton implements OnInit, OnDestroy {
     styleClass: string;
     menuStyle: any;
     menuStyleClass: string;
-    disabled: boolean;
-    hoveredItem: any;
-    menuVisible: boolean;
-    documentClickListener: any;
+    protected hoverDefaultBtn: boolean;
+    protected focusDefaultBtn: boolean;
+    protected activeDefaultBtn: boolean;
+    protected hoverDropdown: boolean;
+    protected focusDropdown: boolean;
+    protected activeDropdown: boolean;
+    protected hoveredItem: any;
+    protected menuVisible: boolean;
+    protected documentClickListener: any;
     constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer, router: Router);
     ngOnInit(): void;
-    onDefaultButtonClick(event: Event): void;
-    itemClick(event: Event, item: MenuItem): void;
-    onDropdownClick(event: Event, menu: Element, container: Element): void;
+    onDefaultButtonClick(event: any): void;
+    itemClick(event: any, item: MenuItem): void;
+    onDropdownClick(event: any, menu: any, container: any): void;
     ngOnDestroy(): void;
 }
 export declare class SplitButtonModule {

@@ -11,8 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var Fieldset = (function () {
-    function Fieldset(el) {
-        this.el = el;
+    function Fieldset() {
         this.collapsed = false;
         this.onBeforeToggle = new core_1.EventEmitter();
         this.onAfterToggle = new core_1.EventEmitter();
@@ -48,9 +47,6 @@ var Fieldset = (function () {
     };
     Fieldset.prototype.collapse = function (event) {
         this.collapsed = true;
-    };
-    Fieldset.prototype.getBlockableElement = function () {
-        return this.el.nativeElement.children[0];
     };
     __decorate([
         core_1.Input(), 
@@ -97,7 +93,7 @@ var Fieldset = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [])
     ], Fieldset);
     return Fieldset;
 }());

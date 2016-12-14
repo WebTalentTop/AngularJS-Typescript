@@ -1,9 +1,9 @@
 import { OnInit, AfterViewInit, OnDestroy, EventEmitter, Renderer, ElementRef } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
 export declare class OverlayPanel implements OnInit, AfterViewInit, OnDestroy {
-    el: ElementRef;
-    domHandler: DomHandler;
-    renderer: Renderer;
+    protected el: ElementRef;
+    protected domHandler: DomHandler;
+    protected renderer: Renderer;
     dismissable: boolean;
     showCloseIcon: boolean;
     style: any;

@@ -11,8 +11,8 @@ export declare class Rating implements ControlValueAccessor {
     value: number;
     onModelChange: Function;
     onModelTouched: Function;
-    starsArray: number[];
-    hoverCancel: boolean;
+    protected starsArray: number[];
+    protected hoverCancel: boolean;
     ngOnInit(): void;
     rate(event: any, i: number): void;
     clear(event: any): void;

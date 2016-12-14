@@ -32,7 +32,6 @@
 .fa-arrow-circle-right {@include icon-override("play_circle_outline"); }
 .fa-arrow-circle-left {@include icon-override("play_circle_outline"); @include rotate(180deg);}
 .fa-calendar { @include icon-override("date_range"); }
-.fa-file-text { @include icon-override("file_text"); }
 .fa-arrow-down{ @include icon-override("arrow_downward"); } 
 .fa-arrow-up { @include icon-override("arrow_upward"); }
 
@@ -73,7 +72,6 @@
 .ui-icon-circle-close { @include icon-override("cancel"); }
 .ui-icon-gear { @include icon-override("settings"); }
 .ui-icon-calendar { @include icon-override("date_range"); }
-.ui-icon-file-text { @include icon-override("file_text"); }
 .ui-icon-trash { @include icon-override("delete_forever"); }
 .ui-icon-notice { @include icon-override("error_outline"); }
 .ui-icon-alert { @include icon-override("warning"); }

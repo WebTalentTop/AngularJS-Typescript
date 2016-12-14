@@ -4159,8 +4159,7 @@ body {
     margin: 0;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
-    border-radius: 0px;
-    color: #212121; }
+    border-radius: 0px; }
     body .ui-picklist li.ui-picklist-item.ui-state-hover {
       background-color: #e8e8e8;
       color: #000000; }
@@ -4205,8 +4204,7 @@ body {
       margin: 0;
       -moz-border-radius: 0px;
       -webkit-border-radius: 0px;
-      border-radius: 0px;
-      color: #212121; }
+      border-radius: 0px; }
       body .ui-orderlist .ui-orderlist-list li.ui-orderlist-item.ui-state-hover {
         background-color: #e8e8e8;
         color: #000000; }
@@ -4239,8 +4237,7 @@ body {
       transition: background-color 0.3s;
       -moz-border-radius: 0px;
       -webkit-border-radius: 0px;
-      border-radius: 0px;
-      color: #212121; }
+      border-radius: 0px; }
       body .ui-listbox .ui-listbox-item.ui-state-hover {
         background-color: #e8e8e8;
         color: #000000; }
@@ -4281,6 +4278,8 @@ body {
       margin-top: -1px;
       box-sizing: border-box;
       color: #ffffff; }
+      body .ui-paginator > a span {
+        display: none; }
       body .ui-paginator > a.ui-state-hover {
         background-color: #B39DDB;
         -moz-border-radius: 50%;
@@ -4593,6 +4592,11 @@ body {
   body .md-inputfield {
     display: block;
     position: relative; }
+    body .md-inputfield input:focus ~ label,
+    body .md-inputfield input.ui-state-filled ~ label {
+      top: -20px;
+      font-size: 12px;
+      color: #673AB7; }
     body .md-inputfield label {
       color: #999;
       font-weight: normal;
@@ -4603,13 +4607,6 @@ body {
       transition: 0.3s ease all;
       -moz-transition: 0.3s ease all;
       -webkit-transition: 0.3s ease all; }
-    body .md-inputfield input:focus ~ label,
-    body .md-inputfield input.ui-state-filled ~ label,
-    body .md-inputfield .ui-inputwrapper-focus ~ label,
-    body .md-inputfield .ui-inputwrapper-filled ~ label {
-      top: -20px;
-      font-size: 12px;
-      color: #673AB7; }
   body .ui-button, body .ui-datepicker-buttonpane > button {
     overflow: hidden;
     background-color: #673AB7;
@@ -4875,8 +4872,7 @@ body {
         padding: 10px 14px;
         -moz-border-radius: 0;
         -webkit-border-radius: 0;
-        border-radius: 0;
-        color: #212121; }
+        border-radius: 0; }
         body .ui-autocomplete-panel .ui-autocomplete-list .ui-autocomplete-list-item .ui-autocomplete-query {
           font-weight: 700; }
       body .ui-autocomplete-panel .ui-autocomplete-list .ui-autocomplete-group {
@@ -4953,8 +4949,7 @@ body {
       transition: background-color 0.3s;
       -moz-border-radius: 0;
       -webkit-border-radius: 0;
-      border-radius: 0;
-      color: #212121; }
+      border-radius: 0; }
       body .ui-dropdown-panel .ui-dropdown-item.ui-state-hover {
         background-color: #e8e8e8;
         color: #000000; }
@@ -5045,8 +5040,7 @@ body {
           padding: 1px; }
     body .ui-multiselect-panel.ui-widget .ui-multiselect-item {
       font-size: 16px;
-      padding: 10px 14px;
-      color: #212121; }
+      padding: 10px 14px; }
       body .ui-multiselect-panel.ui-widget .ui-multiselect-item label {
         padding-left: 28px;
         padding-top: 0px; }
@@ -5279,8 +5273,7 @@ body {
         /* Support for Firefox. */
         -moz-osx-font-smoothing: grayscale;
         /* Support for IE. */
-        font-feature-settings: 'liga';
-        color: #ffffff; }
+        font-feature-settings: 'liga'; }
         body .ui-datepicker .ui-datepicker-header .ui-datepicker-next:before {
           content: "play_circle_outline"; }
         body .ui-datepicker .ui-datepicker-header .ui-datepicker-next .fa {
@@ -5319,8 +5312,7 @@ body {
         -o-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
         transform: rotate(180deg);
-        left: 8px;
-        color: #ffffff; }
+        left: 8px; }
         body .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:before {
           content: "play_circle_outline"; }
         body .ui-datepicker .ui-datepicker-header .ui-datepicker-prev .fa {
@@ -5423,10 +5415,6 @@ body {
       background-color: #212121;
       border-color: #212121;
       color: #ffffff; }
-    body .ui-messages .ui-messages-success {
-      background-color: #8BC34A;
-      border-color: #8BC34A;
-      color: #ffffff; }
     body .ui-messages .ui-messages-close {
       text-decoration: none;
       color: #fff;
@@ -5451,113 +5439,34 @@ body {
       color: #ffffff; }
   body .ui-messages .ui-messages-icon {
     background: none;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    text-indent: 0;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
     font-size: 28px;
     color: #fff;
     margin-top: -2px; }
-    body .ui-messages .ui-messages-icon.fa-info {
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      /* Preferred icon size */
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      text-indent: 0;
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
-      /* Support for IE. */
-      font-feature-settings: 'liga'; }
-      body .ui-messages .ui-messages-icon.fa-info:before {
-        content: "info"; }
-    body .ui-messages .ui-messages-icon.fa-warning {
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      /* Preferred icon size */
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      text-indent: 0;
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
-      /* Support for IE. */
-      font-feature-settings: 'liga'; }
-      body .ui-messages .ui-messages-icon.fa-warning:before {
-        content: "warning"; }
-    body .ui-messages .ui-messages-icon.fa-close {
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      /* Preferred icon size */
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      text-indent: 0;
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
-      /* Support for IE. */
-      font-feature-settings: 'liga'; }
-      body .ui-messages .ui-messages-icon.fa-close:before {
-        content: "error_outline"; }
-    body .ui-messages .ui-messages-icon.fa-check {
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px;
-      /* Preferred icon size */
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      text-indent: 0;
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
-      /* Support for IE. */
-      font-feature-settings: 'liga'; }
-      body .ui-messages .ui-messages-icon.fa-check:before {
-        content: "check_circle"; }
+    body .ui-messages .ui-messages-icon:before {
+      content: "info"; }
   body .ui-growl {
     top: 90px; }
     body .ui-growl > .ui-growl-item-container {
@@ -5569,9 +5478,8 @@ body {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
     body .ui-growl .ui-growl-item .ui-growl-image {
       background: none;
-      color: #ffffff;
-      font-size: 36px; }
-      body .ui-growl .ui-growl-item .ui-growl-image.fa-info-circle {
+      color: #ffffff; }
+      body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-info {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -5594,10 +5502,11 @@ body {
         /* Support for Firefox. */
         -moz-osx-font-smoothing: grayscale;
         /* Support for IE. */
-        font-feature-settings: 'liga'; }
-        body .ui-growl .ui-growl-item .ui-growl-image.fa-info-circle:before {
+        font-feature-settings: 'liga';
+        font-size: 36px; }
+        body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-info:before {
           content: "info"; }
-      body .ui-growl .ui-growl-item .ui-growl-image.fa-warning {
+      body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-error {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -5620,10 +5529,11 @@ body {
         /* Support for Firefox. */
         -moz-osx-font-smoothing: grayscale;
         /* Support for IE. */
-        font-feature-settings: 'liga'; }
-        body .ui-growl .ui-growl-item .ui-growl-image.fa-warning:before {
-          content: "warning"; }
-      body .ui-growl .ui-growl-item .ui-growl-image.fa-close {
+        font-feature-settings: 'liga';
+        font-size: 36px; }
+        body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-error:before {
+          content: "error"; }
+      body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-warn {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -5646,10 +5556,11 @@ body {
         /* Support for Firefox. */
         -moz-osx-font-smoothing: grayscale;
         /* Support for IE. */
-        font-feature-settings: 'liga'; }
-        body .ui-growl .ui-growl-item .ui-growl-image.fa-close:before {
-          content: "error_outline"; }
-      body .ui-growl .ui-growl-item .ui-growl-image.fa-check {
+        font-feature-settings: 'liga';
+        font-size: 36px; }
+        body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-warn:before {
+          content: "warn"; }
+      body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-fatal {
         font-family: 'Material Icons';
         font-weight: normal;
         font-style: normal;
@@ -5672,9 +5583,10 @@ body {
         /* Support for Firefox. */
         -moz-osx-font-smoothing: grayscale;
         /* Support for IE. */
-        font-feature-settings: 'liga'; }
-        body .ui-growl .ui-growl-item .ui-growl-image.fa-check:before {
-          content: "check_circle"; }
+        font-feature-settings: 'liga';
+        font-size: 36px; }
+        body .ui-growl .ui-growl-item .ui-growl-image.ui-growl-image-fatal:before {
+          content: "fatal"; }
     body .ui-growl .ui-growl-item .ui-growl-message {
       color: #ffffff; }
     body .ui-growl .ui-growl-item .ui-growl-icon-close {
@@ -6040,8 +5952,7 @@ body {
             margin-right: 12px;
             display: inline-block;
             vertical-align: middle;
-            float: none;
-            color: #212121; }
+            float: none; }
           body .ui-menu .ui-menu-list li.ui-menuitem .ui-menuitem-link .ui-menuitem-text {
             display: inline-block;
             vertical-align: middle;
@@ -6596,6 +6507,50 @@ body {
     left: 0; }
   body .ui-galleria .ui-galleria-nav-next {
     right: 0; }
+  body .ui-log .ui-log-header {
+    padding: 10px 16px;
+    height: auto; }
+    body .ui-log .ui-log-header > .ui-log-button {
+      line-height: 16px;
+      position: static;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+      border: 1px solid transparent;
+      padding: 1px 3px;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      -moz-transition: background-color 0.3s;
+      -o-transition: background-color 0.3s;
+      -webkit-transition: background-color 0.3s;
+      transition: background-color 0.3s; }
+      body .ui-log .ui-log-header > .ui-log-button.ui-state-hover {
+        background-color: #B39DDB; }
+  body .ui-tagcloud li {
+    margin: 4px 0px; }
+    body .ui-tagcloud li a {
+      -moz-transition: background-color 0.3s;
+      -o-transition: background-color 0.3s;
+      -webkit-transition: background-color 0.3s;
+      transition: background-color 0.3s;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px; }
+      body .ui-tagcloud li a:hover {
+        background-color: #e8e8e8;
+        color: #000000; }
+  body .timeline-frame .timeline-event {
+    border-color: #bdbdbd;
+    background-color: #ffffff; }
+    body .timeline-frame .timeline-event.ui-state-active {
+      background-color: #00BCD4;
+      border-color: #00BCD4;
+      color: #ffffff; }
+  body .timeline-frame .timeline-axis {
+    border-color: #bdbdbd; }
+  body .timeline-frame .timeline-navigation {
+    height: 36px; }
   body .ui-tooltip {
     opacity: 0.9;
     filter: alpha(opacity=90);
@@ -6610,16 +6565,6 @@ body {
       border-left-color: #323232; }
     body .ui-tooltip.ui-tooltip-right .ui-tooltip-arrow {
       border-right-color: #323232; }
-  body .ui-inplace .ui-inplace-display {
-    -moz-transition: background-color 0.3s;
-    -o-transition: background-color 0.3s;
-    -webkit-transition: background-color 0.3s;
-    transition: background-color 0.3s;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px; }
-    body .ui-inplace .ui-inplace-display.ui-state-hover {
-      background-color: #e8e8e8; }
   body .ui-inputtext.ng-dirty.ng-invalid,
   body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown,
   body p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext,

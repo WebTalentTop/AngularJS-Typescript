@@ -24,7 +24,7 @@ var Draggable = (function () {
             if (this.dragEffect) {
                 event.dataTransfer.effectAllowed = this.dragEffect;
             }
-            event.dataTransfer.setData('text', this.scope);
+            event.dataTransfer.setData(this.scope, this.scope);
             this.onDragStart.emit(event);
         }
         else {
@@ -126,10 +126,8 @@ var Droppable = (function () {
         this.onDragOver = new core_1.EventEmitter();
     }
     Droppable.prototype.drop = function (event) {
-        if (this.allowDrop(event)) {
-            event.preventDefault();
-            this.onDrop.emit(event);
-        }
+        event.preventDefault();
+        this.onDrop.emit(event);
     };
     Droppable.prototype.dragEnter = function (event) {
         event.preventDefault();
@@ -143,26 +141,27 @@ var Droppable = (function () {
         this.onDragLeave.emit(event);
     };
     Droppable.prototype.dragOver = function (event) {
-        event.preventDefault();
-        this.onDragOver.emit(event);
+        if (this.allowDrop(event)) {
+            event.preventDefault();
+            this.onDragOver.emit(event);
+        }
     };
     Droppable.prototype.allowDrop = function (event) {
-        var dragScope = event.dataTransfer.getData('text');
-        if (typeof (this.scope) == "string" && dragScope == this.scope) {
-            return true;
-        }
-        else if (this.scope instanceof Array) {
-            for (var j = 0; j < this.scope.length; j++) {
-                if (dragScope == this.scope[j]) {
-                    return true;
+        var allow = false;
+        var types = event.dataTransfer.types;
+        if (types && types.length) {
+            for (var i = 0; i < types.length; i++) {
+                if (types[i] == this.scope) {
+                    allow = true;
+                    break;
                 }
             }
         }
-        return false;
+        return allow;
     };
     __decorate([
         core_1.Input('pDroppable'), 
-        __metadata('design:type', Object)
+        __metadata('design:type', String)
     ], Droppable.prototype, "scope", void 0);
     __decorate([
         core_1.Input(), 

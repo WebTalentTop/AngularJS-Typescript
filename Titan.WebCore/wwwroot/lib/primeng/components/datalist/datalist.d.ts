@@ -1,7 +1,6 @@
 import { ElementRef, AfterViewInit, DoCheck, EventEmitter, IterableDiffers, TemplateRef } from '@angular/core';
-import { BlockableUI } from '../common/api';
-export declare class DataList implements AfterViewInit, DoCheck, BlockableUI {
-    el: ElementRef;
+export declare class DataList implements AfterViewInit, DoCheck {
+    protected el: ElementRef;
     value: any[];
     paginator: boolean;
     rows: number;
@@ -16,9 +15,9 @@ export declare class DataList implements AfterViewInit, DoCheck, BlockableUI {
     header: any;
     footer: any;
     itemTemplate: TemplateRef<any>;
-    dataToRender: any[];
-    first: number;
-    page: number;
+    protected dataToRender: any[];
+    protected first: number;
+    protected page: number;
     differ: any;
     constructor(el: ElementRef, differs: IterableDiffers);
     ngAfterViewInit(): void;
@@ -28,7 +27,6 @@ export declare class DataList implements AfterViewInit, DoCheck, BlockableUI {
     updateDataToRender(datasource: any): void;
     isEmpty(): boolean;
     createLazyLoadMetadata(): any;
-    getBlockableElement(): HTMLElement;
 }
 export declare class DataListModule {
 }

@@ -4,15 +4,14 @@ import { DomHandler } from '../dom/domhandler';
 import { ControlValueAccessor } from '@angular/forms';
 export declare const LISTBOX_VALUE_ACCESSOR: any;
 export declare class Listbox implements ControlValueAccessor {
-    el: ElementRef;
-    domHandler: DomHandler;
+    protected el: ElementRef;
+    protected domHandler: DomHandler;
     options: SelectItem[];
     multiple: boolean;
     style: any;
     styleClass: string;
     disabled: boolean;
     onChange: EventEmitter<any>;
-    onDblClick: EventEmitter<any>;
     itemTemplate: TemplateRef<any>;
     value: any;
     onModelChange: Function;
@@ -29,7 +28,6 @@ export declare class Listbox implements ControlValueAccessor {
     onOptionClickMultiple(event: any, option: any): void;
     isSelected(option: SelectItem): boolean;
     findIndex(option: SelectItem): number;
-    onDoubleClick(event: Event, option: SelectItem): any;
 }
 export declare class ListboxModule {
 }

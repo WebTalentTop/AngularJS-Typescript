@@ -39,15 +39,17 @@
     border-width: 0px;
 }
 
-.ui-datatable thead th,
-.ui-datatable tfoot td,
-.ui-datatable tbody td {
+.ui-datatable thead th {
     border-color: inherit;
     box-sizing: border-box;
 }
 
 .ui-datatable tbody {
     outline: 0;
+}
+
+.ui-datatable tbody td {
+    border-color: inherit;
 }
 
 .ui-datatable .ui-sortable-column {
@@ -287,5 +289,4 @@
     box-sizing: border-box;
     height: 17px;
     width: 17px;
-    margin: 0;
 }

@@ -42,13 +42,6 @@ export declare class SpyNgModuleFactoryLoader implements NgModuleFactoryLoader {
     /**
      * @docsNotRequired
      */
-    private _stubbedModules;
-    /**
-     * @docsNotRequired
-     */
-    /**
-     * @docsNotRequired
-     */
     stubbedModules: {
         [path: string]: any;
     };
@@ -69,7 +62,7 @@ export declare function setupTestingRouter(urlSerializer: UrlSerializer, outletM
  * ```
  * beforeEach(() => {
  *   TestBed.configureTestModule({
- *     imports: [
+ *     modules: [
  *       RouterTestingModule.withRoutes(
  *         [{path: '', component: BlankCmp}, {path: 'simple', component: SimpleCmp}])]
  *       )

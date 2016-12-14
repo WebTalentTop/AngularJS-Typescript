@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 export declare class InputText {
-    el: ElementRef;
+    protected el: ElementRef;
     hover: boolean;
     focus: boolean;
     constructor(el: ElementRef);
@@ -8,8 +8,7 @@ export declare class InputText {
     onMouseout(e: any): void;
     onFocus(e: any): void;
     onBlur(e: any): void;
-    readonly disabled: boolean;
-    readonly filled: boolean;
+    isDisabled(): any;
 }
 export declare class InputTextModule {
 }

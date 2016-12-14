@@ -13,7 +13,7 @@ export declare class SelectButton implements ControlValueAccessor {
     value: any;
     onModelChange: Function;
     onModelTouched: Function;
-    hoveredItem: any;
+    protected hoveredItem: any;
     writeValue(value: any): void;
     registerOnChange(fn: Function): void;
     registerOnTouched(fn: Function): void;

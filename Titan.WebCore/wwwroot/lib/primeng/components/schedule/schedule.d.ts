@@ -1,6 +1,6 @@
-import { ElementRef, OnDestroy, DoCheck, EventEmitter, IterableDiffers, AfterViewChecked } from '@angular/core';
-export declare class Schedule implements DoCheck, OnDestroy, AfterViewChecked {
-    el: ElementRef;
+import { ElementRef, AfterViewInit, OnDestroy, DoCheck, EventEmitter, IterableDiffers } from '@angular/core';
+export declare class Schedule implements AfterViewInit, DoCheck, OnDestroy {
+    protected el: ElementRef;
     events: any[];
     header: any;
     style: any;
@@ -17,7 +17,6 @@ export declare class Schedule implements DoCheck, OnDestroy, AfterViewChecked {
     eventLimit: any;
     defaultDate: any;
     editable: boolean;
-    droppable: boolean;
     eventStartEditable: boolean;
     eventDurationEditable: boolean;
     defaultView: string;
@@ -38,9 +37,7 @@ export declare class Schedule implements DoCheck, OnDestroy, AfterViewChecked {
     eventConstraint: any;
     locale: any;
     eventRender: Function;
-    dayRender: Function;
     onDayClick: EventEmitter<any>;
-    onDrop: EventEmitter<any>;
     onEventClick: EventEmitter<any>;
     onEventMouseover: EventEmitter<any>;
     onEventMouseout: EventEmitter<any>;
@@ -56,8 +53,7 @@ export declare class Schedule implements DoCheck, OnDestroy, AfterViewChecked {
     differ: any;
     schedule: any;
     constructor(el: ElementRef, differs: IterableDiffers);
-    ngAfterViewChecked(): void;
-    initialize(): void;
+    ngAfterViewInit(): void;
     ngDoCheck(): void;
     ngOnDestroy(): void;
     gotoDate(date: any): void;

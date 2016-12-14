@@ -86,7 +86,7 @@ var ApplyRedirects = (function () {
         });
     };
     ApplyRedirects.prototype.noMatchError = function (e) {
-        return new Error("Cannot match any routes. URL Segment: '" + e.segmentGroup + "'");
+        return new Error("Cannot match any routes: '" + e.segmentGroup + "'");
     };
     ApplyRedirects.prototype.createUrlTree = function (rootCandidate) {
         var root = rootCandidate.segments.length > 0 ?
@@ -144,20 +144,19 @@ var ApplyRedirects = (function () {
     };
     ApplyRedirects.prototype.expandSegmentAgainstRouteUsingRedirect = function (injector, segmentGroup, routes, route, segments, outlet) {
         if (route.path === '**') {
-            return this.expandWildCardWithParamsAgainstRouteUsingRedirect(injector, routes, route, outlet);
+            return this.expandWildCardWithParamsAgainstRouteUsingRedirect(route);
         }
         else {
             return this.expandRegularSegmentAgainstRouteUsingRedirect(injector, segmentGroup, routes, route, segments, outlet);
         }
     };
-    ApplyRedirects.prototype.expandWildCardWithParamsAgainstRouteUsingRedirect = function (injector, routes, route, outlet) {
+    ApplyRedirects.prototype.expandWildCardWithParamsAgainstRouteUsingRedirect = function (route) {
         var newSegments = applyRedirectCommands([], route.redirectTo, {});
         if (route.redirectTo.startsWith('/')) {
             return absoluteRedirect(newSegments);
         }
         else {
-            var group = new UrlSegmentGroup(newSegments, {});
-            return this.expandSegment(injector, group, routes, newSegments, outlet, false);
+            return of(new UrlSegmentGroup(newSegments, {}));
         }
     };
     ApplyRedirects.prototype.expandRegularSegmentAgainstRouteUsingRedirect = function (injector, segmentGroup, routes, route, segments, outlet) {
@@ -175,15 +174,7 @@ var ApplyRedirects = (function () {
     ApplyRedirects.prototype.matchSegmentAgainstRoute = function (injector, rawSegmentGroup, route, segments) {
         var _this = this;
         if (route.path === '**') {
-            if (route.loadChildren) {
-                return map.call(this.configLoader.load(injector, route.loadChildren), function (r) {
-                    route._loadedConfig = r;
-                    return of(new UrlSegmentGroup(segments, {}));
-                });
-            }
-            else {
-                return of(new UrlSegmentGroup(segments, {}));
-            }
+            return of(new UrlSegmentGroup(segments, {}));
         }
         else {
             var _a = match(rawSegmentGroup, route, segments), matched = _a.matched, consumedSegments_1 = _a.consumedSegments, lastChild = _a.lastChild;

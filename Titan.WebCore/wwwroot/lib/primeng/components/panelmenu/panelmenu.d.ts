@@ -1,7 +1,7 @@
 import { MenuItem } from '../common/api';
 import { Router } from '@angular/router';
 export declare class BasePanelMenuItem {
-    router: Router;
+    protected router: Router;
     constructor(router: Router);
     handleClick(event: any, item: any): void;
 }
@@ -14,7 +14,7 @@ export declare class PanelMenu extends BasePanelMenuItem {
     model: MenuItem[];
     style: any;
     styleClass: string;
-    animating: boolean;
+    protected animating: boolean;
     constructor(router: Router);
     unsubscribe(item: any): void;
     ngOnDestroy(): void;

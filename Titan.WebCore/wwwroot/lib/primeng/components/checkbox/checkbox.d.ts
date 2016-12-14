@@ -15,8 +15,6 @@ export declare class Checkbox implements ControlValueAccessor {
     focused: boolean;
     checked: boolean;
     onClick(event: any, checkbox: any, focus: boolean): void;
-    updateModel(): void;
-    handleChange(event: any): void;
     isChecked(): boolean;
     removeValue(value: any): void;
     addValue(value: any): void;
