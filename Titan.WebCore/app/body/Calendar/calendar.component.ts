@@ -1,82 +1,82 @@
-import { CalendarService } from './../../shared/services/calendar.service';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+
+declare var $: JQueryStatic;
+declare var fullcalendardef: FullCalendar.Calendar;
 
 @Component({
     selector: 'calendar',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/calendar/calendar.component.html'
 })
 export class CalendarComponent {
-    title = "Calendar";
-    gridData = [];
-    confInfo:any = {};
-    cols = [];
-    gridFilter = {};
-
-    constructor(private service: CalendarService) {
-
-    }
-
-    ngOnInit() {
-        let resData:any;
-        this.service.postGridData()
-            .subscribe(res => {
-                resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
-    }
-
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
-
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.service.postGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-        console.log("---------- Event ---------",event);
-
-    }
-    private getGridFilterValues(event: LazyLoadEvent) {
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
-                }
-                console.log("------- filters ----------", filters);
-            }
-        }
-        this.gridFilter = {
-            locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
+    constructor() { }
+    initSchedule() {
+        var scheduleConfig = {
+            theme: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay,listMonth'
+            },
+            editable: true
+            //events:{}
         };
+        scheduleConfig.eventSources = [function (start, end, timezone, callback) {
+            $.ajax({
+                url: titanApiUrl + 'TestFacility/Schedule',
+                type: 'POST',
+                data: {
+                    startdate: start.utc().format(),
+                    enddate: end.utc().format(),
+
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
+                success: function (result) {
+                    var events = [];
+
+                    $.each(result.calendarEvents.$values, function (index, element) {
+                        element.start = element.start;
+                        element.end = element.end;
+                        element.title = element.title;
+                        element.url = element.url;
+                        events.push(element);
+                    });
+                    callback(events);
+                }
+            });
+        }, function (start, end, timezone, callback) {
+            $.ajax({
+                url: titanApiUrl + 'TestFacility/Schedule',
+                type: 'POST',
+                data: {
+                    startdate: start.utc().format(),
+                    enddate: end.utc().format(),
+
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
+                success: function (result) {
+                    var events = [];
+
+                    $.each(result.calendarEvents.$values, function (index, element) {
+                        element.start = element.start;
+                        element.end = element.end;
+                        element.title = element.title;
+                        element.url = element.url;
+                        events.push(element);
+                    });
+                    callback(events);
+                }
+            });
+        }];
+        //scheduleConfig.events= 
+        $('#calendar').fullCalendar(scheduleConfig);
     }
+    ngOnInit() {
+        this.initSchedule();
+    }
+
 }

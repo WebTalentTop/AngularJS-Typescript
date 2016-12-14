@@ -1,15 +1,21 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CalendarComponent } from "./calendar.component";
-import { CalendarService } from '../../shared/services/calendar.service';
-import { DataTableModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import calendarRoutes from "./calendar.routes";
+import { MultiSelectModule } from 'primeng/primeng';
+import { FormsModule } from '@angular/forms';
+import {
+    DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule,
+    InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule
+} from 'primeng/primeng';
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, calendarRoutes],
-    providers: [CalendarService],
+    imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
+        MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
+        InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule],
+
     declarations: [CalendarComponent]
 })
 
-export default class CalendarModule{}
+export default class CalendarModule { }
