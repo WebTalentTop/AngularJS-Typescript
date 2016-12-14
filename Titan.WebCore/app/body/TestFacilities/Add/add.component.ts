@@ -60,8 +60,9 @@ export class AddComponent {
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => { 
             console.log("-------- Test Facility Adding new result ----- ",res); 
-            if (!res.errorMessage){
-                this.router.navigate(["/testfacilities/details/", res.result.id]);
+            if (res.isSuccess) {
+
+                this.router.navigate(["./testfacilities"], { queryParams: { page: 1 } });
             }
         });
     }

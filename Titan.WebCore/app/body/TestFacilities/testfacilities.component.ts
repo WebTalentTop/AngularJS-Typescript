@@ -1,8 +1,8 @@
 import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { LoggerService } from './../../shared/services/logger.service';
-import { LazyLoadEvent } from 'primeng/primeng';
+import { LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router, ActivatedRoute, Params} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 
 
@@ -17,10 +17,20 @@ export class TestFacilitiesComponent {
     cols = [];
     gridFilter = {};
     idField:string;
-    linkFieldId:string;
+    linkFieldId: string;
+    added: any;
+    msgs: Message[] = [];
+    constructor(private service: TestFacilityService, private route: ActivatedRoute, private router:Router) {
+        this.route.queryParams.subscribe(params => {
 
-    constructor(private service: TestFacilityService, private router:Router) {
+            this.added = params['page'];
 
+        });
+
+        if (this.added == 1) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'Success', summary: 'Success', detail: '' });
+        }
     }
 
     ngOnInit() {
