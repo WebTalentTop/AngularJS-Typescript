@@ -1,5 +1,55 @@
 ﻿
-
+<div class="row">
+    <div class="ui-grid-col-1">
+        Project Code :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Facility :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Mode :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Type :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Status :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Roles:
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Build Levels :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+</div>
         <div class="row">
             <div id="calendar">
             </div>
