@@ -941,6 +941,9 @@
 .fa-calendar:before {
   content: "date_range"; }
 
+.fa-file-text:before {
+  content: "file_text"; }
+
 .fa-arrow-down:before {
   content: "arrow_downward"; }
 
@@ -1111,6 +1114,9 @@
 
 .ui-icon-calendar:before {
   content: "date_range"; }
+
+.ui-icon-file-text:before {
+  content: "file_text"; }
 
 .ui-icon-trash:before {
   content: "delete_forever"; }

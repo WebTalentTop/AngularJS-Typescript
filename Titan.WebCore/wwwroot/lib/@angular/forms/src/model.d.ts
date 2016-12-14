@@ -328,6 +328,8 @@ export declare abstract class AbstractControl {
  *
  * You can also initialize the control with a form state object on instantiation,
  * which includes both the value and whether or not the control is disabled.
+ * You can't use the value key without the disabled key; both are required
+ * to use this way of initialization.
  *
  * ```ts
  * const ctrl = new FormControl({value: 'n/a', disabled: true});
@@ -583,7 +585,7 @@ export declare class FormGroup extends AbstractControl {
      * ### Example
      *
      * ```ts
-     * this.form.reset({first: 'name', last; 'last name'});
+     * this.form.reset({first: 'name', last: 'last name'});
      *
      * console.log(this.form.value);  // {first: 'name', last: 'last name'}
      * ```
