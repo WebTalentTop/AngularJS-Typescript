@@ -154,46 +154,74 @@
 
                     </p-panel>
                     <br /><br /><br />
-                    <p-panel>
-                        <div class="ui-grid-col-4"></div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <b>Test Facility Users</b>
-                            </div>
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Search by UserName#:
-                                </div>
-                                <div class="ui-grid-col-2">
-                                    <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
-                                                    field="firstName" [multiple]="true">
-                                    </p-autoComplete>
-                                    <ul>
-                                        <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
-                                    </ul>
-                                </div>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        User Role:
-                                    </div>
-                                    <div class="ui-grid-col-6">
-                                        <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
 
-                                        </p-dropdown>
-                                    </div>
-                                </div>
-                                <div class="ui-grid-col-2">
-                                    <button pButton type="button" class="btn btn-default" label="Add User" (click)="onAddUserRole()"> </button>
-                                </div>
+                    <!-- Begin Dialog - Assign User Role -->
+
+                    <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade">
+
+                        <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
+
+                        <div class="ui-grid-row">
+
+                            <div class="ui-grid-col-2">
+                                Search by UserName#:
                             </div>
-                            <div class="ui-grid-col-2"></div>
+
+                            <div class="ui-grid-col-2">
+                                <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
+                                                name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
+                                                field="firstName" [multiple]="true">
+                                </p-autoComplete>
+                                <ul>
+                                    <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="ui-grid-row">
+
+                            <div class="ui-grid-col-2">
+                                User Role:
+                            </div>
+
+                            <div class="ui-grid-col-6">
+                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
+                            </div>
+
+                        </div>
+
+                        <p><button pButton type="button" class="btn btn-default" icon="ui-icon-save" label="Assign User Role" (click)="onAddUserRole()"></button></p>
+
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button type="button" pButton icon="fa-check" (click)="displayAssignUserRolesDialog=false" label="Done"></button>
+                            </div>
+                        </footer>
+
+                    </p-dialog>
+
+                    <!-- End Dialog - Assign User Role -->
+
+                    <!-- Begin Panel - Test Facility Users -->
+
+                    <p-panel header="Test Facility Users">
+
+                        <div class="ui-grid-row">
+
                             <p-dataTable [value]="TestFacilityRoles">
                                 <p-column field="name" header="Name" sortable="true"></p-column>
                                 <p-column field="role" header="Role" sortable="true"></p-column>
                             </p-dataTable>
+
                         </div>
+
+                        <p><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Assign User Roles&hellip;"></button></p>
+
                     </p-panel>
+
+                    <!-- End Panel - Test Facility Users -->
+
                     <br /><br /><br />
                     <!--<p-panel>
                         <div class="ui-grid-col-4"></div>
