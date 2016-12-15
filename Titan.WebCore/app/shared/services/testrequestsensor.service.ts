@@ -10,7 +10,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class TestRequestSensorService {
     headers: Headers = new Headers({
-      //  'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       //  'Content-Type': 'multipart/form-data',
         // 'Access-Control-Allow-Origin': '*'
     });
@@ -24,7 +24,9 @@ export class TestRequestSensorService {
     };
 
     constructor(private http: Http) {
-
+        //this.progress$ = Observable.create(observer => {
+        //    this.progressObserver = observer
+        //}).share();
     //  this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
        
 
@@ -82,14 +84,44 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
-    postCommentAdd(filterBody): Observable<any> {
-        let multipartheaders: Headers = new Headers({
-            //  'Content-Type': 'application/json',
-            'Content-Type': 'multipart/form-data;boundary=---------------------------99614912995'
-            // 'Access-Control-Allow-Origin': '*'
+     makeFileRequest(url: string, params: string[], files: File[]): Observable<any> {
+        return Observable.create(observer => {
+            let formData: FormData = new FormData(),
+                xhr: XMLHttpRequest = new XMLHttpRequest();
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        observer.next(JSON.parse(xhr.response));
+                        observer.complete();
+                    } else {
+                        observer.error(xhr.response);
+                    }
+                }
+            };
+
+            //xhr.upload.onprogress = (event) => {
+            //    this.progress = Math.round(event.loaded / event.total * 100);
+
+            //    this.progressObserver.next(this.progress);
+            //};
+
+            xhr.open('POST', url, true);
+            xhr.send(formData);
         });
+    }
+    postCommentAdd(filterBody): Observable<any> {
+       // let multipartheaders: Headers = new Headers({
+            //  'Content-Type': 'application/json',
+         //   'Content-Type': 'multipart/form-data;boundary=---------------------------99614912995'
+            // 'Access-Control-Allow-Origin': '*'
+     //   });
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TestReqestSensorApiUrl.postCommentCreatedUrl}`, filterBody, { headers: multipartheaders })
+        return this.http.post(`${TestReqestSensorApiUrl.postCommentCreatedUrl}`, filterBody, { headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))

@@ -117,6 +117,37 @@ export class AddComponent {
    //         });
 
    }
+  
+   onChange(event) {
+       var files = event.files;
+       //let fileList: FileList = event.target.files;
+       //if (fileList.length > 0) {
+       //    let file: File = fileList[0];
+
+       //    let formData: FormData = new FormData();
+       //    formData.append('degree_attachment', file, file.name);
+       //this.dataService.postCommentAdd(formData).subscribe(res => {
+       //    console.log("-------- Test Sensor Adding new result ----- ", res);
+       //    if (res.IsSuccess) {
+       //        this.router.navigate(["/testrequest/details/", this.id]);
+       //    }
+       //});
+       this.dataService.makeFileRequest('http://localhost:9998/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
+           console.log('sent');
+       });
+
+       //  let headers = new Headers();
+       //  headers.append('Accept', 'application/json');
+       //  let options = new RequestOptions({ headers: headers });
+       //this.http.post('http://url', formData, options)
+       //    .map(res => res.json())
+       //    .catch(error => Observable.throw(error))
+       //    .subscribe(
+       //    data => console.log('success'),
+       //    error => console.log(error)
+       //    )
+
+   }
    onBeforeUpload(event) {
        for (let file of event.files) {
            // this.fileInfo.name = file.name;

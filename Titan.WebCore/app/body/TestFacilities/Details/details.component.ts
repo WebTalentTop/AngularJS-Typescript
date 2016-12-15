@@ -193,10 +193,10 @@ export class DetailsComponent implements AfterViewInit {
         this.getUserRoles();
         this.getTestFacilities();
         this.getTestModes();
-    //    this.getTestTypes();
+       this.getTestTypes();
         this.getBuildLevels();
         this.getTestStatus();
-      //  this.getProjectCodes();
+        this.getProjectCodes();
         this.getTestRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
