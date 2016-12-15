@@ -84,6 +84,21 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
+
+    postTestRequestAdd(filterBody): Observable<any> {
+        //let   multipartheaders: Headers = new Headers({
+        //       //  'Content-Type': 'application/json',
+        //        'Content-Type': 'multipart/form-data',
+        //       // 'Access-Control-Allow-Origin': '*'
+        //   });
+        //  this.headers.append("content-Type", "multipart/form-data");
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postTestRequestCreatedUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
      makeFileRequest(url: string, params: string[], files: File[]): Observable<any> {
         return Observable.create(observer => {
             let formData: FormData = new FormData(),

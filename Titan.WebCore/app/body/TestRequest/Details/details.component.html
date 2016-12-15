@@ -11,15 +11,15 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form role="form">
+                                        
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <form role="form">
+                                                    <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
                                                         <div class="row">
                                                             <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label">Name</label>
-                                                                <input type="text"
-                                                                       placeholder="Name"
+                                                                <label class="control-label">Test Number</label>
+                                                                <input type="text" [(ngModel)]="number" name="number"
+                                                                       placeholder="Test Number"
                                                                        class="form-control">
                                                             </div>
                                                             <div class="ui-grid-col-1">
@@ -69,6 +69,13 @@
                                                             </div>
                                                             <div class="ui-grid-col-2">
                                                                 <p-dropdown [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Verification Method :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testVerificationMethods" (onChange)="onTestVerificationMethodChange($event)" name="testVerificationMethods" [style]="{'width':'auto'}">
                                                                 </p-dropdown>
                                                             </div>
                                                             <div class="ui-grid-col-1">
@@ -358,7 +365,7 @@
                                                                     Start Date
                                                                 </label>
                                                                 <div class="input-group">                                                                  
-                                                                    <p-calendar [(ngModel)]="plannedStartTime" name="plannedStartTime" showTime="true" [showIcon]="true"></p-calendar>
+                                                                    <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" showTime="true" [showIcon]="true"></p-calendar>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-sm-6 col-md-4">
@@ -367,7 +374,7 @@
                                                                     End Date
                                                                 </label>
                                                                 <div class="input-group">
-                                                                    <p-calendar [(ngModel)]="plannedEndTime" name="plannedEndTime" showTime="true" [showIcon]="true"></p-calendar>
+                                                                    <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" showTime="true" [showIcon]="true"></p-calendar>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-sm-6 col-md-4">
@@ -441,11 +448,10 @@
                                             </div>
 
                                             <div class="form-group col-sm-6 col-md-4">
-                                                <a href="#" class="btn btn-success">
-                                                    Create
-                                                </a>
+                                                <button id="create" pButton type="submit" label="Create" (click)="onTestRequestSubmit()" class="btn btn-success">  </button>
+                                               
                                             </div>
-                                        </form>
+                                       
                                     </div>
                                 </div>
                             </div>

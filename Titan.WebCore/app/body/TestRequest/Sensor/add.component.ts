@@ -132,7 +132,7 @@ export class AddComponent {
        //        this.router.navigate(["/testrequest/details/", this.id]);
        //    }
        //});
-       this.dataService.makeFileRequest('http://localhost:9998/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
+       this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
            console.log('sent');
        });
 

@@ -6,4 +6,5 @@ export class TestVerificationMethodApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'testVerificationMethod/post';
     public static postUpdateUrl: string = titanApiUrl + 'testVerificationMethod/put';
     public static getByIdUrl: string = titanApiUrl + 'testVerificationMethod/get';
+    public static getAllUrl: string = titanApiUrl + 'testVerificationMethod/GetAllVerificationMethods';
 }

@@ -40,7 +40,16 @@ export class TestVerificationMethodService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getTestVerificationMethods(): Observable<any> {
+        return this.http.get(`${TestVerificationMethodApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestVerificationMethodApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })

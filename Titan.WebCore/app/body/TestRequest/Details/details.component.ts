@@ -1,5 +1,6 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
@@ -31,18 +32,23 @@ export class DetailsComponent implements AfterViewInit {
     cols = [];
     gridFilter = {};
     buildLevels: any;
+    plannedStartDate: Date;
+    plannedEndDate: any;
     projectCodes: any;
     testTypes: any;
     testTemplates: any;
     testAllModes: any;
     testStatus: any;
     testFacilities: any;
+    testVerificationMethods: any;
     testRoles: any;
     selectedTestTypes: any;
     selectedTestModes: any;
     selectedBuildLevels: any;
+    selectedTestVerificationMethods: any;
     selectedProjectCodes: any;
     selectedTestRoles: any;
+    number: any;
     selectedTestFacilities: any;
     selectedTestStatuses: any;
     selectedTestTemplates: any;
@@ -93,6 +99,7 @@ export class DetailsComponent implements AfterViewInit {
         private testtemplateservice: TestTemplateService,
         private testrequestsensorserice: TestRequestSensorService,
         private router: Router,
+        private testverificationmethodservice: TestVerificationMethodService,
         private projectservice: ProjectService,
         private testmodeservice: TestModeService,
         private teststatusservice: TestStatusService,
@@ -114,6 +121,7 @@ export class DetailsComponent implements AfterViewInit {
         this.getTestStages();
         this.getTestFacilities();
         this.getTestModes();
+        this.getTestVerificationMethods();
         this.getTestTypes();
         this.getBuildLevels();
         this.getTestStatus();
@@ -159,6 +167,12 @@ export class DetailsComponent implements AfterViewInit {
     onTestStageChange(event) {
         console.log('------event------------', event)
         this.selectedTestStageId = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestVerificationMethodChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestVerificationMethods = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -258,10 +272,10 @@ export class DetailsComponent implements AfterViewInit {
             this.testFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Role",
-                //    value: null
-                //});
+                resultMap.push({
+                    label: "Select Test Facility",
+                    value: null
+                });
                 for (let template of response) {
                     var temp = {
                         label: template.name,
@@ -314,6 +328,28 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.testStatus = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getTestVerificationMethods() {
+        //    userRoles
+        this.testverificationmethodservice.getTestVerificationMethods().subscribe(response => {
+            this.testVerificationMethods = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Verification Method",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testVerificationMethods = resultMap;
             }
             console.log(response);
         });
@@ -475,6 +511,37 @@ export class DetailsComponent implements AfterViewInit {
 
             console.log(response);
         });
+    }
+
+    onTestRequestSubmit(formRef)
+    {
+        let formTestRequestData: any = {
+      //   Id : ' ' ,
+         TestNumber : this.number ,
+        // TenantId: ' ',
+         TestTemplateId: this.selectedTestTemplates,
+         TestFacilityId: this.selectedTestFacilities,
+         ProjectId: this.selectedProjectCodes,
+         BuildLevelId: this.selectedBuildLevels,
+         VerificationMethodId: this.selectedTestVerificationMethods,
+        PlannedStartDate : this.plannedStartDate ,
+        PlannedEndDate: this.plannedEndDate,
+        TestStatusId: this.selectedTestStatuses
+        // UserCreatedById : ' ' ,
+        //Createdon : ' ' ,
+        // UserModifiedById : ' ' ,
+        //Modifiedon : ' ' ,
+
+        };
+
+        this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+
+            // console.log(res);
+          //  this.TrackingList = res.$values;
+
+
+        });
+
     }
     onSubmit(formRef) {
         console.log(formRef);

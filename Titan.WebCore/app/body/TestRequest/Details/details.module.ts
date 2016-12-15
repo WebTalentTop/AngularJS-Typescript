@@ -7,6 +7,7 @@ import { TestFacilityService } from '../../../shared/services/testfacility.servi
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/testTemplate.service';
+import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/project.service';
@@ -22,7 +23,7 @@ import detailRoutes from "./details.routes";
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, detailRoutes],
-    providers: [TimeEntryService, EquipmentTypeService, TestRequestSensorService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
+    providers: [TimeEntryService, EquipmentTypeService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService, TestFacilityService, TestTemplateService],
     declarations: [DetailsComponent]
 })
