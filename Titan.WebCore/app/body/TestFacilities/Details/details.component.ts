@@ -193,10 +193,10 @@ export class DetailsComponent implements AfterViewInit {
         this.getUserRoles();
         this.getTestFacilities();
         this.getTestModes();
-        this.getTestTypes();
+    //    this.getTestTypes();
         this.getBuildLevels();
         this.getTestStatus();
-        this.getProjectCodes();
+      //  this.getProjectCodes();
         this.getTestRoles();
         this.dataService.getById(this.id)
             .subscribe(res => {
@@ -540,8 +540,11 @@ export class DetailsComponent implements AfterViewInit {
         console.log(formData);
         this.dataService.postUpdate(formData).subscribe(res => {
 
-            if (!res.errorMessage) {
-                this.router.navigate(["/testfacilities/details/", res.result.id]);
+            if (res.isSuccess) {
+                this.msgs = [];
+                this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+
+               // this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
 
         });
