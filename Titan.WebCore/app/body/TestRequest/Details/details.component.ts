@@ -114,10 +114,10 @@ export class DetailsComponent implements AfterViewInit {
         this.getTestStages();
         this.getTestFacilities();
         this.getTestModes();
-        // this.getTestTypes();
+        this.getTestTypes();
         this.getBuildLevels();
         this.getTestStatus();
-        //  this.getProjectCodes();
+        this.getProjectCodes();
         this.getTestTemplates();
         this.getTestRoles();
         this.getHourEntryByEntityIdentifierId();
