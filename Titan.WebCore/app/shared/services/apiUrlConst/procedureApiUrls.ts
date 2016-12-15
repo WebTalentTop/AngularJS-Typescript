@@ -12,4 +12,5 @@ export class ProcedureApiUrl {
     public static postDeleteProcedureRequirementUrl: string = titanApiUrl + 'procedure/DeleteProcedureRequirement?procedureId=';
     public static postDeleteProcedureStepUrl: string = titanApiUrl + 'procedure/DeleteProcedureStep?procedureId=';
     public static getByIdUrl: string = titanApiUrl + 'procedure';
+    public static putProcedureStepDisplayOrderUrl: string = titanApiUrl + 'procedure/updateProcedureStepDisplayOrder?procedureId=';
 }

@@ -139,7 +139,7 @@
                     <header>
                         Selected Steps
                     </header>
-                    <template let-step>
+                    <template let-step let-i=index>
                         <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-10">
@@ -163,8 +163,10 @@
                                     </div>
                                 </div>
                                 <div class="ui-grid-col-2" style="text-align:center">
-                                    <button type="button" pButton (click)="onDelete(step, 2)" icon="fa fa-trash"></button>
-                                    <button type="button" pButton (click)="onEditStep(step)" icon="fa fa-pencil-square-o"></button>
+                                    <button type="button" pButton (click)="onDelete(step, 2)" icon="fa-trash" title="Delete"></button>
+                                    <button type="button" pButton (click)="onEditStep(step)" icon="fa-pencil-square-o" title="Edit"></button>
+                                    <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
+                                    <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
                                 </div>
                             </div>                            
                         </div>

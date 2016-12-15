@@ -80,9 +80,6 @@ export class DetailsComponent {
         console.log(newStepId);
         var selectedStepIds = new Array();
         selectedStepIds.push(newStepId);
-        var inputDto = {
-            stepList: selectedStepIds
-        }
         this.procedureService.postAddSteps(selectedStepIds, this.procedure.id).subscribe(filteredList => {
             this.selectedSteps = filteredList.$values;
             this.displayAddStep = false;
@@ -108,6 +105,24 @@ export class DetailsComponent {
     onEditStep(step) {
         this.editStepId = step.id;
         this.displayEditStep = true;
+    }
+
+    onMoveStepUp(step) {
+        var oldIndex = this.selectedSteps.indexOf(step);
+        this.selectedSteps.splice(oldIndex - 1, 0, this.selectedSteps.splice(oldIndex, 1)[0]);
+        this.updateProcedureStepDisplayOrder();
+    }
+
+    onMoveStepDown(step) {
+        var oldIndex = this.selectedSteps.indexOf(step);
+        this.selectedSteps.splice(oldIndex + 1, 0, this.selectedSteps.splice(oldIndex, 1)[0])
+        this.updateProcedureStepDisplayOrder();
+    }
+
+    updateProcedureStepDisplayOrder() {
+        this.procedureService.putProcedureStepDisplayOrder(this.selectedSteps, this.procedure.id).subscribe(filteredList => {
+            this.selectedSteps = filteredList.$values;
+        });
     }
 
     onDelete(obj, type) {
@@ -189,10 +204,11 @@ export class DetailsComponent {
                     label: "Select Test Type",
                     value: null
                 });
-                for (let template of response.$values) {
+                //resultMap.concat(response.result);
+                for (let template of response.result) {
                     var temp = {
-                        label: template.name,
-                        value: template.id
+                        label: template.label,
+                        value: template.value
                     }
                     resultMap.push(temp);
                 }
@@ -202,31 +218,47 @@ export class DetailsComponent {
         });
     }
 
+    isUpButtonVisible(step)
+    {
+        if (this.selectedSteps != undefined && this.selectedSteps.length > 1 && step.id != this.selectedSteps[0].id)
+            return true;
+        return false;
+    }
+
+    isDownButtonVisible(step) {
+        if (this.selectedSteps != undefined && this.selectedSteps.length > 1 && step.id != this.selectedSteps[this.selectedSteps.length - 1].id)
+            return true;
+        return false;
+    }
+
     onTestTypeChange() {
         this.testModes = new Array();
         //this.testModes
-        this.testmodeService.getAllByTestTypeId(this.procedure.testTypeId).subscribe(response => {
-            if (response != null && response.$values.length > 0) {
-                var resultMap = new Array();
-                resultMap.push({
-                    label: "Select Test Mode",
-                    value: null
-                });
-                for (let template of response.$values) {
-                    var temp = {
-                        label: template.name,
-                        value: template.id
+        this.testtypeService.getById(this.procedure.testTypeId).subscribe(response => {
+            if (response != null) {
+                if (response != null && response.result.selectedTestModesList != null && response.result.selectedTestModesList.length > 0) {
+                    var resultMap = new Array();
+                    resultMap.push({
+                        label: "Select Test Mode",
+                        value: null
+                    });
+                    for (let template of response.result.selectedTestModesList) {
+                        var temp = {
+                            label: template.label,
+                            value: template.value
+                        }
+                        resultMap.push(temp);
                     }
-                    resultMap.push(temp);
+                    //resultMap.concat(response.result.selectedTestModesList);
+                    this.testModes = resultMap;
                 }
-                this.testModes = resultMap;
-            }
-            else {
-                var testMode = [{
-                    label: "No Modes available",
-                    value: null
-                }];
-                this.testModes = testMode;
+                else {
+                    var testMode = [{
+                        label: "No Modes available",
+                        value: null
+                    }];
+                    this.testModes = testMode;
+                }
             }
             console.log(response);
         });

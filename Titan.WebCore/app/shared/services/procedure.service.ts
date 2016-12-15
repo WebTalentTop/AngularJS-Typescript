@@ -64,6 +64,11 @@ export class ProcedureService extends BaseService {
             .map(this.getJson);
     }
 
+    putProcedureStepDisplayOrder(filterBody, procedureId): Observable<any> {
+        return this.http.put(`${ProcedureApiUrl.putProcedureStepDisplayOrderUrl}` + procedureId, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
+
     getProcedureRequirements(procedureId): Observable<any> {
         return this.http.get(`${ProcedureApiUrl.getProcedureRequirementUrl}` + procedureId, { headers: this.headers })
             .map(this.getJson);
