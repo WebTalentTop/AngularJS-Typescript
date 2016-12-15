@@ -130,7 +130,8 @@ export class DetailsComponent implements AfterViewInit {
                 center: 'title',
                 right: 'month,basicWeek,basicDay,listMonth'
             },
-            editable: true
+            editable: true,
+            eventSources:[]
             //events:{}
         };
         scheduleConfig.eventSources = [function (start, end, timezone, callback) {

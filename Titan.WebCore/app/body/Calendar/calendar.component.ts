@@ -39,7 +39,7 @@ export class CalendarComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-     // private testfacilityservice: TestFacilityService,
+        private testfacilityservice: TestFacilityService,
 
         private buildlevelservice: BuildLevelService,
         private teststatusservice: TestStatusService,
@@ -47,6 +47,7 @@ export class CalendarComponent {
         private projectservice: ProjectService,
         private testmodeservice: TestModeService,
         private testtypeservice: TestTypeService
+
     ) { }
     initSchedule() {
         var scheduleConfig = {
@@ -56,7 +57,8 @@ export class CalendarComponent {
                 center: 'title',
                 right: 'month,basicWeek,basicDay,listMonth'
             },
-            editable: true
+            editable: true,
+            eventSources:[]
             //events:{}
         };
       scheduleConfig.eventSources = [function (start, end, timezone, callback) {
