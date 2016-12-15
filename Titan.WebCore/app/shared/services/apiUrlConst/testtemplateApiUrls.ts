@@ -8,5 +8,6 @@ export class TestTemplateApiUrl {
     public static postAddTestTemplateRequirementUrl: string = titanApiUrl + 'testtemplate/postTestTemplateRequirement?testTemplateId=';
     public static getTestTemplateRequirementUrl: string = titanApiUrl + 'testtemplate/getTestTemplateRequirement?testTemplateId=';
     public static postDeleteTestTemplateRequirementUrl: string = titanApiUrl + 'testtemplate/DeleteTestTemplateRequirement?testTemplateId=';
-   public static getByIdUrl: string = titanApiUrl + 'testTemplate';
+    public static getByIdUrl: string = titanApiUrl + 'testTemplate';
+    public static getAllUrl: string = titanApiUrl + 'testTemplate/GetAllTestTemplates';
 }

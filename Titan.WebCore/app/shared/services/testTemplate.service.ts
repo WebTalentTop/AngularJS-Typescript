@@ -21,6 +21,17 @@ export class TestTemplateService extends BaseService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getTestTemplates(): Observable<any> {
+        return this.http.get(`${TestTemplateApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestTemplateApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })

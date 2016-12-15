@@ -22,7 +22,63 @@
                                                                        placeholder="Name"
                                                                        class="form-control">
                                                             </div>
-                                                            <div class="form-group col-sm-6 col-md-4">
+                                                            <div class="ui-grid-col-1">
+                                                                Project Code :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Build Levels :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Mode :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Type :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Status :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Roles:
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Facility :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <div class="ui-grid-col-1">
+                                                                Test Templates :
+                                                            </div>
+                                                            <div class="ui-grid-col-2">
+                                                                <p-dropdown [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testtemplates" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <!--<div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label">
                                                                     Test
                                                                     Type
@@ -285,7 +341,7 @@
                                                                         T7NZ036
                                                                     </option>
                                                                 </select>
-                                                            </div>
+                                                            </div>-->
                                                             <!-- <div class="form-group col-sm-6 col-md-4">
                                                             <label class="control-label">Part #</label>
                                                             <select name="" id="" class="form-control">
@@ -298,17 +354,20 @@
 
                                                             <div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label">
-                                                                    Request
+                                                                    Planned
                                                                     Start Date
                                                                 </label>
+                                                                <div class="input-group">                                                                  
+                                                                    <p-calendar [(ngModel)]="plannedStartTime" name="plannedStartTime" showTime="true" [showIcon]="true"></p-calendar>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">
+                                                                    Planned
+                                                                    End Date
+                                                                </label>
                                                                 <div class="input-group">
-                                                                    <input type="text"
-                                                                           class="form-control"
-                                                                           placeholder="mm/dd/yyyy"
-                                                                           id="TestStartDate">
-                                                                    <span class="input-group-addon">
-                                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                                    </span>
+                                                                    <p-calendar [(ngModel)]="plannedEndTime" name="plannedEndTime" showTime="true" [showIcon]="true"></p-calendar>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-sm-6 col-md-4">
@@ -337,7 +396,7 @@
 
 
 
-                                                            <div class="form-group col-sm-6 col-md-4">
+                                                            <!--<div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label">Frame #</label>
                                                                 <input type="text" placeholder="Frame #"
                                                                        class="form-control">
@@ -375,7 +434,7 @@
                                                                     <input type="text" class="form-control" placeholder="mm/dd/yyyy">
                                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                                 </div>
-                                                            </div>
+                                                            </div>-->
                                                         </div>
                                                     </form>
                                                 </div>

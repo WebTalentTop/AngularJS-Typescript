@@ -1,7 +1,15 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { TestFacilityService } from '../../../shared/services/testfacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { TestTemplateService } from '../../../shared/services/testTemplate.service';
+import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestRoleService } from '../../../shared/services/testRole.service';
+import { ProjectService } from '../../../shared/services/project.service';
+import { TestModeService } from '../../../shared/services/testMode.service';
+import { TestTypeService } from '../../../shared/services/testType.service';
+import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +30,22 @@ export class DetailsComponent implements AfterViewInit {
     confInfo: any = {};
     cols = [];
     gridFilter = {};
+    buildLevels: any;
+    projectCodes: any;
+    testTypes: any;
+    testTemplates: any;
+    testAllModes: any;
+    testStatus: any;
+    testFacilities: any;
+    testRoles: any;
+    selectedTestTypes: any;
+    selectedTestModes: any;
+    selectedBuildLevels: any;
+    selectedProjectCodes: any;
+    selectedTestRoles: any;
+    selectedTestFacilities: any;
+    selectedTestStatuses: any;
+    selectedTestTemplates: any;
     sensorRequests: any;
     idField: string;
     linkFieldId: string;
@@ -31,7 +55,8 @@ export class DetailsComponent implements AfterViewInit {
     hourEntries: any;
     downTimeReasons: any;
     estimateDuration: any;
-    formConfiguration:any;
+    formConfiguration: any;
+
     formObject:any;
     formEquipmentObject: any;
     TimeEntryTypeId: any;
@@ -63,9 +88,17 @@ export class DetailsComponent implements AfterViewInit {
     constructor(
         private route:ActivatedRoute,
         private dataService: TimeEntryService,
+        private testfacilityservice: TestFacilityService,
         private service: EquipmentTypeService,
-        private testrequestsensorserice: TestRequestSensorService,
-        private router: Router
+        private testtemplateservice: TestTemplateService,
+        private testrequestsensorserice: TestRequestSensorService,      
+        private router: Router,
+        private projectservice: ProjectService,
+        private testmodeservice: TestModeService,
+        private teststatusservice: TestStatusService,
+        private testroleservice: TestRoleService,
+        private testtypeservice: TestTypeService,
+        private buildlevelservice: BuildLevelService
 
     ){
         this.route.params.subscribe(params => this.id = params['id']);
@@ -80,6 +113,14 @@ export class DetailsComponent implements AfterViewInit {
    }
    ngOnInit() {
        this.getTestStages();
+       this.getTestFacilities();
+       this.getTestModes();
+      // this.getTestTypes();
+       this.getBuildLevels();
+       this.getTestStatus();
+     //  this.getProjectCodes();
+       this.getTestTemplates();
+       this.getTestRoles();
        this.getHourEntryByEntityIdentifierId();
        this.getDownTimeReasons();
        let resData: any;
@@ -123,14 +164,68 @@ export class DetailsComponent implements AfterViewInit {
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
+   onTestFacilityChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestFacilities = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
 
+   }
    onDownTimeReasonChange(event) {
        console.log('------event------------', event)
        this.selectedDownTimeReasonId = (event.value);
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
+   onTestRoleChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestRoles = (event.value);
 
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onTestTemplateChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestTemplates = (event.value);
+
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onTestStatusChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestStatuses = (event.value);
+       //this.dataService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
+       //    .subscribe(TestFacilityEvents => {
+       //        console.log('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
+       //        //this.TestFacilityEvents = TestFacilityEvents;
+       //    });
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onBuildLevelChange(event) {
+       console.log('------event------------', event)
+       this.selectedBuildLevels = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onProjectCodeChange(event) {
+       console.log('------event------------', event)
+       this.selectedProjectCodes = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+
+   onTestModeChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestModes = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onTestTypeChange(event) {
+       console.log('------event------------', event)
+       this.selectedTestTypes = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
    onHourEntryChange(event) {
        console.log('------event------------', event)
        this.selectedTimeEntryTypeId = (event.value);
@@ -159,7 +254,185 @@ export class DetailsComponent implements AfterViewInit {
             console.log(response);
         });
    }
+   getTestFacilities() {
+       //    userRoles
+       this.testfacilityservice.getTestFacilities().subscribe(response => {
+           this.testFacilities = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               //resultMap.push({
+               //    label: "Select Test Role",
+               //    value: null
+               //});
+               for (let template of response) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.testFacilities = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getTestRoles() {
+       //    userRoles
+       this.testroleservice.getTestRoles().subscribe(response => {
+           this.testRoles = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Test Role",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.testRoles = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getTestStatus() {
+       //    userRoles
+       this.teststatusservice.getTestStatus().subscribe(response => {
+           this.testStatus = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Test Status",
+                   value: null
+               });
+               for (let template of response) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.testStatus = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getTestModes() {
+       //    userRoles
+       this.testmodeservice.getAllTestModes().subscribe(response => {
+           this.testAllModes = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Test Mode",
+                   value: null
+               });
+               for (let template of response.result) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.testAllModes = resultMap;
+           }
+           console.log(response);
+       });
+   }
 
+   getTestTypes() {
+       //    userRoles
+       this.testtypeservice.getAllTestTypes().subscribe(response => {
+           this.testTypes = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Test Type",
+                   value: null
+               });
+               for (let template of response.result) {
+                   var temp = {
+                       label: template.label,
+                       value: template.value
+                   }
+                   resultMap.push(temp);
+               }
+               this.testTypes = resultMap;
+           }
+           console.log(response);
+       });
+   }
+
+  
+   getProjectCodes() {
+       //    userRoles
+       this.projectservice.getProjectCodes().subscribe(response => {
+           this.projectCodes = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Project Code",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.code,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.projectCodes = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getTestTemplates() {
+       //    userRoles
+       this.testtemplateservice.getTestTemplates().subscribe(response => {
+           this.testTemplates = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Test Template",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.testTemplates = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getBuildLevels() {
+       //    userRoles
+       this.buildlevelservice.getBuildLevels().subscribe(response => {
+           this.buildLevels = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "Select Build Level",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.buildLevels = resultMap;
+           }
+           console.log(response);
+       });
+   }
    getDownTimeReasons() {
        //    userRoles
        this.dataService.GetAllDownTimeReasons().subscribe(response => {
@@ -212,8 +485,8 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'error', summary: 'Please select Test Stage', detail: '' });
             return null;
         }
-        if (this.selectedDownTimeReasonId == null || this.selectedDownTimeReasonId == undefined) {
-            this.msgs = [];
+       if (this.selectedDownTimeReasonId == null || this.selectedDownTimeReasonId == undefined) {
+           this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select DownTimeReason', detail: '' });
             return null;
         }
@@ -268,8 +541,12 @@ export class DetailsComponent implements AfterViewInit {
           testStageId: this.selectedTestStageId,
           isDownTime: false,
           estimateDuration: this.estimateDuration,
+
           downTimeReasonId: this.selectedDownTimeReasonId,
           description:'',
+        
+              
+
           tenantId: '',
           userCreatedById: '' ,
           id : ' '
