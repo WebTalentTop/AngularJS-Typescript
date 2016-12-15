@@ -74,15 +74,11 @@ gulp.task("copy-systemjs", function () {
 gulp.task('sass', function () {
     gulp.src(root_path.primeResources + '**/*-titan.scss')
         .pipe(sass())
-        .pipe(gulp.dest(function (f) {
-            console.log("--- F.base ----", f.base);
-            return f.base;
-        }))
         .pipe(gulp.dest('wwwroot/resources'));
 });
 
 gulp.task("primeResources", function () {
-    gulp.src("./resources/**/*")
+    gulp.src(["./resources/**"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
         .pipe(gulp.dest("./wwwroot/resources/"));
 });
 gulp.task("NMprimeResources", function () {
