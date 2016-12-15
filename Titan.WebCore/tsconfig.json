@@ -1,5 +1,6 @@
 {
-  "compileOnSave": true,
+  "compileOnSave": false,
+  "buildOnSave": false,
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
@@ -21,5 +22,9 @@
     "wwwroot/libs",
     "wwwroot/lib-npm",
     "typings"
+  ],
+  "filesGlog": [
+    "app/**/*.ts",
+    "typings/*.d.ts"
   ]
 }
