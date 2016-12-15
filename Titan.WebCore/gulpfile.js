@@ -8,6 +8,8 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 var gulp = require("gulp");
 var sass = require('gulp-sass');
 var del = require("del");
+var sourcemaps = require("gulp-sourcemaps");
+var uglify = require("gulp-uglify");
 var tsc = require("gulp-typescript");
 var tsProject = tsc.createProject("tsconfig.json");
 
@@ -107,13 +109,15 @@ gulp.task('bootstrap', function() {
 })
 
 gulp.task('tsClean', function(){
-    del['app/**/*.js', 'app/**/*.js.map']
+    del['./app/**/*', '!app/**/*.ts', '!./app/**/*.js.map']
 });
 
 gulp.task("tsCompile",['tsClean'], function() {
     return tsProject.src()
+        .pipe(sourcemaps.init())
         .pipe(tsProject())
-        .js.pipe(gulp.dest(root_path.webroot + "app/"));
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(root_path.webroot + "app/"));
 });
 gulp.task("icons", function() {
     gulp.src('./icons' + '/**/*.*')
