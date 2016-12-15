@@ -50,6 +50,8 @@ const routes = [
     { path: 'testRole', loadChildren: 'app/body/Admin/Vehicle/TestRole/testRole.module' },
     { path: 'units', loadChildren: 'app/body/Admin/Vehicle/Units/units.module' },
     { path: 'operatingHours', loadChildren: 'app/body/Admin/Vehicle/OperatingHours/operatingHours.module' },
+    { path: 'holiday', loadChildren: 'app/body/Admin/Vehicle/Holiday/holiday.module' },
+     { path: 'engineCode', loadChildren: 'app/body/Admin/Vehicle/EngineCode/engineCode.module' },
   ];
 
 export default RouterModule.forChild(routes);

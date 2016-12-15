@@ -58,7 +58,12 @@ export class TestTypeService extends BaseService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getAllTestTypes(): Observable<any> {
+        return this.http.get(`${TestTypeApiUrl.getAllTestTypes}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getAll(): Observable<any> {
         return this.http.get(`${TestTypeApiUrl.getAllUrl}`, { headers: this.headers })
             .map(this.getJson)

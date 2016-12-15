@@ -12,7 +12,7 @@ export class AppComponent {
 
     layoutMode: string = 'static';
 
-    darkMenu: boolean = false;
+    darkMenu: boolean = true;
 
     profileMode: string = 'inline';
 

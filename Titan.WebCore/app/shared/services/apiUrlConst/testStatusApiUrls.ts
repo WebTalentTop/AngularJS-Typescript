@@ -6,4 +6,5 @@ export class TestStatusApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'testStatus/post';
     public static postUpdateUrl: string = titanApiUrl + 'testStatus/put';
     public static getByIdUrl: string = titanApiUrl + 'testStatus/get';
+    public static getAllUrl: string = titanApiUrl + 'testStatus';
 }

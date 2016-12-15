@@ -7,4 +7,5 @@ export class TestTypeApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'testType';
     public static getByIdUrl: string = titanApiUrl + 'testType/GetByIdAndLocale';
     public static getAllUrl: string = titanApiUrl + 'testType/GetByTenantId';
+    public static getAllTestTypes: string = titanApiUrl + 'testType/GetByTenantId';
 }

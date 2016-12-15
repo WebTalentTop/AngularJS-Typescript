@@ -1,0 +1,122 @@
+<h1>{{title}}</h1>
+
+<div class="card card-w-title">
+    <h1>Form Fields To Add</h1>
+    <div class="ui-g form-group">
+        <div class="ui-g-12 ui-md-8">
+            <ul style="list-style: none;">
+                <li pDraggable="inputs" (onDragStart)="dragStart($event, hero)" (onDragEnd)="dragEnd($event)"
+                    *ngFor="let hero of formFieldDataTypeList">
+                    <span>{{hero.name}}</span><br>
+                    <img [id]="hero.name" *ngIf="hero.name === 'TextBox'"
+                         src="Library/titanResources/images/form-images/small/inputText.png" title="TextBox"/>
+                    <img [id]="hero.name" *ngIf="hero.name === 'NumberBox'"
+                         src="Library/titanResources/images/form-images/small/spinner.png" title="NumberBox"/>
+                </li>
+            </ul>
+        </div>
+
+        <div class="ui-g-12 ui-md-4" style="background: #5f5f5f; color:#eeffee;" pDroppable="inputs"
+             (onDrop)="drop($event)">
+            Drop it here please!
+
+            Thanks
+        </div>
+    </div>
+</div>
+
+<div class="card card-w-title" *ngIf="selectedInputList.length > 0">
+    <h1>Form Creation</h1>
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Form Name</label><br>
+            <input pInputText name="formName" type="text" [(ngModel)]="formName"/>
+
+
+        </div>
+        <div class="ui-g-12 ui-md-3">
+            <label>Category</label><br/>
+            <p-dropdown [options]="formSchemaCategoryList" #item (onChange)="onFormSchemaCategoryChange($event, item)" [(ngModel)]="selectedFormSchemaCategory"></p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-md-3" *ngIf="entityEventsList">
+            <label>Entity Event</label><br/>
+            <p-dropdown [options]="entityEventsList" [(ngModel)]="selectedEntityEvent"></p-dropdown>
+        </div>
+    </div>
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-12 ui-md-4" id="dragme"  *ngFor="let item of selectedInputList">
+                <div draggable="true">
+                    <label>{{item.name}}</label><br>
+                    <input pInputText [disabled]="true"
+                           *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextBox'" type="text"
+                           [placeholder]="item.label"/>
+                    <p-spinner size="30"
+                               *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'NumberBox'"
+                               [(ngModel)]="item.maxLength" [disabled]="true"></p-spinner>
+                    <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItem(item)"
+                            iconPos="right"></button>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12">
+            <button type="button" (click)="saveForm()" pButton icon="fa-add" iconPos="right"
+                    label="Save form"></button>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Textbox Information" [(visible)]="displayInput" modal="modal" width="900" responsive="true">
+
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Name of this object</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Textbox placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="20"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveTextBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Name of the NumberBox</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-6">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [min]="0" [max]="400" [(ngModel)]="formInputData.maxLength"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="text" icon="fa-check" (click)="saveNumberBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Radio Information" [(visible)]="displayRadio"></p-dialog>

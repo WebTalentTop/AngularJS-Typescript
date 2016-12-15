@@ -19,6 +19,10 @@ export class BaseService {
     };
 
     constructor() {}
+
+    public Headers():Headers{
+        return this.headers;
+    }
     
     public getJson(response: Response) {
         //console.log("In Data Service response.json() call: ",response.json());

@@ -1,82 +1,334 @@
-import { CalendarService } from './../../shared/services/calendar.service';
-import { DataTable, LazyLoadEvent } from 'primeng/primeng';
-import { Component } from '@angular/core';
+import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
+import { TestFacilityService } from './../../shared/services/testfacility.service';
+import { BuildLevelService } from './../../shared/services/buildlevel.service';
+import { TestStatusService } from './../../shared/services/teststatus.service';
+import { TestRoleService } from './../../shared/services/testRole.service';
+import { ProjectService } from './../../shared/services/project.service';
+import { TestModeService } from './../../shared/services/testMode.service';
+import { TestTypeService } from './../../shared/services/testType.service';
+
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
+
+declare var $: JQueryStatic;
+declare var fullcalendardef: FullCalendar.Calendar;
 
 @Component({
     selector: 'calendar',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/calendar/calendar.component.html'
 })
 export class CalendarComponent {
-    title = "Calendar";
-    gridData = [];
-    confInfo:any = {};
-    cols = [];
-    gridFilter = {};
+    testRoles: any;
+    buildLevels: any;
+    projectCodes: any;
+    testFacilities: any;
+    testAllModes: any;
+    testTypes: any;
+    testStatus: any;
+    selectedTestRoles: any[];
+    selectedTestFacilities: any[];
+    selectedTestTypes: any[];
+    selectedTestModes: any[];
+    selectedBuildLevels: any[];
+    selectedTestStatuses: any[];
+    selectedProjectCodes: any[];
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private testfacilityservice: TestFacilityService,
 
-    constructor(private service: CalendarService) {
+        private buildlevelservice: BuildLevelService,
+        private teststatusservice: TestStatusService,
+        private testroleservice: TestRoleService,
+        private projectservice: ProjectService,
+        private testmodeservice: TestModeService,
+        private testtypeservice: TestTypeService
 
-    }
-
-    ngOnInit() {
-        let resData:any;
-        this.service.postGridData()
-            .subscribe(res => {
-                resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
-
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
-    }
-
-    loadFreshDepartments(event: LazyLoadEvent) {
-        setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
-            this.getGridFilterValues(event);
-            let js = JSON.stringify(this.gridFilter);
-
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
-            this.service.postGridDataFilter(JSON.parse(js))
-                .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
-                    let resData = res;
-                    this.gridData = res.Data;
-                    this.confInfo = res.Configuration;
-                    this.cols = res.Configuration.Columns;
-                });
-        },
-            250);
-        console.log("---------- Event ---------",event);
-
-    }
-    private getGridFilterValues(event: LazyLoadEvent) {
-        let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
-        let pageNumber = event.first === 0 ? 1 : (event.first / 5) + 1;
-        let filters = [];
-        let eFilters = event.filters;
-        if (eFilters) {
-            for (var key in eFilters) {
-                let fil = eFilters[key].value;
-                let matchMode = eFilters[key].matchMode;
-                if (fil) {
-                    filters.push({
-                        columnId: key,
-                        operator: matchMode,
-                        value: fil
-                    });
-                }
-                console.log("------- filters ----------", filters);
-            }
-        }
-        this.gridFilter = {
-            locale: "en-us",
-            defaultLocale: "en-us", pageNumber: pageNumber, pageSize: 5
+    ) { }
+    initSchedule() {
+        var scheduleConfig = {
+            theme: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay,listMonth'
+            },
+            editable: true,
+            eventSources:[]
+            //events:{}
         };
+      scheduleConfig.eventSources = [function (start, end, timezone, callback) {
+            $.ajax({
+                url: titanApiUrl + 'TestFacility/Schedule',
+                type: 'POST',
+                data: {
+                    startdate: start.utc().format(),
+                    enddate: end.utc().format(),
+
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
+                success: function (result) {
+                    var events = [];
+
+                    $.each(result.calendarEvents.$values, function (index, element) {
+                        element.start = element.start;
+                        element.end = element.end;
+                        element.title = element.title;
+                        element.url = element.url;
+                        events.push(element);
+                    });
+                    callback(events);
+                }
+            });
+        }, function (start, end, timezone, callback) {
+            $.ajax({
+                url: titanApiUrl + 'TestFacility/Schedule',
+                type: 'POST',
+                data: {
+                    startdate: start.utc().format(),
+                    enddate: end.utc().format(),
+
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
+                success: function (result) {
+                    var events = [];
+
+                    $.each(result.calendarEvents.$values, function (index, element) {
+                        element.start = element.start;
+                        element.end = element.end;
+                        element.title = element.title;
+                        element.url = element.url;
+                        events.push(element);
+                    });
+                    callback(events);
+                }
+            });
+        }];
+        //scheduleConfig.events= 
+        $('#calendar').fullCalendar(scheduleConfig);
+    }
+    ngOnInit() {
+     //   this.getTestFacilities();
+        this.getTestModes();
+        this.getTestTypes();
+        this.getBuildLevels();
+        this.getTestStatus();
+        this.getProjectCodes();
+        this.getTestRoles();
+        this.initSchedule();
+    }
+    onTestRoleChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestRoles = (event.value);
+
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onBuildLevelChange(event) {
+        console.log('------event------------', event)
+        this.selectedBuildLevels = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onProjectCodeChange(event) {
+        console.log('------event------------', event)
+        this.selectedProjectCodes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestFacilityChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestFacilities = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestModeChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestModes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestTypeChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestTypes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onTestStatusChange(event) {
+        console.log('------event------------', event)
+        this.selectedTestStatuses = (event.value);
+        //this.dataService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
+        //    .subscribe(TestFacilityEvents => {
+        //        console.log('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
+        //        //this.TestFacilityEvents = TestFacilityEvents;
+        //    });
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+  
+    getTestRoles() {
+        //    userRoles
+        this.testroleservice.getTestRoles().subscribe(response => {
+            this.testRoles = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getTestFacilities() {
+        //    userRoles
+        this.testfacilityservice.getTestFacilities().subscribe(response => {
+            this.testFacilities = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testFacilities = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getTestModes() {
+        //    userRoles
+        this.testmodeservice.getAllTestModes().subscribe(response => {
+            this.testAllModes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testAllModes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getTestTypes() {
+        //    userRoles
+        this.testtypeservice.getAllTestTypes().subscribe(response => {
+            this.testTypes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.label,
+                        value: template.value
+                    }
+                    resultMap.push(temp);
+                }
+                this.testTypes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getTestStatus() {
+        //    userRoles
+        this.teststatusservice.getTestStatus().subscribe(response => {
+            this.testStatus = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Status",
+                //    value: null
+                //});
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testStatus = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getProjectCodes() {
+        //    userRoles
+        this.projectservice.getProjectCodes().subscribe(response => {
+            this.projectCodes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Project Code",
+                //    value: null
+                //});
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.code,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.projectCodes = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    getBuildLevels() {
+        //    userRoles
+        this.buildlevelservice.getBuildLevels().subscribe(response => {
+            this.buildLevels = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Build Level",
+                //    value: null
+                //});
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.buildLevels = resultMap;
+            }
+            console.log(response);
+        });
     }
 }

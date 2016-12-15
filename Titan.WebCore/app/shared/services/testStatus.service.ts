@@ -68,6 +68,16 @@ export class TestStatusService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getTestStatus(): Observable<any> {
+        return this.http.get(`${TestStatusApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
 
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());

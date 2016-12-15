@@ -110,6 +110,17 @@ export class ProjectService extends BaseService{
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getProjectCodes(): Observable<any> {
+        return this.http.get(`${ProjectApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
 
     //private getJson(response: Response) {
     //    console.log("In Data Service response.json() call: ", response.json());

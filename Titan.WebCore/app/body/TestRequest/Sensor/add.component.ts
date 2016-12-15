@@ -8,7 +8,7 @@ import { SelectItem, ConfirmationService } from 'primeng/primeng';
 //import { UUID } from 'angular2-uuid'
 import { Router } from '@angular/router';
 declare var $: JQueryStatic;
-declare var quilldef: Quill.Quill;
+
 @Component({
     selector: 'sensor-add',
     templateUrl: 'app/body/TestRequest/Sensor/add.component.html'
@@ -34,9 +34,9 @@ export class AddComponent {
    // details:string;
     Sensors: any;
     fileData: any[] = [];
-    
+
     uploadedFiles: any[] = [];
-   
+
    // hourEntries: any;
    // downTimeReasons: any;
    // estimateDuration: any;
@@ -59,25 +59,25 @@ export class AddComponent {
    // startTime: any;
     // endTime: Date;
     fileInfo: any = {
-   //             id:'', 
-        //             isDeleted:false, 
+   //             id:'',
+        //             isDeleted:false,
          name: ''
-   //             createdOn:'', 
+   //             createdOn:'',
    //             modifiedOn:'',
    //             userCreatedById:'',
    //             userInChargedId:'',
    //             userModifiedById:''
     };
-    
+
    // msgs:Message[];
    // uploadedFiles: any[] = [];
 
     constructor(
-        private route:ActivatedRoute, 
+        private route:ActivatedRoute,
         private dataService: TestRequestSensorService,
         private equipmenttypeservice: EquipmentTypeService,
         private router: Router
-   
+
     ){
         this.route.params.subscribe(params => this.id = params['id']);
           this.entityId = this.id;
@@ -103,19 +103,19 @@ export class AddComponent {
    //    //        //this.model = res.formObject;
    //    //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
    //    //        //console.log("----- Result of formObject -----", this.model);
-   //    //    });     
+   //    //    });
    //     this.dataService.GetTrackingListByEntityId(this.id)
    //         .subscribe(res =>
    //         {
    //             this.TrackingList = res.$values;
-               
+
    //             //this.formConfiguration = res.formConfiguration;
    //             //this.formObject = res.formObject;
    //             //this.model = res.formObject;
    //             //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
    //             //console.log("----- Result of formObject -----", this.model);
-   //         });     
-       
+   //         });
+
    }
    onBeforeUpload(event) {
        for (let file of event.files) {
@@ -219,7 +219,7 @@ export class AddComponent {
    //            }
    //            this.hourEntries = resultMap;
    //        }
-          
+
    //        console.log(response);
    //    });
    //}
@@ -247,16 +247,16 @@ export class AddComponent {
    onSubmit(formRef) {
        //formRef.isDeleted = false;
        //let formData: any = {
-          
+
        //    SensorTypeId: this.selectedSensorTypeId,
 
-       //   TestRequestId : this.id,       
-         
-         
-       //  IsCompleted :'false',       
+       //   TestRequestId : this.id,
+
+
+       //  IsCompleted :'false',
        //  IsDeleted: 'false'
-        
-          
+
+
        //};
        //let formCommentData: any = {
 
@@ -265,7 +265,7 @@ export class AddComponent {
        //    TestRequestId: this.id,
 
 
-          
+
        //    IsDeleted: 'false'
 
        //};
@@ -297,8 +297,8 @@ export class AddComponent {
        //xhr.open('POST', path, false);
        //xhr.setRequestHeader("Content-Type", "multipart/form-data");
        //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
-       
-      
+
+
        //  xhr.withCredentials = true;
      //  xhr.send(null);
        //this.dataService.postAdd(formData,this.comment).subscribe(res => {
@@ -347,9 +347,9 @@ export class AddComponent {
    //    // var test = quill.setText(text);
    //     var format = quill.getFormat(0);
    //     var quilltext = quill.formatText(0, 0, format);
-       
-       
-       
+
+
+
    //     let formData: any = {
    //        timeEntryTypeId: this.selectedTimeEntryTypeId,
    //       entityTypeId : '',
@@ -362,13 +362,13 @@ export class AddComponent {
    //       isDownTime: false,
    //       estimateDuration: this.estimateDuration,
    //       downTimeReasonId: this.selectedDownTimeReasonId,
-   //       description: quill.getText(),         
+   //       description: quill.getText(),
    //       tenantId: '',
    //       userCreatedById: '' ,
    //       id : ' '
 
    //     };
-       
+
    //   //  formData.id = this.id;
    //   //  formData.name = formRef.name;
    //     //formData.address.id = this.addressid;
@@ -397,6 +397,6 @@ export class AddComponent {
    //     this.router.navigate(['testrequest/sensor/details', id]);
    // }
 
-  
+
 
 }

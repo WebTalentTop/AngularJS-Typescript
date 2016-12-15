@@ -6,11 +6,14 @@
         <p-tabView (onChange)="handleChange($event)">
 
 
-            <p-tabPanel header="Details ||" id='details'>
+            <p-tabPanel header="Details" id='details'>
                 <p-growl [value]="msgs"></p-growl>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                    <br />
-                    <p-panel>
+
+                    <!-- Begin Panel - Test Facility Name and Location -->
+
+                    <p-panel header="Test Facility Name and Location">
+
                         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                             <!-- Test Facility Id -->
                             <!--<div class="ui-grid-row">
@@ -153,49 +156,77 @@
                         <div></div>
 
                     </p-panel>
-                    <br /><br /><br />
-                    <p-panel>
-                        <div class="ui-grid-col-4"></div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <b>Test Facility Users</b>
-                            </div>
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Search by UserName#:
-                                </div>
-                                <div class="ui-grid-col-2">
-                                    <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
-                                                    field="firstName" [multiple]="true">
-                                    </p-autoComplete>
-                                    <ul>
-                                        <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
-                                    </ul>
-                                </div>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        User Role:
-                                    </div>
-                                    <div class="ui-grid-col-6">
-                                        <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
 
-                                        </p-dropdown>
-                                    </div>
-                                </div>
-                                <div class="ui-grid-col-2">
-                                    <button pButton type="button" class="btn btn-default" label="Add User" (click)="onAddUserRole()"> </button>
-                                </div>
+                    <!-- End Panel - Test Facility Name and Location -->
+
+                    <!-- Begin Dialog - Assign User Role -->
+
+                    <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade">
+
+                        <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
+
+                        <div class="ui-grid-row">
+
+                            <div class="ui-grid-col-2">
+                                Search by UserName#:
                             </div>
-                            <div class="ui-grid-col-2"></div>
+
+                            <div class="ui-grid-col-6">
+                                <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
+                                                name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
+                                                field="firstName" [multiple]="true">
+                                </p-autoComplete>
+                                <ul>
+                                    <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="ui-grid-row">
+
+                            <div class="ui-grid-col-2">
+                                User Role:
+                            </div>
+
+                            <div class="ui-grid-col-6">
+                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
+                            </div>
+
+                        </div>
+
+                        <p><button pButton type="button" class="btn btn-default" icon="ui-icon-save" label="Assign User Role" (click)="onAddUserRole()"></button></p>
+
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button type="button" pButton icon="fa-check" (click)="displayAssignUserRolesDialog=false" label="Done"></button>
+                            </div>
+                        </footer>
+
+                    </p-dialog>
+
+                    <!-- End Dialog - Assign User Role -->
+
+                    <!-- Begin Panel - Test Facility Users -->
+
+                    <p-panel header="Test Facility Users">
+
+                        <div class="ui-grid-row">
+
                             <p-dataTable [value]="TestFacilityRoles">
                                 <p-column field="name" header="Name" sortable="true"></p-column>
                                 <p-column field="role" header="Role" sortable="true"></p-column>
                             </p-dataTable>
+
                         </div>
+
+                        <p><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Assign User Roles&hellip;"></button></p>
+
                     </p-panel>
-                    <br /><br /><br />
-                    <p-panel>
+
+                    <!-- End Panel - Test Facility Users -->
+
+                    <!--<p-panel>
                         <div class="ui-grid-col-4"></div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
@@ -208,53 +239,81 @@
                                 <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
                             </p-dataTable>
                         </div>
-                    </p-panel>
+                    </p-panel>-->
                 </form>
             </p-tabPanel>
 
-            <p-tabPanel header="Equipment ||" id="equipment" headerStyleClass="equipment">
-                <div *ngIf="displayEquipmentTab">
-                    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito
-                    Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side
-                    of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
-                    local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing
-                    brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's
-                    business. With Fanucci gone, Vito's communal stature grows.
-                </div>
+
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">          
+                <p-panel>
+                    <div class="ui-grid-col-4"></div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            <b>Test Facility Equipments</b>
+                        </div>
+                        <div class="ui-grid-col-2"></div>
+                        <p-dataTable [value]="TestFacilityEquipments">
+                            <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
+                            <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
+                            <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
+                        </p-dataTable>
+                    </div>
+                </p-panel>
 
             </p-tabPanel>
 
 
-            <p-tabPanel header="Schedule ||" id="schedule" headerStyleClass="schedule">
+            <p-tabPanel header="Schedule" id="schedule" headerStyleClass="schedule">
                 <div class="card card-w-title">
-                   
+
                     <div class="row">
                         <div class="ui-grid-col-1">
                             Project Code :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Status :
+                            Test Facility :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Person Incharge: 
+                            Test Mode :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Vehicle :
+                            Test Type :
                         </div>
                         <div class="ui-grid-col-2">
-                            <p-multiSelect [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
+                             Test Status :
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
+                             Test Roles:
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+                        <div class="ui-grid-col-1">
+                             Build Levels :
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                     </div>
@@ -275,18 +334,18 @@
             </p-tabPanel>
 
 
-            <p-tabPanel header="Tests ||" id="tests">
+            <p-tabPanel header="Tests" id="tests">
                 After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
                 and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
                 Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would
                 one day be completely legitimate.
             </p-tabPanel>
 
-            <p-tabPanel header="Attachments ||" id="attachments">
+            <p-tabPanel header="Attachments" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                <p-fileUpload [name]="testfacility" url="http://titanapi-preprod.12thwonder.com/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -303,7 +362,7 @@
                                         <button type="button" pButton icon="fa-refresh"></button>
                                     </template>
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <a href="http://localhost:9998/api/TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
+                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
                                     </template>
                                 </p-column>
                                 <p-column>
@@ -323,5 +382,5 @@
 
         </p-tabView>
     </div>
-    
+
 </div>

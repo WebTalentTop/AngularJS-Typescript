@@ -6,4 +6,5 @@ export class BuildLevelApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'buildLevel/post';
     public static postUpdateUrl: string = titanApiUrl + 'buildLevel/put';
     public static getByIdUrl: string = titanApiUrl + 'buildLevel/get';
+    public static getAllUrl: string = titanApiUrl + 'buildLevel';
 }

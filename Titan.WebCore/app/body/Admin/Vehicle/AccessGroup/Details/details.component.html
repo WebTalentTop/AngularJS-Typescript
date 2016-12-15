@@ -31,24 +31,6 @@
 
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            Description * :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
-                                #accessGroupDetailsDescriptionRef="ngModel" [(ngModel)]="AccessGroupDetails.description"></textarea>
-                        </div>
-                        <div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Access Group Description
-                            </div>
-                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="accessGroupDetailsDescriptionRef.errors?.maxlength">
-                                MaxLength-250
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
                             IsActive :
                         </div>
                         <div class="ui-grid-col-6">
