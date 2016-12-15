@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 //import { routing }   from './app.routing.3';
 //import { DataTableModule } from 'primeng/primeng';
 import { DataGridModule } from 'primeng/primeng';
-//import { DataService } from './shared/services/data.services';
 import { enableProdMode } from '@angular/core';
 //import { DataTableModule } from 'primeng/primeng';
 
