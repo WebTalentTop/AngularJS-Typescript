@@ -1,6 +1,7 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -36,8 +37,8 @@ export class AddComponent {
     fileData: any[] = [];
 
     uploadedFiles: any[] = [];
-
-   // hourEntries: any;
+   // TestFacilityAttachments: ITestFacilityAttachment[];
+       // hourEntries: any;
    // downTimeReasons: any;
    // estimateDuration: any;
    // formConfiguration:any;
@@ -76,6 +77,7 @@ export class AddComponent {
         private route:ActivatedRoute,
         private dataService: TestRequestSensorService,
         private equipmenttypeservice: EquipmentTypeService,
+    
         private router: Router
 
     ){
@@ -92,6 +94,7 @@ export class AddComponent {
    }
    ngOnInit() {
        this.getSensorList();
+     
    //    this.getHourEntryByEntityIdentifierId();
    //    this.getDownTimeReasons();
    //    //this.dataService.GetProjectId(this.id)
@@ -132,9 +135,16 @@ export class AddComponent {
        //        this.router.navigate(["/testrequest/details/", this.id]);
        //    }
        //});
-       this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
-           console.log('sent');
-       });
+       for (let file of event.files) {
+           // this.fileInfo.name = file.name;
+
+           //this.fileData.push(this.fileInfo);
+           this.uploadedFiles.push(file);
+           // this.fileInfo.name = '';
+       }
+       //this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
+       //    console.log('sent');
+       //});
 
        //  let headers = new Headers();
        //  headers.append('Accept', 'application/json');
@@ -277,18 +287,18 @@ export class AddComponent {
    }
    onSubmit(formRef) {
        //formRef.isDeleted = false;
-       //let formData: any = {
+       let formData: any = {
 
-       //    SensorTypeId: this.selectedSensorTypeId,
+           SensorTypeId: this.selectedSensorTypeId,
 
-       //   TestRequestId : this.id,
-
-
-       //  IsCompleted :'false',
-       //  IsDeleted: 'false'
+          TestRequestId : this.id,
 
 
-       //};
+         IsCompleted :'false',
+         IsDeleted: 'false'
+
+
+       };
        //let formCommentData: any = {
 
        //    Comment: this.comment,
@@ -332,20 +342,25 @@ export class AddComponent {
 
        //  xhr.withCredentials = true;
      //  xhr.send(null);
-       //this.dataService.postAdd(formData,this.comment).subscribe(res => {
+       this.dataService.postAdd(formData,this.comment).subscribe(res => {
+           console.log("-------- Test Sensor Adding new result ----- ", res);
+           if (res.isSuccess) {
+               var testRequestSensorId = res.result.id;
+           //    console.log("", res.object.id); 
+               this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(() => {
+                   console.log('sent');
+                   this.router.navigate(["/testrequest/details/", this.id]);
+               });             
+           }
+       });
+       //var fd = new FormData();
+       //fd.append('files', this.uploadedFiles[0]);
+       //this.dataService.postCommentAdd(fd).subscribe(res => {
        //    console.log("-------- Test Sensor Adding new result ----- ", res);
        //    if (res.IsSuccess) {
        //        this.router.navigate(["/testrequest/details/", this.id]);
        //    }
        //});
-       var fd = new FormData();
-       fd.append('files', this.uploadedFiles[0]);
-       this.dataService.postCommentAdd(fd).subscribe(res => {
-           console.log("-------- Test Sensor Adding new result ----- ", res);
-           if (res.IsSuccess) {
-               this.router.navigate(["/testrequest/details/", this.id]);
-           }
-       });
 
        //this.dataService.postAdd(formData).subscribe(res => {
        //    console.log("-------- Test Sensor Adding new result ----- ", res);
@@ -410,6 +425,7 @@ export class AddComponent {
    //     //formData.address.postalCode = formRef.postalCode;
    //     formData.locale = "en-us";
    //     console.log(formData);
+    
    //     this.dataService.postAdd(formData).subscribe(res => {
 
    //        // console.log(res);

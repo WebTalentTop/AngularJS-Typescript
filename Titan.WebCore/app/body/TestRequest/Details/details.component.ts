@@ -32,7 +32,7 @@ export class DetailsComponent implements AfterViewInit {
     cols = [];
     gridFilter = {};
     buildLevels: any;
-    plannedStartDate: Date;
+    plannedStartDate: any;
     plannedEndDate: any;
     projectCodes: any;
     testTypes: any;
@@ -408,7 +408,7 @@ export class DetailsComponent implements AfterViewInit {
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
-                    label: "Select Project Code",
+                    label: "--------Select-------",
                     value: null
                 });
                 for (let template of response.$values) {
@@ -533,6 +533,47 @@ export class DetailsComponent implements AfterViewInit {
         //Modifiedon : ' ' ,
 
         };
+        if (this.number == null || this.number == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
+            return null;
+        }
+        if (this.selectedProjectCodes == null || this.selectedProjectCodes == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Project Code', detail: '' });
+            return null;
+        }
+        if (this.selectedTestFacilities == null || this.selectedTestFacilities == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Facility', detail: '' });
+            return null;
+        }
+        if (this.selectedBuildLevels == null || this.selectedBuildLevels == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Build Levels', detail: '' });
+            return null;
+        }
+       
+        if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
+            return null;
+        }
+        if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
+            return null;
+        }
+        if (this.plannedStartDate == null || this.plannedStartDate == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Planned Start Date', detail: '' });
+            return null;
+        }
+        if (this.plannedEndDate == null || this.plannedEndDate == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Planned End Date', detail: '' });
+            return null;
+        }
 
         this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 

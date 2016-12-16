@@ -71,13 +71,6 @@ export class TestRequestSensorService {
     }
 
     postAdd(filterBody,comment): Observable<any> {
-     //let   multipartheaders: Headers = new Headers({
-     //       //  'Content-Type': 'application/json',
-     //        'Content-Type': 'multipart/form-data',
-     //       // 'Access-Control-Allow-Origin': '*'
-     //   });
-     //  this.headers.append("content-Type", "multipart/form-data");
-        // console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
@@ -99,7 +92,7 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
-     makeFileRequest(url: string, params: string[], files: File[]): Observable<any> {
+    makeFileRequest(url: string, params: string[], files: File[], testRequestId: any): Observable<any> {
         return Observable.create(observer => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -107,7 +100,7 @@ export class TestRequestSensorService {
             for (let i = 0; i < files.length; i++) {
                 formData.append("uploads[]", files[i], files[i].name);
             }
-
+            formData.append("TestRequestId", testRequestId);
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {

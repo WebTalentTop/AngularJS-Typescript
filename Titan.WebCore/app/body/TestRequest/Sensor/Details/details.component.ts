@@ -172,7 +172,7 @@ export class DetailsComponent {
 
             });
         // getSensorAttachmentsByEntityIdUrl
-        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.entityId).subscribe(
+        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
             res => {
                 this.uploadedFiles = res.$values;
             }
