@@ -2226,27 +2226,25 @@ body .layout-wrapper.layout-compact {
     body .layout-wrapper.layout-compact .layout-container .topbar .topbar-right .topbar-items > li > a i {
       font-size: 20px; } }
 
-body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
-  overflow: auto;
-  max-height: none; }
-  body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
-    margin: 0.5em 0 0 0;
-    display: inline-block; }
-  body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
-    margin: 0;
-    float: right; }
-
-.subsection + .subsection {
-  margin-top: 1em; }
-
 body .layout-wrapper .layout-main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   box-sizing: border-box; }
-  body .layout-wrapper .layout-main :first-child {
+  body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
-  body .layout-wrapper .layout-main .footer {
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
+      overflow: auto;
+      max-height: none; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
+        margin: 0.5em 0 0 0;
+        display: inline-block; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
+        margin: 0;
+        float: right; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
+      margin-top: 1em; }
+  body .layout-wrapper .layout-main > .footer {
     flex: 0 0 auto; }
-    body .layout-wrapper .layout-main .footer .card {
+    body .layout-wrapper .layout-main > .footer .card {
       margin-bottom: 0; }

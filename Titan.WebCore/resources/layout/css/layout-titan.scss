@@ -10,35 +10,6 @@ $darkMenuHoverColor: #676767;
 
 @import '../../sass/layout/_layout';
 
-body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar
-{
-    overflow: auto;
-
-    max-height: none;
-
-    header.with-controls
-    {
-        .ui-panel-title
-        {
-            margin: 0.5em 0 0 0;
-
-            display: inline-block
-        }
-
-        .controls
-        {
-            margin: 0;
-
-            float: right
-        }
-    }
-}
-
-.subsection + .subsection
-{
-    margin-top: 1em
-}
-
 body .layout-wrapper .layout-main
 {
     display: flex;
@@ -49,12 +20,44 @@ body .layout-wrapper .layout-main
 
     box-sizing: border-box;
 
-    :first-child
+    > :first-child /* titan-body */
     {
-        flex: 1 1 auto
+        flex: 1 1 auto;
+
+        .ui-tabview-panel .subsection
+        {
+            .ui-panel .ui-panel-titlebar
+            {
+                overflow: auto;
+
+                max-height: none;
+
+                header.with-controls
+                {
+                    .ui-panel-title
+                    {
+                        margin: 0.5em 0 0 0;
+
+                        display: inline-block
+                    }
+
+                    .controls
+                    {
+                        margin: 0;
+
+                        float: right
+                    }
+                }
+            }
+
+            + .subsection
+            {
+                margin-top: 1em
+            }
+        }
     }
 
-    .footer
+    > .footer
     {
         flex: 0 0 auto;
 
