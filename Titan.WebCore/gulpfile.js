@@ -73,7 +73,7 @@ gulp.task("copy-systemjs", function () {
         .pipe(gulp.dest(root_path.package_lib + 'systemjs/'));
 });
 
-gulp.task('sass', ['sass-cleanup'], function () {
+gulp.task('sass', function () {
     gulp.src(root_path.primeResources + '**/*-titan.scss')
         .pipe(sass())
         .pipe(gulp.dest(root_path.primeResources));
