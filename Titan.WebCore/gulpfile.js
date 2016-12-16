@@ -25,7 +25,7 @@ var root_path = {
 var apiServiceLocalOption1Url = "./EnvironmentApiUrl/localoption1/";
 var apiServiceLocalOption2Url = "./EnvironmentApiUrl/localoption2/";
 var apiServicePreProdUrl = "./EnvironmentApiUrl/preprod/";
-var apiServiceQAUrl = "./EnvironmentApiUrl/qa/";var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
+var apiServiceQAUrl = "./EnvironmentApiUrl/qa/"; var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
 
 
 root_path.package_lib = root_path.webroot + "lib/";
@@ -73,22 +73,39 @@ gulp.task("copy-systemjs", function () {
         .pipe(gulp.dest(root_path.package_lib + 'systemjs/'));
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', ['sass-cleanup'], function () {
     gulp.src(root_path.primeResources + '**/*-titan.scss')
         .pipe(sass())
         .pipe(gulp.dest(root_path.primeResources));
 });
-
-gulp.task("primeResources", function () {
-    gulp.src(["./resources/**"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
-        .pipe(gulp.dest("./wwwroot/resources/"));
+gulp.task('sass-cleanup', function () {
+    del(['resources/**/*.css']);
 });
+
+
+gulp.task("resourcesPrimeSpreadJs", function () {
+    gulp.src(["./resources/spreadjs/**/*", "!resources/**/*.scss"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
+        .pipe(gulp.dest("./wwwroot/resources/spreadjs"));
+});
+gulp.task("resourcesPrimeLayout", function () {
+    gulp.src(["./resources/layout/**/*", "!resources/**/*.scss"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
+       .pipe(gulp.dest("./wwwroot/resources/layout"));
+});
+
+
+gulp.task("resourcesPrimeThemes", function () {
+    gulp.src(["./resources/theme/**/*", "!resources/**/*.scss"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
+        .pipe(gulp.dest("./wwwroot/resources/theme"));
+});
+
+gulp.task("copy-thirdparty-files", ["sass","resourcesPrimeSpreadJs", "resourcesPrimeLayout", "resourcesPrimeThemes"]);
+
 gulp.task("NMprimeResources", function () {
     gulp.src(root_path.nmSrc + "primeng/**/*")
         .pipe(gulp.dest(root_path.package_lib + "primeng/"));
 });
 
-gulp.task('copy-titanResources', function(){
+gulp.task('copy-titanResources', function () {
     gulp.src('./titanResources/**/*')
         .pipe(gulp.dest(root_path.webroot + 'library/titanResources/'));
 })
@@ -103,27 +120,27 @@ gulp.task("html", function () {
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
 
-gulp.task('bootstrap', function() {
+gulp.task('bootstrap', function () {
     gulp.src(root_path.nmSrc + 'bootstrap/**/*')
         .pipe(gulp.dest(root_path.package_lib + 'bootstrap/'))
 })
 
-gulp.task('tsClean', function(){
+gulp.task('tsClean', function () {
     del['./app/**/*', '!app/**/*.ts', '!./app/**/*.js.map']
 });
 
-gulp.task("tsCompile",['tsClean'], function() {
+gulp.task("tsCompile", ['tsClean'], function () {
     return tsProject.src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
-gulp.task("icons", function() {
+gulp.task("icons", function () {
     gulp.src('./icons' + '/**/*.*')
         .pipe(gulp.dest(root_path.webroot + 'icons'));
 });
-gulp.task('copy-systemjs-config', function(){
+gulp.task('copy-systemjs-config', function () {
     gulp.src('systemJsConfig/' + '*.js')
         .pipe(gulp.dest(root_path.webroot))
 });
@@ -138,8 +155,7 @@ gulp.task('copy-to-wwwroot',
         'copy-reflect',
         'copy-zone',
         'copy-systemjs',
-        'sass',
-        'primeResources',
+        'copy-thirdparty-files',
         'NMprimeResources',
         'html',
         'css',
