@@ -10,221 +10,232 @@
                 <p-growl [value]="msgs"></p-growl>
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-                    <!-- Begin Panel - Test Facility Name and Location -->
+                    <div class="subsection">
 
-                    <p-panel header="Test Facility Name and Location">
+                        <!-- Begin Panel - Test Facility Name and Location -->
 
-                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                            <!-- Test Facility Id -->
-                            <!--<div class="ui-grid-row">
-                                <div class="ui-grid-col-2">Test Facility Id</div>
-                                <div class="ui-grid-col-6">
-                                    <input pInputText
-                                           [(ngModel)]="testFacility.id"
-                                           #testFacilityIdRef="ngModel"
-                                           class="form-control"
-                                           disabled="disabled"/>
+                        <p-panel header="Test Facility Name and Location">
 
-                                </div>
-                                <div class="ui-grid-4"></div>
-                            </div>-->
-                            <!-- Test Facility Name -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Name *
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel" placeholder="Required-min(3)"
-                                           minlength="3" class="form-control" required row="20" />
-                                </div>
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
-                                        <!--<i class="fa fa-close"></i>-->
-                                        *
+                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                                <!-- Test Facility Id -->
+                                <!--<div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">Test Facility Id</div>
+                                    <div class="ui-grid-col-6">
+                                        <input pInputText
+                                            [(ngModel)]="testFacility.id"
+                                            #testFacilityIdRef="ngModel"
+                                            class="form-control"
+                                            disabled="disabled"/>
 
                                     </div>
-                                    <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">
-                                        (MinLength-3)
+                                    <div class="ui-grid-4"></div>
+                                </div>-->
+                                <!-- Test Facility Name -->
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        Name *
+                                    </div>
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel" placeholder="Required-min(3)"
+                                            minlength="3" class="form-control" required row="20" />
+                                    </div>
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
+                                            <!--<i class="fa fa-close"></i>-->
+                                            *
+
+                                        </div>
+                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">
+                                            (MinLength-3)
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Test Facility Location -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Address Line 1:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
-                                              #tfAddress1Ref="ngModel">
-                                </div>
-
-                                <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">
-                                        <!--<i class="fa fa-close"></i>-->
-                                        *
+                                <!-- Test Facility Location -->
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        Address Line 1:
                                     </div>
-                                </div>
-
-                            </div>
-                            <!-- Test Facility Address -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Address Line 2:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
-                                              #tfAddress2Ref="ngModel">
-                                </div>
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
-                                        *
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
+                                                #tfAddress1Ref="ngModel">
                                     </div>
+
+                                    <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">
+                                            <!--<i class="fa fa-close"></i>-->
+                                            *
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-
-                            <!-- Test Facility Building # -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    City:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city" />
-                                </div>
-
-
-
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="tfBuildingNumberRef.errors?.required">
-                                        *
-
+                                <!-- Test Facility Address -->
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        Address Line 2:
+                                    </div>
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
+                                                #tfAddress2Ref="ngModel">
+                                    </div>
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
+                                            *
+                                        </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <!-- Test Facility Operation Hours -->
-                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
+                                <!-- Test Facility Building # -->
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        City:
+                                    </div>
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city" />
+                                    </div>
 
 
-                            <!-- Test Facility Operation Hours -->
-                            <!-- <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
 
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="tfBuildingNumberRef.errors?.required">
+                                            *
 
-                            <!-- Test Facility Operation Hours -->
-                            <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
-                            <!-- Test Facility Description -->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    State:
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
-                                </div>
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">
-                                        *
+                                <!-- Test Facility Operation Hours -->
+                                <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
+
+
+                                <!-- Test Facility Operation Hours -->
+                                <!-- <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
+
+
+                                <!-- Test Facility Operation Hours -->
+                                <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
+                                <!-- Test Facility Description -->
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        State:
+                                    </div>
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
+                                    </div>
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">
+                                            *
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Postal Code:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
-                                </div>
-                                <div class="ui-grid-col-4">
-                                    <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">
-                                        *
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2">
+                                        Postal Code:
+                                    </div>
+                                    <div class="ui-grid-col-6">
+                                        <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
+                                    </div>
+                                    <div class="ui-grid-col-4">
+                                        <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">
+                                            *
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-2"></div>
+                                    <div class="ui-grid-col-2">
+                                        <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-save" iconPos="left"></button>
+                                    </div>
+                                    <div class="ui-grid-col-4">
+
+                                    </div>
+                                </div>
+                                <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
+                                    Form Submitted
+                                    <br>
+                                </div>-->
                             </div>
+                            <div></div>
+
+                        </p-panel>
+
+                        <!-- End Panel - Test Facility Name and Location -->
+
+                    </div>
+
+                    <div class="subsection">
+
+                        <!-- Begin Dialog - Assign User Role -->
+
+                        <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade">
+
+                            <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
+
                             <div class="ui-grid-row">
-                                <div class="ui-grid-col-2"></div>
+
                                 <div class="ui-grid-col-2">
-                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-save" iconPos="left"></button>
+                                    Search by UserName#:
                                 </div>
-                                <div class="ui-grid-col-4">
 
+                                <div class="ui-grid-col-6">
+                                    <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
+                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
+                                                    field="firstName" [multiple]="true">
+                                    </p-autoComplete>
+                                    <ul>
+                                        <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-                                Form Submitted
-                                <br>
-                            </div>-->
-                        </div>
-                        <div></div>
 
-                    </p-panel>
-
-                    <!-- End Panel - Test Facility Name and Location -->
-
-                    <!-- Begin Dialog - Assign User Role -->
-
-                    <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade">
-
-                        <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
-
-                        <div class="ui-grid-row">
-
-                            <div class="ui-grid-col-2">
-                                Search by UserName#:
                             </div>
 
-                            <div class="ui-grid-col-6">
-                                <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
-                                                field="firstName" [multiple]="true">
-                                </p-autoComplete>
-                                <ul>
-                                    <li *ngFor="let c of filteredSelectedUserNames">{{c.firstName}}</li>
-                                </ul>
+                            <div class="ui-grid-row">
+
+                                <div class="ui-grid-col-2">
+                                    User Role:
+                                </div>
+
+                                <div class="ui-grid-col-6">
+                                    <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
+                                </div>
+
                             </div>
 
-                        </div>
+                            <p><button pButton type="button" class="btn btn-default" icon="ui-icon-save" label="Assign User Role" (click)="onAddUserRole()"></button></p>
 
-                        <div class="ui-grid-row">
+                            <footer>
+                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                    <button type="button" pButton icon="fa-check" (click)="displayAssignUserRolesDialog=false" label="Done"></button>
+                                </div>
+                            </footer>
 
-                            <div class="ui-grid-col-2">
-                                User Role:
+                        </p-dialog>
+
+                        <!-- End Dialog - Assign User Role -->
+
+                        <!-- Begin Panel - Test Facility Users -->
+
+                        <p-panel>
+
+                            <header class="with-controls">
+                                <p class="ui-panel-title">Test Facility Users</p>
+                                <p class="controls"><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Assign User Roles&hellip;"></button></p>
+                            </header>
+
+                            <div class="ui-grid-row">
+
+                                <p-dataTable [value]="TestFacilityRoles">
+                                    <p-column field="name" header="Name" sortable="true"></p-column>
+                                    <p-column field="role" header="Role" sortable="true"></p-column>
+                                </p-dataTable>
+
                             </div>
 
-                            <div class="ui-grid-col-6">
-                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
-                            </div>
+                        </p-panel>
 
-                        </div>
+                        <!-- End Panel - Test Facility Users -->
 
-                        <p><button pButton type="button" class="btn btn-default" icon="ui-icon-save" label="Assign User Role" (click)="onAddUserRole()"></button></p>
-
-                        <footer>
-                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                <button type="button" pButton icon="fa-check" (click)="displayAssignUserRolesDialog=false" label="Done"></button>
-                            </div>
-                        </footer>
-
-                    </p-dialog>
-
-                    <!-- End Dialog - Assign User Role -->
-
-                    <!-- Begin Panel - Test Facility Users -->
-
-                    <p-panel header="Test Facility Users">
-
-                        <div class="ui-grid-row">
-
-                            <p-dataTable [value]="TestFacilityRoles">
-                                <p-column field="name" header="Name" sortable="true"></p-column>
-                                <p-column field="role" header="Role" sortable="true"></p-column>
-                            </p-dataTable>
-
-                        </div>
-
-                        <p><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Assign User Roles&hellip;"></button></p>
-
-                    </p-panel>
-
-                    <!-- End Panel - Test Facility Users -->
+                    </div>
 
                     <!--<p-panel>
                         <div class="ui-grid-col-4"></div>
@@ -244,7 +255,7 @@
             </p-tabPanel>
 
 
-            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">          
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-panel>
                     <div class="ui-grid-col-4"></div>
                     <div class="ui-grid-row">
