@@ -197,7 +197,9 @@ gulp.task("copy-qalocation",
 
 
 
-gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts', 'NMprimeResources', 'primeResources']);
+//gulp.task("prepod-deployment-package", ['sass','copy-preprodlocation', 'tsCompile', 'css', 'html', 'sourceMap', 'ts', 'NMprimeResources', 'primeResources']);
+
+gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'copy-to-wwwroot']);
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
