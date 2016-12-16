@@ -38,3 +38,29 @@ body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar
 {
     margin-top: 1em
 }
+
+body .layout-wrapper .layout-main
+{
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 100vh;
+
+    box-sizing: border-box;
+
+    :first-child
+    {
+        flex: 1 1 auto
+    }
+
+    .footer
+    {
+        flex: 0 0 auto;
+
+        .card
+        {
+            margin-bottom: 0
+        }
+    }
+}
