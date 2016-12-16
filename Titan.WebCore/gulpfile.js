@@ -76,7 +76,7 @@ gulp.task("copy-systemjs", function () {
 gulp.task('sass', function () {
     gulp.src(root_path.primeResources + '**/*-titan.scss')
         .pipe(sass())
-        .pipe(gulp.dest('wwwroot/resources'));
+        .pipe(gulp.dest(root_path.primeResources));
 });
 
 gulp.task("primeResources", function () {
