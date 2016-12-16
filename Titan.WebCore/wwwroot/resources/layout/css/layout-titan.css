@@ -2225,3 +2225,16 @@ body .layout-wrapper.layout-compact {
     padding: 14px 16px; }
     body .layout-wrapper.layout-compact .layout-container .topbar .topbar-right .topbar-items > li > a i {
       font-size: 20px; } }
+
+body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
+  overflow: auto;
+  max-height: none; }
+  body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
+    margin: 0.5em 0 0 0;
+    display: inline-block; }
+  body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
+    margin: 0;
+    float: right; }
+
+.subsection + .subsection {
+  margin-top: 1em; }

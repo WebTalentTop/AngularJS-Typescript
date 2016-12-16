@@ -9,3 +9,32 @@ $darkMenuBgColor: #424242;
 $darkMenuHoverColor: #676767;
 
 @import '../../sass/layout/_layout';
+
+body .layout-wrapper .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar
+{
+    overflow: auto;
+
+    max-height: none;
+
+    header.with-controls
+    {
+        .ui-panel-title
+        {
+            margin: 0.5em 0 0 0;
+
+            display: inline-block
+        }
+
+        .controls
+        {
+            margin: 0;
+
+            float: right
+        }
+    }
+}
+
+.subsection + .subsection
+{
+    margin-top: 1em
+}
