@@ -51,11 +51,11 @@
                             <!-- Test Facility Location -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Address1:
+                                    Address Line 1:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
-                                              #tfAddress1Ref="ngModel"></textarea>
+                                    <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
+                                              #tfAddress1Ref="ngModel">
                                 </div>
 
                                 <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
@@ -70,11 +70,11 @@
                             <!-- Test Facility Address -->
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
-                                    Address2:
+                                    Address Line 2:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
-                                              #tfAddress2Ref="ngModel"></textarea>
+                                    <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
+                                              #tfAddress2Ref="ngModel">
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
