@@ -7,10 +7,10 @@ import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.mo
 
 import { MilestoneStatusService } from '../../../../shared/services/milestoneStatus.service';
 
-import MilestoneStatusRoutes from "./milestoneStatus.routes";
+import milestoneStatusRoutes from "./milestoneStatus.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, MilestoneStatusRoutes, MessagesModule, GrowlModule],
+    imports: [CommonModule, DataTableModule, GridModule, milestoneStatusRoutes, MessagesModule, GrowlModule],
     providers: [MilestoneStatusService],
     declarations: [MilestoneStatusComponent]
 })
