@@ -2248,3 +2248,5 @@ body .layout-wrapper .layout-main {
     flex: 0 0 auto; }
     body .layout-wrapper .layout-main > .footer .card {
       margin-bottom: 0; }
+    body .layout-wrapper .layout-main > .footer sup {
+      line-height: 0; }
