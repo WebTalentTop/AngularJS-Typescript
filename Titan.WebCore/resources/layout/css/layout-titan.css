@@ -2250,3 +2250,7 @@ body .layout-wrapper .layout-main {
       margin-bottom: 0; }
     body .layout-wrapper .layout-main > .footer sup {
       line-height: 0; }
+  body .layout-wrapper .layout-main .ui-dialog {
+    overflow: visible; }
+    body .layout-wrapper .layout-main .ui-dialog .ui-dialog-content {
+      overflow: visible; }

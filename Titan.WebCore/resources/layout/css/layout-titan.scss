@@ -71,4 +71,14 @@ body .layout-wrapper .layout-main
             line-height: 0
         }
     }
+
+    .ui-dialog
+    {
+        overflow: visible;
+
+        .ui-dialog-content
+        {
+            overflow: visible
+        }
+    }
 }
