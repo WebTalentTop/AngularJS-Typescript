@@ -267,6 +267,14 @@
                             <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
                             <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
                             <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
+                            <p-column>
+                                <template pTemplate type="header">
+                                    <button type="button" pButton icon="fa-refresh"></button>
+                                </template>
+                                <template let-TestFacilityEquipment="rowData" pTemplate type="body">
+                                    <button pButton type="button">Move To Another TestFacility</button>
+                                </template>
+                            </p-column>
                         </p-dataTable>
                     </div>
                 </p-panel>
