@@ -332,10 +332,43 @@
 
 
             <p-tabPanel header="Tests" id="tests">
-                After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third
-                and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
-                Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would
-                one day be completely legitimate.
+                <h3>Form List</h3>
+                <pre>{{formSchemaData | json }}</pre>
+                <!--<div class="card card-w-title" *ngFor="let item of formSchemaData" *ngIf="formSchemaData">
+                    <div class="ui-g ui-fluid form-group">
+                        <div class="ui-g-12 ui-md-6">
+                            <label>Form Name</label><br>
+                            <span>{{item.name}}</span>
+
+
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <label>Category</label><br/>
+                            <p-dropdown [options]="item.formSchemaCategoryList" #item [(ngModel)]="selectedFormSchemaCategory"></p-dropdown>
+                        </div>
+                        <div class="ui-g-12 ui-md-3" *ngIf="item.entityEventsList">
+                            <label>Entity Event</label><br/>
+                            <p-dropdown [options]="item.entityEventsList" [(ngModel)]="selectedEntityEvent"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-g ui-fluid form-group">
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-g-12 ui-md-4" id="dragme"  *ngFor="let fieldsItem of item.fields">
+                                <div draggable="true">
+                                    <label>{{fieldsItem.name}}</label><br>
+                                    <input pInputText [disabled]="true"
+                                           *ngIf="checkFieldDataType(fieldsItem.formSchemaFieldDataTypeId).name === 'TextBox'" type="text"
+                                           [placeholder]="fieldsItem.label"/>
+                                    <p-spinner size="30"
+                                               *ngIf="checkFieldDataType(fieldsItem.formSchemaFieldDataTypeId).name === 'NumberBox'"
+                                               [(ngModel)]="item.maxLength" [disabled]="true"></p-spinner>
+                                    <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItem(item)"
+                                            iconPos="right"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
             </p-tabPanel>
 
             <p-tabPanel header="Attachments" id="attachments">

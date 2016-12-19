@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
 import { TestFacilityService } from '../../../shared/services/testFacility.service';
+import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
+import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
 import { TestTemplateService } from '../../../shared/services/testTemplate.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
@@ -22,7 +24,7 @@ import detailsRoutes from "./details.routes";
 
 @NgModule({
     imports: [CommonModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
-    providers: [TestFacilityService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
+    providers: [EntityIdentifierService, TestFacilityService, FormSchemaCategoryService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
 TestTypeService, TestTemplateService
 ],
     declarations: [DetailsComponent]
