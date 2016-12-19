@@ -171,13 +171,11 @@
 
                             <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
 
-                            <div class="ui-grid-row">
+                            <div class="ui-g">
 
-                                <div class="ui-grid-col-2">
-                                    Search by UserName#:
-                                </div>
+                                <div class="ui-g-6">Search by User Name/#:</div>
 
-                                <div class="ui-grid-col-6">
+                                <div class="ui-g-6">
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
                                                     name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
                                                     field="firstName" [multiple]="true">
@@ -189,13 +187,11 @@
 
                             </div>
 
-                            <div class="ui-grid-row">
+                            <div class="ui-g">
 
-                                <div class="ui-grid-col-2">
-                                    User Role:
-                                </div>
+                                <div class="ui-g-6">User Role:</div>
 
-                                <div class="ui-grid-col-6">
+                                <div class="ui-g-6">
                                     <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
                                 </div>
 
