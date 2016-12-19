@@ -169,15 +169,15 @@
 
                         <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade" responsive="true">
 
-                            <p>Please select a user and their role at the {{testFacility.name}} test facility.</p>
+                            <p>Please select one or more users and their role at the {{testFacility.name}} test facility.</p>
 
                             <div class="ui-g">
 
-                                <div class="ui-g-6">Search by User Name/#:</div>
+                                <div class="ui-g-6">Users:</div>
 
                                 <div class="ui-g-6">
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search By UserName#"
+                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search by Name/#"
                                                     field="firstName" [multiple]="true">
                                     </p-autoComplete>
                                     <ul>
@@ -189,7 +189,7 @@
 
                             <div class="ui-g">
 
-                                <div class="ui-g-6">User Role:</div>
+                                <div class="ui-g-6">Role:</div>
 
                                 <div class="ui-g-6">
                                     <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
