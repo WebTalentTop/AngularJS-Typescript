@@ -2233,6 +2233,12 @@ body .layout-wrapper .layout-main {
   box-sizing: border-box; }
   body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row {
+      margin-top: 1.8em; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .md-inputfield input {
+        padding-left: 0; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .md-inputfield label {
+        left: 0; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
       overflow: auto;
       max-height: none; }

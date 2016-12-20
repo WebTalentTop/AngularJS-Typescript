@@ -20,42 +20,39 @@
 
                                 <!-- Begin Name -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        Name *
-                                    </div>
-                                    <div class="ui-grid-col-6">
-                                        <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel" placeholder="Required-min(3)"
-                                            minlength="3" class="form-control" required row="20" />
-                                    </div>
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
-                                            *
+                                <div class="ui-grid-row input-row">
 
-                                        </div>
-                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">
-                                            (MinLength-3)
-                                        </div>
+                                    <div class="ui-grid-col-6">
+                                        <span class="md-inputfield">
+                                            <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
+                                                minlength="3" class="form-control" required row="20">
+                                            <label>Name</label>
+                                        </span>
                                     </div>
+
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">*</div>
+                                        <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.minlength">(MinLength-3)</div>
+                                    </div>
+
                                 </div>
 
                                 <!-- End Name -->
 
                                 <!-- Begin Address Line 1 -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        Address Line 1:
-                                    </div>
+                                <div class="ui-grid-row input-row">
+
                                     <div class="ui-grid-col-6">
-                                        <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
+                                        <span class="md-inputfield">
+                                            <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
                                                 #tfAddress1Ref="ngModel">
+                                            <label>Address Line 1</label>
+                                        </span>
                                     </div>
 
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">
-                                            *
-                                        </div>
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">*</div>
                                     </div>
 
                                 </div>
@@ -64,40 +61,37 @@
 
                                 <!-- Begin Address Line 2 -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        Address Line 2:
-                                    </div>
+                                <div class="ui-grid-row input-row">
+
                                     <div class="ui-grid-col-6">
-                                        <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
+                                        <span class="md-inputfield">
+                                            <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
                                                 #tfAddress2Ref="ngModel">
+                                            <label>Address Line 2</label>
+                                        </span>
                                     </div>
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
-                                            *
-                                        </div>
+
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">*</div>
                                     </div>
+
                                 </div>
 
                                 <!-- End Address Line 2 -->
 
                                 <!-- Begin City -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        City:
-                                    </div>
+                                <div class="ui-grid-row input-row">
+
                                     <div class="ui-grid-col-6">
-                                        <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city" />
+                                        <span class="md-inputfield">
+                                            <input type="text" pInputText class="form-control" required row="20" name="city" #tfBuildingNumberRef="ngModel" [(ngModel)]="address.city" />
+                                            <label>City</label>
+                                        </span>
                                     </div>
 
-
-
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="tfBuildingNumberRef.errors?.required">
-                                            *
-
-                                        </div>
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="tfBuildingNumberRef.errors?.required">*</div>
                                     </div>
 
                                 </div>
@@ -106,51 +100,50 @@
 
                                 <!-- Begin State -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        State:
-                                    </div>
+                                <div class="ui-grid-row input-row">
+
                                     <div class="ui-grid-col-6">
-                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
+                                        <span class="md-inputfield">
+                                            <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
+                                            <label>State</label>
+                                        </span>
                                     </div>
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">
-                                            *
-                                        </div>
+
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="tfstateRef.errors?.required">*</div>
                                     </div>
+
                                 </div>
 
                                 <!-- End State -->
 
                                 <!-- Begin Postal Code -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        Postal Code:
-                                    </div>
+                                <div class="ui-grid-row input-row">
+
                                     <div class="ui-grid-col-6">
-                                        <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
+                                        <span class="md-inputfield">
+                                            <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
+                                            <label>Postal Code</label>
+                                        </span>
                                     </div>
-                                    <div class="ui-grid-col-4">
-                                        <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">
-                                            *
-                                        </div>
+
+                                    <div class="ui-grid-col-6">
+                                        <div class="ui-grid-col-4" *ngIf="tfpostalCodeRef.errors?.required">*</div>
                                     </div>
                                 </div>
 
                                 <!-- End Postal Code -->
 
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2"></div>
-                                    <div class="ui-grid-col-2">
+                                <div class="ui-grid-row input-row">
+
+                                    <div class="ui-grid-col-12">
                                         <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-save" iconPos="left"></button>
                                     </div>
-                                    <div class="ui-grid-col-4">
 
-                                    </div>
                                 </div>
+
                             </div>
-                            <div></div>
 
                         </p-panel>
 
@@ -230,7 +223,6 @@
 
                 </form>
             </p-tabPanel>
-
 
             <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-panel>

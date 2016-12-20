@@ -26,6 +26,24 @@ body .layout-wrapper .layout-main
 
         .ui-tabview-panel .subsection
         {
+            .input-row
+            {
+                margin-top: 1.8em;
+
+                .md-inputfield
+                {
+                    input
+                    {
+                        padding-left: 0
+                    }
+
+                    label
+                    {
+                        left: 0
+                    }
+                }
+            }
+
             .ui-panel .ui-panel-titlebar
             {
                 overflow: auto;
