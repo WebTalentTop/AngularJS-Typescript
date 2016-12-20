@@ -2248,6 +2248,8 @@ body .layout-wrapper .layout-main {
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
         margin: 0;
         float: right; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
+      text-align: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
       margin-top: 1em; }
   body .layout-wrapper .layout-main > .footer {

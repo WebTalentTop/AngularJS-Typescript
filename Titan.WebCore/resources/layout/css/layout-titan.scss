@@ -44,27 +44,35 @@ body .layout-wrapper .layout-main
                 }
             }
 
-            .ui-panel .ui-panel-titlebar
+            .ui-panel
             {
-                overflow: auto;
-
-                max-height: none;
-
-                header.with-controls
+                .ui-panel-titlebar
                 {
-                    .ui-panel-title
+                    overflow: auto;
+
+                    max-height: none;
+
+                    header.with-controls
                     {
-                        margin: 0.5em 0 0 0;
+                        .ui-panel-title
+                        {
+                            margin: 0.5em 0 0 0;
 
-                        display: inline-block
+                            display: inline-block
+                        }
+
+                        .controls
+                        {
+                            margin: 0;
+
+                            float: right
+                        }
                     }
+                }
 
-                    .controls
-                    {
-                        margin: 0;
-
-                        float: right
-                    }
+                footer
+                {
+                    text-align: right
                 }
             }
 
