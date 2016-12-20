@@ -17,19 +17,7 @@
                         <p-panel header="Test Facility Name and Location">
 
                             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                                <!-- Test Facility Id -->
-                                <!--<div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">Test Facility Id</div>
-                                    <div class="ui-grid-col-6">
-                                        <input pInputText
-                                            [(ngModel)]="testFacility.id"
-                                            #testFacilityIdRef="ngModel"
-                                            class="form-control"
-                                            disabled="disabled"/>
 
-                                    </div>
-                                    <div class="ui-grid-4"></div>
-                                </div>-->
                                 <!-- Test Facility Name -->
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-2">
@@ -41,7 +29,6 @@
                                     </div>
                                     <div class="ui-grid-col-4">
                                         <div class="ui-grid-col-4" *ngIf="testFacilityNameRef.errors?.required">
-                                            <!--<i class="fa fa-close"></i>-->
                                             *
 
                                         </div>
@@ -60,10 +47,8 @@
                                                 #tfAddress1Ref="ngModel">
                                     </div>
 
-                                    <!--<div class="ui-grid-col-4">{{ tfForm.value | json }}</div>-->
                                     <div class="ui-grid-col-4">
                                         <div class="ui-grid-col-4" *ngIf="tfAddress1Ref.errors?.required">
-                                            <!--<i class="fa fa-close"></i>-->
                                             *
                                         </div>
                                     </div>
@@ -85,7 +70,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Test Facility Building # -->
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-2">
                                         City:
@@ -104,17 +88,7 @@
                                     </div>
 
                                 </div>
-                                <!-- Test Facility Operation Hours -->
-                                <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>
 
-
-                                <!-- Test Facility Operation Hours -->
-                                <!-- <p-dropdown [options]="maintenanceFrequency" [(ngModel)]="selectedMF"></p-dropdown>
-
-
-                                <!-- Test Facility Operation Hours -->
-                                <!-- <p-dropdown [options]="operationHours" [(ngModel)]="selectedOH"></p-dropdown>-->
-                                <!-- Test Facility Description -->
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-2">
                                         State:
@@ -150,10 +124,6 @@
 
                                     </div>
                                 </div>
-                                <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
-                                    Form Submitted
-                                    <br>
-                                </div>-->
                             </div>
                             <div></div>
 
@@ -233,20 +203,6 @@
 
                     </div>
 
-                    <!--<p-panel>
-                        <div class="ui-grid-col-4"></div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <b>Test Facility Equipments</b>
-                            </div>
-                            <div class="ui-grid-col-2"></div>
-                            <p-dataTable [value]="TestFacilityEquipments">
-                                <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
-                                <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
-                                <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
-                            </p-dataTable>
-                        </div>
-                    </p-panel>-->
                 </form>
             </p-tabPanel>
 
