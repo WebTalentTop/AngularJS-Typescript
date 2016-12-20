@@ -161,9 +161,9 @@
 
                             <div class="ui-g">
 
-                                <div class="ui-g-6">Users:</div>
+                                <div class="ui-g-4">Users:</div>
 
-                                <div class="ui-g-6">
+                                <div class="ui-g-8">
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
                                                     name="username" styleClass="wid100" [minLength]="1" placeholder="Search by Name/#"
                                                     field="firstName" [multiple]="true">
@@ -174,9 +174,9 @@
 
                             <div class="ui-g">
 
-                                <div class="ui-g-6">Role:</div>
+                                <div class="ui-g-4">Role:</div>
 
-                                <div class="ui-g-6">
+                                <div class="ui-g-8">
                                     <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
                                 </div>
 
