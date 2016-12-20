@@ -23,6 +23,7 @@ import detailRoutes from "./details.routes";
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, detailRoutes],
+
     providers: [TimeEntryService, EquipmentTypeService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService, TestFacilityService, TestTemplateService],
     declarations: [DetailsComponent]

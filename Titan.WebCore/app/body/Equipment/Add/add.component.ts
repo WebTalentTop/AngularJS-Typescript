@@ -13,19 +13,37 @@ import { TestFacilityService } from '../../../shared/services/testfacility.servi
 })
 
 export class AddComponent {
-    name:string;
+   // name:string;
     addressLine1:string;
     addressLine2:string;
     city:string;
     state:string;
     postalCode: string;
+    name: any;
+    equipmentTypeId: any;
+    serialNumber: any;
+    purchaseDate: any;
+    warrantyExpirationDate: any;        
+    description: any;
+    purchasePrice: any;
+    equipmentManufacturerId: any;
+    testFacilityId: any;
     equipmentManufacturers: any;
     selectedEquipmentManufacturerId: any;
     equipmentTypes: any;
     selectedEquipmentTypeId: any;
     testFacilities: any;
     selectedTestFacilityId: any;
+    manufacturerName: any;
 
+    manufacturerPhone: any;
+
+    manufacturerWebsite: any;
+
+    manufacturerFax: any;
+
+    IsNewManufacturer: boolean;
+    manufacturerId: any;
     testFacility = {
                     name:'', 
                     address:{
@@ -43,13 +61,16 @@ export class AddComponent {
     }
 
     ngOnInit() {
-        //this.getEquipmentManufacturers();
-        //this.getEquipmentTypes();
-        //this.getTestFacilities();
+        this.getEquipmentManufacturers();
+        this.getEquipmentTypes();
+        this.getTestFacilities();
 
 
     }
     onEquipmentManufacturerChange(event) {
+        if (event.value != null) {
+            this.IsNewManufacturer = false;
+        }
         console.log('------event------------', event)
         this.selectedEquipmentManufacturerId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
@@ -114,7 +135,7 @@ export class AddComponent {
     }
     getEquipmentTypes() {
         //    userRoles
-        this.service.getEquipmentManufacturers().subscribe(response => {
+        this.service.getEquipmentTypes().subscribe(response => {
             this.equipmentTypes = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -134,31 +155,49 @@ export class AddComponent {
             console.log(response);
         });
     }
+    AddManufacturer()
+    {
+        this.IsNewManufacturer = true;
+        this.manufacturerName = '';
+        this.manufacturerPhone = '';
+        this.manufacturerFax = '';
+        this.manufacturerWebsite = '';
+
+    }
     onSubmit(formRef) {
         console.log(formRef);
         console.log(this.testFacility.name);
         formRef.isDeleted = false;
-        let formData: any = {name: '', 
-                    address:{
-                        addressLine1:'',
-                        addressLine2:'',
-                        city:'',
-                        state:'',
-                        postalCode:'',
-                    }};
-        formData.name = formRef.name;
-        formData.address.addressLine1 = formRef.addressLine1;
-        formData.address.addressLine2 = formRef.addressLine2;
-        formData.address.city = formRef.city;
-        formData.address.state = formRef.state;
-        formData.address.postalCode = formRef.postalCode;
-        formData.locale = "en-us";
-        console.log(formData);
-        this.service.postAdd(formData).subscribe(res => { 
-            console.log("-------- Test Facility Adding new result ----- ",res); 
+        if (!this.IsNewManufacturer) {
+            this.manufacturerId = this.selectedEquipmentManufacturerId;
+        }
+        else
+        {
+            this.manufacturerId = '';
+        }
+        let model = {
+            Name: formRef.name,
+            EquipmentTypeId: this.selectedEquipmentTypeId,
+            SerialNumber: formRef.serialNumber,
+            PurchaseDate: formRef.purchaseDate,
+            WarrantyExpiration: formRef.warrantyExpiration,
+            Description: formRef.description,
+            PurchasePrice: formRef.purchasePrice,
+            TestFacilityId: this.selectedTestFacilityId,
+            EquipmentManufacturerId: this.manufacturerId,
+             ManufacturerName: this.manufacturerName,
+             ManufacturerPhone: this.manufacturerPhone,
+             ManufacturerFax: this.manufacturerFax,
+             ManufacturerWebsite: this.manufacturerWebsite
+
+        };
+      
+        // console.log(formData);
+        this.service.postAdd(model).subscribe(res => { 
+            console.log("-------- Equipment Adding new result ----- ",res); 
             if (res.isSuccess) {
 
-                this.router.navigate(["./testfacilities"], { queryParams: { page: 1 } });
+                this.router.navigate(["./equipment"], { queryParams: { page: 1 } });
             }
         });
     }
