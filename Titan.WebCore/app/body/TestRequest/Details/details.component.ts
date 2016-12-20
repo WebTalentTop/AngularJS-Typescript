@@ -77,6 +77,7 @@ export class DetailsComponent implements AfterViewInit {
     filepath: string = "TestFacility";
     TrackingList: any;
     startTime: any;
+    display: boolean = false;
     endTime: any;
     model: any = {
         id: '',
@@ -105,7 +106,8 @@ export class DetailsComponent implements AfterViewInit {
         private teststatusservice: TestStatusService,
         private testroleservice: TestRoleService,
         private testtypeservice: TestTypeService,
-        private buildlevelservice: BuildLevelService
+        private buildlevelservice: BuildLevelService,
+        private confirmservice: ConfirmationService
 
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -116,6 +118,18 @@ export class DetailsComponent implements AfterViewInit {
 
         console.log('tes---', event);
         console.log('-------targetid-------', event.originalEvent.target.innerText);
+    }
+    confirm1() {
+        this.confirmservice.confirm({
+            message: 'Are you sure you need thermo couple info?',
+            accept: () => {
+
+                this.display = true;
+
+                //this.msgs = [];
+                //this.msgs.push({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            }
+        });
     }
     ngOnInit() {
         this.getTestStages();

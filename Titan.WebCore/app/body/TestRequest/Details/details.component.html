@@ -384,6 +384,11 @@
                                                                     <span class="input-group-addon">days</span>
                                                                 </div>
                                                             </div>
+                                                            <p-dialog header="Title" [(visible)]="display">
+                                                                List of departments(multiselect)
+
+                                                            </p-dialog>
+                                                            <button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>
                                                             <!--<div class="form-group col-sm-6 col-md-4">
                                                             <label class="control-label">Process Flow</label>
                                                             <select name="" id="" class="form-control">
