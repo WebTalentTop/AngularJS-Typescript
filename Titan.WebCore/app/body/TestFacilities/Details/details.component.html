@@ -1,16 +1,20 @@
 ﻿<div class="ui-g">
+
     <div class="ui-g-12">
+
         <h3>{{testFacility.name}} Test Facility Details</h3>
 
         <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
+
         <p-tabView (onChange)="handleChange($event)">
 
-
             <p-tabPanel header="Details" id='details'>
-                <p-growl [value]="msgs"></p-growl>
-                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-                    <div class="subsection">
+                <p-growl [value]="msgs"></p-growl>
+
+                <div class="subsection">
+
+                    <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                         <!-- Begin Panel - Test Facility Name and Location -->
 
@@ -149,9 +153,13 @@
 
                         <!-- End Panel - Test Facility Name and Location -->
 
-                    </div>
+                    </form>
 
-                    <div class="subsection">
+                </div>
+
+                <div class="subsection">
+
+                    <form>
 
                         <!-- Begin Dialog - Assign User Role -->
 
@@ -216,9 +224,10 @@
 
                         <!-- End Panel - Test Facility Users -->
 
-                    </div>
+                    </form>
 
-                </form>
+                </div>
+
             </p-tabPanel>
 
             <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
