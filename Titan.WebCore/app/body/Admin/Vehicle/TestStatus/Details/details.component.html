@@ -47,14 +47,29 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            IsActive :
+                            Calendar Display Color * :
                         </div>
-                        <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="TestStatusDetails.isDeleted" name="isDeleted" #testStatusDetailsisDeletedRef="ngModel" [style]="{'width':'50px'}"></p-toggleButton>
+                        <div class="ui-grid-col-4">
+
+                            <input type="text" pInputText name="calendarDisplayColor" [(ngModel)]="TestStatusDetails.calendarDisplayColor" #testStatusDetailsCalendarDisplayColorRef="ngModel"
+                                placeholder="Required" minlength="3" class="form-control" required row="20" />
                         </div>
+                        <div class="ui-grid-col-4">
+
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsCalendarDisplayColorRef.errors?.required">
+                                <i class="fa fa-close"></i> Please enter Calendar Display Color
+                            </div>
+                            
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsCalendarDisplayColorRef.errors?.minlength">
+                                MinLength-3
+                            </div>
+
                         </div>
+                    </div>
+                   
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                         </div>
