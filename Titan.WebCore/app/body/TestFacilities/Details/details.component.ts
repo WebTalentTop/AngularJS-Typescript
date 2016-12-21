@@ -306,12 +306,20 @@ export class DetailsComponent implements AfterViewInit {
     }
     moveEquipmenttoTestFacility()
     {
+        if (this.selectedTestFacilities == null || this.selectedTestFacilities == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Facility', detail: '' });
+            return null;
+        }
         let postbody = {
             'equipmentId': this.selectedEquipmentId,
             'facilityId': this.selectedTestFacilities
         };
      
-        this.dataService.moveEquipmenttoTestFacility(postbody).subscribe(res => { });
+        this.dataService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
+
+            this.displayEquipmentDialog = false;
+        });
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }
    
