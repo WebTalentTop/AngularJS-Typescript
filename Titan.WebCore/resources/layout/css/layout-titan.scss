@@ -72,7 +72,21 @@ body .layout-wrapper .layout-main
 
                 footer
                 {
-                    text-align: right
+                    overflow: auto;
+
+                    p
+                    {
+                        display: inline-block;
+
+                        line-height: 2em;
+
+                        margin: 0 1em 0 0
+                    }
+
+                    button
+                    {
+                        float: right
+                    }
                 }
             }
 

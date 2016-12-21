@@ -2249,7 +2249,13 @@ body .layout-wrapper .layout-main {
         margin: 0;
         float: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
-      text-align: right; }
+      overflow: auto; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer p {
+        display: inline-block;
+        line-height: 2em;
+        margin: 0 1em 0 0; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer button {
+        float: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
       margin-top: 1em; }
   body .layout-wrapper .layout-main > .footer {
