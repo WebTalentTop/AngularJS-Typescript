@@ -69,14 +69,13 @@
 
                                     <div class="ui-grid-col-6">
                                         <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
                                                 #tfAddress2Ref="ngModel">
+                                            <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
                                             <label>Address Line 2</label>
                                         </span>
                                     </div>
 
                                     <div class="ui-grid-col-6">
-                                        <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">*</div>
                                     </div>
 
                                 </div>
