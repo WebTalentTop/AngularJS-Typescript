@@ -2259,9 +2259,12 @@ body .layout-wrapper .layout-main {
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
         margin: 0;
         float: right; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .body {
+      outline: 1px dotted red;
+      padding-top: 2em; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
       overflow: auto;
-      margin-top: 1em; }
+      margin-top: 2em; }
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer p {
         display: inline-block;
         color: #777;
