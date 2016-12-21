@@ -147,28 +147,35 @@
 
                             <p>Please select one or more users and their role at the {{testFacility.name}} test facility.</p>
 
-                            <div class="ui-g">
+                            <!-- Begin Users -->
 
-                                <div class="ui-g-4">Users:</div>
+                            <div class="input-row">
 
-                                <div class="ui-g-8">
+                                <label><span class="text">Users</span>
+
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
                                                     name="username" styleClass="wid100" [minLength]="1" placeholder="Search by Name/#"
                                                     field="firstName" [multiple]="true">
                                     </p-autoComplete>
-                                </div>
+
+                                </label>
 
                             </div>
 
-                            <div class="ui-g">
+                            <!-- End Users -->
 
-                                <div class="ui-g-4">Role:</div>
+                            <!-- Begin Role -->
 
-                                <div class="ui-g-8">
-                                    <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
-                                </div>
+                            <div class="input-row">
+
+                                <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
+                                <span class="pseudo-label">Role</span>
+
+                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'auto'}"></p-dropdown>
 
                             </div>
+
+                            <!-- End Role -->
 
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
