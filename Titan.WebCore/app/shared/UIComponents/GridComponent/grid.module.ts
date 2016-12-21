@@ -2,11 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { DataTableModule, LazyLoadEvent} from 'primeng/primeng';
 import { GridComponent } from './grid.component';
-import { SpinnerModule } from '../SpinnerComponent/spinner.module';
+import { TitanSpinnerModule } from '../SpinnerComponent/spinner.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [CommonModule,SpinnerModule, DataTableModule, RouterModule],
+    imports: [CommonModule,TitanSpinnerModule, DataTableModule, RouterModule],
     declarations: [GridComponent],
     exports: [GridComponent, CommonModule]
 })

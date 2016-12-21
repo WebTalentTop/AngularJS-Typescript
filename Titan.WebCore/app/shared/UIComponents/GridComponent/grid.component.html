@@ -1,4 +1,4 @@
-<h1 [innerHTML]="title"></h1>
+<h1 [innerHTML]="title || ''"></h1>
 <p-dataTable [value]="gridData"
              [lazy]="true"
              [paginator]="true"
@@ -23,5 +23,5 @@
     </p-column>
 </p-dataTable>
 <div *ngIf="gridData.length === 0 && lazyLoadingData === false">
-    <spinner></spinner>
+    <titan-spinner></titan-spinner>
 </div>
