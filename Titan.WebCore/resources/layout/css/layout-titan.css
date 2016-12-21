@@ -2260,11 +2260,14 @@ body .layout-wrapper .layout-main {
         margin: 0;
         float: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
-      overflow: auto; }
+      overflow: auto;
+      margin-top: 1em; }
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer p {
         display: inline-block;
+        color: #777;
         line-height: 2em;
-        margin: 0 1em 0 0; }
+        font-size: 12px;
+        margin: 0 1em 0 10px; }
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer button {
         float: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {

@@ -96,13 +96,19 @@ body .layout-wrapper .layout-main
                 {
                     overflow: auto;
 
+                    margin-top: 1em;
+
                     p
                     {
                         display: inline-block;
 
+                        color: #777;
+
                         line-height: 2em;
 
-                        margin: 0 1em 0 0
+                        font-size: 12px;
+
+                        margin: 0 1em 0 10px
                     }
 
                     button
