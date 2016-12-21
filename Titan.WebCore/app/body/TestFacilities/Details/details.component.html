@@ -170,11 +170,10 @@
 
                             </div>
 
-                            <p><button pButton type="button" class="btn btn-default" icon="ui-icon-save" label="Assign User Role" (click)="onAddUserRole()"></button></p>
-
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <button type="button" pButton icon="fa-check" (click)="displayAssignUserRolesDialog=false" label="Done"></button>
+                                    <button type="button" pButton icon="ui-icon-close" (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
+                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()" label="Assign User Role"></button>
                                 </div>
                             </footer>
 
