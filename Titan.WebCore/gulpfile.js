@@ -1,4 +1,4 @@
-/// <binding AfterBuild='copy-@types, copy-all, copy-dev-res, copy-dev-res-all, copy-dev-ts-sourceMap, copy-front-dev-only' />
+/// <binding AfterBuild='copy-to-wwwroot' />
 /*
 This file in the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
@@ -25,7 +25,8 @@ var root_path = {
 var apiServiceLocalOption1Url = "./EnvironmentApiUrl/localoption1/";
 var apiServiceLocalOption2Url = "./EnvironmentApiUrl/localoption2/";
 var apiServicePreProdUrl = "./EnvironmentApiUrl/preprod/";
-var apiServiceQAUrl = "./EnvironmentApiUrl/qa/"; var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
+var apiServiceQAUrl = "./EnvironmentApiUrl/qa/";
+var apiServiceDestinationUrl = './app/shared/services/apiUrlconst/';
 
 
 root_path.package_lib = root_path.webroot + "lib/";
@@ -74,12 +75,13 @@ gulp.task("copy-systemjs", function () {
 });
 
 gulp.task('sass', function () {
-    gulp.src(root_path.primeResources + '**/*-titan.scss')
+    gulp.src(root_path.primeResources + '**/*.scss')
         .pipe(sass())
         .pipe(gulp.dest(root_path.primeResources));
 });
 gulp.task('sass-cleanup', function () {
-    del(['resources/**/*.css']);
+    del(['resources/layout/*.css', 'resources/theme/*.css']);
+   
 });
 
 
@@ -163,6 +165,7 @@ gulp.task('copy-to-wwwroot',
         'bootstrap',
         'icons',
         'tsCompile'
+        
     ]);
 
 gulp.task('htmlwatch', function () {

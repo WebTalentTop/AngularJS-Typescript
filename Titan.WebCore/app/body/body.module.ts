@@ -6,7 +6,7 @@ import ProjectModule from './Project/project.module';
 import EquipmentModule from './Equipment/equipment.module';
 import DepartmentModule from './Department/department.module';
 import AdminModule from './Admin/admin.module';
-import CalendarModule from './Calendar/calendar.module';
+import CalendarModule from './Calendar/titancalendar.module';
 import LookupModule from './Lookup/lookup.module';
 import { FormsModule} from '@angular/forms';
 

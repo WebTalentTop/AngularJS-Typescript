@@ -1,0 +1,131 @@
+﻿<div>
+<div class="row">
+    <div class="ui-grid-col-1">
+        Slots
+    </div>
+    <div class="ui-grid-col-2">
+        <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue" (onChange)="updateCalendarSettings($event)" [style]="{'width':'auto'}"></p-dropdown>
+    </div>
+    <div class="ui-grid-col-1">
+        Project Codes :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Facility :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Mode :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Type :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Status :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Test Roles:
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+    <div class="ui-grid-col-1">
+        Build Levels :
+    </div>
+    <div class="ui-grid-col-2">
+        <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
+        </p-multiSelect>
+    </div>
+
+</div>
+<!--<div class="row">
+    <p>selectedHideWeekendValue : is  {{selectedHideWeekendValue | json}}</p>
+    <p>First Day of the week: {{selectedFirstDayValue ? selectedFirstDayValue.name : 'none'}}</p>
+    <p>Slot Duration : {{selectedSlotDurationValue | json}}</p>
+
+
+</div>-->
+<div class="row" style="overflow-y:hidden">
+    <div id="calendar">
+    </div>
+</div>
+<p-dialog header="Assign User Roles" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade">
+
+    <div class="ui-grid-row">
+
+        <div class="ui-grid-col-6">
+            Show Weekends
+        </div>
+
+        <div class="ui-grid-col-6">
+            <p-radioButton name="groupname" label="Yes" value="true" [(ngModel)]="selectedHideWeekendValue" (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
+            <p-radioButton name="groupname" label="No" value="false" [(ngModel)]="selectedHideWeekendValue" (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
+
+        </div>
+
+    </div>
+
+    <div class="ui-grid-row">
+
+        <div class="ui-grid-col-6">
+            First Day of the week
+        </div>
+
+        <div class="ui-grid-col-6">
+            <p-dropdown [options]="daysofweek" [(ngModel)]="selectedFirstDayValue"></p-dropdown>
+        </div>
+
+    </div>
+
+    <div class="ui-grid-row">
+
+        <div class="ui-grid-col-6">
+            Start of the day
+        </div>
+
+        <div class="ui-grid-col-6">
+            <p-calendar [(ngModel)]="startWorkHoursValue" [timeOnly]="true"></p-calendar>
+        </div>
+
+    </div>
+
+    <div class="ui-grid-row">
+
+        <div class="ui-grid-col-6">
+            End of the day
+        </div>
+
+        <div class="ui-grid-col-6">
+            <p-calendar [(ngModel)]="endWorkHoursValue" [timeOnly]="true"></p-calendar>
+        </div>
+
+    </div>
+
+</p-dialog>
+
+</div>
+<style>
+    #calendar {
+		max-width: 95%;
+		
+	}
+</style>

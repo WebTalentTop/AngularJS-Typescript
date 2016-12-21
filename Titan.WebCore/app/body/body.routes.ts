@@ -9,7 +9,7 @@ const routes = [
 
     { path: 'project', loadChildren: 'app/body/project/project.module' },
     { path: 'admin', loadChildren: 'app/body/admin/admin.module' },
-    { path: 'calendar', loadChildren: 'app/body/calendar/calendar.module' },
+    { path: 'calendar', loadChildren: 'app/body/calendar/titancalendar.module' },
     { path: 'lookup', loadChildren: 'app/body/lookup/lookup.module' },
     { path: 'problemtracking', loadChildren: 'app/body/ProblemTracking/problemtracking.module' },
     { path: 'workrequest', loadChildren: 'app/body/WorkRequest/workrequest.module' },
