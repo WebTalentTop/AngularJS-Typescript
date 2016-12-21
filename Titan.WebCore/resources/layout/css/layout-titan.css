@@ -2269,6 +2269,9 @@ body .layout-wrapper .layout-main {
     body .layout-wrapper .layout-main .input-row > .pseudo-label {
       display: inline-block;
       width: 5em; }
+    body .layout-wrapper .layout-main .input-row .ui-autocomplete,
+    body .layout-wrapper .layout-main .input-row .ui-dropdown {
+      width: calc(100% - 5.25em); }
     body .layout-wrapper .layout-main .input-row .md-inputfield input {
       padding-left: 0;
       width: 100%; }

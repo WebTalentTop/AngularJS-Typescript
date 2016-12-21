@@ -117,6 +117,12 @@ body .layout-wrapper .layout-main
             width: 5em
         }
 
+        .ui-autocomplete,
+        .ui-dropdown
+        {
+            width: calc(100% - 5.25em)
+        }
+
         .md-inputfield
         {
             input
