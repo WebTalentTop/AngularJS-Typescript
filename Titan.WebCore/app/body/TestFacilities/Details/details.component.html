@@ -91,7 +91,8 @@
 
                                     <div class="ui-grid-col-6">
                                         <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="address.city" />
+                                            <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="address.city"
+                                                (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
                                             <label>City <span [ngClass]="{'error': tfCityRef.errors?.required}">*</span></label>
                                         </span>
                                     </div>
@@ -109,7 +110,8 @@
 
                                     <div class="ui-grid-col-6">
                                         <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel" />
+                                            <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
+                                                (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
                                             <label>State <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
                                         </span>
                                     </div>
@@ -127,7 +129,8 @@
 
                                     <div class="ui-grid-col-6">
                                         <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel" />
+                                            <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
+                                                (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
                                             <label>Postal Code <span [ngClass]="{'error': tfpostalCodeRef.errors?.required}">*</span></label>
                                         </span>
                                     </div>
