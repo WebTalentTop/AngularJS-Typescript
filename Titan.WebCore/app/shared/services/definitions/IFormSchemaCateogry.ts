@@ -16,7 +16,7 @@ export interface IFormSchemaCategory {
     isDeleted?:boolean;
 }
 
-export class FormSchemaCategory implements IFormSchemaCategory{
+export class FormSchemaCategory implements IFormSchemaCategory {
     constructor(
         public id:string,
         public name:string,
