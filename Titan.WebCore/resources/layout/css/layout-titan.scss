@@ -112,9 +112,15 @@ body .layout-wrapper .layout-main
         > label > .text,
         > .pseudo-label
         {
-            display: inline-block;
+            display: block;
 
-            width: 5em
+            width: 4em;
+
+            font-weight: bold;
+
+            float: left;
+
+            margin-right: 1em
         }
 
         .ui-autocomplete,

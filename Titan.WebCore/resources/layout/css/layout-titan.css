@@ -2267,8 +2267,11 @@ body .layout-wrapper .layout-main {
     position: relative; }
     body .layout-wrapper .layout-main .input-row > label > .text,
     body .layout-wrapper .layout-main .input-row > .pseudo-label {
-      display: inline-block;
-      width: 5em; }
+      display: block;
+      width: 4em;
+      font-weight: bold;
+      float: left;
+      margin-right: 1em; }
     body .layout-wrapper .layout-main .input-row .ui-autocomplete,
     body .layout-wrapper .layout-main .input-row .ui-dropdown {
       width: calc(100% - 5.25em); }
