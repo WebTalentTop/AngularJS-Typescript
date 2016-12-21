@@ -18,7 +18,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -47,9 +47,21 @@ export class DetailsComponent implements AfterViewInit {
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
 
+    displayPreviewSelectedForm:boolean = false;
+
     // Form Display
     selectedFormSchemaCategory;
+    selectedFormFields:any[] = [];
+    selectedFormName:string;
     // End of Form Display
+
+    // FormInstance variables
+    displayFormInsanceForm:boolean = false;
+    formInstanceFormSchemaVersionId:string;
+    formInstanceFormSchema:any;
+    formInstanceFields:any[] = [];
+
+
     // End Of Form Related Variables
 
     notificationMsgs: Message[] = [];
@@ -692,14 +704,13 @@ export class DetailsComponent implements AfterViewInit {
 
                                 console.log("Form Schema Category Ids -----", fscIds);
 
-                                this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
+                                /*this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
                                     .subscribe(formSchemaResult => {
                                         console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
                                         this.formSchemaData = formSchemaResult.result;
                                         console.log("FormSchemaData ----------", this.formSchemaData);
 
-                                    });
-/*
+                                    });*/
                                 this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
                                     .subscribe(formSchemaResult => {
                                         console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
@@ -707,7 +718,6 @@ export class DetailsComponent implements AfterViewInit {
                                         console.log("FormSchemaData ----------", this.formSchemaData);
 
                                     });
-*/
                             }
                         });
                 }
@@ -716,5 +726,33 @@ export class DetailsComponent implements AfterViewInit {
                     //this.msgs.push({})
                 }
             })
+    }
+
+    selectedFormToView(formName,formSchemaItems){
+        this.selectedFormName = formName;
+        this.selectedFormFields = formSchemaItems;
+        this.displayPreviewSelectedForm = true;
+        console.log("FormName -------", this.selectedFormName);
+        console.log("Form Schema To View clicked ----", this.selectedFormFields);
+        console.log("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
+    }
+
+    closeFormPreviewDialog() {
+        this.displayPreviewSelectedForm = false;
+        this.selectedFormName = '';
+        this.selectedFormFields = [];
+        console.log("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
+        console.log("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
+        console.log("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
+    }
+
+    // Entering data to the form to create a Form Instance
+    showFormInstance(formSchema){
+        console.log("ShowFOrmInstance ----", formSchema);
+        this.selectedFormName = formSchema.name;
+        this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
+        this.formInstanceFields = formSchema.fields.$values;
+        //this.formInstanceFormSchema = formSchema;*/
+        this.displayFormInsanceForm = true;
     }
 }

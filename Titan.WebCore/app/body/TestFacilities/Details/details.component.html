@@ -331,44 +331,106 @@
             </p-tabPanel>
 
 
-            <p-tabPanel header="Tests" id="tests">
-                <h3>Form List</h3>
-                <pre>{{formSchemaData | json }}</pre>
-                <!--<div class="card card-w-title" *ngFor="let item of formSchemaData" *ngIf="formSchemaData">
-                    <div class="ui-g ui-fluid form-group">
-                        <div class="ui-g-12 ui-md-6">
-                            <label>Form Name</label><br>
-                            <span>{{item.name}}</span>
-
-
-                        </div>
-                        <div class="ui-g-12 ui-md-3">
-                            <label>Category</label><br/>
-                            <p-dropdown [options]="item.formSchemaCategoryList" #item [(ngModel)]="selectedFormSchemaCategory"></p-dropdown>
-                        </div>
-                        <div class="ui-g-12 ui-md-3" *ngIf="item.entityEventsList">
-                            <label>Entity Event</label><br/>
-                            <p-dropdown [options]="item.entityEventsList" [(ngModel)]="selectedEntityEvent"></p-dropdown>
-                        </div>
+            <p-tabPanel header="Maintenance" id="tests">
+                <div class="card card-w-title" *ngIf="formSchemaData">
+                    <div *ngFor="let item of formSchemaData">
+                        <h3>{{item.name}}</h3>
+                        <span>
+                            {{item.formSchemaCategories.$values[0].formSchemaCategory.name}}
+                        </span>
+                        <br/>
+                        <button pButton
+                                icon="fa fa-external-link-square"
+                                type="text"
+                                iconPos="right"
+                                label="Preview Form"
+                                (click)="selectedFormToView(item.name, item.fields.$values)">
+                        </button>
+                        <button pButton
+                                icon="fa fa-plus"
+                                type="text"
+                                iconPos="right"
+                                label="Enter Information"
+                                (click)="showFormInstance()">
+                        </button>
                     </div>
-                    <div class="ui-g ui-fluid form-group">
-                        <div class="ui-g-12 ui-md-12">
-                            <div class="ui-g-12 ui-md-4" id="dragme"  *ngFor="let fieldsItem of item.fields">
-                                <div draggable="true">
-                                    <label>{{fieldsItem.name}}</label><br>
-                                    <input pInputText [disabled]="true"
-                                           *ngIf="checkFieldDataType(fieldsItem.formSchemaFieldDataTypeId).name === 'TextBox'" type="text"
-                                           [placeholder]="fieldsItem.label"/>
-                                    <p-spinner size="30"
-                                               *ngIf="checkFieldDataType(fieldsItem.formSchemaFieldDataTypeId).name === 'NumberBox'"
-                                               [(ngModel)]="item.maxLength" [disabled]="true"></p-spinner>
-                                    <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItem(item)"
-                                            iconPos="right"></button>
-                                </div>
+                </div>
+
+                <p-dialog header="Form Preview"
+                          [(visible)]="displayPreviewSelectedForm"
+                          modal="true"
+                          responsive="true"
+                          width="1200">
+                    <div class="card card-w-title">
+                        <form-preview [selectedInputList]="selectedFormFields"
+                                      [formName]="selectedFormName"></form-preview>
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button pButton
+                                        type="text"
+                                        icon="fa fa-close"
+                                        (click)="closeFormPreviewDialog()"
+                                        label="Close Preview">
+                                </button>
                             </div>
-                        </div>
+                        </footer>
                     </div>
-                </div>-->
+                </p-dialog>
+                <p-dataGrid [value]="formSchemaData">
+                    <header>List of Test Facility Forms</header>
+                    <template let-item>
+                        <!--<pre style="height:auto; overflow-y: scroll">{{ item | json }}</pre><br/>-->
+                        <div style="padding:3px" class="ui-g-12 ui-md-3">
+                            <p-panel [header]="item.name"
+                                     [style]="{'text-align':'center'}">
+                                <div>{{item.formSchemaCategories.$values[0].formSchemaCategory.name}}</div>
+                                <hr class="ui-widget-content" style="border-top:0">
+                                <button pButton
+                                        icon="fa fa-external-link-square"
+                                        type="text"
+                                        iconPos="right"
+                                        label="Preview Form"
+                                        (click)="selectedFormToView(item.name, item.fields.$values)">
+                                </button>
+                                <button pButton
+                                        icon="fa fa-plus"
+                                        type="text"
+                                        iconPos="right"
+                                        label="Enter Information"
+                                        (click)="showFormInstance(item)">
+                                </button>
+                            </p-panel>
+                        </div>
+                    </template>
+                </p-dataGrid>
+
+                <p-dialog header="Form Data"
+                          [(visible)]="displayFormInsanceForm"
+                          modal="true"
+                          responsive="true"
+                          width="1200">
+                    <div class="card card-w-title">
+                        <form-instance
+                                *ngIf="displayFormInsanceForm"
+                                [formSchemaVersionId]="formInstanceFormSchemaVersionId"
+                                [entityIdentifierId]="entityIdentifierInfo.id"
+                                [entityId]="id"
+                                [formName]="selectedFormName"
+                                [selectedInputList]="formInstanceFields">
+                        </form-instance>
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button pButton
+                                        type="text"
+                                        icon="fa fa-close"
+                                        (click)="closeFormPreviewDialog()"
+                                        label="Close Preview">
+                                </button>
+                            </div>
+                        </footer>
+                    </div>
+                </p-dialog>
+
             </p-tabPanel>
 
             <p-tabPanel header="Attachments" id="attachments">
