@@ -2265,6 +2265,10 @@ body .layout-wrapper .layout-main {
       line-height: 0; }
   body .layout-wrapper .layout-main .input-row {
     position: relative; }
+    body .layout-wrapper .layout-main .input-row > label > .text,
+    body .layout-wrapper .layout-main .input-row > .pseudo-label {
+      display: inline-block;
+      width: 5em; }
     body .layout-wrapper .layout-main .input-row .md-inputfield input {
       padding-left: 0;
       width: 100%; }

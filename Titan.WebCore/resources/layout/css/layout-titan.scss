@@ -109,6 +109,14 @@ body .layout-wrapper .layout-main
     {
         position: relative;
 
+        > label > .text,
+        > .pseudo-label
+        {
+            display: inline-block;
+
+            width: 5em
+        }
+
         .md-inputfield
         {
             input
