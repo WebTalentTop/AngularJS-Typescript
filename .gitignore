@@ -30,6 +30,8 @@ wwwroot/app/
 resources/layout/**/*.css
 resources/theme/**/*.css
 
+Properties/**
+
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
