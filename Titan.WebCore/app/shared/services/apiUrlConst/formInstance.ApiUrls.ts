@@ -1,11 +1,11 @@
 import { titanApiUrl } from './titanApiUrl';
 import { GridApiUrl } from './gridApiUrls';
 
-export class FormSchemaApiUrl {
-    public static gridApiUrl:string  = GridApiUrl.formSchemaGridUrl;
-    public static postCreatedUrl: string = titanApiUrl + 'formSchema/post';
-    public static postUpdateUrl: string = titanApiUrl + 'formSchema';
-    public static getByIdUrl: string = titanApiUrl + 'formSchema';
-    public static getByFormSchemaCategoryId: string = titanApiUrl + 'formSchema/getByFormSchemaCategoryId';
-    public static getByFormSchemaCategoryIdCol: string = titanApiUrl + 'formSchema/getByFormSchemaCategoryIdCol';
+export class FormInstanceApiUrl {
+    //public static gridApiUrl:string  = GridApiUrl.formInstanceGridUrl;
+    public static postCreatedUrl: string = titanApiUrl + 'formInstance';
+    public static postUpdateUrl: string = titanApiUrl + 'formInstance';
+    public static getByIdUrl: string = titanApiUrl + 'formInstance';
+    public static getByFormSchemaCategoryId: string = titanApiUrl + 'formInstance/getByFormSchemaCategoryId';
+    public static getByFormSchemaCategoryIdCol: string = titanApiUrl + 'formInstance/getByFormSchemaCategoryIdCol';
 }
