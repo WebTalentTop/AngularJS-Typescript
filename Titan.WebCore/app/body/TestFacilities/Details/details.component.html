@@ -20,24 +20,20 @@
 
                         <p-panel header="Test Facility Name and Location">
 
-                            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid body">
+                            <div class="body">
 
                                 <!-- Begin Name -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
-                                                minlength="3" class="form-control" required row="20"
-                                                (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
-                                            <label>Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
+                                            minlength="3" class="form-control" required row="20"
+                                            (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
+                                        <label>Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>
-                                    </div>
+                                    <p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>
 
                                 </div>
 
@@ -45,21 +41,17 @@
 
                                 <!-- Begin Address Line 1 -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
-                                                #tfAddress1Ref="ngModel"
-                                                (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
-                                            <label>Address Line 1 <span [ngClass]="{'error': tfAddress1Ref.errors?.required}">*</span></label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
+                                            #tfAddress1Ref="ngModel"
+                                            (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
+                                        <label>Address Line 1 <span [ngClass]="{'error': tfAddress1Ref.errors?.required}">*</span></label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
-                                        <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>
-                                    </div>
+                                    <p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
+                                    <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>
 
                                 </div>
 
@@ -67,20 +59,16 @@
 
                                 <!-- Begin Address Line 2 -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
-                                                #tfAddress2Ref="ngModel"
-                                                (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
-                                            <label>Address Line 2</label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
+                                            #tfAddress2Ref="ngModel"
+                                            (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
+                                        <label>Address Line 2</label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>
-                                    </div>
+                                    <p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>
 
                                 </div>
 
@@ -88,19 +76,15 @@
 
                                 <!-- Begin City -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="address.city"
-                                                (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
-                                            <label>City <span [ngClass]="{'error': tfCityRef.errors?.required}">*</span></label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="address.city"
+                                            (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
+                                        <label>City <span [ngClass]="{'error': tfCityRef.errors?.required}">*</span></label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>
-                                    </div>
+                                    <p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>
 
                                 </div>
 
@@ -108,19 +92,15 @@
 
                                 <!-- Begin State -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                                (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                            <label>State <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
+                                            (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
+                                        <label>State <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
-                                    </div>
+                                    <p div="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
 
                                 </div>
 
@@ -128,19 +108,16 @@
 
                                 <!-- Begin Postal Code -->
 
-                                <div class="ui-grid-row input-row">
+                                <div class="input-row">
 
-                                    <div class="ui-grid-col-6">
-                                        <span class="md-inputfield">
-                                            <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
-                                                (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
-                                            <label>Postal Code <span [ngClass]="{'error': tfpostalCodeRef.errors?.required}">*</span></label>
-                                        </span>
+                                    <div class="md-inputfield">
+                                        <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
+                                            (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
+                                        <label>Postal Code <span [ngClass]="{'error': tfpostalCodeRef.errors?.required}">*</span></label>
                                     </div>
 
-                                    <div class="ui-grid-col-6">
-                                        <p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>
-                                    </div>
+                                    <p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>
+
                                 </div>
 
                                 <!-- End Postal Code -->
