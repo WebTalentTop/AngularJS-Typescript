@@ -154,7 +154,7 @@
                                 <label><span class="text">Users</span>
 
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                    name="username" styleClass="wid100" [minLength]="1" placeholder="Search by Name/#"
+                                                    name="username" [minLength]="1" placeholder="Search by Name/#"
                                                     field="firstName" [multiple]="true">
                                     </p-autoComplete>
 
