@@ -319,6 +319,11 @@ export class DetailsComponent implements AfterViewInit {
         this.dataService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
 
             this.displayEquipmentDialog = false;
+            this.dataService.getEquipmentsByIdusing(this.id)
+                .subscribe(res => {
+                    this.TestFacilityEquipments = res;
+
+                });
         });
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }

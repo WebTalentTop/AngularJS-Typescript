@@ -27,9 +27,10 @@ export class AddComponent {
         console.log(this.description);
         formRef.locale = "en-us";
         formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = {name: '', description: '', locale:'', calendarDisplayColor: '', isDeleted: false};
         formData.name = formRef.name;
         formData.description = formRef.description;
+        formData.calendarDisplayColor = formRef.calendarDisplayColor;
         formData.locale = "en-us";
         let added: any="true";
         console.log(formData);
