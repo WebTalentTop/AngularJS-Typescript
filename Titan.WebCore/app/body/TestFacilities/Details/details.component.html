@@ -171,8 +171,7 @@
                                 <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
                                 <span class="pseudo-label">Role</span>
 
-                                <!-- Note: Without [style] the div.ui-dropdown in p-dropdown gets an unwanted style attribute (width: 30px), even with autoWidth set to "false". -->
-                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [style]="{'width':'width: calc(100% - 5.25em)'}"></p-dropdown>
+                                <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>
 
                             </div>
 
