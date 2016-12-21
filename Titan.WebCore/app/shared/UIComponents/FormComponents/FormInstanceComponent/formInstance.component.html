@@ -1,0 +1,39 @@
+<div class="ui-g-12" *ngIf="selectedInputList.length > 0">
+    <h3>{{formName}}</h3>
+    <!--<pre>{{formInstance | json}}</pre>-->
+    <form #fiForm="ngForm" (ngSubmit)="saveForm(fiForm)">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-12 ui-md-4" *ngFor="let formInput of formFieldDataItemList">
+                <div>
+                    <!--<pre style="overflow-y: scroll;height: 250px;">{{formInput | json}}</pre>-->
+                    <label>{{formInput.name}}</label><br>
+                    <input pInputText
+                           id="{{formInput.formSchemaFieldId}}"
+                           name="{{formInput.formSchemaFieldId}}"
+                           [(ngModel)]="formInput.value"
+                           class="form-control" required
+                           *ngIf="formInput.formSchemaFieldDataTypeName === 'TextBox'"
+                           type="text"
+                           [placeholder]="formInput.label"/>
+                    <!--<p-spinner size="30"
+                               [(ngModel)]="formInput.value"
+                               *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'NumberBox'"
+                               [disabled]="true"></p-spinner>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-grid-row">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    <button id="add" pButton type="submit" label="Add">  </button>
+                </div>
+                <div class="ui-grid-col-6">
+                </div>
+                <div class="ui-grid-col-4">
+                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/testfacilities">  </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
