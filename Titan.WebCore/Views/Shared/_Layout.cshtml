@@ -5,52 +5,39 @@
     <base href="/">
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @*<script src="libs/shim.min.js"></script>
-        <script src="libs/zone.js"></script>
-        <script src="libs/Reflect.js"></script>
-        <script src="libs/system.src.js"></script>*@
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-
+    
     <!-- Layout CSS -->
     <link rel="stylesheet" type="text/css" href="~/icons/css/font-awesome.min.css" />
     <link id="theme-css" rel="stylesheet" type="text/css" href="resources/theme/theme-titan.css">
     <link rel="stylesheet" type="text/css" href="resources/layout/css/animate.css">
     <link id="layout-css" rel="stylesheet" type="text/css" href="resources/layout/css/layout-titan.css">
 
-    <!-- PrimeNG CSS -->
+    <!-- Full Calendar, PrimeNG, QTIP, SpreadJS CSS -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.css" />
-    <link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.css" />
     <link rel="stylesheet" type="text/css" href="lib/primeng/resources/primeng.min.css" />
-
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css"/>
+    <link id="layout-spreadjs-css" rel="stylesheet" type="text/css" href="resources/spreadjs/css/gcspread.sheets.9.40.20161.0.css">
     <!-- 1. Load libraries -->
-    @*<script src="resources/demo/js/jquery.deps.js"></script>*@    <!-- Calendar -->
-    <script src="resources/layout/js/layout.js"></script>       <!-- Menu -->
-    @*<script src="resources/demo/js/charts.min.js"></script>*@     <!-- Charts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.js"></script>               <!-- Calendar Dependency -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>   <!-- Calendar -->
-    <script src="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.js"></script>  <!-- Scheduler -->
-   
-
-    <script src="~/resources/spreadjs/gc.spread.sheets.all.10.0.0.min.js"></script>
-    <link id="layout-spreadjs-css" rel="stylesheet" type="text/css" href="resources/spreadjs/css/gc.spread.sheets.10.0.0.css">
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>                                     <!-- JQUERY-->
+    <script src="resources/layout/js/layout.js"></script>                                             <!-- Menu -->   
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.js"></script>               <!-- FULL Calendar Dependency -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>   <!-- FULL Calendar -->
+    <script src="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.js"></script>        <!-- Scheduler -->
+    <script src="//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>                         <!-- QTIP2-->
+    <script src="~/resources/spreadjs/gcspread.sheets.all.9.40.20161.0.min.js"></script>              <!--SpreadJS-->
 
     <script src="/lib/es6-shim/es6-shim.js"></script>
-
     <script src="~/lib/zone/zone.min.js"></script>
-
     <script src="lib/systemjs/system.src.js"></script>
     <script src="/lib/reflect/Reflect.js"></script>
-    @*<script src="/lib/rxjs/Rx.js"></script>*@
     <script src="systemjs.config.js"></script>
-
-    @*<link rel="stylesheet" type="text/css" href="~/css/primeng-modification.css" />*@
 
 </head>
 <body>
     <div>
         @RenderBody()
     </div>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     @RenderSection("scripts", required: false)
 
 </body>
