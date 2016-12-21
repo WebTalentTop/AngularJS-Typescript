@@ -155,9 +155,14 @@ body .layout-wrapper .layout-main
             color: #f00
         }
 
-        + .input-row.md-spaced
+        + .input-row
         {
-            margin-top: 2.8em
+            margin-top: 1em;
+
+            &.md-spaced
+            {
+                margin-top: 2.8em
+            }
         }
     }
 

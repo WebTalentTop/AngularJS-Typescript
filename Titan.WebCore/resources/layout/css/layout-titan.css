@@ -2286,8 +2286,10 @@ body .layout-wrapper .layout-main {
       top: 100%; }
     body .layout-wrapper .layout-main .input-row .error {
       color: #f00; }
-    body .layout-wrapper .layout-main .input-row + .input-row.md-spaced {
-      margin-top: 2.8em; }
+    body .layout-wrapper .layout-main .input-row + .input-row {
+      margin-top: 1em; }
+      body .layout-wrapper .layout-main .input-row + .input-row.md-spaced {
+        margin-top: 2.8em; }
   body .layout-wrapper .layout-main .ui-dialog {
     overflow: visible; }
     body .layout-wrapper .layout-main .ui-dialog .ui-dialog-content {
