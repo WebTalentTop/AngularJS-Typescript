@@ -34,7 +34,9 @@ body .layout-wrapper .layout-main
                 {
                     input
                     {
-                        padding-left: 0
+                        padding-left: 0;
+
+                        width: 100%
                     }
 
                     label
@@ -51,7 +53,7 @@ body .layout-wrapper .layout-main
                     color: #777;
 
                     position: absolute;
-                    left: 10px;
+                    left: 0;
                     top: 100%
                 }
 
