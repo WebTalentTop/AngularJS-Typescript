@@ -384,10 +384,26 @@
                                                                     <span class="input-group-addon">days</span>
                                                                 </div>
                                                             </div>
-                                                            <p-dialog header="Title" [(visible)]="display">
-                                                                List of departments(multiselect)
+                                                            <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
+                                                                Test Request Info Details:
 
+                                                             
+                                                                <div class="form-group col-sm-6 col-md-4">
+                                                                    <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
+                                                                    <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
+                                                                    </p-multiSelect>
+                                                                </div>
+                                                               
+                                                                <footer>
+                                                                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                                        <a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>
+                                                                        <!--<button type="button" pButton icon="fa-close" routerLink="/add/{{id}}" label="OK"></button>-->
+                                                                        <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
+                                                                    </div>
+                                                                </footer>
                                                             </p-dialog>
+                                                          
+                                                            <p-confirmDialog width="425"></p-confirmDialog>
                                                             <button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>
                                                             <!--<div class="form-group col-sm-6 col-md-4">
                                                             <label class="control-label">Process Flow</label>

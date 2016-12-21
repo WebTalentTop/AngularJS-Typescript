@@ -58,6 +58,13 @@ export class TestFacilityService {
         //.map(this.getJson);
     }
 
+    moveEquipmenttoTestFacility(filterBody)
+    {
+        return this.http.post(`${TestFacilityApiUrl.PostMoveEquipmentToFacilityUrl}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+    }
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${TestFacilityApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })

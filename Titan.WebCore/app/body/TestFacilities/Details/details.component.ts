@@ -57,6 +57,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
+    displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
     formEquipmentObject: any;
@@ -70,6 +71,7 @@ export class DetailsComponent implements AfterViewInit {
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
+    selectedEquipmentId: any;
     // Hide show Tab Panels
     displayEquipmentTab: boolean = false;
     displayScheduleTab: boolean = false;
@@ -294,6 +296,25 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    showEquipmentDialog(event) {
+        this.displayEquipmentDialog = true;
+        this.selectedEquipmentId = event.equipmentId;
+        //this.selectedCalibration = null;
+        //this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+        //this.displayDialog = true;
+        // this.IsSubType= true;
+    }
+    moveEquipmenttoTestFacility()
+    {
+        let postbody = {
+            'equipmentId': this.selectedEquipmentId,
+            'facilityId': this.selectedTestFacilities
+        };
+     
+        this.dataService.moveEquipmenttoTestFacility(postbody).subscribe(res => { });
+        // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
+    }
+   
     getUserRoles() {
         //    userRoles
         this.dataService.getRoles().subscribe(response => {
@@ -344,10 +365,10 @@ export class DetailsComponent implements AfterViewInit {
             this.testFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Role",
-                //    value: null
-                //});
+                resultMap.push({
+                    label: "Select Test Facility",
+                    value: null
+                });
                 for (let template of response) {
                     var temp = {
                         label: template.name,

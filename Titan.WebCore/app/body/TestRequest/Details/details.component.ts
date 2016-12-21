@@ -11,6 +11,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { DepartmentService } from '../../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -44,6 +45,8 @@ export class DetailsComponent implements AfterViewInit {
     testRoles: any;
     selectedTestTypes: any;
     selectedTestModes: any;
+    selectedDepartment: any;
+    departments: any;
     selectedBuildLevels: any;
     selectedTestVerificationMethods: any;
     selectedProjectCodes: any;
@@ -107,7 +110,8 @@ export class DetailsComponent implements AfterViewInit {
         private testroleservice: TestRoleService,
         private testtypeservice: TestTypeService,
         private buildlevelservice: BuildLevelService,
-        private confirmservice: ConfirmationService
+        private confirmservice: ConfirmationService,
+        private departmentservice: DepartmentService
 
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -123,7 +127,7 @@ export class DetailsComponent implements AfterViewInit {
         this.confirmservice.confirm({
             message: 'Are you sure you need thermo couple info?',
             accept: () => {
-
+                //TODO:  create a work request (post) with testrequestno_WorkReq
                 this.display = true;
 
                 //this.msgs = [];
@@ -133,6 +137,7 @@ export class DetailsComponent implements AfterViewInit {
     }
     ngOnInit() {
         this.getTestStages();
+        this.getDepartments();
         this.getTestFacilities();
         this.getTestModes();
         this.getTestVerificationMethods();
@@ -205,6 +210,13 @@ export class DetailsComponent implements AfterViewInit {
     onTestRoleChange(event) {
         console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
+
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onDepartmentChange(event) {
+        console.log('------event------------', event)
+        this.selectedDepartment = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -320,6 +332,29 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.testRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getDepartments() {
+        //    userRoles
+        this.departmentservice.getDepartments().subscribe(response => {
+            this.departments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.departments = resultMap;
             }
             console.log(response);
         });

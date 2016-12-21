@@ -16,5 +16,6 @@ export class TestFacilityApiUrl {
     public static getFilteredEvents: string = titanApiUrl + 'testFacility/GetFilteredEvents';
     public static filterUserNames: string = titanApiUrl + 'testFacility/FilterByUserNames';
     public static PostAddUserRolesUrl: string = titanApiUrl + 'testFacility/PostUserRoles';
+    public static PostMoveEquipmentToFacilityUrl: string = titanApiUrl + 'TestFacility/MoveEquipmentToFacility';
     public static getDetailsTabLocJs:string = localizationApiUrl;
 }

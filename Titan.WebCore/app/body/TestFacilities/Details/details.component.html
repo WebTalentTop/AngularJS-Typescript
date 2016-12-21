@@ -218,7 +218,8 @@
                             <b>Test Facility Equipments</b>
                         </div>
                         <div class="ui-grid-col-2"></div>
-                        <p-dataTable [value]="TestFacilityEquipments">
+                        <p-dataTable [value]="TestFacilityEquipments" selectionMode="single" 
+                                                        [paginator]="true" rows="15" [responsive]="true">
                             <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
                             <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
                             <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
@@ -227,10 +228,25 @@
                                     <button type="button" pButton icon="fa-refresh"></button>
                                 </template>
                                 <template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                    <button pButton type="button">Move To Another TestFacility</button>
+                                    <button pButton type="button" (click)="showEquipmentDialog(TestFacilityEquipment)">Move To Another TestFacility</button>
                                 </template>
                             </p-column>
                         </p-dataTable>
+                        <p-dialog header="Test Facility Equipments" [(visible)]="displayEquipmentDialog" [responsive]="true" showEffect="fade" [modal]="true">
+                            <div class="ui-grid-col-1">
+                                Test Facility :
+                            </div>
+                            <div class="ui-grid-col-2">
+                                <p-dropdown [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                                </p-dropdown>
+                            </div>
+                            <footer>
+                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                    <button type="button" pButton icon="fa-close" routerLink="/testfacilities" label="Cancel"></button>
+                                    <button type="button" pButton icon="fa-check" (click)="moveEquipmenttoTestFacility()" label="Ok"></button>
+                                </div>
+                            </footer>
+                        </p-dialog>
                     </div>
                 </p-panel>
 
