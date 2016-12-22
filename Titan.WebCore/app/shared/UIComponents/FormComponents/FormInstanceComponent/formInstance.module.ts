@@ -11,6 +11,7 @@ import { FormInstanceService } from '../../../services/formInstance.service';
 @NgModule({
     imports: [CommonModule,FormsModule, DialogModule, InputTextModule, ButtonModule, SpinnerModule ],
     declarations: [FormInstanceComponent],
-    exports: [FormInstanceComponent,FormInstanceService, CommonModule]
+    providers: [FormInstanceService],
+    exports: [FormInstanceComponent, CommonModule]
 })
 export class FormInstanceModule{}

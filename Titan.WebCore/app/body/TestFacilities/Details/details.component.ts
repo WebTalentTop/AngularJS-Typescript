@@ -318,10 +318,10 @@ export class DetailsComponent implements AfterViewInit {
             'facilityId': this.selectedTestFacilities
         };
      
-        this.dataService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
+        this.testFacilityService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
 
             this.displayEquipmentDialog = false;
-            this.dataService.getEquipmentsByIdusing(this.id)
+            this.testFacilityService.getEquipmentsByIdusing(this.id)
                 .subscribe(res => {
                     this.TestFacilityEquipments = res;
 
@@ -728,7 +728,7 @@ export class DetailsComponent implements AfterViewInit {
             })
     }
 
-    selectedFormToView(formName,formSchemaItems){
+    selectedFormToView(formName,formSchemaItems) {
         this.selectedFormName = formName;
         this.selectedFormFields = formSchemaItems;
         this.displayPreviewSelectedForm = true;
@@ -746,8 +746,9 @@ export class DetailsComponent implements AfterViewInit {
         console.log("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
     }
 
+
     // Entering data to the form to create a Form Instance
-    showFormInstance(formSchema){
+    showFormInstance(formSchema) {
         console.log("ShowFOrmInstance ----", formSchema);
         this.selectedFormName = formSchema.name;
         this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
@@ -755,4 +756,12 @@ export class DetailsComponent implements AfterViewInit {
         //this.formInstanceFormSchema = formSchema;*/
         this.displayFormInsanceForm = true;
     }
+
+    closeFormInstanceDialog() {
+        this.displayFormInsanceForm = false;
+        this.selectedFormName = '';
+        this.formInstanceFormSchemaVersionId = '';
+        this.formInstanceFields = [];
+    }
+
 }

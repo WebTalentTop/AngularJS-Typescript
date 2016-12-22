@@ -1,7 +1,7 @@
 /**
  * Created by ZeroInfinity on 12/19/2016.
  */
-import { Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import { FormInstanceService } from '../../../services/formInstance.service';
 import { FormSchemaFieldDataTypeService } from '../../../services/formSchemaFieldDataType.service';
 import { IFormInstance, FormInstance } from '../../../services/definitions/IFormInstance';
@@ -24,6 +24,8 @@ export class FormInstanceComponent {
     @Input() entityId:string;
     /*@Input() formSchema:any;*/
     @Input() formName:string;
+    @Output() closeFormInstanceDialog = new EventEmitter();
+
     formFieldDataTypeList:IFormSchemaFieldDataType[] =[];
     formFieldDataItemList:IFormInstanceFieldDataItemForm[] = [];
     fieldDataItem:IFormInstanceFieldDataItemForm;
@@ -101,9 +103,19 @@ export class FormInstanceComponent {
         var postResult =this.formInstanceService.postAdd(this.formInstance)
             .subscribe(dataResult => {
                 console.log("DataResult From Post ----------", dataResult);
+                console.log("Post Result Data -----------", postResult);
+                if (dataResult.isSuccess) {
+                    this.formInstance = new FormInstance('','','', []);
+                    this.formFieldDataTypeList = [];
+                    this.closeForm();
+                }
                 return dataResult;
             });
-        console.log("Post Result Data -----------", postResult);
+
+    }
+
+    closeForm() {
+        this.closeFormInstanceDialog.emit();
     }
 
 }

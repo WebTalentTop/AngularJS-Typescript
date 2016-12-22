@@ -333,7 +333,36 @@
 
             <p-tabPanel header="Maintenance" id="tests">
                 <div class="card card-w-title" *ngIf="formSchemaData">
-                    <div *ngFor="let item of formSchemaData">
+
+                    <p-dataGrid [value]="formSchemaData">
+                        <header>List of Test Facility Forms</header>
+                        <template let-item>
+                            <!--<pre style="height:auto; overflow-y: scroll">{{ item | json }}</pre><br/>-->
+                            <div style="padding:3px" class="ui-g-12 ui-md-3">
+                                <p-panel [header]="item.name"
+                                         [style]="{'text-align':'center'}">
+                                    <div>{{item.formSchemaCategories.$values[0].formSchemaCategory.name}}</div>
+                                    <hr class="ui-widget-content" style="border-top:0">
+                                    <button pButton
+                                            icon="fa fa-external-link-square"
+                                            type="text"
+                                            iconPos="right"
+                                            label="Preview Form"
+                                            (click)="selectedFormToView(item.name, item.fields.$values)">
+                                    </button>
+                                    <button pButton
+                                            icon="fa fa-plus"
+                                            type="text"
+                                            iconPos="right"
+                                            label="Enter Information"
+                                            (click)="showFormInstance(item)">
+                                    </button>
+                                </p-panel>
+                            </div>
+                        </template>
+                    </p-dataGrid>
+
+                    <!--<div *ngFor="let item of formSchemaData">
                         <h3>{{item.name}}</h3>
                         <span>
                             {{item.formSchemaCategories.$values[0].formSchemaCategory.name}}
@@ -353,7 +382,7 @@
                                 label="Enter Information"
                                 (click)="showFormInstance()">
                         </button>
-                    </div>
+                    </div>-->
                 </div>
 
                 <p-dialog header="Form Preview"
@@ -376,33 +405,6 @@
                         </footer>
                     </div>
                 </p-dialog>
-                <p-dataGrid [value]="formSchemaData">
-                    <header>List of Test Facility Forms</header>
-                    <template let-item>
-                        <!--<pre style="height:auto; overflow-y: scroll">{{ item | json }}</pre><br/>-->
-                        <div style="padding:3px" class="ui-g-12 ui-md-3">
-                            <p-panel [header]="item.name"
-                                     [style]="{'text-align':'center'}">
-                                <div>{{item.formSchemaCategories.$values[0].formSchemaCategory.name}}</div>
-                                <hr class="ui-widget-content" style="border-top:0">
-                                <button pButton
-                                        icon="fa fa-external-link-square"
-                                        type="text"
-                                        iconPos="right"
-                                        label="Preview Form"
-                                        (click)="selectedFormToView(item.name, item.fields.$values)">
-                                </button>
-                                <button pButton
-                                        icon="fa fa-plus"
-                                        type="text"
-                                        iconPos="right"
-                                        label="Enter Information"
-                                        (click)="showFormInstance(item)">
-                                </button>
-                            </p-panel>
-                        </div>
-                    </template>
-                </p-dataGrid>
 
                 <p-dialog header="Form Data"
                           [(visible)]="displayFormInsanceForm"
@@ -416,14 +418,15 @@
                                 [entityIdentifierId]="entityIdentifierInfo.id"
                                 [entityId]="id"
                                 [formName]="selectedFormName"
-                                [selectedInputList]="formInstanceFields">
+                                [selectedInputList]="formInstanceFields"
+                                (closeFormInstanceDialog)="closeFormInstanceDialog($event)">
                         </form-instance>
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                 <button pButton
                                         type="text"
                                         icon="fa fa-close"
-                                        (click)="closeFormPreviewDialog()"
+                                        (click)="closeFormInstanceDialog()"
                                         label="Close Preview">
                                 </button>
                             </div>
