@@ -2297,3 +2297,8 @@ body .layout-wrapper .layout-main {
     overflow: visible; }
     body .layout-wrapper .layout-main .ui-dialog .ui-dialog-content {
       overflow: visible; }
+    body .layout-wrapper .layout-main .ui-dialog footer label.checkbox {
+      display: inline-block;
+      line-height: 30px;
+      margin-right: 0.5em;
+      margin-top: 7px; }

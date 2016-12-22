@@ -180,5 +180,18 @@ body .layout-wrapper .layout-main
         {
             overflow: visible
         }
+
+        footer
+        {
+            label.checkbox
+            {
+                display: inline-block;
+
+                line-height: 30px;
+
+                margin-right: 0.5em;
+                margin-top: 7px
+            }
+        }
     }
 }
