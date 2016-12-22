@@ -13,15 +13,16 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
-
+import { MenuItem } from 'primeng/primeng';
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
+
 
 @Component({
     selector: 'calendar',
     templateUrl: 'app/body/calendar/titancalendar.component.html'
 })
-export class TitanCalendarComponent {
+export class TitanCalendarComponent implements AfterViewInit {
     testRoles: any;
     buildLevels: any;
     projectCodes: any;
@@ -40,11 +41,41 @@ export class TitanCalendarComponent {
     selectedHideWeekendValue: string = 'true';
     daysofweek: SelectItem[];
     slotDurations: SelectItem[];
-    selectedFirstDayValue: number =0;
+    selectedFirstDayValue: number = 0;
     startWorkHoursValue: string = "05:00";
     endWorkHoursValue: string = "19:00";
     selectedSlotDurationValue: string = "01:00";
     filterResourcesWithEvents: boolean = false; //When this setting is activated, only resources that have associated events will be displayed
+    tooltip: any;
+    displayEventDialog: boolean = false;
+    contextMenuItems: MenuItem[] = [];
+    displayEventDialogHeader: string = '';
+    selectedTestScheduleStartDate: Date;
+    selectedTestScheduleEndDate: Date;
+    testName: string = '';
+    testDuration: string = '';
+    testRequestedStartDate: string = '';
+    testRequestDueDate: string = '';
+    // For assigning operators/technicians
+    selectedOperatorUserNames: any[] = [];;
+    filteredOperatorUserNames: any[] = [];;
+    filteredselectedOperatorUserNames: any;//[] = [];
+    selectedResourceId: string = '';
+    selectedEventId: string = '';
+
+    testOperators: any[] = [
+        {
+            name: "A",
+            startDate: '1-1-2016',
+            endDate: '1-1-2016'
+        },
+        {
+            name: "AB",
+            startDate: '1-1-2016',
+            endDate: '1-1-2016'
+        }
+    ];
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -57,6 +88,7 @@ export class TitanCalendarComponent {
         private testtypeservice: TestTypeService
 
     ) { }
+
     initCalendarOptions() {
         this.daysofweek = [];
         this.daysofweek.push({ label: 'Sunday', value: { id: 1, name: '0', code: 'SUN' } });
@@ -73,9 +105,13 @@ export class TitanCalendarComponent {
         this.slotDurations.push({ label: 'Day', value: "24:00:00" });
         this.slotDurations.push({ label: 'Shift', value: "08:00" });
         this.slotDurations.push({ label: 'Hour', value: "01:00" });
-        //this.slotDurations.push({ label: '30 minutes', value: { id: 4, name: '00:30' } });
-        //this.slotDurations.push({ label: '15 minutes', value: { id: 5, name: '00:15' } });
+        this.slotDurations.push({ label: '30 minutes', value: { id: 4, name: '00:00:30' } });
+        this.slotDurations.push({ label: '15 minutes', value: { id: 5, name: '00:00:15' } });
+
+
+
     }
+
     initSchedule() {
         var self = this;
         let todayDate = moment().startOf('day');
@@ -83,9 +119,10 @@ export class TitanCalendarComponent {
         let TODAY = todayDate.format('YYYY-MM-DD');
         let TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
         let DEFAULTDATE = todayDate.clone().add(-7, 'day').format('YYYY-MM-DD');
+        var tt = this.tooltip;
         let scheduleConfig: any = {
-            schedulerLicenseKey:'0799804275-fcs-1480895270',
-            height:650,
+            schedulerLicenseKey: '0799804275-fcs-1480895270',
+            height: 650,
             theme: true,
             themeButtonIcons: {
                 prev: 'circle-triangle-w',
@@ -145,7 +182,7 @@ export class TitanCalendarComponent {
                     url: titanApiUrl + 'Calendar/GetResourcesForTimelineView?IncludeTestFacility=true&IncludeProject=false',
                     type: 'GET',
                     //data: {
-                        
+
                     //},
                     error: function () {
                         alert('there was an error while fetching events!');
@@ -155,88 +192,70 @@ export class TitanCalendarComponent {
                         callback(data.result.calendarResources.$values);
                     }
                 });
-               
+
             },
-           
-         eventSources : [function (start, end, timezone, callback) {
-              $.ajax({
-                  url: titanApiUrl + 'TestFacility/Schedule',
-                  type: 'POST',
-                  data: {
-                      startdate: start.utc().format(),
-                      enddate: end.utc().format(),
 
-                  },
-                  error: function () {
-                      alert('there was an error while fetching events!');
-                  },
-                  success: function (result) {
-                      var events = [];
+            eventSources: [function (start, end, timezone, callback) {
+                $.ajax({
+                    url: titanApiUrl + 'TestFacility/Schedule',
+                    type: 'POST',
+                    data: {
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
 
-                      $.each(result.calendarEvents.$values, function (index, element) {
-                          events.push(element);
-                      });
-                      callback(events);
-                  }
-              });
-          }]
-            
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }],
+            eventRender: function (event, element) {
+                element.attr("event-id", event.id);
+
+
+                element.attr("resource-id", event.resourceId);
+                element.addClass('showContextMenu');
+                
+                //element.qtip({
+                //    content: event.description
+                //});
+            },
+            eventClick: function (calEvent, jsEvent, view) {
+                self.displayEventDialog = true;
+                return false;
+            },
+
+            eventMouseover: function (calEvent, jsEvent, view) {
+                //var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + 'Ajay Was Here' + '</div>';
+                //var $tooltip = $(tooltip).appendTo('body');
+
+                //$(this).mouseover(function (e) {
+                //    $(this).css('z-index', 10000);
+                //    $tooltip.fadeIn('500');
+                //    $tooltip.fadeTo('10', 1.9);
+                //}).mousemove(function (e) {
+                //    $tooltip.css('top', e.pageY + 10);
+                //    $tooltip.css('left', e.pageX + 20);
+                //});
+            },
+
+            eventMouseout: function (calEvent, jsEvent) {
+                //$(this).css('z-index', 8);
+                //$('.tooltipevent').remove();
+            },
         };
-
-        //scheduleConfig.eventSources = [function (start, end, timezone, callback) {
-        //      $.ajax({
-        //          url: titanApiUrl + 'TestFacility/Schedule',
-        //          type: 'POST',
-        //          data: {
-        //              startdate: start.utc().format(),
-        //              enddate: end.utc().format(),
-
-        //          },
-        //          error: function () {
-        //              alert('there was an error while fetching events!');
-        //          },
-        //          success: function (result) {
-        //              var events = [];
-
-        //              $.each(result.calendarEvents.$values, function (index, element) {
-        //                  element.start = element.start;
-        //                  element.end = element.end;
-        //                  element.title = element.title;
-        //                  element.url = element.url;
-        //                  events.push(element);
-        //              });
-        //              callback(events);
-        //          }
-        //      });
-        //  }, function (start, end, timezone, callback) {
-        //      $.ajax({
-        //          url: titanApiUrl + 'TestFacility/Schedule',
-        //          type: 'POST',
-        //          data: {
-        //              startdate: start.utc().format(),
-        //              enddate: end.utc().format(),
-
-        //          },
-        //          error: function () {
-        //              alert('there was an error while fetching events!');
-        //          },
-        //          success: function (result) {
-        //              var events = [];
-
-        //              $.each(result.calendarEvents.$values, function (index, element) {
-        //                  element.start = element.start;
-        //                  element.end = element.end;
-        //                  element.title = element.title;
-        //                  element.url = element.url;
-        //                  events.push(element);
-        //              });
-        //              callback(events);
-        //          }
-        //      });
-        //  }];
-        //scheduleConfig.events= 
         $('#calendar').fullCalendar(scheduleConfig);
     }
+
     ngOnInit() {
         //   this.getTestFacilities();
         this.getTestModes();
@@ -248,44 +267,86 @@ export class TitanCalendarComponent {
         this.initSchedule();
         this.initCalendarOptions();
 
+
     }
+
+    ngAfterViewInit() {
+        //here you will have code where component content is ready.
+        var selfRef = this;
+
+        $.contextMenu({
+            selector: '.showContextMenu',
+            callback: function (key, options) {
+                var m = "clicked: " + key;
+
+                switch (key) {
+                    case "AssignResources": {
+                       
+                        selfRef.displayEventDialogHeader = "Assign resources";
+                        selfRef.displayEventDialog = true;
+                        selfRef.selectedEventId = $(this).attr("event-id");
+                        selfRef.selectedResourceId = $(this).attr("resource-id");
+                        console.log("----Clicked Assign resource")
+                        break;
+                    }
+                }
+            },
+            items: {
+                "AssignResources": { name: "Assign Resources", icon: "edit" },
+                "Split": { name: "Split", icon: "cut" },
+                "Details": { name: "Details", icon: "fa fa-beer" },
+                "copy": { name: "Copy", icon: "copy" },
+                "paste": { name: "Paste", icon: "paste" },
+                "delete": { name: "Delete", icon: "delete" },
+                "sep1": "---------",
+                "quit": {
+                    name: "Quit", icon: function () {
+                        return 'context-menu-icon context-menu-icon-quit';
+                    }
+                }
+            }
+        })
+    }
+
     onTestRoleChange(event) {
-        console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
-
-        //   this.EquipmentSubType.calibrationform = (event);
-
     }
+
     onBuildLevelChange(event) {
         console.log('------event------------', event)
         this.selectedBuildLevels = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onProjectCodeChange(event) {
         console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestFacilityChange(event) {
         console.log('------event------------', event)
         this.selectedTestFacilities = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestModeChange(event) {
         console.log('------event------------', event)
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestTypeChange(event) {
         console.log('------event------------', event)
         this.selectedTestTypes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestStatusChange(event) {
         console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
@@ -313,6 +374,7 @@ export class TitanCalendarComponent {
             console.log(response);
         });
     }
+
     getTestFacilities() {
         //    userRoles
         this.testfacilityservice.getTestFacilities().subscribe(response => {
@@ -404,6 +466,7 @@ export class TitanCalendarComponent {
             console.log(response);
         });
     }
+
     getProjectCodes() {
         //    userRoles
         this.projectservice.getProjectCodes().subscribe(response => {
@@ -426,6 +489,7 @@ export class TitanCalendarComponent {
             console.log(response);
         });
     }
+
     getBuildLevels() {
         //    userRoles
         this.buildlevelservice.getBuildLevels().subscribe(response => {
@@ -448,12 +512,13 @@ export class TitanCalendarComponent {
             console.log(response);
         });
     }
+
     updateCalendarSettings(event) {
         let schedulerOptions: any = {
 
         };
         let viewStardDate: any = $('#calendar').fullCalendar('getView').start.format();
-        
+
 
         schedulerOptions.weekends = (this.selectedHideWeekendValue === 'true');
         schedulerOptions.firstDay = this.selectedFirstDayValue;
@@ -462,5 +527,30 @@ export class TitanCalendarComponent {
         schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         console.log('------options-------------', schedulerOptions);
         $('#calendar').fullCalendar('option', schedulerOptions);
+    }
+
+    filterOperatorUserNames(event) {
+        this.testfacilityservice.filterByUserNames(event.query).subscribe(filteredList => {
+            this.filteredOperatorUserNames = filteredList.$values;
+        });
+    }
+
+    scheduleUsers(event) {
+        console.log(this.filteredselectedOperatorUserNames)
+
+        let {displayName, firstName} = this.filteredselectedOperatorUserNames;
+
+        console.log(displayName, firstName)
+        let item = {
+            name: displayName,
+            startDate: '1-1-2016',
+            endDate: '1-2-2090'
+        };
+        this.testOperators.push(item);
+        console.log("-----------inside scheduleUsers---", item);
+        var selectedEvent = $("#calendar").fullCalendar('clientEvents', this.selectedEventId)
+        console.log("-----------Selected Event---", selectedEvent);
+
+        //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
     }
 }
