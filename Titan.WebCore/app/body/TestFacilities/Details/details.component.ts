@@ -714,8 +714,13 @@ export class DetailsComponent implements AfterViewInit {
                                 this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
                                     .subscribe(formSchemaResult => {
                                         console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
-                                        this.formSchemaData = formSchemaResult.result;
-                                        console.log("FormSchemaData ----------", this.formSchemaData);
+                                        if (formSchemaResult.isSuccess){
+                                            this.formSchemaData = formSchemaResult.result;
+                                            console.log("FormSchemaData ----------", this.formSchemaData);
+                                        }
+                                        else {
+                                            this.formSchemaData = [];
+                                        }
 
                                     });
                             }
