@@ -1,4 +1,4 @@
-﻿<div>
+﻿
 <div class="row">
     <div class="ui-grid-col-1">
         Slots
@@ -57,18 +57,12 @@
     </div>
 
 </div>
-<!--<div class="row">
-    <p>selectedHideWeekendValue : is  {{selectedHideWeekendValue | json}}</p>
-    <p>First Day of the week: {{selectedFirstDayValue ? selectedFirstDayValue.name : 'none'}}</p>
-    <p>Slot Duration : {{selectedSlotDurationValue | json}}</p>
 
-
-</div>-->
-<div class="row" style="overflow-y:hidden">
+<div class="row">
     <div id="calendar">
     </div>
 </div>
-<p-dialog header="Assign User Roles" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade">
+<p-dialog header="Calendar Settings" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade">
 
     <div class="ui-grid-row">
 
@@ -122,10 +116,82 @@
 
 </p-dialog>
 
-</div>
+
+<p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="500" [responsive]="true" [width]="800">
+
+    <div>
+        Test Name {{testName}}  Duration {{testDuration}} Requested Start Date {{ testRequestedStartDate}} Due By {{testRequestDueDate}}
+
+    </div>
+
+    <div class="ui-g-12">
+
+        <div class="ui-g-4">
+            <label>
+                <span class="text">Schedule Startdate </span>
+                <p-calendar [(ngModel)]="selectedTestScheduleStartDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
+            </label>
+        </div>
+        <div class="ui-g-4">
+            <label>
+                <span class="text">Schedule Enddate</span>
+                <p-calendar [(ngModel)]="selectedTestScheduleEndDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
+            </label>
+        </div>
+    </div>
+    <hr />
+
+    <div class="ui-g-12">
+        <div class="ui-g-4">
+            <label>
+                <span class="text">Operators</span>
+
+                <p-autoComplete [(ngModel)]="filteredselectedOperatorUserNames" [suggestions]="filteredOperatorUserNames" (completeMethod)="filterOperatorUserNames($event)"
+                                name="username" [minLength]="1" placeholder="Search by Name/#"
+                                field="firstName" [multiple]="false">
+                </p-autoComplete>
+
+            </label>
+        </div>
+
+        <div class="ui-g-4">
+
+            <label>
+                <span class="text">Start </span>
+                <p-calendar [(ngModel)]="selectedTestScheduleStartDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
+            </label>
+
+        </div>
+
+        <div class="ui-g-4">
+
+            <label>
+                <span class="text">End</span>
+                <p-calendar [(ngModel)]="selectedTestScheduleEndDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
+            </label>
+
+        </div>
+
+        <div class="ui-g-4">
+
+            <button type="button" pButton icon="ui-icon-calendar" (click)="scheduleUsers($event)" label="Schedule"></button>
+
+        </div>
+    </div>
+    <div class="ui-grid-row">
+
+        <p-dataTable [value]="testOperators">
+            <p-column field="name" header="Name" sortable="true"></p-column>
+            <p-column field="startDate" header="Start" sortable="true"></p-column>
+            <p-column field="endDate" header="End" sortable="true"></p-column>
+        </p-dataTable>
+
+    </div>
+    <button type="button" pButton icon="ui-icon-calendar" label="close"></button>
+</p-dialog>
+
 <style>
     #calendar {
-		max-width: 95%;
-		
-	}
+        max-width: 95%;
+    }
 </style>

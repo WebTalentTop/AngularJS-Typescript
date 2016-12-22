@@ -12,18 +12,20 @@ import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
 import {
     DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
-    FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule
+    FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { MultiSelectModule } from 'primeng/primeng';
-
+import { ContextMenuModule } from 'primeng/primeng';
 import calendarRoutes from "./titancalendar.routes";
 
 @NgModule({
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
-        InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule],
-    providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService, 
+        InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
+        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule],
+
+    providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService
     ],
     declarations: [TitanCalendarComponent]
