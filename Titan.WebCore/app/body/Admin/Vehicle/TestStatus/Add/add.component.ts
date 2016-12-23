@@ -22,12 +22,9 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
-        console.log(formRef);
-        console.log(this.username);
-        console.log(this.description);
         formRef.locale = "en-us";
         formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', calendarDisplayColor: '', isDeleted: false};
+        let formData: any = {name: '', description: '', calendarDisplayColor:'', locale:'', isDeleted: false};
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.calendarDisplayColor = formRef.calendarDisplayColor;
