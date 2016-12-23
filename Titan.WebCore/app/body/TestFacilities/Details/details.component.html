@@ -452,7 +452,15 @@
                             <div class="ui-grid-col-2"></div>
 
                             <p-dataTable [value]="TestFacilityAttachments">
+
+                                <!-- Begin Name Column -->
+
                                 <p-column field="name" header="Name"></p-column>
+
+                                <!-- End Name Column -->
+
+                                <!-- Begin Download Link Column -->
+
                                 <p-column>
                                     <template pTemplate type="header">
                                         <button type="button" pButton icon="fa-refresh"></button>
@@ -461,6 +469,11 @@
                                         <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
                                     </template>
                                 </p-column>
+
+                                <!-- End Download Link Column -->
+
+                                <!-- Begin Actions Column -->
+
                                 <p-column>
                                     <template pTemplate type="header">
                                         <button type="button" pButton icon="fa-refresh"></button>
@@ -469,6 +482,9 @@
                                         <button pButton type="button">delete</button>
                                     </template>
                                 </p-column>
+
+                                <!-- End Actions Column -->
+
                             </p-dataTable>
                         </div>
                     </template>
