@@ -21,7 +21,9 @@ export class TaskComponent {
     HasTasks: boolean = false;
     idField:string;
     linkFieldId: string;
+    testNumber: string;
     added: any;
+    tasks: any;
     msgs: Message[] = [];
     constructor(private service: TestFacilityService, private taskservice: TaskService, private route: ActivatedRoute, private router: Router) {
         //this.route.queryParams.subscribe(params => {
@@ -42,7 +44,9 @@ export class TaskComponent {
             .subscribe(res => {
                 if (res.result.length != 0) {
                     this.HasTasks = true
+                    this.tasks = res.result;
                     this.testRequestId = res.result[0].entityId; 
+                    
                 }
                 //resData = res;
                 //this.gridData = res.Data;
