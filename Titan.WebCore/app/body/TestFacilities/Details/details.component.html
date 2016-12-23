@@ -465,13 +465,21 @@
 
                                 <!-- Begin Uploaded By Column -->
 
-                                <p-column field="userCreatedById" header="Uploaded By"></p-column>
+                                <p-column field="userCreatedById" header="Uploaded By">
+                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                        <em style="color: #ddd">(not yet implemented)</em>
+                                    </template>
+                                </p-column>
 
                                 <!-- End Uploaded By Column -->
 
                                 <!-- Begin When Uploaded Column -->
 
-                                <p-column field="createdOn" header="Uploaded On"></p-column>
+                                <p-column field="createdOn" header="When Uploaded">
+                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                        <em style="color: #ddd">(not yet implemented)</em>
+                                    </template>
+                                </p-column>
 
                                 <!-- End When Uploaded Column -->
 
