@@ -163,6 +163,10 @@ export class DetailsComponent implements AfterViewInit {
     ngAfterViewInit() {
 
     }
+    downloadAttachment(attachment) {
+
+        window.open('/TestFacilityAttachment/file/' + attachment.id);
+    }
     handleChange(event) {
         // console.log('--------tab changed---', event);
         // console.log('-------targetid-------', event.originalEvent.target.innerText);

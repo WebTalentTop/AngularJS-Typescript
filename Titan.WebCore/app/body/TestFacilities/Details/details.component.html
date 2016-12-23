@@ -488,7 +488,7 @@
 
                                 <p-column header="Actions">
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <button pButton type="button" icon="ui-icon-file-download" label="Download"></button>
+                                        <button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>
                                         <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"></button>
                                     </template>
                                 </p-column>
