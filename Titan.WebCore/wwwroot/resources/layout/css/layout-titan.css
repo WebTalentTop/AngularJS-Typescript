@@ -2233,6 +2233,24 @@ body .layout-wrapper .layout-main {
   box-sizing: border-box; }
   body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row {
+      position: relative; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .md-inputfield input {
+        padding-left: 0;
+        width: 100%; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .md-inputfield label {
+        left: 0; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .helper {
+        margin: 0;
+        font-size: 12px;
+        color: #777;
+        position: absolute;
+        left: 0;
+        top: 100%; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row .error {
+        color: #f00; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .input-row + .input-row {
+        margin-top: 2.8em; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
       overflow: auto;
       max-height: none; }
@@ -2242,6 +2260,19 @@ body .layout-wrapper .layout-main {
       body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
         margin: 0;
         float: right; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .body {
+      padding-top: 2em; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
+      overflow: auto;
+      margin-top: 2em; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer p {
+        display: inline-block;
+        color: #777;
+        line-height: 2em;
+        font-size: 12px;
+        margin: 0 1em 0 10px; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer button {
+        float: right; }
     body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
       margin-top: 1em; }
   body .layout-wrapper .layout-main > .footer {
@@ -2250,3 +2281,7 @@ body .layout-wrapper .layout-main {
       margin-bottom: 0; }
     body .layout-wrapper .layout-main > .footer sup {
       line-height: 0; }
+  body .layout-wrapper .layout-main .ui-dialog {
+    overflow: visible; }
+    body .layout-wrapper .layout-main .ui-dialog .ui-dialog-content {
+      overflow: visible; }

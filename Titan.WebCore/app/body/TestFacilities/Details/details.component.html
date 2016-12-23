@@ -441,7 +441,7 @@
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility" url="http://titanapi-preprod.12thwonder.com/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                <p-fileUpload [name]="testfacility"  url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -455,33 +455,34 @@
 
                                 <!-- Begin File Name Column -->
 
-                                <p-column field="name" header="File Name">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">{{TestFacilityAttachment.name}}</a>
-                                    </template>
-                                </p-column>
+                                <p-column field="name" header="File Name"></p-column>
 
                                 <!-- End File Name Column -->
 
                                 <!-- Begin Uploaded By Column -->
 
-                                <p-column field="uploadedBy" header="Uploaded By">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <em style="color: #ddd">(not yet implemented)</em>
-                                    </template>
-                                </p-column>
+                                <p-column field="userCreatedById" header="Uploaded By"></p-column>
 
                                 <!-- End Uploaded By Column -->
 
                                 <!-- Begin When Uploaded Column -->
 
-                                <p-column field="whenUploaded" header="When Uploaded">
+                                <p-column field="createdOn" header="Uploaded On"></p-column>
+
+                                <!-- End When Uploaded Column -->
+
+                                <!-- Begin Download Link Column -->
+
+                                <p-column>
+                                    <template pTemplate type="header">
+                                        <button type="button" pButton icon="fa-refresh"></button>
+                                    </template>
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <em style="color: #ddd">(not yet implemented)</em>
+                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">download</a>
                                     </template>
                                 </p-column>
 
-                                <!-- End When Uploaded Column -->
+                                <!-- End Download Link Column -->
 
                                 <!-- Begin Actions Column -->
 

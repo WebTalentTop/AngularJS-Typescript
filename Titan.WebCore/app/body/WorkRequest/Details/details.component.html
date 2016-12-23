@@ -1,0 +1,68 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <h3>Details</h3>
+        <p-tabView (onChange)="handleChange($event)">
+
+            <p-tabPanel header="Edit ||" id="info">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">List of all tasks for work requests</div>
+                            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+                                <!--<h3> Add Test Facility </h3>-->
+                                <p-panel>
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="table-responsive" style="min-height:400px;">
+                                                <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
+                                                    <p-column header="Sensor Name" field="name" sortable="true"></p-column>
+
+
+                                                    <p-column header="Comments" field="comment" sortable="true"></p-column>
+                                                    <p-column>
+                                                        <template pTemplate type="header">
+                                                            <button type="button" pButton icon="fa-refresh"></button>
+                                                        </template>
+                                                        <template let-sensorrow="rowData" pTemplate type="body">
+                                                            <a routerLink="details/{{sensorrow.id}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                                        </template>
+                                                    </p-column>
+
+                                                </p-dataTable>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!--<header>Test Facility Information</header>-->
+                               
+
+                                    <!--<div class="ui-grid-row">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2">
+                                                <button id="add" pButton type="submit" label="Save">  </button>
+                                            </div>
+                                            <div class="ui-grid-col-6">
+                                            </div>
+                                            <div class="ui-grid-col-4">
+                                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </p-panel>
+                                <br />
+                                <br />
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- Form End -->
+
+
+            </p-tabPanel>
+
+
+        </p-tabView>
+    </div>
+</div>
