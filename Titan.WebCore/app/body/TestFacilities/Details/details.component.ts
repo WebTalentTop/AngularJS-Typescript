@@ -4,7 +4,7 @@ import { TestFacilityService } from '../../../shared/services/testfacility.servi
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
 import { FormSchemaService } from '../../../shared/services/formSchema.service';
-import { IFormSchema, FormSchema } from '../../../shared/services/definitions/IFormSchema';
+import { IFormSchema, FormSchema} from '../../../shared/services/definitions/IFormSchema';
 
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
@@ -18,7 +18,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -37,30 +37,29 @@ declare var fullcalendardef: FullCalendar.Calendar;
 })
 export class DetailsComponent implements AfterViewInit {
 
-    titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
 
     // Form Related variables
-    entityIdentifierName: string = 'TestFacility';
-    entityIdentifierInfo: any = {};
-    formSchemaCategoryInfo: IFormSchemaCategory[] = [];
-    formSchemaInfo: any = {};
-    formSchemaData: IFormSchema[] = [];// new FormSchema('', []);
+    entityIdentifierName:string = 'TestFacility';
+    entityIdentifierInfo:any = {};
+    formSchemaCategoryInfo:IFormSchemaCategory[] = [];
+    formSchemaInfo:any = {};
+    formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
 
-    displayPreviewSelectedForm: boolean = false;
+    displayPreviewSelectedForm:boolean = false;
 
     // Form Display
     selectedFormSchemaCategory;
-    selectedFormFields: any[] = [];
-    selectedFormName: string;
+    selectedFormFields:any[] = [];
+    selectedFormName:string;
     // End of Form Display
 
     // FormInstance variables
-    displayFormInsanceForm: boolean = false;
-    formInstanceFormSchemaVersionId: string;
-    formInstanceFormSchema: any;
-    formInstanceFields: any[] = [];
+    displayFormInsanceForm:boolean = false;
+    formInstanceFormSchemaVersionId:string;
+    formInstanceFormSchema:any;
+    formInstanceFields:any[] = [];
 
 
     // End Of Form Related Variables
@@ -144,7 +143,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     ngOnInit() {
-        if (this.id) {
+        if(this.id) {
             this.getEntityIdentifierInfo();
             this.getUserRoles();
             this.getTestFacilities();
@@ -191,7 +190,7 @@ export class DetailsComponent implements AfterViewInit {
                 right: 'month,basicWeek,basicDay,listMonth'
             },
             editable: true,
-            eventSources: []
+            eventSources:[]
             //events:{}
         };
         scheduleConfig.eventSources = [function (start, end, timezone, callback) {
@@ -258,7 +257,7 @@ export class DetailsComponent implements AfterViewInit {
     onTestRoleChange(event) {
         // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
-
+       
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -311,7 +310,8 @@ export class DetailsComponent implements AfterViewInit {
         //this.displayDialog = true;
         // this.IsSubType= true;
     }
-    moveEquipmenttoTestFacility() {
+    moveEquipmenttoTestFacility()
+    {
         if (this.selectedTestFacilities == null || this.selectedTestFacilities == undefined) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Test Facility', detail: '' });
@@ -321,7 +321,7 @@ export class DetailsComponent implements AfterViewInit {
             'equipmentId': this.selectedEquipmentId,
             'facilityId': this.selectedTestFacilities
         };
-
+     
         this.testFacilityService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
 
             this.displayEquipmentDialog = false;
@@ -333,7 +333,7 @@ export class DetailsComponent implements AfterViewInit {
         });
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }
-
+   
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
@@ -379,7 +379,7 @@ export class DetailsComponent implements AfterViewInit {
         });
     }
 
-    getTestFacilityById() {
+    getTestFacilityById(){
         this.testFacilityService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
@@ -544,7 +544,7 @@ export class DetailsComponent implements AfterViewInit {
     getTestFacilityRoleService() {
         this.testfacilityroleservice.getByIdusing(this.id)
             .subscribe(TestFacilityRoles => {
-                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+            //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                 this.TestFacilityRoles = TestFacilityRoles;
             });
     }
@@ -588,7 +588,7 @@ export class DetailsComponent implements AfterViewInit {
             this.filteredSelectedUserNames = null;
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
-                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+          //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.TestFacilityRoles = TestFacilityRoles;
                 });
         });
@@ -635,7 +635,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 
-                // this.router.navigate(["/testfacilities/details/", res.result.id]);
+               // this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
 
         });
@@ -658,7 +658,7 @@ export class DetailsComponent implements AfterViewInit {
 
                 this.testfacilityattachmentservice.getByIdusing(this.id)
                     .subscribe(TestFacilityAttachments => {
-                        //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+          //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                         this.TestFacilityAttachments = TestFacilityAttachments;
                     });
             });
@@ -694,14 +694,14 @@ export class DetailsComponent implements AfterViewInit {
     private getEntityIdentifierInfo() {
         this.entityIdentifierService.getByName(this.entityIdentifierName)
             .subscribe(res => {
-                if (res.isSuccess) {
+                if(res.isSuccess) {
                     console.log("EntityIdentifierInfo Call ----------", res);
                     this.entityIdentifierInfo = res.result;
 
                     this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
                         .subscribe(fsCategory => {
                             console.log("FormSchemaCategoryInfo ----------", fsCategory);
-                            if (fsCategory.isSuccess) {
+                            if(fsCategory.isSuccess) {
                                 this.formSchemaCategoryInfo = fsCategory.result;
 
                                 let fscIds = this.formSchemaCategoryInfo.map(fsc => fsc.id);
@@ -718,7 +718,7 @@ export class DetailsComponent implements AfterViewInit {
                                 this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
                                     .subscribe(formSchemaResult => {
                                         console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
-                                        if (formSchemaResult.isSuccess) {
+                                        if (formSchemaResult.isSuccess){
                                             this.formSchemaData = formSchemaResult.result;
                                             console.log("FormSchemaData ----------", this.formSchemaData);
                                         }
@@ -730,14 +730,14 @@ export class DetailsComponent implements AfterViewInit {
                             }
                         });
                 }
-                else {
+                else{
                     //Add a message to the user and maybe after certain seconds take them to home page or ...
                     //this.msgs.push({})
                 }
             })
     }
 
-    selectedFormToView(formName, formSchemaItems) {
+    selectedFormToView(formName,formSchemaItems) {
         this.selectedFormName = formName;
         this.selectedFormFields = formSchemaItems;
         this.displayPreviewSelectedForm = true;
