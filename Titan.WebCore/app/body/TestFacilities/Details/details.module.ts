@@ -29,7 +29,7 @@ import detailsRoutes from "./details.routes";
 
 @NgModule({
 
-    imports: [CommonModule, FormPreviewModule, FormInstanceModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, DataTableModule, TabViewModule, CalendarModule,  ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
+    imports: [CommonModule, FormPreviewModule, DataGridModule, FormInstanceModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, SpinnerModule, PaginatorModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
     providers: [EntityIdentifierService,TestFacilityService,FormSchemaCategoryService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
 
 TestTypeService, TestTemplateService
