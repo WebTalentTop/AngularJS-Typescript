@@ -210,4 +210,23 @@ body .layout-wrapper .layout-main
             }
         }
     }
+
+    .ui-column-filter
+    {
+        border: 1px solid #ddd;
+        border-radius: 0.2em;
+
+        background-color: #fafafa;
+        color: #aaa;
+
+        padding: 0.25em 0.5em;
+
+        &:focus
+        {
+            border: 1px solid #cacaca;
+
+            background-color: #fff;
+            color: #555
+        }
+    }
 }
