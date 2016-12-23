@@ -63,18 +63,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     selectedResourceId: string = '';
     selectedEventId: string = '';
 
-    testOperators: any[] = [
-        {
-            name: "A",
-            startDate: '1-1-2016',
-            endDate: '1-1-2016'
-        },
-        {
-            name: "AB",
-            startDate: '1-1-2016',
-            endDate: '1-1-2016'
-        }
-    ];
+    testOperators: any[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -224,7 +213,7 @@ export class TitanCalendarComponent implements AfterViewInit {
 
                 element.attr("resource-id", event.resourceId);
                 element.addClass('showContextMenu');
-                
+
                 //element.qtip({
                 //    content: event.description
                 //});
@@ -281,7 +270,7 @@ export class TitanCalendarComponent implements AfterViewInit {
 
                 switch (key) {
                     case "AssignResources": {
-                       
+
                         selfRef.displayEventDialogHeader = "Assign resources";
                         selfRef.displayEventDialog = true;
                         selfRef.selectedEventId = $(this).attr("event-id");
@@ -538,13 +527,14 @@ export class TitanCalendarComponent implements AfterViewInit {
     scheduleUsers(event) {
         console.log(this.filteredselectedOperatorUserNames)
 
-        let {displayName, firstName} = this.filteredselectedOperatorUserNames;
+        let {displayName, firstName, id} = this.filteredselectedOperatorUserNames;
 
-        console.log(displayName, firstName)
+        console.log(displayName, firstName, id)
         let item = {
             name: displayName,
             startDate: '1-1-2016',
-            endDate: '1-2-2090'
+            endDate: '1-2-2090',
+            id: id
         };
         this.testOperators.push(item);
         console.log("-----------inside scheduleUsers---", item);
@@ -552,5 +542,8 @@ export class TitanCalendarComponent implements AfterViewInit {
         console.log("-----------Selected Event---", selectedEvent);
 
         //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
+    }
+    removeOperator(operator) {
+        console.log(operator);
     }
 }

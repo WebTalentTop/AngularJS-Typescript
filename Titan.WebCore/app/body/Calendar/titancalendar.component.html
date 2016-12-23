@@ -181,9 +181,18 @@
     <div class="ui-grid-row">
 
         <p-dataTable [value]="testOperators">
+            <p-column hidden="true" field="id"></p-column>
             <p-column field="name" header="Name" sortable="true"></p-column>
             <p-column field="startDate" header="Start" sortable="true"></p-column>
             <p-column field="endDate" header="End" sortable="true"></p-column>
+            <p-column styleClass="col-button">
+                <template pTemplate="header">
+                    <button type="button" pButton icon="fa-refresh"></button>
+                </template>
+                <template let-user="rowData" pTemplate="body">
+                    <button type="button" pButton (click)="removeOperator(user)" icon="fa-delete"></button>
+                </template>
+            </p-column>
         </p-dataTable>
 
     </div>
