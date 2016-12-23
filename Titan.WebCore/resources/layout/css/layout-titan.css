@@ -2302,3 +2302,7 @@ body .layout-wrapper .layout-main {
       line-height: 30px;
       margin-right: 0.5em;
       margin-top: 7px; }
+  body .layout-wrapper .layout-main .card-w-title header h1 {
+    float: left; }
+  body .layout-wrapper .layout-main .card-w-title header button {
+    float: right; }

@@ -194,4 +194,20 @@ body .layout-wrapper .layout-main
             }
         }
     }
+
+    .card-w-title
+    {
+        header
+        {
+            h1
+            {
+                float: left
+            }
+
+            button
+            {
+                float: right
+            }
+        }
+    }
 }
