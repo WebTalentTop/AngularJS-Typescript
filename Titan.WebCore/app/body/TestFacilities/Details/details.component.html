@@ -455,7 +455,11 @@
 
                                 <!-- Begin File Name Column -->
 
-                                <p-column field="name" header="File Name"></p-column>
+                                <p-column field="name" header="File Name">
+                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">{{TestFacilityAttachment.name}}</a>
+                                    </template>
+                                </p-column>
 
                                 <!-- End File Name Column -->
 
