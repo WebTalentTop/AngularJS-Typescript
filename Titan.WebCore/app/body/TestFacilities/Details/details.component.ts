@@ -37,6 +37,7 @@ declare var fullcalendardef: FullCalendar.Calendar;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
 

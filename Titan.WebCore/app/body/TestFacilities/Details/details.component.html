@@ -441,7 +441,7 @@
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility" url="http://titanapi-preprod.12thwonder.com/api/file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                <p-fileUpload [name]="testfacility"  url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -461,13 +461,13 @@
 
                                 <!-- Begin Uploaded By Column -->
 
-                                <p-column field="uploadedBy" header="Uploaded By"></p-column>
+                                <p-column field="userCreatedById" header="Uploaded By"></p-column>
 
                                 <!-- End Uploaded By Column -->
 
                                 <!-- Begin When Uploaded Column -->
 
-                                <p-column field="whenUploaded" header="When Uploaded"></p-column>
+                                <p-column field="createdOn" header="Uploaded On"></p-column>
 
                                 <!-- End When Uploaded Column -->
 
