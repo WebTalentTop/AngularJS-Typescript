@@ -396,15 +396,16 @@
                                                                
                                                                 <footer>
                                                                     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                                                        <a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>
-                                                                        <!--<button type="button" pButton icon="fa-close" routerLink="/add/{{id}}" label="OK"></button>-->
+                                                                        <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
+                                                                        <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
                                                                         <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
                                                                     </div>
                                                                 </footer>
                                                             </p-dialog>
                                                           
-                                                            <p-confirmDialog width="425"></p-confirmDialog>
-                                                            <button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>
+                                                            <!--<p-confirmDialog width="425"></p-confirmDialog>-->
+                                                            <p-checkbox name="groupname" value="IsThermoCouple" label="Are you sure you need thermo couple info?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()"></p-checkbox>
+                                                            <!--<button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>-->
                                                             <!--<div class="form-group col-sm-6 col-md-4">
                                                             <label class="control-label">Process Flow</label>
                                                             <select name="" id="" class="form-control">

@@ -21,13 +21,17 @@ import { FormInstanceModule } from '../../../shared/UIComponents/FormComponents/
 import { DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule, DialogModule, PaginatorModule, SpinnerModule} from 'primeng/primeng';
 
 
+
+
 import { RouterModule } from "@angular/router";
 import {MultiSelectModule} from 'primeng/primeng';
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormPreviewModule, FormInstanceModule, RouterModule, DataGridModule, AutoCompleteModule, MultiSelectModule, FormsModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, SpinnerModule, PanelModule, PaginatorModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
-    providers: [EntityIdentifierService, TestFacilityService, FormSchemaCategoryService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
+
+    imports: [CommonModule, FormPreviewModule, FormInstanceModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, DataTableModule, TabViewModule, CalendarModule, CheckboxModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
+    providers: [EntityIdentifierService,TestFacilityService,FormSchemaCategoryService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
+
 TestTypeService, TestTemplateService
 ],
     declarations: [DetailsComponent]
