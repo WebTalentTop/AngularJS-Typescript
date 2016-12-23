@@ -166,7 +166,7 @@ export class DetailsComponent implements AfterViewInit {
     }
     downloadAttachment(attachment) {
 
-        window.open('/TestFacilityAttachment/file/' + attachment.id);
+        window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
     }
     handleChange(event) {
         // console.log('--------tab changed---', event);
