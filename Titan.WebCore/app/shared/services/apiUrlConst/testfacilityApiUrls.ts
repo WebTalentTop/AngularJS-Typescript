@@ -21,8 +21,10 @@ export class TestFacilityApiUrl {
     public static filterUserNames: string = titanApiUrl + 'testFacility/FilterByUserNames';
     public static PostAddUserRolesUrl: string = titanApiUrl + 'testFacility/PostUserRoles';
     public static PostAddDepartmentMapUrl: string = titanApiUrl + 'testFacility/PostDepartments';
-    public static getDepartments: string = titanApiUrl + 'tenant';;
-    public static getEquipments: string = titanApiUrl + 'equipment';;
+    public static getDepartments: string = titanApiUrl + 'tenant';
+    public static getEquipments: string = titanApiUrl + 'equipment';
+    public static getOperatingHours: string = titanApiUrl + 'operatingHours';
+    public static getMaintenanceFrequencies: string = titanApiUrl + 'maintenanceFrequency';
     public static PostAddEquipmentMapUrl: string = titanApiUrl + 'testFacility/PostEquipments';
     public static PostMoveEquipmentToFacilityUrl: string = titanApiUrl + 'TestFacility/MoveEquipmentToFacility';
     public static getDetailsTabLocJs:string = localizationApiUrl;

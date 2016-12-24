@@ -192,6 +192,24 @@ export class TestFacilityService {
                 return data.$values
             });
     }
+    getOperatingHours(): Observable<any> {
+
+        return this.http.get(`${TestFacilityApiUrl.getOperatingHours}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
+    getMaintenanceFrequencies(): Observable<any> {
+
+        return this.http.get(`${TestFacilityApiUrl.getMaintenanceFrequencies}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
     getEquipments(): Observable<any> {
 
         return this.http.get(`${TestFacilityApiUrl.getEquipments}`, { headers: this.headers })

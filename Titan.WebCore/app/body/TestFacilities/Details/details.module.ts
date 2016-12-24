@@ -18,7 +18,7 @@ import { TestFacilityAttachmentService } from '../../../shared/services/testFaci
 import { FormPreviewModule } from '../../../shared/UIComponents/FormComponents/FormPreviewComponent/formPreview.module';
 import { FormInstanceModule } from '../../../shared/UIComponents/FormComponents/FormInstanceComponent/formInstance.module';
 
-import { DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule, DialogModule, PaginatorModule, SpinnerModule} from 'primeng/primeng';
+import { DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, EditorModule, FileUploadModule, GrowlModule, DialogModule, PaginatorModule, SpinnerModule } from 'primeng/primeng';
 
 
 
@@ -29,7 +29,7 @@ import detailsRoutes from "./details.routes";
 
 @NgModule({
 
-    imports: [CommonModule, FormPreviewModule, DataGridModule, FormInstanceModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, SpinnerModule, PaginatorModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
+    imports: [CommonModule, FormPreviewModule, DataGridModule, FormInstanceModule, RouterModule, AutoCompleteModule, MultiSelectModule, FormsModule, SpinnerModule, PaginatorModule, EditorModule, DataTableModule, TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, DialogModule, detailsRoutes],
     providers: [EntityIdentifierService,TestFacilityService,FormSchemaCategoryService, TestFacilityRoleService, TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
 
 TestTypeService, TestTemplateService

@@ -16,10 +16,9 @@
 
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-                        <h2>Next Maintainence Date:</h2> 
                         <!-- Begin Panel - Test Facility Name and Location -->
 
-                        <p-panel header="Information">
+                        <p-panel header="Test Facility Name and Location">
 
                             <div class="body">
 
@@ -29,8 +28,8 @@
 
                                     <div class="md-inputfield">
                                         <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
-                                            minlength="3" class="form-control" required row="20"
-                                            (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
+                                               minlength="3" class="form-control" required row="20"
+                                               (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
                                         <label>Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
                                     </div>
 
@@ -39,15 +38,14 @@
                                 </div>
 
                                 <!-- End Name -->
-
                                 <!-- Begin Address Line 1 -->
 
                                 <div class="input-row md-spaced">
 
                                     <div class="md-inputfield">
                                         <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="address.addressLine1"
-                                            #tfAddress1Ref="ngModel"
-                                            (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
+                                               #tfAddress1Ref="ngModel"
+                                               (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
                                         <label>Address Line 1 <span [ngClass]="{'error': tfAddress1Ref.errors?.required}">*</span></label>
                                     </div>
 
@@ -57,15 +55,14 @@
                                 </div>
 
                                 <!-- End Address Line 1 -->
-
                                 <!-- Begin Address Line 2 -->
 
                                 <div class="input-row md-spaced">
 
                                     <div class="md-inputfield">
                                         <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="address.addressLine2"
-                                            #tfAddress2Ref="ngModel"
-                                            (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
+                                               #tfAddress2Ref="ngModel"
+                                               (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
                                         <label>Address Line 2</label>
                                     </div>
 
@@ -74,14 +71,13 @@
                                 </div>
 
                                 <!-- End Address Line 2 -->
-
                                 <!-- Begin City -->
 
                                 <div class="input-row md-spaced">
 
                                     <div class="md-inputfield">
                                         <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="address.city"
-                                            (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
+                                               (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
                                         <label>City <span [ngClass]="{'error': tfCityRef.errors?.required}">*</span></label>
                                     </div>
 
@@ -90,14 +86,13 @@
                                 </div>
 
                                 <!-- End City -->
-
                                 <!-- Begin State -->
 
                                 <div class="input-row md-spaced">
 
                                     <div class="md-inputfield">
                                         <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                            (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
+                                               (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
                                         <label>State <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
                                     </div>
 
@@ -106,62 +101,13 @@
                                 </div>
 
                                 <!-- End State -->
-
-                                <!-- Begin Operation Hours -->
-
-                                <div class="input-row md-spaced">
-
-                                    <div class="md-inputfield">
-                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                               (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                        <label>Operation Hours <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
-                                    </div>
-
-                                    <p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
-
-                                </div>
-
-                                <!-- End State -->
-
-                                <!-- Begin Maintainence Frequency -->
-
-                                <div class="input-row md-spaced">
-
-                                    <div class="md-inputfield">
-                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                               (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                        <label> Maintainence Frequency <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
-                                    </div>
-
-                                    <p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
-
-                                </div>
-
-                                <!-- End State -->
-
-                                <!-- Begin Description -->
-
-                                <div class="input-row md-spaced">
-
-                                    <div class="md-inputfield">
-                                        <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="address.state" #tfstateRef="ngModel"
-                                               (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                        <label>Desccription <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
-                                    </div>
-
-                                    <p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
-
-                                </div>
-
-                                <!-- End State -->
-
                                 <!-- Begin Postal Code -->
 
                                 <div class="input-row md-spaced">
 
                                     <div class="md-inputfield">
                                         <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
-                                            (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
+                                               (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
                                         <label>Postal Code <span [ngClass]="{'error': tfpostalCodeRef.errors?.required}">*</span></label>
                                     </div>
 
@@ -200,7 +146,8 @@
 
                             <div class="input-row">
 
-                                <label><span class="text">Users</span>
+                                <label>
+                                    <span class="text">Users</span>
 
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
                                                     name="username" [minLength]="1" placeholder="Search by Name/#"
@@ -212,7 +159,6 @@
                             </div>
 
                             <!-- End Users -->
-
                             <!-- Begin Role -->
 
                             <div class="input-row">
@@ -237,7 +183,6 @@
                         </p-dialog>
 
                         <!-- End Dialog - Assign User Role -->
-
                         <!-- Begin Panel - Test Facility Users -->
 
                         <p-panel>
@@ -249,102 +194,9 @@
 
                             <div class="ui-grid-row">
 
-                                <p-dataTable [value]="TestFacilityRoles" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" >
-                                    <p-column field="name" header="Name" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                                    <p-column field="role" header="Role" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                              <p-column header="Action">
-
-                                        <template let-TestFacilityRole="rowData" pTemplate type="body">
-                                            <button pButton type="button" icon="ui-icon-remove-circle" (click)="onDeleteUserRoleMap(TestFacilityRole.id)" label="Delete"></button>
-                                        </template>
-                                    </p-column>
-                                </p-dataTable>
-
-                            </div>
-
-                        </p-panel>
-
-                        <!-- End Panel - Test Facility Users -->
-
-                    </form>
-
-                </div>
-
-                <div class="subsection">
-
-                    <form>
-
-                        <!-- Begin Dialog - Assign User Role -->
-
-                        <p-dialog header="Assign Departments" [(visible)]="displayAssignDepartmentsDialog" modal="modal" showEffect="fade" responsive="true">
-
-                            <p>Please select one or more departments at the {{testFacility.name}} test facility.</p>
-
-                            <!-- Begin Users -->
-
-                            <!--<div class="input-row">
-
-                                <label>
-                                    <span class="text">Users</span>
-
-                                    <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                                    name="username" [minLength]="1" placeholder="Search by Name/#"
-                                                    field="firstName" [multiple]="true">
-                                    </p-autoComplete>
-
-                                </label>
-
-                            </div>-->
-
-                            <!-- End Users -->
-                            <!-- Begin Role -->
-
-                            <div class="input-row">
-
-                                <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
-                                <span class="pseudo-label">Departments</span>
-
-                                <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
-
-                            </div>
-
-                            <!-- End Role -->
-
-                            <footer>
-                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <label class="checkbox"><input type="checkbox"> Keep Open</label>
-                                    <button type="button" pButton icon="ui-icon-close" (click)="displayAssignDepartmentsDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()" label="Assign Department"></button>
-                                </div>
-                            </footer>
-
-                        </p-dialog>
-
-                        <!-- End Dialog - Assign User Role -->
-                        <!-- Begin Panel - Test Facility Users -->
-
-                        <p-panel>
-
-                            <header class="with-controls">
-                                <p class="ui-panel-title">Departments</p>
-                                <p class="controls"><button type="text" (click)="displayAssignDepartmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Departments&hellip;"></button></p>
-                            </header>
-
-                            <div class="ui-grid-row">
-
-                                <p-dataTable [value]="testFacilityTenants" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                                    <p-column field="name" header="Name(Department Name)" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                                    <p-column field="role" header="Next Scheduled Test date" sortable="true"></p-column>
-                                    <p-column field="role" header="Department PIC" sortable="true"></p-column>
-                                    <p-column header="Action">
-                                        <!--<template pTemplate type="header">
-                                            <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"></button>
-                                        </template>-->
-                                        <template let-TestFacilityTenant="rowData" pTemplate type="body">
-                                            <button pButton type="button" icon="ui-icon-remove-circle" (click)="onDeleteTenantMap(TestFacilityTenant.id)" label="Delete"></button>
-                                        </template>
-
-                                    </p-column>
+                                <p-dataTable [value]="TestFacilityRoles">
+                                    <p-column field="name" header="Name" sortable="true"></p-column>
+                                    <p-column field="role" header="Role" sortable="true"></p-column>
                                 </p-dataTable>
 
                             </div>
@@ -359,111 +211,36 @@
 
             </p-tabPanel>
 
-            <p-tabPanel header="Equipments" id="equipment" headerStyleClass="equipment">
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-growl [value]="msgs"></p-growl>
+                <p-panel header="Test Facility Equipment">
 
-              
-
-                <p-dialog header="Assign Equipments" [(visible)]="displayAssignEquipmentsDialog" modal="modal" showEffect="fade" responsive="true">
-
-                    <p>Please select any equipment at the {{testFacility.name}} test facility.</p>
-
-                    <!-- Begin Users -->
-                    <!--<div class="input-row">
-
-            <label>
-                <span class="text">Users</span>
-
-                <p-autoComplete [(ngModel)]="filteredSelectedUserNames" [suggestions]="filteredUserNames" (completeMethod)="filterUserNames($event)"
-                                name="username" [minLength]="1" placeholder="Search by Name/#"
-                                field="firstName" [multiple]="true">
-                </p-autoComplete>
-
-            </label>
-
-        </div>-->
-                    <!-- End Users -->
-                    <!-- Begin Role -->
-
-                    <div class="input-row">
-
-                        <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
-                        <span class="pseudo-label">Equipments</span>
-
-                        <p-dropdown [options]="equipments" (onChange)="onEquipmentChange($event)" name="equipments" [autoWidth]="false"></p-dropdown>
-
-                    </div>
-
-                    <!-- End Role -->
-
-                    <footer>
-                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                            <label class="checkbox"><input type="checkbox"> Keep Open</label>
-                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()" label="Assign Equipment"></button>
-                        </div>
-                    </footer>
-
-                </p-dialog>
-                <p-panel>
-                    <header class="with-controls">
-                        <p class="ui-panel-title">Test Facility Equipments</p>
-                        <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Equipments&hellip;"></button></p>
-                    </header>
-                    <div class="ui-grid-col-4"></div>
-                    <div class="ui-grid-row">
-                        <!--<div class="ui-grid-col-2">
-                            <b>Test Facility Equipments</b>
-                        </div>-->
-                        <div class="ui-grid-col-2"></div>
-                        <p-dataTable [value]="TestFacilityEquipments" selectionMode="single" 
-                                                        [paginator]="true" rows="15" [responsive]="true">
-                            <p-column field="equipmentName" header="Equipment Name" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="serialNumber" header="Serial Number" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="equipmentTypeName" header="Next Calibration Date" sortable="true"></p-column>
-                            <!--<p-column>
-                                <template pTemplate type="header">
-                                    <button type="button" pButton icon="fa-refresh"></button>
-                                </template>
-
-                                <template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                    <button pButton type="button" icon="ui-icon-arrow-forward" label="Move" (click)="showEquipmentDialog(TestFacilityEquipment)" title="Move To Another Test Facility"></button>
-                                </template>
-                            </p-column>-->
-                            <p-column header="Actions">
-                                <template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                    <button pButton type="button" (click)="showEquipmentDialog(TestFacilityEquipment)">Move To Another TestFacility</button>
-                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onDeleteEquipmentMap(TestFacilityEquipment.id)" label="Delete"></button>
-                                </template>
-                                <!--<template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                    <button pButton type="button" (click)="showEquipmentDialog(TestFacilityEquipment)">Move To Another TestFacility</button>
-                                </template>-->
-
-                                <!--<template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onDeleteEquipmentMap(TestFacilityEquipment.id)" label="Delete"></button>
-                                </template>-->
-                            </p-column>
-                        </p-dataTable>
-
-                      
-
-                        <p-dialog header="Move Equipments" [(visible)]="displayEquipmentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="300">
-
-                              <div class="ui-grid-row">
-                                <div class="ui-grid-col-4"><label for="name">Choose Test Facility</label></div>
-                                <div class="ui-grid-col-8">
-                                    <p-dropdown [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
-                                    </p-dropdown>
-                                </div>
+                    <p-dataTable [value]="TestFacilityEquipments" selectionMode="single"
+                                 [paginator]="true" rows="15" [responsive]="true">
+                        <p-column field="equipmentName" header="Equipment Name" sortable="true"></p-column>
+                        <p-column field="serialNumber" header="Serial Number" sortable="true"></p-column>
+                        <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true"></p-column>
+                        <p-column header="Actions">
+                            <template let-TestFacilityEquipment="rowData" pTemplate type="body">
+                                <button pButton type="button" icon="ui-icon-arrow-forward" label="Move" (click)="showEquipmentDialog(TestFacilityEquipment)" title="Move To Another Test Facility"></button>
+                            </template>
+                        </p-column>
+                    </p-dataTable>
+                    <p-dialog header="Test Facility Equipment" [(visible)]="displayEquipmentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="300">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4"><label for="name">Choose Test Facility</label></div>
+                            <div class="ui-grid-col-8">
+                                <p-dropdown [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                                </p-dropdown>
                             </div>
-                            <footer>
-                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <button type="button" pButton icon="fa-close" routerLink="/testfacilities" label="Cancel"></button>
-                                    <button type="button" pButton icon="fa-check" (click)="moveEquipmenttoTestFacility()" label="Ok"></button>
-                                </div>
-                            </footer>
-                        </p-dialog>
+                        </div>
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <button type="button" pButton icon="fa-close" routerLink="/testfacilities" label="Cancel"></button>
+                                <button type="button" pButton icon="fa-check" (click)="moveEquipmenttoTestFacility()" label="Ok"></button>
+                            </div>
+                        </footer>
+                    </p-dialog>
 
                 </p-panel>
 
@@ -503,21 +280,21 @@
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Test Status :
+                            Test Status :
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Test Roles:
+                            Test Roles:
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
                         <div class="ui-grid-col-1">
-                             Build Levels :
+                            Build Levels :
                         </div>
                         <div class="ui-grid-col-2">
                             <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
@@ -558,15 +335,13 @@
                                             type="text"
                                             iconPos="right"
                                             label="Preview Form"
-                                            (click)="selectedFormToView(item.name, item.fields.$values)">
-                                    </button>
+                                            (click)="selectedFormToView(item.name, item.fields.$values)"></button>
                                     <button pButton
                                             icon="fa fa-plus"
                                             type="text"
                                             iconPos="right"
                                             label="Enter Information"
-                                            (click)="showFormInstance(item)">
-                                    </button>
+                                            (click)="showFormInstance(item)"></button>
                                 </p-panel>
                             </div>
                         </template>
@@ -609,8 +384,7 @@
                                         type="text"
                                         icon="fa fa-close"
                                         (click)="closeFormPreviewDialog()"
-                                        label="Close Preview">
-                                </button>
+                                        label="Close Preview"></button>
                             </div>
                         </footer>
                     </div>
@@ -622,14 +396,13 @@
                           responsive="true"
                           width="1200">
                     <div class="card card-w-title">
-                        <form-instance
-                                *ngIf="displayFormInsanceForm"
-                                [formSchemaVersionId]="formInstanceFormSchemaVersionId"
-                                [entityIdentifierId]="entityIdentifierInfo.id"
-                                [entityId]="id"
-                                [formName]="selectedFormName"
-                                [selectedInputList]="formInstanceFields"
-                                (closeFormInstanceDialog)="closeFormInstanceDialog($event)">
+                        <form-instance *ngIf="displayFormInsanceForm"
+                                       [formSchemaVersionId]="formInstanceFormSchemaVersionId"
+                                       [entityIdentifierId]="entityIdentifierInfo.id"
+                                       [entityId]="id"
+                                       [formName]="selectedFormName"
+                                       [selectedInputList]="formInstanceFields"
+                                       (closeFormInstanceDialog)="closeFormInstanceDialog($event)">
                         </form-instance>
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -637,8 +410,7 @@
                                         type="text"
                                         icon="fa fa-close"
                                         (click)="closeFormInstanceDialog()"
-                                        label="Close Preview">
-                                </button>
+                                        label="Close Preview"></button>
                             </div>
                         </footer>
                     </div>
@@ -650,7 +422,7 @@
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
 
-                <p-fileUpload [name]="testfacility"  url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
+                <p-fileUpload [name]="testfacility" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}" (onUpload)="onUpload($event)"
                               multiple="multiple" accept="image/*" maxFileSize="1000000">
                     <template pTemplate type="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -660,7 +432,7 @@
                             <div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>
                             <div class="ui-grid-col-2"></div>
 
-                            <p-dataTable [value]="TestFacilityAttachments" [editable]="true">
+                            <p-dataTable [value]="TestFacilityAttachments">
 
                                 <!-- Begin File Name Column -->
 
@@ -670,42 +442,31 @@
                                     </template>
                                 </p-column>
 
-
-                                <p-column header="Category" [style]="{'overflow':'visible'}" >
-                                    <template pTemplate type="body" let-col>
-                                        <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories"  [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
-                                    </template>
-                                </p-column>
                                 <!-- End File Name Column -->
-
                                 <!-- Begin Uploaded By Column -->
 
-                                <p-column field="employee" header="Employee">
+                                <p-column field="userCreatedById" header="Uploaded By">
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>
+                                        <em style="color: #ddd">(not yet implemented)</em>
                                     </template>
                                 </p-column>
 
                                 <!-- End Uploaded By Column -->
-
                                 <!-- Begin When Uploaded Column -->
 
-                                <p-column field="TestFacilityAttachment.timeStamp" header="TimeStamp">
+                                <p-column field="createdOn" header="When Uploaded">
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <em style="color: #ddd">{{TestFacilityAttachment.timeStamp}}</em>
+                                        <em style="color: #ddd">(not yet implemented)</em>
                                     </template>
                                 </p-column>
 
                                 <!-- End When Uploaded Column -->
-
                                 <!-- Begin Actions Column -->
 
                                 <p-column header="Actions">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">                                 
-
-                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a>
-                                        <!--<button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>-->
-                                        <button pButton type="button" icon="ui-icon-remove-circle" label="Delete" (click)="onDelete(TestFacilityAttachment)"></button>
+                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                        <button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>
+                                        <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"></button>
                                     </template>
                                 </p-column>
 
@@ -717,40 +478,7 @@
                 </p-fileUpload>
             </p-tabPanel>
 
-            <p-tabPanel header="Log" id="log" headerStyleClass="log">
-                <p-growl [value]="msgs"></p-growl>
-                <p-panel>
-                    <div class="ui-grid-col-4"></div>
-                    <div class="ui-grid-row">
-                        <p-panel>
 
-                            <header class="with-controls">
-                                <p class="ui-panel-title">Comments</p>                             
-                             </header>
-
-                            <div class="ui-grid-row">
-
-                              
-
-                            </div>
-
-                        </p-panel>
-                        <!--<div class="ui-grid-col-2">
-                            <b>Test Facility Equipments</b>
-                        </div>-->
-                        <div class="ui-grid-col-2"></div>
-                        <p-dataTable [value]="TestFacilityEquipments" selectionMode="single"
-                                    [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"> [responsive]="true">
-                            <p-column field="equipmentName" header="Information" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="serialNumber" header="Audit/Comment" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="equipmentTypeName" header="Employee" sortable="true"  [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="equipmentTypeName" header="Timestamp" sortable="true"></p-column>
-                         </p-dataTable>
-
-                    </div>
-                </p-panel>
-
-            </p-tabPanel>
         </p-tabView>
     </div>
 

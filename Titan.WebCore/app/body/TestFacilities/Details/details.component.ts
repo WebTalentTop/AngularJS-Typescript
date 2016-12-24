@@ -55,7 +55,10 @@ export class DetailsComponent implements AfterViewInit {
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
     categories: SelectItem[];;
     displayPreviewSelectedForm:boolean = false;
-
+    operatingHours: any;
+    maintenanceFrequencies: any;
+    selectedOperatingHour: any;
+    selectedMaintenanceFrequency: any;
     // Form Display
     selectedFormSchemaCategory;
     selectedFormFields:any[] = [];
@@ -179,6 +182,9 @@ export class DetailsComponent implements AfterViewInit {
             this.getDepartments();
             this.getEquipments();
 
+            this.getOperatingHours();
+            this.getMaintenanceFrequencies();
+
         }
     }
 
@@ -285,6 +291,18 @@ export class DetailsComponent implements AfterViewInit {
     onEquipmentChange(event) {
         // console.log('------event------------', event)
         this.selectedEquipment = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onMaintenanceFrequencyChange(event) {
+        // console.log('------event------------', event)
+        this.selectedMaintenanceFrequency = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onOperatingHourChange(event) {
+        // console.log('------event------------', event)
+        this.selectedOperatingHour = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -423,6 +441,50 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.departments = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getMaintenanceFrequencies() {
+        //    userRoles
+        this.testFacilityService.getMaintenanceFrequencies().subscribe(response => {
+            this.maintenanceFrequencies = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.maintenanceFrequencies = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getOperatingHours() {
+        //    userRoles
+        this.testFacilityService.getOperatingHours().subscribe(response => {
+            this.operatingHours = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.operatingHours = resultMap;
             }
             // console.log(response);
         });
