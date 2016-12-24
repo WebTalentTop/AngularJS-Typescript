@@ -579,12 +579,12 @@ export class TitanCalendarComponent implements AfterViewInit {
         this.scheduledTestFacilities.push(item);
 
         this.selectedTestFacilityItems = this.generateTestFacilitySelectItems(this.scheduledTestFacilities, true);
-        console.log("----------- scheduleFacilities Selected Test Facilities Array ---", this.scheduledTestFacilities);
-        console.log("----------- Distinct Selected Test Facilities Array ---", this.selectedTestFacilityItems);
-       
+      
         var selectedEvent = $("#calendar").fullCalendar('clientEvents', this.selectedEventId)
-        console.log("----------- scheduleFacilities Selected Event---", selectedEvent);
-        console.log("----------- scheduleFacilities Selected Test Facilities Array ---", this.scheduledTestFacilities);
+
+        // Clearing the test facility Name
+        this.filteredselectedTestFacilityNames = null;
+
         //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
     }
 
