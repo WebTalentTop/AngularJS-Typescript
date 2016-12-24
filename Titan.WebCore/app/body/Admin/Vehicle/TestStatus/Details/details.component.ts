@@ -30,7 +30,8 @@ export class DetailsComponent {
         userCreatedById: '',
         userModifiedById: '',
         createdOn: '',
-        modifiedOn: ''
+        modifiedOn: '',
+        calendarDisplayColor: ''
 
     };
 
@@ -47,8 +48,6 @@ export class DetailsComponent {
         private service: TestStatusService
     )
     { }
-
-
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));

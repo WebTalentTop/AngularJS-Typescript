@@ -2,14 +2,14 @@
 import { CommonModule } from "@angular/common";
 import { TestFacilitiesComponent } from "./testfacilities.component";
 
-import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, MessagesModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, MessagesModule, DropdownModule, ButtonModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 import testFacilitiesRoutes from "./testfacilities.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule,GridModule, testFacilitiesRoutes],
+    imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, GridModule, ButtonModule, testFacilitiesRoutes],
     providers:[TestFacilityService],
     declarations: [TestFacilitiesComponent]
 })

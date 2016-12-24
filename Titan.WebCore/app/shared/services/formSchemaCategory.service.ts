@@ -43,7 +43,7 @@ export class FormSchemaCategoryService {
             .map(this.getJson);
     }*/
 
-    postAdd(filterBody): Observable<any> {
+    /*postAdd(filterBody): Observable<any> {
         console.log("-------- Post FilterBody --------", filterBody);
         console.log("Post Schema URL ------------", FormSchemaCategoryApiUrl.postCreatedUrl);
         return this.http.post(`${FormSchemaCategoryApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
@@ -57,35 +57,33 @@ export class FormSchemaCategoryService {
         console.log("-------- Post FilterBody --------", filterBody);
         return this.http.put(`${FormSchemaCategoryApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
-        /*.map(this.checkErrors)
+        /!*.map(this.checkErrors)
          .catch(err => Observable.throw(err))
-         .map(this.getJson);*/
+         .map(this.getJson);*!/
     }
 
     getById(id): Observable<any> {
         return this.http.get(`${FormSchemaCategoryApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson);
-    }
+    }*/
 
     getAll(): Observable<any> {
         return this.http.get(`${FormSchemaCategoryApiUrl.getAllUrl}`, {headers: this.headers})
             .map(this.getJson);
     }
 
+    getByEntityIdentifierId(id): Observable<any> {
+        return this.http.get(`${FormSchemaCategoryApiUrl.getByEntityIdentifierId}/${id}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
+    GetByEntitySubTypeId(id): Observable<any> {
+        return this.http.get(`${FormSchemaCategoryApiUrl.getByEntitySubTypeId}${id}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();
-    }
-
-    private checkErrors(response: Response): Response {
-        if (response.status >= 200 && response.status <= 300) {
-            return response;
-        }
-        else {
-            var error = new Error(response.statusText);
-            error['response'] = response;
-            console.error(error);
-            throw error;
-        }
     }
 }

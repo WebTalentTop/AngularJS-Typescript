@@ -1,5 +1,11 @@
 ﻿import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
+
+import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
+import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
+import { FormSchemaService } from '../../../shared/services/formSchema.service';
+import { IFormSchema, FormSchema} from '../../../shared/services/definitions/IFormSchema';
+
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
@@ -7,11 +13,12 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
+import { IFormSchemaCategory } from '../../../shared/services/definitions/IFormSchemaCateogry';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -30,8 +37,33 @@ declare var fullcalendardef: FullCalendar.Calendar;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
+
+    // Form Related variables
+    entityIdentifierName:string = 'TestFacility';
+    entityIdentifierInfo:any = {};
+    formSchemaCategoryInfo:IFormSchemaCategory[] = [];
+    formSchemaInfo:any = {};
+    formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
+
+    displayPreviewSelectedForm:boolean = false;
+
+    // Form Display
+    selectedFormSchemaCategory;
+    selectedFormFields:any[] = [];
+    selectedFormName:string;
+    // End of Form Display
+
+    // FormInstance variables
+    displayFormInsanceForm:boolean = false;
+    formInstanceFormSchemaVersionId:string;
+    formInstanceFormSchema:any;
+    formInstanceFields:any[] = [];
+
+
+    // End Of Form Related Variables
 
     notificationMsgs: Message[] = [];
     notifications: any;
@@ -57,6 +89,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
+    displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
     formEquipmentObject: any;
@@ -70,6 +103,7 @@ export class DetailsComponent implements AfterViewInit {
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
+    selectedEquipmentId: any;
     // Hide show Tab Panels
     displayEquipmentTab: boolean = false;
     displayScheduleTab: boolean = false;
@@ -90,7 +124,10 @@ export class DetailsComponent implements AfterViewInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private dataService: TestFacilityService,
+        private testFacilityService: TestFacilityService,
+        private entityIdentifierService: EntityIdentifierService,
+        private formSchemaCategoryService: FormSchemaCategoryService,
+        private formSchemaService: FormSchemaService,
         private testfacilityroleservice: TestFacilityRoleService,
         private buildlevelservice: BuildLevelService,
         private teststatusservice: TestStatusService,
@@ -105,12 +142,35 @@ export class DetailsComponent implements AfterViewInit {
         this.entityId = this.id;
         console.log("---- TF Details ID Param -----", this.id);
     }
+
+    ngOnInit() {
+        if(this.id) {
+            this.getEntityIdentifierInfo();
+            this.getUserRoles();
+            this.getTestFacilities();
+            this.getTestModes();
+            this.getTestTypes();
+            this.getBuildLevels();
+            this.getTestStatus();
+            this.getProjectCodes();
+            this.getTestRoles();
+            this.getTestFacilityById();
+            this.getTestFacilityRoleService();
+            this.getTestFacilityAttachmentServiceById();
+            this.getTestFacilityEquipmentById();
+        }
+    }
+
     ngAfterViewInit() {
 
     }
+    downloadAttachment(attachment) {
+
+        window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
+    }
     handleChange(event) {
-        console.log('--------tab changed---', event);
-        console.log('-------targetid-------', event.originalEvent.target.innerText);
+        // console.log('--------tab changed---', event);
+        // console.log('-------targetid-------', event.originalEvent.target.innerText);
         if (event.originalEvent.currentTarget.classList.contains("equipment")) {
             this.displayEquipmentTab = true;
         } else if (!this.displayScheduleTab && event.originalEvent.currentTarget.classList.contains("schedule")) {
@@ -188,105 +248,54 @@ export class DetailsComponent implements AfterViewInit {
         //scheduleConfig.events= 
         $('#calendar').fullCalendar(scheduleConfig);
     }
-    ngOnInit() {
 
-        this.getUserRoles();
-        this.getTestFacilities();
-        this.getTestModes();
-        this.getTestTypes();
-        this.getBuildLevels();
-        this.getTestStatus();
-        this.getProjectCodes();
-        this.getTestRoles();
-        this.dataService.getById(this.id)
-            .subscribe(res => {
-                //this.formConfiguration = res.formConfiguration;
-                //this.formObject = res.formObject;
-                this.address = res.address;
-                this.addressid = res.address.id
-                this.testFacility = res.testFacility;
-                //this.model = res.formObject;
-                //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-                //console.log("----- Result of formObject -----", this.model);
-            });
-        if (this.id) {
-            this.dataService.getNotifications(this.id)
-                .subscribe(res => {
-                    if (res) {
-                        this.notifications = res;
-                    }
-
-                    this.notifications.forEach(x => {
-                        this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
-                    })
-                })
-        }
-
-        this.testfacilityroleservice.getByIdusing(this.id)
-            .subscribe(TestFacilityRoles => {
-                console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
-                this.TestFacilityRoles = TestFacilityRoles;
-            });
-
-        this.testfacilityattachmentservice.getByIdusing(this.id)
-            .subscribe(TestFacilityAttachments => {
-                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
-                this.TestFacilityAttachments = TestFacilityAttachments;
-            });
-
-        this.dataService.getEquipmentsByIdusing(this.id)
-            .subscribe(res => {
-                this.TestFacilityEquipments = res;
-
-            });
-    }
     onUserRoleChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedRole = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestRoleChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
        
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onBuildLevelChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedBuildLevels = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onProjectCodeChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestFacilityChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedTestFacilities = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestModeChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestTypeChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedTestTypes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestStatusChange(event) {
-        console.log('------event------------', event)
+        // console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
-        //this.dataService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
+        //this.testFacilityService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
         //    .subscribe(TestFacilityEvents => {
         //        console.log('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
         //        //this.TestFacilityEvents = TestFacilityEvents;
@@ -294,9 +303,41 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    showEquipmentDialog(event) {
+        this.displayEquipmentDialog = true;
+        this.selectedEquipmentId = event.equipmentId;
+        //this.selectedCalibration = null;
+        //this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+        //this.displayDialog = true;
+        // this.IsSubType= true;
+    }
+    moveEquipmenttoTestFacility()
+    {
+        if (this.selectedTestFacilities == null || this.selectedTestFacilities == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Facility', detail: '' });
+            return null;
+        }
+        let postbody = {
+            'equipmentId': this.selectedEquipmentId,
+            'facilityId': this.selectedTestFacilities
+        };
+     
+        this.testFacilityService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
+
+            this.displayEquipmentDialog = false;
+            this.testFacilityService.getEquipmentsByIdusing(this.id)
+                .subscribe(res => {
+                    this.TestFacilityEquipments = res;
+
+                });
+        });
+        // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
+    }
+   
     getUserRoles() {
         //    userRoles
-        this.dataService.getRoles().subscribe(response => {
+        this.testFacilityService.getRoles().subscribe(response => {
             this.userRoles = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -313,7 +354,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.userRoles = resultMap;
             }
-            console.log(response);
+            // console.log(response);
         });
     }
     getTestRoles() {
@@ -335,19 +376,46 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testRoles = resultMap;
             }
-            console.log(response);
+            // console.log(response);
         });
     }
+
+    getTestFacilityById(){
+        this.testFacilityService.getById(this.id)
+            .subscribe(res => {
+                //this.formConfiguration = res.formConfiguration;
+                //this.formObject = res.formObject;
+                this.address = res.address;
+                this.addressid = res.address.id
+                this.testFacility = res.testFacility;
+                //this.model = res.formObject;
+                //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
+                //console.log("----- Result of formObject -----", this.model);
+            });
+        if (this.id) {
+            this.testFacilityService.getNotifications(this.id)
+                .subscribe(res => {
+                    if (res) {
+                        this.notifications = res;
+                    }
+
+                    this.notifications.forEach(x => {
+                        this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                    })
+                })
+        }
+    }
+
     getTestFacilities() {
         //    userRoles
-        this.dataService.getTestFacilities().subscribe(response => {
+        this.testFacilityService.getTestFacilities().subscribe(response => {
             this.testFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Role",
-                //    value: null
-                //});
+                resultMap.push({
+                    label: "Select Test Facility",
+                    value: null
+                });
                 for (let template of response) {
                     var temp = {
                         label: template.name,
@@ -357,7 +425,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testFacilities = resultMap;
             }
-            console.log(response);
+            // console.log(response);
         });
     }
 
@@ -380,7 +448,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testAllModes = resultMap;
             }
-            console.log(response);
+            // console.log(response);
         });
     }
 
@@ -403,7 +471,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
+            // console.log(response);
         });
     }
 
@@ -426,7 +494,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testStatus = resultMap;
             }
-            console.log(response);
+            //console.log(response);
         });
     }
     getProjectCodes() {
@@ -448,7 +516,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.projectCodes = resultMap;
             }
-            console.log(response);
+            //console.log(response);
         });
     }
     getBuildLevels() {
@@ -470,9 +538,33 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.buildLevels = resultMap;
             }
-            console.log(response);
+            //console.log(response);
         });
     }
+
+    getTestFacilityRoleService() {
+        this.testfacilityroleservice.getByIdusing(this.id)
+            .subscribe(TestFacilityRoles => {
+            //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.TestFacilityRoles = TestFacilityRoles;
+            });
+    }
+    getTestFacilityAttachmentServiceById() {
+        this.testfacilityattachmentservice.getByIdusing(this.id)
+            .subscribe(TestFacilityAttachments => {
+                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                this.TestFacilityAttachments = TestFacilityAttachments;
+            });
+    }
+
+    getTestFacilityEquipmentById() {
+        this.testFacilityService.getEquipmentsByIdusing(this.id)
+            .subscribe(res => {
+                this.TestFacilityEquipments = res;
+
+            });
+    }
+
     onAddUserRole() {
 
         if (this.filteredSelectedUserNames.length == 0) {
@@ -492,12 +584,12 @@ export class DetailsComponent implements AfterViewInit {
         //var inputDto = {
         //    testRequirementList: selectedTestRequirementIds
         //}
-        this.dataService.postAddUserNames(selectedUserNames, this.id, this.selectedRole).subscribe(filteredList => {
+        this.testFacilityService.postAddUserNames(selectedUserNames, this.id, this.selectedRole).subscribe(filteredList => {
             this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
-                    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+          //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.TestFacilityRoles = TestFacilityRoles;
                 });
         });
@@ -507,13 +599,13 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     filterUserNames(event) {
-        this.dataService.filterByUserNames(event.query).subscribe(filteredList => {
+        this.testFacilityService.filterByUserNames(event.query).subscribe(filteredList => {
             this.filteredUserNames = filteredList.$values;
         });
     }
     onSubmit(formRef) {
-        console.log(formRef);
-        console.log(this.testFacility.name);
+        //console.log(formRef);
+        //console.log(this.testFacility.name);
         formRef.isDeleted = false;
         let formData: any = {
             id: this.id,
@@ -538,7 +630,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.address.postalCode = formRef.postalCode;
         formData.locale = "en-us";
         console.log(formData);
-        this.dataService.postUpdate(formData).subscribe(res => {
+        this.testFacilityService.postUpdate(formData).subscribe(res => {
 
             if (res.isSuccess) {
                 this.msgs = [];
@@ -561,13 +653,13 @@ export class DetailsComponent implements AfterViewInit {
         }
     }
     onDelete(TestFacilityAttachment: ITestFacilityAttachment) {
-        console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
         this.testfacilityattachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
             .subscribe(res => {
 
                 this.testfacilityattachmentservice.getByIdusing(this.id)
                     .subscribe(TestFacilityAttachments => {
-                        console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+          //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                         this.TestFacilityAttachments = TestFacilityAttachments;
                     });
             });
@@ -575,7 +667,7 @@ export class DetailsComponent implements AfterViewInit {
 
 
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
-        console.log('---------------buttonclick---------------', TestFacilityAttachment);
+        //console.log('---------------buttonclick---------------', TestFacilityAttachment);
         // return this.http.get(`${TestFacilityApiUrl.getfilesByIdUrl}/${path}`, { headers: this.headers })
         //   this.msgs = [];
         // this.msgs.push({severity:'info', summary:'Attachment Select', detail:'',  + TestFacilityAttachment.$values.path});
@@ -592,11 +684,94 @@ export class DetailsComponent implements AfterViewInit {
 
         this.testfacilityattachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
-                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                //console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
 
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
+
+    private getEntityIdentifierInfo() {
+        this.entityIdentifierService.getByName(this.entityIdentifierName)
+            .subscribe(res => {
+                if(res.isSuccess) {
+                    console.log("EntityIdentifierInfo Call ----------", res);
+                    this.entityIdentifierInfo = res.result;
+
+                    this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
+                        .subscribe(fsCategory => {
+                            console.log("FormSchemaCategoryInfo ----------", fsCategory);
+                            if(fsCategory.isSuccess) {
+                                this.formSchemaCategoryInfo = fsCategory.result;
+
+                                let fscIds = this.formSchemaCategoryInfo.map(fsc => fsc.id);
+
+                                console.log("Form Schema Category Ids -----", fscIds);
+
+                                /*this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
+                                    .subscribe(formSchemaResult => {
+                                        console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        this.formSchemaData = formSchemaResult.result;
+                                        console.log("FormSchemaData ----------", this.formSchemaData);
+
+                                    });*/
+                                this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
+                                    .subscribe(formSchemaResult => {
+                                        console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        if (formSchemaResult.isSuccess){
+                                            this.formSchemaData = formSchemaResult.result;
+                                            console.log("FormSchemaData ----------", this.formSchemaData);
+                                        }
+                                        else {
+                                            this.formSchemaData = [];
+                                        }
+
+                                    });
+                            }
+                        });
+                }
+                else{
+                    //Add a message to the user and maybe after certain seconds take them to home page or ...
+                    //this.msgs.push({})
+                }
+            })
+    }
+
+    selectedFormToView(formName,formSchemaItems) {
+        this.selectedFormName = formName;
+        this.selectedFormFields = formSchemaItems;
+        this.displayPreviewSelectedForm = true;
+        console.log("FormName -------", this.selectedFormName);
+        console.log("Form Schema To View clicked ----", this.selectedFormFields);
+        console.log("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
+    }
+
+    closeFormPreviewDialog() {
+        this.displayPreviewSelectedForm = false;
+        this.selectedFormName = '';
+        this.selectedFormFields = [];
+        console.log("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
+        console.log("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
+        console.log("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
+    }
+
+
+    // Entering data to the form to create a Form Instance
+    showFormInstance(formSchema) {
+        console.log("ShowFOrmInstance ----", formSchema);
+        this.selectedFormName = formSchema.name;
+        this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
+        this.formInstanceFields = formSchema.fields.$values;
+        //this.formInstanceFormSchema = formSchema;*/
+        this.displayFormInsanceForm = true;
+    }
+
+    closeFormInstanceDialog() {
+        this.displayFormInsanceForm = false;
+        this.selectedFormName = '';
+        this.formInstanceFormSchemaVersionId = '';
+        this.formInstanceFields = [];
+    }
+
 }

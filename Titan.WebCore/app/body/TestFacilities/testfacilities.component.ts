@@ -20,7 +20,8 @@ export class TestFacilitiesComponent {
     linkFieldId: string;
     added: any;
     msgs: Message[] = [];
-    constructor(private service: TestFacilityService, private route: ActivatedRoute, private router:Router) {
+
+    constructor(private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router:Router, private logger: LoggerService) {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
@@ -35,7 +36,7 @@ export class TestFacilitiesComponent {
 
     ngOnInit() {
         let resData:any;
-        this.service.postGridData()
+        this.testFacilityService.postGridData()
             .subscribe(res => {
                 resData = res;
                 this.gridData = res.Data;

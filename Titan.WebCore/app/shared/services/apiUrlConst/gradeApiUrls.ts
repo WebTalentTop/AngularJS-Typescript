@@ -1,3 +1,6 @@
+/**
+ * Created by ZeroInfinity on 12/20/2016.
+ */
 import { titanApiUrl } from './titanApiUrl';
 import { GridApiUrl } from './gridApiUrls';
 

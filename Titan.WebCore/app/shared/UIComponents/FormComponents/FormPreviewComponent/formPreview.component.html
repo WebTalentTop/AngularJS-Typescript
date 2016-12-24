@@ -1,0 +1,23 @@
+<div class="ui-g-12" *ngIf="selectedInputList.length > 0">
+    <h3>{{formName}}</h3>
+    <!--<pre>{{selectedInputList | json}}</pre>-->
+    <div class="ui-g-12 ui-md-12">
+        <div class="ui-g-12 ui-md-4" id="dragme" *ngFor="let formInput of selectedInputList">
+            <div>
+                <!--<pre style="overflow-y: scroll;height: 250px;">{{formInput | json}}</pre>-->
+                <label>{{formInput.name}}</label><br>
+                <input pInputText [disabled]="true"
+                       *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'TextBox'"
+                       type="text"
+                       [placeholder]="formInput.label"/>
+                <p-spinner size="30"
+                           *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'NumberBox'"
+                           [disabled]="true"></p-spinner>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-12">
+        <button type="button" (click)="saveForm()" disabled="true" pButton icon="fa-add" iconPos="right"
+                label="Save form"></button>
+    </div>
+</div>

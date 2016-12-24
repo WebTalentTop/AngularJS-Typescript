@@ -69,6 +69,22 @@ export class EquipmentService {
         //.map(this.getJson);
     }
 
+    getEquipmentManufacturers(): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getEquipmentTypes(): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getAllEquipmentTypesUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

@@ -11,6 +11,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { DepartmentService } from '../../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -44,6 +45,9 @@ export class DetailsComponent implements AfterViewInit {
     testRoles: any;
     selectedTestTypes: any;
     selectedTestModes: any;
+    IsThermoCouple: boolean = false;
+    selectedDepartment: any;
+    departments: any;
     selectedBuildLevels: any;
     selectedTestVerificationMethods: any;
     selectedProjectCodes: any;
@@ -77,6 +81,7 @@ export class DetailsComponent implements AfterViewInit {
     filepath: string = "TestFacility";
     TrackingList: any;
     startTime: any;
+    display: boolean = false;
     endTime: any;
     model: any = {
         id: '',
@@ -105,7 +110,9 @@ export class DetailsComponent implements AfterViewInit {
         private teststatusservice: TestStatusService,
         private testroleservice: TestRoleService,
         private testtypeservice: TestTypeService,
-        private buildlevelservice: BuildLevelService
+        private buildlevelservice: BuildLevelService,
+        private confirmservice: ConfirmationService,
+        private departmentservice: DepartmentService
 
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -117,8 +124,16 @@ export class DetailsComponent implements AfterViewInit {
         console.log('tes---', event);
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
+    OK()
+    {
+        this.display = false;
+    }
+    confirm1() {
+              this.display = true;        
+    }
     ngOnInit() {
         this.getTestStages();
+        this.getDepartments();
         this.getTestFacilities();
         this.getTestModes();
         this.getTestVerificationMethods();
@@ -191,6 +206,13 @@ export class DetailsComponent implements AfterViewInit {
     onTestRoleChange(event) {
         console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
+
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onDepartmentChange(event) {
+        console.log('------event------------', event)
+        this.selectedDepartment = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -306,6 +328,29 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.testRoles = resultMap;
+            }
+            console.log(response);
+        });
+    }
+
+    getDepartments() {
+        //    userRoles
+        this.departmentservice.getDepartments().subscribe(response => {
+            this.departments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.departments = resultMap;
             }
             console.log(response);
         });
@@ -575,13 +620,78 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-        this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 
             // console.log(res);
           //  this.TrackingList = res.$values;
+            if (this.IsThermoCouple) {
+
+                let workrequestbody = {
+
+                    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                    EntityId: 'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A'//res.id  
+                  
+                };
+                //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId() 
+                this.testrequestsensorserice.postWorkRequestAdd(workrequestbody).subscribe(workresult => {
+
+                    this.selectedDepartment.forEach(dept => {
+                        var primaryuserid = 'BE06471E-F53B-E013-642A-003087ABCAA3';
+                        let taskbody = {
+
+                            EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                            EntityId: 'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A',//res.id,
+                            DepartmentId: dept,
+                            UserId: primaryuserid
+
+                        };
+
+                        this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
 
 
-        });
+
+                        });
+                    });
+                });
+
+                //2. save to testrequestexternaldepartments--skip
+
+
+
+                //3. save to tasks table for user,department,entityid,entityidentifier,showmodule....(userservice , get all primary incharge users for selected departments )
+              //  this.selectedDepartment.forEach(dept => {
+
+                    // make service call to get primaryUserId for each department-- TODO
+                    //var primaryuserid ='BE06471E-F53B-E013-642A-003087ABCAA3' ;
+                    //let taskbody = {
+
+                    //    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                    //    EntityId: 'E428D5D6-D91F-4DD9-8C4C-52AB264C4B78',//res.id,
+                    //    DepartmentId: this.selectedDepartment,
+                    //    UserId: primaryuserid
+
+                    //};
+
+                    //this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
+
+
+
+                    //});
+
+              //  });
+               
+
+
+                //4. email to all prime engineer of selected departments ,, (get all primary incharge users for selected departments)
+
+
+               
+            }
+
+
+       });
+
+       
 
     }
     onSubmit(formRef) {

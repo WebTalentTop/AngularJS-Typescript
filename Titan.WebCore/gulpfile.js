@@ -219,7 +219,10 @@ gulp.task("prepod-deployment-package", ['copy-preprodlocation', 'copy-to-wwwroot
 
 gulp.task("copy-dev-res", ["ts", 'sourceMap', 'css', 'html']);
 
-gulp.task("copy-dev-res-all", ['sass', "ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
+//gulp.task("copy-dev-res-all", ['sass', "ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'primeResources']);
+gulp.task("copy-dev-res-all",
+    ['sass', "ts", 'sourceMap', 'css', 'html', 'NMprimeResources', 'resourcesPrimeLayout', 'resourcesPrimeSpreadJs', 'resourcesPrimeLayout']);
+
 
 gulp.task("copy-front-dev-only", ['css', 'html']);
 gulp.task("copy-dev-ts-sourceMap", ["ts", 'sourceMap']);

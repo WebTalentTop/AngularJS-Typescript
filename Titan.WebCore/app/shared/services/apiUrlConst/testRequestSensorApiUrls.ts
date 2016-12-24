@@ -7,6 +7,10 @@ export class TestReqestSensorApiUrl {
     //public static getHourEntryByEntityIdentifierId: string = titanApiUrl + 'timeEntryType/GetHourlyEntries';
     public static postCreatedUrl: string = titanApiUrl + 'testRequestSensor/post';
     public static postTestRequestCreatedUrl: string = titanApiUrl + 'testRequest/post';
+    public static postWorkRequestCreatedUrl: string = titanApiUrl + 'workRequest/post';
+    public static postTestRequestExternalDepartmentsAddUrl: string = titanApiUrl + 'workRequest/PostExternalDepartments';
+    public static postTasksAddUrl: string = titanApiUrl + 'workRequest/CreateTasks';
+    public static postEmailAllUserDepartmentsUrl: string = titanApiUrl + 'workRequest/post';
     public static postCommentCreatedUrl: string = titanApiUrl + 'testRequestSensor/post/uploadfile';
     public static postUpdateUrl: string = titanApiUrl + 'testRequestSensor/put';
     public static postCommentUpdateUrl: string = titanApiUrl + 'testRequestSensorComment/put';

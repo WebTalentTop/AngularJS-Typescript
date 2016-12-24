@@ -27,6 +27,7 @@
 
                     </div>
                 </div>
+
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
                         Test Status Description *
@@ -36,10 +37,33 @@
                             placeholder="Required" class="form-control  col-sm-12" required ></textarea>
                     </div>
                     <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="testStatusDetailsNameRef.errors?.required">
+                        <div class="ui-grid-col-4" *ngIf="testStatusDetailsDescriptionRef.errors?.required">
                             <!--<i class="fa fa-close"></i>                                                    
                             *-->
                         </div>
+                    </div>
+                </div>
+
+                  <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        Calendar Display Color *
+                    </div>
+                    <div class="ui-grid-col-6">
+                        <input type="text" id="calendarDisplayColor" name="calendarDisplayColor" pInputText [(ngModel)]="calendarDisplayColor" placeholder="Calendar Display Color" minlength="3" #testStatusDetailsCalendarDisplayColorRef="ngModel"
+                            class="form-control" required />
+                    </div>
+
+                    <div class="ui-grid-col-4">
+
+                        <div class="ui-grid-col-4" *ngIf="testStatusDetailsCalendarDisplayColorRef.errors?.required">
+                            <!--<i class="fa fa-close"></i>-->
+
+                        </div>
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testStatusDetailsCalendarDisplayColorRef.errors?.minlength">
+                            MinLength-3
+
+                        </div>
+
                     </div>
                 </div>
             </div>

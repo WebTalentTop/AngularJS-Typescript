@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import {Http, Headers, Response, URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormSchemaApiUrl } from './apiUrlConst/formSchema.ApiUrls';
 import {IFormSchema} from "./definitions/IFormSchema";
@@ -62,6 +62,16 @@ export class FormSchemaService {
 
     getById(id): Observable<any> {
         return this.http.get(`${FormSchemaApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    getByFormSchemaCategoryId(id):Observable<any> {
+        return this.http.get(`${FormSchemaApiUrl.getByFormSchemaCategoryId}/${id}`, { headers: this.headers})
+            .map(this.getJson);
+    }
+
+    getByFormSchemaCategoryIdCol(ids):Observable<any> {
+        return this.http.get(`${FormSchemaApiUrl.getByFormSchemaCategoryIdCol}/${ids}`, { headers: this.headers})
             .map(this.getJson);
     }
 

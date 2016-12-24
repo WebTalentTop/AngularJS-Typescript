@@ -51,7 +51,17 @@ export class DepartmentService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getDepartments(): Observable<any> {
+        return this.http.get(`${DepartmentApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${DepartmentApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
