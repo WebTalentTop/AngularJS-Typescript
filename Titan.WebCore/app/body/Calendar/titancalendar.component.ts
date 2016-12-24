@@ -52,10 +52,17 @@ export class TitanCalendarComponent implements AfterViewInit {
     displayEventDialogHeader: string = '';
     selectedTestScheduleStartDate: Date;
     selectedTestScheduleEndDate: Date;
-    testName: string = '';
+    
+    
+    
+
+    //Assign Dialog Header Properties
+    testName: string ='';
+    plannedStartDate: string ='';
+    plannedEndDate: string ='';
+    dueDate: string ='';
     testDuration: string = '';
-    testRequestedStartDate: string = '';
-    testRequestDueDate: string = '';
+
     // For assigning operators/technicians
     selectedOperatorUserNames: any[] = [];;
     filteredOperatorUserNames: any[] = [];;
@@ -66,7 +73,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     filteredTestFacilityNames: any[] = [];;
     filteredselectedTestFacilityNames: any;//[] = [];
     selectedTestFacilityItems: SelectItem[] = [];
-    scheduledTestFacilities: any[] =[];
+    scheduledTestFacilities: any[] = [];
     selectedFacilityForOperator: string;
 
     selectedResourceId: string = '';
@@ -153,23 +160,11 @@ export class TitanCalendarComponent implements AfterViewInit {
                     minTime: this.startWorkHoursValue,
                     maxTime: this.endWorkHoursValue,
                     slotDuration: this.selectedSlotDurationValue,
-                    //slotDuration: '08:00:00',
-                    ////slotLabelFormat: [
-                    ////    'ddd D', // top level of text
-                    ////    'HH'  // lower level of text
-                    ////],
-                    //slotLabelInterval: '08:00:00',
                 }
             },
             editable: true,
             resourceAreaWidth: "125px",
             scrollTime: '00:00',
-            //businessHours: {
-            //    // days of week. an array of zero-based day of week integers (0=Sunday)
-            //    dow: [1, 2, 3, 4, 5], // Monday - Friday
-            //    start: '07:00', // a start time (10am in this example)
-            //    end: '18:00', // an end time (6pm in this example)
-            //},
             resourceGroupField: "entityTypeIdentifierId",
             resourceGroupText: function (groupValue) {
                 return "Test Facility";
@@ -179,9 +174,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 $.ajax({
                     url: titanApiUrl + 'Calendar/GetResourcesForTimelineView?IncludeTestFacility=true&IncludeProject=false',
                     type: 'GET',
-                    //data: {
-
-                    //},
                     error: function () {
                         alert('there was an error while fetching events!');
                     },
@@ -218,9 +210,11 @@ export class TitanCalendarComponent implements AfterViewInit {
             }],
             eventRender: function (event, element) {
                 element.attr("event-id", event.id);
-
-
                 element.attr("resource-id", event.resourceId);
+                element.attr("testName", event.testName);
+                element.attr("plannedStart", moment(event.plannedStartDate).format("llll"));
+                element.attr("plannedEnd", moment(event.plannedEndDate).format("llll"));
+                element.attr("dueDate", moment(event.dueDate).format("llll"));
                 element.addClass('showContextMenu');
 
                 //element.qtip({
@@ -280,11 +274,16 @@ export class TitanCalendarComponent implements AfterViewInit {
 
                 switch (key) {
                     case "AssignResources": {
-
-                        selfRef.displayEventDialogHeader = "Assign resources";
+                        
                         selfRef.displayEventDialog = true;
                         selfRef.selectedEventId = $(this).attr("event-id");
                         selfRef.selectedResourceId = $(this).attr("resource-id");
+                        selfRef.plannedStartDate = $(this).attr("plannedStart");
+                        selfRef.plannedEndDate = $(this).attr("plannedEnd");
+                        selfRef.dueDate = $(this).attr("dueDate");
+                        selfRef.testName = $(this).attr("testName");
+
+                        selfRef.displayEventDialogHeader = `${selfRef.testName}  Due By: ${selfRef.dueDate}`;
                         console.log("----Clicked Assign resource")
                         break;
                     }
@@ -306,6 +305,9 @@ export class TitanCalendarComponent implements AfterViewInit {
             }
         })
     }
+
+  
+    //#region filters 
 
     onTestRoleChange(event) {
         this.selectedTestRoles = (event.value);
@@ -512,6 +514,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         });
     }
 
+
     updateCalendarSettings(event) {
         let schedulerOptions: any = {
 
@@ -524,10 +527,12 @@ export class TitanCalendarComponent implements AfterViewInit {
         schedulerOptions.minTime = this.startWorkHoursValue;
         schedulerOptions.maxTime = this.endWorkHoursValue;
         schedulerOptions.slotDuration = this.selectedSlotDurationValue;
-        console.log('------options-------------', schedulerOptions);
         $('#calendar').fullCalendar('option', schedulerOptions);
     }
 
+    //#endregion filters
+
+    //#region Assign Resources Region
     filterOperatorUserNames(event) {
         this.testfacilityservice.filterByUserNames(event.query).subscribe(filteredList => {
             this.filteredOperatorUserNames = filteredList.$values;
@@ -567,7 +572,7 @@ export class TitanCalendarComponent implements AfterViewInit {
 
         console.log("insie Yadik")
 
-        let {name,  id} = this.filteredselectedTestFacilityNames;
+        let {name, id} = this.filteredselectedTestFacilityNames;
 
         console.log(name, id)
         let item = {
@@ -579,7 +584,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         this.scheduledTestFacilities.push(item);
 
         this.selectedTestFacilityItems = this.generateTestFacilitySelectItems(this.scheduledTestFacilities, true);
-      
+
         var selectedEvent = $("#calendar").fullCalendar('clientEvents', this.selectedEventId)
 
         // Clearing the test facility Name
@@ -595,7 +600,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         items.forEach(function (x) {
             var key = x.name;
             if (!unique[key]) {
-                selectedItems.push({label:x.name, value:x.id});
+                selectedItems.push({ label: x.name, value: x.id });
                 unique[key] = true;
             }
         });
@@ -607,4 +612,8 @@ export class TitanCalendarComponent implements AfterViewInit {
     removeOperator(operator) {
         console.log(operator);
     }
+
+
+
+    //#endregion Assign Resources Region
 }

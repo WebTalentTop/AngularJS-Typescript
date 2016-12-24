@@ -120,7 +120,7 @@
 <p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="500" [responsive]="true" [width]="800">
 
     <div>
-        Test Name {{testName}}  Duration {{testDuration}} Requested Start Date {{ testRequestedStartDate}} Due By {{testRequestDueDate}}
+        <strong> Test Name</strong> {{testName}}  <strong>Duration</strong> {{testDuration}} <strong>Requested Start Date</strong> {{ plannedStartDate}} <strong>Due By</strong> {{dueDate}}
 
     </div>
 
@@ -193,8 +193,8 @@
             <div class="ui-g-4">
                 <label>
                     <span class="text">Test Facility</span>
-                    <p-dropdown [options]="selectedTestFacilityItems" [(ngModel)]="selectedFacilityForOperator" [style]="{'width':'100%'}" ></p-dropdown>
-               
+                    <p-dropdown [options]="selectedTestFacilityItems" [(ngModel)]="selectedFacilityForOperator" [style]="{'width':'100%'}"></p-dropdown>
+
 
                 </label>
             </div>
