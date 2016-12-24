@@ -2233,29 +2233,29 @@ body .layout-wrapper .layout-main {
   box-sizing: border-box; }
   body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel .ui-panel-titlebar {
+    body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar {
       overflow: auto;
       max-height: none; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
+      body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
         margin: 0.5em 0 0 0;
         display: inline-block; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel .ui-panel-titlebar header.with-controls .controls {
+      body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar header.with-controls .controls {
         margin: 0;
         float: right; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel .body {
+    body .layout-wrapper .layout-main > :first-child .ui-panel .body {
       padding-top: 2em; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel footer {
+    body .layout-wrapper .layout-main > :first-child .ui-panel footer {
       overflow: auto;
       margin-top: 2em; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel footer p {
+      body .layout-wrapper .layout-main > :first-child .ui-panel footer p {
         display: inline-block;
         color: #777;
         line-height: 2em;
         font-size: 12px;
         margin: 0 1em 0 10px; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .ui-panel footer button {
+      body .layout-wrapper .layout-main > :first-child .ui-panel footer button {
         float: right; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
+    body .layout-wrapper .layout-main > :first-child .subsection + .subsection {
       margin-top: 1em; }
   body .layout-wrapper .layout-main > .footer {
     flex: 0 0 auto; }

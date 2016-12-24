@@ -24,69 +24,66 @@ body .layout-wrapper .layout-main
     {
         flex: 1 1 auto;
 
-        .ui-tabview-panel
+        .ui-panel
         {
-            .ui-panel
+            .ui-panel-titlebar
             {
-                .ui-panel-titlebar
+                overflow: auto;
+
+                max-height: none;
+
+                header.with-controls
                 {
-                    overflow: auto;
-
-                    max-height: none;
-
-                    header.with-controls
+                    .ui-panel-title
                     {
-                        .ui-panel-title
-                        {
-                            margin: 0.5em 0 0 0;
+                        margin: 0.5em 0 0 0;
 
-                            display: inline-block
-                        }
-
-                        .controls
-                        {
-                            margin: 0;
-
-                            float: right
-                        }
-                    }
-                }
-
-                .body
-                {
-                    padding-top: 2em
-                }
-
-                footer
-                {
-                    overflow: auto;
-
-                    margin-top: 2em;
-
-                    p
-                    {
-                        display: inline-block;
-
-                        color: #777;
-
-                        line-height: 2em;
-
-                        font-size: 12px;
-
-                        margin: 0 1em 0 10px
+                        display: inline-block
                     }
 
-                    button
+                    .controls
                     {
+                        margin: 0;
+
                         float: right
                     }
                 }
             }
 
-            .subsection + .subsection
+            .body
             {
-                margin-top: 1em
+                padding-top: 2em
             }
+
+            footer
+            {
+                overflow: auto;
+
+                margin-top: 2em;
+
+                p
+                {
+                    display: inline-block;
+
+                    color: #777;
+
+                    line-height: 2em;
+
+                    font-size: 12px;
+
+                    margin: 0 1em 0 10px
+                }
+
+                button
+                {
+                    float: right
+                }
+            }
+        }
+
+        .subsection + .subsection
+        {
+            margin-top: 1em
         }
     }
 
