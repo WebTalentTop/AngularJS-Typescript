@@ -127,14 +127,15 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
             <h1>Test Facilities</h1>
+
             <div class="ui-g-12">
                 <div class="ui-g-4">
                     <label>
-                        <span class="text">Operators</span>
+                        <span class="text">Test Facility</span>
 
-                        <p-autoComplete [(ngModel)]="filteredselectedOperatorUserNames" [suggestions]="filteredOperatorUserNames" (completeMethod)="filterOperatorUserNames($event)"
-                                        name="username" [minLength]="1" placeholder="Search by Name/#"
-                                        field="firstName" [multiple]="false">
+                        <p-autoComplete [(ngModel)]="filteredselectedTestFacilityNames" [suggestions]="filteredTestFacilityNames" (completeMethod)="filterTestFacilityNames($event)"
+                                        name="facilityName" [minLength]="1" placeholder="Search by Name/#"
+                                        field="name" [multiple]="false">
                         </p-autoComplete>
 
                     </label>
@@ -160,18 +161,18 @@
 
                 <div class="ui-g-4">
 
-                    <button type="button" pButton icon="ui-icon-calendar" (click)="scheduleUsers($event)" label="Schedule"></button>
+                    <button type="button" pButton icon="ui-icon-calendar" (click)="scheduleFacilities($event)" label="Schedule Facility"></button>
 
                 </div>
             </div>
             <div class="ui-grid-row">
 
-                <p-dataTable [value]="testOperators">
+                <p-dataTable [value]="scheduledTestFacilities" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5,10,20]">
                     <p-column hidden="true" field="id"></p-column>
                     <p-column field="name" header="Name" sortable="true"></p-column>
                     <p-column field="startDate" header="Start" sortable="true"></p-column>
                     <p-column field="endDate" header="End" sortable="true"></p-column>
-                    <p-column styleClass="col-button">chrome
+                    <p-column styleClass="col-button">
                         <template pTemplate="header">
                             <button type="button" pButton icon="fa-refresh"></button>
                         </template>
@@ -188,6 +189,16 @@
     <div class="card card-w-title">
         <h1>Operators</h1>
         <div class="ui-g-12">
+
+            <div class="ui-g-4">
+                <label>
+                    <span class="text">Test Facility</span>
+                    <p-dropdown [options]="selectedTestFacilityItems" [(ngModel)]="selectedFacilityForOperator" [style]="{'width':'100%'}" ></p-dropdown>
+               
+
+                </label>
+            </div>
+
             <div class="ui-g-4">
                 <label>
                     <span class="text">Operators</span>
@@ -230,6 +241,7 @@
             <p-dataTable [value]="testOperators">
                 <p-column hidden="true" field="id"></p-column>
                 <p-column field="name" header="Name" sortable="true"></p-column>
+                <p-column field="testFacility" header="Test Facility" sortable="true"></p-column>
                 <p-column field="startDate" header="Start" sortable="true"></p-column>
                 <p-column field="endDate" header="End" sortable="true"></p-column>
                 <p-column styleClass="col-button">

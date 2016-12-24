@@ -60,6 +60,15 @@ export class TitanCalendarComponent implements AfterViewInit {
     selectedOperatorUserNames: any[] = [];;
     filteredOperatorUserNames: any[] = [];;
     filteredselectedOperatorUserNames: any;//[] = [];
+
+    // For selecting Technicians
+    selectedTestFacilityNames: any[] = [];;
+    filteredTestFacilityNames: any[] = [];;
+    filteredselectedTestFacilityNames: any;//[] = [];
+    selectedTestFacilityItems: SelectItem[] = [];
+    scheduledTestFacilities: any[] =[];
+    selectedFacilityForOperator: string;
+
     selectedResourceId: string = '';
     selectedEventId: string = '';
 
@@ -242,6 +251,7 @@ export class TitanCalendarComponent implements AfterViewInit {
                 //$('.tooltipevent').remove();
             },
         };
+
         $('#calendar').fullCalendar(scheduleConfig);
     }
 
@@ -255,8 +265,8 @@ export class TitanCalendarComponent implements AfterViewInit {
         this.getTestRoles();
         this.initSchedule();
         this.initCalendarOptions();
-
-
+        this.selectedTestFacilityItems = [];
+        this.selectedTestFacilityItems.push({ label: 'Audi', value: 'Audi' });
     }
 
     ngAfterViewInit() {
@@ -524,6 +534,13 @@ export class TitanCalendarComponent implements AfterViewInit {
         });
     }
 
+    filterTestFacilityNames(event) {
+        this.testfacilityservice.getTestFacilities().subscribe(filteredList => {
+            console.log("---", filteredList);
+            this.filteredTestFacilityNames = filteredList;
+        })
+    }
+
     scheduleUsers(event) {
         console.log(this.filteredselectedOperatorUserNames)
 
@@ -534,7 +551,8 @@ export class TitanCalendarComponent implements AfterViewInit {
             name: displayName,
             startDate: '1-1-2016',
             endDate: '1-2-2090',
-            id: id
+            id: id,
+            testFacility: this.selectedFacilityForOperator
         };
         this.testOperators.push(item);
         console.log("-----------inside scheduleUsers---", item);
@@ -543,6 +561,49 @@ export class TitanCalendarComponent implements AfterViewInit {
 
         //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
     }
+
+
+    scheduleFacilities(event) {
+
+        console.log("insie Yadik")
+
+        let {name,  id} = this.filteredselectedTestFacilityNames;
+
+        console.log(name, id)
+        let item = {
+            name: name,
+            startDate: '1-1-2016',
+            endDate: '1-2-2090',
+            id: id
+        };
+        this.scheduledTestFacilities.push(item);
+
+        this.selectedTestFacilityItems = this.generateTestFacilitySelectItems(this.scheduledTestFacilities, true);
+        console.log("----------- scheduleFacilities Selected Test Facilities Array ---", this.scheduledTestFacilities);
+        console.log("----------- Distinct Selected Test Facilities Array ---", this.selectedTestFacilityItems);
+       
+        var selectedEvent = $("#calendar").fullCalendar('clientEvents', this.selectedEventId)
+        console.log("----------- scheduleFacilities Selected Event---", selectedEvent);
+        console.log("----------- scheduleFacilities Selected Test Facilities Array ---", this.scheduledTestFacilities);
+        //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
+    }
+
+    generateTestFacilitySelectItems(items, retDistict) {
+
+        let selectedItems: SelectItem[] = [];
+        let unique = {};
+        items.forEach(function (x) {
+            var key = x.name;
+            if (!unique[key]) {
+                selectedItems.push({label:x.name, value:x.id});
+                unique[key] = true;
+            }
+        });
+
+        console.log("after generateTestFacilitySelectItems", selectedItems);
+        return selectedItems;
+    }
+
     removeOperator(operator) {
         console.log(operator);
     }
