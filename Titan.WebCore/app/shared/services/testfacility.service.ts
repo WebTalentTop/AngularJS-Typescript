@@ -93,6 +93,65 @@ export class TestFacilityService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+      getTenants(id): Observable<any> {
+          return this.http.get(`${TestFacilityApiUrl.getTenants}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              .map(data => {
+                  console.log('---------getbyusing testdata---------', data);
+                  return data.$values
+              });
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
+      DeleteUserRoleMap(id): Observable<any> {
+          return this.http.post(`${TestFacilityApiUrl.DeleteUserRoleMap}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              //.map(data => {
+              //    console.log('---------getbyusing testdata---------', data);
+              //    return data.$values
+              //});
+              ;
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
+      DeleteEquipmentMap(id): Observable<any> {
+          return this.http.post(`${TestFacilityApiUrl.DeleteEquipmentMap}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              //.map(data => {
+              //    console.log('---------getbyusing testdata---------', data);
+              //    return data.$values
+              //});
+              ;
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
+      DeleteTenantMap(id): Observable<any> {
+          return this.http.post(`${TestFacilityApiUrl.DeleteTenantMap}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              //.map(data => {
+              //    console.log('---------getbyusing testdata---------', data);
+              //    return data.$values
+              //});
+              ;
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
 
  getTestFacilities(): Observable<any> {
      return this.http.get(`${TestFacilityApiUrl.getAllUrl}`, { headers: this.headers })
@@ -122,7 +181,26 @@ export class TestFacilityService {
              console.log("Notification data --------", data);
              return data.$values
          });
- }
+    }
+
+    getDepartments(): Observable<any> {
+
+        return this.http.get(`${TestFacilityApiUrl.getDepartments}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
+    getEquipments(): Observable<any> {
+
+        return this.http.get(`${TestFacilityApiUrl.getEquipments}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
 
  getFilteredEvents(teststatus, buildlevels, projectcodes, testroles, testfacilitys, testtypes, testmodes): Observable < any > {
      return this.http.get(`${TestFacilityApiUrl.getFilteredEvents}/${teststatus}/${buildlevels}/${projectcodes}/${testroles}/${testfacilitys}/${testtypes}/${testmodes}/`, { headers: this.headers })
@@ -139,6 +217,15 @@ export class TestFacilityService {
 }
     postAddUserNames(filterBody, testFacilityId,testFacilityRoleId): Observable<any> {
         return this.http.post(`${TestFacilityApiUrl.PostAddUserRolesUrl}/${testFacilityId}/${testFacilityRoleId}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    postAddDepartment(testFacilityId, selectedDepartmentId): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.PostAddDepartmentMapUrl}/${testFacilityId}/${selectedDepartmentId}`, null, { headers: this.headers })
+            .map(this.getJson);
+    }
+    postAddEquipment(testFacilityId, selectedEquipmentId): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.PostAddEquipmentMapUrl}/${testFacilityId}/${selectedEquipmentId}`, null, { headers: this.headers })
             .map(this.getJson);
     }
 	getLocalizationInformationObservable(resourceSetName,cultureName):Observable<any> {

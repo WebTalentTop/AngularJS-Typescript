@@ -40,14 +40,20 @@ export class DetailsComponent implements AfterViewInit {
     titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
-
+    testFacilityTenants: any;
+    equipments: any;
+    displayAssignDepartmentsDialog: boolean;
+    displayAssignEquipmentsDialog: boolean;
+    departments: any;
+    selectedDepartment: any;
+    selectedEquipment: any;
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
     entityIdentifierInfo:any = {};
     formSchemaCategoryInfo:IFormSchemaCategory[] = [];
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
-
+    categories: SelectItem[];;
     displayPreviewSelectedForm:boolean = false;
 
     // Form Display
@@ -60,8 +66,8 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields:any[] = [];
-
+    formInstanceFields: any[] = [];
+    selectedCategory: any;
 
     // End Of Form Related Variables
 
@@ -144,7 +150,17 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     ngOnInit() {
-        if(this.id) {
+        if (this.id) {
+            this.categories = [];
+            this.categories.push({ label: 'All categories', value: null });
+            this.categories.push({ label: 'Wheel Alignment', value: 'Wheel Alignment' });
+            this.categories.push({ label: 'Torque for Parts', value: 'Torque for Parts' });
+            this.categories.push({ label: 'Certificates', value: 'Certificates' });
+            this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
+            this.categories.push({ label: 'Manual', value: 'Manual' });
+            this.categories.push({ label: 'Results', value: 'Results' });
+           
+
             this.getEntityIdentifierInfo();
             this.getUserRoles();
             this.getTestFacilities();
@@ -158,6 +174,11 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityRoleService();
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
+            this.GetTenantsByTestFacilityId();
+
+            this.getDepartments();
+            this.getEquipments();
+
         }
     }
 
@@ -255,6 +276,18 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onDepartmentChange(event) {
+        // console.log('------event------------', event)
+        this.selectedDepartment = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onEquipmentChange(event) {
+        // console.log('------event------------', event)
+        this.selectedEquipment = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     onTestRoleChange(event) {
         // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
@@ -271,6 +304,12 @@ export class DetailsComponent implements AfterViewInit {
     onProjectCodeChange(event) {
         // console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onCategoryChange(event) {
+        // console.log('------event------------', event)
+        this.selectedCategory = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -334,7 +373,16 @@ export class DetailsComponent implements AfterViewInit {
         });
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }
-   
+
+    GetTenantsByTestFacilityId()
+    {
+        this.testFacilityService.getTenants(this.id)
+            .subscribe(res => {
+                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.testFacilityTenants = res;
+            });
+
+    }
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
@@ -353,6 +401,50 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.userRoles = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getDepartments() {
+        //    userRoles
+        this.testFacilityService.getDepartments().subscribe(response => {
+            this.departments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.departments = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getEquipments() {
+        //    userRoles
+        this.testFacilityService.getEquipments().subscribe(response => {
+            this.equipments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Equipment",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.equipments = resultMap;
             }
             // console.log(response);
         });
@@ -598,6 +690,48 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
     }
 
+    onAddDepartment() {
+
+        if (this.selectedDepartment == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Search any department to add', detail: '' });
+            return null;
+        }
+        
+        this.testFacilityService.postAddDepartment(this.id, this.selectedDepartment).subscribe(filteredList => {
+           
+            this.testFacilityService.getTenants(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.testFacilityTenants = res;
+                });
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+    }
+
+    onAddEquipment() {
+
+        if (this.selectedEquipment == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Search any equipment to add', detail: '' });
+            return null;
+        }
+
+        this.testFacilityService.postAddEquipment(this.id, this.selectedEquipment).subscribe(filteredList => {
+           
+            this.testFacilityService.getEquipmentsByIdusing(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.TestFacilityEquipments = res;
+                });
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+    }
+
     filterUserNames(event) {
         this.testFacilityService.filterByUserNames(event.query).subscribe(filteredList => {
             this.filteredUserNames = filteredList.$values;
@@ -665,6 +799,43 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
+    onDeleteUserRoleMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteUserRoleMap(event)
+            .subscribe(res => {
+
+                this.testfacilityroleservice.getByIdusing(this.id)
+                    .subscribe(TestFacilityRoles => {
+                        //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                        this.TestFacilityRoles = TestFacilityRoles;
+                    });
+            });
+    }
+    onDeleteEquipmentMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteEquipmentMap(event)
+            .subscribe(res => {
+
+                this.testFacilityService.getEquipmentsByIdusing(this.id)
+                    .subscribe(res => {
+                        this.TestFacilityEquipments = res;
+
+                    });
+            });
+    }
+    onDeleteTenantMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteTenantMap(event)
+            .subscribe(res => {
+
+                this.testFacilityService.getTenants(this.id)
+                    .subscribe(res => {
+                        //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                        this.testFacilityTenants = res;
+                    });
+
+            });
+    }
 
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
         //console.log('---------------buttonclick---------------', TestFacilityAttachment);
