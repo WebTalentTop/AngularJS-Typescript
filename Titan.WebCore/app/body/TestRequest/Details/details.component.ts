@@ -620,7 +620,7 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-    //    this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 
             // console.log(res);
           //  this.TrackingList = res.$values;
@@ -689,7 +689,7 @@ export class DetailsComponent implements AfterViewInit {
             }
 
 
-     //   });
+       });
 
        
 

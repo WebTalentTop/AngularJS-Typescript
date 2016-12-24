@@ -21,12 +21,15 @@
 
 
                                                     <p-column header="Comments" field="comment" sortable="true"></p-column>
+
+                                                    <p-column header="IsCompleted" field="isCompleted" sortable="true"></p-column>
+
                                                     <p-column>
                                                         <template pTemplate type="header">
                                                             <button type="button" pButton icon="fa-refresh"></button>
                                                         </template>
                                                         <template let-sensorrow="rowData" pTemplate type="body">
-                                                            <a routerLink="details/{{sensorrow.id}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                                            <a routerLink="details/{{sensorrow.id}}"><i class="fa ui-icon-edit"></i>View Details</a>
                                                         </template>
                                                     </p-column>
 

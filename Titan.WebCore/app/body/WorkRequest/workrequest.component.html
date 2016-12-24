@@ -4,10 +4,10 @@
         <div class="panel-body">
             <div class="row">
                 <div class="ui-grid-row">
-                    <p-fileUpload [name]="sensorpic2"
+                    <!--<p-fileUpload [name]="sensorpic2"
                                   multiple="multiple" accept="image/*" maxFileSize="1000000">
 
-                    </p-fileUpload>
+                    </p-fileUpload>-->
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive" style="min-height:400px;">
@@ -19,12 +19,13 @@
 
                                     <p-column header="Module" field="showModule" sortable="true"></p-column>
 
+                                    <p-column header="IsCompleted" field="isCompleted" sortable="true"></p-column>
                                     <p-column>
                                         <template pTemplate type="header">
                                             <button type="button" pButton icon="fa-refresh"></button>
                                         </template>
                                         <template let-workrequestrow="rowData" pTemplate type="body">
-                                            <a routerLink="details/{{workrequestrow.id}}/{{workrequestrow.entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                            <a routerLink="details/{{workrequestrow.id}}/{{workrequestrow.entityId}}"><i class="fa ui-icon-edit"></i>View Details</a>
                                         </template>
                                     </p-column>
                                     <!--<p-column header="Module#" field="name" sortable="true"></p-column>
