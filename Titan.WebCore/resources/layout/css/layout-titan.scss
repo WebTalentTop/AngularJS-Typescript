@@ -24,7 +24,7 @@ body .layout-wrapper .layout-main
     {
         flex: 1 1 auto;
 
-        .ui-tabview-panel .subsection
+        .ui-tabview-panel
         {
             .ui-panel
             {
@@ -83,7 +83,7 @@ body .layout-wrapper .layout-main
                 }
             }
 
-            + .subsection
+            .subsection + .subsection
             {
                 margin-top: 1em
             }
