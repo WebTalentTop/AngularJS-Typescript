@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TestTemplateService } from '../../../shared/services/testtemplate.service'
 import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
-import { TestRequirementService } from '../../../shared/services/testrequirement.service'
+import { ProcedureService } from '../../../shared/services/procedure.service'
 import { Validators } from '@angular/forms';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Router } from '@angular/router'
@@ -17,54 +17,54 @@ export class DetailsComponent {
     public testTemplate: any;
     public testTypes: any;
     public testModes: Array<any> = new Array();
-    public selectedTestRequirements: Array<any> = new Array();
-    public filteredTestRequirements: Array<any> = new Array();
-    public filteredSelectedTestRequirements: Array<any> = new Array();
+    public selectedProcedures: Array<any> = new Array();
+    public filteredProcedures: Array<any> = new Array();
+    public filteredSelectedProcedures: Array<any> = new Array();
     constructor(
         private testTemplateService: TestTemplateService,
         private testtypeService: TestTypeService,
         private testmodeService: TestModeService,
         private router: Router,
         private route: ActivatedRoute,
-        private testrequirementService: TestRequirementService,
+        private procedureService: ProcedureService,
         private confirmationService: ConfirmationService
     ) {
 
     }
 
     ngOnInit() {
-        this.getTestType();
-        var testMode = {
-            label: "Select Test Type to Populate",
-            value: null
-        };
-        this.testModes.push(testMode);
+        //this.getTestType();
+        //var testMode = {
+        //    label: "Select Test Type to Populate",
+        //    value: null
+        //};
+        //this.testModes.push(testMode);
         this.route.params.subscribe(params => {
             console.log(params);
             this.testTemplateService.getById(params['id']).subscribe(res => {
-                this.testTemplate = res;
-                if (this.testTemplate.testTypeId != null) {
-                    this.onTestTypeChange();
-                }
+                this.testTemplate = res.result;
+                //if (this.testTemplate.testTypeId != null) {
+                //    this.onTestTypeChange();
+                //}
             });
-            this.testTemplateService.getTestTemplateRequirements(params['id']).subscribe(res => {
-                this.selectedTestRequirements = res.$values;
+            this.testTemplateService.getTestTemplateProcedures(params['id']).subscribe(res => {
+                this.selectedProcedures = res.$values;
             });
 
         });
     }
 
-    onDelete(testRequirement) {
+    onDelete(procedure) {
         this.confirmationService.confirm({
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'fa fa-trash',
             accept: () => {
-                this.testTemplateService.postDeleteTestTemplateRequirement(
+                this.testTemplateService.postDeleteTestTemplateProcedure(
                     this.testTemplate.id,
-                    testRequirement.id
+                    procedure.id
                 ).subscribe(res => {
-                    this.selectedTestRequirements = res.$values;
+                    this.selectedProcedures = res.result;
                 });
             }
         });
@@ -72,24 +72,23 @@ export class DetailsComponent {
 
     }
 
-     onAddTestRequirement() {
-       var selectedTestRequirementIds = new Array();
-        for (var sel of this.filteredSelectedTestRequirements) {
-            selectedTestRequirementIds.push(sel.id);
+     onAddProcedure() {
+       var selectedProcedureIds = new Array();
+        for (var sel of this.filteredSelectedProcedures) {
+            selectedProcedureIds.push(sel.id);
         }
         var inputDto = {
-            testRequirementList: selectedTestRequirementIds
+            procedureList: selectedProcedureIds
         }
-        this.testTemplateService.postAddTestRequirements(selectedTestRequirementIds, this.testTemplate.id).subscribe(filteredList => {
-            this.selectedTestRequirements = filteredList.$values;
-            this.filteredSelectedTestRequirements = null;
-
+        this.testTemplateService.postAddProcedures(selectedProcedureIds, this.testTemplate.id).subscribe(filteredList => {
+            this.selectedProcedures = filteredList.result;
+            this.filteredSelectedProcedures = null;
         });
     }
 
-    filterTestRequirements(event) {
-        this.testrequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
-            this.filteredTestRequirements = filteredList.$values;
+    filterProcedures(event) {
+        this.procedureService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
+            this.filteredProcedures = filteredList.result;
         });
     }
 

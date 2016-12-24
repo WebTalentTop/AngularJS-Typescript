@@ -23,12 +23,12 @@ export class AddComponent {
 
     ngOnInit() {
         this.testTemplate = new Object();
-        this.getTestType();
-        var testMode = {
-            label: "Select Test Type to Populate",
-            value: null
-        };
-        this.testModes.push(testMode);
+        //this.getTestType();
+        //var testMode = {
+        //    label: "Select Test Type to Populate",
+        //    value: null
+        //};
+        //this.testModes.push(testMode);
     }
 
     getTestType(){
@@ -85,20 +85,8 @@ export class AddComponent {
     }
 
     onSubmit() {
-        // console.log(formRef);
-        // console.log(this.username);
-        // console.log(this.description);
-        // formRef.locale = "en-us";
-        // formRef.isDeleted = false;
-        // let platformData: any = {name: '', description: '', locale:'', isDeleted: false};
-        // platformData.name = formRef.username;
-        // platformData.description = formRef.description;
-        // platformData.locale = "en-us";
-
-        // console.log(platformData);
         this.testTemplateService.postAdd(this.testTemplate).subscribe(res => {
-            console.log('fjdalhfkj ' + res)
-            this.router.navigate(['testtemplate/details', res]);
+            this.router.navigate(['testtemplate/details', res.result]);
         });
     }
 }

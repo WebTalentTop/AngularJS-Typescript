@@ -25,9 +25,11 @@ export class DetailsComponent {
             //let locale = params['locale'];
 
             this.service.getProjectDetails(this.projectId).subscribe(ProjectDetails => {
-                this.ProjectDetails = ProjectDetails;
+                this.ProjectDetails = ProjectDetails.result;
+                this.ProjectDetails.plannedStartDate = new Date(this.ProjectDetails.plannedStartDate);
+                this.ProjectDetails.plannedEndDate = new Date(this.ProjectDetails.plannedEndDate);
                 this.ProjectDetails.id = this.projectId;
-                console.log(this.ProjectDetails);    
+                console.log(this.ProjectDetails);     
             });
         });
     }

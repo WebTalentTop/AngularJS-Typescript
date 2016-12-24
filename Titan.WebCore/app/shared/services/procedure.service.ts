@@ -88,4 +88,9 @@ export class ProcedureService extends BaseService {
         return this.http.put(`${ProcedureApiUrl.postDeleteProcedureStepUrl}` + procedureId + '&stepId=' + stepId, null, { headers: this.headers })
             .map(this.getJson);
     }
+
+    filterByTestTemplateId(testTemplateId, filterString): Observable<any> {
+        return this.http.get(`${ProcedureApiUrl.filterByTestTemplateIdUrl}` + testTemplateId + '&filterString=' + filterString, { headers: this.headers })
+            .map(this.getJson);
+    }
 }

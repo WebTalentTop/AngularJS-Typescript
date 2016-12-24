@@ -20,6 +20,7 @@ const routes = [
     { path: 'procedure', loadChildren: 'app/body/Procedure/procedure.module' },
     { path: 'testrequest', loadChildren: 'app/body/TestRequest/testrequest.module' },
     { path: 'vehicle', loadChildren: 'app/body/Vehicle/vehicle.module' },
+    { path: 'torquesheet', loadChildren: 'app/body/TorqueSheet/torque-sheet.module' },
     { path: 'testtemplate', loadChildren: 'app/body/TestTemplate/testtemplate.module' }
 ];
 

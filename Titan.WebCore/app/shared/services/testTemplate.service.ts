@@ -44,7 +44,6 @@ export class TestTemplateService extends BaseService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TestTemplateApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
@@ -55,9 +54,6 @@ export class TestTemplateService extends BaseService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${TestTemplateApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson)
-            .map(this.checkErrors)
-            .catch(err => Observable.throw(err))
             .map(this.getJson);
     }
 
@@ -69,18 +65,18 @@ export class TestTemplateService extends BaseService {
         //.map(this.getJson);
     }
 
-    postAddTestRequirements(filterBody, testTemplateId): Observable<any> {
-        return this.http.post(`${TestTemplateApiUrl.postAddTestTemplateRequirementUrl}` + testTemplateId, filterBody, { headers: this.headers })
+    postAddProcedures(filterBody, testTemplateId): Observable<any> {
+        return this.http.post(`${TestTemplateApiUrl.postAddTestTemplateProcedureUrl}` + testTemplateId, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
 
-    getTestTemplateRequirements(testTemplateId): Observable<any> {
-        return this.http.get(`${TestTemplateApiUrl.getTestTemplateRequirementUrl}` + testTemplateId, { headers: this.headers })
+    getTestTemplateProcedures(testTemplateId): Observable<any> {
+        return this.http.get(`${TestTemplateApiUrl.getTestTemplateProcedureUrl}` + testTemplateId, { headers: this.headers })
             .map(this.getJson);
     }
 
-    postDeleteTestTemplateRequirement(testTemplateId, testRequirementId): Observable<any> {
-        return this.http.put(`${TestTemplateApiUrl.postDeleteTestTemplateRequirementUrl}` + testTemplateId + '&testRequirementId=' + testRequirementId, null, { headers: this.headers })
+    postDeleteTestTemplateProcedure(testTemplateId, procedureId): Observable<any> {
+        return this.http.put(`${TestTemplateApiUrl.postDeleteTestTemplateProcedureUrl}` + testTemplateId + '&procedureId=' + procedureId, null, { headers: this.headers })
             .map(this.getJson);
     }
 }
