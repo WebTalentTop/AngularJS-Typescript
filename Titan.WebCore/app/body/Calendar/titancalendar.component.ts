@@ -52,15 +52,15 @@ export class TitanCalendarComponent implements AfterViewInit {
     displayEventDialogHeader: string = '';
     selectedTestScheduleStartDate: Date;
     selectedTestScheduleEndDate: Date;
-    
-    
-    
+
+
+
 
     //Assign Dialog Header Properties
-    testName: string ='';
-    plannedStartDate: string ='';
-    plannedEndDate: string ='';
-    dueDate: string ='';
+    testName: string = '';
+    plannedStartDate: string = '';
+    plannedEndDate: string = '';
+    dueDate: string = '';
     testDuration: string = '';
 
     // For assigning operators/technicians
@@ -185,28 +185,32 @@ export class TitanCalendarComponent implements AfterViewInit {
 
             },
 
-            eventSources: [function (start, end, timezone, callback) {
-                $.ajax({
-                    url: titanApiUrl + 'TestFacility/Schedule',
-                    type: 'POST',
-                    data: {
-                        startdate: start.utc().format(),
-                        enddate: end.utc().format(),
+            eventSources: [{
+                id:'testFacilityEventSource',
+                events: function (start, end, timezone, callback) {
+                    $.ajax({
+                        url: titanApiUrl + 'TestFacility/Schedule',
+                        type: 'POST',
+                        data: {
+                            startdate: start.utc().format(),
+                            enddate: end.utc().format(),
+                            projectCodeIdList : []
 
-                    },
-                    error: function () {
-                        alert('there was an error while fetching events!');
-                    },
-                    success: function (result) {
-                        var events = [];
-                        $.each(result.calendarEvents.$values, function (index, item) {
-                            events.push(item);
-                            console.log('------item------------', item)
-                        });
-                        console.log('------Event Source callback------------', events)
-                        callback(events);
-                    }
-                });
+                        },
+                        error: function () {
+                            alert('there was an error while fetching events!');
+                        },
+                        success: function (result) {
+                            var events = [];
+                            $.each(result.calendarEvents.$values, function (index, item) {
+                                events.push(item);
+                                console.log('------item------------', item)
+                            });
+                            console.log('------Event Source callback------------', events)
+                            callback(events);
+                        }
+                    });
+                }
             }],
             eventRender: function (event, element) {
                 element.attr("event-id", event.id);
@@ -274,7 +278,7 @@ export class TitanCalendarComponent implements AfterViewInit {
 
                 switch (key) {
                     case "AssignResources": {
-                        
+
                         selfRef.displayEventDialog = true;
                         selfRef.selectedEventId = $(this).attr("event-id");
                         selfRef.selectedResourceId = $(this).attr("resource-id");
@@ -283,7 +287,7 @@ export class TitanCalendarComponent implements AfterViewInit {
                         selfRef.dueDate = $(this).attr("dueDate");
                         selfRef.testName = $(this).attr("testName");
 
-                        selfRef.displayEventDialogHeader = `${selfRef.testName}  Due By: ${selfRef.dueDate}`;
+                        selfRef.displayEventDialogHeader = `${selfRef.testName}`;
                         console.log("----Clicked Assign resource")
                         break;
                     }
@@ -306,7 +310,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         })
     }
 
-  
+
     //#region filters 
 
     onTestRoleChange(event) {
@@ -323,6 +327,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     onProjectCodeChange(event) {
         console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
+        console.log(this.selectedProjectCodes);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -528,6 +533,54 @@ export class TitanCalendarComponent implements AfterViewInit {
         schedulerOptions.maxTime = this.endWorkHoursValue;
         schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         $('#calendar').fullCalendar('option', schedulerOptions);
+    }
+
+    filterCalendarEvents(event) {
+        console.log("--inside filterCalendarEvents")
+        // We may be able to do pure client side filtering. Need to investigate. 
+        //For now lets go to the server.
+        let start = moment().utc();
+        let end = moment.utc();
+        let timezome = '';
+        let testFacilityEventSource = $("#calendar").fullCalendar('getEventSourceById', 'testFacilityEventSource');
+        $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource )
+        $("#calendar").fullCalendar('removeEventSource', { id: 'testFacilityEventSource' });
+        console.log("-- Clearing the events");
+        
+        debugger;
+        var payload = {
+            startdate: '12-1-2016',
+            enddate: '12-12-2017',
+            projectCodeIdList: this.selectedProjectCodes
+        };
+        console.log(payload);
+        //this.initSchedule();
+        var source1 = {
+            id: 'testFacilityEventSource',
+            events: function (start, end, timezone, callback) {
+                $.ajax({
+                    url: titanApiUrl + 'TestFacility/Schedule',
+                    type: 'POST',
+                    data: payload,
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }
+        }
+        console.log(source1);
+        $("#calendar").fullCalendar('addEventSource', source1);
+        
+
     }
 
     //#endregion filters

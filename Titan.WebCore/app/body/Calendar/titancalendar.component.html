@@ -56,6 +56,10 @@
         </p-multiSelect>
     </div>
 
+    <div class="ui-grid-col-2">
+        <button pButton type="button" label="Click" (click)="filterCalendarEvents($event)"></button>
+
+    </div>
 </div>
 
 <div class="row">
@@ -120,7 +124,7 @@
 <p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="500" [responsive]="true" [width]="800">
 
     <div>
-        <strong> Test Name</strong> {{testName}}  <strong>Duration</strong> {{testDuration}} <strong>Requested Start Date</strong> {{ plannedStartDate}} <strong>Due By</strong> {{dueDate}}
+        <strong>Requested Start Date</strong> {{ plannedStartDate}} <strong>Due By</strong> {{dueDate}}
 
     </div>
 
