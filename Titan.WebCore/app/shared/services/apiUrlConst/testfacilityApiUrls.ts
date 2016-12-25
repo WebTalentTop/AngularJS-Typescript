@@ -24,6 +24,7 @@ export class TestFacilityApiUrl {
     public static getDepartments: string = titanApiUrl + 'tenant';
     public static getEquipments: string = titanApiUrl + 'equipment';
     public static getOperatingHours: string = titanApiUrl + 'operatingHours';
+    public static getCategories: string = titanApiUrl + 'category';
     public static getMaintenanceFrequencies: string = titanApiUrl + 'maintenanceFrequency';
     public static PostAddEquipmentMapUrl: string = titanApiUrl + 'testFacility/PostEquipments';
     public static PostMoveEquipmentToFacilityUrl: string = titanApiUrl + 'TestFacility/MoveEquipmentToFacility';

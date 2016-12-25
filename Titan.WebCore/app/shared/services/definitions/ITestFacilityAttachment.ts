@@ -3,5 +3,6 @@ export interface ITestFacilityAttachment {
     name;
     path;
     employee;
+    category;
     timeStamp;
 }

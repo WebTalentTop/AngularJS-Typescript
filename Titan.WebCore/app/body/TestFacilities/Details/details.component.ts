@@ -47,13 +47,15 @@ export class DetailsComponent implements AfterViewInit {
     departments: any;
     selectedDepartment: any;
     selectedEquipment: any;
+    categories: any;
+    selectedCategory: any;
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
     entityIdentifierInfo:any = {};
     formSchemaCategoryInfo:IFormSchemaCategory[] = [];
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
-    categories: SelectItem[];;
+    
     displayPreviewSelectedForm:boolean = false;
     operatingHours: any;
     maintenanceFrequencies: any;
@@ -70,8 +72,7 @@ export class DetailsComponent implements AfterViewInit {
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
     formInstanceFields: any[] = [];
-    selectedCategory: any;
-
+    
     // End Of Form Related Variables
 
     notificationMsgs: Message[] = [];
@@ -154,14 +155,14 @@ export class DetailsComponent implements AfterViewInit {
 
     ngOnInit() {
         if (this.id) {
-            this.categories = [];
-            this.categories.push({ label: 'All categories', value: null });
-            this.categories.push({ label: 'Wheel Alignment', value: 'Wheel Alignment' });
-            this.categories.push({ label: 'Torque for Parts', value: 'Torque for Parts' });
-            this.categories.push({ label: 'Certificates', value: 'Certificates' });
-            this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
-            this.categories.push({ label: 'Manual', value: 'Manual' });
-            this.categories.push({ label: 'Results', value: 'Results' });
+            //this.categories = [];
+            //this.categories.push({ label: 'All categories', value: null });
+            //this.categories.push({ label: 'Wheel Alignment', value: '5A3AFB53-A3D2-4BDF-8909-E60ED577F84D' });
+            //this.categories.push({ label: 'Torque for Parts', value: '817164F9-01D8-470D-BD58-618F4BF135F2' });
+            //this.categories.push({ label: 'Certificates', value: 'Certificates' });
+            //this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
+            //this.categories.push({ label: 'Manual', value: 'Manual' });
+            //this.categories.push({ label: 'Results', value: 'Results' });
            
 
             this.getEntityIdentifierInfo();
@@ -184,6 +185,7 @@ export class DetailsComponent implements AfterViewInit {
 
             this.getOperatingHours();
             this.getMaintenanceFrequencies();
+            this.getCategories();
 
         }
     }
@@ -294,6 +296,7 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+   
     onMaintenanceFrequencyChange(event) {
         // console.log('------event------------', event)
         this.selectedMaintenanceFrequency = (event.value);
@@ -423,6 +426,28 @@ export class DetailsComponent implements AfterViewInit {
             // console.log(response);
         });
     }
+    getCategories() {
+        //    userRoles
+        this.testFacilityService.getCategories().subscribe(response => {
+            this.categories = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select User Role",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.categories = resultMap;
+            }
+            // console.log(response);
+        });
+    }
     getDepartments() {
         //    userRoles
         this.testFacilityService.getDepartments().subscribe(response => {
@@ -452,7 +477,7 @@ export class DetailsComponent implements AfterViewInit {
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
-                    label: "Select Department",
+                    label: "Select Maintenance Frequency",
                     value: null
                 });
                 for (let template of response) {
@@ -474,7 +499,7 @@ export class DetailsComponent implements AfterViewInit {
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
-                    label: "Select Department",
+                    label: "Select Operating Hours",
                     value: null
                 });
                 for (let template of response) {
@@ -806,6 +831,9 @@ export class DetailsComponent implements AfterViewInit {
         let formData: any = {
             id: this.id,
             name: '',
+            description: '',
+            operatingHourId: '',
+            maintenanceFrequencyId: '',
             address: {
 
                 id: '',
@@ -817,7 +845,10 @@ export class DetailsComponent implements AfterViewInit {
             }
         };
         formData.id = this.id;
+        formData.description = formRef.description;
         formData.name = formRef.name;
+        formData.operatingHourId = this.selectedOperatingHour;
+        formData.maintenanceFrequencyId = this.selectedMaintenanceFrequency;        
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;

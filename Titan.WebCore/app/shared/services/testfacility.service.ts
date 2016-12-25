@@ -201,6 +201,15 @@ export class TestFacilityService {
                 return data.$values
             });
     }
+    getCategories(): Observable<any> {
+
+        return this.http.get(`${TestFacilityApiUrl.getCategories}`, { headers: this.headers })
+            .map(this.getJson)
+            .map(data => {
+                console.log("Notification data --------", data);
+                return data.$values
+            });
+    }
     getMaintenanceFrequencies(): Observable<any> {
 
         return this.http.get(`${TestFacilityApiUrl.getMaintenanceFrequencies}`, { headers: this.headers })
