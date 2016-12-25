@@ -7,7 +7,20 @@ import { FormsModule} from '@angular/forms';
 import formBuilderRoutes from "./formBuilder.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DragDropModule, SpinnerModule, DialogModule, InputTextModule, DropdownModule, ButtonModule, CheckboxModule, RadioButtonModule, CalendarModule, formBuilderRoutes],
+    imports: [
+        CommonModule,
+        DragDropModule,
+        FormsModule,
+        DragDropModule,
+        SpinnerModule,
+        DialogModule,
+        InputTextModule,
+        DropdownModule,
+        ButtonModule,
+        CheckboxModule,
+        RadioButtonModule,
+        CalendarModule,
+        formBuilderRoutes],
     declarations: [FormBuildersComponent]
 })
 
