@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import { EntityEventService } from '../../../shared/services/entityEvent.service';
 import { FormSchemaService } from '../../../shared/services/formSchema.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
