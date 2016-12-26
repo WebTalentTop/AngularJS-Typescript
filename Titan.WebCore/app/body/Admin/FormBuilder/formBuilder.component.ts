@@ -82,8 +82,7 @@ export class FormBuildersComponent {
     constructor(private entityEventService: EntityEventService,
                 private formSchemaService: FormSchemaService,
                 private formSchemaCategoryService: FormSchemaCategoryService,
-                private formFieldDataTypeService: FormSchemaFieldDataTypeService,
-                private dragulaService: DragulaService
+                private formFieldDataTypeService: FormSchemaFieldDataTypeService
                 ) {
         /*dragulaService.setOptions('droppedDraggableItems',{
             removeOnSpill:true
