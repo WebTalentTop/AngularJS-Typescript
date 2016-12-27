@@ -107,6 +107,20 @@ export class TestFacilityService {
           //.catch(err => Observable.throw(err))
           //.map(this.getJson);
       }
+      getLogComments(id): Observable<any> {
+          return this.http.get(`${TestFacilityApiUrl.getLogComments}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              .map(data => {
+                  console.log('---------getbyusing testdata---------', data);
+                  return data.$values
+              });
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
       DeleteUserRoleMap(id): Observable<any> {
           return this.http.post(`${TestFacilityApiUrl.DeleteUserRoleMap}/${id}`, { headers: this.headers })
 
@@ -249,6 +263,10 @@ export class TestFacilityService {
 
     postAddDepartment(testFacilityId, selectedDepartmentId): Observable<any> {
         return this.http.post(`${TestFacilityApiUrl.PostAddDepartmentMapUrl}/${testFacilityId}/${selectedDepartmentId}`, null, { headers: this.headers })
+            .map(this.getJson);
+    }
+    PostLogComments(testFacilityId, comment): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.PostLogCommentsUrl}/${testFacilityId}/${comment}`, null, { headers: this.headers })
             .map(this.getJson);
     }
     postAddEquipment(testFacilityId, selectedEquipmentId): Observable<any> {

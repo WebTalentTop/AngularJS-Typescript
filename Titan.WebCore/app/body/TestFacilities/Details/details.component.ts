@@ -180,7 +180,7 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
             this.GetTenantsByTestFacilityId();
-        //    this.GetLogCommentsByTestFacilityId();
+            this.GetLogCommentsByTestFacilityId();
             this.getDepartments();
             this.getEquipments();
 
@@ -576,6 +576,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
+            //    this.selectedOperatingHour = res.testFacility.operatingHourName;
+              //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
                 //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //console.log("----- Result of formObject -----", this.model);
