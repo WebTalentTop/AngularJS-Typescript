@@ -180,7 +180,7 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
             this.GetTenantsByTestFacilityId();
-            this.GetLogCommentsByTestFacilityId();
+        //    this.GetLogCommentsByTestFacilityId();
             this.getDepartments();
             this.getEquipments();
 
