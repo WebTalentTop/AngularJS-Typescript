@@ -191,7 +191,7 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
             this.GetTenantsByTestFacilityId();
-        //    this.GetLogCommentsByTestFacilityId();
+            this.GetLogCommentsByTestFacilityId();
             this.getDepartments();
             this.getEquipments();
 
@@ -453,7 +453,7 @@ export class DetailsComponent implements AfterViewInit {
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
-                    label: "Select User Role",
+                    label: "Select Category",
                     value: null
                 });
                 for (let template of response) {
@@ -587,6 +587,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
+            //    this.selectedOperatingHour = res.testFacility.operatingHourName;
+              //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
                 //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //console.log("----- Result of formObject -----", this.model);
@@ -826,7 +828,7 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-        this.testFacilityService.PostLogComments(this.id, "hello").subscribe(filteredList => {
+        this.testFacilityService.PostLogComments(this.id, this.comment).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
