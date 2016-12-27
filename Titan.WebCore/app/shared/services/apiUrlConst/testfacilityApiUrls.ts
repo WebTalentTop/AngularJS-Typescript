@@ -11,6 +11,7 @@ export class TestFacilityApiUrl {
     public static getAllUrl: string = titanApiUrl + 'testFacility/GetByTenantId';
     public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
     public static getTenants: string = titanApiUrl + 'testFacility/GetTenantsByTestFacilityId';
+    public static getLogComments: string = titanApiUrl + 'testFacility/GetTestFacilityLogCommentByTestFacilityId';
     public static DeleteUserRoleMap: string = titanApiUrl + 'testFacility/DeleteUserRoleMap';
     public static DeleteEquipmentMap: string = titanApiUrl + 'testFacility/DeleteEquipmentMap';
     public static DeleteTenantMap: string = titanApiUrl + 'testFacility/DeleteTenantMap';
@@ -27,6 +28,7 @@ export class TestFacilityApiUrl {
     public static getCategories: string = titanApiUrl + 'category';
     public static getMaintenanceFrequencies: string = titanApiUrl + 'maintenanceFrequency';
     public static PostAddEquipmentMapUrl: string = titanApiUrl + 'testFacility/PostEquipments';
+    public static PostLogCommentsUrl: string = titanApiUrl + 'testFacility/PostLogComments';
     public static PostMoveEquipmentToFacilityUrl: string = titanApiUrl + 'TestFacility/MoveEquipmentToFacility';
     public static getDetailsTabLocJs:string = localizationApiUrl;
 }

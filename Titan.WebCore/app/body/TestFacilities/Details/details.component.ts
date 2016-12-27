@@ -55,7 +55,8 @@ export class DetailsComponent implements AfterViewInit {
     formSchemaCategoryInfo:IFormSchemaCategory[] = [];
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
-    
+    comment: any;
+    testFacilityLogComments: any;
     displayPreviewSelectedForm:boolean = false;
     operatingHours: any;
     maintenanceFrequencies: any;
@@ -179,7 +180,7 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
             this.GetTenantsByTestFacilityId();
-
+            this.GetLogCommentsByTestFacilityId();
             this.getDepartments();
             this.getEquipments();
 
@@ -404,6 +405,14 @@ export class DetailsComponent implements AfterViewInit {
             });
 
     }
+    GetLogCommentsByTestFacilityId() {
+        this.testFacilityService.getLogComments(this.id)
+            .subscribe(res => {
+                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.testFacilityLogComments = res;
+            });
+
+    }
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
@@ -482,7 +491,7 @@ export class DetailsComponent implements AfterViewInit {
                 });
                 for (let template of response) {
                     var temp = {
-                        label: template.name,
+                        label: template.frequency,
                         value: template.id
                     }
                     resultMap.push(temp);
@@ -798,6 +807,27 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
     }
 
+    AddLogComment()
+    {
+        if (this.comment == null || this.comment == '') {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Please write any comment', detail: '' });
+            return null;
+        }
+
+        this.testFacilityService.PostLogComments(this.id, "hello").subscribe(filteredList => {
+            this.testFacilityService.getLogComments(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.testFacilityLogComments = res;
+                });
+           
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
+
+    }
     onAddEquipment() {
 
         if (this.selectedEquipment == null) {
