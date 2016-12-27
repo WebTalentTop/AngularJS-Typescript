@@ -817,7 +817,7 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-        this.testFacilityService.PostLogComments(this.id, "hello").subscribe(filteredList => {
+        this.testFacilityService.PostLogComments(this.id, this.comment).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
