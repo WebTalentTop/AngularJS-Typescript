@@ -442,7 +442,7 @@ export class DetailsComponent implements AfterViewInit {
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
-                    label: "Select User Role",
+                    label: "Select Category",
                     value: null
                 });
                 for (let template of response) {
