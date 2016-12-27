@@ -169,10 +169,8 @@ export class DetailsComponent implements AfterViewInit {
             //this.categories.push({ label: 'Results', value: 'Results' });
            
             // TODO: Replace this with a breadcrumb data service.
-            // TODO: Find out how to use this.testFacility.name for the final menu item label.
             this.breadcrumbs = [];
             this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
-            this.breadcrumbs.push({ label: 'Current Test Facility'});
 
             // TODO: Find out why the home link does not use the pointer icon for its hover state.
             this.breadcrumbsHome = { routerLink: ['/'] };
