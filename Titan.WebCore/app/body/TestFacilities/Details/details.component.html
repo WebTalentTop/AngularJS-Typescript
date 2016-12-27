@@ -18,9 +18,10 @@
 
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
+                        <h2>Next Maintainence Date:</h2>
                         <!-- Begin Panel - Test Facility Name and Location -->
 
-                        <p-panel header="Test Facility Name and Location">
+                        <p-panel header="Information">
 
                             <div class="body">
 
@@ -567,78 +568,89 @@
             <p-tabPanel header="Attachments" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
-                <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories" [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
-                <div class="ui-grid-col-2"></div>
-                <p-fileUpload [name]="testfacility" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}/{{selectedCategory}}" (onUpload)="onUpload($event)"
-                              multiple="multiple" accept="image/*" maxFileSize="1000000">
-                    <template pTemplate type="content">
-                        <ul *ngIf="uploadedFiles.length">
-                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                        </ul>
-                        <div class="ui-grid-row">
-                            <!--<div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>-->
-                            <div class="ui-grid-col-2"></div>
+              
+                    <div class="ui-grid-col-1">
+                        Category:
+                    </div>
+                    <div class="col-sm-12">
+                        <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories" [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
+                    </div>                  
+               
+                <!--<div class="ui-grid-col-2"></div>-->
+               
+                    <p-fileUpload [name]="testfacility" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}/{{selectedCategory}}" (onUpload)="onUpload($event)"
+                                  multiple="multiple" accept="image/*" maxFileSize="1000000">
+                        <template pTemplate type="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                            <div class="ui-grid-row">
+                                <!--<div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>-->
+                                <div class="ui-grid-col-2"></div>
 
-                            <p-dataTable [value]="TestFacilityAttachments" [editable]="true">
+                                <p-dataTable [value]="TestFacilityAttachments" [editable]="true">
 
-                                <!-- Begin File Name Column -->
+                                    <!-- Begin File Name Column -->
 
-                                <p-column field="name" header="File Name">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">{{TestFacilityAttachment.name}}</a>
-                                    </template>
-                                </p-column>
+                                    <p-column field="name" header="File Name">
+                                        <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                            <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">{{TestFacilityAttachment.name}}</a>
+                                        </template>
+                                    </p-column>
 
 
-                                <!--<p-column header="Category" [style]="{'overflow':'visible'}">
-                                    <template pTemplate type="body" let-col>
-                                        <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories" [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
-                                  
-                                      </template>
-                                </p-column>-->
-                                <p-column field="category" header="Category">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
-                                        {{TestFacilityAttachment.category}}
-                                    </template>
-                                </p-column>
-                                <!-- End File Name Column -->
-                                <!-- Begin Uploaded By Column -->
+                                    <!--<p-column header="Category" [style]="{'overflow':'visible'}">
+                            <template pTemplate type="body" let-col>
+                                <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories" [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
 
-                                <p-column field="employee" header="Employee">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
-                                        {{TestFacilityAttachment.employee}}
-                                    </template>
-                                </p-column>
+                              </template>
+                        </p-column>-->
+                                    <p-column field="category" header="Category">
+                                        <template let-Test
+                                            <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                                <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
+                                                {{TestFacilityAttachment.category}}
+                                            </template>
+                                    </p-column>
+                                    <!-- End File Name Column -->
+                                    <!-- Begin Uploaded By Column -->
 
-                                <!-- End Uploaded By Column -->
-                                <!-- Begin When Uploaded Column -->
+                                    <p-column field="employee" header="Employee">
+                                        <template let-Test
+                                            <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                                <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
+                                                {{TestFacilityAttachment.employee}}
+                                            </template>
+                                    </p-column>
 
-                                <p-column field="TestFacilityAttachment.timeStamp" header="TimeStamp">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
-                                        {{TestFacilityAttachment.timeStamp}}
-                                    </template>
-                                </p-column>
+                                    <!-- End Uploaded By Column -->
+                                    <!-- Begin When Uploaded Column -->
 
-                                <!-- End When Uploaded Column -->
-                                <!-- Begin Actions Column -->
+                                    <p-column field="TestFacilityAttachment.timeStamp" header="TimeStamp">
+                                        <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                            {{TestFacilityAttachment.timeStamp}}
+                                        </template>
+                                    </p-column>
 
-                                <p-column header="Actions">
-                                    <template let-TestFacilityAttachment="rowData" pTemplate type="body">
+                                    <!-- End When Uploaded Column -->
+                                    <!-- Begin Actions Column -->
 
-                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a>
-                                        <!--<button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>-->
-                                        <button pButton type="button" icon="ui-icon-remove-circle" label="Delete" (click)="onDelete(TestFacilityAttachment)"></button>
-                                    </template>
-                                </p-column>
+                                    <p-column header="Actions">
+                                        <template let-TestFacilityAttachment="rowData" pTemplate type="body">
 
-                                <!-- End Actions Column -->
+                                            <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a>
+                                            <!--<button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>-->
+                                            <button pButton type="button" icon="ui-icon-remove-circle" label="Delete" (click)="onDelete(TestFacilityAttachment)"></button>
+                                        </template>
+                                    </p-column>
 
-                            </p-dataTable>
-                        </div>
-                    </template>
-                </p-fileUpload>
+                                    <!-- End Actions Column -->
+
+                                </p-dataTable>
+                            </div>
+                        </template>
+                    </p-fileUpload>
+             
             </p-tabPanel>
 
             <p-tabPanel header="Log" id="log" headerStyleClass="log">
@@ -653,7 +665,7 @@
                         </div>
                     <div class="ui-grid-col-2"></div>
                     <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
-                    <button pButton type="button" label="Add Comment" (click)="AddLogComment()"> Add Comment </button>
+                    <button pButton type="button" label="Add Comment"  (click)="AddLogComment()"> Add Comment </button>
                     <div class="ui-grid-col-2"></div>
                         <div class="ui-grid-row">
 
