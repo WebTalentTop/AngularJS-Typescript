@@ -18,7 +18,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -129,6 +129,9 @@ export class DetailsComponent implements AfterViewInit {
         userModifiedById: ''
     };
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     msgs: Message[];
     uploadedFiles: any[] = [];
 
@@ -165,6 +168,14 @@ export class DetailsComponent implements AfterViewInit {
             //this.categories.push({ label: 'Manual', value: 'Manual' });
             //this.categories.push({ label: 'Results', value: 'Results' });
            
+            // TODO: Replace this with a breadcrumb data service.
+            // TODO: Find out how to use this.testFacility.name for the final menu item label.
+            this.breadcrumbs = [];
+            this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
+            this.breadcrumbs.push({ label: 'Current Test Facility'});
+
+            // TODO: Find out why the home link does not use the pointer icon for its hover state.
+            this.breadcrumbsHome = { routerLink: ['/'] };
 
             this.getEntityIdentifierInfo();
             this.getUserRoles();
