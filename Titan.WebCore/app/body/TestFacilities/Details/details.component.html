@@ -322,16 +322,16 @@
 
             </p-tabPanel>
 
-            <p-tabPanel header="Equipments" id="equipment" headerStyleClass="equipment">
+            <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-growl [value]="msgs"></p-growl>
-                <p-dialog header="Assign Equipments" [(visible)]="displayAssignEquipmentsDialog" modal="modal" showEffect="fade" responsive="true">
+                <p-dialog header="Assign Equipment" [(visible)]="displayAssignEquipmentsDialog" modal="modal" showEffect="fade" responsive="true">
 
                     <p>Please select any equipment at the {{testFacility.name}} test facility.</p>
 
                     <div class="input-row">
 
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
-                        <span class="pseudo-label">Equipments</span>
+                        <span class="pseudo-label">Equipment</span>
 
                         <p-dropdown [options]="equipments" (onChange)="onEquipmentChange($event)" name="equipments" [autoWidth]="false"></p-dropdown>
 
@@ -350,8 +350,8 @@
                 </p-dialog>
                 <p-panel>
                     <header class="with-controls">
-                        <p class="ui-panel-title">Test Facility Equipments</p>
-                        <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Equipments&hellip;"></button></p>
+                        <p class="ui-panel-title">Test Facility Equipment</p>
+                        <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Equipment&hellip;"></button></p>
                     </header>
                     <div class="ui-grid-col-4"></div>
                    
