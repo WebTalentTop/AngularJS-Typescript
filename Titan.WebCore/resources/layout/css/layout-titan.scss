@@ -228,4 +228,38 @@ body .layout-wrapper .layout-main
             color: #555
         }
     }
+
+    .ui-breadcrumb
+    {
+        border: none;
+
+        background-color: transparent;
+
+        padding: 0;
+
+        li
+        {
+            color: #ccc;
+
+            a
+            {
+                color: #ccc;
+
+                :hover
+                {
+                    color: #777
+                }
+
+                :active
+                {
+                    color: #333
+                }
+            }
+
+            ::before
+            {
+                color: #ccc
+            }
+        }
+    }
 }
