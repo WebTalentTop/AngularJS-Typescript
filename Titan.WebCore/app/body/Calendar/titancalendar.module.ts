@@ -12,7 +12,7 @@ import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
 import {
     DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
-    FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule
+    FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, FieldsetModule, AccordionModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { MultiSelectModule } from 'primeng/primeng';
@@ -23,7 +23,7 @@ import calendarRoutes from "./titancalendar.routes";
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
         InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
-        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule],
+        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule, FieldsetModule, AccordionModule],
 
     providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService

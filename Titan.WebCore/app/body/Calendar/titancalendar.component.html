@@ -1,68 +1,75 @@
 ﻿
-<div class="row">
-    <div class="ui-grid-col-1">
-        Slots
-    </div>
-    <div class="ui-grid-col-2">
-        <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue" (onChange)="updateCalendarSettings($event)" [style]="{'width':'auto'}"></p-dropdown>
-    </div>
-    <div class="ui-grid-col-1">
-        Project Codes :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Test Facility :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Test Mode :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Test Type :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Test Status :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Test Roles:
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
-    <div class="ui-grid-col-1">
-        Build Levels :
-    </div>
-    <div class="ui-grid-col-2">
-        <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
-        </p-multiSelect>
-    </div>
+<p-accordion>
+    <p-accordionTab header="Search Options">
+        <div class="ui-g-12">
 
-    <div class="ui-grid-col-2">
-        <button pButton type="button" label="Click" (click)="filterCalendarEvents($event)"></button>
+            <div class="ui-g form-group">
 
-    </div>
-</div>
+                <div class="ui-g-12 ui-md-3">
+                    <label>Slots</label> <br />
+                    <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue" (onChange)="updateCalendarSettings($event)">
+                    </p-dropdown>
+                </div>
 
-<div class="row">
+                <div class="ui-g-12 ui-md-3">
+                    <label>Project Code</label> <br />
+                    <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+
+                </div>
+
+                <div class="ui-g-12 ui-md-3">
+                    <label>Test Facility</label> <br />
+                    <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <label>Test Types</label> <br />
+                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <label>Test Mode</label> <br />
+                    <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+
+                </div>
+
+                <div class="ui-g-12 ui-md-3">
+                    <label>Test Status</label> <br />
+                    <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <label>PIC</label> <br />
+                    <p-autoComplete [(ngModel)]="filteredSelectedTestUserNames" [suggestions]="filteredTestUserNames" (completeMethod)="getTestUsers($event)"
+                                    name="testUsers" [minLength]="1" placeholder="Search by Name"
+                                    field="displayName" [multiple]="false">
+                    </p-autoComplete>
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <label>Build Levels</label> <br />
+                    <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'100%'}">
+                    </p-multiSelect>
+                </div>
+                <div class="ui-g-12">
+                    <div class="ui-g-12 ui-md-3">
+                        <button pButton type="button" label="Search" (click)="filterCalendarEvents()"></button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-accordionTab>
+
+</p-accordion>
+
+
+
+<div class="ui-g-12">
     <div id="calendar">
     </div>
 </div>
@@ -266,6 +273,5 @@
 
 <style>
     #calendar {
-        max-width: 95%;
     }
 </style>

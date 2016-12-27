@@ -6,6 +6,7 @@ import { TestRoleService } from '../../shared/services/testRole.service';
 import { ProjectService } from '../../shared/services/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
+import { TitanUserService } from '../../shared/services/titanuser.service';
 
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -27,7 +28,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     buildLevels: any;
     projectCodes: any;
     testFacilities: any;
-    testAllModes: any;
+    testAllModes: any; 
     testTypes: any;
     testStatus: any;
     selectedTestRoles: any[];
@@ -53,7 +54,9 @@ export class TitanCalendarComponent implements AfterViewInit {
     selectedTestScheduleStartDate: Date;
     selectedTestScheduleEndDate: Date;
 
-
+    // Search Filters on the main page
+    filteredTestUserNames: any[] = [];
+    filteredSelectedTestUserNames: any;
 
 
     //Assign Dialog Header Properties
@@ -165,15 +168,24 @@ export class TitanCalendarComponent implements AfterViewInit {
             editable: true,
             resourceAreaWidth: "125px",
             scrollTime: '00:00',
-            resourceGroupField: "entityTypeIdentifierId",
+            resourceGroupField: "entityTypeIdentifier",
             resourceGroupText: function (groupValue) {
-                return "Test Facility";
+                return groupValue;
             },
             resources: function (callback) {
                 console.log("----Resources Loading ------");
                 $.ajax({
-                    url: titanApiUrl + 'Calendar/GetResourcesForTimelineView?IncludeTestFacility=true&IncludeProject=false',
-                    type: 'GET',
+                    url: titanApiUrl + 'Calendar/ResourcesForTimelineView',
+                    data: {
+                        includeTestFaciity: true,
+                        includeProject: false,
+                        includeUsers: true,
+                        includeVehicle:false,
+                        testFacilityHeader :'Test Facility',
+                        userHeader : 'User'
+
+                    },
+                    type: 'Post',
                     error: function () {
                         alert('there was an error while fetching events!');
                     },
@@ -186,7 +198,7 @@ export class TitanCalendarComponent implements AfterViewInit {
             },
 
             eventSources: [{
-                id:'testFacilityEventSource',
+                id: 'testFacilityEventSource',
                 events: function (start, end, timezone, callback) {
                     $.ajax({
                         url: titanApiUrl + 'TestFacility/Schedule',
@@ -194,7 +206,7 @@ export class TitanCalendarComponent implements AfterViewInit {
                         data: {
                             startdate: start.utc().format(),
                             enddate: end.utc().format(),
-                            projectCodeIdList : []
+                            projectCodeIdList: []
 
                         },
                         error: function () {
@@ -254,7 +266,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     }
 
     ngOnInit() {
-        //   this.getTestFacilities();
+        this.getTestFacilities();
         this.getTestModes();
         this.getTestTypes();
         this.getBuildLevels();
@@ -318,10 +330,9 @@ export class TitanCalendarComponent implements AfterViewInit {
     }
 
     onBuildLevelChange(event) {
-        console.log('------event------------', event)
+        console.log('------updating selected build levels------------', event)
         this.selectedBuildLevels = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
-
+        console.log(this.selectedBuildLevels);
     }
 
     onProjectCodeChange(event) {
@@ -356,6 +367,13 @@ export class TitanCalendarComponent implements AfterViewInit {
     onTestStatusChange(event) {
         console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
+    }
+
+    getTestUsers(event) {
+
+        this.testfacilityservice.filterByUserNames(event.query).subscribe(filteredList => {
+            this.filteredTestUserNames = filteredList.$values;
+        });
     }
 
     getTestRoles() {
@@ -454,6 +472,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         //    userRoles
         this.teststatusservice.getTestStatus().subscribe(response => {
             this.testStatus = new Array();
+
             if (response != null) {
                 var resultMap = new Array();
                 //resultMap.push({
@@ -543,15 +562,22 @@ export class TitanCalendarComponent implements AfterViewInit {
         let end = moment.utc();
         let timezome = '';
         let testFacilityEventSource = $("#calendar").fullCalendar('getEventSourceById', 'testFacilityEventSource');
-        $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource )
+        $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource)
         $("#calendar").fullCalendar('removeEventSource', { id: 'testFacilityEventSource' });
         console.log("-- Clearing the events");
-        
+
         debugger;
         var payload = {
             startdate: '12-1-2016',
             enddate: '12-12-2017',
-            projectCodeIdList: this.selectedProjectCodes
+            projectCodeIdList: this.selectedProjectCodes,
+            buildLevelIdList: this.selectedBuildLevels,
+            testStatusIdList: this.selectedTestStatuses,
+            testTypeIdList: this.selectedTestTypes,
+            testModeIdList: this.selectedTestModes,
+            TestFacilityIdList: this.selectedTestFacilities
+
+
         };
         console.log(payload);
         //this.initSchedule();
@@ -579,7 +605,7 @@ export class TitanCalendarComponent implements AfterViewInit {
         }
         console.log(source1);
         $("#calendar").fullCalendar('addEventSource', source1);
-        
+
 
     }
 
