@@ -825,8 +825,8 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'info', summary: 'Please write any comment', detail: '' });
             return null;
         }
-
-        this.testFacilityService.PostLogComments(this.id, this.comment).subscribe(filteredList => {
+        console.log("stringify --------", JSON.stringify(this.comment));
+        this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
