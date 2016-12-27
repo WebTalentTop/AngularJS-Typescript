@@ -364,7 +364,7 @@
 
                         <p-column header="Actions">
                             <template let-TestFacilityEquipment="rowData" pTemplate type="body">
-                                <button pButton type="button" (click)="showEquipmentDialog(TestFacilityEquipment)">Move To Another TestFacility</button>
+                                <button pButton type="button" icon="ui-icon-arrow-forward" label="Move" (click)="showEquipmentDialog(TestFacilityEquipment)" title="Move To Another Test Facility"></button>
                                 <button pButton type="button" icon="ui-icon-remove-circle" (click)="onDeleteEquipmentMap(TestFacilityEquipment.id)" label="Delete"></button>
                             </template>
 
