@@ -2317,3 +2317,17 @@ body .layout-wrapper .layout-main {
       border: 1px solid #cacaca;
       background-color: #fff;
       color: #555; }
+  body .layout-wrapper .layout-main .ui-breadcrumb {
+    border: none;
+    background-color: transparent;
+    padding: 0; }
+    body .layout-wrapper .layout-main .ui-breadcrumb li {
+      color: #ccc; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li a {
+        color: #ccc; }
+        body .layout-wrapper .layout-main .ui-breadcrumb li a :hover {
+          color: #777; }
+        body .layout-wrapper .layout-main .ui-breadcrumb li a :active {
+          color: #333; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li ::before {
+        color: #ccc; }
