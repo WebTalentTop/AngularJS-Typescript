@@ -564,7 +564,7 @@ export class DetailsComponent implements AfterViewInit {
       //   Id : ' ' ,
          TestNumber : this.number ,
         // TenantId: ' ',
-         TestTemplateId: this.selectedTestTemplates,
+         TestTemplateId: '2F59E940-50E9-403E-8075-F407AE285143',//this.selectedTestTemplates,
          TestFacilityId: this.selectedTestFacilities,
          ProjectId: this.selectedProjectCodes,
          BuildLevelId: this.selectedBuildLevels,
@@ -599,11 +599,11 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
        
-        if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
-            return null;
-        }
+        //if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
+        //    this.msgs = [];
+        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
+        //    return null;
+        //}
         if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
@@ -620,7 +620,7 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+     //  this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 
             // console.log(res);
           //  this.TrackingList = res.$values;
@@ -689,8 +689,7 @@ export class DetailsComponent implements AfterViewInit {
             }
 
 
-       });
-
+     //});
        
 
     }

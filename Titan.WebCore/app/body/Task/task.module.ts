@@ -6,11 +6,10 @@ import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, M
 import { RouterModule } from "@angular/router";
 import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { TaskService } from '../../shared/services/task.service';
-import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 import taskRoutes from "./task.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule,GridModule, taskRoutes],
+    imports: [CommonModule, RouterModule, DataTableModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, taskRoutes],
     providers:[TestFacilityService, TaskService],
     declarations: [TaskComponent]
 })

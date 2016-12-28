@@ -47,6 +47,7 @@ export class AddComponent {
    // TimeEntryTypeId: any;
     selectedSensorTypeId: any;
     comment: any;
+    sensorRequests: any;
    // selectedTimeEntryTypeId: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
@@ -94,7 +95,10 @@ export class AddComponent {
    }
    ngOnInit() {
        this.getSensorList();
-     
+       this.dataService.GetAllTestRequestSensors(this.entityId)
+           .subscribe(res => {
+               this.sensorRequests = res.result;
+           });
    //    this.getHourEntryByEntityIdentifierId();
    //    this.getDownTimeReasons();
    //    //this.dataService.GetProjectId(this.id)
@@ -347,9 +351,14 @@ export class AddComponent {
            if (res.isSuccess) {
                var testRequestSensorId = res.result.id;
            //    console.log("", res.object.id); 
-               this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(() => {
+               this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(result => {
                    console.log('sent');
-                   this.router.navigate(["/testrequest/details/", this.id]);
+                 //  this.router.navigate(["/testrequest/details/", this.id]);
+                   // make a call with id and update the datatable
+                   this.dataService.GetAllTestRequestSensors(this.entityId)
+                       .subscribe(res => {
+                           this.sensorRequests = res.result;                         
+                       });
                });             
            }
        });

@@ -177,7 +177,29 @@
                        </div>
                     </div>
                 </div><!-- Form End -->
-              
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive" style="min-height:400px;">
+                            <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
+                                <p-column header="Sensor Name" field="name" sortable="true"></p-column>
+
+
+                                <p-column header="Comments" field="comment" sortable="true"></p-column>
+                                <!--<p-column>
+                                    <template pTemplate type="header">
+                                        <button type="button" pButton icon="fa-refresh"></button>
+                                    </template>
+                                    <template let-sensorrow="rowData" pTemplate type="body">
+                                        <a routerLink="details/{{sensorrow.id}}/{{entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                    </template>
+                                </p-column>-->
+
+                            </p-dataTable>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </p-tabPanel>
 

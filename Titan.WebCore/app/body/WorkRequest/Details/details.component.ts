@@ -53,9 +53,13 @@ export class DetailsComponent {
     workRequestId: any;
     testRequestSensorCommentId: any;
     selectedSensorTypeId: any;
+    categoryId: any = "31D2FE32-9104-4594-B79D-056B440409E9";
     msgs: Message[]=[];
     entityId: any;
-    entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
+    entityType: any = "wr";
+    IsKeepOpen: boolean = false;
+    displayAssignAttachmentsDialog: boolean = false;
+    //entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
     testRequestSensorId: any;
     //filepath: string = "TestFacility";
     //testFacility = { name: '' };
@@ -228,6 +232,32 @@ export class DetailsComponent {
         this.selectedSensorTypeId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
+    }
+    onUploadAttachments(selectedTestRequestSensor)
+    {
+        this.displayAssignAttachmentsDialog = true;
+        this.testRequestSensorId = selectedTestRequestSensor.id;
+        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
+            res => {
+                this.uploadedFiles = res.$values;
+            }
+        );
+
+    }
+    onOk()
+    {
+        if (!this.IsKeepOpen)
+            this.displayAssignAttachmentsDialog = false;
+        else
+            this.displayAssignAttachmentsDialog = true;
+    }
+    onUpload(event)
+    {
+        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
+            res => {
+                this.uploadedFiles = res.$values;
+            }
+        );
     }
     getSensorList() {
         //    userRoles

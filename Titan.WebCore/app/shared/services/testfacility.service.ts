@@ -266,7 +266,9 @@ export class TestFacilityService {
             .map(this.getJson);
     }
     PostLogComments(testFacilityId, comment): Observable<any> {
-        return this.http.post(`${TestFacilityApiUrl.PostLogCommentsUrl}/${testFacilityId}`, null, { headers: this.headers })
+
+        return this.http.post(`${TestFacilityApiUrl.PostLogCommentsUrl}/${testFacilityId}`, comment, { headers: this.headers })
+
             .map(this.getJson);
     }
     postAddEquipment(testFacilityId, selectedEquipmentId): Observable<any> {

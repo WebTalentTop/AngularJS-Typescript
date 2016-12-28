@@ -24,16 +24,68 @@
 
                                                     <p-column header="IsCompleted" field="isCompleted" sortable="true"></p-column>
 
-                                                    <p-column>
+
+
+                                                    <p-column [editable]="true">
+                                                            <template pTemplate type="header">
+                                                                <button type="button" pButton icon="fa-refresh"></button>
+                                                            </template>
+                                                            <template let-TestRequestSensor="rowData" pTemplate="body">
+                                                                <!--<p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{TestRequestSensor.id}}/{{categoryId}}"
+                                                                              multiple="multiple" accept="image/*" maxFileSize="1000000">
+
+                                                                </p-fileUpload>-->
+                                                                <button pButton type="button" icon="ui-icon-remove-circle" label="Upload" (click)="onUploadAttachments(TestRequestSensor)"></button>
+                                                            </template>
+
+
+                                                        </p-column>
+
+
+                                                    <!--<p-column>
                                                         <template pTemplate type="header">
                                                             <button type="button" pButton icon="fa-refresh"></button>
                                                         </template>
                                                         <template let-sensorrow="rowData" pTemplate type="body">
                                                             <a routerLink="details/{{sensorrow.id}}"><i class="fa ui-icon-edit"></i>View Details</a>
                                                         </template>
-                                                    </p-column>
+                                                    </p-column>-->
 
                                                 </p-dataTable>
+                                                <p-dialog header="Assign Attachments" [(visible)]="displayAssignAttachmentsDialog" modal="modal" showEffect="fade" responsive="true">
+
+                                                    <p>Please select one or more attachments to thermo couple.</p>
+                                                    <div class="input-row">
+
+                                                        <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
+                                                        <span class="pseudo-label">Upload</span>
+
+                                                        <p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{testRequestSensorId}}/{{categoryId}}" (onUpload)="onUpload($event)"
+                                                                      multiple="multiple" accept="image/*" maxFileSize="1000000">                                                           
+                                                        </p-fileUpload>
+                                                    </div>
+                                                    <div class="input-row">
+
+                                                        <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
+                                                        <span class="pseudo-label">Attachments</span>
+
+                                                        <ul *ngIf="uploadedFiles.length">
+                                                            <li *ngFor="let file of uploadedFiles">{{file.name}}<a href="http://localhost:9998/api/TestFacilityAttachment/file/{{file.id}}">download</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <!-- End Role -->
+
+                                                    <footer>
+                                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                            <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                                            <!--<label class="checkbox"><input type="checkbox" name="keep" binary="true" > Keep Open</label>-->
+                                                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel"></button>
+                                                            <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Ok"></button>
+                                                        </div>
+                                                    </footer>
+
+                                                </p-dialog>
                                             </div>
                                         </div>
 

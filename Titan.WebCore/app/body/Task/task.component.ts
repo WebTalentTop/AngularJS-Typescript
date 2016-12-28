@@ -4,7 +4,7 @@ import { LoggerService } from './../../shared/services/logger.service';
 import { LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router'
-import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+
 import { titanApiUrl } from './../../shared/services/apiurlconst/titanapiurl';
 
 @Component({
