@@ -77,7 +77,7 @@ gulp.task("copy-systemjs", function () {
 gulp.task('sass', function () {
     gulp.src(root_path.primeResources + '**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest(root_path.primeResources));
+        .pipe(gulp.dest(root_path.package_lib));
 });
 gulp.task('sass-cleanup', function () {
     del(['resources/layout/*.css', 'resources/theme/*.css']);
