@@ -148,11 +148,27 @@
                                 <!-- Begin Description -->
 
                                 <div class="input-row md-spaced">
-
+                                    <label>Description</label>
                                     <div class="md-inputfield">
-                                        <p-editor [(ngModel)]="testFacility.description" name="description" [style]="{'height':'320px'}"></p-editor>
+                                       
+                                        <p-editor [(ngModel)]="testFacility.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                            <header>
+                                                <select class="ql-size">
+                                                    <option value="small"></option>
+                                                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                                    <option selected></option>
+                                                    <option value="large"></option>
+                                                    <option value="huge"></option>
+                                                </select>
+                                                <span class="ql-formats">
+                                                    <button class="ql-bold"></button>
+                                                    <button class="ql-italic"></button>
+                                                    <button class="ql-underline"></button>
+                                                </span>
+                                            </header>
+                                        </p-editor>
 
-                                        <label>Description</label>
+                                        
                                     </div>
                                 </div>
 
