@@ -241,6 +241,11 @@ body .layout-wrapper .layout-main
         {
             color: #ccc;
 
+            &.fa
+            {
+                margin: 0
+            }
+
             a
             {
                 color: #ccc;
@@ -253,6 +258,13 @@ body .layout-wrapper .layout-main
                 :active
                 {
                     color: #333
+                }
+
+                span
+                {
+                    display: block;
+
+                    font-size: 16px
                 }
             }
 
