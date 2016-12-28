@@ -1,0 +1,80 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@types/qtip2",
+        "scope": "@types",
+        "escapedName": "@types%2fqtip2",
+        "name": "@types/qtip2",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\CodeRepository\\titan.webcore\\Titan.WebCore"
+    ]
+  ],
+  "_from": "@types/qtip2@latest",
+  "_id": "@types/qtip2@2.2.27",
+  "_inCache": true,
+  "_location": "/@types/qtip2",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/qtip2-2.2.27.tgz_1474308299249_0.6603139373473823"
+  },
+  "_npmUser": {
+    "name": "types",
+    "email": "ts-npm-types@microsoft.com"
+  },
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@types/qtip2",
+    "scope": "@types",
+    "escapedName": "@types%2fqtip2",
+    "name": "@types/qtip2",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/qtip2/-/qtip2-2.2.27.tgz",
+  "_shasum": "858956949869d01061a13df81b481d73cac1b543",
+  "_shrinkwrap": null,
+  "_spec": "@types/qtip2",
+  "_where": "C:\\CodeRepository\\titan.webcore\\Titan.WebCore",
+  "author": {
+    "name": "Nathan Pitman",
+    "email": "https://github.com/Seltzer"
+  },
+  "dependencies": {
+    "@types/jquery": "*"
+  },
+  "description": "TypeScript definitions for qtip2 v2.2.1",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "858956949869d01061a13df81b481d73cac1b543",
+    "tarball": "https://registry.npmjs.org/@types/qtip2/-/qtip2-2.2.27.tgz"
+  },
+  "license": "MIT",
+  "main": "",
+  "maintainers": [
+    {
+      "name": "types",
+      "email": "ryan.cavanaugh@microsoft.com"
+    }
+  ],
+  "name": "@types/qtip2",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typesPublisherContentHash": "20f0fdd54687012dd914d6f0b63f428cddcd8f0f1c948be92f007f4ef971be76",
+  "typings": "index.d.ts",
+  "version": "2.2.27"
+}

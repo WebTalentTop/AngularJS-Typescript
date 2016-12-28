@@ -1,0 +1,23 @@
+{
+    "authors": "Nathan Pitman <https://github.com/Seltzer>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [
+        "jquery"
+    ],
+    "moduleDependencies": [],
+    "libraryMajorVersion": "2",
+    "libraryMinorVersion": "2",
+    "libraryName": "qtip2 v2.2.1",
+    "typingsPackageName": "qtip2",
+    "projectName": "http://qtip2.com/",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "Global",
+    "globals": [],
+    "declaredModules": [],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "20f0fdd54687012dd914d6f0b63f428cddcd8f0f1c948be92f007f4ef971be76"
+}
