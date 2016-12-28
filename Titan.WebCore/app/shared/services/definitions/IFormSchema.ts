@@ -14,7 +14,7 @@ export class FormSchema implements IFormSchema {
         public name:string,
         public fields:IFormSchemaField[],
         public formSchemaCategoryIds?:any[],
-        public entityEventFormSchemaCategories?:any[]
+        public entityEventFormSchemaCategories?:any[],
     )
     {
         this.formSchemaCategoryIds = [];

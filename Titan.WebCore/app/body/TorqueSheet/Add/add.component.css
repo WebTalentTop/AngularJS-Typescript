@@ -1,0 +1,38 @@
+
+.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only
+ {
+    font-size: 15px ;
+    display:inline-block;
+    width: auto;
+    background-color: forestgreen;
+
+}
+
+p-panel .ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all
+{
+    height: 40px;
+    background-color: lightgray;
+}
+
+#cancel.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only
+ { 
+    font-size: 15px ;
+    display:inline-block;
+    width: 120px;
+    background-color: gray;
+     
+    }
+
+p-panel #footer 
+{
+    float: left;
+    width: auto;
+}
+
+﻿#username.form-control.ui-inputtext {
+    background-color: #c3c3c3;
+}
+
+#username.form-control.ui-inputtext:hover {
+    background-color: #ffffff;
+}

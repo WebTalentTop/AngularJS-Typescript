@@ -11,10 +11,10 @@
                 <p-column header="Action">
                     <template let-col let-node="rowData" pTemplate type="body">
                         <button type="button" *ngIf="canAdd(node.data.rowType)" pButton [label]="getLabel(node.data.rowType)" (click)="onAdd(node.data.rowType, node.data.id, $event)"></button>
-                        <button type="button" *ngIf="canSelectTemplate(node.data)" pButton label="Use Template" 
-                            (click)="onAddTemplate(node.data, $event, true)"></button>
-                        <button type="button" *ngIf="canEditTemplate(node.data)" pButton label="Edit Template"
-                                (click)="onAddTemplate(node.data, $event, false)"></button>
+                        <button type="button" *ngIf="canEditTorqueSheet(node.data)" pButton label="Edit TS" 
+                            (click)="onEditTorqueSheet(node.data, $event)"></button>
+                        <!--<button type="button" *ngIf="canEditTemplate(node.data)" pButton label="Edit Template"
+                                (click)="onAddTemplate(node.data, $event, false)"></button>-->
                     </template>
                 </p-column>
             </p-treeTable>
@@ -102,7 +102,7 @@
             Template *:
         </div>
         <div class="ui-grid-col-8">
-            <p-dropdown [options]="torquesheetTemplates" [(ngModel)]="selectedTemplate"
+            <p-dropdown [options]="torquesheetTemplates" [(ngModel)]="selectedTemplate" name="selectedTemplate"
                 (onChange)="onTemplateChange()" width="250px"></p-dropdown>
             <!--<select name="torqueSheetTemplate" [(ngModel)] ="selectedTemplate">
                 <option value="">Select Template</option>

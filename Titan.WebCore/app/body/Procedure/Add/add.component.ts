@@ -16,8 +16,11 @@ export class AddComponent {
     public procedure:any;
     public testTypes: any;
     public testModes: Array<any> = new Array();
-    constructor(private procedureService: ProcedureService, private testTypeService: TestTypeService,
-        private testModeService: TestModeService, private router: Router) {
+    constructor(private procedureService: ProcedureService,
+        private testTypeService: TestTypeService,
+        private testModeService: TestModeService,
+        private testtypeService: TestTypeService,
+        private router: Router) {
 
     }
 
@@ -41,10 +44,10 @@ export class AddComponent {
                     label: "Select Test Type",
                     value: null
                 });
-                for (let template of response.$values) {
+                for (let template of response.result) {
                     var temp = {
-                        label: template.name,
-                        value: template.id
+                        label: template.label,
+                        value: template.value
                     }
                     resultMap.push(temp);
                 }
@@ -57,17 +60,17 @@ export class AddComponent {
     onTestTypeChange() {
         this.testModes = new Array();
         //this.testModes
-        this.testModeService.getAllByTestTypeId(this.procedure.testTypeId).subscribe(response => {
-            if (response != null && response.$values.length > 0) { 
+        this.testtypeService.getById(this.procedure.testTypeId).subscribe(response => {
+            if (response != null && response.result.selectedTestModesList != null && response.result.selectedTestModesList.length > 0) {
                 var resultMap = new Array();
                 resultMap.push({
                     label: "Select Test Mode",
                     value: null
                 });
-                for (let template of response.$values) {
+                for (let template of response.result.selectedTestModesList) {
                     var temp = {
-                        label: template.name,
-                        value: template.id
+                        label: template.label,
+                        value: template.value
                     }
                     resultMap.push(temp);
                 }

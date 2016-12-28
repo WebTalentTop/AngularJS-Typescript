@@ -60,6 +60,12 @@ export class TorqueBookComponent {
         return true;
     }
 
+    canEditTorqueSheet(data) {
+        if ((data.rowType == "BuildLevel" || data.rowType == "TorqueBook"))
+            return false;
+        return true;
+    }
+
     canEditTemplate(data) {
         if ((data.rowType == "BuildLevel" || data.rowType == "TorqueBook"))
             return false;
@@ -110,6 +116,10 @@ export class TorqueBookComponent {
         }
     }
 
+    onEditTorqueSheet(data, event) {
+        this.router.navigate(["/torquesheet/details/", data.id, data.torqueBookId, "Project", this.projectId]);
+    }
+
     onAddTorqueSheetTemplateConfirmation() {
         var data = {
             id: this.modifyingTorqueSheet.id,
@@ -143,7 +153,7 @@ export class TorqueBookComponent {
         this.displayTorqueSheetTemplate = true;
         var obj = this;
         setTimeout(function () {
-            obj.spreadInstance = new GcSpread.Sheets.Spread($("#torqueSheetSpreadContainer").get(0));
+            obj.spreadInstance = new GC.Spread.Sheets.Workbook($("#torqueSheetSpreadContainer").get(0));
             obj.spreadInstance.isPaintSuspended(true);
             console.log(contents);
             obj.spreadInstance.fromJSON(JSON.parse(contents));
@@ -159,9 +169,11 @@ export class TorqueBookComponent {
 
     onAddTorqueSheet(torqueBookId, event){
         this.torqueBookIdForAddingTorqueSheet = torqueBookId;
-        this.torqueBookElmForAddingTorqueSheet = event.srcElement;
-        this.getTorqueBooksTorqueSheetNames(torqueBookId);
-        this.displayAddTorqueSheet = true;
+        this.router.navigate(["/torquesheet/add/", this.torqueBookIdForAddingTorqueSheet, "Project", this.projectId]);
+
+        //this.torqueBookElmForAddingTorqueSheet = event.srcElement;
+        //this.getTorqueBooksTorqueSheetNames(torqueBookId);
+        //this.displayAddTorqueSheet = true;
     }
 
     getTorqueBooksTorqueSheetNames(torqueBookId){

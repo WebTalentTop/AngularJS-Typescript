@@ -51,7 +51,8 @@ const routes = [
     { path: 'units', loadChildren: 'app/body/Admin/Vehicle/Units/units.module' },
     { path: 'operatingHours', loadChildren: 'app/body/Admin/Vehicle/OperatingHours/operatingHours.module' },
     { path: 'holiday', loadChildren: 'app/body/Admin/Vehicle/Holiday/holiday.module' },
-     { path: 'engineCode', loadChildren: 'app/body/Admin/Vehicle/EngineCode/engineCode.module' },
+    { path: 'engineCode', loadChildren: 'app/body/Admin/Vehicle/EngineCode/engineCode.module' },
+    { path: 'step', loadChildren: 'app/body/Admin/Vehicle/Step/step.module' },
   ];
 
 export default RouterModule.forChild(routes);

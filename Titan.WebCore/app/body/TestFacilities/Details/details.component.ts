@@ -18,7 +18,7 @@ import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFac
 import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -37,18 +37,31 @@ declare var fullcalendardef: FullCalendar.Calendar;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
-
+    testFacilityTenants: any;
+    equipments: any;
+    displayAssignDepartmentsDialog: boolean;
+    displayAssignEquipmentsDialog: boolean;
+    departments: any;
+    selectedDepartment: any;
+    selectedEquipment: any;
+    categories: any;
+    selectedCategory: any;
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
     entityIdentifierInfo:any = {};
     formSchemaCategoryInfo:IFormSchemaCategory[] = [];
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
-
+    comment: any;
+    testFacilityLogComments: any;
     displayPreviewSelectedForm:boolean = false;
-
+    operatingHours: any;
+    maintenanceFrequencies: any;
+    selectedOperatingHour: any;
+    selectedMaintenanceFrequency: any;
     // Form Display
     selectedFormSchemaCategory;
     selectedFormFields:any[] = [];
@@ -59,9 +72,8 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields:any[] = [];
-
-
+    formInstanceFields: any[] = [];
+    
     // End Of Form Related Variables
 
     notificationMsgs: Message[] = [];
@@ -117,6 +129,9 @@ export class DetailsComponent implements AfterViewInit {
         userModifiedById: ''
     };
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     msgs: Message[];
     uploadedFiles: any[] = [];
 
@@ -143,7 +158,23 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     ngOnInit() {
-        if(this.id) {
+        if (this.id) {
+            //this.categories = [];
+            //this.categories.push({ label: 'All categories', value: null });
+            //this.categories.push({ label: 'Wheel Alignment', value: '5A3AFB53-A3D2-4BDF-8909-E60ED577F84D' });
+            //this.categories.push({ label: 'Torque for Parts', value: '817164F9-01D8-470D-BD58-618F4BF135F2' });
+            //this.categories.push({ label: 'Certificates', value: 'Certificates' });
+            //this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
+            //this.categories.push({ label: 'Manual', value: 'Manual' });
+            //this.categories.push({ label: 'Results', value: 'Results' });
+           
+            // TODO: Replace this with a breadcrumb data service.
+            this.breadcrumbs = [];
+            this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
+
+            // TODO: Find out why the home link does not use the pointer icon for its hover state.
+            this.breadcrumbsHome = { routerLink: ['/'] };
+
             this.getEntityIdentifierInfo();
             this.getUserRoles();
             this.getTestFacilities();
@@ -157,11 +188,24 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityRoleService();
             this.getTestFacilityAttachmentServiceById();
             this.getTestFacilityEquipmentById();
+            this.GetTenantsByTestFacilityId();
+            this.GetLogCommentsByTestFacilityId();
+            this.getDepartments();
+            this.getEquipments();
+
+            this.getOperatingHours();
+            this.getMaintenanceFrequencies();
+            this.getCategories();
+
         }
     }
 
     ngAfterViewInit() {
 
+    }
+    downloadAttachment(attachment) {
+
+        window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
     }
     handleChange(event) {
         // console.log('--------tab changed---', event);
@@ -250,6 +294,31 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onDepartmentChange(event) {
+        // console.log('------event------------', event)
+        this.selectedDepartment = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onEquipmentChange(event) {
+        // console.log('------event------------', event)
+        this.selectedEquipment = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+   
+    onMaintenanceFrequencyChange(event) {
+        // console.log('------event------------', event)
+        this.selectedMaintenanceFrequency = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onOperatingHourChange(event) {
+        // console.log('------event------------', event)
+        this.selectedOperatingHour = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     onTestRoleChange(event) {
         // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
@@ -266,6 +335,12 @@ export class DetailsComponent implements AfterViewInit {
     onProjectCodeChange(event) {
         // console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
+    onCategoryChange(event) {
+        // console.log('------event------------', event)
+        this.selectedCategory = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -329,7 +404,24 @@ export class DetailsComponent implements AfterViewInit {
         });
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }
-   
+
+    GetTenantsByTestFacilityId()
+    {
+        this.testFacilityService.getTenants(this.id)
+            .subscribe(res => {
+                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.testFacilityTenants = res;
+            });
+
+    }
+    GetLogCommentsByTestFacilityId() {
+        this.testFacilityService.getLogComments(this.id)
+            .subscribe(res => {
+                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                this.testFacilityLogComments = res;
+            });
+
+    }
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
@@ -348,6 +440,116 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.userRoles = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getCategories() {
+        //    userRoles
+        this.testFacilityService.getCategories().subscribe(response => {
+            this.categories = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Category",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.categories = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getDepartments() {
+        //    userRoles
+        this.testFacilityService.getDepartments().subscribe(response => {
+            this.departments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Department",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.departments = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getMaintenanceFrequencies() {
+        //    userRoles
+        this.testFacilityService.getMaintenanceFrequencies().subscribe(response => {
+            this.maintenanceFrequencies = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Maintenance Frequency",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.frequency,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.maintenanceFrequencies = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getOperatingHours() {
+        //    userRoles
+        this.testFacilityService.getOperatingHours().subscribe(response => {
+            this.operatingHours = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Operating Hours",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.operatingHours = resultMap;
+            }
+            // console.log(response);
+        });
+    }
+    getEquipments() {
+        //    userRoles
+        this.testFacilityService.getEquipments().subscribe(response => {
+            this.equipments = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Equipment",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.equipments = resultMap;
             }
             // console.log(response);
         });
@@ -383,6 +585,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
+            //    this.selectedOperatingHour = res.testFacility.operatingHourName;
+              //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
                 //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //console.log("----- Result of formObject -----", this.model);
@@ -593,6 +797,69 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
     }
 
+    onAddDepartment() {
+
+        if (this.selectedDepartment == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Search any department to add', detail: '' });
+            return null;
+        }
+        
+        this.testFacilityService.postAddDepartment(this.id, this.selectedDepartment).subscribe(filteredList => {
+           
+            this.testFacilityService.getTenants(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.testFacilityTenants = res;
+                });
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+    }
+
+    AddLogComment()
+    {
+        if (this.comment == null || this.comment == '') {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Please write any comment', detail: '' });
+            return null;
+        }
+        console.log("stringify --------", JSON.stringify(this.comment));
+        this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
+            this.testFacilityService.getLogComments(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.testFacilityLogComments = res;
+                });
+           
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
+
+    }
+    onAddEquipment() {
+
+        if (this.selectedEquipment == null) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Search any equipment to add', detail: '' });
+            return null;
+        }
+
+        this.testFacilityService.postAddEquipment(this.id, this.selectedEquipment).subscribe(filteredList => {
+           
+            this.testFacilityService.getEquipmentsByIdusing(this.id)
+                .subscribe(res => {
+                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                    this.TestFacilityEquipments = res;
+                });
+        });
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+    }
+
     filterUserNames(event) {
         this.testFacilityService.filterByUserNames(event.query).subscribe(filteredList => {
             this.filteredUserNames = filteredList.$values;
@@ -605,6 +872,9 @@ export class DetailsComponent implements AfterViewInit {
         let formData: any = {
             id: this.id,
             name: '',
+            description: '',
+            operatingHourId: '',
+            maintenanceFrequencyId: '',
             address: {
 
                 id: '',
@@ -616,7 +886,10 @@ export class DetailsComponent implements AfterViewInit {
             }
         };
         formData.id = this.id;
+        formData.description = formRef.description;
         formData.name = formRef.name;
+        formData.operatingHourId = this.selectedOperatingHour;
+        formData.maintenanceFrequencyId = this.selectedMaintenanceFrequency;        
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
@@ -660,6 +933,43 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
+    onDeleteUserRoleMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteUserRoleMap(event)
+            .subscribe(res => {
+
+                this.testfacilityroleservice.getByIdusing(this.id)
+                    .subscribe(TestFacilityRoles => {
+                        //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
+                        this.TestFacilityRoles = TestFacilityRoles;
+                    });
+            });
+    }
+    onDeleteEquipmentMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteEquipmentMap(event)
+            .subscribe(res => {
+
+                this.testFacilityService.getEquipmentsByIdusing(this.id)
+                    .subscribe(res => {
+                        this.TestFacilityEquipments = res;
+
+                    });
+            });
+    }
+    onDeleteTenantMap(event) {
+        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
+        this.testFacilityService.DeleteTenantMap(event)
+            .subscribe(res => {
+
+                this.testFacilityService.getTenants(this.id)
+                    .subscribe(res => {
+                        //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
+                        this.testFacilityTenants = res;
+                    });
+
+            });
+    }
 
     selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
         //console.log('---------------buttonclick---------------', TestFacilityAttachment);

@@ -34,7 +34,7 @@
                                 </div>-->
                             </div>
 
-                            <div class="ui-grid-row">
+                            <!--<div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
                                     Test Type:
                                 </div>
@@ -63,10 +63,7 @@
                                     <input type="number" name="estimatedCost" pInputText #estimatedCostRef="ngModel" [(ngModel)]="testTemplate.estimatedCost"
                                         max="999999999999" placeholder="Estimated Cost" class="form-control" required />
                                 </div>
-                                <!--<div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
-                                    Template Name field is required
-                                </div>-->
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="ui-grid-row">
@@ -93,40 +90,37 @@
                     </p-panel>
                 </form>
             </p-tabPanel>
-            <p-tabPanel header="Requirements ||">
+            <p-tabPanel header="Procedure(s) ||">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
-                        Search by Reference#:
+                        Search by Procedure Name:
                     </div>
                     <div class="ui-grid-col-2">
-                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" (completeMethod)="filterTestRequirements($event)"
-                            styleClass="wid100" [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
+                        <p-autoComplete [(ngModel)]="filteredSelectedProcedures" [suggestions]="filteredProcedures" (completeMethod)="filterProcedures($event)"
+                            styleClass="wid100" [minLength]="1" placeholder="Search By Name" field="name" [multiple]="true">
                         </p-autoComplete>
                     </div>
 
                     <div class="ui-grid-col-2">
-                        <button pButton type="submit" class="btn btn-default" label="Add Requirement" (click)="onAddTestRequirement()"> </button>
+                        <button pButton type="submit" class="btn btn-default" label="Add Procedure" (click)="onAddProcedure()"> </button>
                     </div>
                 </div>
                 <br/><br/>
                 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
                 <div class="ui-grid-row">
-                    <p-dataTable [value]="selectedTestRequirements">
-                        <p-column field="referenceNumber" header="Reference#"></p-column>
-                        <p-column field="title" header="Title"></p-column>
+                    <p-dataTable [value]="selectedProcedures">
+                        <p-column field="name" header="Name"></p-column>
+                        <!--<p-column field="title" header="Title"></p-column>-->
                         <p-column>
                             <template pTemplate type="header">
                                 Action
                             </template>
-                            <template let-testRequirement="rowData" pTemplate type="body">
-                                <button type="button" pButton (click)="onDelete(testRequirement)" icon="fa-trash"></button>
+                            <template let-procedure="rowData" pTemplate type="body">
+                                <button type="button" pButton (click)="onDelete(procedure)" icon="fa-trash"></button>
                             </template>
                         </p-column>
                     </p-dataTable>
                 </div>
-            </p-tabPanel>
-            <p-tabPanel header="Steps ||">
-                Steps
             </p-tabPanel>
         </p-tabView>
     </div>

@@ -2233,29 +2233,30 @@ body .layout-wrapper .layout-main {
   box-sizing: border-box; }
   body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar {
+    body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar {
       overflow: auto;
       max-height: none; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
+      body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar header.with-controls .ui-panel-title {
         margin: 0.5em 0 0 0;
         display: inline-block; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .ui-panel-titlebar header.with-controls .controls {
+      body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar header.with-controls .controls {
         margin: 0;
         float: right; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel .body {
+    body .layout-wrapper .layout-main > :first-child .ui-panel .body {
       padding-top: 2em; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer {
+    body .layout-wrapper .layout-main > :first-child .ui-panel footer {
       overflow: auto;
       margin-top: 2em; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer p {
+      body .layout-wrapper .layout-main > :first-child .ui-panel footer p {
         display: inline-block;
         color: #777;
         line-height: 2em;
         font-size: 12px;
         margin: 0 1em 0 10px; }
-      body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection .ui-panel footer button {
-        float: right; }
-    body .layout-wrapper .layout-main > :first-child .ui-tabview-panel .subsection + .subsection {
+      body .layout-wrapper .layout-main > :first-child .ui-panel footer button {
+        float: right;
+        margin-left: 0.5em; }
+    body .layout-wrapper .layout-main > :first-child .subsection + .subsection {
       margin-top: 1em; }
   body .layout-wrapper .layout-main > .footer {
     flex: 0 0 auto; }
@@ -2306,3 +2307,34 @@ body .layout-wrapper .layout-main {
     float: left; }
   body .layout-wrapper .layout-main .card-w-title header button {
     float: right; }
+  body .layout-wrapper .layout-main .ui-column-filter {
+    border: 1px solid #ddd;
+    border-radius: 0.2em;
+    background-color: #fafafa;
+    color: #aaa;
+    padding: 0.25em 0.5em; }
+    body .layout-wrapper .layout-main .ui-column-filter:focus {
+      border: 1px solid #cacaca;
+      background-color: #fff;
+      color: #555; }
+  body .layout-wrapper .layout-main .ui-breadcrumb {
+    border: none;
+    background-color: transparent;
+    padding: 0; }
+    body .layout-wrapper .layout-main .ui-breadcrumb li {
+      color: #ccc; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li.fa {
+        margin: 0; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li.fa-home {
+        cursor: pointer; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li a {
+        color: #ccc; }
+        body .layout-wrapper .layout-main .ui-breadcrumb li a :hover {
+          color: #777; }
+        body .layout-wrapper .layout-main .ui-breadcrumb li a :active {
+          color: #333; }
+        body .layout-wrapper .layout-main .ui-breadcrumb li a span {
+          display: block;
+          font-size: 16px; }
+      body .layout-wrapper .layout-main .ui-breadcrumb li ::before {
+        color: #ccc; }

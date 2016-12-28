@@ -92,6 +92,43 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
+    postWorkRequestAdd(filterBody): Observable<any> {
+       
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postWorkRequestCreatedUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
+
+    postTestRequestExternalDepartmentsAdd(filterBody): Observable<any> {
+
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postTestRequestExternalDepartmentsAddUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
+    postTasksAdd(filterBody): Observable<any> {
+
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postTasksAddUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
+    postEmailAllUserDepartments(filterBody): Observable<any> {
+
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postEmailAllUserDepartmentsUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
     makeFileRequest(url: string, params: string[], files: File[], testRequestId: any): Observable<any> {
         return Observable.create(observer => {
             let formData: FormData = new FormData(),

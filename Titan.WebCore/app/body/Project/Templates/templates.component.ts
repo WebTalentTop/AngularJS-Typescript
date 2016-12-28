@@ -28,7 +28,7 @@ export class TemplatesComponent {
 
     onAddTorqueSheetTemplate(){
         this.displayAddTorqueSheetTemplate = true;
-        this.spreadInstance = new GcSpread.Sheets.Spread(document.getElementById("spreadContainer"));
+        this.spreadInstance = new GC.Spread.Sheets.Workbook(document.getElementById("spreadContainer"));
         // Get active sheet in spread instance
         var activeSheet = this.spreadInstance.getActiveSheet();
     }

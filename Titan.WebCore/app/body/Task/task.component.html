@@ -1,0 +1,29 @@
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h1> Pending Tasks </h1>
+        <div class="ui-grid-row">
+            <div class="col-sm-12">
+                <div class="panel panel-default " *ngIf="HasTasks==true">
+                   <div class="panel-heading">Thermo Couple Pending Tasks</div>
+                    <!--<h2>TestRequestDetails:</h2>
+                    TestRequestId: {{testRequestId}}<br/>
+                    TestNumber: {{testNumber}}<br/>
+                    <div class="ui-grid-4"></div>
+                    <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a>-->
+                
+                    <ul *ngIf="HasTasks==true">
+                        <li *ngFor="let task of tasks"> TestRequestNumber# {{task.entityId}} needs Thermo Couple Info <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a></li>
+                    </ul>
+                    </div>            
+                </div>
+                    <!--<a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Test Facility</a>-->
+                    <!--<p-messages [value]="msgs"></p-messages>-->
+                    <!--<grid-data [gridData]="gridData"
+                           [cols]='cols'
+                           [confInfo]="confInfo"
+                           [dataService]="service"
+                           (navigateToDetails)="navigateDetails($event)"
+                           [title]="title"></grid-data>-->
+                </div>
+            </div>
+        </div>

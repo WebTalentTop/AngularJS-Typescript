@@ -24,69 +24,68 @@ body .layout-wrapper .layout-main
     {
         flex: 1 1 auto;
 
-        .ui-tabview-panel .subsection
+        .ui-panel
         {
-            .ui-panel
+            .ui-panel-titlebar
             {
-                .ui-panel-titlebar
+                overflow: auto;
+
+                max-height: none;
+
+                header.with-controls
                 {
-                    overflow: auto;
-
-                    max-height: none;
-
-                    header.with-controls
+                    .ui-panel-title
                     {
-                        .ui-panel-title
-                        {
-                            margin: 0.5em 0 0 0;
+                        margin: 0.5em 0 0 0;
 
-                            display: inline-block
-                        }
-
-                        .controls
-                        {
-                            margin: 0;
-
-                            float: right
-                        }
-                    }
-                }
-
-                .body
-                {
-                    padding-top: 2em
-                }
-
-                footer
-                {
-                    overflow: auto;
-
-                    margin-top: 2em;
-
-                    p
-                    {
-                        display: inline-block;
-
-                        color: #777;
-
-                        line-height: 2em;
-
-                        font-size: 12px;
-
-                        margin: 0 1em 0 10px
+                        display: inline-block
                     }
 
-                    button
+                    .controls
                     {
+                        margin: 0;
+
                         float: right
                     }
                 }
             }
 
-            + .subsection
+            .body
             {
-                margin-top: 1em
+                padding-top: 2em
             }
+
+            footer
+            {
+                overflow: auto;
+
+                margin-top: 2em;
+
+                p
+                {
+                    display: inline-block;
+
+                    color: #777;
+
+                    line-height: 2em;
+
+                    font-size: 12px;
+
+                    margin: 0 1em 0 10px
+                }
+
+                button
+                {
+                    float: right;
+
+                    margin-left: 0.5em
+                }
+            }
+        }
+
+        .subsection + .subsection
+        {
+            margin-top: 1em
         }
     }
 
@@ -207,6 +206,76 @@ body .layout-wrapper .layout-main
             button
             {
                 float: right
+            }
+        }
+    }
+
+    .ui-column-filter
+    {
+        border: 1px solid #ddd;
+        border-radius: 0.2em;
+
+        background-color: #fafafa;
+        color: #aaa;
+
+        padding: 0.25em 0.5em;
+
+        &:focus
+        {
+            border: 1px solid #cacaca;
+
+            background-color: #fff;
+            color: #555
+        }
+    }
+
+    .ui-breadcrumb
+    {
+        border: none;
+
+        background-color: transparent;
+
+        padding: 0;
+
+        li
+        {
+            color: #ccc;
+
+            &.fa
+            {
+                margin: 0
+            }
+
+            &.fa-home
+            {
+                cursor: pointer
+            }
+
+            a
+            {
+                color: #ccc;
+
+                :hover
+                {
+                    color: #777
+                }
+
+                :active
+                {
+                    color: #333
+                }
+
+                span
+                {
+                    display: block;
+
+                    font-size: 16px
+                }
+            }
+
+            ::before
+            {
+                color: #ccc
             }
         }
     }

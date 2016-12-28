@@ -45,6 +45,7 @@ export class DetailsComponent implements AfterViewInit {
     testRoles: any;
     selectedTestTypes: any;
     selectedTestModes: any;
+    IsThermoCouple: boolean = false;
     selectedDepartment: any;
     departments: any;
     selectedBuildLevels: any;
@@ -123,17 +124,12 @@ export class DetailsComponent implements AfterViewInit {
         console.log('tes---', event);
         console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
+    OK()
+    {
+        this.display = false;
+    }
     confirm1() {
-        this.confirmservice.confirm({
-            message: 'Are you sure you need thermo couple info?',
-            accept: () => {
-                //TODO:  create a work request (post) with testrequestno_WorkReq
-                this.display = true;
-
-                //this.msgs = [];
-                //this.msgs.push({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-            }
-        });
+              this.display = true;        
     }
     ngOnInit() {
         this.getTestStages();
@@ -624,13 +620,78 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-        this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 
             // console.log(res);
           //  this.TrackingList = res.$values;
+            if (this.IsThermoCouple) {
+
+                let workrequestbody = {
+
+                    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                    EntityId: 'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A'//res.id  
+                  
+                };
+                //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId() 
+                this.testrequestsensorserice.postWorkRequestAdd(workrequestbody).subscribe(workresult => {
+
+                    this.selectedDepartment.forEach(dept => {
+                        var primaryuserid = 'BE06471E-F53B-E013-642A-003087ABCAA3';
+                        let taskbody = {
+
+                            EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                            EntityId: 'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A',//res.id,
+                            DepartmentId: dept,
+                            UserId: primaryuserid
+
+                        };
+
+                        this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
 
 
-        });
+
+                        });
+                    });
+                });
+
+                //2. save to testrequestexternaldepartments--skip
+
+
+
+                //3. save to tasks table for user,department,entityid,entityidentifier,showmodule....(userservice , get all primary incharge users for selected departments )
+              //  this.selectedDepartment.forEach(dept => {
+
+                    // make service call to get primaryUserId for each department-- TODO
+                    //var primaryuserid ='BE06471E-F53B-E013-642A-003087ABCAA3' ;
+                    //let taskbody = {
+
+                    //    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                    //    EntityId: 'E428D5D6-D91F-4DD9-8C4C-52AB264C4B78',//res.id,
+                    //    DepartmentId: this.selectedDepartment,
+                    //    UserId: primaryuserid
+
+                    //};
+
+                    //this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
+
+
+
+                    //});
+
+              //  });
+               
+
+
+                //4. email to all prime engineer of selected departments ,, (get all primary incharge users for selected departments)
+
+
+               
+            }
+
+
+       });
+
+       
 
     }
     onSubmit(formRef) {

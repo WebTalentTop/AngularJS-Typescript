@@ -4,16 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { StepApiUrl } from './apiUrlConst/StepApiUrls';
 import { BaseService } from './base.service'
 
-
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class StepService extends BaseService{
+export class StepService extends BaseService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
-       // 'Access-Control-Allow-Origin': '*'
+        // 'Access-Control-Allow-Origin': '*'
     });
 
     body = {
@@ -59,7 +58,7 @@ export class StepService extends BaseService{
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${StepApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
-            //.map(this.checkErrors);
+        //.map(this.checkErrors);
     }
 
     getById(id): Observable<any> {

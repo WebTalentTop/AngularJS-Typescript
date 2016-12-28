@@ -1,0 +1,53 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+                <h3> Edit Torque Sheet </h3>
+                <p-panel>
+                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                Torque Sheet Name *:
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'auto'}"
+                                            name="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.required">
+                                Torque Sheet Name field is required
+                            </div>
+                        </div>
+                        <div class="hidden" style="display:none">
+                            <input type="file" name="image" id="fileSelector" #fileSelector (change)="onPictureSelect()" />
+                        </div>
+                        <button type="button" class="btn btn-default btn-toolbar localize-tooltip" id="addpicture" (click)="onInsertPictueClick()"
+                                title="Insert Picture">
+                            <span class="fa fa-picture-o fa-2x">Insert Pic.</span>
+                        </button>
+                        <div class="ui-grid-row">
+                            <div id="torqueSheetSpreadContainer" style="width:95%; height:500px; border: 1px solid gray">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save">  </button>
+                            </div>
+                            <div class="ui-grid-col-6">
+                            </div>
+                            <div class="ui-grid-col-4">
+                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
+                            </div>
+                        </div>
+                    </div>
+                </p-panel>
+                <br />
+                <br />
+            </form>
+        </div>
+    </div>
+</div>

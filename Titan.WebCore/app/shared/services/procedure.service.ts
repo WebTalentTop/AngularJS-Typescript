@@ -33,7 +33,7 @@ export class ProcedureService extends BaseService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${ProcedureApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err));
+            .map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -43,12 +43,11 @@ export class ProcedureService extends BaseService {
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${ProcedureApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson)
-            .catch(err => Observable.throw(err));
+            .map(this.getJson);
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${ProcedureApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${ProcedureApiUrl.getByIdUrl}` + id, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
@@ -86,6 +85,11 @@ export class ProcedureService extends BaseService {
 
     postDeleteProcedureStep(procedureId, stepId): Observable<any> {
         return this.http.put(`${ProcedureApiUrl.postDeleteProcedureStepUrl}` + procedureId + '&stepId=' + stepId, null, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    filterByTestTemplateId(testTemplateId, filterString): Observable<any> {
+        return this.http.get(`${ProcedureApiUrl.filterByTestTemplateIdUrl}` + testTemplateId + '&filterString=' + filterString, { headers: this.headers })
             .map(this.getJson);
     }
 }
