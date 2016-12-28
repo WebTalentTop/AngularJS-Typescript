@@ -246,6 +246,11 @@ body .layout-wrapper .layout-main
                 margin: 0
             }
 
+            &.fa-home
+            {
+                cursor: pointer
+            }
+
             a
             {
                 color: #ccc;
