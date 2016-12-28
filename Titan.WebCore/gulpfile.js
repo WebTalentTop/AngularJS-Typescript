@@ -84,7 +84,10 @@ gulp.task('sass-cleanup', function () {
    
 });
 
-
+gulp.task("primengDependencies", function () {
+    gulp.src(["./resources/primeng.deps/**/*"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
+        .pipe(gulp.dest("./wwwroot/resources/primeng.deps"));
+});
 gulp.task("resourcesPrimeSpreadJs", function () {
     gulp.src(["./resources/spreadjs/**/*", "!resources/**/*.scss"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
         .pipe(gulp.dest("./wwwroot/resources/spreadjs"));
@@ -158,6 +161,7 @@ gulp.task('copy-to-wwwroot',
         'copy-zone',
         'copy-systemjs',
         'copy-thirdparty-files',
+        'primengDependencies',
         'NMprimeResources',
         'html',
         'css',
