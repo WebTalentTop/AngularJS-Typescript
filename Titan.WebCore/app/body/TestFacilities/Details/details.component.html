@@ -33,10 +33,10 @@
                                         <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
                                                minlength="3" class="form-control" required row="20"
                                                (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
-                                        <label>Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
+                                        <label>Name <span [ngClass]="{'error': testFacilityNameRef.dirty && testFacilityNameRef.errors?.required}">*</span></label>
                                     </div>
 
-                                    <p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>
+                                    <p class="helper error" *ngIf="testFacilityNameRef.dirty && (testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength)">At least three characters</p>
 
                                 </div>
 
