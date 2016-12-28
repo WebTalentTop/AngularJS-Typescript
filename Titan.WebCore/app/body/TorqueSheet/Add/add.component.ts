@@ -61,7 +61,7 @@ export class AddComponent implements AfterViewInit, OnInit {
     }
 
     onPictureSelect() {
-        var file = $("#fileSelector")[0].files[0];
+         var file = ($("#fileSelector")[0] as any).files[0];
             //action = $(this).data("action");
 
         if (!file) return false;

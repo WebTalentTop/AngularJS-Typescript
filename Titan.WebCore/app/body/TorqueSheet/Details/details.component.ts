@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
 import { ITorqueSheet } from '../../../shared/services/definitions/ITorqueSheet';
 
-
-
 @Component({
     selector: 'details-torquesheet',
     templateUrl: 'app/body/TorqueSheet/Details/details.component.html'
@@ -85,7 +83,7 @@ export class DetailsComponent {
     }
 
     onPictureSelect() {
-        var file = $("#fileSelector")[0].files[0];
+        var file = ($("#fileSelector")[0] as any).files[0];
         //action = $(this).data("action");
 
         if (!file) return false;
