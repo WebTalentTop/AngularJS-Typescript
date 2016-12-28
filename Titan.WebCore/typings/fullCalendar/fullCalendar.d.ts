@@ -409,6 +409,13 @@ interface JQuery {
      * Generic method function
      */
     fullCalendar(method: string, arg1: any, arg2: any, arg3: any): void;
+
+    /**
+    * Refetches one or more specific event sources.
+    */
+    fullCalendar(method: 'refetchEventSources', source: any): any;
+
+    fullCalendar(method: 'getEventSourceById', source: any): any;
 }
 
 interface JQueryStatic {
