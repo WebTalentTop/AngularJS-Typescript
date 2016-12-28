@@ -28,7 +28,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     buildLevels: any;
     projectCodes: any;
     testFacilities: any;
-    testAllModes: any; 
+    testAllModes: any;
     testTypes: any;
     testStatus: any;
     selectedTestRoles: any[];
@@ -180,9 +180,9 @@ export class TitanCalendarComponent implements AfterViewInit {
                         includeTestFaciity: true,
                         includeProject: false,
                         includeUsers: true,
-                        includeVehicle:false,
-                        testFacilityHeader :'Test Facility',
-                        userHeader : 'User'
+                        includeVehicle: false,
+                        testFacilityHeader: 'Test Facility',
+                        userHeader: 'User'
 
                     },
                     type: 'Post',
@@ -239,6 +239,7 @@ export class TitanCalendarComponent implements AfterViewInit {
             },
             eventClick: function (calEvent, jsEvent, view) {
                 self.displayEventDialog = true;
+                console.log("---click is blocked--");
                 return false;
             },
 
@@ -287,12 +288,12 @@ export class TitanCalendarComponent implements AfterViewInit {
             selector: '.showContextMenu',
             callback: function (key, options) {
                 var m = "clicked: " + key;
-
+                let testRequestId = $(this).attr("event-id");
                 switch (key) {
                     case "AssignResources": {
 
                         selfRef.displayEventDialog = true;
-                        selfRef.selectedEventId = $(this).attr("event-id");
+                        selfRef.selectedEventId = testRequestId;
                         selfRef.selectedResourceId = $(this).attr("resource-id");
                         selfRef.plannedStartDate = $(this).attr("plannedStart");
                         selfRef.plannedEndDate = $(this).attr("plannedEnd");
@@ -303,6 +304,12 @@ export class TitanCalendarComponent implements AfterViewInit {
                         console.log("----Clicked Assign resource")
                         break;
                     }
+                    case "Details": {
+                        selfRef.router.navigate(['testrequest/details', testRequestId]);
+                        break;
+                    }
+
+
                 }
             },
             items: {
