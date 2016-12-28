@@ -130,7 +130,7 @@ export class AddComponent {
                 if (!this.isDisplayComponentInPopUp) {
                     this.router.navigate(["/step/details/", res.result]);
                 } else {
-                    this.onAddComplete.emit(true);
+                    this.onAddComplete.emit(res.result);
                 }
             }
         });
