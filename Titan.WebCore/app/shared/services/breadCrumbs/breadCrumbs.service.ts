@@ -35,6 +35,9 @@ export class BreadCrumbsService {
 
         // Admin Shift Page
         this.adminShiftPage();
+
+        //Admin Holiday Page
+        this.adminHolidayPage();
     }
 
     // Home Page Bread Crumbs
@@ -158,6 +161,23 @@ export class BreadCrumbsService {
 
     private adminShiftPageBCItems() {
         let menuItem = { label: 'Shift', routerLink: 'app/body/Admin/Vehicle/shift/' };
+        return menuItem;
+    }
+
+    private adminHolidayPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'HolidayHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminHolidayPageBCItems() {
+        let menuItem = { label: 'Holiday', routerLink: 'app/body/Admin/Vehicle/holiday/' };
         return menuItem;
     }
 
