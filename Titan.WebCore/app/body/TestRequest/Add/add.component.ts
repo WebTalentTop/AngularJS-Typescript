@@ -21,10 +21,10 @@ import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'details-testrequest',
+    selector: 'add-testrequest',
     templateUrl: 'app/body/TestRequest/Details/details.component.html'
 })
-export class DetailsComponent implements AfterViewInit {
+export class AddComponent implements AfterViewInit {
     ngAfterViewInit() {
     }
     // qui
@@ -167,16 +167,11 @@ export class DetailsComponent implements AfterViewInit {
         //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
         //        //console.log("----- Result of formObject -----", this.model);
         //    });
-        this.dataService.GetTrackingListByEntityId(this.id)
-            .subscribe(res => {
-                this.TrackingList = res.$values;
+        //this.dataService.GetTrackingListByEntityId(this.id)
+        //    .subscribe(res => {
+        //        this.TrackingList = res.$values;
 
-                //this.formConfiguration = res.formConfiguration;
-                //this.formObject = res.formObject;
-                //this.model = res.formObject;
-                //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-                //console.log("----- Result of formObject -----", this.model);
-            });
+        //    });
 
     }
     onTestStageChange(event) {
@@ -693,105 +688,7 @@ export class DetailsComponent implements AfterViewInit {
        
 
     }
-    onSubmit(formRef) {
-        console.log(formRef);
-        if (this.selectedTestStageId == null || this.selectedTestStageId == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Test Stage', detail: '' });
-            return null;
-        }
-        if (this.selectedDownTimeReasonId == null || this.selectedDownTimeReasonId == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select DownTimeReason', detail: '' });
-            return null;
-        }
-        if (this.selectedTimeEntryTypeId == null || this.selectedTimeEntryTypeId == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select activity', detail: '' });
-            return null;
-        }
-        if (this.estimateDuration == null || this.estimateDuration == "") {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Estimate Duration', detail: '' });
-            return null;
-        }
-        if (this.startTime == null || this.startTime == "") {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select start Time', detail: '' });
-            return null;
-        }
-        if (this.endTime == null || this.endTime == "") {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select End Time', detail: '' });
-            return null;
-        }
-
-
-
-        //   console.log(this.testFacility.name);
-        formRef.isDeleted = false;
-        //let formData: any = {
-        //    id: this.id,
-        //    name: '',
-        //    address: {
-
-        //        id: '',
-        //        addressLine1: '',
-        //        addressLine2: '',
-        //        city: '',
-        //        state: '',
-        //        postalCode: '',
-        //    }
-        //};
-
-
-        let formData: any = {
-            timeEntryTypeId: this.selectedTimeEntryTypeId,
-            entityTypeId: '',
-            entityId: this.id,
-            startTime: this.startTime,
-            endTime: this.endTime,
-            userId: '',
-            projectId: '53FE9592-1A9B-07D0-85D7-006A30BCD348',
-            testStageId: this.selectedTestStageId,
-            isDownTime: false,
-            estimateDuration: this.estimateDuration,
-
-            downTimeReasonId: this.selectedDownTimeReasonId,
-            description: '',
-
-
-
-            tenantId: '',
-            userCreatedById: '',
-            id: ' '
-
-        };
-
-        //  formData.id = this.id;
-        //  formData.name = formRef.name;
-        //formData.address.id = this.addressid;
-        //formData.address.addressLine1 = formRef.addressLine1;
-        //formData.address.addressLine2 = formRef.addressLine2;
-        //formData.address.city = formRef.city;
-        //formData.address.state = formRef.state;
-        //formData.address.postalCode = formRef.postalCode;
-        formData.locale = "en-us";
-        console.log(formData);
-        this.dataService.postAdd(formData).subscribe(res => {
-
-            // console.log(res);
-            this.TrackingList = res.$values;
-
-            //if (!res.errorMessage) {
-            //    //this.router.navigate(["/testfacilities/details/", res.result.id]);
-            //}
-
-        });
-        this.msgs = [];
-        this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
-
-    }
+   
     navigateDetails(id: string) {
         this.router.navigate(['testrequest/sensor/details/', id]);
     }
