@@ -45,6 +45,9 @@ export class BreadCrumbsService {
         //Admin Units Page
         this.adminUnitsPage();
 
+        //Admin BuildLevels Page
+        this.adminBuildLevelsPage();
+
 }
 
 
@@ -221,6 +224,23 @@ export class BreadCrumbsService {
 
     private adminUnitsPageBCItems() {
         let menuItem = { label: 'Units', routerLink: 'app/body/Admin/Vehicle/units/' };
+        return menuItem;
+    }
+
+        private adminBuildLevelsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminBuildLevelsPageBCItems() {
+        let menuItem = { label: 'BuildLevels', routerLink: 'app/body/Admin/Vehicle/buildLevels/' };
         return menuItem;
     }
 
