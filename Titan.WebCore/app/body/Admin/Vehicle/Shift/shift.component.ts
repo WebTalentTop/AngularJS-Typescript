@@ -3,7 +3,7 @@ import { LoggerService } from '../../../../shared/services/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
 import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 @Component({
     selector: 'shift-grid',
