@@ -3382,7 +3382,10 @@ interface JQuery {
 	// Context Menu
 	
 	
-	contextMenu(options?: any): JQuery;
+    contextMenu(options?: any): JQuery;
+
+    gentleSelect(options?: any): JQuery;
+    cron(options?: any): JQuery;
 }
 declare module "jquery" {
     export = $;
