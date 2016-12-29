@@ -959,7 +959,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.maintenanceFrequency = this.selectedMaintenanceFrequency;        
+        formData.maintenanceFrequency = $('#selector').cron("value");        
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
