@@ -2233,6 +2233,13 @@ body .layout-wrapper .layout-main {
   box-sizing: border-box; }
   body .layout-wrapper .layout-main > :first-child {
     flex: 1 1 auto; }
+    body .layout-wrapper .layout-main > :first-child .ui-tabview-top {
+      border: none;
+      background-color: inherit; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-top .ui-tabview-nav {
+        border: 1px solid #bdbdbd; }
+      body .layout-wrapper .layout-main > :first-child .ui-tabview-top .ui-tabview-panel {
+        padding: 0; }
     body .layout-wrapper .layout-main > :first-child .ui-panel .ui-panel-titlebar {
       overflow: auto;
       max-height: none; }

@@ -24,6 +24,23 @@ body .layout-wrapper .layout-main
     {
         flex: 1 1 auto;
 
+        .ui-tabview-top
+        {
+            border: none;
+
+            background-color: inherit;
+
+            .ui-tabview-nav
+            {
+                border: 1px solid #bdbdbd
+            }
+
+            .ui-tabview-panel
+            {
+                padding: 0
+            }
+        }
+
         .ui-panel
         {
             .ui-panel-titlebar
