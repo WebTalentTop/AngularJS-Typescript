@@ -18,7 +18,8 @@ var root_path = {
     app: "./app/",
     nmSrc: "./node_modules/",
     primeResources: "./resources/",
-    package_lib: "wwwroot/lib/"
+    package_lib: "wwwroot/lib/",
+    resourcesInWebRoot: './wwwroot/resources/'
 };
 //library destination
 
@@ -77,7 +78,7 @@ gulp.task("copy-systemjs", function () {
 gulp.task('sass', function () {
     gulp.src(root_path.primeResources + '**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest(root_path.package_lib));
+        .pipe(gulp.dest(root_path.resourcesInWebRoot));
 });
 gulp.task('sass-cleanup', function () {
     del(['resources/layout/*.css', 'resources/theme/*.css']);
