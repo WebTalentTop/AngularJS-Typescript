@@ -2280,13 +2280,13 @@ body .layout-wrapper .layout-main {
     body .layout-wrapper .layout-main .input-row > label > .text,
     body .layout-wrapper .layout-main .input-row > .pseudo-label {
       display: block;
-      width: 4em;
+      width: 6em;
       font-weight: bold;
       float: left;
       margin-right: 1em; }
     body .layout-wrapper .layout-main .input-row .ui-autocomplete,
     body .layout-wrapper .layout-main .input-row .ui-dropdown {
-      width: calc(100% - 5.25em); }
+      width: calc(100% - 7.25em); }
     body .layout-wrapper .layout-main .input-row .md-inputfield input {
       padding-left: 0;
       width: 100%; }
