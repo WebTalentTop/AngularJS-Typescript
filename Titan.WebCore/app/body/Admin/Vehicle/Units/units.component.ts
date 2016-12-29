@@ -1,9 +1,10 @@
 import { UnitsService } from '../../../../shared/services/units.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
+import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'units-grid',
@@ -17,15 +18,30 @@ export class UnitsComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: UnitsService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService,private service: UnitsService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
     
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let unitsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'UnitsHomePage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("unitsBreadCrumb ---------", unitsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = unitsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
            
         });
 

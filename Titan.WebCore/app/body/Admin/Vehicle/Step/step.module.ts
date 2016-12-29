@@ -12,7 +12,7 @@ import stepRoutes from "./step.routes";
 
 @NgModule({
     imports: [CommonModule, DataTableModule, GridModule, stepRoutes, MessagesModule, BreadcrumbModule, GrowlModule],
-    providers: [StepService],
+    providers: [StepService,BreadCrumbsService],
     declarations: [StepComponent]
 })
 

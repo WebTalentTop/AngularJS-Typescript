@@ -41,7 +41,12 @@ export class BreadCrumbsService {
     
         //Admin Step Page
         this.adminStepPage();
+
+        //Admin Units Page
+        this.adminUnitsPage();
+
 }
+
 
     // Home Page Bread Crumbs
     private homeBreadCrumbAdd() {
@@ -199,6 +204,23 @@ export class BreadCrumbsService {
 
     private adminStepPageBCItems() {
         let menuItem = { label: 'Step', routerLink: 'app/body/Admin/Vehicle/step/' };
+        return menuItem;
+    }
+
+    private adminUnitsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UnitsHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminUnitsPageBCItems() {
+        let menuItem = { label: 'Units', routerLink: 'app/body/Admin/Vehicle/units/' };
         return menuItem;
     }
 
