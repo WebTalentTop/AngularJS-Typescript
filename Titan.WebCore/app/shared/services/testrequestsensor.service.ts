@@ -120,6 +120,15 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
+    postTasksComplete(id): Observable<any> {
+
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.put(`${TestReqestSensorApiUrl.postTasksCompleteUrl}/${id}`, null, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
     postEmailAllUserDepartments(filterBody): Observable<any> {
 
         // console.log("-------- Post Customers FilterBody --------", filterBody);
@@ -172,8 +181,8 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
-    GetAllTestRequestSensors(id): Observable<any> {
-        return this.http.get(`${TestReqestSensorApiUrl.GetAllTestRequestSensors}/${id}`, { headers: this.headers })
+    GetAllTestRequestSensors(id,departmentId): Observable<any> {
+        return this.http.get(`${TestReqestSensorApiUrl.GetAllTestRequestSensors}/${id}/${departmentId}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
@@ -181,6 +190,13 @@ export class TestRequestSensorService {
     }
     getById(id): Observable<any> {
         return this.http.get(`${TestReqestSensorApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getTaskDetailsById(id): Observable<any> {
+        return this.http.get(`${TestReqestSensorApiUrl.getTaskDetailsByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))

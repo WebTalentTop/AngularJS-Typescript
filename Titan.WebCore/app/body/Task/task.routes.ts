@@ -3,7 +3,8 @@ import { RouterModule } from "@angular/router";
 
 const routes = [
     { path: '', component: TaskComponent },
-    { path: 'testrequest/details/:testRequestId/add/:testRequestId', loadChildren: 'app/body/TestRequest/Sensor/add.module' }
+    { path: 'testrequest/details/:testRequestId/add/:testrequestId/:taskId', loadChildren: 'app/body/TestRequest/Sensor/add.module' },
+    { path: 'details/:taskId', loadChildren: 'app/body/Task/Details/details.module' }
    
 ];
 

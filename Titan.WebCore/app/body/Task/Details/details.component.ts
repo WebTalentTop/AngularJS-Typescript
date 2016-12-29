@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'sensor-add',
-    templateUrl: 'app/body/TestRequest/Sensor/add.component.html'
+    selector: 'sensor-details',
+    templateUrl: 'app/body/Task/Details/details.component.html'
 })
-export class AddComponent {
+export class DetailsComponent {
    // ngAfterViewInit() {
    //   //  var editor = new Quill('#editor');
    //     var quill = new Quill('#editor-container', {
@@ -85,10 +85,10 @@ export class AddComponent {
 
     ){
         this.route.params.subscribe(params => {
-            this.id = params['id'];
+         //   this.id = params['id'];
             this.taskId = params['taskId'];
         });
-          this.entityId = this.id;
+         // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
          // this.fileData= this.fileInfo[];
     }
@@ -99,13 +99,14 @@ export class AddComponent {
        console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
-       this.getSensorList();
+     //  this.getSensorList();
 
        //get the departmentId through taskId
        //get sensors by department and entityId
        this.dataService.getTaskDetailsById(this.taskId)
            .subscribe(taskres => {
-               this.departmentId = taskres.result.departmentId
+               this.departmentId = taskres.result.departmentId;
+               this.entityId = taskres.result.entityId;
                console.log('------------task department ------------', taskres.result.departmentId);
                this.dataService.GetAllTestRequestSensors(this.entityId, taskres.result.departmentId)
                    .subscribe(res => {

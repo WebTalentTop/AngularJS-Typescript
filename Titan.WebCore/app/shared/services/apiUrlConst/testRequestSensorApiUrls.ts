@@ -10,11 +10,13 @@ export class TestReqestSensorApiUrl {
     public static postWorkRequestCreatedUrl: string = titanApiUrl + 'workRequest/post';
     public static postTestRequestExternalDepartmentsAddUrl: string = titanApiUrl + 'workRequest/PostExternalDepartments';
     public static postTasksAddUrl: string = titanApiUrl + 'workRequest/CreateTasks';
+    public static postTasksCompleteUrl: string = titanApiUrl + 'task/TaskComplete';
     public static postEmailAllUserDepartmentsUrl: string = titanApiUrl + 'workRequest/post';
     public static postCommentCreatedUrl: string = titanApiUrl + 'testRequestSensor/post/uploadfile';
     public static postUpdateUrl: string = titanApiUrl + 'testRequestSensor/put';
     public static postCommentUpdateUrl: string = titanApiUrl + 'testRequestSensorComment/put';
     public static getByIdUrl: string = titanApiUrl + 'testRequestSensor/get';
+    public static getTaskDetailsByIdUrl: string = titanApiUrl + 'task/get';
     //getSensorCommentIdByTestRequestSensorId
     public static getSensorCommentIdByTestRequestSensorIdUrl: string = titanApiUrl + 'testRequestSensorComment/GetTestRequestCommentById';
     //public static GetTrackingListByEntityId: string = titanApiUrl + 'timeEntry/GetTrackingListByEntityId';

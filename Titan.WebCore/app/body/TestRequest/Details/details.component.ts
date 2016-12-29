@@ -146,7 +146,7 @@ export class DetailsComponent implements AfterViewInit {
         this.getHourEntryByEntityIdentifierId();
         this.getDownTimeReasons();
         let resData: any;
-        this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId)
+        this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId,'')
             .subscribe(res => {
                 this.sensorRequests = res.result;
                 //  resData = res;

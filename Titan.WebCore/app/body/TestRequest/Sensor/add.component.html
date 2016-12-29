@@ -12,6 +12,10 @@
 
                                 <!--<h3> Add Test Facility </h3>-->
                                 <p-panel>
+                                    <header class="with-controls">
+                                        <p class="ui-panel-title">Add Thermo Couple Info</p>
+                                        <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;"></button></p>
+                                    </header>
                                     <!--<header>Test Facility Information</header>-->
                                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
 
@@ -44,7 +48,7 @@
                                                 Department *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="department"
+                                                <input type="text" name="department" [(ngModel)]="departmentId"
                                                        placeholder="Department"
                                                        class="form-control">
                                             </div>

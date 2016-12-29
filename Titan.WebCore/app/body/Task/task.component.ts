@@ -22,8 +22,10 @@ export class TaskComponent {
     idField:string;
     linkFieldId: string;
     testNumber: string;
+    taskId: any;
     added: any;
-    tasks: any;
+    pendingTasks: any;
+    allTasks: any;
     msgs: Message[] = [];
     constructor(private service: TestFacilityService, private taskservice: TaskService, private route: ActivatedRoute, private router: Router) {
         //this.route.queryParams.subscribe(params => {
@@ -42,12 +44,15 @@ export class TaskComponent {
         let resData: any;
         this.taskservice.gettasksbyuserid()
             .subscribe(res => {
-                if (res.result.length != 0) {
+                if (res.result.pendingTasks.$values.length != 0) {
                     this.HasTasks = true
-                    this.tasks = res.result;
+                }
+                    this.pendingTasks = res.result.pendingTasks.$values;
+                    this.allTasks = res.result.allTasks.$values;
+                  //  this.taskId = res.result.id;
                     this.testRequestId = res.result[0].entityId; 
                     
-                }
+                
                 //resData = res;
                 //this.gridData = res.Data;
                 //this.cols = res.Configuration.Columns;
@@ -55,17 +60,7 @@ export class TaskComponent {
                 //this.confInfo = res.Configuration;
                 //console.log("------- Configuration --------", this.confInfo);
             });
-        this.service.postGridData()
-            .subscribe(res => {
-                resData = res;
-                this.gridData = res.Data;
-                this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
-                this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
+       
     }
 
     navigateDetails(id:string){

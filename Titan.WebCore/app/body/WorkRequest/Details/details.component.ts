@@ -161,8 +161,9 @@ export class DetailsComponent {
     ngOnInit() {
 
        // this.getSensorList();
+        let departmentId = '00000000-0000-0000-0000-000000000000';
         //    this.getUserRoles();
-        this.testrequestsensorservice.GetAllTestRequestSensors(this.entityId)
+        this.testrequestsensorservice.GetAllTestRequestSensors(this.entityId, departmentId)
             .subscribe(res => {
                 this.sensorRequests = res.result;
                 //  resData = res;
