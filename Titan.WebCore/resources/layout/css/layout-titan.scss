@@ -24,15 +24,24 @@ body .layout-wrapper .layout-main
     {
         flex: 1 1 auto;
 
+        .ui-messages
+        {
+            margin: 2em 0
+        }
+
         .ui-tabview-top
         {
             border: none;
 
             background-color: inherit;
 
+            margin: 2em 0 1em 0;
+
             .ui-tabview-nav
             {
-                border: 1px solid #bdbdbd
+                border: 1px solid #bdbdbd;
+
+                margin: 2em 0
             }
 
             .ui-tabview-panel
