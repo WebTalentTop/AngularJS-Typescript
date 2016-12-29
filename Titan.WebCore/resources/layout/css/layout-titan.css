@@ -2264,7 +2264,7 @@ body .layout-wrapper .layout-main {
         float: right;
         margin-left: 0.5em; }
     body .layout-wrapper .layout-main > :first-child .subsection + .subsection {
-      margin-top: 1em; }
+      margin-top: 2em; }
   body .layout-wrapper .layout-main > .footer {
     flex: 0 0 auto; }
     body .layout-wrapper .layout-main > .footer .card {
