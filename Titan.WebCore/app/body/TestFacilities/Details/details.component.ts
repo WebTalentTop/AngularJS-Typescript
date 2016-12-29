@@ -1,4 +1,5 @@
-﻿import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
+﻿
+import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
@@ -27,9 +28,27 @@ import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
+declare var cron: any;
+//interface CronJonStatic {
+//    new (cronTime: string | Date, onTick: () => void, onComplete?: () => void, start?: boolean, timeZone?: string, context?: any): CronJob;
+//    new (options: {
+//        cronTime: string | Date; onTick: () => void; onComplete?: () => void; start?: boolean; timeZone?: string; context?: any
+//    }): CronJob;
+//}
+//interface CronJob {
+//    start(): void;
+//    stop(): void;
+//}
+
+//interface CronTime { }
+//interface CronTimeStatic {
+//    new (time: string | Date): CronTime;
+//}
+//declare var crondef: CronJonStatic;
+//import cron = require('../typings/cron/index');
 //declare var fullCalendardef: Calendar;
 //let $ = require('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js');
-//let $ = require('../../../shared/services/fullcalendar.js');
+//let cron = require('../../../../typings/cron/index.d.ts');
 
 @Component({
     selector: 'details-testfacility',
@@ -37,6 +56,7 @@ declare var fullcalendardef: FullCalendar.Calendar;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    frequency: any;
     titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
@@ -44,6 +64,7 @@ export class DetailsComponent implements AfterViewInit {
     equipments: any;
     displayAssignDepartmentsDialog: boolean;
     displayAssignEquipmentsDialog: boolean;
+    displayAssignUserRolesDialog: boolean;
     departments: any;
     selectedDepartment: any;
     selectedEquipment: any;
@@ -110,7 +131,7 @@ export class DetailsComponent implements AfterViewInit {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
-    testFacility = { name: '' };
+    testFacility = { name: '', maintenanceFrequency: '' };
     address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
@@ -159,6 +180,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     ngOnInit() {
+         
         if (this.id) {
             //this.categories = [];
             //this.categories.push({ label: 'All categories', value: null });
@@ -200,10 +222,36 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
+    FrequencyInit()
+    {
+        if (this.testFacility.maintenanceFrequency != null)
+        { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
+        else
+        { this.selectedMaintenanceFrequency = "* * * * *"; }
 
-    ngAfterViewInit() {
+        $("#selector").cron({
+
+            initial: this.selectedMaintenanceFrequency,
+            onChange: function () {
+
+                this.selectedMaintenanceFrequency = $(this).cron("value");
+                // $('#selector-val').text($(this).cron("value"));
+            },
+            effectOpts: {
+                openEffect: "fade",
+                openSpeed: "slow"
+            },
+            useGentleSelect: true
+        })
 
     }
+
+    ngAfterViewInit() {
+        //var frequency: any;
+       
+       
+    }
+
     downloadAttachment(attachment) {
 
         window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
@@ -586,6 +634,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
+                this.FrequencyInit();
+                this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
@@ -766,6 +816,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     onAddUserRole() {
+      
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
@@ -777,6 +828,11 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'info', summary: 'Please select Role', detail: '' });
             return null;
         }
+        if (!this.IsKeepOpen)
+            this.displayAssignUserRolesDialog = false;
+        else
+            this.displayAssignUserRolesDialog = true;
+
         var selectedUserNames = new Array();
         for (var sel of this.filteredSelectedUserNames) {
             selectedUserNames.push(sel.id);
@@ -800,12 +856,18 @@ export class DetailsComponent implements AfterViewInit {
 
     onAddDepartment() {
 
+       
+
         if (this.selectedDepartment == null) {
             this.msgs = [];
             this.msgs.push({ severity: 'info', summary: 'Search any department to add', detail: '' });
             return null;
         }
-        
+        if (!this.IsKeepOpen)
+            this.displayAssignDepartmentsDialog = false;
+        else
+            this.displayAssignDepartmentsDialog = true;
+
         this.testFacilityService.postAddDepartment(this.id, this.selectedDepartment).subscribe(filteredList => {
            
             this.testFacilityService.getTenants(this.id)
@@ -826,6 +888,9 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'info', summary: 'Please write any comment', detail: '' });
             return null;
         }
+
+       
+
         console.log("stringify --------", JSON.stringify(this.comment));
         this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
@@ -847,6 +912,10 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'info', summary: 'Search any equipment to add', detail: '' });
             return null;
         }
+        if (!this.IsKeepOpen)
+            this.displayAssignEquipmentsDialog = false;
+        else
+            this.displayAssignEquipmentsDialog = true;
 
         this.testFacilityService.postAddEquipment(this.id, this.selectedEquipment).subscribe(filteredList => {
            
@@ -875,7 +944,7 @@ export class DetailsComponent implements AfterViewInit {
             name: '',
             description: '',
             operatingHourId: '',
-            maintenanceFrequencyId: '',
+            maintenanceFrequency: '',
             address: {
 
                 id: '',
@@ -890,7 +959,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.maintenanceFrequencyId = this.selectedMaintenanceFrequency;        
+        formData.maintenanceFrequency = this.selectedMaintenanceFrequency;        
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;

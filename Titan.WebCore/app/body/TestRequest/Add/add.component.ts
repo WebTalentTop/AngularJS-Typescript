@@ -617,14 +617,14 @@ export class AddComponent implements AfterViewInit {
 
       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
 
-            // console.log(res);
+             console.log('-----------testrequestcreated--------',res);
           //  this.TrackingList = res.$values;
-            if (this.IsThermoCouple) {
+            if (res.isSuccess && this.IsThermoCouple) {
 
                 let workrequestbody = {
 
                     EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
-                    EntityId: res.id//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A'//res.id  
+                    EntityId: res.result.id//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A'//res.id  
                   
                 };
                 //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId() 
@@ -635,7 +635,7 @@ export class AddComponent implements AfterViewInit {
                         let taskbody = {
 
                             EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
-                            EntityId: res.id,//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A',//res.id,
+                            EntityId: res.result.id,//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A',//res.id,
                             DepartmentId: dept,
                             UserId: primaryuserid
 
