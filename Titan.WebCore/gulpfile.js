@@ -85,6 +85,13 @@ gulp.task('sass-cleanup', function () {
    
 });
 
+gulp.task('sass-titan', function () {
+    gulp.src(root_path.primeResources + '**/*-titan.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(root_path.primeResources))
+        .pipe(gulp.dest(root_path.resourcesInWebRoot));
+});
+
 gulp.task("primengDependencies", function () {
     gulp.src(["./resources/primeng.deps/**/*"])//, "!resources/demo/**", "!resources/sass/**/*.scss"])
         .pipe(gulp.dest("./wwwroot/resources/primeng.deps"));
