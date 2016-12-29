@@ -48,6 +48,9 @@ export class BreadCrumbsService {
         //Admin BuildLevels Page
         this.adminBuildLevelsPage();
 
+        //Admin Market Page
+        this.adminMarketPage();
+
 }
 
 
@@ -192,7 +195,6 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-
     private adminStepPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
@@ -241,6 +243,23 @@ export class BreadCrumbsService {
 
     private adminBuildLevelsPageBCItems() {
         let menuItem = { label: 'BuildLevels', routerLink: 'app/body/Admin/Vehicle/buildLevels/' };
+        return menuItem;
+    }
+
+    private adminMarketPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MarketHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMarketPageBCItems() {
+        let menuItem = { label: 'Market', routerLink: 'app/body/Admin/Vehicle/market/' };
         return menuItem;
     }
 
