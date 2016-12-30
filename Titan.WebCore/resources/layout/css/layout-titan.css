@@ -2269,6 +2269,8 @@ body .layout-wrapper .layout-main {
         margin-left: 0.5em; }
     body .layout-wrapper .layout-main > :first-child .subsection + .subsection {
       margin-top: 2em; }
+    body .layout-wrapper .layout-main > :first-child .ui-paginator span.fa {
+      display: none; }
   body .layout-wrapper .layout-main > .footer {
     flex: 0 0 auto; }
     body .layout-wrapper .layout-main > .footer .card {
