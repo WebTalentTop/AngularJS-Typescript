@@ -69,6 +69,9 @@ export class BreadCrumbsService {
         //Admin Milestone Page
         this.adminMilestonePage();
 
+        //Admin MilestoneCategory Page
+        this.adminMilestoneCategoryPage();
+
 }
 
 
@@ -366,7 +369,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    private adminMilestonePage() {
+        private adminMilestonePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -378,8 +381,24 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminMilestonePageBCItems() {
+        private adminMilestonePageBCItems() {
         let menuItem = { label: 'Milestone', routerLink: 'app/body/Admin/Vehicle/milestone/' };
+        return menuItem;
+
+        private adminMilestoneCategoryPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneCategoryPageBCItems() {
+        let menuItem = { label: 'MilestoneCategory', routerLink: 'app/body/Admin/Vehicle/milestoneCategory/' };
         return menuItem;
     }
     public getBreadCrumbs() {
