@@ -57,6 +57,9 @@ export class BreadCrumbsService {
         //Admin TitanRole Page
         this.adminTitanRolePage();
 
+        //Admin MilestoneStatus Page
+        this.adminMilestoneStatusPage();
+
 }
 
 
@@ -300,6 +303,23 @@ export class BreadCrumbsService {
 
     private adminTitanRolePageBCItems() {
         let menuItem = { label: 'TitanRole', routerLink: 'app/body/Admin/Vehicle/titanRole/' };
+        return menuItem;
+    }
+
+    private adminMilestoneStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneStatusPageBCItems() {
+        let menuItem = { label: 'MilestoneStatus', routerLink: 'app/body/Admin/Vehicle/milestoneStatus/' };
         return menuItem;
     }
 
