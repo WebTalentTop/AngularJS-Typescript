@@ -93,6 +93,9 @@ export class BreadCrumbsService {
         //Admin Permission Page
         this.adminPermissionPage();
 
+        //Admin Role Page
+        this.adminRolePage();
+
 }
 
 
@@ -492,7 +495,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-        private adminAccessPage() {
+    private adminAccessPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -540,6 +543,23 @@ export class BreadCrumbsService {
 
     private adminPermissionPageBCItems() {
         let menuItem = { label: 'Permission', routerLink: 'app/body/Admin/Vehicle/permission/' };
+        return menuItem;
+    }
+
+    private adminRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRolePageBCItems() {
+        let menuItem = { label: 'Role', routerLink: 'app/body/Admin/Vehicle/role/' };
         return menuItem;
     }
 
