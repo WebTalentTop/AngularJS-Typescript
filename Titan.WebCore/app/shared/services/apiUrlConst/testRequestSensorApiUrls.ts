@@ -16,6 +16,7 @@ export class TestReqestSensorApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'testRequestSensor/put';
     public static postCommentUpdateUrl: string = titanApiUrl + 'testRequestSensorComment/put';
     public static getByIdUrl: string = titanApiUrl + 'testRequestSensor/get';
+    public static getTestRequestByIdUrl: string = titanApiUrl + 'testRequest/get';
     public static getTaskDetailsByIdUrl: string = titanApiUrl + 'task/get';
     //getSensorCommentIdByTestRequestSensorId
     public static getSensorCommentIdByTestRequestSensorIdUrl: string = titanApiUrl + 'testRequestSensorComment/GetTestRequestCommentById';

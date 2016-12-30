@@ -195,6 +195,14 @@ export class TestRequestSensorService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
+    getTestRequestById(id): Observable<any> {
+        return this.http.get(`${TestReqestSensorApiUrl.getTestRequestByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getTaskDetailsById(id): Observable<any> {
         return this.http.get(`${TestReqestSensorApiUrl.getTaskDetailsByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
