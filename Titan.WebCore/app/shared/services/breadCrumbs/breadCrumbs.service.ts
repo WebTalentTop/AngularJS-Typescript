@@ -54,6 +54,9 @@ export class BreadCrumbsService {
         //Admin Platform Page
         this.adminPlatformPage();
 
+        //Admin TitanRole Page
+        this.adminTitanRolePage();
+
 }
 
 
@@ -227,13 +230,12 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-
     private adminUnitsPageBCItems() {
-        let menuItem = { label: 'Platform', routerLink: 'app/body/Admin/Vehicle/platform/' };
+        let menuItem = { label: 'Units', routerLink: 'app/body/Admin/Vehicle/units/' };
         return menuItem;
     }
 
-    private adminBuildLevelsPage() {
+    private adminBuildLevelsPage(){ 
     let menuItems = [];
     menuItems.push(this.homeBreadCrumbItem());
     menuItems.push(this.adminHomePageBCItems());
@@ -281,6 +283,23 @@ export class BreadCrumbsService {
 
     private adminPlatformPageBCItems() {
         let menuItem = { label: 'Platform', routerLink: 'app/body/Admin/Vehicle/platform/' };
+        return menuItem;
+    }
+
+    private adminTitanRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TitanRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTitanRolePageBCItems() {
+        let menuItem = { label: 'TitanRole', routerLink: 'app/body/Admin/Vehicle/titanRole/' };
         return menuItem;
     }
 
