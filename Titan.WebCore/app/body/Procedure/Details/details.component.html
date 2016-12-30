@@ -135,7 +135,39 @@
                     <details-step [isDisplayComponentInPopUp]="true" [stepId]="editStepId" (onEditComplete)="onEditStepComplete($event)" (onCancelComplete)="onEditCancelStepComplete($event)"></details-step>
                 </p-dialog>
 
-                <p-dataList [value]="selectedSteps">
+                <p-dataTable [value]="selectedSteps" expandableRows="true">
+                    <p-column expander="true" styleClass="col-icon"></p-column>
+                    <p-column field="name" header="Name"></p-column>
+                    <p-column field="stepTypeName" header="Step Type"></p-column>
+                    <!--<p-column field="repeatStep" header="Repeat?"></p-column>-->
+                    <p-column field="repeatStep" header="Repeat?">
+                        <template let-col let-step="rowData" pTemplate="body">
+                            <span>{{(step.repeatStep ? 'Yes' : 'No')}}</span>
+                        </template>
+                    </p-column>
+                    <p-column styleClass="col-button" header="Action">
+                        <template let-step="rowData" pTemplate="body">
+                            <button type="button" pButton (click)="onDelete(step, 2)" icon="fa-trash" title="Delete"></button>
+                            <button type="button" pButton (click)="onEditStep(step)" icon="fa-pencil-square-o" title="Edit"></button>
+                            <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
+                            <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
+                        </template>
+                    </p-column>
+                    <template let-step pTemplate="rowexpansion">
+                        <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                            <div class="ui-grid-row" *ngIf="step.repeatStep">
+                                <div class="ui-grid-col-2">Step Frequency: </div>
+                                <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
+                                <div class="ui-grid-col-2">Test % / # of Cycles: </div>
+                                <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
+                            </div>
+                        </div>
+                    </template>
+                </p-dataTable>
+
+                
+
+                <!--<p-dataList [value]="selectedSteps">
                     <header>
                         Selected Steps
                     </header>
@@ -171,7 +203,7 @@
                             </div>                            
                         </div>
                     </template>
-                </p-dataList>
+                </p-dataList>-->
                 
                 <!--<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>-->
                 <!--<div class="ui-grid-row">
