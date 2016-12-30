@@ -1,9 +1,10 @@
 import { MilestoneTypeService } from '../../../../shared/services/milestoneType.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
+import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'milestoneType-grid',
@@ -17,16 +18,30 @@ export class MilestoneTypeComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: MilestoneTypeService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService, private service: MilestoneTypeService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
     
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
-           
+           let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let milestoneTypeBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'MilestoneTypeHomePage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("milestoneTypeBreadCrumb ---------", milestoneTypeBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = milestoneTypeBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
         });
 
         if (this.added == 1) {

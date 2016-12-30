@@ -72,6 +72,9 @@ export class BreadCrumbsService {
         //Admin MilestoneCategory Page
         this.adminMilestoneCategoryPage();
 
+        //Admin MilestoneType Page
+        this.adminMilestoneTypePage();
+
 }
 
 
@@ -401,6 +404,23 @@ export class BreadCrumbsService {
         let menuItem = { label: 'MilestoneCategory', routerLink: 'app/body/Admin/Vehicle/milestoneCategory/' };
         return menuItem;
     }
+
+        private adminMilestoneTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+        private adminMilestoneTypePageBCItems() {
+        let menuItem = { label: 'MilestoneType', routerLink: 'app/body/Admin/Vehicle/milestoneType/' };
+        return menuItem;
+
     public getBreadCrumbs() {
         return this.breadCrumbs;
     }
