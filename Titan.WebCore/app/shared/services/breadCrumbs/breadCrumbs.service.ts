@@ -51,6 +51,9 @@ export class BreadCrumbsService {
         //Admin Market Page
         this.adminMarketPage();
 
+        //Admin Platform Page
+        this.adminPlatformPage();
+
 }
 
 
@@ -224,21 +227,22 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
+
     private adminUnitsPageBCItems() {
-        let menuItem = { label: 'Units', routerLink: 'app/body/Admin/Vehicle/units/' };
+        let menuItem = { label: 'Platform', routerLink: 'app/body/Admin/Vehicle/platform/' };
         return menuItem;
     }
 
-        private adminBuildLevelsPage() {
-        let menuItems = [];
-        menuItems.push(this.homeBreadCrumbItem());
-        menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+    private adminBuildLevelsPage() {
+    let menuItems = [];
+    menuItems.push(this.homeBreadCrumbItem());
+    menuItems.push(this.adminHomePageBCItems());
+    menuItems.push(this.adminVehicleHomePageBCItems());
+    // menuItems.push(this.adminHolidayPageBCItems());
 
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
-        this.addToBreadCrumbs(bcInfoItems);
+    let bcInfoItems: IBreadCrumbsInfo;
+    bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
+    this.addToBreadCrumbs(bcInfoItems);
     }
 
     private adminBuildLevelsPageBCItems() {
@@ -260,6 +264,23 @@ export class BreadCrumbsService {
 
     private adminMarketPageBCItems() {
         let menuItem = { label: 'Market', routerLink: 'app/body/Admin/Vehicle/market/' };
+        return menuItem;
+    }
+
+    private adminPlatformPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PlatformHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPlatformPageBCItems() {
+        let menuItem = { label: 'Platform', routerLink: 'app/body/Admin/Vehicle/platform/' };
         return menuItem;
     }
 
