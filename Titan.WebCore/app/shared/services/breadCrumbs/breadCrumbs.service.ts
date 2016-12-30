@@ -60,6 +60,9 @@ export class BreadCrumbsService {
         //Admin MilestoneStatus Page
         this.adminMilestoneStatusPage();
 
+        //Admin ProjectStatus Page
+        this.adminProjectStatusPage();
+
 }
 
 
@@ -320,6 +323,23 @@ export class BreadCrumbsService {
 
     private adminMilestoneStatusPageBCItems() {
         let menuItem = { label: 'MilestoneStatus', routerLink: 'app/body/Admin/Vehicle/milestoneStatus/' };
+        return menuItem;
+    }
+
+    private adminProjectStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectStatusPageBCItems() {
+        let menuItem = { label: 'ProjectStatus', routerLink: 'app/body/Admin/Vehicle/projectStatus/' };
         return menuItem;
     }
 
