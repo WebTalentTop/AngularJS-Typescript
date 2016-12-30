@@ -78,6 +78,9 @@ export class BreadCrumbsService {
         //Admin Grade Page
         this.adminGradePage();
 
+        //Admin ModelName Page
+        this.adminModelNamePage();
+
 }
 
 
@@ -425,7 +428,7 @@ export class BreadCrumbsService {
         let menuItem = { label: 'MilestoneType', routerLink: 'app/body/Admin/Vehicle/milestoneType/' };
         return menuItem;
         }
-        
+
         private adminGradePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
@@ -440,6 +443,23 @@ export class BreadCrumbsService {
 
     private adminGradePageBCItems() {
         let menuItem = { label: 'Grade', routerLink: 'app/body/Admin/Vehicle/grade/' };
+        return menuItem;
+    }
+
+        private adminModelNamePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelNameHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminModelNamePageBCItems() {
+        let menuItem = { label: 'ModelName', routerLink: 'app/body/Admin/Vehicle/modelName/' };
         return menuItem;
     }
 
