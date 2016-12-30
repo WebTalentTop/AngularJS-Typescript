@@ -27,7 +27,6 @@ export class HolidayComponent {
 
     }
     
-
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
     ngOnInit() {

@@ -18,7 +18,7 @@ export class MilestoneComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: MilestoneTypeService, private breadCrumbsService: BreadCrumbsService,private service: MilestoneService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService,private service: MilestoneService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
     breadcrumbs: MenuItem[];
