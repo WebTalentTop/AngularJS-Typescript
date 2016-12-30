@@ -66,6 +66,9 @@ export class BreadCrumbsService {
         //Admin ProjectRole Page
         this.adminProjectRolePage();
 
+        //Admin Milestone Page
+        this.adminMilestonePage();
+
 }
 
 
@@ -346,7 +349,6 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-
     private adminProjectRolePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
@@ -361,6 +363,23 @@ export class BreadCrumbsService {
 
     private adminProjectRolePageBCItems() {
         let menuItem = { label: 'ProjectRole', routerLink: 'app/body/Admin/Vehicle/projectRole/' };
+        return menuItem;
+    }
+
+    private adminMilestonePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestonePageBCItems() {
+        let menuItem = { label: 'Milestone', routerLink: 'app/body/Admin/Vehicle/milestone/' };
         return menuItem;
     }
     public getBreadCrumbs() {

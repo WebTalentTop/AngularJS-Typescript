@@ -1,9 +1,10 @@
 import { MilestoneService } from '../../../../shared/services/milestone.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
+import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'milestone-grid',
@@ -17,15 +18,29 @@ export class MilestoneComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: MilestoneService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService,private service: MilestoneService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
-    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let milestoneBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'MilestoneHomePage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("milestoneBreadCrumb ---------", milestoneBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = milestoneBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
            
         });
 
