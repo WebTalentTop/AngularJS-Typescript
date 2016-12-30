@@ -63,6 +63,9 @@ export class BreadCrumbsService {
         //Admin ProjectStatus Page
         this.adminProjectStatusPage();
 
+        //Admin ProjectRole Page
+        this.adminProjectRolePage();
+
 }
 
 
@@ -343,6 +346,23 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+
+    private adminProjectRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectRolePageBCItems() {
+        let menuItem = { label: 'ProjectRole', routerLink: 'app/body/Admin/Vehicle/projectRole/' };
+        return menuItem;
+    }
     public getBreadCrumbs() {
         return this.breadCrumbs;
     }
