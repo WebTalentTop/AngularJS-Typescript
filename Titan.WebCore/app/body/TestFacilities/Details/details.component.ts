@@ -223,10 +223,10 @@ export class DetailsComponent implements AfterViewInit {
 
     //    this.FrequencyInit(event);
     //}
-    FrequencyInit(IsFrequency)
+    frequencyInit()
     {
-        var cron_field = $('#selector').cron();
-        if (IsFrequency && cron_field != null) {
+       // var cron_field = $('#selector').cron();
+      //  if (IsFrequency && cron_field != null) {
             if (this.testFacility.maintenanceFrequency != null)
             { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
             else
@@ -247,7 +247,7 @@ export class DetailsComponent implements AfterViewInit {
                 useGentleSelect: true
             })
 
-        }
+      //  }
     }
 
     ngAfterViewInit() {
@@ -674,7 +674,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
-                this.FrequencyInit(true);
+                this.frequencyInit();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
