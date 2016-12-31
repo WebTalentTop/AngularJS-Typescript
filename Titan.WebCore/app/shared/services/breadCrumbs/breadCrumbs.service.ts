@@ -19,15 +19,12 @@ export class BreadCrumbsService {
         this.adminBreadCrumbAdd();
 
         // Admin FormBuilder
-
         this.adminFormBuilderPage();
 
         // Admin Form Builder Add
-
         this.adminFormBuilderAddFormPage()
 
         //Admin Form Builder Details
-
         this.adminFormBuilderDetailsFormPage();
 
         // Admin Vehicle Home Page
@@ -35,10 +32,12 @@ export class BreadCrumbsService {
 
         // Admin Shift Page
         this.adminShiftPage();
+        // Admin Shift Add Page
+        this.adminShiftAddPage()
 
         //Admin Holiday Page
         this.adminHolidayPage();
-    
+
         //Admin Step Page
         this.adminStepPage();
 
@@ -96,7 +95,7 @@ export class BreadCrumbsService {
         //Admin Role Page
         this.adminRolePage();
 
-}
+    }
 
 
     // Home Page Bread Crumbs
@@ -119,7 +118,7 @@ export class BreadCrumbsService {
     private adminBreadCrumbAdd() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
-        menuItems.push(this.adminHomePageBCItems());
+        // menuItems.push(this.adminHomePageBCItems());
 
         let adminHomePage = { pageName: 'Admin', items: menuItems };
 
@@ -127,7 +126,7 @@ export class BreadCrumbsService {
     }
 
     private adminHomePageBCItems() {
-        let menuItem = { label: 'Admin', command: 'bcNavigation($event)' };
+        let menuItem = { label: 'Admin', routerLink: ['/admin'] };
 
         return menuItem;
     }
@@ -201,7 +200,7 @@ export class BreadCrumbsService {
     }
 
     private adminVehicleHomePageBCItems() {
-        let menuItem = { label: 'Vehicle', routerLink: 'app/body/admin/Vehicle/' };
+        let menuItem = { label: 'Vehicle', routerLink: ['/admin'] };
 
         return menuItem;
     }
@@ -219,7 +218,29 @@ export class BreadCrumbsService {
     }
 
     private adminShiftPageBCItems() {
-        let menuItem = { label: 'Shift', routerLink: 'app/body/Admin/Vehicle/shift/' };
+        let menuItem = { label: 'Shift', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Shift Add Bread Crumbs
+    private adminShiftAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminShiftPageBCItems());
+        // menuItems.push(this.adminShiftAddPageBCItems());
+
+        let bcInfoItems = [];
+        bcInfoItems.push({ pageName: 'ShiftAddPage', items: menuItems });
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminShiftAddPageBCItems() {
+        let menuItem = { label: 'Add Shift', routerLink: ['admin/shift'] };
+
         return menuItem;
     }
 
@@ -275,15 +296,15 @@ export class BreadCrumbsService {
     }
 
     private adminBuildLevelsPage() {
-    let menuItems = [];
-    menuItems.push(this.homeBreadCrumbItem());
-    menuItems.push(this.adminHomePageBCItems());
-    menuItems.push(this.adminVehicleHomePageBCItems());
-    // menuItems.push(this.adminHolidayPageBCItems());
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
 
-    let bcInfoItems: IBreadCrumbsInfo;
-    bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
-    this.addToBreadCrumbs(bcInfoItems);
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
     }
 
     private adminBuildLevelsPageBCItems() {
@@ -442,9 +463,9 @@ export class BreadCrumbsService {
     private adminMilestoneTypePageBCItems() {
         let menuItem = { label: 'MilestoneType', routerLink: 'app/body/Admin/Vehicle/milestoneType/' };
         return menuItem;
-        }
+    }
 
-        private adminGradePage() {
+    private adminGradePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
