@@ -95,6 +95,9 @@ export class BreadCrumbsService {
         //Admin Role Page
         this.adminRolePage();
 
+        //Admin MaintenanceFrequency Page
+        this.adminMaintenanceFrequencyPage();
+
     }
 
 
@@ -581,6 +584,23 @@ export class BreadCrumbsService {
 
     private adminRolePageBCItems() {
         let menuItem = { label: 'Role', routerLink: 'app/body/Admin/Vehicle/role/' };
+        return menuItem;
+    }
+
+        private adminMaintenanceFrequencyPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MaintenanceFrequencyHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMaintenanceFrequencyPageBCItems() {
+        let menuItem = { label: 'Role', routerLink: 'app/body/Admin/Vehicle/maintenanceFrequency/' };
         return menuItem;
     }
 
