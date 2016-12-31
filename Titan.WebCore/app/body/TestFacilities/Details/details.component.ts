@@ -96,7 +96,7 @@ export class DetailsComponent implements AfterViewInit {
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
     formInstanceFields: any[] = [];
-    
+
     // End Of Form Related Variables
 
     notificationMsgs: Message[] = [];
@@ -158,6 +158,16 @@ export class DetailsComponent implements AfterViewInit {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
+
+    tabLoadStatus = [
+        {loaded:true, method: this.loadDetailsTabViews},
+        {loaded:false, method: this.loadEquipmentTabViews},
+        {loaded:false, method:this.loadScheduleTabViews},
+        {loaded:false, method:this.loadMaintainanceTabViews},
+        {loaded:false, method:this.loadAttachmentsTabViews},
+        {loaded:false, method:this.loadLogsTabViews}
+    ];
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -181,7 +191,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     ngOnInit() {
-         
+
         if (this.id) {
             //this.categories = [];
             //this.categories.push({ label: 'All categories', value: null });
@@ -191,7 +201,7 @@ export class DetailsComponent implements AfterViewInit {
             //this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
             //this.categories.push({ label: 'Manual', value: 'Manual' });
             //this.categories.push({ label: 'Results', value: 'Results' });
-           
+
             // TODO: Replace this with a breadcrumb data service.
             this.breadcrumbs = [];
             this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
@@ -199,27 +209,12 @@ export class DetailsComponent implements AfterViewInit {
             // TODO: Find out why the home link does not use the pointer icon for its hover state.
             this.breadcrumbsHome = { routerLink: ['/'] };
 
-            this.getEntityIdentifierInfo();
-            this.getUserRoles();
-            this.getTestFacilities();
-            this.getTestModes();
-            this.getTestTypes();
-            this.getBuildLevels();
-            this.getTestStatus();
-            this.getProjectCodes();
-            this.getTestRoles();
             this.getTestFacilityById();
-            this.getTestFacilityRoleService();
-            this.getTestFacilityAttachmentServiceById();
-            this.getTestFacilityEquipmentById();
             this.GetTenantsByTestFacilityId();
-            this.GetLogCommentsByTestFacilityId();
             this.getDepartments();
-            this.getEquipments();
 
             this.getOperatingHours();
             this.getMaintenanceFrequencies();
-            this.getCategories();
 
         }
     }
@@ -257,27 +252,63 @@ export class DetailsComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         //var frequency: any;
-       
-       
+
+
     }
 
     downloadAttachment(attachment) {
 
         window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
     }
+
+    loadDetailsTabViews(me) {
+
+    }
+
+    loadMaintainanceTabViews(me) {
+        me.getEntityIdentifierInfo();
+    }
+
+    loadLogsTabViews(me) {
+        me.GetLogCommentsByTestFacilityId();
+    }
+
+    loadAttachmentsTabViews(me) {
+        me.getCategories();
+        me.getTestFacilityAttachmentServiceById();
+    }
+
+    loadScheduleTabViews(me) {
+        //schedule tab
+        me.getUserRoles();
+        me.getTestFacilities();
+        me.getTestModes();
+        me.getTestTypes();
+        me.getBuildLevels();
+        me.getTestStatus();
+        me.getProjectCodes();
+        me.getTestRoles();
+        me.getTestFacilityRoleService();
+
+        me.displayScheduleTab = true;
+        $("#calendar").parent('.ui-tabview-panel').show();
+        let ref = me;
+        setTimeout(function () { ref.initSchedule(); }, 10);
+    }
+    loadEquipmentTabViews(me) {
+        me.getTestFacilityEquipmentById();
+        me.getEquipments();
+    }
+
     handleChange(event) {
-        // console.log('--------tab changed---', event);
+        //console.log('--------tab changed---', event);
         // console.log('-------targetid-------', event.originalEvent.target.innerText);
-        if (event.originalEvent.currentTarget.classList.contains("equipment")) {
-            this.displayEquipmentTab = true;
-        } else if (!this.displayScheduleTab && event.originalEvent.currentTarget.classList.contains("schedule")) {
-            this.displayScheduleTab = true;
-            $("#calendar").parent('.ui-tabview-panel').show();
-            let ref = this;
-            setTimeout(function () { ref.initSchedule(); }, 10);
+
+        let load = this.tabLoadStatus[event.index];
+        if (!load.loaded) {
+            load.method(this);
+            load.loaded = true;
         }
-
-
     }
     initSchedule() {
         var scheduleConfig = {
@@ -342,7 +373,7 @@ export class DetailsComponent implements AfterViewInit {
                 }
             });
         }];
-        //scheduleConfig.events= 
+        //scheduleConfig.events=
         $('#calendar').fullCalendar(scheduleConfig);
     }
 
@@ -364,7 +395,7 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
-   
+
     onMaintenanceFrequencyChange(event) {
         // console.log('------event------------', event)
         this.selectedMaintenanceFrequency = (event.value);
@@ -380,7 +411,7 @@ export class DetailsComponent implements AfterViewInit {
     onTestRoleChange(event) {
         // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
-       
+
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -450,7 +481,7 @@ export class DetailsComponent implements AfterViewInit {
             'equipmentId': this.selectedEquipmentId,
             'facilityId': this.selectedTestFacilities
         };
-     
+
         this.testFacilityService.moveEquipmenttoTestFacility(postbody).subscribe(res => {
 
             this.displayEquipmentDialog = false;
@@ -825,7 +856,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     onAddUserRole() {
-      
+
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
@@ -865,7 +896,7 @@ export class DetailsComponent implements AfterViewInit {
 
     onAddDepartment() {
 
-       
+
 
         if (this.selectedDepartment == null) {
             this.msgs = [];
@@ -878,7 +909,7 @@ export class DetailsComponent implements AfterViewInit {
             this.displayAssignDepartmentsDialog = true;
 
         this.testFacilityService.postAddDepartment(this.id, this.selectedDepartment).subscribe(filteredList => {
-           
+
             this.testFacilityService.getTenants(this.id)
                 .subscribe(res => {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
@@ -898,7 +929,7 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-       
+
 
         console.log("stringify --------", JSON.stringify(this.comment));
         this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
@@ -907,7 +938,7 @@ export class DetailsComponent implements AfterViewInit {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.testFacilityLogComments = res;
                 });
-           
+
         });
 
         this.msgs = [];
@@ -927,7 +958,7 @@ export class DetailsComponent implements AfterViewInit {
             this.displayAssignEquipmentsDialog = true;
 
         this.testFacilityService.postAddEquipment(this.id, this.selectedEquipment).subscribe(filteredList => {
-           
+
             this.testFacilityService.getEquipmentsByIdusing(this.id)
                 .subscribe(res => {
                     //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
@@ -968,7 +999,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.maintenanceFrequency = $('#selector').cron("value");        
+        formData.maintenanceFrequency = $('#selector').cron("value");
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
