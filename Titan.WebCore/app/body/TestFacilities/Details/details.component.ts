@@ -56,6 +56,7 @@ declare var cron: any;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    IsFrequency: boolean = false;
     frequency: any;
     titanApiUrl: any = titanApiUrl;
     username: string;
@@ -222,28 +223,36 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
-    FrequencyInit()
+    //onMaintenanceNeeded(event)
+    //{
+
+    //    this.FrequencyInit(event);
+    //}
+    frequencyInit()
     {
-        if (this.testFacility.maintenanceFrequency != null)
-        { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
-        else
-        { this.selectedMaintenanceFrequency = "* * * * *"; }
+       // var cron_field = $('#selector').cron();
+      //  if (IsFrequency && cron_field != null) {
+            if (this.testFacility.maintenanceFrequency != null)
+            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
+            else
+            { this.selectedMaintenanceFrequency = "* * * * *"; }
 
-        $("#selector").cron({
+            $("#selector").cron({
 
-            initial: this.selectedMaintenanceFrequency,
-            onChange: function () {
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
 
-                this.selectedMaintenanceFrequency = $(this).cron("value");
-                // $('#selector-val').text($(this).cron("value"));
-            },
-            effectOpts: {
-                openEffect: "fade",
-                openSpeed: "slow"
-            },
-            useGentleSelect: true
-        })
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
+                    // $('#selector-val').text($(this).cron("value"));
+                },
+                effectOpts: {
+                    openEffect: "fade",
+                    openSpeed: "slow"
+                },
+                useGentleSelect: true
+            })
 
+      //  }
     }
 
     ngAfterViewInit() {
@@ -634,7 +643,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
-                this.FrequencyInit();
+                this.frequencyInit();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;

@@ -66,7 +66,19 @@ export class DetailsComponent implements AfterViewInit {
     downTimeReasons: any;
     estimateDuration: any;
     formConfiguration: any;
-
+    testRequestDetails: any = {
+        testNumber: '',
+        // TenantId: ' ',
+        testTemplateId:'',
+        testFacilityId: '',
+        projectId: '',
+        buildLevelId: '',
+        verificationMethodId: '',
+        plannedEndDate: '',
+        plannedStartDate: '',
+        testStatusId: '',
+        dueDate: ''
+    };
     formObject: any;
     formEquipmentObject: any;
     TimeEntryTypeId: any;
@@ -146,7 +158,23 @@ export class DetailsComponent implements AfterViewInit {
         this.getHourEntryByEntityIdentifierId();
         this.getDownTimeReasons();
         let resData: any;
-        this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId,'')
+        // get test request details byid
+        this.testrequestsensorserice.getTestRequestById(this.id)
+            .subscribe(res => {
+                this.testRequestDetails = res.result;
+
+                this.testRequestDetails.plannedStartDate = new Date(res.result.plannedStartDate);
+                this.testRequestDetails.plannedEndDate = new Date(res.result.plannedEndDate);
+                this.testRequestDetails.dueDate = new Date(res.result.dueDate);
+                //  resData = res;
+                //this.gridData = res.Data;
+                //this.cols = res.Configuration.Columns;
+                ////console.log("-------- Cols --------", this.cols);
+                //this.confInfo = res.Configuration;
+                //console.log("------- Configuration --------", this.confInfo);
+            });
+        let departmentId = '00000000-0000-0000-0000-000000000000';
+        this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId, departmentId)
             .subscribe(res => {
                 this.sensorRequests = res.result;
                 //  resData = res;
@@ -568,10 +596,10 @@ export class DetailsComponent implements AfterViewInit {
          TestFacilityId: this.selectedTestFacilities,
          ProjectId: this.selectedProjectCodes,
          BuildLevelId: this.selectedBuildLevels,
-         VerificationMethodId: this.selectedTestVerificationMethods,
-        PlannedStartDate : this.plannedStartDate ,
-        PlannedEndDate: this.plannedEndDate,
-        TestStatusId: this.selectedTestStatuses
+         VerificationMethodId: this.testRequestDetails.plannedStartDate,
+         PlannedEndDate: this.testRequestDetails.plannedEndDate,
+         TestStatusId: this.selectedTestStatuses,
+        DueDate: this.testRequestDetails.dueDate
         // UserCreatedById : ' ' ,
         //Createdon : ' ' ,
         // UserModifiedById : ' ' ,
@@ -609,7 +637,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
             return null;
         }
-        if (this.plannedStartDate == null || this.plannedStartDate == "") {
+        if (this.plannedStartDate == null) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Planned Start Date', detail: '' });
             return null;

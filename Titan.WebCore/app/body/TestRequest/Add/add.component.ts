@@ -22,7 +22,7 @@ declare var $: JQueryStatic;
 
 @Component({
     selector: 'add-testrequest',
-    templateUrl: 'app/body/TestRequest/Details/details.component.html'
+    templateUrl: 'app/body/TestRequest/Add/add.component.html'
 })
 export class AddComponent implements AfterViewInit {
     ngAfterViewInit() {
@@ -38,6 +38,7 @@ export class AddComponent implements AfterViewInit {
     projectCodes: any;
     testTypes: any;
     testTemplates: any;
+    dueDate: any;
     testAllModes: any;
     testStatus: any;
     testFacilities: any;
@@ -143,19 +144,19 @@ export class AddComponent implements AfterViewInit {
         this.getProjectCodes();
         this.getTestTemplates();
         this.getTestRoles();
-        this.getHourEntryByEntityIdentifierId();
+      //  this.getHourEntryByEntityIdentifierId();
         this.getDownTimeReasons();
         let resData: any;
-        this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId,'')
-            .subscribe(res => {
-                this.sensorRequests = res.result;
-                //  resData = res;
-                //this.gridData = res.Data;
-                //this.cols = res.Configuration.Columns;
-                ////console.log("-------- Cols --------", this.cols);
-                //this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
+        //this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId,'')
+        //    .subscribe(res => {
+        //        this.sensorRequests = res.result;
+        //        //  resData = res;
+        //        //this.gridData = res.Data;
+        //        //this.cols = res.Configuration.Columns;
+        //        ////console.log("-------- Cols --------", this.cols);
+        //        //this.confInfo = res.Configuration;
+        //        //console.log("------- Configuration --------", this.confInfo);
+        //    });
 
         //this.dataService.GetProjectId(this.id)
         //    .subscribe(res => {
@@ -559,19 +560,15 @@ export class AddComponent implements AfterViewInit {
       //   Id : ' ' ,
          TestNumber : this.number ,
         // TenantId: ' ',
-         TestTemplateId: '2F59E940-50E9-403E-8075-F407AE285143',//this.selectedTestTemplates,
+         TestTemplateId: this.selectedTestTemplates,
          TestFacilityId: this.selectedTestFacilities,
          ProjectId: this.selectedProjectCodes,
          BuildLevelId: this.selectedBuildLevels,
          VerificationMethodId: this.selectedTestVerificationMethods,
         PlannedStartDate : this.plannedStartDate ,
         PlannedEndDate: this.plannedEndDate,
-        TestStatusId: this.selectedTestStatuses
-        // UserCreatedById : ' ' ,
-        //Createdon : ' ' ,
-        // UserModifiedById : ' ' ,
-        //Modifiedon : ' ' ,
-
+        TestStatusId: this.selectedTestStatuses,
+        DueDate: this.dueDate
         };
         if (this.number == null || this.number == "") {
             this.msgs = [];
@@ -594,11 +591,11 @@ export class AddComponent implements AfterViewInit {
             return null;
         }
        
-        //if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
-        //    this.msgs = [];
-        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
-        //    return null;
-        //}
+        if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
+            return null;
+        }
         if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
@@ -607,6 +604,11 @@ export class AddComponent implements AfterViewInit {
         if (this.plannedStartDate == null || this.plannedStartDate == "") {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Planned Start Date', detail: '' });
+            return null;
+        }
+        if (this.dueDate == null || this.dueDate == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Due Date', detail: '' });
             return null;
         }
         if (this.plannedEndDate == null || this.plannedEndDate == "") {
@@ -624,7 +626,7 @@ export class AddComponent implements AfterViewInit {
                 let workrequestbody = {
 
                     EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
-                    EntityId: res.result.id//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A'//res.id  
+                    EntityId: res.result.id
                   
                 };
                 //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId() 
@@ -635,7 +637,7 @@ export class AddComponent implements AfterViewInit {
                         let taskbody = {
 
                             EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
-                            EntityId: res.result.id,//'CF338C63-A9EC-4D7F-8F48-EA1F8353EC2A',//res.id,
+                            EntityId: res.result.id,
                             DepartmentId: dept,
                             UserId: primaryuserid
 
@@ -681,8 +683,8 @@ export class AddComponent implements AfterViewInit {
 
 
                
-            }
-
+             }
+             this.router.navigate(['testrequest/details/', res.result.id]);
 
      });
        

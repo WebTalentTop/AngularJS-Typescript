@@ -186,9 +186,15 @@
                         <div class="table-responsive" style="min-height:400px;">
                             <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
                                 <p-column header="Sensor Name" field="name" sortable="true"></p-column>
-
-
                                 <p-column header="Comments" field="comment" sortable="true"></p-column>
+                                <p-column header="Part Name"  sortable="true"></p-column>
+                                <p-column header="Part Number"  sortable="true"></p-column>
+                                <p-column header="Department"  sortable="true"></p-column>
+                                <p-column header="Department PIC"  sortable="true"></p-column>
+                                <p-column header="Material"  sortable="true"></p-column>
+                                <p-column header="Steady State Requirement" sortable="true"></p-column>
+                                <p-column header="Steady Periodic Requirement" sortable="true"></p-column>
+                                <p-column header="Category" sortable="true"></p-column>
                                 <!--<p-column>
                                     <template pTemplate type="header">
                                         <button type="button" pButton icon="fa-refresh"></button>
