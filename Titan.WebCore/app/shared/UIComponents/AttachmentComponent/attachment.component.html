@@ -1,0 +1,75 @@
+<h2>{{title}}</h2>
+<p-growl [value]="msgs"></p-growl>
+
+<div class="ui-grid-col-1">
+    Category:
+</div>
+<div class="col-sm-12">
+    <p-dropdown [options]="categories" name="categories" (onChange)="onCategoryChange($event)" [style]="{'width':'100%'}"></p-dropdown>
+    <!--<p-dropdown [options]="stepFrequencies"              [(ngModel)]="stepDetails.stepFrequencyId" (onChange)="onStepFrequencyChange()" name="stepFrequency">
+    -->
+</div>
+
+<!--<div class="ui-grid-col-2"></div>-->
+
+<p-fileUpload name="attachments" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}/{{selectedCategory}}" (onUpload)="onUpload($event)"
+              multiple="multiple" accept="image/*" maxFileSize="1000000" auto="auto">
+    <template pTemplate type="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+        <div class="ui-grid-row">
+            <!--<div class="ui-grid-col-2"><b>Test Facility Attachments</b></div>-->
+            <div class="ui-grid-col-2"></div>
+
+            <p-dataTable [value]="uploadedAttachments" [editable]="true">
+
+                <!-- Begin File Name Column -->
+
+                <p-column field="name" header="File Name">
+                    <template let-Attachment="rowData" pTemplate type="body">
+                        <a href="{{titanApiUrl}}Document/file/{{Attachment.id}}">{{Attachment.name}}</a>
+                    </template>
+                </p-column>
+                <p-column field="category" header="Category">
+                    <template let-Attachment="rowData" pTemplate type="body">
+                        {{Attachment.category}}
+                    </template>
+                </p-column>
+                <!-- End File Name Column -->
+                <!-- Begin Uploaded By Column -->
+
+                <p-column field="employee" header="Employee">
+                    <template let-Attachment="rowData" pTemplate type="body">
+                        {{Attachment.employee}}
+                    </template>
+                </p-column>
+
+                <!-- End Uploaded By Column -->
+                <!-- Begin When Uploaded Column -->
+
+                <p-column field="Attachment.timeStamp" header="TimeStamp">
+                    <template let-Attachment="rowData" pTemplate type="body">
+                        {{Attachment.timeStamp}}
+                    </template>
+                </p-column>
+
+                <!-- End When Uploaded Column -->
+                <!-- Begin Actions Column -->
+
+                <p-column header="Actions">
+                    <template let-Attachment="rowData" pTemplate type="body">
+
+                        <a href="{{titanApiUrl}}Document/file/{{Attachment.id}}">Download</a>
+                        <!--<button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>-->
+                        <button pButton type="button" icon="ui-icon-remove-circle" label="Delete" (click)="onDelete(Attachment)"></button>
+                    </template>
+                </p-column>
+
+                <!-- End Actions Column -->
+
+            </p-dataTable>
+        </div>
+    </template>
+</p-fileUpload>
+<p-confirmDialog width="425"></p-confirmDialog>

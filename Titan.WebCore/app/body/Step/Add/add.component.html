@@ -24,6 +24,20 @@
                     <div class="ui-grid-row">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
+                                Test Stage
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <p-dropdown [options]="testStages" [(ngModel)]="stepDetails.testStageId" name="testStage" [style]="{'width':'150px'}">
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
+                                Test Stage field is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
                                 Step Type
                             </div>
                             <div class="ui-grid-col-6">

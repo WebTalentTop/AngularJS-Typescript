@@ -8,6 +8,7 @@ import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputT
     RadioButtonModule, MultiSelectModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 //import addRoutes from "./add.routes";
+import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 
 @NgModule({
     imports: [
@@ -23,7 +24,7 @@ import { RouterModule } from "@angular/router";
         RadioButtonModule,
         MultiSelectModule
         ],
-    providers: [StepService],
+    providers: [StepService, TimeEntryService],
     declarations: [AddComponent],
     exports:[AddComponent]
 })

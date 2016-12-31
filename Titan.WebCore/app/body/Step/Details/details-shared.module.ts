@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { StepService} from '../../../shared/services/step.service';
+import { AttachmentModule } from '../../../shared/UIComponents/AttachmentComponent/attachment.module';
+import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 
 import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, 
     RadioButtonModule, MultiSelectModule } from 'primeng/primeng';
@@ -21,9 +23,10 @@ import { RouterModule } from "@angular/router";
         ButtonModule,
         DropdownModule, 
         RadioButtonModule,
+        AttachmentModule,
         MultiSelectModule
         ],
-    providers: [StepService],
+    providers: [StepService, TimeEntryService],
     exports:[DetailsComponent],
     declarations: [DetailsComponent]
 })

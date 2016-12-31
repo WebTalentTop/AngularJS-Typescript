@@ -5,6 +5,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 
 enum StepTypeEnum
 {
@@ -43,6 +44,7 @@ export class DetailsComponent {
     public id:any;
     public stepTypesLoaded:boolean;
     public stepFrequenciesLoaded:boolean;
+    public testStages: any;
 
     @Input() isDisplayComponentInPopUp: boolean;
     @Input() private set stepId(id: string) {
@@ -56,7 +58,8 @@ export class DetailsComponent {
         private service: StepService,
         private route: ActivatedRoute,
         private router: Router,
-        private dataService: StepService
+        private dataService: StepService,
+        private dataTimeService: TimeEntryService
     ) {
         this.route.params.subscribe(params => 
         {
@@ -69,6 +72,7 @@ export class DetailsComponent {
     ngOnInit() {
         this.getStepTypes();
         this.getStepFrequencies();
+        this.getTestStages();
     }
 
     getDetails(id) {
@@ -84,6 +88,29 @@ export class DetailsComponent {
                 }
             });
         }
+    }
+
+    getTestStages() {
+        //    userRoles
+        this.dataTimeService.getTestStages().subscribe(response => {
+            this.testStages = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Stage",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testStages = resultMap;
+            }
+            console.log(response);
+        });
     }
 
       onStepTypeChange(){

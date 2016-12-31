@@ -4,6 +4,7 @@ import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputT
 import { Router } from '@angular/router';
 
 import { StepService } from '../../../shared/services/step.service';
+import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 
 enum StepTypeEnum
 {
@@ -41,11 +42,14 @@ export class AddComponent {
     public stepTypeDetailLabelText: string = "";
     public showRepeatDetails:boolean;
     public showTestOrCycle: boolean;
+    public testStages: any;
 
     @Input() isDisplayComponentInPopUp: boolean;
     @Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
     @Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
-    constructor(private service: StepService, private router: Router) {
+    constructor(private service: StepService, private router: Router,
+        private dataService: TimeEntryService
+    ) {
 
     }
 
@@ -53,6 +57,7 @@ export class AddComponent {
         this.stepDetails = new Object();
         this.getStepTypes();
         this.getStepFrequencies();
+        this.getTestStages();
     }
 
     onStepTypeChange(){
@@ -133,6 +138,29 @@ export class AddComponent {
                     this.onAddComplete.emit(res.result);
                 }
             }
+        });
+    }
+
+    getTestStages() {
+        //    userRoles
+        this.dataService.getTestStages().subscribe(response => {
+            this.testStages = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Stage",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testStages = resultMap;
+            }
+            console.log(response);
         });
     }
 
