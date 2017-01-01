@@ -113,6 +113,12 @@ export class BreadCrumbsService {
         //Admin TestActivity Page
         this.adminTestActivityPage();
 
+        //Admin Priority Page
+        this.adminPriorityPage();
+        
+        //Admin Judgement Page
+        this.adminJudgementPage();
+
     }
 
 
@@ -687,7 +693,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-        private adminTestActivityPage() {
+    private adminTestActivityPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -701,6 +707,40 @@ export class BreadCrumbsService {
 
     private adminTestActivityPageBCItems() {
         let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminPriorityPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPriorityPageBCItems() {
+        let menuItem = { label: 'Priority', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminJudgementPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminJudgementPageBCItems() {
+        let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
         return menuItem;
     }
 
