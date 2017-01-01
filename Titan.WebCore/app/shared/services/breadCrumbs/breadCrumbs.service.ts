@@ -98,6 +98,9 @@ export class BreadCrumbsService {
         //Admin MaintenanceFrequency Page
         this.adminMaintenanceFrequencyPage();
 
+        //Admin OperatingHours Page
+        this.adminOperatingHoursPage();
+
     }
 
 
@@ -260,7 +263,7 @@ export class BreadCrumbsService {
     }
 
     private adminHolidayPageBCItems() {
-        let menuItem = { label: 'Holiday', routerLink: 'app/body/Admin/Vehicle/holiday/' };
+        let menuItem = { label: 'Holiday', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -277,7 +280,7 @@ export class BreadCrumbsService {
     }
 
     private adminStepPageBCItems() {
-        let menuItem = { label: 'Step', routerLink: 'app/body/Admin/Vehicle/step/' };
+        let menuItem = { label: 'Step', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -294,7 +297,7 @@ export class BreadCrumbsService {
     }
 
     private adminUnitsPageBCItems() {
-        let menuItem = { label: 'Units', routerLink: 'app/body/Admin/Vehicle/units/' };
+        let menuItem = { label: 'Units', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -311,7 +314,7 @@ export class BreadCrumbsService {
     }
 
     private adminBuildLevelsPageBCItems() {
-        let menuItem = { label: 'BuildLevels', routerLink: 'app/body/Admin/Vehicle/buildLevels/' };
+        let menuItem = { label: 'BuildLevels', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -328,7 +331,7 @@ export class BreadCrumbsService {
     }
 
     private adminMarketPageBCItems() {
-        let menuItem = { label: 'Market', routerLink: 'app/body/Admin/Vehicle/market/' };
+        let menuItem = { label: 'Market', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -345,7 +348,7 @@ export class BreadCrumbsService {
     }
 
     private adminPlatformPageBCItems() {
-        let menuItem = { label: 'Platform', routerLink: 'app/body/Admin/Vehicle/platform/' };
+        let menuItem = { label: 'Platform', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -362,7 +365,7 @@ export class BreadCrumbsService {
     }
 
     private adminTitanRolePageBCItems() {
-        let menuItem = { label: 'TitanRole', routerLink: 'app/body/Admin/Vehicle/titanRole/' };
+        let menuItem = { label: 'TitanRole', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -379,7 +382,7 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneStatusPageBCItems() {
-        let menuItem = { label: 'MilestoneStatus', routerLink: 'app/body/Admin/Vehicle/milestoneStatus/' };
+        let menuItem = { label: 'MilestoneStatus', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -396,7 +399,7 @@ export class BreadCrumbsService {
     }
 
     private adminProjectStatusPageBCItems() {
-        let menuItem = { label: 'ProjectStatus', routerLink: 'app/body/Admin/Vehicle/projectStatus/' };
+        let menuItem = { label: 'ProjectStatus', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -413,7 +416,7 @@ export class BreadCrumbsService {
     }
 
     private adminProjectRolePageBCItems() {
-        let menuItem = { label: 'ProjectRole', routerLink: 'app/body/Admin/Vehicle/projectRole/' };
+        let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -430,7 +433,7 @@ export class BreadCrumbsService {
     }
 
     private adminMilestonePageBCItems() {
-        let menuItem = { label: 'Milestone', routerLink: 'app/body/Admin/Vehicle/milestone/' };
+        let menuItem = { label: 'Milestone', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -447,7 +450,7 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneCategoryPageBCItems() {
-        let menuItem = { label: 'MilestoneCategory', routerLink: 'app/body/Admin/Vehicle/milestoneCategory/' };
+        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -464,7 +467,7 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneTypePageBCItems() {
-        let menuItem = { label: 'MilestoneType', routerLink: 'app/body/Admin/Vehicle/milestoneType/' };
+        let menuItem = { label: 'MilestoneType', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -481,7 +484,7 @@ export class BreadCrumbsService {
     }
 
     private adminGradePageBCItems() {
-        let menuItem = { label: 'Grade', routerLink: 'app/body/Admin/Vehicle/grade/' };
+        let menuItem = { label: 'Grade', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -498,7 +501,7 @@ export class BreadCrumbsService {
     }
 
     private adminModelNamePageBCItems() {
-        let menuItem = { label: 'ModelName', routerLink: 'app/body/Admin/Vehicle/modelName/' };
+        let menuItem = { label: 'ModelName', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -515,7 +518,7 @@ export class BreadCrumbsService {
     }
 
     private adminModelYearPageBCItems() {
-        let menuItem = { label: 'ModelYear', routerLink: 'app/body/Admin/Vehicle/modelYear/' };
+        let menuItem = { label: 'ModelYear', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -532,7 +535,7 @@ export class BreadCrumbsService {
     }
 
     private adminAccessPageBCItems() {
-        let menuItem = { label: 'Access', routerLink: 'app/body/Admin/Vehicle/access/' };
+        let menuItem = { label: 'Access', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -549,7 +552,7 @@ export class BreadCrumbsService {
     }
 
     private adminAccessGroupPageBCItems() {
-        let menuItem = { label: 'AccessGroup', routerLink: 'app/body/Admin/Vehicle/accessGroup/' };
+        let menuItem = { label: 'AccessGroup', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -566,7 +569,7 @@ export class BreadCrumbsService {
     }
 
     private adminPermissionPageBCItems() {
-        let menuItem = { label: 'Permission', routerLink: 'app/body/Admin/Vehicle/permission/' };
+        let menuItem = { label: 'Permission', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -583,11 +586,11 @@ export class BreadCrumbsService {
     }
 
     private adminRolePageBCItems() {
-        let menuItem = { label: 'Role', routerLink: 'app/body/Admin/Vehicle/role/' };
+        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
         return menuItem;
     }
 
-        private adminMaintenanceFrequencyPage() {
+    private adminMaintenanceFrequencyPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -600,7 +603,24 @@ export class BreadCrumbsService {
     }
 
     private adminMaintenanceFrequencyPageBCItems() {
-        let menuItem = { label: 'Role', routerLink: 'app/body/Admin/Vehicle/maintenanceFrequency/' };
+        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminOperatingHoursPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'OperatingHoursHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminOperatingHoursPageBCItems() {
+        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
         return menuItem;
     }
 
