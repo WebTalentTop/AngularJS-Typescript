@@ -119,6 +119,15 @@ export class BreadCrumbsService {
         //Admin Judgement Page
         this.adminJudgementPage();
 
+        //Admin TestStage Page
+        this.adminTestStagePage();
+
+        //Admin RequirementItemType Page
+        this.adminRequirementItemTypePage();
+
+        //Admin SensorType Page
+        this.adminSensorTypePage();
+
     }
 
 
@@ -743,6 +752,58 @@ export class BreadCrumbsService {
         let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
         return menuItem;
     }
+
+    private adminTestStagePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStagePageBCItems() {
+        let menuItem = { label: 'TestStage', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminRequirementItemTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RequirementItemTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRequirementItemTypeBCItems() {
+        let menuItem = { label: 'RequirementItemType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+        private adminSensorTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminSensorTypeBCItems() {
+        let menuItem = { label: 'SensorType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
 
 
     public getBreadCrumbs() {

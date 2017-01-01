@@ -1,9 +1,10 @@
 import { SensorTypeService } from '../../../../shared/services/sensorType.service';
 import { LoggerService } from '../../../../shared/services/logger.service';
-import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component'
+import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';
+import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'sensorType-grid',
@@ -17,16 +18,29 @@ export class SensorTypeComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private service: SensorTypeService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService,private service: SensorTypeService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
-    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
-           
+           let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let sensorTypeBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'SensorTypeHomePage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("sensorTypeBreadCrumb ---------", sensorTypeBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = sensorTypeBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
         });
 
         if (this.added == 1) {
