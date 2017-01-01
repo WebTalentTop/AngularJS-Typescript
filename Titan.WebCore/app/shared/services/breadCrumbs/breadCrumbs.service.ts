@@ -110,6 +110,9 @@ export class BreadCrumbsService {
         //Admin DownTimeReason Page
         this.adminDownTimeReasonPage();
 
+        //Admin TestActivity Page
+        this.adminTestActivityPage();
+
     }
 
 
@@ -681,6 +684,23 @@ export class BreadCrumbsService {
 
     private adminDownTimeReasonPageBCItems() {
         let menuItem = { label: 'DownTimeReason', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+        private adminTestActivityPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestActivityPageBCItems() {
+        let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
         return menuItem;
     }
 
