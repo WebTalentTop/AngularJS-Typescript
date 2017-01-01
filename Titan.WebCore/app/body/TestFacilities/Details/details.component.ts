@@ -70,7 +70,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedDepartment: any;
     selectedEquipment: any;
     categories: any;
-    selectedCategory: any;
+    selectedCategory: any = '31D2FE32-9104-4594-B79D-056B440409E9';
     IsKeepOpen: boolean = false;
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
