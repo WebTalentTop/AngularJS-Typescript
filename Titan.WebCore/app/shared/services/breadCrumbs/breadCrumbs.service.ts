@@ -128,6 +128,15 @@ export class BreadCrumbsService {
         //Admin SensorType Page
         this.adminSensorTypePage();
 
+        //Admin StepFrequency Page
+        this.adminStepFrequencyPage();
+
+        //Admin TestMode Page
+        this.adminTestModePage();
+
+        //Admin StepType Page
+        this.adminStepTypePage();
+
     }
 
 
@@ -787,7 +796,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-        private adminSensorTypePage() {
+    private adminSensorTypePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -804,7 +813,57 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+    private adminStepFrequencyPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
 
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepFrequencyHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepFrequencyBCItems() {
+        let menuItem = { label: 'StepFrequency', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminTestModePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestModeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestModeBCItems() {
+        let menuItem = { label: 'TestMode', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminStepTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepTypeBCItems() {
+        let menuItem = { label: 'StepType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+    
 
     public getBreadCrumbs() {
         return this.breadCrumbs;
