@@ -101,6 +101,9 @@ export class BreadCrumbsService {
         //Admin OperatingHours Page
         this.adminOperatingHoursPage();
 
+        //Admin TestStatus Page
+        this.adminTestStatusPage();
+
     }
 
 
@@ -620,6 +623,23 @@ export class BreadCrumbsService {
     }
 
     private adminOperatingHoursPageBCItems() {
+        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+        private adminTestStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStatusPageBCItems() {
         let menuItem = { label: 'Role', routerLink: ['/admin/'] };
         return menuItem;
     }
