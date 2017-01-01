@@ -104,6 +104,12 @@ export class BreadCrumbsService {
         //Admin TestStatus Page
         this.adminTestStatusPage();
 
+        //Admin TestRole Page
+        this.adminTestRolePage();
+
+        //Admin DownTimeReason Page
+        this.adminDownTimeReasonPage();
+
     }
 
 
@@ -606,7 +612,7 @@ export class BreadCrumbsService {
     }
 
     private adminMaintenanceFrequencyPageBCItems() {
-        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'MaintenanceFrequency', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -623,7 +629,7 @@ export class BreadCrumbsService {
     }
 
     private adminOperatingHoursPageBCItems() {
-        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'OperatingHours', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -640,7 +646,41 @@ export class BreadCrumbsService {
     }
 
     private adminTestStatusPageBCItems() {
-        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Staus', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminTestRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRolePageBCItems() {
+        let menuItem = { label: 'Test Role', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminDownTimeReasonPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'DownTimeReasonHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminDownTimeReasonPageBCItems() {
+        let menuItem = { label: 'DownTimeReason', routerLink: ['/admin/'] };
         return menuItem;
     }
 
