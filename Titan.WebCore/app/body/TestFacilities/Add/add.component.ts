@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, Message, GrowlModule, MessagesModule, DropdownModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class AddComponent {
     city:string;
     state:string;
     postalCode:string;
-
+    notificationMsgs: Message[] = [];
     testFacility = {
                     name:'', 
                     address:{
@@ -59,10 +59,17 @@ export class AddComponent {
         formData.locale = "en-us";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => { 
-            console.log("-------- Test Facility Adding new result ----- ",res); 
+            console.log("-------- Test Facility Adding new result ----- ", res); 
+            
             if (res.isSuccess) {
 
                 this.router.navigate(["./testfacilities"], { queryParams: { page: 1 } });
+            }
+            else
+            {
+                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'test facility name exists.' });
+               
+
             }
         });
     }

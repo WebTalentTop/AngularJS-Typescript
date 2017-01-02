@@ -8,6 +8,7 @@
 
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
+                <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
                 <!-- Begin Panel - Test Facility Name and Location -->
 
                 <p-panel header="Test Facility Name and Location">

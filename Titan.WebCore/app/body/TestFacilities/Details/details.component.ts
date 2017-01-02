@@ -212,7 +212,7 @@ export class DetailsComponent implements AfterViewInit {
             this.getTestFacilityById();
             this.GetTenantsByTestFacilityId();
             this.getDepartments();
-
+            this.getUserRoles();
             this.getOperatingHours();
             this.getMaintenanceFrequencies();
 
@@ -296,6 +296,7 @@ export class DetailsComponent implements AfterViewInit {
         setTimeout(function () { ref.initSchedule(); }, 10);
     }
     loadEquipmentTabViews(me) {
+        me.getTestFacilities();
         me.getTestFacilityEquipmentById();
         me.getEquipments();
     }

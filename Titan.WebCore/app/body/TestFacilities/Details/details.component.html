@@ -10,12 +10,12 @@
 
         <p-tabView (onChange)="handleChange($event)">
 
-            <p-tabPanel header="Details" id='details'>
+            <p-tabPanel header="Information" id='details'>
 
                 <p-growl [value]="msgs"></p-growl>
 
                 <div class="subsection">
-
+                   
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                         <h2>Next Maintainence Date: {{testFacility.nextMaintenanceDate}}</h2>
@@ -255,7 +255,7 @@
 
                             <header class="with-controls">
                                 <p class="ui-panel-title">Test Facility Users</p>
-                                <p class="controls"><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Assign User Roles&hellip;"></button></p>
+                                <p class="controls"><button type="text" (click)="displayAssignUserRolesDialog=true" pButton icon="ui-icon-person-add" label="Add User Roles&hellip;"></button></p>
                             </header>
 
                             <div class="ui-grid-row">
@@ -319,7 +319,7 @@
 
                             <header class="with-controls">
                                 <p class="ui-panel-title">Departments</p>
-                                <p class="controls"><button type="text" (click)="displayAssignDepartmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Departments&hellip;"></button></p>
+                                <p class="controls"><button type="text" (click)="displayAssignDepartmentsDialog=true" pButton icon="ui-icon-person-add" label="Add Departments&hellip;"></button></p>
                             </header>
 
                             <div class="ui-grid-row">
@@ -354,7 +354,7 @@
 
             <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-growl [value]="msgs"></p-growl>
-                <p-dialog header="Assign Equipment" [(visible)]="displayAssignEquipmentsDialog" modal="modal" showEffect="fade" responsive="true">
+                <p-dialog header="Add Equipment" [(visible)]="displayAssignEquipmentsDialog" modal="modal" showEffect="fade" responsive="true">
 
                     <p>Please select any equipment at the {{testFacility.name}} test facility.</p>
 
@@ -374,15 +374,15 @@
                             <!--<label class="checkbox"><input type="checkbox"> Keep Open</label>-->
                             <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                             <button type="button" pButton icon="ui-icon-close" (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()" label="Assign Equipment"></button>
+                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()" label="Add Equipment"></button>
                         </div>
                     </footer>
 
                 </p-dialog>
                 <p-panel>
                     <header class="with-controls">
-                        <p class="ui-panel-title">Test Facility Equipment</p>
-                        <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Assign Equipment&hellip;"></button></p>
+                        <p class="ui-panel-title"> Equipment List</p>
+                        <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Add Equipment&hellip;"></button></p>
                     </header>
                     <div class="ui-grid-col-4"></div>
                    
@@ -634,7 +634,7 @@
                               </template>
                         </p-column>-->
                                     <p-column field="category" header="Category">
-                                        <template let-Test
+                                       
                                             <template let-TestFacilityAttachment="rowData" pTemplate type="body">
                                                 <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
                                                 {{TestFacilityAttachment.category}}
@@ -644,7 +644,7 @@
                                     <!-- Begin Uploaded By Column -->
 
                                     <p-column field="employee" header="Employee">
-                                        <template let-Test
+                                       
                                             <template let-TestFacilityAttachment="rowData" pTemplate type="body">
                                                 <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
                                                 {{TestFacilityAttachment.employee}}
