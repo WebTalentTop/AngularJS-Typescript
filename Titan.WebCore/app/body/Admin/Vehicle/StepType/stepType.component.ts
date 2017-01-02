@@ -28,7 +28,7 @@ export class StepTypeComponent {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
-           let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
             let stepTypeBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'StepTypeHomePage'
             )[0];

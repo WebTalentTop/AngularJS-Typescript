@@ -137,6 +137,9 @@ export class BreadCrumbsService {
         //Admin StepType Page
         this.adminStepTypePage();
 
+        //Admin TestType Page
+        this.adminTestTypePage();
+
     }
 
 
@@ -861,6 +864,23 @@ export class BreadCrumbsService {
 
     private adminStepTypeBCItems() {
         let menuItem = { label: 'StepType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminTestTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestTypeBCItems() {
+        let menuItem = { label: 'TestType', routerLink: ['/admin/'] };
         return menuItem;
     }
     
