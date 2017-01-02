@@ -27,22 +27,13 @@ export class BreadCrumbsService {
         //Admin Form Builder Details
         this.adminFormBuilderDetailsFormPage();
 
-        //Admin TestFacilities Page
-        this.testFacilitiesPage();
-        //Admin Test Facilities Add
-        this.testFacilitiesAddPage();
-        //Admin Test Facilities Details
-        this.testFacilitiesDetailsPage();
-
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
         // Admin Shift Page
         this.adminShiftPage();
         // Admin Shift Add Page
-        this.adminShiftAddPage();
-        // Admin Shift Details Page
-        this.adminShiftDetailsPage();
+        this.adminShiftAddPage()
 
         //Admin Holiday Page
         this.adminHolidayPage();
@@ -152,7 +143,7 @@ export class BreadCrumbsService {
         //Admin TestRequirement Page
         this.adminTestRequirementPage();
 
-        //Admin TestVerificationMethod Page
+         //Admin TestVerificationMethod Page
         this.adminTestVerificationMethodPage();
 
         //Admin VehicleType Page
@@ -253,50 +244,6 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    private testFacilitiesPage() {
-        let menuItems = [];
-        menuItems.push(this.homeBreadCrumbItem());
-
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'TestFacilitiesHomePage', items: menuItems };
-        this.addToBreadCrumbs(bcInfoItems);
-    }
-
-    private testFacilitiesPageBCItems() {
-        let menuItem = { label: 'Test Facilities', routerLink: ['/testFacilities'] };
-        return menuItem;
-    }
-
-    private testFacilitiesAddPage() {
-        let menuItems = [];
-        menuItems.push(this.homeBreadCrumbItem());
-        menuItems.push(this.testFacilitiesPageBCItems());
-
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'TestFacilitiesAddPage', items: menuItems };
-        this.addToBreadCrumbs(bcInfoItems);
-    }
-
-    private testFacilitiesAddPageBCItems() {
-        let menuItem = { label: 'Test Facilities Add', routerLink: ['/testFacilities'] };
-        return menuItem;
-    }
-
-    private testFacilitiesDetailsPage() {
-        let menuItems = [];
-        menuItems.push(this.homeBreadCrumbItem());
-        menuItems.push(this.testFacilitiesPageBCItems());
-
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'TestFacilitiesDetailsPage', items: menuItems };
-        this.addToBreadCrumbs(bcInfoItems);
-    }
-
-    private testFacilitiesDetailsPageBCItems() {
-        let menuItem = { label: 'Test Facilities Details', routerLink: ['/testFacilities'] };
-        return menuItem;
-    }
-
     private adminVehicleHomePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
@@ -328,7 +275,7 @@ export class BreadCrumbsService {
     }
 
     private adminShiftPageBCItems() {
-        let menuItem = { label: 'Shift', routerLink: ['/admin/vehicle/shift'] };
+        let menuItem = { label: 'Shift', routerLink: ['/admin/'] };
         return menuItem;
     }
 
@@ -339,35 +286,17 @@ export class BreadCrumbsService {
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.adminVehicleHomePageBCItems());
         menuItems.push(this.adminShiftPageBCItems());
+        // menuItems.push(this.adminShiftAddPageBCItems());
 
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'ShiftAddPage', items: menuItems };
+        let bcInfoItems = [];
+        bcInfoItems.push({ pageName: 'ShiftAddPage', items: menuItems });
 
         this.addToBreadCrumbs(bcInfoItems);
 
     }
 
     private adminShiftAddPageBCItems() {
-        let menuItem = { label: 'Add Shift', routerLink: ['/admin/vehicle/shift'] };
-        return menuItem;
-    }
-
-    // Admin Shift Details Bread Crumbs
-    private adminShiftDetailsPage() {
-        let menuItems = [];
-        menuItems.push(this.homeBreadCrumbItem());
-        menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        menuItems.push(this.adminShiftPageBCItems());
-
-        let bcInfoItems: IBreadCrumbsInfo;
-        bcInfoItems = { pageName: 'ShiftDetailsPage', items: menuItems };
-
-        this.addToBreadCrumbs(bcInfoItems);
-    }
-
-    private adminShiftDetailsPageBCItems() {
-        let menuItem = { label: 'Shift Details', routerLink: ['/admin/vehicle/shift'] };
+        let menuItem = { label: 'Add Shift', routerLink: ['admin/shift'] };
 
         return menuItem;
     }
@@ -1001,7 +930,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    private adminVehicleTypePage() {
+        private adminVehicleTypePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());

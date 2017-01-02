@@ -3,8 +3,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TestFacilityService} from '../../../shared/services/testFacility.service';
-import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, BreadcrumbModule } from 'primeng/primeng';
+
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, MessagesModule, GrowlModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
@@ -19,10 +19,10 @@ import addRoutes from "./add.routes";
         PanelModule, 
         ButtonModule,
         DropdownModule, 
-        addRoutes,
-        BreadcrumbModule
+        MessagesModule, GrowlModule,
+        addRoutes
         ],
-    providers: [TestFacilityService, BreadCrumbsService],
+    providers: [TestFacilityService],
     declarations: [AddComponent]
 })
 

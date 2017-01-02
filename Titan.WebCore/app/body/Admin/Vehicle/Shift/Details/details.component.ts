@@ -3,9 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ShiftService } from '../../../../../shared/services/shift.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
-import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'shift-detail',
@@ -35,6 +34,7 @@ export class DetailsComponent {
         modifiedOn: ''
     };
 
+
     msgs: Message[];
     uploadedFiles: any[] = [];
 
@@ -43,14 +43,12 @@ export class DetailsComponent {
     public ShiftId: string;
 
     constructor(
-        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: ShiftService
     )
     { }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
+
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
@@ -58,26 +56,12 @@ export class DetailsComponent {
 
             this.ShiftId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
-            let breadC = this.breadCrumbsService.getBreadCrumbs();
-            let shiftDetailsBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'ShiftDetailsPage'
-            )[0];
-
-            console.log("BreadC -----", breadC);
-            console.log("shiftDetailsBreadCrumb ---------", shiftDetailsBreadCrumb);
-            this.breadcrumbs = [];
-            this.breadcrumbs = shiftDetailsBreadCrumb.items;
-
-            console.log("breadcurmbs ------", this.breadcrumbs);
-
-            this.breadcrumbsHome = { routerLink: ['/'] };
-            });
 
             this.service.getById(this.ShiftId).subscribe(ShiftDetails => {
                 this.ShiftDetails = ShiftDetails.result;
                 this.ShiftDetails.id = this.ShiftId;
                 console.log(this.ShiftDetails);
-            
+            });
         });
     }
 

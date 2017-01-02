@@ -3,15 +3,15 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { ShiftService} from '../../../../../shared/services/shift.service';
-import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { DataTableModule, ButtonModule, InputTextareaModule,ToggleButtonModule, InputTextModule,GrowlModule,BreadcrumbModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+
+import { DataTableModule, ButtonModule, InputTextareaModule,ToggleButtonModule, InputTextModule,GrowlModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, ToggleButtonModule,InputTextareaModule,GrowlModule,BreadcrumbModule, InputTextModule, PanelModule, 
-            ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
-    providers: [ShiftService, BreadCrumbsService],
+    imports: [CommonModule, FormsModule, DataTableModule, ToggleButtonModule,InputTextareaModule,GrowlModule, InputTextModule, PanelModule, 
+        ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
+    providers: [ShiftService],
     declarations: [DetailsComponent],
     exports: [DetailsComponent]
 })

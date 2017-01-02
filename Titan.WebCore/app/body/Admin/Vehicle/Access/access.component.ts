@@ -27,7 +27,7 @@ export class AccessComponent {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
-            let breadC = this.breadCrumbsService.getBreadCrumbs();
+           let breadC = this.breadCrumbsService.getBreadCrumbs();
             let accessBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'AccessHomePage'
             )[0];

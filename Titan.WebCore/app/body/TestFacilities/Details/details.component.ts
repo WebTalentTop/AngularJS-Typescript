@@ -25,7 +25,6 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
-import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
@@ -170,7 +169,6 @@ export class DetailsComponent implements AfterViewInit {
     ];
 
     constructor(
-        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private testFacilityService: TestFacilityService,
@@ -190,20 +188,6 @@ export class DetailsComponent implements AfterViewInit {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
         console.log("---- TF Details ID Param -----", this.id);
-      
-        let breadC = this.breadCrumbsService.getBreadCrumbs();
-        let testFacilitiesDetailsBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'TestFacilitiesDetailsPage'
-            )[0];
-
-            console.log("BreadC -----", breadC);
-            console.log("testFacilitiesDetailsBreadCrumb ---------", testFacilitiesDetailsBreadCrumb);
-            this.breadcrumbs = [];
-            this.breadcrumbs = testFacilitiesDetailsBreadCrumb.items;
-
-            console.log("breadcrumbs ------", this.breadcrumbs);
-
-            this.breadcrumbsHome = { routerLink: ['/'] };
     }
 
     ngOnInit() {
@@ -219,11 +203,11 @@ export class DetailsComponent implements AfterViewInit {
             //this.categories.push({ label: 'Results', value: 'Results' });
 
             // TODO: Replace this with a breadcrumb data service.
-            // this.breadcrumbs = [];
-            // this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
+            this.breadcrumbs = [];
+            this.breadcrumbs.push({ label: 'Test Facilities', routerLink: ['/testfacilities']});
 
             // TODO: Find out why the home link does not use the pointer icon for its hover state.
-            // this.breadcrumbsHome = { routerLink: ['/'] };
+            this.breadcrumbsHome = { routerLink: ['/'] };
 
             this.getTestFacilityById();
             this.GetTenantsByTestFacilityId();
@@ -1031,7 +1015,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 
-               // this.router.navigate(["/testFacilities/details/", res.result.id]);
+               // this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
 
         });
