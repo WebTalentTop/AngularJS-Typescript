@@ -24,10 +24,11 @@
                                                 Part Name *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="partName"
+                                                <input type="text" name="partName" [(ngModel)]="partName"
                                                        placeholder="Part Name"
                                                        class="form-control">
                                             </div>
+                                           
                                             <div class="ui-grid-4"></div>
                                         </div>
 
@@ -36,7 +37,7 @@
                                                 Part Number *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="partNumber" 
+                                                <input type="text" name="partNumber" [(ngModel)]="partNumber"
                                                        placeholder="Part Number"
                                                        class="form-control">
                                             </div>
@@ -71,9 +72,9 @@
                                                 Category *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="category"
-                                                       placeholder="Category"
-                                                       class="form-control">
+                                                <p-dropdown [options]="categories" [(ngModel)]="selectedCategoryId" (onChange)="onCategoryChange($event)" name="category" [style]="{'width':'200px'}">
+
+                                                </p-dropdown>
                                             </div>
                                             <div class="ui-grid-4"></div>
                                         </div>
@@ -82,9 +83,9 @@
                                                 Material *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="material"
-                                                       placeholder="Material"
-                                                       class="form-control">
+                                                <p-dropdown [options]="materials" [(ngModel)]="selectedMaterialId" (onChange)="onMaterialChange($event)" name="material" [style]="{'width':'200px'}">
+
+                                                </p-dropdown>
                                             </div>
                                             <div class="ui-grid-4"></div>
                                         </div>
@@ -93,7 +94,7 @@
                                                 Steady state Requirement *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="steadyreq"
+                                                <input type="text" name="steadyRequirement" [(ngModel)]="steadyRequirement"
                                                        placeholder="Test Number"
                                                        class="form-control">
                                             </div>
@@ -104,7 +105,7 @@
                                                 Periodic Requirement *
                                             </div>
                                             <div class="ui-grid-col-6">
-                                                <input type="text" name="periodicreq"
+                                                <input type="text" name="periodicRequirement" [(ngModel)]="periodicRequirement"
                                                        placeholder="Test Number"
                                                        class="form-control">
                                             </div>
@@ -187,14 +188,14 @@
                             <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
                                 <p-column header="Sensor Name" field="name" sortable="true"></p-column>
                                 <p-column header="Comments" field="comment" sortable="true"></p-column>
-                                <p-column header="Part Name"  sortable="true"></p-column>
-                                <p-column header="Part Number"  sortable="true"></p-column>
-                                <p-column header="Department"  sortable="true"></p-column>
-                                <p-column header="Department PIC"  sortable="true"></p-column>
-                                <p-column header="Material"  sortable="true"></p-column>
-                                <p-column header="Steady State Requirement" sortable="true"></p-column>
-                                <p-column header="Steady Periodic Requirement" sortable="true"></p-column>
-                                <p-column header="Category" sortable="true"></p-column>
+                                <p-column header="Part Name" field="partName" sortable="true"></p-column>
+                                <p-column header="Part Number" field="partNumber" sortable="true"></p-column>
+                                <p-column header="Department" field="departmentId" sortable="true"></p-column>
+                                <p-column header="Department PIC" field="departmentId" sortable="true"></p-column>
+                                <p-column header="Material" field="materialId"  sortable="true"></p-column>
+                                <p-column header="Steady State Requirement" field="steadyRequirement" sortable="true"></p-column>
+                                <p-column header="Steady Periodic Requirement" field="periodicRequirement" sortable="true"></p-column>
+                                <p-column header="Category" field="categoryId" sortable="true"></p-column>
                                 <!--<p-column>
                                     <template pTemplate type="header">
                                         <button type="button" pButton icon="fa-refresh"></button>

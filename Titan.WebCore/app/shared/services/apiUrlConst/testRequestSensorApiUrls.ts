@@ -8,6 +8,7 @@ export class TestReqestSensorApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'testRequestSensor/post';
     public static postTestRequestCreatedUrl: string = titanApiUrl + 'testRequest/post';
     public static postWorkRequestCreatedUrl: string = titanApiUrl + 'workRequest/post';
+    public static postWorkRequestUrl: string = titanApiUrl + 'workRequest/CreateWorkRequest';
     public static postTestRequestExternalDepartmentsAddUrl: string = titanApiUrl + 'workRequest/PostExternalDepartments';
     public static postTasksAddUrl: string = titanApiUrl + 'workRequest/CreateTasks';
     public static postTasksCompleteUrl: string = titanApiUrl + 'task/TaskComplete';

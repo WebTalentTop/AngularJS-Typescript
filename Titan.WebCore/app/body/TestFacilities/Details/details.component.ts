@@ -132,7 +132,7 @@ export class DetailsComponent implements AfterViewInit {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
-    testFacility = { name: '', maintenanceFrequency: '' };
+    testFacility = { name: '', maintenanceFrequency: '' , nextMaintenanceDate: '' };
     address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];

@@ -48,6 +48,14 @@ export class AddComponent {
     selectedSensorTypeId: any;
     comment: any;
     sensorRequests: any;
+    categories: any;
+    materials: any;
+    selectedCategoryId: any;
+    selectedMaterialId: any;
+    partName: any;
+    partNumber: any;
+    steadyRequirement: any;
+    periodicRequirement: any;
    // selectedTimeEntryTypeId: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
@@ -99,6 +107,24 @@ export class AddComponent {
        console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
+
+        this.categories = [];
+            this.categories.push({ label: 'All categories', value: null });
+            this.categories.push({ label: 'Wheel Alignment', value: '5A3AFB53-A3D2-4BDF-8909-E60ED577F84D' });
+            this.categories.push({ label: 'Torque for Parts', value: '817164F9-01D8-470D-BD58-618F4BF135F2' });
+            this.categories.push({ label: 'Certificates', value: 'Certificates' });
+            this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
+            this.categories.push({ label: 'Manual', value: 'Manual' });
+            this.categories.push({ label: 'Results', value: 'Results' });
+
+        this.materials = [];
+            this.materials.push({ label: 'All materials', value: null });
+            this.materials.push({ label: 'Wheel Alignment', value: '5A3AFB53-A3D2-4BDF-8909-E60ED577F84D' });
+            this.materials.push({ label: 'Torque for Parts', value: '817164F9-01D8-470D-BD58-618F4BF135F2' });
+            this.materials.push({ label: 'Certificates', value: 'Certificates' });
+            this.materials.push({ label: 'Standard Documents', value: 'Standard Documents' });
+            this.materials.push({ label: 'Manual', value: 'Manual' });
+            this.materials.push({ label: 'Results', value: 'Results' });
        this.getSensorList();
 
        //get the departmentId through taskId
@@ -217,6 +243,18 @@ export class AddComponent {
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
+   onCategoryChange(event) {
+       console.log('------event------------', event)
+       this.selectedCategoryId = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
+   onMaterialChange(event) {
+       console.log('------event------------', event)
+       this.selectedMaterialId = (event.value);
+       //   this.EquipmentSubType.calibrationform = (event);
+
+   }
 
    //onDownTimeReasonChange(event) {
    //    console.log('------event------------', event)
@@ -323,6 +361,18 @@ export class AddComponent {
    onSubmit(formRef) {
        //formRef.isDeleted = false;
        let formData: any = {
+           //newly added columns
+
+           PartName:this.partName,
+           PartNumber: this.partNumber,
+           SteadyRequirement: this.steadyRequirement,
+           PeriodicRequirement: this.periodicRequirement,
+           CategoryId: this.selectedCategoryId,
+           MaterialId: this.selectedMaterialId,
+
+           // doesnt need
+         
+
 
            SensorTypeId: this.selectedSensorTypeId,
 

@@ -59,6 +59,14 @@ export class DetailsComponent {
     entityType: any = "wr";
     IsKeepOpen: boolean = false;
     displayAssignAttachmentsDialog: boolean = false;
+    selectedTestRequestSensor: any = {
+        'slotNo': '',
+        'moduleNo': '',
+        'upDown': '',
+        'comment': '',
+         
+
+    };
     //entityType: any = "9F8D13F5-F0E8-452E-8D81-631FCD7A1C9A";
     testRequestSensorId: any;
     //filepath: string = "TestFacility";
@@ -236,6 +244,7 @@ export class DetailsComponent {
     }
     onUploadAttachments(selectedTestRequestSensor)
     {
+        this.selectedTestRequestSensor = selectedTestRequestSensor;
         this.displayAssignAttachmentsDialog = true;
         this.testRequestSensorId = selectedTestRequestSensor.id;
         this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
@@ -247,6 +256,54 @@ export class DetailsComponent {
     }
     onOk()
     {
+        
+        //let formCommentData: any = {
+
+        //    Comment: this.selectedTestRequestSensor.comment,
+        //    Id: this.testRequestSensorCommentId,
+        //    TestRequestSensorId: this.id,
+        //    IsDeleted: 'false'
+
+        //};
+        //this.dataService.postCommentUpdate(formCommentData).subscribe(res => {
+        //    console.log("-------- Test Sensor Adding new result ----- ", res);
+        //    if (res.IsSuccess) {
+        //        this.router.navigate(["/testrequest/details/", this.id]);
+        //    }
+        //});
+        this.dataService.getById(this.testRequestSensorId)
+            .subscribe(res => {
+               
+                //this.selectedSensorTypeId = res.result.sensorTypeId;
+                //this.PIC = res.result.pic;
+                //this.departmentId = res.result.departmentId;
+                let formData: any = {
+                    ModuleNo: this.selectedTestRequestSensor.moduleNo,
+                    SlotNo: this.selectedTestRequestSensor.slotNo,
+                    UpDown: this.selectedTestRequestSensor.upDown,
+                    Id: this.testRequestSensorId,
+                    TestRequestId: this.entityId,
+                    DepartmentId: res.result.departmentId,
+                    SensorTypeId: res.result.sensorTypeId,
+                    PIC: res.result.pic
+
+
+                };
+                this.dataService.postUpdate(formData).subscribe(res => {
+                    console.log("-------- Test Sensor Adding new result ----- ", res);
+                    if (res.IsSuccess) {
+                        let departmentId = '00000000-0000-0000-0000-000000000000';
+                        // refresh the grid row by calling per testRequestSensorId
+                        this.testrequestsensorservice.GetAllTestRequestSensors(this.entityId, departmentId)
+                            .subscribe(res => {
+                                this.sensorRequests = res.result;
+                            });
+                       
+                    }
+                });
+            });
+      
+
         if (!this.IsKeepOpen)
             this.displayAssignAttachmentsDialog = false;
         else

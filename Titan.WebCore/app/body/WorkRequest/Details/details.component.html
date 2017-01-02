@@ -16,20 +16,20 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="table-responsive" style="min-height:400px;">
-                                                <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
+                                                <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" selectionMode="single" [responsive]="true">
                                                     <p-column header="Sensor Name" field="name" sortable="true"></p-column>
 
 
                                                     <p-column header="Comments" field="comment" sortable="true"></p-column>
 
-                                                    <p-column header="IsCompleted" field="isCompleted" sortable="true"></p-column>
+                                                  
 
-                                                    <p-column header="Module#"  sortable="true"></p-column>
-                                                    <p-column header="Slot#"  sortable="true"></p-column>
-                                                    <p-column header="Up/Down"  sortable="true"></p-column>
+                                                    <p-column header="Module#" field="moduleNo"  sortable="true"></p-column>
+                                                    <p-column header="Slot#" field="slotNo" sortable="true"></p-column>
+                                                    <p-column header="Up/Down" field="upDown"  sortable="true"></p-column>
 
 
-                                                    <p-column [editable]="true">
+                                                    <p-column>
                                                             <template pTemplate type="header">
                                                                 <button type="button" pButton icon="fa-refresh"></button>
                                                             </template>
@@ -81,7 +81,7 @@
                                                             Module #:
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="steadyreq"
+                                                            <input type="text" name="moduleNo" [(ngModel)]="selectedTestRequestSensor.moduleNo"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
@@ -92,7 +92,7 @@
                                                             Slot #:
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="periodicreq"
+                                                            <input type="text" name="slotNo" [(ngModel)]="selectedTestRequestSensor.slotNo"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
@@ -103,22 +103,22 @@
                                                             Up/Down *
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="steadyreq"
+                                                            <input type="text" name="upDown" [(ngModel)]="selectedTestRequestSensor.upDown"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
                                                         <div class="ui-grid-4"></div>
                                                     </div>
-                                                    <div class="ui-grid-row">
+                                                    <!--<div class="ui-grid-row">
                                                         <div class="ui-grid-col-2">
                                                             Comments *
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <p-editor  name="comments" [style]="{'min-height':'160px'}" placeholder="Max 2500 characters. ">
+                                                            <p-editor  name="comments" [(ngModel)]="selectedTestRequestSensor.comment" [style]="{'min-height':'160px'}" placeholder="Max 2500 characters. ">
                                                                 <header>
                                                                     <select class="ql-size">
                                                                         <option value="small"></option>
-                                                                        <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                                                         Note a missing, thus falsy value, is used to reset to default 
                                                                         <option selected></option>
                                                                         <option value="large"></option>
                                                                         <option value="huge"></option>
@@ -132,7 +132,7 @@
                                                             </p-editor>
                                                         </div>
                                                         <div class="ui-grid-4"></div>
-                                                    </div>
+                                                    </div>-->
                                                     <!-- End Role -->
 
                                                     <footer>

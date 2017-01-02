@@ -101,6 +101,15 @@ export class TestRequestSensorService {
             //.catch(err => Observable.throw(err))
             .map(this.getJson);
     }
+    postCreateWorkRequest(filterBody): Observable<any> {
+
+        // console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TestReqestSensorApiUrl.postWorkRequestUrl}`, filterBody, { headers: this.headers })
+            //.map(this.getJson)
+            //.map(this.checkErrors)
+            //.catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
 
     postTestRequestExternalDepartmentsAdd(filterBody): Observable<any> {
 
