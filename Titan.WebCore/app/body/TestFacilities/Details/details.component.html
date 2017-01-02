@@ -204,7 +204,7 @@
 
                         <!-- Begin Dialog - Assign User Role -->
 
-                        <p-dialog header="Assign User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade" responsive="true">
+                        <p-dialog header="Add User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal" showEffect="fade" responsive="true">
 
                             <p>Please select one or more users and their role at the {{testFacility.name}} test facility.</p>
 
@@ -242,7 +242,7 @@
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                                     <button type="button" pButton icon="ui-icon-close" (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()" label="Assign User Role"></button>
+                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()" label="Add User Role"></button>
                                 </div>
                             </footer>
 
@@ -286,7 +286,7 @@
 
                         <!-- Begin Dialog - Assign Departments -->
 
-                        <p-dialog header="Assign Departments" [(visible)]="displayAssignDepartmentsDialog" modal="modal" showEffect="fade" responsive="true">
+                        <p-dialog header="Add Departments" [(visible)]="displayAssignDepartmentsDialog" modal="modal" showEffect="fade" responsive="true">
 
                             <p>Please select one or more departments at the {{testFacility.name}} test facility.</p>
 
@@ -305,7 +305,7 @@
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                                     <button type="button" pButton icon="ui-icon-close" (click)="displayAssignDepartmentsDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()" label="Assign Department"></button>
+                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()" label="Add Department"></button>
                                 </div>
                             </footer>
 
