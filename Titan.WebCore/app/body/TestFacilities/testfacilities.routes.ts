@@ -1,4 +1,4 @@
-﻿import { TestFacilitiesComponent } from "./testfacilities.component";
+﻿import { TestFacilitiesComponent } from "./testFacilities.component";
 import { RouterModule } from "@angular/router";
 
 const routes = [

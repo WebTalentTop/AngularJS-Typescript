@@ -1,9 +1,7 @@
 ﻿<div class="ui-g">
 
     <div class="ui-g-12">
-
         <p-breadcrumb [model]="breadcrumbs" ></p-breadcrumb>
-
         <h1>{{testFacility.name}} Test Facility Details</h1>
 
         <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
@@ -411,7 +409,7 @@
                             </div>
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <button type="button" pButton icon="fa-close" routerLink="/testfacilities" label="Cancel"></button>
+                                    <button type="button" pButton icon="fa-close" routerLink="/testFacilities" label="Cancel"></button>
                                     <button type="button" pButton icon="fa-check" (click)="moveEquipmenttoTestFacility()" label="Ok"></button>
                                 </div>
                             </footer>

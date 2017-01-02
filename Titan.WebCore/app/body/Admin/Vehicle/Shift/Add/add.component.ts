@@ -26,23 +26,23 @@ export class AddComponent {
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
     ngOnInit() {
-// this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
 
-//             this.added = params['page'];
-//             let breadC = this.breadCrumbsService.getBreadCrumbs();
-//             let shiftAddBreadCrumb = breadC.filter(filter =>
-//                 filter.pageName === 'ShiftAddPage'
-//             )[0];
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let shiftAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'ShiftAddPage'
+            )[0];
 
-//             console.log("BreadC -----", breadC);
-//             console.log("shiftAddBreadCrumb ---------", shiftAddBreadCrumb);
-//             this.breadcrumbs = [];
-//             this.breadcrumbs = shiftAddBreadCrumb.items;
+            console.log("BreadC -----", breadC);
+            console.log("shiftAddBreadCrumb ---------", shiftAddBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = shiftAddBreadCrumb.items;
 
-//             console.log("breadcurmbs ------", this.breadcrumbs);
+            console.log("breadcurmbs ------", this.breadcrumbs);
 
-//             this.breadcrumbsHome = { routerLink: ['/'] };
-//      }); 
+            this.breadcrumbsHome = { routerLink: ['/'] };
+     }); 
     }
     onSubmit(formRef) {
         console.log(formRef);
