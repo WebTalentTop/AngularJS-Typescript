@@ -1,17 +1,17 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TestVerificationMethodComponent } from "./testVerificationMethod.component";
-import { DataTableModule, MessagesModule, GrowlModule } from 'primeng/primeng';
+import { DataTableModule, MessagesModule, GrowlModule,BreadcrumbModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
-
+import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { TestVerificationMethodService } from '../../../../shared/services/testVerificationMethod.service';
 
 import testVerificationMethodRoutes from "./testVerificationMethod.routes";
 
 @NgModule({
-    imports: [CommonModule, DataTableModule, GridModule, testVerificationMethodRoutes, MessagesModule, GrowlModule],
-    providers: [TestVerificationMethodService],
+    imports: [CommonModule, DataTableModule, GridModule, testVerificationMethodRoutes, MessagesModule,BreadcrumbModule ,GrowlModule],
+    providers: [TestVerificationMethodService,BreadCrumbsService],
     declarations: [TestVerificationMethodComponent]
 })
 
