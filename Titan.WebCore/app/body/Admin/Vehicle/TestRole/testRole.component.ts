@@ -21,14 +21,14 @@ export class TestRoleComponent {
     constructor(private breadCrumbsService: BreadCrumbsService,private service: TestRoleService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
 
     }
-     breadcrumbs: MenuItem[];
+    breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
-           let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
             let testRoleBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'TestRoleHomePage'
             )[0];

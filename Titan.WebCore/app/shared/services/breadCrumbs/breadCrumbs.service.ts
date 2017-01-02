@@ -115,7 +115,7 @@ export class BreadCrumbsService {
 
         //Admin Priority Page
         this.adminPriorityPage();
-        
+
         //Admin Judgement Page
         this.adminJudgementPage();
 
@@ -139,6 +139,12 @@ export class BreadCrumbsService {
 
         //Admin TestType Page
         this.adminTestTypePage();
+
+        //Admin TestRequirement Page
+        this.adminTestRequirementPage();
+
+         //Admin TestVerificationMethod Page
+        this.adminTestVerificationMethodPage();
 
     }
 
@@ -663,7 +669,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-        private adminTestStatusPage() {
+    private adminTestStatusPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -883,7 +889,40 @@ export class BreadCrumbsService {
         let menuItem = { label: 'TestType', routerLink: ['/admin/'] };
         return menuItem;
     }
-    
+
+    private adminTestRequirementPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequirementHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRequirementBCItems() {
+        let menuItem = { label: 'TestRequirement', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminTestVerificationMethodPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestVerificationMethodHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestVerificationMethodBCItems() {
+        let menuItem = { label: 'TestVerificationMethod', routerLink: ['/admin/'] };
+        return menuItem;
+    }
 
     public getBreadCrumbs() {
         return this.breadCrumbs;
