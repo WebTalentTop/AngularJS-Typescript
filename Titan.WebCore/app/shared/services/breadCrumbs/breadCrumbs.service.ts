@@ -146,6 +146,12 @@ export class BreadCrumbsService {
          //Admin TestVerificationMethod Page
         this.adminTestVerificationMethodPage();
 
+        //Admin VehicleType Page
+        this.adminVehicleTypePage();
+
+        //Admin EngineCode Page
+        this.adminEngineCodePage();
+
     }
 
 
@@ -921,6 +927,40 @@ export class BreadCrumbsService {
 
     private adminTestVerificationMethodBCItems() {
         let menuItem = { label: 'TestVerificationMethod', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+        private adminVehicleTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminVehicleTypeBCItems() {
+        let menuItem = { label: 'VehicleType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    private adminEngineCodePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminEngineCodeBCItems() {
+        let menuItem = { label: 'EngineCode', routerLink: ['/admin/'] };
         return menuItem;
     }
 
