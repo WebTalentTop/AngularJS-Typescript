@@ -881,6 +881,16 @@ export class DetailsComponent implements AfterViewInit {
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
                     this.TestFacilityRoles = TestFacilityRoles;
+                    this.testFacilityService.getNotifications(this.id)
+                        .subscribe(res => {
+                            if (res) {
+                                this.notifications = res;
+                            }
+
+                            this.notifications.forEach(x => {
+                                this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                            })
+                        });
                 });
         });
 
