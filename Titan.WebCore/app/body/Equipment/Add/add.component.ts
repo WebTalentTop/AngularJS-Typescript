@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { EquipmentService } from '../../../shared/services/equipment.service';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
-
+declare var cron: any;
 @Component({
     selector: 'add-equipment',
     //styleUrls: ['app/body/Equipment/Add/add.component.css'], 
@@ -25,6 +25,7 @@ export class AddComponent {
     purchaseDate: any;
     warrantyExpirationDate: any;        
     description: any;
+    selectedCalibrationFrequency: any;
     purchasePrice: any;
     equipmentManufacturerId: any;
     testFacilityId: any;
@@ -64,9 +65,23 @@ export class AddComponent {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
         this.getTestFacilities();
+        $("#selector").cron({
 
+            initial: "* * * * *",
+            onChange: function () {
+
+                this.selectedCalibrationFrequency = $(this).cron("value");
+                // $('#selector-val').text($(this).cron("value"));
+            },
+            effectOpts: {
+                openEffect: "fade",
+                openSpeed: "slow"
+            },
+            useGentleSelect: true
+        })
 
     }
+   
     onEquipmentManufacturerChange(event) {
         if (event.value != null) {
             this.IsNewManufacturer = false;

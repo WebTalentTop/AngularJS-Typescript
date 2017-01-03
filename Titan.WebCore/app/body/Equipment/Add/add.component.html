@@ -48,8 +48,22 @@
                                                         <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
                                                     </div>
                                                     <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">Model # </label>
+                                                        <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
                                                         <label class="control-label">Purchased Price</label>
                                                         <input type="text" [(ngModel)]="purchasePrice" class="form-control" name="purchasePrice" placeholder="Actual cost" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <!--<label>Calibration Frequency</label>-->
+                                                        <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency" binary="true"></p-checkbox>
+
+
+                                                        <div class="control-label">
+                                                            <div id="selector"></div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -153,6 +167,30 @@
                                                     <label class="control-label">Fax</label>
                                                     <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerFax" class="form-control" placeholder="Fax" />
                                                 </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">Email</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerEmail" class="form-control" placeholder="Fax" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">Address Line1</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerAddressLine1" class="form-control" placeholder="Fax" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">Address Line2</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerFaxAddressLine2" class="form-control" placeholder="Fax" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">Postal</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerPostal" class="form-control" placeholder="Fax" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">City</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerCity" class="form-control" placeholder="Fax" />
+                                                    </div>
+                                                    <div class="form-group col-sm-6 col-md-4">
+                                                        <label class="control-label">State</label>
+                                                        <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerState" class="form-control" placeholder="Fax" />
+                                                    </div>
                                                 <!--<div class="form-group col-sm-6 col-md-4">
                                                     <label class="control-label">Contact Person</label>
                                                     <input type="text" name="person" class="form-control" placeholder="Contact Person" />

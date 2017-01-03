@@ -5,7 +5,8 @@ import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { EquipmentService } from '../../../shared/services/equipment.service';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-
+declare var cron: any;
+declare var useGentleSelect: any;
 @Component({
     selector: 'details-equipment',
     templateUrl: 'app/body/Equipment/Details/details.component.html'
@@ -17,6 +18,7 @@ export class DetailsComponent {
     equipmentManufacturers: any;
     selectedEquipmentManufacturerId: any;
     equipmentTypes: any;
+    selectedCalibrationFrequency: any;
     selectedEquipmentTypeId: any;
     testFacilities: any;
     selectedTestFacilityId: any;
@@ -68,14 +70,27 @@ export class DetailsComponent {
        this.getEquipmentManufacturers();
        this.getEquipmentTypes();
        this.getTestFacilities();
-
+     
         this.service.getById(this.id)
             .subscribe(res =>
             {
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
                 this.model = res;
-               
+                $("#selector").cron({
+
+                    initial: "* * * * *",
+                    onChange: function () {
+
+                        this.selectedCalibrationFrequency = $(this).cron("value");
+                        // $('#selector-val').text($(this).cron("value"));
+                    },
+                    effectOpts: {
+                        openEffect: "fade",
+                        openSpeed: "slow"
+                    },
+                     useGentleSelect: true
+                })
             });
        
 
