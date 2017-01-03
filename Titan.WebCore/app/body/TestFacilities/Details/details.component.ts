@@ -1020,7 +1020,18 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.postUpdate(formData).subscribe(res => {
 
             if (res.isSuccess) {
-                this.getTestFacilityById();
+                this.testFacilityService.getById(this.id)
+                    .subscribe(res => {
+                        //this.formConfiguration = res.formConfiguration;
+                        //this.formObject = res.formObject;
+                        this.address = res.address;
+                        this.addressid = res.address.id
+                        this.testFacility = res.testFacility;
+                        this.frequencyInit();
+                        this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
+                        this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                       
+                    });
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 
