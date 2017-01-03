@@ -1,14 +1,15 @@
 import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { LoggerService } from './../../shared/services/logger.service';
-import { LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 
 @Component({
-    selector: 'test-facilities',
-    templateUrl: 'app/body/TestFacilities/testfacilities.component.html'
+    selector: 'test-Facilities',
+    templateUrl: 'app/body/TestFacilities/testFacilities.component.html'
 })
 export class TestFacilitiesComponent {
     // title = "Test Facilities";
@@ -21,11 +22,22 @@ export class TestFacilitiesComponent {
     added: any;
     msgs: Message[] = [];
 
-    constructor(private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router:Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService,private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router:Router, private logger: LoggerService) {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testFacilitiesBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestFacilitiesHomePage')[0];
 
+            console.log("BreadC -----", breadC);
+            console.log("testFacilitiesBreadCrumb ---------", testFacilitiesBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = testFacilitiesBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
         });
 
         if (this.added == 1) {
@@ -33,7 +45,8 @@ export class TestFacilitiesComponent {
             this.msgs.push({ severity: 'Success', summary: 'Success', detail: '' });
         }
     }
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
         let resData:any;
         this.testFacilityService.postGridData()
@@ -50,7 +63,7 @@ export class TestFacilitiesComponent {
     }
 
     navigateDetails(id:string){
-        this.router.navigate(['testfacilities/details', id]);
+        this.router.navigate(['testFacilities/details', id]);
     }
 
    
