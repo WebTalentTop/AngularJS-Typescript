@@ -75,19 +75,19 @@ export class BreadCrumbsService {
         // Admin BuildLevels Details Page
         this.adminBuildLevelsDetailsPage();
 
-        // //Admin Market Page
-        // this.adminMarketPage();
-        // // Admin Market Add Page
-        // this.adminMarketAddPage();
-        // // Admin Market Details Page
-        // this.adminMarketDetailsPage();
+        //Admin Market Page
+        this.adminMarketPage();
+        // Admin Market Add Page
+        this.adminMarketAddPage();
+        // Admin Market Details Page
+        this.adminMarketDetailsPage();
 
-        // //Admin Platform Page
-        // this.adminPlatformPage();
-        // // Admin Platform Add Page
-        // this.adminPlatformAddPage();
-        // // Admin Platform Details Page
-        // this.adminPlatformDetailsPage();
+        //Admin Platform Page
+        this.adminPlatformPage();
+        // Admin Platform Add Page
+        this.adminPlatformAddPage();
+        // Admin Platform Details Page
+        this.adminPlatformDetailsPage();
 
         // //Admin TitanRole Page
         // this.adminTitanRolePage();
@@ -497,7 +497,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminShiftPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ShiftHomePage', items: menuItems };
@@ -609,7 +608,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'StepHomePage', items: menuItems };
@@ -665,7 +663,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'UnitsHomePage', items: menuItems };
@@ -721,7 +718,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
@@ -771,43 +767,115 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+    // Admin Market Bread Crumbs
+    private adminMarketPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
 
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MarketHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
 
-    // // Admin Market Bread Crumbs
-    // private adminMarketPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
+    private adminMarketPageBCItems() {
+        let menuItem = { label: 'Market', routerLink: ['/admin/vehicle/market'] };
+        return menuItem;
+    }
 
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MarketHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
+        private adminMarketAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminMarketPageBCItems());
 
-    // private adminMarketPageBCItems() {
-    //     let menuItem = { label: 'Market', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MarketAddPage', items: menuItems };
 
-    // // Admin Platform Bread Crumbs
-    // private adminPlatformPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
+        this.addToBreadCrumbs(bcInfoItems);
 
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'PlatformHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
+    }
 
-    // private adminPlatformPageBCItems() {
-    //     let menuItem = { label: 'Platform', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
+    private adminMarketAddPageBCItems() {
+        let menuItem = { label: 'Add Market', routerLink: ['/admin/vehicle/market'] };
+        return menuItem;
+    }
+
+    private adminMarketDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminMarketPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MarketDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMarketDetailsPageBCItems() {
+        let menuItem = { label: 'Market Details', routerLink: ['/admin/vehicle/market'] };
+
+        return menuItem;
+    }
+
+    // Admin Platform Bread Crumbs
+    private adminPlatformPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PlatformHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPlatformPageBCItems() {
+        let menuItem = { label: 'Platform', routerLink: ['/admin/vehicle/platform'] };
+        return menuItem;
+    }
+
+    private adminPlatformAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminPlatformPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PlatformAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminPlatformAddPageBCItems() {
+        let menuItem = { label: 'Add Platform', routerLink: ['/admin/vehicle/platform'] };
+        return menuItem;
+    }
+
+    private adminPlatformDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminPlatformPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PlatformDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPlatformDetailsPageBCItems() {
+        let menuItem = { label: 'Platform Details', routerLink: ['/admin/vehicle/platform'] };
+
+        return menuItem;
+    }
 
     // // Admin TitanRole Bread Crumbs
     // private adminTitanRolePage() {
