@@ -71,7 +71,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedDepartment: any;
     selectedEquipment: any;
     categories: any;
-    selectedCategory: any = '31D2FE32-9104-4594-B79D-056B440409E9';
+    selectedCategory: any = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
     IsKeepOpen: boolean = false;
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
@@ -222,6 +222,7 @@ export class DetailsComponent implements AfterViewInit {
 
             this.getTestFacilityById();
             this.GetTenantsByTestFacilityId();
+            this.getTestFacilityRoleService();
             this.getDepartments();
             this.getUserRoles();
             this.getOperatingHours();
@@ -827,6 +828,7 @@ export class DetailsComponent implements AfterViewInit {
 
     onAddUserRole() {
 
+     
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
@@ -838,6 +840,29 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'info', summary: 'Please select Role', detail: '' });
             return null;
         }
+
+      /*  if (this.TestFacilityRoles.every(tfr => tfr.role == this.selectedRole && this.selectedRole == "Primary In Charge")) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Already user with PIC present', detail: '' });
+            return null;
+        }
+
+        if (this.filteredSelectedUserNames.length > 0 && this.selectedRole == "Primary In Charge") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role PIC', detail: '' });
+            return null;
+        }
+        if (this.TestFacilityRoles.every(tfr => tfr.role == this.selectedRole && this.selectedRole == "Secondary In Charge")) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Already user with PIC present', detail: '' });
+            return null;
+        }
+
+        if (this.filteredSelectedUserNames.length > 0 && this.selectedRole == "Secondary In Charge") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role PIC', detail: '' });
+            return null;
+        }*/
         if (!this.IsKeepOpen)
             this.displayAssignUserRolesDialog = false;
         else
