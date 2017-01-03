@@ -19,7 +19,15 @@
                             Name field is required
                         </div>
                     </div>
-
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Description:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <textarea type="text" pInputTextArea class="form-control" name="procedureDescription" row="20" maxlength="2000"
+                                      #procedureDescriptionRef="ngModel" [(ngModel)]="procedure.description"></textarea>
+                        </div>
+                    </div>
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                             Test Type:

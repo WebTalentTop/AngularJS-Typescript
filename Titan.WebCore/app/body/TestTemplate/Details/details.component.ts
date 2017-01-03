@@ -4,6 +4,7 @@ import { TestTemplateService } from '../../../shared/services/testtemplate.servi
 import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
 import { ProcedureService } from '../../../shared/services/procedure.service'
+import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Router } from '@angular/router'
@@ -20,6 +21,9 @@ export class DetailsComponent {
     public selectedProcedures: Array<any> = new Array();
     public filteredProcedures: Array<any> = new Array();
     public filteredSelectedProcedures: Array<any> = new Array();
+    public selectedTestRequirements: Array<any> = new Array();
+    public filteredTestRequirements: Array<any> = new Array();
+    public filteredSelectedTestRequirements: Array<any> = new Array();
     constructor(
         private testTemplateService: TestTemplateService,
         private testtypeService: TestTypeService,
@@ -27,6 +31,7 @@ export class DetailsComponent {
         private router: Router,
         private route: ActivatedRoute,
         private procedureService: ProcedureService,
+        private testRequirementService: TestRequirementService,
         private confirmationService: ConfirmationService
     ) {
 
@@ -47,7 +52,10 @@ export class DetailsComponent {
                 //}
             });
             this.testTemplateService.getTestTemplateProcedures(params['id']).subscribe(res => {
-                this.selectedProcedures = res.$values;
+                this.selectedProcedures = res.result;
+            });
+            this.testTemplateService.getTestTemplateRequirements(params['id']).subscribe(res => {
+                this.selectedTestRequirements = res.result;
             });
 
         });
@@ -140,6 +148,81 @@ export class DetailsComponent {
                 this.testModes = testMode;
             }
         });
+    }
+
+    onDeleteTestRequirement(testRequirement) {
+        this.confirmationService.confirm({
+            message: 'Do you want to delete this record?',
+            header: 'Delete Confirmation',
+            icon: 'fa fa-trash',
+            accept: () => {
+                this.testTemplateService.postDeleteTestTemplateRequirement(
+                    this.testTemplate.id,
+                    testRequirement.id
+                ).subscribe(res => {
+                    this.selectedTestRequirements = res.result;
+                });
+            }
+        });
+
+
+    }
+
+    onAddTestRequirement() {
+        var selectedTestRequirementIds = new Array();
+        for (var sel of this.filteredSelectedTestRequirements) {
+            selectedTestRequirementIds.push(sel.id);
+        }
+        var inputDto = {
+            testRequirementList: selectedTestRequirementIds
+        }
+        this.testTemplateService.postAddTestRequirements(selectedTestRequirementIds, this.testTemplate.id).subscribe(filteredList => {
+            this.selectedTestRequirements = filteredList.result;
+            this.filteredSelectedTestRequirements = null;
+        });
+    }
+
+    filterTestRequirements(event) {
+        this.testRequirementService.filterByTestTemplateId(this.testTemplate.id, event.query).subscribe(filteredList => {
+            this.filteredTestRequirements = filteredList.$values;
+        });
+    }
+
+    onMoveProcedureUp(procedure) {
+        var oldIndex = this.selectedProcedures.indexOf(procedure);
+        this.selectedProcedures.splice(oldIndex - 1, 0, this.selectedProcedures.splice(oldIndex, 1)[0]);
+        this.updateProcedureProcedureDisplayOrder();
+    }
+
+    onMoveProcedureDown(procedure) {
+        var oldIndex = this.selectedProcedures.indexOf(procedure);
+        this.selectedProcedures.splice(oldIndex + 1, 0, this.selectedProcedures.splice(oldIndex, 1)[0])
+        this.updateProcedureProcedureDisplayOrder();
+    }
+
+    updateProcedureProcedureDisplayOrder() {
+        this.testTemplateService.putTestTemplateProcedureDisplayOrder(this.selectedProcedures, this.testTemplate.id).subscribe(filteredList => {
+            this.selectedProcedures = filteredList.result;
+        });
+    }
+
+    onLoadProcedureSteps(event) {
+        console.log(event);
+        this.procedureService.getProcedureSteps(event.id).subscribe(res => {
+            event.steps = res.$values;
+        });
+    }
+
+    isUpButtonVisible(procedure) {
+        if (this.selectedProcedures != undefined && this.selectedProcedures.length > 1 && procedure.id != this.selectedProcedures[0].id)
+            return true;
+        return false;
+    }
+
+    isDownButtonVisible(procedure) {
+        if (this.selectedProcedures != undefined && this.selectedProcedures.length > 1 && procedure.id != this.selectedProcedures[this.selectedProcedures.length - 1].id)
+            return true;
+        return false;
     }
 
     onSubmit() {

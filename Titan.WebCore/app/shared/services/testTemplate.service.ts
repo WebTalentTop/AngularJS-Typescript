@@ -58,7 +58,7 @@ export class TestTemplateService extends BaseService {
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${TestTemplateApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${TestTemplateApiUrl.getByIdUrl}` + id, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
@@ -77,6 +77,26 @@ export class TestTemplateService extends BaseService {
 
     postDeleteTestTemplateProcedure(testTemplateId, procedureId): Observable<any> {
         return this.http.put(`${TestTemplateApiUrl.postDeleteTestTemplateProcedureUrl}` + testTemplateId + '&procedureId=' + procedureId, null, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    postAddTestRequirements(filterBody, testTemplateId): Observable<any> {
+        return this.http.post(`${TestTemplateApiUrl.postAddTestTemplateRequirementUrl}` + testTemplateId, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    getTestTemplateRequirements(testTemplateId): Observable<any> {
+        return this.http.get(`${TestTemplateApiUrl.getTestTemplateRequirementUrl}` + testTemplateId, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    postDeleteTestTemplateRequirement(testTemplateId, requirementId): Observable<any> {
+        return this.http.put(`${TestTemplateApiUrl.postDeleteTestTemplateRequirementUrl}` + testTemplateId + '&requirementId=' + requirementId, null, { headers: this.headers })
+            .map(this.getJson);
+    }
+
+    putTestTemplateProcedureDisplayOrder(filterBody, testTemplateId): Observable<any> {
+        return this.http.put(`${TestTemplateApiUrl.putTestTemplateProcedureDisplayOrderUrl}` + testTemplateId, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
 }

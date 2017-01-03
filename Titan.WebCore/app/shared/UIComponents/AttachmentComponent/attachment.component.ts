@@ -73,14 +73,16 @@ export class AttachmentComponent {
     }
 
     getAttachments() {
-        this.attachmentService.getDocumentsByEntityIdentifierId(this.entityId)
-            .subscribe(response => {
-                console.log('-----------  Attachments------------------', response);
-                if (response.length > 0)
-                    this.uploadedAttachments = response;
-                else
-                    this.uploadedAttachments = null;
-            });
+        if (this.entityId != undefined) {
+            this.attachmentService.getDocumentsByEntityIdentifierId(this.entityId)
+                .subscribe(response => {
+                    console.log('-----------  Attachments------------------', response);
+                    if (response.length > 0)
+                        this.uploadedAttachments = response;
+                    else
+                        this.uploadedAttachments = null;
+                });
+        }
     }
 
     onDelete(Attachment: IAttachment) {

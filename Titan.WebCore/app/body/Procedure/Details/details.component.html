@@ -21,7 +21,15 @@
                                     *
                                 </div>
                             </div>
-
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    Description:
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <textarea type="text" pInputTextArea class="form-control" name="procedureDescription" row="20" maxlength="2000"
+                                              #procedureDescriptionRef="ngModel" [(ngModel)]="procedure.description"></textarea>
+                                </div>
+                            </div>
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
                                     Test Type:
@@ -131,12 +139,12 @@
                 <p-dialog header="Add Step" [(visible)]="displayAddStep" width="600">
                     <add-step [isDisplayComponentInPopUp]="true" (onAddComplete)="onAddStepComplete($event)" (onCancelComplete)="onCancelStepComplete($event)"></add-step>
                 </p-dialog>
-                <p-dialog header="Edit Step" [(visible)]="displayEditStep" width="600">
+                <p-dialog header="Edit Step" [(visible)]="displayEditStep" width="700" height="500">
                     <details-step [isDisplayComponentInPopUp]="true" [stepId]="editStepId" (onEditComplete)="onEditStepComplete($event)" (onCancelComplete)="onEditCancelStepComplete($event)"></details-step>
                 </p-dialog>
 
                 <p-dataTable [value]="selectedSteps" expandableRows="true">
-                    <p-column expander="true" styleClass="col-icon"></p-column>
+                    <p-column expander="true" styleClass="col-icon" [style]="{'width':'22px'}"></p-column>
                     <p-column field="name" header="Name"></p-column>
                     <p-column field="stepTypeName" header="Step Type"></p-column>
                     <!--<p-column field="repeatStep" header="Repeat?"></p-column>-->
@@ -184,7 +192,7 @@
                                             <div class="ui-grid-col-2">Repeat: </div>
                                             <div class="ui-grid-col-2">{{(step.repeatStep ? 'Yes' : 'No')}}</div>
                                         </div>
-                                        <div class="ui-grid-row">
+                                        <div class="ui-grid-row"> 
                                         </div>
                                         <div class="ui-grid-row" *ngIf="step.repeatStep">
                                             <div class="ui-grid-col-2">Step Frequency: </div>

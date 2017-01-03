@@ -147,6 +147,23 @@ export class DetailsComponent {
                 }
             }
         });
+
+        var overlays = $("div.ui-widget-overlay.ui-dialog-mask:visible");
+        if (overlays.length > 1) {
+            var maxZIndex = 0;
+            overlays.each(function () {
+                var index_current = parseInt($(this).css("z-index"), 10);
+                if (index_current > maxZIndex) {
+                    maxZIndex = index_current;
+                }
+            });
+            overlays.each(function () {
+                var index_current = parseInt($(this).css("z-index"), 10);
+                if (index_current == maxZIndex) {
+                    $(this).hide();
+                }
+            });
+        }
     }
 
      onAddTestRequirement() {
