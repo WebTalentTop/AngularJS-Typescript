@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UnitsService } from '../../../../../shared/services/units.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'units-detail',
@@ -42,13 +43,14 @@ export class DetailsComponent {
     public UnitsId: string;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: UnitsService
     )
     { }
-
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
@@ -56,11 +58,25 @@ export class DetailsComponent {
             this.UnitsId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let unitsDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'UnitsDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("unitsDetailsBreadCrumb ---------", unitsDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = unitsDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
+
             this.service.getById(this.UnitsId).subscribe(UnitsDetails => {
                 this.UnitsDetails = UnitsDetails.result;
               
                 console.log(this.UnitsDetails);
-            });
         });
     }
 

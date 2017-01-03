@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BuildLevelService } from '../../../../../shared/services/buildLevel.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,  InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'buildLevel-detail',
@@ -42,13 +43,15 @@ export class DetailsComponent {
     public BuildLevelId: string;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: BuildLevelService
     )
     { }
 
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
@@ -56,11 +59,25 @@ export class DetailsComponent {
             this.BuildLevelId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let buildLevelsDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'BuildLevelsDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("buildLevelsDetailsBreadCrumb ---------", buildLevelsDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = buildLevelsDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
+
             this.service.getById(this.BuildLevelId).subscribe(BuildLevelDetails => {
                 this.BuildLevelDetails = BuildLevelDetails.result;
                 this.BuildLevelDetails.id = this.BuildLevelId;
                 console.log(this.BuildLevelDetails);
-            });
         });
     }
 

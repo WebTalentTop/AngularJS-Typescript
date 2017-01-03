@@ -57,6 +57,7 @@ export class DetailsComponent {
 
             this.ShiftId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
+            
             let breadC = this.breadCrumbsService.getBreadCrumbs();
             let shiftDetailsBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'ShiftDetailsPage'
