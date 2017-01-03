@@ -15,7 +15,7 @@ const routes = [
     { path: 'workrequest', loadChildren: 'app/body/WorkRequest/workrequest.module' },
     //{ path: 'testcatalog', loadChildren: 'app/body/TestCatalog/testcatalog.module' },
     { path: 'testtempalte', loadChildren: 'app/body/TestTemplate/testtemplate.module' },
-    { path: 'testfacilities', loadChildren: 'app/body/TestFacilities/testfacilities.module' },
+    { path: 'testFacilities', loadChildren: 'app/body/TestFacilities/testFacilities.module' },
     { path: 'step', loadChildren: 'app/body/Step/step.module' },
     { path: 'procedure', loadChildren: 'app/body/Procedure/procedure.module' },
     { path: 'testrequest', loadChildren: 'app/body/TestRequest/testrequest.module' },
