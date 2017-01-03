@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TestFacilityService} from '../../../shared/services/testFacility.service';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, MessagesModule, GrowlModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, MessagesModule, GrowlModule, PanelModule, DropdownModule, BreadcrumbModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @NgModule({
     imports: [
@@ -20,9 +21,9 @@ import addRoutes from "./add.routes";
         ButtonModule,
         DropdownModule, 
         MessagesModule, GrowlModule,
-        addRoutes
-        ],
-    providers: [TestFacilityService],
+        addRoutes,
+        BreadcrumbModule],
+    providers: [TestFacilityService,BreadCrumbsService],
     declarations: [AddComponent]
 })
 

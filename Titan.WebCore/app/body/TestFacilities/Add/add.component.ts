@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, Message, GrowlModule, MessagesModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, 
+        Message, GrowlModule, MessagesModule, DropdownModule, MenuItem } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
-
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import { TestFacilityService } from '../../../shared/services/testFacility.service';
 
 @Component({
-    selector: 'add-test-facilities',
+    selector: 'add-test-Facilities',
     styleUrls: ['app/body/TestFacilities/Add/add.component.css'], 
     templateUrl: 'app/body/TestFacilities/Add/add.component.html'
 })
@@ -20,8 +21,8 @@ export class AddComponent {
     postalCode:string;
     notificationMsgs: Message[] = [];
     testFacility = {
-                    name:'', 
-                    address:{
+                        name:'', 
+                        address:{
                         addressLine1:'',
                         addressLine2:'',
                         city:'',
@@ -31,12 +32,28 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private service: TestFacilityService, private router: Router) {
+    constructor(private breadCrumbsService: BreadCrumbsService,
+                private service: TestFacilityService, 
+                private router: Router) {
 
     }
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
 
     ngOnInit() {
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'TestFacilitiesAddPage'
+        )[0];
 
+        console.log("BreadC -----", breadC);
+        console.log("testFacilitiesAddBreadCrumb ---------", testFacilitiesAddBreadCrumb);
+        this.breadcrumbs = [];
+        this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
+
+        console.log("breadcrumbs ------", this.breadcrumbs);
+
+        this.breadcrumbsHome = { routerLink: ['/'] };
     }
     onSubmit(formRef) {
         console.log(formRef);
@@ -63,11 +80,11 @@ export class AddComponent {
             
             if (res.isSuccess) {
 
-                this.router.navigate(["./testfacilities"], { queryParams: { page: 1 } });
+                this.router.navigate(["./testFacilities"], { queryParams: { page: 1 } });
             }
             else
             {
-                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'test facility name exists.' });
+                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'test Facility name exists.' });
                
 
             }
