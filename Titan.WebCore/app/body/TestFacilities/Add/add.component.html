@@ -107,7 +107,39 @@
                             <!--<p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>-->
 
                         </div>
+                        <div class="form-group col-sm-6 col-md-4">
+                            <label class="control-label  col-sm-12 pl0">
+                                Last
+                                Maintenance Date
+                            </label>
+                            <div class="input-group">
+                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" showTime="true" [showIcon]="true"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="input-row md-spaced">
+                            <label>Description</label>
+                            <div class="md-inputfield">
 
+                                <p-editor [(ngModel)]="testFacility.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
+                                            <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+
+
+                            </div>
+                        </div>
                         <!-- End Postal Code -->
 
                     </div>

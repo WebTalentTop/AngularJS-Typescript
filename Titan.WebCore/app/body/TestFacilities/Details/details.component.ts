@@ -125,6 +125,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
+    lastMaintenanceDate: any;
     displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
@@ -656,6 +657,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
+                this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
@@ -991,6 +993,7 @@ export class DetailsComponent implements AfterViewInit {
             description: '',
             operatingHourId: '',
             maintenanceFrequency: '',
+            lastMaintenanceDate : '',
             address: {
 
                 id: '',
@@ -1005,6 +1008,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
+        formData.lastMaintenanceDate = this.lastMaintenanceDate;
         formData.maintenanceFrequency = $('#selector').cron("value");
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
@@ -1016,6 +1020,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.postUpdate(formData).subscribe(res => {
 
             if (res.isSuccess) {
+                this.getTestFacilityById();
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 

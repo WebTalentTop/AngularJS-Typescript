@@ -21,7 +21,7 @@ export class AddComponent {
     postalCode:string;
     notificationMsgs: Message[] = [];
     testFacility = {
-                        name:'', 
+                        name:'', description: '', lastMaintenanceDate: '',
                         address:{
                         addressLine1:'',
                         addressLine2:'',
@@ -53,7 +53,7 @@ export class AddComponent {
     }
     onSubmit(formRef) {
         formRef.isDeleted = false;
-        let formData: any = {name: '', 
+        let formData: any = {name: '', lastMaintenanceDate: '', description: '',
                     address:{
                         addressLine1:'',
                         addressLine2:'',
@@ -62,6 +62,8 @@ export class AddComponent {
                         postalCode:'',
                     }};
         formData.name = formRef.name;
+        formData.description = formRef.description,
+        formData.lastMaintenanceDate = formRef.lastMaintenanceDate;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
         formData.address.city = formRef.city;

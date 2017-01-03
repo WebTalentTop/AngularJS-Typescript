@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TestFacilityService} from '../../../shared/services/testFacility.service';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, MessagesModule, GrowlModule, PanelModule, DropdownModule, BreadcrumbModule } from 'primeng/primeng';
+import {
+    DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, EditorModule, SharedModule, MessagesModule, CalendarModule,
+    GrowlModule, PanelModule, DropdownModule, BreadcrumbModule
+} from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
@@ -17,9 +20,11 @@ import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCr
         DataTableModule, 
         InputTextareaModule, 
         InputTextModule, 
-        PanelModule, 
+        PanelModule,
+        EditorModule,
+        SharedModule,
         ButtonModule,
-        DropdownModule, 
+        DropdownModule, CalendarModule,
         MessagesModule, GrowlModule,
         addRoutes,
         BreadcrumbModule],
