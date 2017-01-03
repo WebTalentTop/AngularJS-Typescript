@@ -58,6 +58,7 @@ declare var cron: any;
 export class DetailsComponent implements AfterViewInit {
 
     IsFrequency: boolean = false;
+    hasNotifications: boolean = true;
     frequency: any;
     titanApiUrl: any = titanApiUrl;
     username: string;
@@ -666,6 +667,9 @@ export class DetailsComponent implements AfterViewInit {
                 .subscribe(res => {
                     if (res) {
                         this.notifications = res;
+                        if (res.length > 0) {
+                            this.hasNotifications = false;
+                        }
                     }
 
                     this.notifications.forEach(x => {
@@ -881,16 +885,22 @@ export class DetailsComponent implements AfterViewInit {
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
                     this.TestFacilityRoles = TestFacilityRoles;
-                    this.testFacilityService.getNotifications(this.id)
-                        .subscribe(res => {
-                            if (res) {
-                                this.notifications = res;
-                            }
+                    if (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8" || this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
+                        this.testFacilityService.getNotifications(this.id)
+                            .subscribe(res => {
+                                if (res) {
+                                    this.notifications = res;
+                                    if (res.length > 0)
+                                    {
+                                        this.hasNotifications = false;
+                                    }
+                                }
 
-                            this.notifications.forEach(x => {
-                                this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
-                            })
-                        });
+                                this.notifications.forEach(x => {
+                                    this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                                })
+                            });
+                    }
                 });
         });
 
@@ -1043,6 +1053,20 @@ export class DetailsComponent implements AfterViewInit {
                 this.testfacilityroleservice.getByIdusing(this.id)
                     .subscribe(TestFacilityRoles => {
                         this.TestFacilityRoles = TestFacilityRoles;
+                        this.testFacilityService.getNotifications(this.id)
+                            .subscribe(res => {
+                                if (res) {
+                                    this.notifications = res;
+                                    if (res.length > 0) {
+                                        this.hasNotifications = false;
+                                    }
+                                }
+
+                                this.notifications.forEach(x => {
+                                    this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                                })
+                            });
+
                     });
             });
     }
