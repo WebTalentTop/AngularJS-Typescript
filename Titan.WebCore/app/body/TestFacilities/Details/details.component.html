@@ -607,7 +607,7 @@
                 <!--<div class="ui-grid-col-2"></div>-->
                
                     <p-fileUpload [name]="testfacility" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}/{{selectedCategory}}" (onUpload)="onUpload($event)"
-                                  multiple="multiple" accept="image/*" maxFileSize="1000000" auto="auto">
+                                  multiple="multiple" accept="image/*" maxFileSize="1000000">
                         <template pTemplate type="content">
                             <ul *ngIf="uploadedFiles.length">
                                 <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
