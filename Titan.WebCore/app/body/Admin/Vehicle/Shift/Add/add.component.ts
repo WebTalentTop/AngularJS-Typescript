@@ -26,7 +26,7 @@ export class AddComponent {
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
     ngOnInit() {
-this.route.queryParams.subscribe(params => {
+        this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();

@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HolidayService } from '../../../../../shared/services/holiday.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'holiday-detail',
@@ -18,7 +19,7 @@ export class DetailsComponent {
     entityType: string = "Holiday";
     entityId: string = this.id;
     filepath: string = "Holiday";
-    holiday = { name: '' };   
+    holiday = { name: '' };
     formConfiguration: any;
     formObject: any;
 
@@ -42,25 +43,40 @@ export class DetailsComponent {
     public HolidayId: string;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: HolidayService
     )
     { }
 
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
 
             this.HolidayId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let holidayDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'HolidayDetailsPage'
+            )[0];
 
-            this.service.getById(this.HolidayId).subscribe(HolidayDetails => {
-                this.HolidayDetails = HolidayDetails.result;
-              
-                console.log(this.HolidayDetails);
-            });
+            console.log("BreadC -----", breadC);
+            console.log("holidayDetailsBreadCrumb ---------", holidayDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = holidayDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
+        this.service.getById(this.HolidayId).subscribe(HolidayDetails => {
+            this.HolidayDetails = HolidayDetails.result;
+
+            console.log(this.HolidayDetails);
         });
     }
 
@@ -69,7 +85,7 @@ export class DetailsComponent {
 
         this.service.postUpdate(this.HolidayDetails).subscribe(HolidayDetails => {
         });
-         this.msgs = [];
-         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }
