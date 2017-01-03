@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { TitanCalendarComponent } from "./titancalendar.component";
 import { FormsModule } from '@angular/forms';
 import { TestFacilityService } from '../../shared/services/testFacility.service';
-
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 import { BuildLevelService } from '../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
 import { TestRoleService } from '../../shared/services/testRole.service';
@@ -15,7 +15,7 @@ import {
     FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, FieldsetModule, AccordionModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { MultiSelectModule } from 'primeng/primeng';
+import { MultiSelectModule,BreadcrumbModule } from 'primeng/primeng';
 import { ContextMenuModule } from 'primeng/primeng';
 import calendarRoutes from "./titancalendar.routes";
 
@@ -23,11 +23,11 @@ import calendarRoutes from "./titancalendar.routes";
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
         InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
-        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule, FieldsetModule, AccordionModule],
+        DialogModule, GrowlModule, RadioButtonModule, CalendarModule,BreadcrumbModule, TooltipModule, OverlayPanelModule, ContextMenuModule, FieldsetModule, AccordionModule],
 
     providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
-        TestTypeService
-    ],
+            TestTypeService,BreadCrumbsService],
+
     declarations: [TitanCalendarComponent]
 })
 

@@ -27,6 +27,9 @@ export class BreadCrumbsService {
         //Admin Form Builder Details
         this.adminFormBuilderDetailsFormPage();
 
+        //Admin Calendar Page
+        this.calendarPage();
+
         //Admin TestFacilities Page
         this.testFacilitiesPage();
         //Admin Test Facilities Add
@@ -250,6 +253,20 @@ export class BreadCrumbsService {
     private adminFormBuilderDetailsFormPageBCItems() {
         let menuItem = { label: 'Details Form', routerLink: 'app/body/Admin/FormBuilder/details/' };
 
+        return menuItem;
+    }
+
+    private calendarPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'CalendarHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private calendarPageBCItems() {
+        let menuItem = { label: 'Calendar', routerLink: ['/calendar'] };
         return menuItem;
     }
 

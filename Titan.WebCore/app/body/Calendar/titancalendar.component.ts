@@ -7,7 +7,7 @@ import { ProjectService } from '../../shared/services/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
 import { TitanUserService } from '../../shared/services/titanuser.service';
-
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
@@ -85,6 +85,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     testOperators: any[] = [];
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private testfacilityservice: TestFacilityService,
@@ -260,7 +261,8 @@ export class TitanCalendarComponent implements AfterViewInit {
 
         $('#calendar').fullCalendar(scheduleConfig);
     }
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.getTestFacilities();
         this.getTestModes();
@@ -273,6 +275,20 @@ export class TitanCalendarComponent implements AfterViewInit {
         this.initCalendarOptions();
         this.selectedTestFacilityItems = [];
         this.selectedTestFacilityItems.push({ label: 'Audi', value: 'Audi' });
+
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let calendarBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'CalendarHomePage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("calendarBreadCrumb ---------", calendarBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = calendarBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
     }
 
     ngAfterViewInit() {
