@@ -180,6 +180,106 @@ gulp.task('copy-to-wwwroot',
         
     ]);
 
+gulp.task('copy-to-wwwroot-preprod',
+    [
+        'copy-preprodlocation',
+        'copy-systemjs-config',
+        'copy-angular2',
+        'copy-es6-shim',
+        'copy-rxjs',
+        'copy-rxjs-all',
+        'copy-reflect',
+        'copy-zone',
+        'copy-systemjs',
+        'copy-thirdparty-files',
+        'moment',
+        'resourcesPrimeThemes',
+        'NMprimeResources',
+        'ng2-dragula',
+        'dragula',
+        'html',
+        'css',
+        'copy-titanResources',
+        'bootstrap',
+        'icons',
+        'tsCompile'
+    ]);
+
+gulp.task('copy-to-wwwroot-location1',
+    [
+        'copy-locationoption1',
+        'copy-systemjs-config',
+        'copy-angular2',
+        'copy-es6-shim',
+        'copy-rxjs',
+        'copy-rxjs-all',
+        'copy-reflect',
+        'copy-zone',
+        'copy-systemjs',
+        'copy-thirdparty-files',
+        'moment',
+        'resourcesPrimeThemes',
+        'NMprimeResources',
+        'ng2-dragula',
+        'dragula',
+        'html',
+        'css',
+        'copy-titanResources',
+        'bootstrap',
+        'icons',
+        'tsCompile'
+    ]);
+
+gulp.task('copy-to-wwwroot-location2',
+    [
+        'copy-locationoption2',
+        'copy-systemjs-config',
+        'copy-angular2',
+        'copy-es6-shim',
+        'copy-rxjs',
+        'copy-rxjs-all',
+        'copy-reflect',
+        'copy-zone',
+        'copy-systemjs',
+        'copy-thirdparty-files',
+        'moment',
+        'resourcesPrimeThemes',
+        'NMprimeResources',
+        'ng2-dragula',
+        'dragula',
+        'html',
+        'css',
+        'copy-titanResources',
+        'bootstrap',
+        'icons',
+        'tsCompile'
+    ]);
+
+gulp.task('copy-to-wwwroot-qalocation',
+    [
+        'copy-qalocation',
+        'copy-systemjs-config',
+        'copy-angular2',
+        'copy-es6-shim',
+        'copy-rxjs',
+        'copy-rxjs-all',
+        'copy-reflect',
+        'copy-zone',
+        'copy-systemjs',
+        'copy-thirdparty-files',
+        'moment',
+        'resourcesPrimeThemes',
+        'NMprimeResources',
+        'ng2-dragula',
+        'dragula',
+        'html',
+        'css',
+        'copy-titanResources',
+        'bootstrap',
+        'icons',
+        'tsCompile'
+    ]);
+
 gulp.task('htmlwatch', function () {
     gulp.watch(root_path.app + "**/*.html", ['html']);
 });
