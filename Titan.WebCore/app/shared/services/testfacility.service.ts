@@ -30,7 +30,14 @@ export class TestFacilityService {
         this.headers.append('Accept', 'application/json');
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
-
+    postReserve(viewmodel): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.postReserveUrl}`, viewmodel, { headers: this.headers })
+            .map(this.getJson);
+    }
+    postFree(viewmodel): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.postFreeUrl}`, viewmodel, { headers: this.headers })
+            .map(this.getJson);
+    }
     postGridData(): Observable<any> {
         return this.http.post(`${TestFacilityApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
@@ -290,6 +297,11 @@ export class TestFacilityService {
         return this.http.post(`${TestFacilityApiUrl.PostAddEquipmentMapUrl}/${testFacilityId}/${selectedEquipmentId}`, null, { headers: this.headers })
             .map(this.getJson);
     }
+    postMoveTest(formData){
+        return this.http.post(`${TestFacilityApiUrl.postMoveTestUrl}`, formData, { headers: this.headers })
+            .map(this.getJson);
+    }
+
 	getLocalizationInformationObservable(resourceSetName,cultureName):Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getDetailsTabLocJs}${resourceSetName}&cultureName=${cultureName}`)
             .map(res =>{

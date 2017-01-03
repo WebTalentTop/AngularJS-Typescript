@@ -416,6 +416,8 @@ interface JQuery {
     fullCalendar(method: 'refetchEventSources', source: any): any;
 
     fullCalendar(method: 'getEventSourceById', source: any): any;
+
+    fullCalendar(method: 'getResourceById', source: any): any;
 }
 
 interface JQueryStatic {

@@ -31,5 +31,8 @@ export class TestFacilityApiUrl {
     public static PostAddEquipmentMapUrl: string = titanApiUrl + 'testFacility/PostEquipments';
     public static PostLogCommentsUrl: string = titanApiUrl + 'testFacility/PostLogComments';
     public static PostMoveEquipmentToFacilityUrl: string = titanApiUrl + 'TestFacility/MoveEquipmentToFacility';
-    public static getDetailsTabLocJs:string = localizationApiUrl;
+    public static getDetailsTabLocJs: string = localizationApiUrl;
+    public static postReserveUrl: string = titanApiUrl + 'testFacility/reserve/';
+    public static postFreeUrl: string = titanApiUrl + 'testFacility/Free/';
+    public static postMoveTestUrl: string = titanApiUrl + 'testFacility/MoveTest/';
 }

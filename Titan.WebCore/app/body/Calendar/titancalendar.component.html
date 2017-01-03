@@ -1,58 +1,66 @@
-﻿<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
-<p-accordion>
+﻿<p-accordion>
     <p-accordionTab header="Search Options">
+
         <div class="ui-g-12">
 
             <div class="ui-g form-group">
 
                 <div class="ui-g-12 ui-md-3">
-                    <label>Slots</label> <br />
-                    <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue" (onChange)="updateCalendarSettings($event)">
+                    <label>Slots</label> <br/>
+                    <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue"
+                                (onChange)="updateCalendarSettings($event)">
                     </p-dropdown>
                 </div>
 
                 <div class="ui-g-12 ui-md-3">
-                    <label>Project Code</label> <br />
-                    <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'100%'}">
+                    <label>Project Code</label> <br/>
+                    <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes"
+                                   [style]="{'width':'100%'}">
                     </p-multiSelect>
 
                 </div>
 
                 <div class="ui-g-12 ui-md-3">
-                    <label>Test Facility</label> <br />
-                    <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'100%'}">
+                    <label>Test Facility</label> <br/>
+                    <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)"
+                                   name="testFacilities" [style]="{'width':'100%'}">
                     </p-multiSelect>
 
                 </div>
                 <div class="ui-g-12 ui-md-3">
-                    <label>Test Types</label> <br />
-                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'100%'}">
+                    <label>Test Types</label> <br/>
+                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes"
+                                   [style]="{'width':'100%'}">
                     </p-multiSelect>
 
                 </div>
                 <div class="ui-g-12 ui-md-3">
-                    <label>Test Mode</label> <br />
-                    <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'100%'}">
+                    <label>Test Mode</label> <br/>
+                    <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes"
+                                   [style]="{'width':'100%'}">
                     </p-multiSelect>
 
                 </div>
 
                 <div class="ui-g-12 ui-md-3">
-                    <label>Test Status</label> <br />
-                    <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'100%'}">
+                    <label>Test Status</label> <br/>
+                    <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus"
+                                   [style]="{'width':'100%'}">
                     </p-multiSelect>
 
                 </div>
                 <div class="ui-g-12 ui-md-3">
-                    <label>PIC</label> <br />
-                    <p-autoComplete [(ngModel)]="filteredSelectedTestUserNames" [suggestions]="filteredTestUserNames" (completeMethod)="getTestUsers($event)"
+                    <label>PIC</label> <br/>
+                    <p-autoComplete [(ngModel)]="filteredSelectedTestUserNames" [suggestions]="filteredTestUserNames"
+                                    (completeMethod)="getTestUsers($event)"
                                     name="testUsers" [minLength]="1" placeholder="Search by Name"
                                     field="displayName" [multiple]="false">
                     </p-autoComplete>
                 </div>
                 <div class="ui-g-12 ui-md-3">
-                    <label>Build Levels</label> <br />
-                    <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'100%'}">
+                    <label>Build Levels</label> <br/>
+                    <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels"
+                                   [style]="{'width':'100%'}">
                     </p-multiSelect>
                 </div>
                 <div class="ui-g-12">
@@ -68,7 +76,6 @@
 </p-accordion>
 
 
-
 <div class="ui-g-12">
     <div id="calendar">
     </div>
@@ -82,8 +89,10 @@
         </div>
 
         <div class="ui-grid-col-6">
-            <p-radioButton name="groupname" label="Yes" value="true" [(ngModel)]="selectedHideWeekendValue" (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
-            <p-radioButton name="groupname" label="No" value="false" [(ngModel)]="selectedHideWeekendValue" (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
+            <p-radioButton name="groupname" label="Yes" value="true" [(ngModel)]="selectedHideWeekendValue"
+                           (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
+            <p-radioButton name="groupname" label="No" value="false" [(ngModel)]="selectedHideWeekendValue"
+                           (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
 
         </div>
 
@@ -128,7 +137,8 @@
 </p-dialog>
 
 
-<p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="500" [responsive]="true" [width]="800">
+<p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="800" [responsive]="true"
+>
 
     <div>
         <strong>Requested Start Date</strong> {{ plannedStartDate}} <strong>Due By</strong> {{dueDate}}
@@ -136,59 +146,72 @@
     </div>
 
     <div class="ui-g-12">
+
         <div class="card card-w-title">
             <h1>Test Facilities</h1>
+            <form #tfScheduleForm="ngForm" (ngSubmit)="onSubmitTestFacilitySchedule(tfScheduleForm.value)">
+                <div class="ui-g-12">
 
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label>
-                        <span class="text">Test Facility</span>
+                    <div class="ui-g-4">
 
-                        <p-autoComplete [(ngModel)]="filteredselectedTestFacilityNames" [suggestions]="filteredTestFacilityNames" (completeMethod)="filterTestFacilityNames($event)"
-                                        name="facilityName" [minLength]="1" placeholder="Search by Name/#"
-                                        field="name" [multiple]="false">
-                        </p-autoComplete>
+                        <span class="text"> Facility Name</span> <br/>
+                        <!--<span [ngClass]="{'error': testFacilityNameRef.dirty && testFacilityNameRef.errors?.required}">*</span>-->
+                        <p-dropdown [options]="testFacilities"
+                                    [(ngModel)]="selectedTestFacilityForSchedule"
+                                    required
+                                    name="testFacilityName1" [style]="{'width':'100%'}"></p-dropdown>
 
-                    </label>
+
+                    </div>
+
+                    <div class="ui-g-4">
+
+                        <label>
+                            <span class="text">Start </span> <br/>
+                            <p-calendar [(ngModel)]="selectedTestScheduleStartDate" showTime="showTime" hourFormat="12"
+                                        [icon]="fa-calendar" required
+                                        name="selectedTestScheduleStartDate"
+                                        [selectOtherMonths]="true" [showOtherMonths]="true"
+                                        (onSelect)="onFacilityScheduleCalendarDateSelection($event)"></p-calendar>
+                        </label>
+
+                    </div>
+
+                    <div class="ui-g-4">
+
+                        <label>
+                            <span class="text">End</span> <br/>
+                            <p-calendar [(ngModel)]="selectedTestScheduleEndDate" showTime="showTime" hourFormat="12"
+                                        [icon]="fa-calendar"
+                                        required min="selectedTestScheduleStartDate" name="selectedTestScheduleEndDate"
+                                        [minDate]="selectedTestScheduleStartDate"
+                                        [selectOtherMonths]="true" [showOtherMonths]="true"
+                                        (onSelect)="onFacilityScheduleCalendarDateSelection($event)"></p-calendar>
+                        </label>
+
+                    </div>
+
+                    <div class="ui-g-4">
+
+                        <button type="submit" pButton icon="ui-icon-calendar" label="Schedule Facility"
+                                [disabled]='!tfScheduleForm.valid'></button>
+
+                    </div>
                 </div>
-
-                <div class="ui-g-4">
-
-                    <label>
-                        <span class="text">Start </span>
-                        <p-calendar [(ngModel)]="selectedTestScheduleStartDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
-                    </label>
-
-                </div>
-
-                <div class="ui-g-4">
-
-                    <label>
-                        <span class="text">End</span>
-                        <p-calendar [(ngModel)]="selectedTestScheduleEndDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
-                    </label>
-
-                </div>
-
-                <div class="ui-g-4">
-
-                    <button type="button" pButton icon="ui-icon-calendar" (click)="scheduleFacilities($event)" label="Schedule Facility"></button>
-
-                </div>
-            </div>
+            </form>
             <div class="ui-grid-row">
 
-                <p-dataTable [value]="scheduledTestFacilities" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5,10,20]">
-                    <p-column hidden="true" field="id"></p-column>
-                    <p-column field="name" header="Name" sortable="true"></p-column>
+                <p-dataTable [value]="scheduledTestFacilities" [rows]="5" [paginator]="true"
+                             [rowsPerPageOptions]="[5,10,20]">
+                    <p-column hidden="true" field="testFacilityScheduleId"></p-column>
+                    <p-column hidden="true" field="testFacilityId"></p-column>
+                    <p-column field="facilityName" header="Facility Name" sortable="true"></p-column>
                     <p-column field="startDate" header="Start" sortable="true"></p-column>
                     <p-column field="endDate" header="End" sortable="true"></p-column>
                     <p-column styleClass="col-button">
-                        <template pTemplate="header">
-                            <button type="button" pButton icon="fa-refresh"></button>
-                        </template>
                         <template let-user="rowData" pTemplate="body">
-                            <button type="button" pButton (click)="removeOperator(user)" icon="fa-delete"></button>
+                            <button type="button" pButton (click)="removeFacility(user)" icon="ui-icon-trash"
+                                    [disabled]='scheduledTestFacilities.length <1'></button>
                         </template>
                     </p-column>
                 </p-dataTable>
@@ -196,63 +219,72 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr/>
     <div class="card card-w-title">
         <h1>Operators</h1>
-        <div class="ui-g-12">
+        <form #tfScheduleOperatorForm="ngForm" (ngSubmit)="onSubmitOperatorSchedule(tfScheduleOperatorForm.value)">
+            <div class="ui-g-12">
 
-            <div class="ui-g-4">
-                <label>
+                <div class="ui-g-3">
+
                     <span class="text">Test Facility</span>
-                    <p-dropdown [options]="selectedTestFacilityItems" [(ngModel)]="selectedFacilityForOperator" [style]="{'width':'100%'}"></p-dropdown>
+                    <p-dropdown [options]="testFacilities"
+                                [(ngModel)]="selectedFacilityForOperator"
+                                required
+                                name="testFacilityForOperator" [style]="{'width':'100%'}"></p-dropdown>
 
 
-                </label>
-            </div>
+                </div>
 
-            <div class="ui-g-4">
-                <label>
-                    <span class="text">Operators</span>
+                <div class="ui-g-3">
 
-                    <p-autoComplete [(ngModel)]="filteredselectedOperatorUserNames" [suggestions]="filteredOperatorUserNames" (completeMethod)="filterOperatorUserNames($event)"
+                    <span class="text">Operators</span> <br/>
+
+                    <p-autoComplete [(ngModel)]="filteredselectedOperatorUserNames"
+                                    [suggestions]="filteredOperatorUserNames"
+                                    (completeMethod)="filterOperatorUserNames($event)"
                                     name="username" [minLength]="1" placeholder="Search by Name/#"
-                                    field="firstName" [multiple]="false">
+                                    field="displayName" [multiple]="false">
                     </p-autoComplete>
 
-                </label>
-            </div>
 
-            <div class="ui-g-4">
+                </div>
 
-                <label>
+                <div class="ui-g-3">
                     <span class="text">Start </span>
-                    <p-calendar [(ngModel)]="selectedTestScheduleStartDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
-                </label>
+                    <p-calendar [(ngModel)]="selectedTitanUserScheduleStartDate" showTime="showTime" hourFormat="12"
+                                [selectOtherMonths]="true" [showOtherMonths]="true" name="operatorStart"
+                                [icon]="fa-calendar"></p-calendar>
 
+
+                </div>
+
+                <div class="ui-g-3">
+
+                    <label>
+                        <span class="text">End</span>
+                        <p-calendar [(ngModel)]="selectedTitanUserScheduleEndDate" showTime="showTime" hourFormat="12"
+                                    name="operatorEnd"
+                                    [selectOtherMonths]="true" [showOtherMonths]="true"
+                                    [icon]="fa-calendar"></p-calendar>
+                    </label>
+
+                </div>
+
+                <div class="ui-g-4">
+                    <button type="submit" pButton icon="ui-icon-calendar" label="Schedule Operator"
+                            [disabled]='!tfScheduleOperatorForm.valid'></button>
+
+
+                </div>
             </div>
-
-            <div class="ui-g-4">
-
-                <label>
-                    <span class="text">End</span>
-                    <p-calendar [(ngModel)]="selectedTestScheduleEndDate" showTime="showTime" hourFormat="12" [icon]="fa-calendar"></p-calendar>
-                </label>
-
-            </div>
-
-            <div class="ui-g-4">
-
-                <button type="button" pButton icon="ui-icon-calendar" (click)="scheduleUsers($event)" label="Schedule"></button>
-
-            </div>
-        </div>
-
+        </form>
         <div class="ui-grid-row">
-
             <p-dataTable [value]="testOperators">
-                <p-column hidden="true" field="id"></p-column>
-                <p-column field="name" header="Name" sortable="true"></p-column>
-                <p-column field="testFacility" header="Test Facility" sortable="true"></p-column>
+
+                <p-column hidden="true" field="titanUserScheduleId"></p-column>
+                <p-column field="userDisplayName" header="Name" sortable="true"></p-column>
+                <p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>
                 <p-column field="startDate" header="Start" sortable="true"></p-column>
                 <p-column field="endDate" header="End" sortable="true"></p-column>
                 <p-column styleClass="col-button">
@@ -260,7 +292,7 @@
                         <button type="button" pButton icon="fa-refresh"></button>
                     </template>
                     <template let-user="rowData" pTemplate="body">
-                        <button type="button" pButton (click)="removeOperator(user)" icon="fa-delete"></button>
+                        <button type="button" pButton (click)="removeOperator(user)" icon="ui-icon-remove"></button>
                     </template>
                 </p-column>
             </p-dataTable>
@@ -270,6 +302,58 @@
     </div>
     <button type="button" pButton icon="ui-icon-calendar" label="close"></button>
 </p-dialog>
+
+
+<p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog" [minWidth]="800" [responsive]="true">
+    <form #tfMoveForm="ngForm" (ngSubmit)="onSubmitMoveTestFacilitySchedule(tfMoveForm.value)">
+        <div class="ui-g-12">
+
+            <div class="ui-g-4">
+
+                <label>
+                    <span class="text">Start </span> <br/>
+                    <p-calendar [(ngModel)]="moveTestScheduleStartDate" showTime="showTime" hourFormat="12"
+                                [icon]="fa-calendar" required
+                                name="moveTestScheduleStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, moveTestScheduleStartDate,moveTestScheduleEndDate)"></p-calendar>
+                </label>
+
+            </div>
+
+            <div class="ui-g-4">
+
+                <label>
+                    <span class="text">End</span> <br/>
+                    <p-calendar [(ngModel)]="moveTestScheduleEndDate" showTime="showTime" hourFormat="12"
+                                [icon]="fa-calendar"
+                                required name="moveTestScheduleEndDate"
+                                [minDate]="moveTestScheduleStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, moveTestScheduleStartDate,moveTestScheduleEndDate)"></p-calendar>
+                </label>
+
+            </div>
+            <div class="ui-g-4">
+
+
+                    <span class="text">Operators:</span> <br/>
+                    <p-radioButton name="groupname" value="0" [(ngModel)]="moveTestFacilityOperatorOption" label="Remove"></p-radioButton>
+                    <p-radioButton name="groupname" value="1" [(ngModel)]="moveTestFacilityOperatorOption" label="Move"></p-radioButton>
+
+
+            </div>
+            <div class="ui-g-4">
+                <button type="button" pButton icon="ui-icon-calendar" label="Cancel" (click)="cancelMove($event)"
+                ></button>
+                <button type="submit" pButton icon="ui-icon-calendar" label="Move"
+                        [disabled]='!tfMoveForm.valid'></button>
+
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
 
 <style>
     #calendar {
