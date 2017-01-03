@@ -45,19 +45,13 @@ export class AddComponent {
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
             filter.pageName === 'TestFacilitiesAddPage'
         )[0];
-
-        console.log("BreadC -----", breadC);
-        console.log("testFacilitiesAddBreadCrumb ---------", testFacilitiesAddBreadCrumb);
         this.breadcrumbs = [];
         this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
 
-        console.log("breadcrumbs ------", this.breadcrumbs);
 
         this.breadcrumbsHome = { routerLink: ['/'] };
     }
     onSubmit(formRef) {
-        console.log(formRef);
-        console.log(this.testFacility.name);
         formRef.isDeleted = false;
         let formData: any = {name: '', 
                     address:{
@@ -74,9 +68,8 @@ export class AddComponent {
         formData.address.state = formRef.state;
         formData.address.postalCode = formRef.postalCode;
         formData.locale = "en-us";
-        console.log(formData);
+
         this.service.postAdd(formData).subscribe(res => { 
-            console.log("-------- Test Facility Adding new result ----- ", res); 
             
             if (res.isSuccess) {
 

@@ -160,7 +160,6 @@ export class AddComponent {
                 }
                 this.testStages = resultMap;
             }
-            console.log(response);
         });
     }
 

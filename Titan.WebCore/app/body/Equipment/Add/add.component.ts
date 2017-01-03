@@ -71,7 +71,6 @@ export class AddComponent {
         if (event.value != null) {
             this.IsNewManufacturer = false;
         }
-        console.log('------event------------', event)
         this.selectedEquipmentManufacturerId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -95,18 +94,15 @@ export class AddComponent {
                 }
                 this.equipmentManufacturers = resultMap;
             }
-            console.log(response);
         });
     }
 
     onEquipmentTypeChange(event) {
-        console.log('------event------------', event)
         this.selectedEquipmentTypeId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestFacilityChange(event) {
-        console.log('------event------------', event)
         this.selectedTestFacilityId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -130,7 +126,6 @@ export class AddComponent {
                 }
                 this.testFacilities = resultMap;
             }
-            console.log(response);
         });
     }
     getEquipmentTypes() {
@@ -152,7 +147,6 @@ export class AddComponent {
                 }
                 this.equipmentTypes = resultMap;
             }
-            console.log(response);
         });
     }
     AddManufacturer()
@@ -165,8 +159,6 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
-        console.log(formRef);
-        console.log(this.testFacility.name);
         formRef.isDeleted = false;
         if (!this.IsNewManufacturer) {
             this.manufacturerId = this.selectedEquipmentManufacturerId;
@@ -191,10 +183,8 @@ export class AddComponent {
              ManufacturerWebsite: this.manufacturerWebsite
 
         };
-      
-        // console.log(formData);
+
         this.service.postAdd(model).subscribe(res => { 
-            console.log("-------- Equipment Adding new result ----- ",res); 
             if (res.isSuccess) {
 
                 this.router.navigate(["./equipment"], { queryParams: { page: 1 } });

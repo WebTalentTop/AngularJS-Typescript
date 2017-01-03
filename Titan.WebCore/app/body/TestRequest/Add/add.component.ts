@@ -118,12 +118,8 @@ export class AddComponent implements AfterViewInit {
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
     }
     handleChange(event) {
-
-        console.log('tes---', event);
-        console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
     OK()
     {
@@ -176,52 +172,44 @@ export class AddComponent implements AfterViewInit {
 
     }
     onTestStageChange(event) {
-        console.log('------event------------', event)
         this.selectedTestStageId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestVerificationMethodChange(event) {
-        console.log('------event------------', event)
         this.selectedTestVerificationMethods = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestFacilityChange(event) {
-        console.log('------event------------', event)
         this.selectedTestFacilities = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onDownTimeReasonChange(event) {
-        console.log('------event------------', event)
         this.selectedDownTimeReasonId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestRoleChange(event) {
-        console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onDepartmentChange(event) {
-        console.log('------event------------', event)
         this.selectedDepartment = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestTemplateChange(event) {
-        console.log('------event------------', event)
         this.selectedTestTemplates = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestStatusChange(event) {
-        console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
         //this.dataService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
         //    .subscribe(TestFacilityEvents => {
@@ -232,32 +220,27 @@ export class AddComponent implements AfterViewInit {
 
     }
     onBuildLevelChange(event) {
-        console.log('------event------------', event)
         this.selectedBuildLevels = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onProjectCodeChange(event) {
-        console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
 
     onTestModeChange(event) {
-        console.log('------event------------', event)
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestTypeChange(event) {
-        console.log('------event------------', event)
         this.selectedTestTypes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onHourEntryChange(event) {
-        console.log('------event------------', event)
         this.selectedTimeEntryTypeId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -281,7 +264,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testStages = resultMap;
             }
-            console.log(response);
         });
     }
     getTestFacilities() {
@@ -303,7 +285,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testFacilities = resultMap;
             }
-            console.log(response);
         });
     }
     getTestRoles() {
@@ -325,7 +306,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testRoles = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -348,7 +328,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.departments = resultMap;
             }
-            console.log(response);
         });
     }
     getTestStatus() {
@@ -370,7 +349,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testStatus = resultMap;
             }
-            console.log(response);
         });
     }
     getTestVerificationMethods() {
@@ -392,7 +370,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testVerificationMethods = resultMap;
             }
-            console.log(response);
         });
     }
     getTestModes() {
@@ -414,7 +391,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testAllModes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -437,7 +413,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -461,7 +436,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.projectCodes = resultMap;
             }
-            console.log(response);
         });
     }
     getTestTemplates() {
@@ -483,7 +457,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.testTemplates = resultMap;
             }
-            console.log(response);
         });
     }
     getBuildLevels() {
@@ -505,7 +478,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.buildLevels = resultMap;
             }
-            console.log(response);
         });
     }
     getDownTimeReasons() {
@@ -527,7 +499,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.downTimeReasons = resultMap;
             }
-            console.log(response);
         });
     }
     getHourEntryByEntityIdentifierId() {
@@ -549,8 +520,6 @@ export class AddComponent implements AfterViewInit {
                 }
                 this.hourEntries = resultMap;
             }
-
-            console.log(response);
         });
     }
 
@@ -618,8 +587,6 @@ export class AddComponent implements AfterViewInit {
         }
 
       this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
-
-             console.log('-----------testrequestcreated--------',res);
           //  this.TrackingList = res.$values;
             if (res.isSuccess && this.IsThermoCouple) {
 

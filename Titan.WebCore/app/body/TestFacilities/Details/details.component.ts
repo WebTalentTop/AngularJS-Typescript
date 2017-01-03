@@ -189,19 +189,14 @@ export class DetailsComponent implements AfterViewInit {
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
         
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesDetailsBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'TestFacilitiesDetailsPage'
             )[0];
 
-            console.log("BreadC -----", breadC);
-            console.log("testFacilitiesDetailsBreadCrumb ---------", testFacilitiesDetailsBreadCrumb);
             this.breadcrumbs = [];
             this.breadcrumbs = testFacilitiesDetailsBreadCrumb.items;
-
-            console.log("breadcrumbs ------", this.breadcrumbs);
 
             this.breadcrumbsHome = { routerLink: ['/'] };
     }
@@ -318,8 +313,6 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     handleChange(event) {
-        //console.log('--------tab changed---', event);
-        // console.log('-------targetid-------', event.originalEvent.target.innerText);
 
         let load = this.tabLoadStatus[event.index];
         if (!load.loaded) {
@@ -395,81 +388,58 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     onUserRoleChange(event) {
-        // console.log('------event------------', event)
         this.selectedRole = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onDepartmentChange(event) {
-        // console.log('------event------------', event)
         this.selectedDepartment = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onEquipmentChange(event) {
-        // console.log('------event------------', event)
         this.selectedEquipment = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
 
     onMaintenanceFrequencyChange(event) {
-        // console.log('------event------------', event)
         this.selectedMaintenanceFrequency = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onOperatingHourChange(event) {
-        // console.log('------event------------', event)
         this.selectedOperatingHour = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestRoleChange(event) {
-        // console.log('------event------------', event)
         this.selectedTestRoles = (event.value);
 
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onBuildLevelChange(event) {
-        // console.log('------event------------', event)
         this.selectedBuildLevels = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onProjectCodeChange(event) {
-        // console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onCategoryChange(event) {
-        // console.log('------event------------', event)
         this.selectedCategory = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
-
     }
     onTestFacilityChange(event) {
-        // console.log('------event------------', event)
         this.selectedTestFacilities = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestModeChange(event) {
-        // console.log('------event------------', event)
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestTypeChange(event) {
-        // console.log('------event------------', event)
         this.selectedTestTypes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
     onTestStatusChange(event) {
-        // console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
         //this.testFacilityService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
         //    .subscribe(TestFacilityEvents => {
@@ -515,7 +485,6 @@ export class DetailsComponent implements AfterViewInit {
     {
         this.testFacilityService.getTenants(this.id)
             .subscribe(res => {
-                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                 this.testFacilityTenants = res;
             });
 
@@ -523,7 +492,6 @@ export class DetailsComponent implements AfterViewInit {
     GetLogCommentsByTestFacilityId() {
         this.testFacilityService.getLogComments(this.id)
             .subscribe(res => {
-                //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                 this.testFacilityLogComments = res;
             });
 
@@ -547,7 +515,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.userRoles = resultMap;
             }
-            // console.log(response);
         });
     }
     getCategories() {
@@ -569,7 +536,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.categories = resultMap;
             }
-            // console.log(response);
         });
     }
     getDepartments() {
@@ -591,7 +557,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.departments = resultMap;
             }
-            // console.log(response);
         });
     }
     getMaintenanceFrequencies() {
@@ -613,7 +578,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.maintenanceFrequencies = resultMap;
             }
-            // console.log(response);
         });
     }
     getOperatingHours() {
@@ -635,7 +599,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.operatingHours = resultMap;
             }
-            // console.log(response);
         });
     }
     getEquipments() {
@@ -657,7 +620,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.equipments = resultMap;
             }
-            // console.log(response);
         });
     }
     getTestRoles() {
@@ -679,7 +641,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testRoles = resultMap;
             }
-            // console.log(response);
         });
     }
 
@@ -732,7 +693,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testFacilities = resultMap;
             }
-            // console.log(response);
         });
     }
 
@@ -755,7 +715,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testAllModes = resultMap;
             }
-            // console.log(response);
         });
     }
 
@@ -778,7 +737,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testTypes = resultMap;
             }
-            // console.log(response);
         });
     }
 
@@ -801,7 +759,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.testStatus = resultMap;
             }
-            //console.log(response);
         });
     }
     getProjectCodes() {
@@ -823,7 +780,6 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.projectCodes = resultMap;
             }
-            //console.log(response);
         });
     }
     getBuildLevels() {
@@ -845,21 +801,18 @@ export class DetailsComponent implements AfterViewInit {
                 }
                 this.buildLevels = resultMap;
             }
-            //console.log(response);
         });
     }
 
     getTestFacilityRoleService() {
         this.testfacilityroleservice.getByIdusing(this.id)
             .subscribe(TestFacilityRoles => {
-            //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                 this.TestFacilityRoles = TestFacilityRoles;
             });
     }
     getTestFacilityAttachmentServiceById() {
         this.testfacilityattachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
-                console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
     }
@@ -902,7 +855,6 @@ export class DetailsComponent implements AfterViewInit {
             this.filteredSelectedUserNames = null;
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
-          //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.TestFacilityRoles = TestFacilityRoles;
                 });
         });
@@ -929,7 +881,6 @@ export class DetailsComponent implements AfterViewInit {
 
             this.testFacilityService.getTenants(this.id)
                 .subscribe(res => {
-                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.testFacilityTenants = res;
                 });
         });
@@ -946,13 +897,9 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-
-
-        console.log("stringify --------", JSON.stringify(this.comment));
         this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
-                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.testFacilityLogComments = res;
                 });
 
@@ -978,7 +925,6 @@ export class DetailsComponent implements AfterViewInit {
 
             this.testFacilityService.getEquipmentsByIdusing(this.id)
                 .subscribe(res => {
-                    //          console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                     this.TestFacilityEquipments = res;
                 });
         });
@@ -993,8 +939,6 @@ export class DetailsComponent implements AfterViewInit {
         });
     }
     onSubmit(formRef) {
-        //console.log(formRef);
-        //console.log(this.testFacility.name);
         formRef.isDeleted = false;
         let formData: any = {
             id: this.id,
@@ -1024,7 +968,6 @@ export class DetailsComponent implements AfterViewInit {
         formData.address.state = formRef.state;
         formData.address.postalCode = formRef.postalCode;
         formData.locale = "en-us";
-        console.log(formData);
         this.testFacilityService.postUpdate(formData).subscribe(res => {
 
             if (res.isSuccess) {
@@ -1048,32 +991,27 @@ export class DetailsComponent implements AfterViewInit {
         }
     }
     onDelete(TestFacilityAttachment: ITestFacilityAttachment) {
-        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
         this.testfacilityattachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
             .subscribe(res => {
 
                 this.testfacilityattachmentservice.getByIdusing(this.id)
                     .subscribe(TestFacilityAttachments => {
-          //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                         this.TestFacilityAttachments = TestFacilityAttachments;
                     });
             });
     }
 
     onDeleteUserRoleMap(event) {
-        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
         this.testFacilityService.DeleteUserRoleMap(event)
             .subscribe(res => {
 
                 this.testfacilityroleservice.getByIdusing(this.id)
                     .subscribe(TestFacilityRoles => {
-                        //              console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                         this.TestFacilityRoles = TestFacilityRoles;
                     });
             });
     }
     onDeleteEquipmentMap(event) {
-        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
         this.testFacilityService.DeleteEquipmentMap(event)
             .subscribe(res => {
 
@@ -1085,13 +1023,11 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
     onDeleteTenantMap(event) {
-        //console.log('--------------TestFacilityAttachment id0------------', TestFacilityAttachment);
         this.testFacilityService.DeleteTenantMap(event)
             .subscribe(res => {
 
                 this.testFacilityService.getTenants(this.id)
                     .subscribe(res => {
-                        //    console.log('-----------  TestFacilitiesroles------------------', TestFacilityRoles);
                         this.testFacilityTenants = res;
                     });
 
@@ -1116,7 +1052,6 @@ export class DetailsComponent implements AfterViewInit {
 
         this.testfacilityattachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
-                //console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
 
@@ -1128,18 +1063,15 @@ export class DetailsComponent implements AfterViewInit {
         this.entityIdentifierService.getByName(this.entityIdentifierName)
             .subscribe(res => {
                 if(res.isSuccess) {
-                    console.log("EntityIdentifierInfo Call ----------", res);
                     this.entityIdentifierInfo = res.result;
 
                     this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
                         .subscribe(fsCategory => {
-                            console.log("FormSchemaCategoryInfo ----------", fsCategory);
                             if(fsCategory.isSuccess) {
                                 this.formSchemaCategoryInfo = fsCategory.result;
 
                                 let fscIds = this.formSchemaCategoryInfo.map(fsc => fsc.id);
 
-                                console.log("Form Schema Category Ids -----", fscIds);
 
                                 /*this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
                                     .subscribe(formSchemaResult => {
@@ -1174,24 +1106,17 @@ export class DetailsComponent implements AfterViewInit {
         this.selectedFormName = formName;
         this.selectedFormFields = formSchemaItems;
         this.displayPreviewSelectedForm = true;
-        console.log("FormName -------", this.selectedFormName);
-        console.log("Form Schema To View clicked ----", this.selectedFormFields);
-        console.log("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
     }
 
     closeFormPreviewDialog() {
         this.displayPreviewSelectedForm = false;
         this.selectedFormName = '';
         this.selectedFormFields = [];
-        console.log("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
-        console.log("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
-        console.log("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
     }
 
 
     // Entering data to the form to create a Form Instance
     showFormInstance(formSchema) {
-        console.log("ShowFOrmInstance ----", formSchema);
         this.selectedFormName = formSchema.name;
         this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
         this.formInstanceFields = formSchema.fields.$values;

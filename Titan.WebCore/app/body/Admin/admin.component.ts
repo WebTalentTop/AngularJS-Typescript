@@ -15,11 +15,9 @@ export class AdminComponent {
         this.items = [];
         let adminBC = breadCrumbs.filter(item => item.pageName === 'Admin')[0];
         this.items = adminBC.items;
-        console.log('Bread Crumbs for Admin', adminBC);
     }
 
     ngOnInit() { }
     bcNavigation(event) {
-        console.log("Event of navigation ----", event);
     }
 }

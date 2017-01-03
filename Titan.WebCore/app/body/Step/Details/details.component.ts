@@ -109,7 +109,6 @@ export class DetailsComponent {
                 }
                 this.testStages = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -190,7 +189,6 @@ export class DetailsComponent {
     onSubmit(formRef) {
         
         this.service.postUpdate(this.stepDetails).subscribe(res => { 
-            console.log(res);
             if (res.isSuccess){
                 if (!this.isDisplayComponentInPopUp) {
                     this.router.navigate(["/step/"]);

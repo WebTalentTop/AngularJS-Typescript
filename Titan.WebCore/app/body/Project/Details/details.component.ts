@@ -28,16 +28,13 @@ export class DetailsComponent {
                 this.ProjectDetails = ProjectDetails.result;
                 this.ProjectDetails.plannedStartDate = new Date(this.ProjectDetails.plannedStartDate);
                 this.ProjectDetails.plannedEndDate = new Date(this.ProjectDetails.plannedEndDate);
-                this.ProjectDetails.id = this.projectId;
-                console.log(this.ProjectDetails);     
+                this.ProjectDetails.id = this.projectId;    
             });
         });
     }
 
     
     onSubmit(){
-        console.log("inside");
-
         this.service.putProjectDetails(this.ProjectDetails).subscribe(ProjectDetails => {console.log(ProjectDetails);  
             });
     }

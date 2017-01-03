@@ -51,7 +51,6 @@ export class DetailsComponent {
                 setTimeout(function () {
                     obj.spreadInstance = new GC.Spread.Sheets.Workbook($("#torqueSheetSpreadContainer").get(0));
                     obj.spreadInstance.isPaintSuspended(true);
-                    console.log(obj.torqueSheetDetails.contents);
                     obj.spreadInstance.fromJSON(JSON.parse(obj.torqueSheetDetails.contents));
                     obj.spreadInstance.isPaintSuspended(false);
                 }, 200);

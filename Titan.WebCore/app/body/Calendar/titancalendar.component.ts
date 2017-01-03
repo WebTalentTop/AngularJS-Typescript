@@ -173,7 +173,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 return groupValue;
             },
             resources: function (callback) {
-                console.log("----Resources Loading ------");
                 $.ajax({
                     url: titanApiUrl + 'Calendar/ResourcesForTimelineView',
                     data: {
@@ -190,7 +189,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                         alert('there was an error while fetching events!');
                     },
                     success: function (data) {
-                        console.log("----Resources Loaded ------" + data.result.calendarResources.$values);
                         callback(data.result.calendarResources.$values);
                     }
                 });
@@ -216,9 +214,7 @@ export class TitanCalendarComponent implements AfterViewInit {
                             var events = [];
                             $.each(result.calendarEvents.$values, function (index, item) {
                                 events.push(item);
-                                console.log('------item------------', item)
                             });
-                            console.log('------Event Source callback------------', events)
                             callback(events);
                         }
                     });
@@ -239,7 +235,6 @@ export class TitanCalendarComponent implements AfterViewInit {
             },
             eventClick: function (calEvent, jsEvent, view) {
                 self.displayEventDialog = true;
-                console.log("---click is blocked--");
                 return false;
             },
 
@@ -301,7 +296,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                         selfRef.testName = $(this).attr("testName");
 
                         selfRef.displayEventDialogHeader = `${selfRef.testName}`;
-                        console.log("----Clicked Assign resource")
                         break;
                     }
                     case "Details": {
@@ -337,42 +331,27 @@ export class TitanCalendarComponent implements AfterViewInit {
     }
 
     onBuildLevelChange(event) {
-        console.log('------updating selected build levels------------', event)
         this.selectedBuildLevels = (event.value);
-        console.log(this.selectedBuildLevels);
     }
 
     onProjectCodeChange(event) {
-        console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
-        console.log(this.selectedProjectCodes);
-        //   this.EquipmentSubType.calibrationform = (event);
-
     }
 
     onTestFacilityChange(event) {
-        console.log('------event------------', event)
         this.selectedTestFacilities = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
 
     }
 
     onTestModeChange(event) {
-        console.log('------event------------', event)
         this.selectedTestModes = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
-
     }
 
     onTestTypeChange(event) {
-        console.log('------event------------', event)
         this.selectedTestTypes = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
-
     }
 
     onTestStatusChange(event) {
-        console.log('------event------------', event)
         this.selectedTestStatuses = (event.value);
     }
 
@@ -402,7 +381,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.testRoles = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -425,7 +403,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.testFacilities = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -448,7 +425,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.testAllModes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -471,7 +447,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -495,7 +470,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.testStatus = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -518,7 +492,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.projectCodes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -541,7 +514,6 @@ export class TitanCalendarComponent implements AfterViewInit {
                 }
                 this.buildLevels = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -562,7 +534,7 @@ export class TitanCalendarComponent implements AfterViewInit {
     }
 
     filterCalendarEvents(event) {
-        console.log("--inside filterCalendarEvents")
+        // console.log("--inside filterCalendarEvents")
         // We may be able to do pure client side filtering. Need to investigate. 
         //For now lets go to the server.
         let start = moment().utc();
@@ -571,7 +543,6 @@ export class TitanCalendarComponent implements AfterViewInit {
         let testFacilityEventSource = $("#calendar").fullCalendar('getEventSourceById', 'testFacilityEventSource');
         $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource)
         $("#calendar").fullCalendar('removeEventSource', { id: 'testFacilityEventSource' });
-        console.log("-- Clearing the events");
 
         debugger;
         var payload = {
@@ -586,7 +557,7 @@ export class TitanCalendarComponent implements AfterViewInit {
 
 
         };
-        console.log(payload);
+        // console.log(payload);
         //this.initSchedule();
         var source1 = {
             id: 'testFacilityEventSource',
@@ -602,15 +573,12 @@ export class TitanCalendarComponent implements AfterViewInit {
                         var events = [];
                         $.each(result.calendarEvents.$values, function (index, item) {
                             events.push(item);
-                            console.log('------item------------', item)
                         });
-                        console.log('------Event Source callback------------', events)
                         callback(events);
                     }
                 });
             }
         }
-        console.log(source1);
         $("#calendar").fullCalendar('addEventSource', source1);
 
 
@@ -627,17 +595,14 @@ export class TitanCalendarComponent implements AfterViewInit {
 
     filterTestFacilityNames(event) {
         this.testfacilityservice.getTestFacilities().subscribe(filteredList => {
-            console.log("---", filteredList);
             this.filteredTestFacilityNames = filteredList;
         })
     }
 
     scheduleUsers(event) {
-        console.log(this.filteredselectedOperatorUserNames)
 
         let {displayName, firstName, id} = this.filteredselectedOperatorUserNames;
 
-        console.log(displayName, firstName, id)
         let item = {
             name: displayName,
             startDate: '1-1-2016',
@@ -646,9 +611,7 @@ export class TitanCalendarComponent implements AfterViewInit {
             testFacility: this.selectedFacilityForOperator
         };
         this.testOperators.push(item);
-        console.log("-----------inside scheduleUsers---", item);
         var selectedEvent = $("#calendar").fullCalendar('clientEvents', this.selectedEventId)
-        console.log("-----------Selected Event---", selectedEvent);
 
         //  We can add an event here using the renderEvent or renderEvents  .fullCalendar( 'renderEvent', event [, stick ] )
     }
@@ -656,11 +619,8 @@ export class TitanCalendarComponent implements AfterViewInit {
 
     scheduleFacilities(event) {
 
-        console.log("insie Yadik")
-
         let {name, id} = this.filteredselectedTestFacilityNames;
 
-        console.log(name, id)
         let item = {
             name: name,
             startDate: '1-1-2016',
@@ -691,12 +651,10 @@ export class TitanCalendarComponent implements AfterViewInit {
             }
         });
 
-        console.log("after generateTestFacilitySelectItems", selectedItems);
         return selectedItems;
     }
 
     removeOperator(operator) {
-        console.log(operator);
     }
 
 

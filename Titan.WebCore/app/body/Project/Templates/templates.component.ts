@@ -34,14 +34,12 @@ export class TemplatesComponent {
     }
 
     onAddTorqueSheetTemplateConfirmation() {
-        //console.log(JSON.stringify(this.spreadInstance.toJSON()));
         var data = {
             name: this.TemplateName,
             contents: JSON.stringify(this.spreadInstance.toJSON()) 
         }
         this.service.postTorqueSheetTemplate(data).subscribe(res => {
             this.closeTemplateWindow();
-            console.log('Success')
         });
         //this.spreadInstance = null;
     }

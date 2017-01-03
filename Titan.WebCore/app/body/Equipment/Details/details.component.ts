@@ -59,13 +59,10 @@ export class DetailsComponent {
         this.route.params.subscribe(params => this.id = params['id']);
         this.equipmentId = this.id;
         this.model.id = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
     }
    handleChange(event)
    {
 
-       console.log('tes---',event);
-       console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
        this.getEquipmentManufacturers();
@@ -91,7 +88,6 @@ export class DetailsComponent {
     }
 
    onEquipmentManufacturerChange(event) {
-       console.log('------event------------', event)
        this.selectedEquipmentManufacturerId = (event.value);
        //   this.EquipmentSubType.calibrationform = (event);
 
@@ -115,18 +111,15 @@ export class DetailsComponent {
                }
                this.equipmentManufacturers = resultMap;
            }
-           console.log(response);
        });
    }
 
    onEquipmentTypeChange(event) {
-       console.log('------event------------', event)
        this.selectedEquipmentTypeId = (event.value);
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
    onTestFacilityChange(event) {
-       console.log('------event------------', event)
        this.selectedTestFacilityId = (event.value);
        //   this.EquipmentSubType.calibrationform = (event);
 
@@ -150,7 +143,6 @@ export class DetailsComponent {
                }
                this.testFacilities = resultMap;
            }
-           console.log(response);
        });
    }
    getEquipmentTypes() {
@@ -172,12 +164,9 @@ export class DetailsComponent {
                }
                this.equipmentTypes = resultMap;
            }
-           console.log(response);
        });
    }
-   onEquipmentSave() {
-      // console.log(formRef);
-      
+   onEquipmentSave() {   
      //  formRef.isDeleted = false;
        let formData: any = {
            id: this.id,
@@ -218,7 +207,6 @@ export class DetailsComponent {
        //formData.address.state = formRef.state;
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
-       //console.log(formData);
        this.service.postUpdate(this.model).subscribe(res => {
 
            if (res.isSuccess) {

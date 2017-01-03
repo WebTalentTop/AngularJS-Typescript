@@ -26,7 +26,6 @@ export class ProjectComponent {
         let resData: any;
         this.service.postGridData()
             .subscribe(res => {
-                console.log("inside proj grid");
                 resData = res;
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;

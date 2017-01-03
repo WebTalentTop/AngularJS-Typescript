@@ -32,12 +32,12 @@ export class AccessComponent {
                 filter.pageName === 'AccessHomePage'
             )[0];
 
-            console.log("BreadC -----", breadC);
-            console.log("accessBreadCrumb ---------", accessBreadCrumb);
+            // console.log("BreadC -----", breadC);
+            // console.log("accessBreadCrumb ---------", accessBreadCrumb);
             this.breadcrumbs = [];
             this.breadcrumbs = accessBreadCrumb.items;
 
-            console.log("breadcurmbs ------", this.breadcrumbs);
+            // console.log("breadcurmbs ------", this.breadcrumbs);
 
             this.breadcrumbsHome = { routerLink: ['/'] };
         });
@@ -51,7 +51,7 @@ export class AccessComponent {
         this.service.postGridData()
             .subscribe(res => {
                 resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
+                // console.log("Inside of Service Call in BodyComponent: ", resData);
 
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
@@ -59,8 +59,8 @@ export class AccessComponent {
                 this.confInfo = res.Configuration;
                 //console.log("------- Configuration --------", this.confInfo);
             });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
+        // console.log("The Whole MyValues After Service Call: ", this.gridData);
+        // console.log("The Whole configuration Info values: ", this.confInfo);
         
     }
     navigateDetails(id:string){

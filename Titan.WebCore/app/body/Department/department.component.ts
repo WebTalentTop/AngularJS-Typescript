@@ -22,29 +22,20 @@ export class DepartmentComponent {
         this.dataService.postGridData()
             .subscribe(res => {
                 resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
 
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
                 this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
             });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
     }
 
     loadFreshDepartments(event: LazyLoadEvent) {
         setTimeout(() => {
-            console.log("----------insede settimeout: ", event);
             this.getGridFilterValues(event);
             let js = JSON.stringify(this.gridFilter);
 
-                console.log("----------- GridFilter ---------", this.gridFilter);
-                console.log("-------- Grid Filter JS --------", JSON.parse(js));
             this.dataService.postGridDataFilter(JSON.parse(js))
                 .subscribe(res => {
-                    console.log("------ ResData in postCustomersFilterSummary -----", res);
                     let resData = res;
                     this.gridData = res.Data;
                     this.confInfo = res.Configuration;
@@ -52,8 +43,6 @@ export class DepartmentComponent {
                 });
         },
             250);
-        console.log("---------- Event ---------",event);
-
     }
     private getGridFilterValues(event: LazyLoadEvent) {
         let sortColumn = (typeof event.sortField === 'undefined') ? [] : [{ columnId: event.sortField, sortOrder: event.sortOrder }];
@@ -71,7 +60,6 @@ export class DepartmentComponent {
                         value: fil
                     });
                 }
-                console.log("------- filters ----------", filters);
             }
         }
         this.gridFilter = {

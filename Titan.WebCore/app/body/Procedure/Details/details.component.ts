@@ -77,7 +77,6 @@ export class DetailsComponent {
     }
 
     onAddStepComplete(newStepId) {
-        console.log(newStepId);
         var selectedStepIds = new Array();
         selectedStepIds.push(newStepId);
         this.procedureService.postAddSteps(selectedStepIds, this.procedure.id).subscribe(filteredList => {
@@ -180,7 +179,6 @@ export class DetailsComponent {
      }
 
     filterTestRequirements(event) {
-        console.log(this.procedure);
         this.testrequirementService.filterByProcedureId(this.procedure.id, event.query).subscribe(filteredList => {
             this.filteredTestRequirements = filteredList.$values;
         });
@@ -188,7 +186,6 @@ export class DetailsComponent {
 
     filterSteps(event) {
         this.stepService.filterByProcedureId(this.procedure.id, event.query).subscribe(response => {
-        console.log(response);
             if (response.isSuccess)
                 this.filteredSteps = response.result;
         });
@@ -214,7 +211,6 @@ export class DetailsComponent {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -260,14 +256,12 @@ export class DetailsComponent {
                     this.testModes = testMode;
                 }
             }
-            console.log(response);
         });
     }
 
     onSubmit() {
 
         this.procedureService.postUpdate(this.procedure).subscribe(res => {
-            console.log(res)
             //this.router.navigate(['procedure/details', res.$values.id]);
         });
     }

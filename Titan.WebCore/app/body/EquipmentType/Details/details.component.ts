@@ -73,11 +73,8 @@ export class DetailsComponent implements OnInit {
         // this.selectedCalibration="BMW";
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
-        console.log("---- TF Details ID Param -----", this.id);
     }
     handleChange(event) {
-        console.log('tes---', event);
-        console.log('-------targetid-------', event.originalEvent.target.innerText);
     }
     ngOnInit() {
         this.dataService.getById(this.id) 
@@ -89,12 +86,9 @@ export class DetailsComponent implements OnInit {
                 this.model.parentId = res.parentId;
                 this.model.name = res.name;
                 this.model.description = res.description; 
-                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                console.log("----- Result of formObject -----", this.model);
                 this.dataService.getSubTypesById(this.model.id)
                     .subscribe(result => {
                         this.EquipmentsubTypes = result.$values;
-                        console.log("----- Result of formObject -----", this.model);
                     });
             });
 
@@ -103,7 +97,6 @@ export class DetailsComponent implements OnInit {
 
 
     onEdit() {
-        console.log('d---------------updateddescriptions-------------', this.model);
 
         this.dataService.postUpdate(this.model)
             .subscribe(res => {
@@ -112,19 +105,13 @@ export class DetailsComponent implements OnInit {
                 //this.model.description = res.description;
                 //this.msgs = [];
                 //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-                //   console.log("----- Result of formObject -----", this.model);
             });
 
 
         this.EquipmentsubTypes.forEach((subtype: any) => {
-            console.log('----------isdeleted----', subtype);
-            console.log('----------isdeleted----', subtype.isdeleted);
            // if (subtype.isdeleted =='' )
                 this.dataService.postAdd(subtype)
                     .subscribe(res1 => {
-
-                        console.log("----- Result of subtypes creation -----", res1);
                     });
           
         });
@@ -189,8 +176,6 @@ export class DetailsComponent implements OnInit {
                         this.EquipmentsubTypes = result.$values;
 
                     });
-                //  console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$descriptions);
-
             });
         // this.EquipmentSubType = null;
         this.displayDialog = false;

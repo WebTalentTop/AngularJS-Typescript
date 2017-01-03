@@ -91,8 +91,6 @@ export class DetailsComponent {
             this.entityId = params['entityId'];
         });
         this.testRequestSensorId = this.id;
-       // this.entityId=
-        console.log("---- TF Details ID Param -----", this.id);
     }
     //ngAfterViewInit() {
 
@@ -211,7 +209,6 @@ export class DetailsComponent {
     //        });
     }
     onSensorChange(event) {
-        console.log('------event------------', event)
         this.selectedSensorTypeId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -235,7 +232,6 @@ export class DetailsComponent {
                 }
                 this.Sensors = resultMap;
             }
-            console.log(response);
         });
     }
     //onUserRoleChange(event) {
@@ -332,15 +328,12 @@ export class DetailsComponent {
         //formData.address.state = formRef.state;
         //formData.address.postalCode = formRef.postalCode;
         //formData.locale = "en-us";
-        console.log(formData);
         this.dataService.postUpdate(formData).subscribe(res => {
-            console.log("-------- Test Sensor Adding new result ----- ", res);
             if (res.IsSuccess) {
                 this.router.navigate(["/testrequest/details/", this.id]);
             }
         });
         this.dataService.postCommentUpdate(formCommentData).subscribe(res => {
-            console.log("-------- Test Sensor Adding new result ----- ", res);
             if (res.IsSuccess) {
                 this.router.navigate(["/testrequest/details/", this.id]);
             }

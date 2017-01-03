@@ -127,7 +127,6 @@ export class TorqueBookComponent {
         }
         this.torqueSheetService.putTorqueSheetTemplate(data).subscribe(res => {
             this.closeTemplateWindow();
-            console.log('Success')
         });
     }
 
@@ -144,7 +143,6 @@ export class TorqueBookComponent {
     }
 
     onTemplateChange(event, value){
-        //console.log(this.selectedTemplate);
         this.initializeTemplate(this.selectedTemplate.contents);
     }
 
@@ -155,7 +153,6 @@ export class TorqueBookComponent {
         setTimeout(function () {
             obj.spreadInstance = new GC.Spread.Sheets.Workbook($("#torqueSheetSpreadContainer").get(0));
             obj.spreadInstance.isPaintSuspended(true);
-            console.log(contents);
             obj.spreadInstance.fromJSON(JSON.parse(contents));
             obj.spreadInstance.isPaintSuspended(false);
         }, 200);

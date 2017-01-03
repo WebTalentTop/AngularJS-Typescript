@@ -50,7 +50,6 @@ export class AddComponent {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -80,7 +79,6 @@ export class AddComponent {
                 }];
                 this.testModes = testMode;
             }
-            console.log(response);
         });
     }
 

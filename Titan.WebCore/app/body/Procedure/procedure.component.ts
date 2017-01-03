@@ -29,16 +29,11 @@ export class ProcedureComponent {
                 resData = res;
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
-                //console.log("-------- Cols --------", this.cols);
                 this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
             });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
     }
 
     navigateDetails(id:string){
-        console.log("----- Procedure Navigate Details -----", id);
         this.router.navigate(['procedure/details', id]);
     }
 

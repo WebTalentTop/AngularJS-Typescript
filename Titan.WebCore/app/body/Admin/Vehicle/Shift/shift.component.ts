@@ -38,12 +38,12 @@ export class ShiftComponent {
                 filter.pageName === 'ShiftHomePage'
             )[0];
 
-            console.log("BreadC -----", breadC);
-            console.log("shiftBreadCrumb ---------", shiftBreadCrumb);
+            // console.log("BreadC -----", breadC);
+            // console.log("shiftBreadCrumb ---------", shiftBreadCrumb);
             this.breadcrumbs = [];
             this.breadcrumbs = shiftBreadCrumb.items;
 
-            console.log("breadcurmbs ------", this.breadcrumbs);
+            // console.log("breadcurmbs ------", this.breadcrumbs);
 
             this.breadcrumbsHome = { routerLink: ['/'] };
 
@@ -58,7 +58,7 @@ export class ShiftComponent {
         this.service.postGridData()
             .subscribe(res => {
                 resData = res;
-                console.log("Inside of Service Call in BodyComponent: ", resData);
+                // console.log("Inside of Service Call in BodyComponent: ", resData);
 
                 this.gridData = res.Data;
                 this.cols = res.Configuration.Columns;
@@ -66,8 +66,8 @@ export class ShiftComponent {
                 this.confInfo = res.Configuration;
                 //console.log("------- Configuration --------", this.confInfo);
             });
-        console.log("The Whole MyValues After Service Call: ", this.gridData);
-        console.log("The Whole configuration Info values: ", this.confInfo);
+        // console.log("The Whole MyValues After Service Call: ", this.gridData);
+        // console.log("The Whole configuration Info values: ", this.confInfo);
 
     }
     navigateDetails(id: string) {

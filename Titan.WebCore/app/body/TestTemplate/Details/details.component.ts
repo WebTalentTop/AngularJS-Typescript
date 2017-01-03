@@ -40,7 +40,6 @@ export class DetailsComponent {
         //};
         //this.testModes.push(testMode);
         this.route.params.subscribe(params => {
-            console.log(params);
             this.testTemplateService.getById(params['id']).subscribe(res => {
                 this.testTemplate = res.result;
                 //if (this.testTemplate.testTypeId != null) {
@@ -111,7 +110,6 @@ export class DetailsComponent {
                 }
                 this.testTypes = resultMap;
             }
-            console.log(response);
         });
     }
 
@@ -141,14 +139,12 @@ export class DetailsComponent {
                 }];
                 this.testModes = testMode;
             }
-            console.log(response);
         });
     }
 
     onSubmit() {
 
         this.testTemplateService.postUpdate(this.testTemplate).subscribe(res => {
-            console.log(res)
             //this.router.navigate(['testtemplate/details', res.$values.id]);
         });
     }

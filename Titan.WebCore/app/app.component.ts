@@ -19,15 +19,12 @@ export class AppComponent {
     constructor(private el: ElementRef) { }
 
     ngAfterViewInit() {
-        console.log("----- Native Element ---------", this.el.nativeElement);
         Ultima.init(this.el.nativeElement);
     }
 
     changeTheme(event, theme) {
         let themeLink: HTMLLinkElement = <HTMLLinkElement>document.getElementById('theme-css');
         let layoutLink: HTMLLinkElement = <HTMLLinkElement>document.getElementById('layout-css');
-
-        console.log("------- Theme --------", theme);
 
         themeLink.href = 'resources/theme/theme-' + theme + '.css';
         layoutLink.href = 'resources/layout/css/layout-' + theme + '.css';

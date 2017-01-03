@@ -19,9 +19,7 @@ export class ProjectDetailsMainComponent {
 
 
     ngOnInit() { 
-        console.log("test");
           this.route.params.subscribe(params => this.id = params['id']);
-        console.log("---- TF Details ID Param -----", this.id);
         // this.route.params.forEach((params: Params) => {
         //     let projectId = params['projectId']; // (+) converts string 'id' to a number
         //     //let locale = params['locale'];
