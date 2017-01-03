@@ -828,7 +828,10 @@ export class DetailsComponent implements AfterViewInit {
 
     onAddUserRole() {
 
-     
+        if (!this.IsKeepOpen)
+            this.displayAssignUserRolesDialog = false;
+        else
+            this.displayAssignUserRolesDialog = true;
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
@@ -841,32 +844,29 @@ export class DetailsComponent implements AfterViewInit {
             return null;
         }
 
-      /*  if (this.TestFacilityRoles.every(tfr => tfr.role == this.selectedRole && this.selectedRole == "Primary In Charge")) {
+        if ((this.TestFacilityRoles.find(tfr => tfr.role == "Primary Incharge") != undefined) && (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8")) {
             this.msgs = [];
             this.msgs.push({ severity: 'info', summary: 'Already user with PIC present', detail: '' });
             return null;
         }
 
-        if (this.filteredSelectedUserNames.length > 0 && this.selectedRole == "Primary In Charge") {
+        if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8") {
             this.msgs = [];
             this.msgs.push({ severity: 'info', summary: 'Please select only one user for role PIC', detail: '' });
             return null;
         }
-        if (this.TestFacilityRoles.every(tfr => tfr.role == this.selectedRole && this.selectedRole == "Secondary In Charge")) {
+        if ((this.TestFacilityRoles.find(tfr => tfr.role == "Secondary Incharge") != undefined) && (this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Already user with PIC present', detail: '' });
+            this.msgs.push({ severity: 'info', summary: 'Already user with SIC present', detail: '' });
             return null;
         }
 
-        if (this.filteredSelectedUserNames.length > 0 && this.selectedRole == "Secondary In Charge") {
+        if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role PIC', detail: '' });
+            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role SIC', detail: '' });
             return null;
-        }*/
-        if (!this.IsKeepOpen)
-            this.displayAssignUserRolesDialog = false;
-        else
-            this.displayAssignUserRolesDialog = true;
+        }
+       
 
         var selectedUserNames = new Array();
         for (var sel of this.filteredSelectedUserNames) {
