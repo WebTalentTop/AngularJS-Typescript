@@ -1,13 +1,13 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <h3>Details</h3>
+        <h3>Add New Work Request</h3>
         <p-tabView (onChange)="handleChange($event)">
 
-            <p-tabPanel header="Info ||" id="info">
+            <p-tabPanel header="Work Request Details ||" id="info">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default ">
-                            <div class="panel-heading">Add New Test Request</div>
+                            <div class="panel-heading"></div>
                             <p-growl [value]="msgs"></p-growl>
                             <div class="panel-body">
                                 <div class="row">
@@ -23,26 +23,37 @@
                                                                        placeholder="Test Number"
                                                                        class="form-control">
                                                             </div>-->
-                                                            
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label col-sm-12 pl0">Work Request Title</label>
+                                                                <input type="text" [(ngModel)]="workRequestTitle" name="title"
+                                                                       placeholder="Work Request Title"
+                                                                       class="form-control">
+                                                            </div>
+
                                                             <div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label col-sm-12 pl0">Project Code :</label>
                                                                 <p-dropdown [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
                                                                 </p-dropdown>
                                                             </div>
 
+                                                             <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label col-sm-12 pl0">Build Levels :</label>
+                                                                <p-dropdown [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+
                                                             <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label col-sm-12 pl0">Vehicle Number</label>
-                                                                <input type="text" [(ngModel)]="vehicleNumber" name="number"
-                                                                       placeholder="Vehicle Number"
-                                                                       class="form-control">
+                                                                <label class="control-label col-sm-12 pl0"> Vehicle :</label>
+                                                                <p-dropdown [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
                                                             </div>
 
                                                             <div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label col-sm-12 pl0">Priority</label>
-                                                                <input type="text" [(ngModel)]="priority" name="number"
-                                                                       placeholder="Priority"
-                                                                       class="form-control">
+                                                                <p-dropdown [options]="priority" (onChange)="onPriorityChange($event)" name="priority" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
                                                             </div>
+                                                            
                                                             <div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label col-sm-12 pl0">Priority Reason</label>
                                                                 <input type="text" [(ngModel)]="priorityReason" name="number"
@@ -485,15 +496,15 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-sm-2">
+                                    <!--<div class="col-sm-2">
                                         Material Service Parts List
-                                    </div>
+                                    </div>-->
 
-                                    <div class="col-sm-10 col-md-4">
+                                    <!--<div class="col-sm-10 col-md-4">
                                         <button class="btn btn-success" ng-click="openAddBB();">
                                             <i class="fa fa-plus"></i> Add
                                         </button>
-                                    </div>
+                                    </div>-->
                                 </div>
 
 
@@ -506,22 +517,22 @@
                                         <div class="table-responsive" style="min-height:400px;">
                                             <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
                                              class="grid"></div>-->
-                                            <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+                                            <!--<p-dataTable [paginator]="true" rows="15" [responsive]="true">
                                                 <p-column header="PartNumber" sortable="true"></p-column>
                                                 <p-column header="DrawingNumber" sortable="true"></p-column>
                                                 <p-column header="Quantity Requested" sortable="true"></p-column>
                                                 <p-column header="Comments" sortable="true"></p-column>
-                                            </p-dataTable>
+                                            </p-dataTable>-->
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <div class="col-sm-6 col-md-4">
+                                <!--<div class="col-sm-6 col-md-4">
                                     <button class="btn btn-success">
                                         <i class="fa fa-plus"></i> Attachment
                                     </button>
-                                </div>
+                                </div>-->
 
 
 
