@@ -988,14 +988,7 @@ export class DetailsComponent implements AfterViewInit {
             this.filteredUserNames = filteredList.$values;
         });
     }
-  onFreq(e)
-  {
-    if (!this.IsFrequency)
-        this.testFacility.maintenanceFrequency = null;
-    else
-        this.testFacility.maintenanceFrequency ="42 3**5";
 
-  }
     onSubmit(formRef) {
         formRef.isDeleted = false;
         let formData: any = {
