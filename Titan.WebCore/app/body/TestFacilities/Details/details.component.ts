@@ -1074,7 +1074,7 @@ export class DetailsComponent implements AfterViewInit {
                         this.address = res.address;
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
-                       // this.frequencyInit();
+                        this.frequencyInit();
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
                         this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
