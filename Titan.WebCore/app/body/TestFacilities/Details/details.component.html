@@ -15,7 +15,7 @@
                 <p-growl [value]="msgs"></p-growl>
 
                 <div class="subsection">
-                   
+
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                         <h2>Next Maintainence Date: {{testFacility.nextMaintenanceDate}}</h2>
@@ -143,16 +143,16 @@
                                     </div>
 
                                 </div>-->
-                               
+
                                 <div class="input-row md-spaced">
-                                    <label>Maintenance Frequency</label>
-                                    <p-checkbox name="groupname" value="IsFrequency" label="Maintenance Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
-                                
-                                     
+                                    <label>Maintenance Frequency{{testFacility.maintenanceFacility}}</label>
+                                    <p-checkbox name="groupname" value="IsFrequency" label="Maintenance Frequency" [(ngModel)]="IsFrequency" binary="true" (ngModelChange)="onFreq($event)"></p-checkbox>
+
+
                                       <div class="md-inputfield">
-                                        <div id="selector"></div>
+                                        <div id="selector" [hidden]="!IsFrequency"></div>
                                     </div>
-                                  
+
                                 </div>
                                 <!-- End State -->
                                 <!-- Begin Description -->
@@ -160,7 +160,7 @@
                                 <div class="input-row md-spaced">
                                     <label>Description</label>
                                     <div class="md-inputfield">
-                                       
+
                                         <p-editor [(ngModel)]="testFacility.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                             <header>
                                                 <select class="ql-size">
@@ -178,7 +178,7 @@
                                             </header>
                                         </p-editor>
 
-                                        
+
                                     </div>
                                 </div>
 
@@ -385,7 +385,7 @@
                         <p class="controls"><button type="text" (click)="displayAssignEquipmentsDialog=true" pButton icon="ui-icon-person-add" label="Add Equipment&hellip;"></button></p>
                     </header>
                     <div class="ui-grid-col-4"></div>
-                   
+
                     <p-dataTable [value]="TestFacilityEquipments" selectionMode="single"
                                  [paginator]="true" rows="15" [responsive]="true">
                         <p-column field="equipmentName" header="Equipment Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
@@ -596,16 +596,16 @@
             <p-tabPanel header="Attachments" id="attachments">
                 <h2>Attachments</h2>
                 <p-growl [value]="msgs"></p-growl>
-              
+
                     <div class="ui-grid-col-1">
                         Category:
                     </div>
                     <div class="col-sm-12">
                         <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories" [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
-                    </div>                  
-               
+                    </div>
+
                 <!--<div class="ui-grid-col-2"></div>-->
-               
+
                     <p-fileUpload [name]="testfacility" url="{{titanApiUrl}}file/SaveDocuments/{{entityType}}/{{entityId}}/{{selectedCategory}}" (onUpload)="onUpload($event)"
                                   multiple="multiple" accept="image/*" maxFileSize="1000000">
                         <template pTemplate type="content">
@@ -634,7 +634,7 @@
                               </template>
                         </p-column>-->
                                     <p-column field="category" header="Category">
-                                       
+
                                             <template let-TestFacilityAttachment="rowData" pTemplate type="body">
                                                 <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
                                                 {{TestFacilityAttachment.category}}
@@ -644,7 +644,7 @@
                                     <!-- Begin Uploaded By Column -->
 
                                     <p-column field="employee" header="Employee">
-                                       
+
                                             <template let-TestFacilityAttachment="rowData" pTemplate type="body">
                                                 <!--<em style="color: #ddd">{{TestFacilityAttachment.employee}}</em>-->
                                                 {{TestFacilityAttachment.employee}}
@@ -678,7 +678,7 @@
                             </div>
                         </template>
                     </p-fileUpload>
-             
+
             </p-tabPanel>
 
             <p-tabPanel header="Log" id="log" headerStyleClass="log">

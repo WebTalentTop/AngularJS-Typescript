@@ -1,4 +1,4 @@
-﻿
+
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 
@@ -57,7 +57,7 @@ declare var cron: any;
 })
 export class DetailsComponent implements AfterViewInit {
 
-    IsFrequency: boolean = false;
+    IsFrequency: boolean =false;
     frequency: any;
     titanApiUrl: any = titanApiUrl;
     username: string;
@@ -189,7 +189,7 @@ export class DetailsComponent implements AfterViewInit {
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
-        
+
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesDetailsBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'TestFacilitiesDetailsPage'
@@ -239,10 +239,11 @@ export class DetailsComponent implements AfterViewInit {
     {
        // var cron_field = $('#selector').cron();
       //  if (IsFrequency && cron_field != null) {
+
             if (this.testFacility.maintenanceFrequency != null)
-            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
+            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; this.IsFrequency=true;}
             else
-            { this.selectedMaintenanceFrequency = "* * * * *"; }
+            { this.selectedMaintenanceFrequency = "* * * * *"; this.IsFrequency=false;}
 
             $("#selector").cron({
 
@@ -655,6 +656,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
+                if (this.testFacility.maintenanceFrequency==null) this.IsFrequency=false;
+                else this.IsFrequency=true;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
@@ -828,7 +831,7 @@ export class DetailsComponent implements AfterViewInit {
 
     onAddUserRole() {
 
-     
+
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
@@ -963,6 +966,14 @@ export class DetailsComponent implements AfterViewInit {
             this.filteredUserNames = filteredList.$values;
         });
     }
+  onFreq(e)
+  {
+    if (!this.IsFrequency)
+        this.testFacility.maintenanceFrequency = null;
+    else
+        this.testFacility.maintenanceFrequency ="42 3**5";
+
+  }
     onSubmit(formRef) {
         formRef.isDeleted = false;
         let formData: any = {
@@ -985,7 +996,9 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.maintenanceFrequency = $('#selector').cron("value");
+        //formData.maintenanceFrequency = this.IsFrequency?$('#selector').cron("value"):null;
+
+        formData.maintenanceFrequency =this.testFacility.maintenanceFrequency;
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;

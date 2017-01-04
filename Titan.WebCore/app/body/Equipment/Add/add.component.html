@@ -6,196 +6,190 @@
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                 <h3> Add Equipment </h3>
+                <p-panel header="Basic Information">
+                  <div class="body">
+                      <!-- Begin Name -->
+                      <div class="input-row">
+                          <div class="md-inputfield">
+                              <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
+                                     minlength="3" class="form-control" required row="20">
+                              <label>Name <span >*</span></label>
+                          </div>
+                      </div>
+                      <!-- End Name -->
+                      <!-- Begin Serial # -->
+                      <div class="input-row md-spaced">
+                          <div class="md-inputfield">
+                              <input type="text" id="name" pInputText name="serial" [(ngModel)]="serialNumber" #testFacilityNameRef="ngModel"
+                                     minlength="3" class="form-control"  row="20">
+                           <label>Serial #</label>
+                          </div>
+                      </div>
+                      <!-- End Serial# -->
+                      <!-- Begin Equipment Type # -->
+                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
+                            <label>Equipment Type</label>
+                            <p-dropdown   [style]="{'width':'200px'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
+                            </p-dropdown>
+                      </div>
+                      <!-- End Equipment Type -->
+                      <!-- Purchased Price -->
+                      <div class="input-row md-spaced">
+                          <div class="md-inputfield">
+                              <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="purchasePrice">
+                           <label>Purchased Price</label>
+                          </div>
+                      </div>
+                      <!-- Purchased Price -->
+                      <!--Year Purchased-->
+                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
+                          <div class="ui-grid-col-6">
+                            <label class="control-label">Year Purchased </label>
+                            <p-calendar [(ngModel)]="purchaseDate"name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
+                          </div>
+                          <div class="ui-grid-col-6">
+                            <label class="control-label">Warranty Until</label>
+                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
+                          </div>
+                      </div>
+                      <!--End Year-->
+                      <!-- Location -->
+                      <div class="input-row md-spaced">
+                          <div class="md-inputfield">
+                              <input type="text" id="name" pInputText name="location" [(ngModel)]="location">
+                           <label>Location</label>
+                          </div>
+                      </div>
+                      <!-- End Location -->
+                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
+                          <label class="control-label col-sm-12 pl0">  Test Facility :</label>
+                          <p-dropdown [style]="{'width':'200px'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                          </p-dropdown>
+                      </div>
+                      <!--Calibration Date-->
+                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
+                          <div class="ui-grid-col-6">
+                            <label class="control-label">Last Calibration Date </label>
+                            <p-calendar [(ngModel)]="lastcalibrationDate"name="lastcalibrationDate" showTime="true" [showIcon]="true"></p-calendar>
+                          </div>
+
+                      </div>
+                      <!--End Calibration Date-->
+                      <!--Calibration Frequency-->
+                      <div class="input-row md-spaced">
+                          <label>Calibration Frequency{{testFacility.maintenanceFacility}}</label>
+                          <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
+                            <div class="md-inputfield">
+                              <div id="selector" [hidden]="!IsFrequency"></div>
+                          </div>
+
+                      </div>
+                      <!--Calibration Frequency-->
+                      <!--Begin Description-->
+                      <div class="md-spaced" style="margin-top:40px;">
+                          <label>Description</label>
+                          <div class="md-inputfield">
+
+                              <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <header>
+                                      <select class="ql-size">
+                                          <option value="small"></option>
+
+                                          <option selected></option>
+                                          <option value="large"></option>
+                                          <option value="huge"></option>
+                                      </select>
+                                      <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                      </span>
+                                  </header>
+                              </p-editor>
+                          </div>
+                      </div>
+                      <!--End Description-->
+                  </div>
+                  <footer>
+                      <p>* indicates required field</p>
+                      <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipment"></button>
+                      <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"></button>
+                  </footer>
+                </p-panel><br />
                 <p-panel>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel panel-default ">
-                                <div class="panel-heading">Basic Information</div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">                                          
-                                                <div class="row">
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">Name</label>
-                                                        <input type="text" placeholder="Name" [(ngModel)]="name" class="form-control" name="name">
-                                                    </div>
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">Serial #</label>
-                                                        <input type="text" placeholder="Serial" class="form-control" [(ngModel)]="serialNumber" name="serialNumber">
-                                                    </div>
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label col-sm-12 pl0">  Equipment Types :</label>
-                                                        <p-dropdown [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" [style]="{'width':'auto'}">
-                                                        </p-dropdown>
-                                                        <!--<label class="control-label">Equipment Type</label>
-                                                        <select name="" class="form-control">
-                                                            <option value="">Select Option</option>
-                                                            <option value="" selected="selected">SmokeMeter</option>
-                                                        </select>-->
-                                                    </div>
-                                                    <!--<div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">P/O</label>
-                                                        <input type="text" class="form-control" name="po" />
-                                                    </div>-->
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">Year Purchased </label>
-                                                        <div class="input-group">
-                                                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">Warranty until </label>
-                                                        <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
-                                                    </div>
-                                                    <div class="form-group col-sm-6 col-md-4">
-                                                        <label class="control-label">Purchased Price</label>
-                                                        <input type="text" [(ngModel)]="purchasePrice" class="form-control" name="purchasePrice" placeholder="Actual cost" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-sm-12">
-                                                        <label class="control-label">Description </label>
-                                                       
-                                                            <textarea type="text" pInputTextArea class="form-control" required row="20" name="description" [(ngModel)]="description"></textarea>
-                                                        
-                                                    </div>
-                                                </div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
+
+                    <header class="with-controls">
+                        <p class="ui-panel-title">Manufacture Information</p>
+                        <p class="controls"><button type="text" (click)="displayAssignManufactureDialog=true" pButton icon="ui-icon-person-add" label="Add New&hellip;"></button></p>
+                    </header>
+
+                    <div class="ui-grid-row" style="margin-top:20px;">
+                       <div class="ui-grid-row md-spaced">
+                              <label>Equipment Manufacturer</label>
+                              <p-dropdown [style]="{'width':'200px'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" [style]="{'width':'auto'}">
+                              </p-dropdown>
+                      </div>
+                        <div class="input-row md-spaced" style="margin-top:20px">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" class="form-control" row="20">
+                                <label>Name</label>
                             </div>
                         </div>
-                    </div><!-- Basic Info End -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel panel-default ">
-                                <div class="panel-heading">Location</div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-
-                                            <div class="row">
-
-                                                <label class="control-label col-sm-12 pl0">  Test Facility :</label>
-                                                <p-dropdown [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
-                                                </p-dropdown>
-                                                <!--<div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Site</label>
-                                    <select class="form-control">
-                                        <option value="">Select Site</option>
-                                        <option value="" selected="selected">USA</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Building</label>
-                                    <input type="text" value="Name of Building" placeholder="Building" class="form-control">
-                                </div>
-                                <div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Room</label>
-                                    <input type="text" value="Name Of Room" placeholder="Room" class="form-control">
-                                </div>
-                                <div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Bay</label>
-                                    <input type="text" value="Bay" class="form-control" placeholder="Bay" />
-                                </div>
-                                <div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Space Id</label>
-                                    <input type="text" value="ID001" class="form-control" placeholder="Space Id" />
-                                </div>-->
-                                            </div>
-                                            <!--<div class="row">
-                                <div class="form-group col-sm-12">
-                                    <label class="control-label">Description </label>
-                                    <div class="locationDescription">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-                                </div>
-                            </div>-->
-
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerAddress" [(ngModel)]="manufacturerAddress" class="form-control" row="20">
+                                <label>Address</label>
                             </div>
                         </div>
-                    </div><!-- Location End -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Manufacturer Information</div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-
-                                            <div class="row">
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label col-sm-12 pl0">  Equipment Manufacturer :</label>
-                                                    <p-dropdown [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" [style]="{'width':'auto'}">
-                                                    </p-dropdown>
-                                                    <div class="ui-grid-col-2">
-                                                        <button id="add" pButton type="button" (click)="AddManufacturer()" label="Add New Manufacturer">  </button>
-                                                    </div>
-                                                    <!--<label class="control-label">Name</label>
-                                    <input type="text" name="mname" class="form-control" placeholder="Name" />-->
-                                                </div>
-                                                <div *ngIf="IsNewManufacturer==true">
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Manufacturer Name</label>
-                                                    <input type="text" name="manufacturerName" [(ngModel)]="manufacturerName" placeholder="Serial No" class="form-control">
-                                                </div>
-                                                <!--<div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Address</label>
-                                                    <input type="text" name="address" placeholder="Address" class="form-control">
-                                                </div>-->
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Phone</label>
-                                                    <input type="text" name="manufacturerPhone" [(ngModel)]="manufacturerPhone" class="form-control" placeholder="Phone" />
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Fax</label>
-                                                    <input type="text" name="manufacturerFax" [(ngModel)]="manufacturerFax" class="form-control" placeholder="Fax" />
-                                                </div>
-                                                <!--<div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Contact Person</label>
-                                                    <input type="text" name="person" class="form-control" placeholder="Contact Person" />
-                                                </div>-->
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Website</label>
-                                                    <input type="text" name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" class="form-control" placeholder="Website" />
-                                                </div>
-                                                </div>
-                                                <!--<div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">Warranty until</label>
-                                                    <input type="text" name="warranty" class="form-control" placeholder="Warranty until" />
-                                                </div>-->
-                                                <!--<div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Model</label>
-                                    <input type="text" name="model" class="form-control" placeholder="Model" />
-                                </div>
-                                <div class="form-group col-sm-6 col-md-4">
-                                    <label class="control-label">Year</label>
-                                    <input type="text" name="year" class="form-control" placeholder="Year" />
-                                </div>-->
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerPhone" [(ngModel)]="manufacturerPhone" class="form-control" row="20">
+                                <label>Phone</label>
                             </div>
                         </div>
-                    </div><!-- Manufacturer Information End --> 
-                  
-
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <button id="add" pButton type="submit" label="Add">  </button>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerEmail" [(ngModel)]="manufacturerEmail" class="form-control" row="20">
+                                <label>Email</label>
                             </div>
+                        </div>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerContactPerson" [(ngModel)]="manufacturerContactPerson" class="form-control" row="20">
+                                <label>Contact Person</label>
+                            </div>
+                        </div>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerFax" [(ngModel)]="manufacturerFax" class="form-control" row="20">
+                                <label>Fax</label>
+                            </div>
+                        </div>
+                        <div class="input-row md-spaced">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" class="form-control" row="20">
+                                <label>Website</label>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row md-spaced" style="margin-top:40px">
                             <div class="ui-grid-col-6">
-                            </div>
-                            <div class="ui-grid-col-4">
-                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/equipment">  </button>
+                              <label class="control-label">Warranty Until</label>
+                              <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
                             </div>
                         </div>
-                    </div>
+                        <div class="input-row md-spaced" style="margin-top:40px">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="model" [(ngModel)]="model" class="form-control" row="20">
+                                <label>Model</label>
+                            </div>
+                        </div>
+                        <div class="input-row md-spaced" style="margin-bottom:20px;">
+                            <div class="md-inputfield">
+                                <input type="text" id="name" pInputText name="year" [(ngModel)]="year" class="form-control" row="20">
+                                <label>Year</label>
+                            </div>
+                        </div>
+                  </div>
                 </p-panel>
                 <br />
                 <br />

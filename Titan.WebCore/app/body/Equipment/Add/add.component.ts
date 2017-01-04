@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { CheckboxModule,DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
+
 import { Router } from '@angular/router';
 
 import { EquipmentService } from '../../../shared/services/equipment.service';
@@ -8,7 +9,7 @@ import { TestFacilityService } from '../../../shared/services/testfacility.servi
 
 @Component({
     selector: 'add-equipment',
-    //styleUrls: ['app/body/Equipment/Add/add.component.css'], 
+    //styleUrls: ['app/body/Equipment/Add/add.component.css'],
     templateUrl: 'app/body/Equipment/Add/add.component.html'
 })
 
@@ -23,7 +24,7 @@ export class AddComponent {
     equipmentTypeId: any;
     serialNumber: any;
     purchaseDate: any;
-    warrantyExpirationDate: any;        
+    warrantyExpirationDate: any;
     description: any;
     purchasePrice: any;
     equipmentManufacturerId: any;
@@ -45,7 +46,7 @@ export class AddComponent {
     IsNewManufacturer: boolean;
     manufacturerId: any;
     testFacility = {
-                    name:'', 
+                    name:'',
                     address:{
                         addressLine1:'',
                         addressLine2:'',
@@ -184,13 +185,13 @@ export class AddComponent {
 
         };
 
-        this.service.postAdd(model).subscribe(res => { 
+        this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {
 
                 this.router.navigate(["./equipment"], { queryParams: { page: 1 } });
             }
         });
     }
-   
+
 
 }
