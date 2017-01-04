@@ -103,218 +103,218 @@ export class BreadCrumbsService {
         // Admin MilestoneStatus Details Page
         this.adminMilestoneStatusDetailsPage();
 
-        // //Admin ProjectStatus Page
-        // this.adminProjectStatusPage();
+        //Admin ProjectStatus Page
+        this.adminProjectStatusPage();
         // // Admin ProjectStatus Add Page
         // this.adminProjectStatusAddPage();
         // // Admin ProjectStatus Details Page
         // this.adminProjectStatusDetailsPage();
 
-        // //Admin ProjectRole Page
-        // this.adminProjectRolePage();
+        //Admin ProjectRole Page
+        this.adminProjectRolePage();
         // // Admin ProjectRole Add Page
         // this.adminProjectRoleAddPage();
         // // Admin ProjectRole Details Page
         // this.adminProjectRoleDetailsPage();
 
-        // //Admin Milestone Page
-        // this.adminMilestonePage();
+        //Admin Milestone Page
+        this.adminMilestonePage();
         // // Admin Milestone Add Page
         // this.adminMilestoneAddPage();
         // // Admin Milestone Details Page
         // this.adminMilestoneDetailsPage();
 
-        // //Admin MilestoneCategory Page
-        // this.adminMilestoneCategoryPage();
+        //Admin MilestoneCategory Page
+        this.adminMilestoneCategoryPage();
         // // Admin MilestoneCategory Add Page
         // this.adminMilestoneCategoryAddPage();
         // // Admin MilestoneCategory Details Page
         // this.adminMilestoneCategoryDetailsPage();
 
-        // //Admin MilestoneType Page
-        // this.adminMilestoneTypePage();
+        //Admin MilestoneType Page
+        this.adminMilestoneTypePage();
         // // Admin MilestoneType Add Page
         // this.adminMilestoneTypeAddPage();
         // // Admin MilestoneType Details Page
         // this.adminMilestoneTypeDetailsPage();
 
-        // //Admin Grade Page
-        // this.adminGradePage();
+        //Admin Grade Page
+        this.adminGradePage();
         // // Admin Grade Add Page
         // this.adminGradeAddPage();
         // // Admin Grade Details Page
         // this.adminGradeDetailsPage();
 
-        // //Admin ModelName Page
-        // this.adminModelNamePage();
+        //Admin ModelName Page
+        this.adminModelNamePage();
         // // Admin ModelName Add Page
         // this.adminModelNameAddPage();
         // // Admin ModelName Details Page
         // this.adminModelNameDetailsPage();
 
-        // //Admin ModelYear Page
-        // this.adminModelYearPage();
+        //Admin ModelYear Page
+        this.adminModelYearPage();
         // // Admin ModelYear Add Page
         // this.adminModelYearAddPage();
         // // Admin ModelYear Details Page
         // this.adminModelYearDetailsPage();
 
-        // //Admin Access Page
-        // this.adminAccessPage();
+        //Admin Access Page
+        this.adminAccessPage();
         // // Admin Access Add Page
         // this.adminAccessAddPage();
         // // Admin Access Details Page
         // this.adminAccessDetailsPage();
 
-        // //Admin AccessGroup Page
-        // this.adminAccessGroupPage();
+        //Admin AccessGroup Page
+        this.adminAccessGroupPage();
         // // Admin AccessGroup Add Page
         // this.adminAccessGroupAddPage();
         // // Admin AccessGroup Details Page
         // this.adminAccessGroupDetailsPage();
 
-        // //Admin Permission Page
-        // this.adminPermissionPage();
+        //Admin Permission Page
+        this.adminPermissionPage();
         // // Admin Permission Add Page
         // this.adminPermissionAddPage();
         // // Admin Permission Details Page
         // this.adminPermissionDetailsPage();
 
-        // //Admin Role Page
-        // this.adminRolePage();
+        //Admin Role Page
+        this.adminRolePage();
         // // Admin Role Add Page
         // this.adminRoleAddPage();
         // // Admin Role Details Page
         // this.adminRoleDetailsPage();
 
-        // //Admin MaintenanceFrequency Page
-        // this.adminMaintenanceFrequencyPage();
+        //Admin MaintenanceFrequency Page
+        this.adminMaintenanceFrequencyPage();
         // // Admin MaintenanceFrequency Add Page
         // this.adminMaintenanceFrequencyAddPage();
         // // Admin MaintenanceFrequency Details Page
         // this.adminMaintenanceFrequencyDetailsPage();
 
-        // //Admin OperatingHours Page
-        // this.adminOperatingHoursPage();
+        //Admin OperatingHours Page
+        this.adminOperatingHoursPage();
         // // Admin OperatingHours Add Page
         // this.adminOperatingHoursAddPage();
         // // Admin OperatingHours Details Page
         // this.adminOperatingHoursDetailsPage();
 
-        // //Admin TestStatus Page
-        // this.adminTestStatusPage();
+        //Admin TestStatus Page
+        this.adminTestStatusPage();
         // // Admin TestStatus Add Page
         // this.adminTestStatusAddPage();
         // // Admin TestStatus Details Page
         // this.adminTestStatusDetailsPage();
 
-        // //Admin TestRole Page
-        // this.adminTestRolePage();
+        //Admin TestRole Page
+        this.adminTestRolePage();
         // // Admin TestRole Add Page
         // this.adminTestRoleAddPage();
         // // Admin TestRole Details Page
         // this.adminTestRoleDetailsPage();
 
-        // //Admin DownTimeReason Page
-        // this.adminDownTimeReasonPage();
+        //Admin DownTimeReason Page
+        this.adminDownTimeReasonPage();
         // // Admin DownTimeReason Add Page
         // this.adminDownTimeReasonAddPage();
         // // Admin DownTimeReason Details Page
         // this.adminDownTimeReasonDetailsPage();
 
-        // //Admin TestActivity Page
-        // this.adminTestActivityPage();
+        //Admin TestActivity Page
+        this.adminTestActivityPage();
         // // Admin TestActivity Add Page
         // this.adminTestActivityAddPage();
         // // Admin TestActivity Details Page
         // this.adminTestActivityDetailsPage();
 
-        // //Admin Priority Page
-        // this.adminPriorityPage();
+        //Admin Priority Page
+        this.adminPriorityPage();
         // // Admin Priority Add Page
         // this.adminPriorityAddPage();
         // // Admin Priority Details Page
         // this.adminPriorityDetailsPage();
 
-        // //Admin Judgement Page
-        // this.adminJudgementPage();
+        //Admin Judgement Page
+        this.adminJudgementPage();
         // // Admin Judgement Add Page
         // this.adminJudgementAddPage();
         // // Admin Judgement Details Page
         // this.adminJudgementDetailsPage();
 
-        // //Admin TestStage Page
-        // this.adminTestStagePage();
+        //Admin TestStage Page
+        this.adminTestStagePage();
         // // Admin TestStage Add Page
         // this.adminTestStageAddPage();
         // // Admin TestStage Details Page
         // this.adminTestStageDetailsPage();
 
-        // //Admin RequirementItemType Page
-        // this.adminRequirementItemTypePage();
+        //Admin RequirementItemType Page
+        this.adminRequirementItemTypePage();
         // // Admin RequirementItemType Add Page
         // this.adminRequirementItemTypeAddPage();
         // // Admin RequirementItemType Details Page
         // this.adminRequirementItemTypeDetailsPage();
 
-        // //Admin SensorType Page
-        // this.adminSensorTypePage();
+        //Admin SensorType Page
+        this.adminSensorTypePage();
         // // Admin SensorType Add Page
         // this.adminSensorTypeAddPage();
         // // Admin SensorType Details Page
         // this.adminSensorTypeDetailsPage();
 
-        // //Admin StepFrequency Page
-        // this.adminStepFrequencyPage();
+        //Admin StepFrequency Page
+        this.adminStepFrequencyPage();
         // // Admin StepFrequency Add Page
         // this.adminStepFrequencyAddPage();
         // // Admin StepFrequency Details Page
         // this.adminStepFrequencyDetailsPage();
 
-        // //Admin TestMode Page
-        // this.adminTestModePage();
+        //Admin TestMode Page
+        this.adminTestModePage();
         // // Admin TestMode Add Page
         // this.adminTestModeAddPage();
         // // Admin TestMode Details Page
         // this.adminTestModeDetailsPage();
 
-        // //Admin StepType Page
-        // this.adminStepTypePage();
+        //Admin StepType Page
+        this.adminStepTypePage();
         // // Admin StepType Add Page
         // this.adminStepTypeAddPage();
         // // Admin StepType Details Page
         // this.adminStepTypeDetailsPage();
 
-        // //Admin TestType Page
-        // this.adminTestTypePage();
+        //Admin TestType Page
+        this.adminTestTypePage();
         // // Admin TestType Add Page
         // this.adminTestTypeAddPage();
         // // Admin TestType Details Page
         // this.adminTestTypeDetailsPage();
 
-        // //Admin TestRequirement Page
-        // this.adminTestRequirementPage();
+        //Admin TestRequirement Page
+        this.adminTestRequirementPage();
         // // Admin TestRequirement Add Page
         // this.adminTestRequirementAddPage();
         // // Admin TestRequirement Details Page
         // this.adminTestRequirementDetailsPage();
 
-        // //Admin TestVerificationMethod Page
-        // this.adminTestVerificationMethodPage();
+        //Admin TestVerificationMethod Page
+        this.adminTestVerificationMethodPage();
         // // Admin TestVerificationMethod Add Page
         // this.adminTestVerificationMethodAddPage();
         // // Admin TestVerificationMethod Details Page
         // this.adminTestVerificationMethodDetailsPage();
 
-        // //Admin VehicleType Page
-        // this.adminVehicleTypePage();
+        //Admin VehicleType Page
+        this.adminVehicleTypePage();
         // // Admin VehicleType Add Page
         // this.adminVehicleTypeAddPage();
         // // Admin VehicleType Details Page
         // this.adminVehicleTypeDetailsPage();
 
-        // //Admin EngineCode Page
-        // this.adminEngineCodePage();
+        //Admin EngineCode Page
+        this.adminEngineCodePage();
         // // Admin EngineCode Add Page
         // this.adminEngineCodeAddPage();
         // // Admin EngineCode Details Page
@@ -987,558 +987,558 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    // // Admin ProjectStatus Bread Crumbs
-    // private adminProjectStatusPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'ProjectStatusHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminProjectStatusPageBCItems() {
-    //     let menuItem = { label: 'ProjectStatus', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin ProjectRole Bread Crumbs
-    // private adminProjectRolePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'ProjectRoleHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminProjectRolePageBCItems() {
-    //     let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Milestone Bread Crumbs
-    // private adminMilestonePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MilestoneHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminMilestonePageBCItems() {
-    //     let menuItem = { label: 'Milestone', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin MilestoneCategory Bread Crumbs
-    // private adminMilestoneCategoryPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MilestoneCategoryHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminMilestoneCategoryPageBCItems() {
-    //     let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin MilestoneType Bread Crumbs
-    // private adminMilestoneTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MilestoneTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminMilestoneTypePageBCItems() {
-    //     let menuItem = { label: 'MilestoneType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Grade Bread Crumbs
-    // private adminGradePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'GradeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminGradePageBCItems() {
-    //     let menuItem = { label: 'Grade', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin ModelName Bread Crumbs
-    // private adminModelNamePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'ModelNameHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminModelNamePageBCItems() {
-    //     let menuItem = { label: 'ModelName', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin ModelYear Bread Crumbs
-    // private adminModelYearPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'ModelYearHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminModelYearPageBCItems() {
-    //     let menuItem = { label: 'ModelYear', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Access Bread Crumbs
-    // private adminAccessPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'AccessHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminAccessPageBCItems() {
-    //     let menuItem = { label: 'Access', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin AccessGroup Bread Crumbs
-    // private adminAccessGroupPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'AccessGroupHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminAccessGroupPageBCItems() {
-    //     let menuItem = { label: 'AccessGroup', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Permission Bread Crumbs
-    // private adminPermissionPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'PermissionHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminPermissionPageBCItems() {
-    //     let menuItem = { label: 'Permission', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Role Bread Crumbs
-    // private adminRolePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'RoleHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminRolePageBCItems() {
-    //     let menuItem = { label: 'Role', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin MaintenanceFrequency Bread Crumbs
-    // private adminMaintenanceFrequencyPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MaintenanceFrequencyHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminMaintenanceFrequencyPageBCItems() {
-    //     let menuItem = { label: 'MaintenanceFrequency', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin OperatingHours Bread Crumbs
-    // private adminOperatingHoursPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'OperatingHoursHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminOperatingHoursPageBCItems() {
-    //     let menuItem = { label: 'OperatingHours', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestStatus Bread Crumbs
-    // private adminTestStatusPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestStatusHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestStatusPageBCItems() {
-    //     let menuItem = { label: 'Test Staus', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestRole Bread Crumbs
-    // private adminTestRolePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestRoleHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestRolePageBCItems() {
-    //     let menuItem = { label: 'Test Role', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin DownTimeReason Bread Crumbs
-    // private adminDownTimeReasonPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'DownTimeReasonHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminDownTimeReasonPageBCItems() {
-    //     let menuItem = { label: 'DownTimeReason', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestActivity Bread Crumbs
-    // private adminTestActivityPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestActivityHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestActivityPageBCItems() {
-    //     let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Priority Bread Crumbs
-    // private adminPriorityPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'PriorityHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminPriorityPageBCItems() {
-    //     let menuItem = { label: 'Priority', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin Judgement Bread Crumbs
-    // private adminJudgementPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'JudgementHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminJudgementPageBCItems() {
-    //     let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestStage Bread Crumbs
-    // private adminTestStagePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestStageHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestStagePageBCItems() {
-    //     let menuItem = { label: 'TestStage', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin RequirementItemType Bread Crumbs
-    // private adminRequirementItemTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'RequirementItemTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminRequirementItemTypeBCItems() {
-    //     let menuItem = { label: 'RequirementItemType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin SensorType Bread Crumbs
-    // private adminSensorTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'SensorTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminSensorTypeBCItems() {
-    //     let menuItem = { label: 'SensorType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin StepFrequency Bread Crumbs
-    // private adminStepFrequencyPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'StepFrequencyHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminStepFrequencyBCItems() {
-    //     let menuItem = { label: 'StepFrequency', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestMode Bread Crumbs
-    // private adminTestModePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestModeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestModeBCItems() {
-    //     let menuItem = { label: 'TestMode', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin StepType Bread Crumbs
-    // private adminStepTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'StepTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminStepTypeBCItems() {
-    //     let menuItem = { label: 'StepType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestType Bread Crumbs
-    // private adminTestTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestTypeBCItems() {
-    //     let menuItem = { label: 'TestType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestRequirement Bread Crumbs
-    // private adminTestRequirementPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestRequirementHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestRequirementBCItems() {
-    //     let menuItem = { label: 'TestRequirement', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin TestVerificationMethod Bread Crumbs
-    // private adminTestVerificationMethodPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TestVerificationMethodHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminTestVerificationMethodBCItems() {
-    //     let menuItem = { label: 'TestVerificationMethod', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin VehicleType Bread Crumbs
-    // private adminVehicleTypePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'VehicleTypeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private adminVehicleTypeBCItems() {
-    //     let menuItem = { label: 'VehicleType', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
-
-    // // Admin EngineCode Bread Crumbs
-    // private adminEngineCodePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'EngineCodeHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
+    // Admin ProjectStatus Bread Crumbs
+    private adminProjectStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectStatusPageBCItems() {
+        let menuItem = { label: 'ProjectStatus', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin ProjectRole Bread Crumbs
+    private adminProjectRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectRolePageBCItems() {
+        let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Milestone Bread Crumbs
+    private adminMilestonePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestonePageBCItems() {
+        let menuItem = { label: 'Milestone', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin MilestoneCategory Bread Crumbs
+    private adminMilestoneCategoryPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneCategoryPageBCItems() {
+        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin MilestoneType Bread Crumbs
+    private adminMilestoneTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneTypePageBCItems() {
+        let menuItem = { label: 'MilestoneType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Grade Bread Crumbs
+    private adminGradePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'GradeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminGradePageBCItems() {
+        let menuItem = { label: 'Grade', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin ModelName Bread Crumbs
+    private adminModelNamePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelNameHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminModelNamePageBCItems() {
+        let menuItem = { label: 'ModelName', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin ModelYear Bread Crumbs
+    private adminModelYearPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelYearHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminModelYearPageBCItems() {
+        let menuItem = { label: 'ModelYear', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Access Bread Crumbs
+    private adminAccessPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminAccessPageBCItems() {
+        let menuItem = { label: 'Access', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin AccessGroup Bread Crumbs
+    private adminAccessGroupPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessGroupHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminAccessGroupPageBCItems() {
+        let menuItem = { label: 'AccessGroup', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Permission Bread Crumbs
+    private adminPermissionPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PermissionHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPermissionPageBCItems() {
+        let menuItem = { label: 'Permission', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Role Bread Crumbs
+    private adminRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRolePageBCItems() {
+        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin MaintenanceFrequency Bread Crumbs
+    private adminMaintenanceFrequencyPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MaintenanceFrequencyHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMaintenanceFrequencyPageBCItems() {
+        let menuItem = { label: 'MaintenanceFrequency', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin OperatingHours Bread Crumbs
+    private adminOperatingHoursPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'OperatingHoursHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminOperatingHoursPageBCItems() {
+        let menuItem = { label: 'OperatingHours', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestStatus Bread Crumbs
+    private adminTestStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStatusPageBCItems() {
+        let menuItem = { label: 'Test Staus', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestRole Bread Crumbs
+    private adminTestRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRolePageBCItems() {
+        let menuItem = { label: 'Test Role', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin DownTimeReason Bread Crumbs
+    private adminDownTimeReasonPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'DownTimeReasonHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminDownTimeReasonPageBCItems() {
+        let menuItem = { label: 'DownTimeReason', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestActivity Bread Crumbs
+    private adminTestActivityPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestActivityPageBCItems() {
+        let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Priority Bread Crumbs
+    private adminPriorityPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPriorityPageBCItems() {
+        let menuItem = { label: 'Priority', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin Judgement Bread Crumbs
+    private adminJudgementPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminJudgementPageBCItems() {
+        let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestStage Bread Crumbs
+    private adminTestStagePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStagePageBCItems() {
+        let menuItem = { label: 'TestStage', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin RequirementItemType Bread Crumbs
+    private adminRequirementItemTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RequirementItemTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRequirementItemTypeBCItems() {
+        let menuItem = { label: 'RequirementItemType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin SensorType Bread Crumbs
+    private adminSensorTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminSensorTypeBCItems() {
+        let menuItem = { label: 'SensorType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin StepFrequency Bread Crumbs
+    private adminStepFrequencyPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepFrequencyHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepFrequencyBCItems() {
+        let menuItem = { label: 'StepFrequency', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestMode Bread Crumbs
+    private adminTestModePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestModeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestModeBCItems() {
+        let menuItem = { label: 'TestMode', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin StepType Bread Crumbs
+    private adminStepTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepTypeBCItems() {
+        let menuItem = { label: 'StepType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestType Bread Crumbs
+    private adminTestTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestTypeBCItems() {
+        let menuItem = { label: 'TestType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestRequirement Bread Crumbs
+    private adminTestRequirementPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequirementHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRequirementBCItems() {
+        let menuItem = { label: 'TestRequirement', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin TestVerificationMethod Bread Crumbs
+    private adminTestVerificationMethodPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestVerificationMethodHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestVerificationMethodBCItems() {
+        let menuItem = { label: 'TestVerificationMethod', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin VehicleType Bread Crumbs
+    private adminVehicleTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminVehicleTypeBCItems() {
+        let menuItem = { label: 'VehicleType', routerLink: ['/admin/'] };
+        return menuItem;
+    }
+
+    // Admin EngineCode Bread Crumbs
+    private adminEngineCodePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminHolidayPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
 
     private adminEngineCodeBCItems() {
         let menuItem = { label: 'EngineCode', routerLink: ['/admin/'] };
