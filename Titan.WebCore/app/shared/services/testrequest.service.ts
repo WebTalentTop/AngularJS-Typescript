@@ -35,10 +35,10 @@ export class TestRequestService extends BaseService {
 
     }
 
-    getUserScheduleById(id): Observable<any> {
+    getUserScheduleById(id, idType): Observable<any> {
 
-        return this.http.get(`${TestReqestApiUrl.getUserScheduleByTestRequestIdUrl}` + id, {headers: this.headers})
-            .map(this.getJson);
+            return this.http.get(`${TestReqestApiUrl.getUserScheduleByIdUrl}${id}/${idType}`, {headers: this.headers})
+                .map(this.getJson);
 
     }
 

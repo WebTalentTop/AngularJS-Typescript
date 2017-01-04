@@ -149,6 +149,10 @@ gulp.task("tsCompile", ['tsClean'], function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
+gulp.task("moment", function () {
+    gulp.src(root_path.nmSrc + "moment/**/*")
+        .pipe(gulp.dest(root_path.package_lib + "moment/"));
+});
 gulp.task("icons", function () {
     gulp.src('./icons' + '/**/*.*')
         .pipe(gulp.dest(root_path.webroot + 'icons'));
@@ -171,6 +175,7 @@ gulp.task('copy-to-wwwroot',
         'copy-thirdparty-files',
         'primengDependencies',
         'NMprimeResources',
+        'moment',
         'html',
         'css',
         'copy-titanResources',

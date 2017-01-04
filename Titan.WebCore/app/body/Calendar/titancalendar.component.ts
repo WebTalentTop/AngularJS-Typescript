@@ -8,6 +8,7 @@ import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
 import {TitanUserService} from '../../shared/services/titanuser.service';
 import {TestRequestService} from '../../shared/services/testrequest.service';
+import * as moment from 'moment/moment';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {
     DataTable,
@@ -93,6 +94,12 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
 
     //Assign Dialog Header Properties
+    assignResourceHeader: string ='';
+    assignBlockTestFacilityName : string ='';
+    displayAssignDialog: boolean =false;
+    selectedBlockStartDate: Date;
+    selectedBlockEndDate:Date;
+    testOperatorsForBlock:any[] =[];
     testName: string = '';
     plannedStartDate: string = '';
     plannedEndDate: string = '';
@@ -342,15 +349,40 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 switch (key) {
                     case "AssignResources": {
 
-                        selfRef.displayEventDialog = true;
+                       // selfRef.displayEventDialog = true;
+                        selfRef.displayAssignDialog = true;
+
                         selfRef.selectedTestRequestId = testRequestId;
                         selfRef.selectedEventId = id;
                         selfRef.selectedResourceId = $(this).attr("resource-id");
+                        selfRef.assignBlockTestFacilityName = $("#calendar").fullCalendar( 'getResourceById', selfRef.selectedResourceId ).title;
                         selfRef.plannedStartDate = $(this).attr("plannedStart");
                         selfRef.plannedEndDate = $(this).attr("plannedEnd");
+                        // Taking the simplistic approach now/
+                        selfRef.selectedBlockStartDate = $("#calendar").fullCalendar( 'clientEvents', id )[0].start.toDate();
+                        selfRef.selectedBlockEndDate = $("#calendar").fullCalendar( 'clientEvents', id )[0].end.toDate();
+
                         selfRef.dueDate = $(this).attr("dueDate");
                         selfRef.testName = $(this).attr("testName");
                         selfRef.displayEventDialogHeader = `${selfRef.testName}`;
+                        selfRef.testRequestService.getUserScheduleById(selfRef.selectedEventId,"testfacilityscheduleid").subscribe(res => {
+                            console.log("----GetUserScheduleById", res);
+                            let items = res.result.map(x => {
+                                let r: {
+                                    testFacilityId,
+                                    userDisplayName,
+                                    startDate,
+                                    endDate, userId,
+                                    testUserScheduleId,
+                                    testfacilityName} = x;
+
+                                r.startDate = moment(r.startDate).toDate();
+                                r.endDate = moment(r.endDate).toDate();
+                                return r;
+                            });
+                            selfRef.testOperatorsForBlock = items;
+                        });
+
                         selfRef.testRequestService.getTestFacilityScheduleById(selfRef.selectedTestRequestId).subscribe(res => {
                             let items = res.result.map(x => {
                                 let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;
@@ -359,7 +391,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                             selfRef.scheduledTestFacilities = items;
 
                         });
-                        selfRef.testRequestService.getUserScheduleById(selfRef.selectedTestRequestId).subscribe(res => {
+                        selfRef.testRequestService.getUserScheduleById(selfRef.selectedTestRequestId,"testrequestid").subscribe(res => {
                             console.log("----GetUserScheduleById", res);
                             let items = res.result.map(x => {
                                 let r: {testFacilityId, userDisplayName, startDate, endDate, userId, testUserScheduleId, testfacilityName} = x;
@@ -729,13 +761,29 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
 
     }
+    addEmptyRowOperatorBlock(){
 
+       let r={
+            testFacilityId:'',
+            userDisplayName:'',
+            startDate:moment.utc().toDate(),
+            endDate:moment.utc().toDate(),
+            userId:'',
+            testUserScheduleId:'',
+            testfacilityName:''
+        }
+        console.log(r);
+        //r.startDate = moment.utc().toDate();
+
+        this.testOperatorsForBlock.splice(0,0, r);
+
+    }
     onSubmitTestFacilitySchedule(values) {
         let postdata = {
             startDate: this.selectedTestScheduleStartDate,
             endDate: this.selectedTestScheduleEndDate,
             entityId: this.selectedTestRequestId,
-            testFacilityId: this.selectedTestFacilityForSchedule
+            testFacilityScheduleId: this.selectedEventId
         };
 
         this.testfacilityservice.postReserve(postdata).subscribe(res => {

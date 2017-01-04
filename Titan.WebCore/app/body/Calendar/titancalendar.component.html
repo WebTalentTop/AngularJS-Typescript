@@ -80,6 +80,8 @@
     <div id="calendar">
     </div>
 </div>
+
+
 <p-dialog header="Calendar Settings" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade">
 
     <div class="ui-grid-row">
@@ -337,9 +339,11 @@
             <div class="ui-g-4">
 
 
-                    <span class="text">Operators:</span> <br/>
-                    <p-radioButton name="groupname" value="0" [(ngModel)]="moveTestFacilityOperatorOption" label="Remove"></p-radioButton>
-                    <p-radioButton name="groupname" value="1" [(ngModel)]="moveTestFacilityOperatorOption" label="Move"></p-radioButton>
+                <span class="text">Operators:</span> <br/>
+                <p-radioButton name="groupname" value="0" [(ngModel)]="moveTestFacilityOperatorOption"
+                               label="Remove"></p-radioButton>
+                <p-radioButton name="groupname" value="1" [(ngModel)]="moveTestFacilityOperatorOption"
+                               label="Move"></p-radioButton>
 
 
             </div>
@@ -354,6 +358,97 @@
     </form>
 </p-dialog>
 
+<p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog" [minWidth]="800" [responsive]="true">
+    <form #tfAssignResourcesForm="ngForm" (ngSubmit)="onSubmitTestFacilitySchedule(tfAssignResourcesForm.value)">
+        <div class="ui-g-12">
+
+            <div class="ui-g-4">
+
+                <span class="text"> Facility Name</span> <br/>
+                {{assignBlockTestFacilityName}}
+            </div>
+
+            <div class="ui-g-4">
+
+                <label>
+                    <span class="text">Start </span> <br/>
+                    <p-calendar [(ngModel)]="selectedBlockStartDate" showTime="showTime" hourFormat="12"
+                                [icon]="fa-calendar" required
+                                name="selectedBlockStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, selectedBlockStartDate,selectedBlockEndDate)"></p-calendar>
+                </label>
+
+            </div>
+
+            <div class="ui-g-4">
+
+                <label>
+                    <span class="text">End</span> <br/>
+                    <p-calendar [(ngModel)]="selectedBlockEndDate" showTime="showTime" hourFormat="12"
+                                [icon]="fa-calendar"
+                                required min="selectedBlockStartDate" name="selectedBlockEndDate"
+                                [minDate]="selectedTestScheduleStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, selectedBlockStartDate,selectedBlockEndDate)"></p-calendar>
+                </label>
+
+            </div>
+
+            <div class="ui-g-4">
+
+                <button type="submit" pButton icon="ui-icon-calendar" label="Schedule Facility"
+                        [disabled]='!tfAssignResourcesForm.valid'></button>
+
+            </div>
+        </div>
+    </form>
+    <div class="ui-helper-clearfix" style="width:100%">
+        <button type="button" pButton icon="fa-plus" style="float:left" (click)="addEmptyRowOperatorBlock()"
+                label="Add"></button>
+    </div>
+    <div class="ui-grid-row">
+        <p-dataTable [value]="testOperatorsForBlock">
+            <header></header>
+            <p-column hidden="true" field="titanUserScheduleId"></p-column>
+            <p-column field="userDisplayName" header="Name" sortable="true"></p-column>
+            <!--<p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>-->
+            <p-column field="startDate" sortable="true">
+                <template pTemplate="header">
+                    Start
+                </template>
+                <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                    <p-calendar [(ngModel)]="testOperatorsForBlock[i].startDate"  showTime="showTime" hourFormat="12"
+                                name="operatorStart"
+                                [selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body"
+                                [icon]="fa-calendar"></p-calendar>
+                </template>
+            </p-column>
+            <p-column field="endDate" sortable="true">
+                <template pTemplate="header">
+                    Start
+                </template>
+                <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                    <p-calendar [(ngModel)]="testOperatorsForBlock[i].endDate" showTime="showTime" hourFormat="12"
+                                name="operatorEnd"
+                                [selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body"
+                                [icon]="fa-calendar"></p-calendar>
+                </template>
+            </p-column>
+            <p-column styleClass="col-button">
+                <template pTemplate="header">
+                    <button type="button" pButton icon="fa-refresh"></button>
+                </template>
+                <template let-user="rowData" pTemplate="body">
+                    <button type="button" pButton (click)="removeOperator(user)" icon="ui-icon-remove"></button>
+                    <button type="button" pButton (click)="removeOperator(user)" icon="ui-icon-save"></button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+    </div>
+
+</p-dialog>
 
 <style>
     #calendar {
