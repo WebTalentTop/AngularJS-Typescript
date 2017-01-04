@@ -105,6 +105,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     plannedEndDate: string = '';
     dueDate: string = '';
     testDuration: string = '';
+    titanUsersListForTenant: SelectItem[] =[];
 
     // For assigning operators/technicians
     selectedOperatorUserNames: any[] = [];
@@ -356,6 +357,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         selfRef.selectedEventId = id;
                         selfRef.selectedResourceId = $(this).attr("resource-id");
                         selfRef.assignBlockTestFacilityName = $("#calendar").fullCalendar( 'getResourceById', selfRef.selectedResourceId ).title;
+                        selfRef.assignResourceHeader = "Assign resources to " + selfRef.assignBlockTestFacilityName;
                         selfRef.plannedStartDate = $(this).attr("plannedStart");
                         selfRef.plannedEndDate = $(this).attr("plannedEnd");
                         // Taking the simplistic approach now/
@@ -382,7 +384,16 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                             });
                             selfRef.testOperatorsForBlock = items;
                         });
-
+                        selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
+                            let values = filteredList.$values;
+                            console.log("Making the call", filteredList);
+                            selfRef.titanUsersListForTenant = filteredList.$values.map(x=>{
+                                let r : any = {};
+                                r.label = x.displayName;
+                                r.value = x.id;
+                                return r;
+                            });
+                        });
                         selfRef.testRequestService.getTestFacilityScheduleById(selfRef.selectedTestRequestId).subscribe(res => {
                             let items = res.result.map(x => {
                                 let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;

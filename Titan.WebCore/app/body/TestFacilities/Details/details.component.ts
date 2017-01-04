@@ -60,6 +60,10 @@ export class DetailsComponent implements AfterViewInit {
     IsFrequency: boolean = false;
     hasNextMaintenanceDate: boolean = false;
     hasNotifications: boolean = true;
+
+    isMaintenaceFrequencySelected: boolean = false;
+    isCronControlInitialized : boolean=false;
+
     frequency: any;
     IsTestFacilityDelete: boolean = false;
     titanApiUrl: any = titanApiUrl;
@@ -234,65 +238,48 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
-    onMaintenanceNeeded()
-    {
-        if (this.IsFrequency) {
-
-            if (this.testFacility.maintenanceFrequency != null)
-            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
-            else
-            { this.selectedMaintenanceFrequency = "* * * * *"; }
-
-            $("#selector").cron({
-
-                initial: this.selectedMaintenanceFrequency,
-                onChange: function () {
-
-                    this.selectedMaintenanceFrequency = $(this).cron("value");
-                    // $('#selector-val').text($(this).cron("value"));
-                },
-                effectOpts: {
-                    openEffect: "fade",
-                    openSpeed: "slow"
-                },
-                useGentleSelect: true
-            })
-
-        }
-        else
-        {
-            $("div").remove(".md-inputfield");
-            //$("div")
-        }
-        //this.FrequencyInit(event
-    }
+  
     frequencyInit()
     {
-       // var cron_field = $('#selector').cron();
-       // if (IsFrequency) {
             if (this.testFacility.maintenanceFrequency != null)
-            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
+            {
+                this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency;
+                this.isMaintenaceFrequencySelected = true;
+                $("#selector").cron({
+
+                    initial: this.selectedMaintenanceFrequency,
+                    onChange: function () {
+                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                    }, useGentleSelect:false
+                });
+                this.isCronControlInitialized = true;
+            }
             else
-            { this.selectedMaintenanceFrequency = "* * * * *"; }
+            {
+                this.selectedMaintenanceFrequency = "0 0 1 1 *";
+                this.isMaintenaceFrequencySelected = false;
+            }
 
-            $("#selector").cron({
-
-                initial: this.selectedMaintenanceFrequency,
-                onChange: function () {
-
-                    this.selectedMaintenanceFrequency = $(this).cron("value");
-                    // $('#selector-val').text($(this).cron("value"));
-                },
-                effectOpts: {
-                    openEffect: "fade",
-                    openSpeed: "slow"
-                },
-                useGentleSelect: true
-            })
-
-      //  }
     }
 
+    showHideCronPicker(){
+        console.log("--inside cronpicker show hide");
+        debugger;
+        if (this.isMaintenaceFrequencySelected){
+            if (!this.isCronControlInitialized){
+                $("#selector").cron({
+
+                    initial: this.selectedMaintenanceFrequency,
+                    onChange: function () {
+                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                    }, useGentleSelect:false
+                });
+            }
+        } else
+        {
+            // Hide the cron
+        }
+    }
     ngAfterViewInit() {
         //var frequency: any;
 
@@ -696,8 +683,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.frequencyInit();
               //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-               // if (res.testFacility.lastMaintenanceDate != "0001 - 01 - 01T00: 00:00" && res.testFacility.maintenanceFrequency != null)
-                if (res.testFacility.nextMaintenanceDate != null) {
+               if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
                 }
                 this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;

@@ -141,16 +141,20 @@
 
                 </div>-->
 
-                                    <div class="input-row md-spaced">
-                                        <label>Maintenance Frequency</label>
-                                        <p-checkbox name="groupname" value="IsFrequency" label="Maintenance Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
-
-
-                                        <div class="md-inputfield">
-                                            <div id="selector"></div>
-                                        </div>
-
+                                     <div class="input-row md-spaced">
+                                    <label>Maintenance Frequency</label>
+                                    <p-checkbox name="groupname" value="isMaintenaceFrequencySelected" label="Maintenance Frequency"
+                                                [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
+                                                (onChange)="showHideCronPicker()">
+                                    </p-checkbox>
+                                
+                                     
+                                      <div class="md-inputfield" >
+                                        <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
                                     </div>
+                                  
+                                </div>
+
                                     <!-- End State -->
                                     <!-- Begin Description -->
 
@@ -177,6 +181,11 @@
 
 
                                         </div>
+
+                                </div>
+                               
+                               
+
                                     </div>
                                     <div class="input-row md-spaced">
                                         <!--<label>Maintenance Frequency</label>-->
