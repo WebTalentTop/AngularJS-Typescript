@@ -1,4 +1,4 @@
-﻿
+
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 
@@ -36,9 +36,11 @@ declare var cron: any;
     templateUrl: 'app/body/TestFacilities/Details/details.component.html'
 })
 export class DetailsComponent implements AfterViewInit {
+
    hasNextMaintenanceDate: boolean = false;
     isMaintenaceFrequencySelected: boolean = false;
     isCronControlInitialized : boolean=false;
+
     frequency: any;
     IsTestFacilityDelete: boolean = false;
     titanApiUrl: any = titanApiUrl;
@@ -172,7 +174,7 @@ export class DetailsComponent implements AfterViewInit {
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
-        
+
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesDetailsBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'TestFacilitiesDetailsPage'
@@ -206,7 +208,7 @@ export class DetailsComponent implements AfterViewInit {
         }
     }
   
-    frequencyInit()
+      frequencyInit()
     {
             if (this.testFacility.maintenanceFrequency != null)
             {
@@ -650,7 +652,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.frequencyInit();
               //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-               if (res.testFacility.nextMaintenanceDate != null) {
+  			if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
                 }
                 this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
@@ -834,6 +836,7 @@ export class DetailsComponent implements AfterViewInit {
         else
             this.displayAssignUserRolesDialog = true;
 
+
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
             this.msgs.push({ severity: 'warn', summary: 'Search any user to add', detail: '' });
@@ -985,6 +988,14 @@ export class DetailsComponent implements AfterViewInit {
             this.filteredUserNames = filteredList.$values;
         });
     }
+  onFreq(e)
+  {
+    if (!this.IsFrequency)
+        this.testFacility.maintenanceFrequency = null;
+    else
+        this.testFacility.maintenanceFrequency ="42 3**5";
+
+  }
     onSubmit(formRef) {
         formRef.isDeleted = false;
         let formData: any = {
@@ -1008,12 +1019,14 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
+
         if (this.isMaintenaceFrequencySelected){
             formData.maintenanceFrequency = $('#selector').cron("value");
         }
         else {
             formData.maintenanceFrequency = '' ;
         }
+
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
