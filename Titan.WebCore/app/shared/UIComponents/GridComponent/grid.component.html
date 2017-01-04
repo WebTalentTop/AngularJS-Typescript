@@ -4,6 +4,8 @@
              [paginator]="true"
              [rows]="confInfo.PageSize"
              [(selection)]="selectedItem"
+             selectionMode="single"
+             (onRowSelect)="navigateTo(selectedItem)"
              [totalRecords]="confInfo.TotalRecords"
              (onLazyLoad)="loadFresh($event)"
              *ngIf="gridData.length >0 || lazyLoadingData === true">
@@ -14,12 +16,6 @@
               [filter]="col.ShowFilter"
               filterMatchMode="contains"
               [hidden]="col.Hidden">
-        <template let-col let-item="rowData" *ngIf="checkLinkable(col.Field)" pTemplate type="body">
-
-           <a (click)="navigateTo(item[idField])">{{item[col.field]}}</a>
-        </template>
-        <template let-col let-item="rowData" *ngIf="col.Field === 'date'" pTemplate type="body">
-        </template>
     </p-column>
 </p-dataTable>
 <div *ngIf="gridData.length === 0 && lazyLoadingData === false">
