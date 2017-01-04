@@ -89,19 +89,19 @@ export class BreadCrumbsService {
         // Admin Platform Details Page
         this.adminPlatformDetailsPage();
 
-        // //Admin TitanRole Page
-        // this.adminTitanRolePage();
-        // // Admin TitanRole Add Page
-        // this.adminTitanRoleAddPage();
-        // // Admin TitanRole Details Page
-        // this.adminTitanRoleDetailsPage();
+        //Admin TitanRole Page
+        this.adminTitanRolePage();
+        // Admin TitanRole Add Page
+        this.adminTitanRoleAddPage();
+        // Admin TitanRole Details Page
+        this.adminTitanRoleDetailsPage();
 
-        // //Admin MilestoneStatus Page
-        // this.adminMilestoneStatusPage();
-        // // Admin MilestoneStatus Add Page
-        // this.adminMilestoneStatusAddPage();
-        // // Admin MilestoneStatus Details Page
-        // this.adminMilestoneStatusDetailsPage();
+        //Admin MilestoneStatus Page
+        this.adminMilestoneStatusPage();
+        // Admin MilestoneStatus Add Page
+        this.adminMilestoneStatusAddPage();
+        // Admin MilestoneStatus Details Page
+        this.adminMilestoneStatusDetailsPage();
 
         // //Admin ProjectStatus Page
         // this.adminProjectStatusPage();
@@ -877,41 +877,115 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    // // Admin TitanRole Bread Crumbs
-    // private adminTitanRolePage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
+    // Admin TitanRole Bread Crumbs
+    private adminTitanRolePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
 
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'TitanRoleHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TitanRoleHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
 
-    // private adminTitanRolePageBCItems() {
-    //     let menuItem = { label: 'TitanRole', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
+    private adminTitanRolePageBCItems() {
+        let menuItem = { label: 'TitanRole', routerLink: ['/admin/vehicle/titanRole'] };
+        return menuItem;
+    }
 
-    // // Admin MilestoneStatus Bread Crumbs
-    // private adminMilestoneStatusPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-    //     menuItems.push(this.adminVehicleHomePageBCItems());
-    //     // menuItems.push(this.adminHolidayPageBCItems());
+    private adminTitanRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminTitanRolePageBCItems());
 
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'MilestoneStatusHomePage', items: menuItems };
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TitanRoleAddPage', items: menuItems };
 
-    // private adminMilestoneStatusPageBCItems() {
-    //     let menuItem = { label: 'MilestoneStatus', routerLink: ['/admin/'] };
-    //     return menuItem;
-    // }
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTitanRoleAddPageBCItems() {
+        let menuItem = { label: 'Add TitanRole', routerLink: ['/admin/vehicle/titanRole'] };
+        return menuItem;
+    }
+
+    private adminTitanRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminTitanRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TitanRoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTitanRoleDetailsPageBCItems() {
+        let menuItem = { label: 'TitanRole Details', routerLink: ['/admin/vehicle/titanRole'] };
+
+        return menuItem;
+    }
+
+    // Admin MilestoneStatus Bread Crumbs
+    private adminMilestoneStatusPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneStatusHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneStatusPageBCItems() {
+        let menuItem = { label: 'MilestoneStatus', routerLink: ['/admin/vehicle/milestoneStatus'] };
+        return menuItem;
+    }
+
+    private adminMilestoneStatusAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminMilestoneStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneStatusAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneStatusAddPageBCItems() {
+        let menuItem = { label: 'Add MilestoneStatus', routerLink: ['/admin/vehicle/milestoneStatus'] };
+        return menuItem;
+    }
+
+    private adminMilestoneStatusDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.adminMilestoneStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneStatusDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneStatusDetailsPageBCItems() {
+        let menuItem = { label: 'MilestoneStatus Details', routerLink: ['/admin/vehicle/milestoneStatus'] };
+
+        return menuItem;
+    }
 
     // // Admin ProjectStatus Bread Crumbs
     // private adminProjectStatusPage() {

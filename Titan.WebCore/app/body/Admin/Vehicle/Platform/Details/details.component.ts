@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlatformService } from '../../../../../shared/services/platform.service'
+import { PlatformService } from '../../../../../shared/services/platform.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
