@@ -1,13 +1,13 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <h3>Details</h3>
+        <h3>Add New Test Request</h3>
         <p-tabView (onChange)="handleChange($event)">
 
-            <p-tabPanel header="Info ||" id="info">
+            <p-tabPanel header="Test Request Details ||" id="info">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default ">
-                            <div class="panel-heading">Add New Test Request</div>
+                            <div class="panel-heading"></div>
                             <p-growl [value]="msgs"></p-growl>
                             <div class="panel-body">
                                 <div class="row">
@@ -54,6 +54,33 @@
                                                                 <input type="text" [(ngModel)]="purpose" name="purpose"
                                                                        placeholder="Purpose"
                                                                        class="form-control">
+                                                            </div>
+
+                                                                             <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label  col-sm-12 pl0">
+                                                                    Planned
+                                                                    Start Date
+                                                                </label>
+                                                                <div class="input-group">                                                                  
+                                                                    <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" showTime="true" [showIcon]="true"></p-calendar>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label col-sm-12 pl0">
+                                                                    Planned
+                                                                    End Date
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" showTime="true" [showIcon]="true"></p-calendar>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label  col-sm-12 pl0">
+                                                                     Due Date
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <p-calendar [(ngModel)]="dueDate" name="dueDate" showTime="true" [showIcon]="true"></p-calendar>
+                                                                </div>
                                                             </div>
                                                            
                                                             <!--<div class="form-group col-sm-6 col-md-4">
@@ -105,6 +132,7 @@
                                                                 <p-dropdown [options]="testProcedures" (onChange)="onTestProceduresChange($event)" name="testProcedures" [style]="{'width':'auto'}">
                                                                 </p-dropdown>
                                                             </div>
+
 
                                                             <!--<div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label">
@@ -380,33 +408,8 @@
                                                             </select>
                                                         </div>-->
 
-                                                            <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label  col-sm-12 pl0">
-                                                                    Planned
-                                                                    Start Date
-                                                                </label>
-                                                                <div class="input-group">                                                                  
-                                                                    <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" showTime="true" [showIcon]="true"></p-calendar>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label col-sm-12 pl0">
-                                                                    Planned
-                                                                    End Date
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" showTime="true" [showIcon]="true"></p-calendar>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label  col-sm-12 pl0">
-                                                                     Due Date
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <p-calendar [(ngModel)]="dueDate" name="dueDate" showTime="true" [showIcon]="true"></p-calendar>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-sm-6 col-md-4">
+                                                            
+                                                            <!--<div class="form-group col-sm-6 col-md-4">
                                                                 <label class="control-label col-sm-12 pl0">
                                                                     Test
                                                                     Duration
@@ -417,7 +420,7 @@
                                                                            class="form-control">
                                                                     <span class="input-group-addon">days</span>
                                                                 </div>
-                                                            </div>
+                                                            </div>-->
                                                             <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
                                                                 Test Request Info Details:
 
@@ -438,7 +441,15 @@
                                                             </p-dialog>
                                                           
                                                             <!--<p-confirmDialog width="425"></p-confirmDialog>-->
-                                                            <p-checkbox name="groupname" value="IsThermoCouple" label="Are you sure you need thermo couple info?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()"></p-checkbox>
+                                                            <div class="row">
+                                                            <p-checkbox name="groupname" value="IsThermoCouple" label="Does this Test require Sensor Type?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()"></p-checkbox>
+                                                            </div>
+                                                              <div class="row">
+                                                            <p-checkbox name="groupname" value="PartsList" label="Does this Test require Parts Type?" [(ngModel)]="PartsList" binary="true" (onChange)="confirm1()"></p-checkbox>
+                                                              </div>
+                                                            
+                                                            
+                                                            
                                                             <!--<button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>-->
                                                             <!--<div class="form-group col-sm-6 col-md-4">
                                                             <label class="control-label">Process Flow</label>
@@ -513,18 +524,12 @@
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="row">
+                                <!--<div class="row">
                                     <div class="col-sm-2">
                                         Material Service Parts List
                                     </div>
-
-                                    <div class="col-sm-10 col-md-4">
-                                        <button class="btn btn-success" ng-click="openAddBB();">
-                                            <i class="fa fa-plus"></i> Add
-                                        </button>
-                                    </div>
-                                </div>
-
+                                    
+                                </div>-->
 
                             </div>
 
@@ -535,31 +540,29 @@
                                         <div class="table-responsive" style="min-height:400px;">
                                             <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
                                              class="grid"></div>-->
-                                            <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+                                           
+                                            <!--<p-dataTable [paginator]="true" rows="15" [responsive]="true">
                                                 <p-column header="PartNumber" sortable="true"></p-column>
                                                 <p-column header="DrawingNumber" sortable="true"></p-column>
                                                 <p-column header="Quantity Requested" sortable="true"></p-column>
                                                 <p-column header="Comments" sortable="true"></p-column>
-                                            </p-dataTable>
+                                            </p-dataTable>-->
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <div class="col-sm-6 col-md-4">
+                                <!--<div class="col-sm-6 col-md-4">
                                     <button class="btn btn-success">
                                         <i class="fa fa-plus"></i> Attachment
                                     </button>
-                                </div>
-
-
-
+                                </div>-->
 
                             </div>
                         </div>
                     </div>
                 </div>
-
+                
             </p-tabPanel>
 
            
