@@ -30,40 +30,15 @@ import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCr
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 declare var cron: any;
-//interface CronJonStatic {
-//    new (cronTime: string | Date, onTick: () => void, onComplete?: () => void, start?: boolean, timeZone?: string, context?: any): CronJob;
-//    new (options: {
-//        cronTime: string | Date; onTick: () => void; onComplete?: () => void; start?: boolean; timeZone?: string; context?: any
-//    }): CronJob;
-//}
-//interface CronJob {
-//    start(): void;
-//    stop(): void;
-//}
-
-//interface CronTime { }
-//interface CronTimeStatic {
-//    new (time: string | Date): CronTime;
-//}
-//declare var crondef: CronJonStatic;
-//import cron = require('../typings/cron/index');
-//declare var fullCalendardef: Calendar;
-//let $ = require('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js');
-//let cron = require('../../../../typings/cron/index.d.ts');
 
 @Component({
     selector: 'details-testfacility',
     templateUrl: 'app/body/TestFacilities/Details/details.component.html'
 })
 export class DetailsComponent implements AfterViewInit {
-
-    IsFrequency: boolean = false;
-    hasNextMaintenanceDate: boolean = false;
-    hasNotifications: boolean = true;
-
+   hasNextMaintenanceDate: boolean = false;
     isMaintenaceFrequencySelected: boolean = false;
     isCronControlInitialized : boolean=false;
-
     frequency: any;
     IsTestFacilityDelete: boolean = false;
     titanApiUrl: any = titanApiUrl;
@@ -212,14 +187,6 @@ export class DetailsComponent implements AfterViewInit {
     ngOnInit() {
 
         if (this.id) {
-            //this.categories = [];
-            //this.categories.push({ label: 'All categories', value: null });
-            //this.categories.push({ label: 'Wheel Alignment', value: '5A3AFB53-A3D2-4BDF-8909-E60ED577F84D' });
-            //this.categories.push({ label: 'Torque for Parts', value: '817164F9-01D8-470D-BD58-618F4BF135F2' });
-            //this.categories.push({ label: 'Certificates', value: 'Certificates' });
-            //this.categories.push({ label: 'Standard Documents', value: 'Standard Documents' });
-            //this.categories.push({ label: 'Manual', value: 'Manual' });
-            //this.categories.push({ label: 'Results', value: 'Results' });
 
             // TODO: Replace this with a breadcrumb data service.
             // this.breadcrumbs = [];
@@ -1041,8 +1008,12 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-       
-        formData.maintenanceFrequency = $('#selector').cron("value");
+        if (this.isMaintenaceFrequencySelected){
+            formData.maintenanceFrequency = $('#selector').cron("value");
+        }
+        else {
+            formData.maintenanceFrequency = '' ;
+        }
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
         formData.address.addressLine2 = formRef.addressLine2;
@@ -1060,7 +1031,6 @@ export class DetailsComponent implements AfterViewInit {
                         this.address = res.address;
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
-                       // this.frequencyInit();
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
                         this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
@@ -1072,8 +1042,6 @@ export class DetailsComponent implements AfterViewInit {
                     });
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
-
-               // this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
             else
             {
@@ -1152,15 +1120,6 @@ export class DetailsComponent implements AfterViewInit {
                     });
 
             });
-    }
-
-    selectAttachment(TestFacilityAttachment: ITestFacilityAttachment) {
-        //console.log('---------------buttonclick---------------', TestFacilityAttachment);
-        // return this.http.get(`${TestFacilityApiUrl.getfilesByIdUrl}/${path}`, { headers: this.headers })
-        //   this.msgs = [];
-        // this.msgs.push({severity:'info', summary:'Attachment Select', detail:'',  + TestFacilityAttachment.$values.path});
-
-
     }
 
     onUpload(event) {
