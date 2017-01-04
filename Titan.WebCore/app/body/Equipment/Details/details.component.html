@@ -289,23 +289,53 @@
             </div>
         </p-tabPanel>
         <p-tabPanel header="Log ||" id="log">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered" id="editEquipmentHistory">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Employe</th>
-                                        <th>Timestamp</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+            <p-growl [value]="msgs"></p-growl>
+            <form name="tForm2" enctype="application/x-www-form-urlencoded">
+                <p-panel>
+
+                    <header class="with-controls">
+                        <p class="ui-panel-title">Comments</p>
+
+                    </header>
+                    <div class="ui-grid-row">
+                        <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
+                            <header>
+                                <select class="ql-size">
+                                    <option value="small"></option>
+                                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                    <option selected></option>
+                                    <option value="large"></option>
+                                    <option value="huge"></option>
+                                </select>
+                                <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                </span>
+                            </header>
+                        </p-editor>
                     </div>
-                </div>
+
+
+                    <div class="ui-grid-col-2"></div>
+                    <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
+                    <button pButton type="button" icon="ui-icon-comment" label="Add Comment" (click)="AddLogComment()"></button>
+                </p-panel>
+            </form>
+            <div class="ui-grid-col-2"></div>
+            <div class="ui-grid-row">
+
+
+                <div class="ui-grid-col-2"></div>
+                <p-dataTable [value]="testFacilityLogComments" selectionMode="single"
+                             [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    [responsive]="true">
+                    <p-column field="event" header="Information" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                    <p-column field="comment" header="Audit/Comment" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                    <p-column field="employee" header="Employee" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                    <p-column field="createdOn" header="Timestamp" sortable="true"></p-column>
+                </p-dataTable>
+
             </div>
 
         </p-tabPanel>

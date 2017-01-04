@@ -136,6 +136,21 @@ export class TestFacilityService {
           //.catch(err => Observable.throw(err))
           //.map(this.getJson);
       }
+      DeleteTestFacility(id): Observable<any> {
+          return this.http.post(`${TestFacilityApiUrl.DeleteTestFacilityUrl}/${id}`, { headers: this.headers })
+
+              //     .toPromise()
+              //  .then(res => <ITestFacilityRole[]> res.json().data)
+              // .then(data => { return data; });
+              .map(this.getJson)
+              //.map(data => {
+              //    console.log('---------getbyusing testdata---------', data);
+              //    return data.$values
+              //});
+              ;
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+      }
       DeleteEquipmentMap(id): Observable<any> {
           return this.http.post(`${TestFacilityApiUrl.DeleteEquipmentMap}/${id}`, { headers: this.headers })
 

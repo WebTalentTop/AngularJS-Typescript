@@ -58,8 +58,10 @@ declare var cron: any;
 export class DetailsComponent implements AfterViewInit {
 
     IsFrequency: boolean = false;
+    hasNextMaintenanceDate: boolean = false;
     hasNotifications: boolean = true;
     frequency: any;
+    IsTestFacilityDelete: boolean = false;
     titanApiUrl: any = titanApiUrl;
     username: string;
     details: string;
@@ -232,15 +234,42 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
-    //onMaintenanceNeeded(event)
-    //{
+    onMaintenanceNeeded()
+    {
+        if (this.IsFrequency) {
 
-    //    this.FrequencyInit(event);
-    //}
+            if (this.testFacility.maintenanceFrequency != null)
+            { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
+            else
+            { this.selectedMaintenanceFrequency = "* * * * *"; }
+
+            $("#selector").cron({
+
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
+
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
+                    // $('#selector-val').text($(this).cron("value"));
+                },
+                effectOpts: {
+                    openEffect: "fade",
+                    openSpeed: "slow"
+                },
+                useGentleSelect: true
+            })
+
+        }
+        else
+        {
+            $("div").remove(".md-inputfield");
+            //$("div")
+        }
+        //this.FrequencyInit(event
+    }
     frequencyInit()
     {
        // var cron_field = $('#selector').cron();
-      //  if (IsFrequency && cron_field != null) {
+       // if (IsFrequency) {
             if (this.testFacility.maintenanceFrequency != null)
             { this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency; }
             else
@@ -269,7 +298,16 @@ export class DetailsComponent implements AfterViewInit {
 
 
     }
+    onTestFacilityDelete()
+    {
+        if (this.IsTestFacilityDelete)
+        this.testFacilityService.DeleteTestFacility(this.id).subscribe(res =>
 
+            console.log('-----delete-------', res)
+
+        );
+
+    }
     downloadAttachment(attachment) {
 
         window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
@@ -655,8 +693,13 @@ export class DetailsComponent implements AfterViewInit {
                 this.address = res.address;
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
-                this.frequencyInit();
+               // this.frequencyInit();
+                onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
+               // if (res.testFacility.lastMaintenanceDate != "0001 - 01 - 01T00: 00:00" && res.testFacility.maintenanceFrequency != null)
+                if (res.testFacility.nextMaintenanceDate != null) {
+                    this.hasNextMaintenanceDate = true;
+                }
                 this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
@@ -669,14 +712,13 @@ export class DetailsComponent implements AfterViewInit {
                 .subscribe(res => {
                     if (res) {
                         this.notifications = res;
-                        if (res.length > 0) {
-                            this.hasNotifications = false;
-                        }
+                       
                     }
-
-                    this.notifications.forEach(x => {
-                        this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
-                    })
+                   
+                        this.notifications.forEach(x => {
+                            this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                        })
+                    
                 })
         }
     }
@@ -841,35 +883,35 @@ export class DetailsComponent implements AfterViewInit {
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Search any user to add', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Search any user to add', detail: '' });
             return null;
         }
         if (this.selectedRole == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Please select Role', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please select Role', detail: '' });
             return null;
         }
 
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Primary Incharge") != undefined) && (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Already user with PIC present', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Already user with PIC present', detail: '' });
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role PIC', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for role PIC', detail: '' });
             return null;
         }
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Secondary Incharge") != undefined) && (this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Already user with SIC present', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Already user with SIC present', detail: '' });
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Please select only one user for role SIC', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for role SIC', detail: '' });
             return null;
         }
        
@@ -892,17 +934,19 @@ export class DetailsComponent implements AfterViewInit {
                             .subscribe(res => {
                                 if (res) {
                                     this.notifications = res;
-                                    if (res.length > 0)
+                                    if (res.length == 0)
                                     {
-                                        this.hasNotifications = false;
+                                        this.notificationMsgs = [];
                                     }
                                 }
 
                                 this.notifications.forEach(x => {
+                                   
                                     this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                                 })
                             });
                     }
+                    this.selectedRole = null;
                 });
         });
 
@@ -916,7 +960,7 @@ export class DetailsComponent implements AfterViewInit {
 
         if (this.selectedDepartment == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Search any department to add', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Search any department to add', detail: '' });
             return null;
         }
         if (!this.IsKeepOpen)
@@ -929,6 +973,7 @@ export class DetailsComponent implements AfterViewInit {
             this.testFacilityService.getTenants(this.id)
                 .subscribe(res => {
                     this.testFacilityTenants = res;
+                    this.selectedDepartment = null;
                 });
         });
 
@@ -940,7 +985,7 @@ export class DetailsComponent implements AfterViewInit {
     {
         if (this.comment == null || this.comment == '') {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Please write any comment', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please write any comment', detail: '' });
             return null;
         }
 
@@ -960,7 +1005,7 @@ export class DetailsComponent implements AfterViewInit {
 
         if (this.selectedEquipment == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'info', summary: 'Search any equipment to add', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Search any equipment to add', detail: '' });
             return null;
         }
         if (!this.IsKeepOpen)
@@ -973,6 +1018,8 @@ export class DetailsComponent implements AfterViewInit {
             this.testFacilityService.getEquipmentsByIdusing(this.id)
                 .subscribe(res => {
                     this.TestFacilityEquipments = res;
+                    this.selectedEquipment = null;
+
                 });
         });
 
@@ -1008,7 +1055,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-     
+       
         formData.maintenanceFrequency = $('#selector').cron("value");
         formData.address.id = this.addressid;
         formData.address.addressLine1 = formRef.addressLine1;
@@ -1027,9 +1074,14 @@ export class DetailsComponent implements AfterViewInit {
                         this.address = res.address;
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
-                        this.frequencyInit();
+                       // this.frequencyInit();
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
                         this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                       // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
+                        if (res.testFacility.nextMaintenanceDate != null) {
+                            this.hasNextMaintenanceDate = true;
+                        }
+                       
                        
                     });
                 this.msgs = [];
@@ -1037,6 +1089,11 @@ export class DetailsComponent implements AfterViewInit {
 
                // this.router.navigate(["/testfacilities/details/", res.result.id]);
             }
+            else
+            {
+            this.msgs = [];
+                this.msgs.push({ severity: 'warn', summary: res.errorMessage, detail: '' });
+}
 
         });
         this.msgs = [];
@@ -1073,9 +1130,11 @@ export class DetailsComponent implements AfterViewInit {
                             .subscribe(res => {
                                 if (res) {
                                     this.notifications = res;
-                                    if (res.length > 0) {
-                                        this.hasNotifications = false;
-                                    }
+                                   
+                                        if (res.length == 0) {
+                                            this.notificationMsgs = [];
+                                        }
+                                    
                                 }
 
                                 this.notifications.forEach(x => {
@@ -1128,6 +1187,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testfacilityattachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 this.TestFacilityAttachments = TestFacilityAttachments;
+                this.selectedCategory = null;
             });
 
         this.msgs = [];

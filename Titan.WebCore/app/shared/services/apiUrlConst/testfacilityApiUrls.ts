@@ -13,6 +13,7 @@ export class TestFacilityApiUrl {
     public static getTenants: string = titanApiUrl + 'testFacility/GetTenantsByTestFacilityId';
     public static getLogComments: string = titanApiUrl + 'testFacility/GetTestFacilityLogCommentByTestFacilityId';
     public static DeleteUserRoleMap: string = titanApiUrl + 'testFacility/DeleteUserRoleMap';
+    public static DeleteTestFacilityUrl: string = titanApiUrl + 'testFacility/Delete';
     public static DeleteEquipmentMap: string = titanApiUrl + 'testFacility/DeleteEquipmentMap';
     public static DeleteTenantMap: string = titanApiUrl + 'testFacility/DeleteTenantMap';
     public static getfilesByIdUrl: string = titanApiUrl + 'testFacilityAttachment/file';

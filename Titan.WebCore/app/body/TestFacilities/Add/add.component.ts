@@ -75,7 +75,8 @@ export class AddComponent {
             
             if (res.isSuccess) {
 
-                this.router.navigate(["./testFacilities"], { queryParams: { page: 1 } });
+                this.router.navigate(['testFacilities/details/', res.result.id]);
+               // this.router.navigate(["./testFacilities"], { queryParams: { page: 1 } });
             }
             else
             {
