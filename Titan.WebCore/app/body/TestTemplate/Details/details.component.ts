@@ -208,9 +208,15 @@ export class DetailsComponent {
 
     onLoadProcedureSteps(event) {
         console.log(event);
-        this.procedureService.getProcedureSteps(event.id).subscribe(res => {
-            event.steps = res.$values;
-        });
+        if (event.data != undefined) {
+            this.procedureService.getProcedureSteps(event.data.id).subscribe(res => {
+                event.data.steps = res.$values;
+            });
+        } else {
+            this.procedureService.getProcedureSteps(event.id).subscribe(res => {
+                event.steps = res.$values;
+            });
+        }
     }
 
     isUpButtonVisible(procedure) {

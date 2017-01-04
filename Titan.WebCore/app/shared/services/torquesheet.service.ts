@@ -71,8 +71,8 @@ export class TorquesheetService extends BaseService{
             .map(this.getJson)
     }
 
-    putTorqueSheet(filterBody): Observable<any> {
-        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}`, filterBody)
+    putTorqueSheet(status:string, filterBody): Observable<any> {
+        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}` + status, filterBody)
             .map(this.getJson)
     }
 }

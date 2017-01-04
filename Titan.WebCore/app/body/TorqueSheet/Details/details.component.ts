@@ -197,13 +197,38 @@ export class DetailsComponent {
         //var tempId = this.torqueBookIdForAddingTorqueSheet;
         //var container = $(this.torqueBookElmForAddingTorqueSheet).closest("div.ui-treetable-row");
         this.torqueSheetDetails.contents = JSON.stringify(this.spreadInstance.toJSON());
-        this.service.putTorqueSheet(this.torqueSheetDetails).subscribe(res => {
+        this.service.putTorqueSheet("", this.torqueSheetDetails).subscribe(res => {
             if (this.landingFrom == "Project") {
                 $("#torqueSheetSpreadContainer").html("");
                 this.router.navigate(["/project/detailsmain/", this.identifierId]);
 
             }
             //this.onAddTorqueSheetCancel();
+        });
+    }
+
+    onSubmitForApproval() {
+        this.saveTorqueSheet("Submit");
+    }
+
+    onApprove() {
+        this.saveTorqueSheet("Approve");
+    }
+
+    onReject() {
+        this.saveTorqueSheet("Reject");
+    }
+
+    onCreateNewVersion() {
+
+    }
+
+    saveTorqueSheet(status) {
+        this.torqueSheetDetails.contents = JSON.stringify(this.spreadInstance.toJSON());
+        this.service.putTorqueSheet(status, this.torqueSheetDetails).subscribe(res => {
+            if (res.isSuccess) {
+                this.torqueSheetDetails = res.result;
+            }
         });
     }
 

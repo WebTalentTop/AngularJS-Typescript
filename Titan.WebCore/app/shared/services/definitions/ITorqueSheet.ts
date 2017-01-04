@@ -15,4 +15,11 @@ export interface ITorqueSheet {
     name: string;
     isNewVersionRequested: boolean;
     isCurrentVersionApproved: boolean;
+    isSubmitForApprovalVisible: boolean;
+    isRequestForNewVersionVisible: boolean;
+    isApprovalRequested: boolean;
+    canApproveOrRejectTorqueSheet: boolean;
+    isSaveVersionVisible: boolean;
+    isApproveVersionVisible: boolean;
+    isRejectVersionVisible: boolean;
 }

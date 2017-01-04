@@ -32,15 +32,15 @@
                         </div>
                     </div>
 
-                    <div class="ui-grid-row">
+                    <div class="ui-grid-row" *ngIf="torqueSheetDetails">
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save">  </button>
-                            </div>
-                            <div class="ui-grid-col-6">
-                            </div>
-                            <div class="ui-grid-col-4">
+                            <div class="ui-grid-col-12">
+                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save" *ngIf="torqueSheetDetails.isSaveVersionVisible">  </button>
                                 <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
+                                <button id="submit" pButton type="button" label="Submit For Approval" (click)="onSubmitForApproval()" *ngIf="torqueSheetDetails.isSubmitForApprovalVisible">  </button>
+                                <button id="approve" pButton type="button" label="Approve" (click)="onApprove()" *ngIf="torqueSheetDetails.isApproveVersionVisible">  </button>
+                                <button id="reject" pButton type="button" label="Reject" (click)="onReject()" *ngIf="torqueSheetDetails.isRejectVersionVisible">  </button>
+                                <button id="createNewVersion" pButton type="button" label="Create New Version" (click)="onCreateNewVersion()" *ngIf="torqueSheetDetails.isRequestForNewVersionVisible">  </button>
                             </div>
                         </div>
                     </div>
