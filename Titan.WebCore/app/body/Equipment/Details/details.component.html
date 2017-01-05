@@ -28,7 +28,7 @@
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Facility :</p>
-                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="model.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="model.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities">
                         </p-dropdown>
                     </div>
                   </div>
@@ -67,6 +67,10 @@
                       <div class="ui-g-12 ui-md-6 md-inputfield">
                         <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="model.purchasePrice" style="width:100%">
                         <label>Purchased Price</label>
+                      </div>
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="text" id="name" pInputText name="model" [(ngModel)]="model.model" style="width:100%">
+                          <label>Model</label>
                       </div>
                   </div>
                   <!-- Price -->
