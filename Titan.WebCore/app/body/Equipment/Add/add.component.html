@@ -9,87 +9,78 @@
                 <p-panel header="Basic Information">
                   <div class="body">
                       <!-- Begin Name -->
-                      <div class="input-row">
-                          <div class="md-inputfield">
+                      <div class="ui-grid-row">
+                          <div class="md-inputfield ui-g-12 ui-md-6">
                               <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
-                                     minlength="3" class="form-control" required row="20">
+                                     minlength="3" class="form-control" required row="20" style="width:100%">
                               <label>Name <span >*</span></label>
                           </div>
-                      </div>
-                      <!-- End Name -->
-                      <!-- Begin Serial # -->
-                      <div class="input-row md-spaced">
-                          <div class="md-inputfield">
-                              <input type="text" id="name" pInputText name="serial" [(ngModel)]="serialNumber" #testFacilityNameRef="ngModel"
-                                     minlength="3" class="form-control"  row="20">
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                              <input type="text" id="name" pInputText name="serial" [(ngModel)]="serialNumber" style="width:100%">
                            <label>Serial #</label>
                           </div>
                       </div>
                       <!-- End Serial# -->
                       <!-- Begin Equipment Type # -->
-                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
-                            <label>Equipment Type</label>
-                            <p-dropdown   [style]="{'width':'200px'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
+                      <div class="ui-grid-row md-spaced">
+                        <div class="ui-g-12 ui-md-6">
+                            <p style="color:#777">Equipment Type :</p>
+                            <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
                             </p-dropdown>
+                        </div>
+                        <div class="ui-g-12 ui-md-6">
+                            <p style="color:#777">Test Facility :</p>
+                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                            </p-dropdown>
+                        </div>
                       </div>
-                      <!-- End Equipment Type -->
-                      <!-- Purchased Price -->
-                      <div class="input-row md-spaced">
-                          <div class="md-inputfield">
-                              <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="purchasePrice">
-                           <label>Purchased Price</label>
-                          </div>
-                      </div>
-                      <!-- Purchased Price -->
+                      <!-- End Equipment Type --><br /><br />
                       <!--Year Purchased-->
-                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
-                          <div class="ui-grid-col-6">
-                            <label class="control-label">Year Purchased </label>
-                            <p-calendar [(ngModel)]="purchaseDate"name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
+                      <div class="ui-grid-row md-spaced" style="color:#777">
+                          <div class="ui-g-12 ui-md-6">
+                            <label>Year Purchased :</label>
+                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
                           </div>
-                          <div class="ui-grid-col-6">
-                            <label class="control-label">Warranty Until</label>
-                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
-                          </div>
-                      </div>
-                      <!--End Year-->
-                      <!-- Location -->
-                      <div class="input-row md-spaced">
-                          <div class="md-inputfield">
-                              <input type="text" id="name" pInputText name="location" [(ngModel)]="location">
-                           <label>Location</label>
+                          <div class="ui-g-12 ui-md-6 ">
+                            <label>Warranty Until :</label>
+                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true" ></p-calendar>
+
                           </div>
                       </div>
-                      <!-- End Location -->
-                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
-                          <label class="control-label col-sm-12 pl0">  Test Facility :</label>
-                          <p-dropdown [style]="{'width':'200px'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
-                          </p-dropdown>
-                      </div>
-                      <!--Calibration Date-->
-                      <div class="ui-grid-row md-spaced" style="margin-top:40px;margin-bottom:40px">
-                          <div class="ui-grid-col-6">
-                            <label class="control-label">Last Calibration Date </label>
+                      <!--End Year--><br />
+                      <!--Calibration Frequency-->
+                      <div class="ui-grid-row md-spaced" style="color:#777">
+                          <div class="ui-g-12 ui-md-12" >
+                           <label>Calibration Frequency :</label>
+                         </div>
+                          <div class="ui-g-12 ui-md-6" >
+                              <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
+                              <div class="md-inputfield">
+                                  <div id="selector" [hidden]="!IsFrequency"></div>
+                              </div>
+                          </div>
+                          <div class="ui-g-12 ui-md-6">
+                            <label style="color:#777">Last Calibration Date :</label>
                             <p-calendar [(ngModel)]="lastcalibrationDate"name="lastcalibrationDate" showTime="true" [showIcon]="true"></p-calendar>
                           </div>
-
                       </div>
-                      <!--End Calibration Date-->
-                      <!--Calibration Frequency-->
-                      <div class="input-row md-spaced">
-                          <label>Calibration Frequency</label>
-                          <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
-                            <div class="md-inputfield">
-                              <div id="selector" [hidden]="!IsFrequency"></div>
+                      <!--Calibration Frequency--><br /><br />
+                      <!-- Price -->
+                      <div class="ui-grid-row md-spaced" style="color:#777">
+                          <div class="ui-g-12 ui-md-6 md-inputfield">
+                            <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
+                            <label>Purchased Price</label>
                           </div>
-
                       </div>
+                      <!-- Price -->
+                      <br />
                       <!--Calibration Frequency-->
                       <!--Begin Description-->
-                      <div class="md-spaced" style="margin-top:40px;">
-                          <label>Description</label>
-                          <div class="md-inputfield">
-
+                      <div class="ui-grid-row md-spaced" >
+                          <div class="ui-g-12 ui-md-12" >
+                            <label style="color:#777">Description</label>
+                          </div>
+                          <div class="ui-g-12 ui-md-12 md-inputfield">
                               <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                   <header>
                                       <select class="ql-size">
@@ -122,74 +113,61 @@
                         <p class="ui-panel-title">Manufacture Information</p>
                         <p class="controls"><button type="text" (click)="displayAssignManufactureDialog=true" pButton icon="ui-icon-person-add" label="Add New&hellip;"></button></p>
                     </header>
-
-                    <div class="ui-grid-row" style="margin-top:20px;">
-                       <div class="ui-grid-row md-spaced">
-                              <label>Equipment Manufacturer</label>
-                              <p-dropdown [style]="{'width':'200px'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" [style]="{'width':'auto'}">
-                              </p-dropdown>
-                      </div>
-                        <div class="input-row md-spaced" style="margin-top:20px">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" class="form-control" row="20">
-                                <label>Name</label>
-                            </div>
+                        <div class="ui-grid-row md-spaced">
+                          <div class="ui-g-12 ui-md-6">
+                              <label style="color:#777">Equipment Manufacturer :</label>
+                          </div>
                         </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerAddress" [(ngModel)]="manufacturerAddress" class="form-control" row="20">
+                        <div class="ui-grid-row md-spaced">
+                          <div class="ui-g-12 ui-md-6">
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" >
+                              </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6">
+                            <label style="color:#777">Warranty Until :</label>
+                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
+                          </div>
+                        </div><br />
+                        <div class="ui-grid-row md-spaced">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerAddress" [(ngModel)]="manufacturerAddress" style="width:100%">
                                 <label>Address</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerPhone" [(ngModel)]="manufacturerPhone" class="form-control" row="20">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerPhone" [(ngModel)]="manufacturerPhone" style="width:100%">
                                 <label>Phone</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerEmail" [(ngModel)]="manufacturerEmail" class="form-control" row="20">
+                        </div><br />
+                        <div class="ui-grid-row md-spaced">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerEmail" [(ngModel)]="manufacturerEmail" style="width:100%">
                                 <label>Email</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerContactPerson" [(ngModel)]="manufacturerContactPerson" class="form-control" row="20">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerContactPerson" [(ngModel)]="manufacturerContactPerson" style="width:100%">
                                 <label>Contact Person</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerFax" [(ngModel)]="manufacturerFax" class="form-control" row="20">
+                        </div><br />
+                        <div class="ui-grid-row md-spaced">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerFax" [(ngModel)]="manufacturerFax" style="width:100%">
                                 <label>Fax</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" class="form-control" row="20">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" style="width:100%">
                                 <label>Website</label>
                             </div>
-                        </div>
-                        <div class="ui-grid-row md-spaced" style="margin-top:40px">
-                            <div class="ui-grid-col-6">
-                              <label class="control-label">Warranty Until</label>
-                              <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
-                            </div>
-                        </div>
-                        <div class="input-row md-spaced" style="margin-top:40px">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="model" [(ngModel)]="model" class="form-control" row="20">
+                        </div><br />
+                        <div class="ui-grid-row md-spaced">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="model" [(ngModel)]="model" style="width:100%">
                                 <label>Model</label>
                             </div>
-                        </div>
-                        <div class="input-row md-spaced" style="margin-bottom:20px;">
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="year" [(ngModel)]="year" class="form-control" row="20">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="year" [(ngModel)]="year" style="width:100%">
                                 <label>Year</label>
                             </div>
-                        </div>
-                  </div>
+                        </div><br />
                 </p-panel>
                 <br />
                 <br />
