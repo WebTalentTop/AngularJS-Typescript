@@ -15,15 +15,15 @@ p-panel .ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all
 }
 
 #cancel.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only
- { 
+ {
     font-size: 15px ;
     display:inline-block;
     width: 120px;
     background-color: gray;
-     
+
     }
 
-p-panel #footer 
+p-panel #footer
 {
     float: left;
     width: auto;

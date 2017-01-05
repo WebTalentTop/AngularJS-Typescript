@@ -269,3 +269,8 @@ Titan.WebCore/library/
 
 # Log Files and Directories to Exclude
 npm-debug.log
+Titan.WebCore/index.html
+Titan.WebCore/systemjs.config.js
+Titan.WebCore/temp_equip.html
+Titan.WebCore/temp_equip_detail
+Titan.WebCore/temp_request_add

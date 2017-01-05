@@ -8,7 +8,8 @@ import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
 import {TitanUserService} from '../../shared/services/titanuser.service';
 import {TestRequestService} from '../../shared/services/testrequest.service';
-import * as moment from 'moment/moment';
+////
+//import * as moment from 'moment/moment';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {
     DataTable,
@@ -378,8 +379,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                                     testUserScheduleId,
                                     testfacilityName} = x;
 
-                                r.startDate = moment(r.startDate).toDate();
-                                r.endDate = moment(r.endDate).toDate();
+                                //r.startDate = moment(r.startDate).toDate();
+                                //r.endDate = moment(r.endDate).toDate();
                                 return r;
                             });
                             selfRef.testOperatorsForBlock = items;

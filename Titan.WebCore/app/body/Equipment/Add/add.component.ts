@@ -66,23 +66,23 @@ export class AddComponent {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
         this.getTestFacilities();
-        $("#selector").cron({
-
-            initial: "* * * * *",
-            onChange: function () {
-
-                this.selectedCalibrationFrequency = $(this).cron("value");
-                // $('#selector-val').text($(this).cron("value"));
-            },
-            effectOpts: {
-                openEffect: "fade",
-                openSpeed: "slow"
-            },
-            useGentleSelect: true
-        })
+        // $("#selector").cron({
+        //
+        //     initial: "* * * * *",
+        //     onChange: function () {
+        //
+        //         this.selectedCalibrationFrequency = $(this).cron("value");
+        //         // $('#selector-val').text($(this).cron("value"));
+        //     },
+        //     effectOpts: {
+        //         openEffect: "fade",
+        //         openSpeed: "slow"
+        //     },
+        //     useGentleSelect: true
+        // })
 
     }
-   
+
     onEquipmentManufacturerChange(event) {
         if (event.value != null) {
             this.IsNewManufacturer = false;
