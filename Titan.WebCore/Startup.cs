@@ -37,6 +37,7 @@ namespace Titan.WebCore
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
             services.Configure<TenantUser>(Configuration.GetSection("TenantUser"));
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.AddSingleton<IConfiguration>(Configuration);
         }

@@ -10,4 +10,8 @@ namespace Titan.WebCore.Models
         public string TenatInfo { get; set; }
         public Tenant Tenant { get; set; }
     }
+    public class AppSettings
+    {
+        public string ApiUrl { get; set; }
+    }
 }
