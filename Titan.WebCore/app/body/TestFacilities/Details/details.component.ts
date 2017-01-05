@@ -93,6 +93,7 @@ export class DetailsComponent implements AfterViewInit {
     buildLevels: any;
     projectCodes: any;
     testFacilities: any;
+    currentTestFacilities: any;
     testAllModes: any;
     testTypes: any;
     testStatus: any;
@@ -304,8 +305,8 @@ export class DetailsComponent implements AfterViewInit {
         setTimeout(function () { ref.initSchedule(); }, 10);
     }
     loadEquipmentTabViews(me) {
-       // me.getTestFacilities();
-        me.getavailableTestFacilities();
+        me.getTestFacilities();
+       // me.getavailableTestFacilities();
         me.getavailableEquipments();
         me.getTestFacilityEquipmentById();
        // me.getEquipments();
@@ -684,6 +685,7 @@ export class DetailsComponent implements AfterViewInit {
         //    userRoles
         this.testFacilityService.getAvailableTestFacilities(this.id).subscribe(response => {
             this.testFacilities = new Array();
+          //  this.currentTestFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -697,6 +699,7 @@ export class DetailsComponent implements AfterViewInit {
                     }
                     resultMap.push(temp);
                 }
+             //   this.currentTestFacilities = resultMap.filter(tf => tf.value != this.id);
                 this.testFacilities = resultMap;
             }
         });
@@ -706,6 +709,7 @@ export class DetailsComponent implements AfterViewInit {
         //    userRoles
         this.testFacilityService.getTestFacilities().subscribe(response => {
             this.testFacilities = new Array();
+            this.currentTestFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -719,6 +723,7 @@ export class DetailsComponent implements AfterViewInit {
                     }
                     resultMap.push(temp);
                 }
+                this.currentTestFacilities = resultMap.filter(tf => tf.value != this.id);
                 this.testFacilities = resultMap;
             }
         });
