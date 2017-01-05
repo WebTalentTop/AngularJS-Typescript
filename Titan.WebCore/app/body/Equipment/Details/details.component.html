@@ -20,7 +20,7 @@
                   </div>
                   <!-- End Name -->
                   <!-- Begin Equipment Type # -->
-                  <div class="ui-grid-row md-spaced">
+                  <div class="ui-grid-row ">
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Equipment Type :</p>
                         <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
@@ -34,7 +34,7 @@
                   </div>
                   <!-- End Equipment Type --><br /><br />
                   <!--Year Purchased-->
-                  <div class="ui-grid-row md-spaced" style="color:#777">
+                  <div class="ui-grid-row " style="color:#777">
                       <div class="ui-g-12 ui-md-6 md-inputfield">
                          <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
                          <label>Year Purchased :</label>
@@ -46,7 +46,7 @@
                   </div>
                   <!--End Year--><br />
                   <!--Calibration Frequency-->
-                  <div class="ui-grid-row md-spaced" style="color:#777">
+                  <div class="ui-grid-row " style="color:#777">
                       <div class="ui-g-12 ui-md-12" >
                        <label>Calibration Frequency :</label>
                      </div>
@@ -57,13 +57,13 @@
                           </div>
                       </div>
                       <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [style]="{'width':'160px'}"[(ngModel)]="model.lastcalibrationDate" name="lastcalibrationDate" showTime="true" [showIcon]="true"></p-calendar>
+                        <p-calendar [style]="{'width':'160px'}" [(ngModel)]="model.lastcalibrationDate" name="lastcalibrationDate" showTime="true" [showIcon]="true"></p-calendar>
                         <label style="color:#777">Last Calibration Date :</label>
                       </div>
                   </div>
                   <!--Calibration Frequency--><br /><br />
                   <!-- Price -->
-                  <div class="ui-grid-row md-spaced" style="color:#777">
+                  <div class="ui-grid-row " style="color:#777">
                       <div class="ui-g-12 ui-md-6 md-inputfield">
                         <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="model.purchasePrice" style="width:100%">
                         <label>Purchased Price</label>
@@ -73,7 +73,7 @@
                   <br />
                   <!--Calibration Frequency-->
                   <!--Begin Description-->
-                  <div class="ui-grid-row md-spaced" >
+                  <div class="ui-grid-row " >
                       <div class="ui-g-12 ui-md-12" >
                         <label style="color:#777">Description</label>
                       </div>

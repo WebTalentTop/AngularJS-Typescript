@@ -22,7 +22,7 @@
                       </div>
                       <!-- End Serial# -->
                       <!-- Begin Equipment Type # -->
-                      <div class="ui-grid-row md-spaced">
+                      <div class="ui-grid-row ">
                         <div class="ui-g-12 ui-md-6">
                             <p style="color:#777">Equipment Type :</p>
                             <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
@@ -36,20 +36,19 @@
                       </div>
                       <!-- End Equipment Type --><br /><br />
                       <!--Year Purchased-->
-                      <div class="ui-grid-row md-spaced" style="color:#777">
-                          <div class="ui-g-12 ui-md-6">
-                            <label>Year Purchased :</label>
+                      <div class="ui-grid-row " style="color:#777">
+                          <div class="ui-g-12 ui-md-6 md-inputfield">
                             <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
+                            <label>Year Purchased :</label>
                           </div>
-                          <div class="ui-g-12 ui-md-6 ">
-                            <label>Warranty Until :</label>
+                          <div class="ui-g-12 ui-md-6 md-inputfield">
                             <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true" ></p-calendar>
-
+                            <label>Warranty Until :</label>
                           </div>
                       </div>
                       <!--End Year--><br />
                       <!--Calibration Frequency-->
-                      <div class="ui-grid-row md-spaced" style="color:#777">
+                      <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-12" >
                            <label>Calibration Frequency :</label>
                          </div>
@@ -59,14 +58,14 @@
                                   <div id="selector" [hidden]="!IsFrequency"></div>
                               </div>
                           </div>
-                          <div class="ui-g-12 ui-md-6">
+                          <div class="ui-g-12 ui-md-6 md-inputfield">
+                            <p-calendar [(ngModel)]="lastcalibrationDate" name="lastcalibrationDate" showTime="true" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
                             <label style="color:#777">Last Calibration Date :</label>
-                            <p-calendar [(ngModel)]="lastcalibrationDate"name="lastcalibrationDate" showTime="true" [showIcon]="true"></p-calendar>
                           </div>
                       </div>
                       <!--Calibration Frequency--><br /><br />
                       <!-- Price -->
-                      <div class="ui-grid-row md-spaced" style="color:#777">
+                      <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-6 md-inputfield">
                             <input type="text" id="name" pInputText name="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
                             <label>Purchased Price</label>
@@ -76,7 +75,7 @@
                       <br />
                       <!--Calibration Frequency-->
                       <!--Begin Description-->
-                      <div class="ui-grid-row md-spaced" >
+                      <div class="ui-grid-row " >
                           <div class="ui-g-12 ui-md-12" >
                             <label style="color:#777">Description</label>
                           </div>
@@ -113,22 +112,22 @@
                         <p class="ui-panel-title">Manufacture Information</p>
                         <p class="controls"><button type="text" (click)="displayAssignManufactureDialog=true" pButton icon="ui-icon-person-add" label="Add New&hellip;"></button></p>
                     </header>
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <label style="color:#777">Equipment Manufacturer :</label>
                           </div>
                         </div>
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" >
                               </p-dropdown>
                           </div>
-                          <div class="ui-g-12 ui-md-6">
-                            <label style="color:#777">Warranty Until :</label>
+                          <div class="ui-g-12 ui-md-6 md-inputfield">
                             <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true"></p-calendar>
+                                                    <label style="color:#777">Warranty Until :</label>
                           </div>
                         </div><br />
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" id="name" pInputText name="manufacturerAddress" [(ngModel)]="manufacturerAddress" style="width:100%">
                                 <label>Address</label>
@@ -138,7 +137,7 @@
                                 <label>Phone</label>
                             </div>
                         </div><br />
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" id="name" pInputText name="manufacturerEmail" [(ngModel)]="manufacturerEmail" style="width:100%">
                                 <label>Email</label>
@@ -148,7 +147,7 @@
                                 <label>Contact Person</label>
                             </div>
                         </div><br />
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" id="name" pInputText name="manufacturerFax" [(ngModel)]="manufacturerFax" style="width:100%">
                                 <label>Fax</label>
@@ -158,7 +157,7 @@
                                 <label>Website</label>
                             </div>
                         </div><br />
-                        <div class="ui-grid-row md-spaced">
+                        <div class="ui-grid-row ">
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" id="name" pInputText name="model" [(ngModel)]="model" style="width:100%">
                                 <label>Model</label>
