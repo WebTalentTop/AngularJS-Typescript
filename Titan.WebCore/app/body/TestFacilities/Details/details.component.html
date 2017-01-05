@@ -809,7 +809,14 @@
                         <p-column field="event" header="Information" sortable="true" [filter]="true"
                                   filterPlaceholder="Search"></p-column>
                         <p-column field="comment" header="Audit/Comment" sortable="true" [filter]="true"
-                                  filterPlaceholder="Search"></p-column>
+
+                                  filterPlaceholder="Search">
+                            <template let-col let-item="rowData" pTemplate="body">
+                                <div [innerHtml]="item.comment"></div>
+                            </template>
+
+
+                        </p-column>
                         <p-column field="employee" header="Employee" sortable="true" [filter]="true"
                                   filterPlaceholder="Search"></p-column>
                         <p-column field="createdOn" header="Timestamp" sortable="true"></p-column>
