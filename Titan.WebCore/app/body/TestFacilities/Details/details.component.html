@@ -416,7 +416,7 @@
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
                         <span class="pseudo-label">Equipment</span>
 
-                        <p-dropdown [options]="equipments" (onChange)="onEquipmentChange($event)" name="equipments"
+                        <p-dropdown [options]="equipments" (onChange)="onEquipmentChange($event)" name="equipments"  [filter]="true"
                                     [autoWidth]="false"></p-dropdown>
 
                     </div>
@@ -440,7 +440,7 @@
                     <header class="with-controls">
                         <p class="ui-panel-title"> Equipment List</p>
                         <p class="controls">
-                            <button type="text" (click)="displayAssignEquipmentsDialog=true" pButton
+                            <button type="text" (click)="onAssignEquipments()" pButton
                                     icon="ui-icon-person-add" label="Add Equipment&hellip;"></button>
                         </p>
                     </header>
@@ -452,7 +452,7 @@
                                   filterPlaceholder="Search"></p-column>
                         <p-column field="serialNumber" header="Serial Number" sortable="true" [filter]="true"
                                   filterPlaceholder="Search"></p-column>
-                        <p-column field="equipmentTypeName" header="Equipment TypeName" sortable="true" [filter]="true"
+                        <p-column field="equipmentTypeName" header="Equipment Type Name" sortable="true" [filter]="true"
                                   filterPlaceholder="Search"></p-column>
                         <p-column field="equipmentTypeName" header="Next Calibration Date" sortable="true"></p-column>
 

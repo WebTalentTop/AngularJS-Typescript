@@ -9,6 +9,7 @@ export class TestFacilityApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'testFacility/update';
     public static getByIdUrl: string = titanApiUrl + 'testFacility/get';
     public static getAllUrl: string = titanApiUrl + 'testFacility/GetByTenantId';
+    public static getAvailableAllUrl: string = titanApiUrl + 'testFacility/GetAvailableTestFacilitiesForEquipments';
     public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
     public static getTenants: string = titanApiUrl + 'testFacility/GetTenantsByTestFacilityId';
     public static getLogComments: string = titanApiUrl + 'testFacility/GetTestFacilityLogCommentByTestFacilityId';
@@ -24,7 +25,7 @@ export class TestFacilityApiUrl {
     public static PostAddUserRolesUrl: string = titanApiUrl + 'testFacility/PostUserRoles';
     public static PostAddDepartmentMapUrl: string = titanApiUrl + 'testFacility/PostDepartments';
     public static getDepartments: string = titanApiUrl + 'tenant';
-    public static getEquipments: string = titanApiUrl + 'equipment';
+    public static getEquipments: string = titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility';
     public static getOperatingHours: string = titanApiUrl + 'operatingHours';
     public static getCategories: string = titanApiUrl + 'category';
     public static getMaintenanceFrequencies: string = titanApiUrl + 'maintenanceFrequency';
