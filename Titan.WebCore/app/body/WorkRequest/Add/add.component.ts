@@ -11,6 +11,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { PriorityService } from '../../../shared/services/priority.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -33,6 +34,7 @@ export class AddComponent implements AfterViewInit {
     cols = [];
     gridFilter = {};
     buildLevels: any;
+    priority: any[];
     plannedStartDate: any;
     plannedEndDate: any;
     projectCodes: any;
@@ -50,6 +52,7 @@ export class AddComponent implements AfterViewInit {
     selectedDepartment: any;
     departments: any;
     selectedBuildLevels: any;
+    selectedPriority: any;
     selectedTestVerificationMethods: any;
     selectedProjectCodes: any;
     selectedTestRoles: any;
@@ -68,7 +71,6 @@ export class AddComponent implements AfterViewInit {
     estimateDuration: any;
     formConfiguration: any;
     vehicleNumber: any;
-    priority: any;
     priorityReason: any;
     personInCharge: any;
     formObject: any;
@@ -115,6 +117,7 @@ export class AddComponent implements AfterViewInit {
         private testroleservice: TestRoleService,
         private testtypeservice: TestTypeService,
         private buildlevelservice: BuildLevelService,
+        private priorityservice: PriorityService,
         private confirmservice: ConfirmationService,
         private departmentservice: DepartmentService
 
@@ -142,7 +145,8 @@ export class AddComponent implements AfterViewInit {
         //this.getTestModes();
         //this.getTestVerificationMethods();
         //this.getTestTypes();
-        //this.getBuildLevels();
+        this.getBuildLevels();
+        this.getPriority();
         //this.getTestStatus();
         this.getProjectCodes();
     //    this.getTestTemplates();
@@ -240,6 +244,14 @@ export class AddComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
+    onPriorityChange(event) {
+        console.log('------event------------', event)
+        this.selectedPriority = (event.value);
+    }
+
+
+
     onProjectCodeChange(event) {
         console.log('------event------------', event)
         this.selectedProjectCodes = (event.value);
@@ -511,6 +523,20 @@ export class AddComponent implements AfterViewInit {
             console.log(response);
         });
     }
+
+    getPriority() {
+        //    userRoles
+        this.priorityservice.getPriority().subscribe(response => {
+            this.priority = [];
+            if (response.isSuccess) {
+                let result = response.result;
+                this.priority = result.map(x=> {
+                    return {label:x.name, value: x.id};
+                })
+            }
+            
+        });
+    }
     getDownTimeReasons() {
         //    userRoles
         this.dataService.GetAllDownTimeReasons().subscribe(response => {
@@ -557,7 +583,7 @@ export class AddComponent implements AfterViewInit {
         });
     }
 
-    onTestRequestSubmit(formRef)
+    onWorkRequestSubmit(formRef)
     {
         let formWorkRequestData: any = {
       //   Id : ' ' ,
@@ -570,7 +596,8 @@ export class AddComponent implements AfterViewInit {
       //   TestTemplateId: this.selectedTestTemplates,
       //   TestFacilityId: this.selectedTestFacilities,
          ProjectCode: this.selectedProjectCodes,
-         //BuildLevelId: this.selectedBuildLevels,
+         BuildLevelId: this.selectedBuildLevels,
+         PriorityId: this.selectedPriority,
          //VerificationMethodId: this.selectedTestVerificationMethods,
         StartDate : this.plannedStartDate ,
        EndDate: this.plannedEndDate

@@ -6,4 +6,5 @@ export class PriorityApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'priority/post';
     public static postUpdateUrl: string = titanApiUrl + 'priority/put';
     public static getByIdUrl: string = titanApiUrl + 'priority/get';
+    public static getAllUrl: string = titanApiUrl + 'priority';
 }

@@ -14,6 +14,7 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { PriorityService } from '../../../shared/services/priority.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
@@ -25,7 +26,7 @@ import addRoutes from "./add.routes";
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, addRoutes],
 
-    providers: [TimeEntryService, EquipmentTypeService, ConfirmationService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
+    providers: [TimeEntryService, EquipmentTypeService, ConfirmationService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService,PriorityService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService, TestFacilityService, TestTemplateService, DepartmentService],
     declarations: [AddComponent]
 })

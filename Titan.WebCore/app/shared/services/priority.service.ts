@@ -44,7 +44,7 @@ export class PriorityService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${PriorityApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-          //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
@@ -64,6 +64,18 @@ export class PriorityService {
     getById(id): Observable<any> {
         return this.http.get(`${PriorityApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getPriority(): Observable<any> {
+        return this.http.get(`${PriorityApiUrl.getAllUrl}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
             ;
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
