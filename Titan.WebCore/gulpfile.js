@@ -201,7 +201,7 @@ gulp.task('copy-to-wwwroot-preprod',
         'resourcesPrimeThemes',
         'NMprimeResources',
 
-        'dragula',
+       
         'html',
         'css',
         'copy-titanResources',
@@ -226,7 +226,7 @@ gulp.task('copy-to-wwwroot-location1',
         'resourcesPrimeThemes',
         'NMprimeResources',
 
-        'dragula',
+        
         'html',
         'css',
         'copy-titanResources',
@@ -251,7 +251,7 @@ gulp.task('copy-to-wwwroot-location2',
         'resourcesPrimeThemes',
         'NMprimeResources',
 
-        'dragula',
+        
         'html',
         'css',
         'copy-titanResources',
@@ -276,7 +276,7 @@ gulp.task('copy-to-wwwroot-qalocation',
         'resourcesPrimeThemes',
         'NMprimeResources',
 
-        'dragula',
+      
         'html',
         'css',
         'copy-titanResources',

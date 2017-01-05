@@ -199,7 +199,16 @@ export class TestFacilityService {
      //.catch(err => Observable.throw(err))
      //.map(this.getJson);
  }
-
+ getAvailableTestFacilities(id): Observable<any> {
+     return this.http.get(`${TestFacilityApiUrl.getAvailableAllUrl}/${id}`, { headers: this.headers })
+         .map(this.getJson)
+         .map(data => {
+             console.log("Notification data --------", data);
+             return data.$values
+         });
+     //.catch(err => Observable.throw(err))
+     //.map(this.getJson);
+ }
     getNotifications(id): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getNotifications}/${id}`, {headers: this.headers})
             .map(this.getJson)
@@ -255,9 +264,9 @@ export class TestFacilityService {
                 return data.$values
             });
     }
-    getEquipments(): Observable<any> {
+    getEquipments(id): Observable<any> {
 
-        return this.http.get(`${TestFacilityApiUrl.getEquipments}`, { headers: this.headers })
+        return this.http.get(`${TestFacilityApiUrl.getEquipments}/${id}`, { headers: this.headers })
             .map(this.getJson)
             .map(data => {
                 console.log("Notification data --------", data);

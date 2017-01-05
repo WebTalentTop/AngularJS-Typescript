@@ -304,9 +304,11 @@ export class DetailsComponent implements AfterViewInit {
         setTimeout(function () { ref.initSchedule(); }, 10);
     }
     loadEquipmentTabViews(me) {
-        me.getTestFacilities();
+       // me.getTestFacilities();
+        me.getavailableTestFacilities();
+        me.getavailableEquipments();
         me.getTestFacilityEquipmentById();
-        me.getEquipments();
+       // me.getEquipments();
     }
 
     handleChange(event) {
@@ -598,9 +600,9 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
-    getEquipments() {
+    getavailableEquipments() {
         //    userRoles
-        this.testFacilityService.getEquipments().subscribe(response => {
+        this.testFacilityService.getEquipments(this.id).subscribe(response => {
             this.equipments = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -676,6 +678,28 @@ export class DetailsComponent implements AfterViewInit {
                     
                 })
         }
+    }
+
+    getavailableTestFacilities() {
+        //    userRoles
+        this.testFacilityService.getAvailableTestFacilities(this.id).subscribe(response => {
+            this.testFacilities = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Facility",
+                    value: null
+                });
+                for (let template of response) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testFacilities = resultMap;
+            }
+        });
     }
 
     getTestFacilities() {
@@ -936,7 +960,12 @@ export class DetailsComponent implements AfterViewInit {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
     }
+    onAssignEquipments()
+    {
+        this.displayAssignEquipmentsDialog = true;
+        this.getavailableEquipments();
 
+    }
     AddLogComment()
     {
         if (this.comment == null || this.comment == '') {
@@ -963,7 +992,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs = [];
             this.msgs.push({ severity: 'warn', summary: 'Search any equipment to add', detail: '' });
             return null;
-        }
+        }       
         if (!this.IsKeepOpen)
             this.displayAssignEquipmentsDialog = false;
         else
@@ -980,7 +1009,7 @@ export class DetailsComponent implements AfterViewInit {
         });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+        this.msgs.push({ severity: 'info', summary: 'Equipment Added', detail: '' });
     }
 
     filterUserNames(event) {

@@ -3,6 +3,7 @@
         <h3>Details</h3>
 <p-tabView  (onChange)="handleChange($event)">
 
+
         <p-tabPanel header="Details ||" id='details'>
           <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
           <p-panel header="Basic Information">
@@ -110,6 +111,212 @@
             </footer>
           </p-panel>
           </form>
+
+   
+        <p-tabPanel header="Details ||" id='details'>
+            <div class="row">
+                <div class="col-sm-12">
+                   
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default ">
+                                        <div class="panel-heading">Basic Information</div>
+                                        <div class="panel-body">
+                                            <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+
+                                                        <div class="row">
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Name</label>
+                                                                <input type="text" placeholder="Name" class="form-control" name="name" [(ngModel)]="model.name">
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Serial #</label>
+                                                                <input type="text" placeholder="Serial" class="form-control" name="serialNumber" [(ngModel)]="model.serialNumber">
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label col-sm-12 pl0">  Equipment Types :</label>
+                                                                <p-dropdown [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" [style]="{'width':'auto'}">
+                                                                </p-dropdown>
+                                                            </div>
+                                                            <!--<div class="form-group col-sm-6 col-md-4">
+                        <label class="control-label">P/O</label>
+                        <input type="text" class="form-control" [(ngModel)]="P/O"/>
+                    </div>-->
+
+                                                           
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Year Purchased </label>
+                                                                <div class="input-group">
+                                                                    <p-calendar [(ngModel)]="model.purchaseDate" name="purchaseDate"  [showIcon]="true"></p-calendar>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Warranty until </label>
+                                                                <div class="input-group">
+                                                                    <p-calendar [(ngModel)]="model.warrantyExpiration" name="warrantyExpiration"  [showIcon]="true"></p-calendar>
+                                                               </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Last Calibration Date </label>
+                                                                <div class="input-group">
+                                                                    <p-calendar [(ngModel)]="model.lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true"></p-calendar>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Model # </label>
+                                                                <input type="text" placeholder="Model #" class="form-control" [(ngModel)]="model.modelNumber" name="modelNumber">
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <label class="control-label">Purchased Price</label>
+                                                                <input type="text" [(ngModel)]="model.purchasePrice" class="form-control" name="purchasePrice" placeholder="Actual cost" />
+                                                            </div>
+                                                            <div class="form-group col-sm-6 col-md-4">
+                                                                <!--<label>Calibration Frequency</label>-->
+                                                                <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency"  binary="true"></p-checkbox>
+
+
+                                                                <div class="control-label">
+                                                                    <div id="selector"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-sm-12">
+                                                                <label class="control-label">Description </label>
+                                                                <textarea type="text" pInputTextArea class="form-control" required row="20" name="description" [(ngModel)]="model.description"></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="panel panel-default ">
+                                                                    <div class="panel-heading">Location</div>
+                                                                    <div class="panel-body">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+
+                                                                                <div class="row">
+
+                                                                                    <label class="control-label col-sm-12 pl0">  Test Facility :</label>
+                                                                                    <p-dropdown [options]="testFacilities" [(ngModel)]="model.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
+                                                                                    </p-dropdown>
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- Location End -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">Manufacturer Information</div>
+                                                                    <div class="panel-body">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+
+                                                                                <div class="row">
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label col-sm-12 pl0">  Equipment Manufacturer :</label>
+                                                                                        <p-dropdown [options]="equipmentManufacturers" [(ngModel)]="model.equipmentManufacturerId" (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers" [style]="{'width':'auto'}">
+                                                                                        </p-dropdown>
+                                                                                        <!--<label class="control-label">Name</label>
+                                                <input type="text" name="mname" class="form-control" placeholder="Name" />-->
+                                                                                    </div>
+                                                                                   
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Manufacturer Name</label>
+                                                                                        <input type="text" name="manufacturerName" [(ngModel)]="model.manufacturerName" placeholder="Serial No" class="form-control">
+                                                                                    </div>
+                                                                                 
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Phone</label>
+                                                                                        <input type="text" name="manufacturerPhone" [(ngModel)]="model.manufacturerPhone" class="form-control" placeholder="Phone" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Fax</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerFax" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Email</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerEmail" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Address Line1</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerAddress.addressLine1" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Address Line2</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerAddress.addressLine2" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Postal</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerAddress.postalCode" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">City</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerAddress.city" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">State</label>
+                                                                                        <input type="text" name="manufacturerFax" [(ngModel)]="model.manufacturerAddress.state" class="form-control" placeholder="Fax" />
+                                                                                    </div>
+                                                                                    <!--<div class="form-group col-sm-6 col-md-4">
+        <label class="control-label">Contact Person</label>
+        <input type="text" name="person" class="form-control" placeholder="Contact Person" />
+    </div>-->
+                                                                                    <div class="form-group col-sm-6 col-md-4">
+                                                                                        <label class="control-label">Website</label>
+                                                                                        <input type="text" name="manufacturerWebsite" [(ngModel)]="model.manufacturerWebsite" class="form-control" placeholder="Website" />
+                                                                                    </div>
+                                                                                    <!--<div class="form-group col-sm-6 col-md-4">
+                                                <label class="control-label">Model</label>
+                                                <input type="text" name="model" class="form-control" placeholder="Model" />
+                                            </div>
+                                            <div class="form-group col-sm-6 col-md-4">
+                                                <label class="control-label">Year</label>
+                                                <input type="text" name="year" class="form-control" placeholder="Year" />
+                                            </div>-->
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- Manufacturer Information End -->
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-2">
+                                                                    <button id="add" pButton type="submit" label="Save" (click)="onEquipmentSave()">  </button>
+                                                                </div>
+                                                                <div class="ui-grid-col-6">
+                                                                </div>
+                                                                <div class="ui-grid-col-4">
+                                                                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/equipment">  </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Basic Info End -->
+
+                         
+                        </div>
+                   
+                </div>
+                        </div>
+
         </p-tabPanel>
 
         <p-tabPanel header="Schedule ||" id="schedule">

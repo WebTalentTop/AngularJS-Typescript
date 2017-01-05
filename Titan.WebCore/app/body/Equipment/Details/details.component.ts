@@ -36,8 +36,10 @@ export class DetailsComponent {
             name: '',
             equipmentTypeId: '',
             serialNumber: '',
+            modelNumber: '' ,
             purchaseDate:'' ,
             warrantyExpiration: '',
+            lastCalibrationDate: '',
             description: '' ,
             purchasePrice: '',
             testFacilityId: '',
@@ -45,8 +47,16 @@ export class DetailsComponent {
             manufacturerName: '',
             manufacturerPhone: '',
             manufacturerFax: '',
-            manufacturerWebsite: ''
+            manufacturerWebsite: '',
+            manufacturerEmail: '',
+            manufacturerAddress: {
+                addressLine1: '',
+                addressLine2: '',
+                city: '',
+                state: '',
+                postalCode: ''
 
+            }
        
     };
     msgs:Message[];
@@ -74,9 +84,13 @@ export class DetailsComponent {
         this.service.getById(this.id)
             .subscribe(res =>
             {
+                this.model = res.result;
+                this.model.purchaseDate = new Date(res.result.purchaseDate);
+                this.model.warrantyExpiration = new Date(res.result.warrantyExpiration);
+                this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
-                this.model = res;
+               
                 $("#selector").cron({
 
                     initial: "* * * * *",
@@ -104,6 +118,7 @@ export class DetailsComponent {
 
    onEquipmentManufacturerChange(event) {
        this.selectedEquipmentManufacturerId = (event.value);
+       
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
@@ -181,35 +196,23 @@ export class DetailsComponent {
            }
        });
    }
-   onEquipmentSave() {   
+   onEquipmentSave(formRef) {   
      //  formRef.isDeleted = false;
-       let formData: any = {
-           id: this.id,
-           name: '',
-           address: {
-
-               id: '',
-               addressLine1: '',
-               addressLine2: '',
-               city: '',
-               state: '',
-               postalCode: '',
-           }
-       };
+       
        let modeldata = {
-           //Name: model.name,
-           //EquipmentTypeId: this.selectedEquipmentTypeId,
-           //SerialNumber: model.serialNumber,
-           //PurchaseDate: formRef.purchaseDate,
-           //WarrantyExpiration: formRef.warrantyExpiration,
-           //Description: formRef.description,
-           //PurchasePrice: formRef.purchasePrice,
-           //TestFacilityId: this.selectedTestFacilityId,
-           //EquipmentManufacturerId: this.selectedEquipmentManufacturerId,
-           //ManufacturerName: formRef.manufacturerName,
-           //ManufacturerPhone: formRef.manufacturerPhone,
-           //ManufacturerFax: formRef.manufacturerFax,
-           //ManufacturerWebsite: formRef.manufacturerWebsite
+           Id: this.id,
+           Name: formRef.name,
+           ModelNumber: formRef.modelNumber,
+           LastCalibrationDate: formRef.lastCalibrationDate,
+           EquipmentTypeId: this.selectedEquipmentTypeId,
+           SerialNumber: formRef.serialNumber,         
+           PurchaseDate: formRef.purchaseDate,          
+           WarrantyExpiration: formRef.warrantyExpiration,
+           Description: formRef.description,
+           PurchasePrice: formRef.purchasePrice,
+           TestFacilityId: this.selectedTestFacilityId,
+           EquipmentManufacturerId: this.selectedEquipmentManufacturerId
+         
 
        };
 
@@ -222,7 +225,7 @@ export class DetailsComponent {
        //formData.address.state = formRef.state;
        //formData.address.postalCode = formRef.postalCode;
        //formData.locale = "en-us";
-       this.service.postUpdate(this.model).subscribe(res => {
+       this.service.postUpdate(modeldata).subscribe(res => {
 
            if (res.isSuccess) {
                this.msgs = [];

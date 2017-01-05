@@ -41,9 +41,14 @@ export class AddComponent {
     manufacturerPhone: any;
 
     manufacturerWebsite: any;
+    manufacturerEmail: any;
 
     manufacturerFax: any;
-
+    manufacturerAddressLine1: any;
+    manufacturerAddressLine2: any;
+    manufacturerPostal: any;
+    manufacturerState: any;
+    manufacturerCity: any;
     IsNewManufacturer: boolean;
     manufacturerId: any;
     testFacility = {
@@ -88,8 +93,22 @@ export class AddComponent {
             this.IsNewManufacturer = false;
         }
         this.selectedEquipmentManufacturerId = (event.value);
-        //   this.EquipmentSubType.calibrationform = (event);
-
+        // get all manufacturer information
+        this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res =>
+        {
+            this.manufacturerPhone = res.result.phoneNumber;
+            this.manufacturerFax = res.result.faxNumber;
+            this.manufacturerWebsite = res.result.website;
+            this.manufacturerName = res.result.name;
+            this.manufacturerEmail = res.result.email;
+            this.manufacturerAddressLine1 = res.result.addressLine1;
+            this.manufacturerAddressLine2 = res.result.addressLine2;
+            this.manufacturerPostal = res.result.postal;
+            this.manufacturerCity = res.result.city;
+            this.manufacturerState = res.result.state;
+         
+        });
+      
     }
     getEquipmentManufacturers() {
         //    userRoles
@@ -185,6 +204,8 @@ export class AddComponent {
         }
         let model = {
             Name: formRef.name,
+            ModelNumber: formRef.modelNumber,
+            LastCalibrationDate: formRef.lastCalibrationDate,
             EquipmentTypeId: this.selectedEquipmentTypeId,
             SerialNumber: formRef.serialNumber,
             PurchaseDate: formRef.purchaseDate,
@@ -196,14 +217,22 @@ export class AddComponent {
              ManufacturerName: this.manufacturerName,
              ManufacturerPhone: this.manufacturerPhone,
              ManufacturerFax: this.manufacturerFax,
-             ManufacturerWebsite: this.manufacturerWebsite
+             ManufacturerWebsite: this.manufacturerWebsite,
+             ManufacturerEmail: this.manufacturerEmail,
+             ManufacturerAddress: {
+                 addressLine1: this.manufacturerAddressLine1,
+                 addressLine2: this.manufacturerAddressLine2,
+                 city: this.manufacturerCity,
+                 state: this.manufacturerState,
+                 postalCode: this.manufacturerPostal,
+             }
 
         };
 
         this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {
 
-                this.router.navigate(["./equipment"], { queryParams: { page: 1 } });
+                this.router.navigate(["equipment/details/"], res.result.id);
             }
         });
     }

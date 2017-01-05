@@ -69,6 +69,14 @@ export class EquipmentService {
         //.map(this.getJson);
     }
 
+    getManufaturerDetailsById(id): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getManufacturerDetailsByIdUrl}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     getEquipmentManufacturers(): Observable<any> {
         return this.http.get(`${EquipmentApiUrl.getAllUrl}`, { headers: this.headers })
             .map(this.getJson)
