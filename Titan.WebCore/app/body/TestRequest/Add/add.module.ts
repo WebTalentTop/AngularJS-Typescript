@@ -18,12 +18,12 @@ import { DepartmentService } from '../../../shared/services/department.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
 import { ConfirmationService } from 'primeng/primeng';
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, addRoutes],
+    imports: [EditorModule, SharedModule, MultiSelectModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, addRoutes],
 
     providers: [TimeEntryService, EquipmentTypeService, ConfirmationService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
         TestTypeService, TestFacilityService, TestTemplateService, DepartmentService],
