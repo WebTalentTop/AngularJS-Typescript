@@ -5,7 +5,7 @@
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-                <h3> Add Equipment </h3>
+                <h2> Add Equipment </h2>
                 <p-panel header="Basic Information">
                   <div class="body">
                       <!-- Begin Name -->
@@ -38,11 +38,11 @@
                       <!--Year Purchased-->
                       <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" showTime="true" [showIcon]="true"></p-calendar>
+                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
                             <label>Year Purchased :</label>
                           </div>
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" showTime="true" [showIcon]="true" ></p-calendar>
+                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" [showIcon]="true" ></p-calendar>
                             <label>Warranty Until :</label>
                           </div>
                       </div>
@@ -53,13 +53,13 @@
                            <label>Calibration Frequency :</label>
                          </div>
                           <div class="ui-g-12 ui-md-6" >
-                              <p-checkbox name="groupname" value="IsFrequency" label="Calibration Frequency" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
+                              <p-checkbox name="groupname" value="IsFrequency" label="Is Calibration Required" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
                               <div class="md-inputfield">
                                   <div id="selector" [hidden]="!IsFrequency"></div>
                               </div>
                           </div>
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="lastcalibrationDate" name="lastcalibrationDate" showTime="true" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
+                            <p-calendar [(ngModel)]="lastcalibrationDate" name="lastcalibrationDate" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
                             <label style="color:#777">Last Calibration Date :</label>
                           </div>
                       </div>
