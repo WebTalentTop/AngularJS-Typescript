@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
         <h2>Add New Test Request</h2>
-              <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+              <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
                   <p-panel header="Basic Information">
                     <div class="body">
                         <div class="ui-grid-row">
@@ -74,6 +74,24 @@
                               </p-multiSelect>
                           </div>
                         </div><br /><br />
+                        <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
+                            Test Request Info Details:
+
+
+                            <div class="form-group col-sm-6 col-md-4">
+                                <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
+                                <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
+                                </p-multiSelect>
+                            </div>
+
+                            <footer>
+                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                    <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
+                                    <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
+                                    <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
+                                </div>
+                            </footer>
+                        </p-dialog>
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6" >
                                 <p-checkbox name="groupname" value="IsThermoCouple" label="Does this Test require Sensor Type?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()">
@@ -109,7 +127,7 @@
                         </div>
                     </div>
                     <footer>
-                        <button id="create" pButton type="button" icon="ui-icon-save" label="Create" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+                        <button id="create" pButton type="submit" icon="ui-icon-save" label="Create" (click)="onTestRequestSubmit()"></button>
                     </footer>
                     <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
                         Test Request Info Details:
