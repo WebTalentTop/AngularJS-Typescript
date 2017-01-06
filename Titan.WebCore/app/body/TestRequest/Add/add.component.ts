@@ -560,11 +560,11 @@ export class AddComponent implements AfterViewInit {
             return null;
         }
        
-        if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
-            return null;
-        }
+        //if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
+        //    this.msgs = [];
+        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
+        //    return null;
+        //}
         //if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
         //    this.msgs = [];
         //    this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
@@ -650,7 +650,8 @@ export class AddComponent implements AfterViewInit {
 
 
                
-             }
+          }
+          if(res.isSuccess)
              this.router.navigate(['testrequest/details/', res.result.id]);
 
      });
