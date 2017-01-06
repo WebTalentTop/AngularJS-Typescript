@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
         <h2>Add New Test Request</h2>
-              <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+              <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
                   <p-panel header="Basic Information">
                     <div class="body">
                         <div class="ui-grid-row">
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <footer>
-                        <button id="create" pButton type="button" icon="ui-icon-save" label="Create" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+                        <button id="create" pButton type="submit" icon="ui-icon-save" label="Create" (click)="onTestRequestSubmit()"></button>
                     </footer>
                   </p-panel>
               </form>
