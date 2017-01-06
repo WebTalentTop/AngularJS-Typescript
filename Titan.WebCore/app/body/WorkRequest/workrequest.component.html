@@ -1,40 +1,49 @@
-﻿<div class="ui-g">
+﻿<!--<div class="ui-g">-->
     <div class="ui-g-12">
         <div class="card card-w-title">
-        <h2> Work Request</h2>
+        <!--<h2> Work Request</h2>-->
     <!--<div class="panel panel-default">-->
         <!--<div class="panel-heading">Sensor Info</div>-->
     <header>
+       
         <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Work Request"></button>
+     <h2> Work Request</h2>
     </header>
-        <div class="panel-body">
-            <div class="row">
-                <div class="ui-grid-row">
+            <!--<div class="row">
+                 <div class="panel-body">-->
+                <!--<div class="ui-grid-row">-->
                     <!--<a routerLink="add"><i class="fa ui-icon-add"></i>Add WorkRequest</a>-->
                     <!--<p-fileUpload [name]="sensorpic2"
                                   multiple="multiple" accept="image/*" maxFileSize="1000000">
-                          
                     </p-fileUpload>-->
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive" style="min-height:400px;">
                                 <p-dataTable [value]="workRequests" [paginator]="true" rows="15" [responsive]="true">
 
-                                  
-
                                     <p-column header="Work Request Name" field="name" sortable="true"></p-column>
 
                                     <p-column header="Module" field="showModule" sortable="true"></p-column>
 
                                     <p-column header="IsCompleted" field="isCompleted" sortable="true"></p-column>
-                                    <p-column>
+                                   
+                                <p-column header="Actions" field="actions" sortable="true">
+                                    <template let-workrequestrow="rowData" pTemplate type="body">
+                                        <a routerLink="details/{{workrequestrow.id}}/{{workrequestrow.entityId}}">View Details</a>
+                                        <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"
+                                                (click)="onDelete(workrequestrow)"></button>
+                                    </template>
+                                </p-column>
+
+                                    <!--<p-column>
                                         <template pTemplate type="header">
                                             <button type="button" pButton icon="fa-refresh"></button>
                                         </template>
                                         <template let-workrequestrow="rowData" pTemplate type="body">
                                             <a routerLink="details/{{workrequestrow.id}}/{{workrequestrow.entityId}}"><i class="fa ui-icon-edit"></i>View Details</a>
                                         </template>
-                                    </p-column>
+                                    </p-column>-->
+
                                     <!--<p-column header="Module#" field="name" sortable="true"></p-column>
                                     <p-column header="Slot#" field="name" sortable="true"></p-column>
                                     <p-column header="upload" field="name" sortable="true"></p-column>
@@ -70,15 +79,15 @@
                         </div>
 
 
-                    </div>
+                    <!--</div>-->
                   
-                </div>
+                <!--</div>-->
                 <!--</div>
 
-
                 </div>-->
-            </div>
+            <!--</div>-->
         <!--</div>-->
-    <!--</div>-->
     </div>
-        </div></div>
+    <!--</div>-->
+        </div>
+        </div>
