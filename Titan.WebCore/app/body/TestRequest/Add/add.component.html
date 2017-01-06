@@ -19,24 +19,24 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Project Code :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" [(ngModel)]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Build Levels :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels" [(ngModel)]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels">
                               </p-dropdown>
                           </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Vehicle :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" [(ngModel)]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Facility :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="testFacilities" (onChange)="onTestFacilityChange($event)" name="testFacilities" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" >
                               </p-dropdown>
                           </div>
                         </div><br /><br />
@@ -63,7 +63,7 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Templates :</p>
-                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" [(ngModel)]="testtemplates" (onChange)="getTestTemplates($event)" name="testTemplates" >
+                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" [(ngModel)]="testtemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" >
                               </p-multiSelect>
                           </div>
                           <div class="ui-g-12 ui-md-6">

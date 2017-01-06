@@ -204,7 +204,7 @@ export class AddComponent implements AfterViewInit {
 
     }
     onTestTemplateChange(event) {
-        this.selectedTestTemplates = (event.value);
+        this.selectedTestTemplates = (event.value[0]);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -533,10 +533,10 @@ export class AddComponent implements AfterViewInit {
          TestFacilityId: this.selectedTestFacilities,
          ProjectId: this.selectedProjectCodes,
          BuildLevelId: this.selectedBuildLevels,
-         VerificationMethodId: this.selectedTestVerificationMethods,
+         VerificationMethodId: '392E6125-5966-4812-9EC7-25BAFC3514B6',
         PlannedStartDate : this.plannedStartDate ,
         PlannedEndDate: this.plannedEndDate,
-        TestStatusId: this.selectedTestStatuses,
+        TestStatusId: 'A7162D62-C568-43FF-AFB2-1E6343C9C4D1',
         DueDate: this.dueDate
         };
         if (this.number == null || this.number == "") {
@@ -565,11 +565,11 @@ export class AddComponent implements AfterViewInit {
             this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
             return null;
         }
-        if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
-            this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
-            return null;
-        }
+        //if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
+        //    this.msgs = [];
+        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
+        //    return null;
+        //}
         if (this.plannedStartDate == null || this.plannedStartDate == "") {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Planned Start Date', detail: '' });
