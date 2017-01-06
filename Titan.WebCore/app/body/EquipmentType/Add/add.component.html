@@ -1,0 +1,54 @@
+﻿<div class="ui-g">
+    <div class="ui-g-12">
+        <h3>Add EquipmentType</h3>
+        <div class="card card-w-title">
+                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                  <p-panel header="Basic Information">
+                    <div class="body">
+                        <!-- Begin Name -->
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
+                                       minlength="3" class="form-control" required row="20" style="width:100%">
+                                <label>Name <span >*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="frequency" [(ngModel)]="frequency" style="width:100%">
+                             <label>Frequency</label>
+                            </div>
+                          </div><br />
+                          <div class="ui-grid-row " >
+                              <div class="ui-g-12 ui-md-12" >
+                                <label style="color:#777">Description</label>
+                              </div>
+                              <div class="ui-g-12 ui-md-12 md-inputfield">
+                                  <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                      <header>
+                                          <select class="ql-size">
+                                              <option value="small"></option>
+
+                                              <option selected></option>
+                                              <option value="large"></option>
+                                              <option value="huge"></option>
+                                          </select>
+                                          <span class="ql-formats">
+                                              <button class="ql-bold"></button>
+                                              <button class="ql-italic"></button>
+                                              <button class="ql-underline"></button>
+                                          </span>
+                                      </header>
+                                  </p-editor>
+                              </div>
+                          </div>
+                      </div>
+                    <footer>
+                        <p>* indicates required field</p>
+                        <button pButton type="submit" icon="ui-icon-save" label="Create" [disabled]="!tfForm.valid"></button>
+                    </footer>
+                  </p-panel>
+                </form>
+     <!--</p-panel>-->
+        <!--</p-tabView>-->
+    </div>
+    </div>
+</div>

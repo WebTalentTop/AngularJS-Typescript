@@ -10,10 +10,10 @@ import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrat
 
 
 @Component({
-    selector: 'details-testfacility',
-    templateUrl: 'app/body/equipmenttype/Details/details.component.html'
+    selector: 'add-equipmenttype',
+    templateUrl: 'app/body/equipmenttype/Add/add.component.html'
 })
-export class DetailsComponent implements OnInit {
+export class AddComponent implements OnInit {
 
     displayDialog: boolean;
     EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
@@ -29,7 +29,6 @@ export class DetailsComponent implements OnInit {
     msgs: Message[];
     entityType: string = '';
     entityId: string = '';
-    filepath: string = "TestFacility";
     displayDialogForm: boolean;
     emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
@@ -60,16 +59,16 @@ export class DetailsComponent implements OnInit {
     ) {
 
         this.CalibrationForms = [];
-        this.CalibrationForms.push({label:"Audi", value:{ id: '1', name: 'Audi', description: 'Audi' }});
-        this.CalibrationForms.push({label:"BMW", value:{ id: '2', name: 'BMW', description: 'BMW' }});
-        this.CalibrationForms.push({label:"Fiat", value:{ id: '3', name: 'Fiat', description: 'Fiat' }});
-        this.CalibrationForms.push({label:"Ford", value:{ id: '4', name: 'Ford', description: 'Ford' }});
-        this.CalibrationForms.push({label:"Honda", value:{ id: '5', name: 'Honda', description: 'Honda' }});
-        this.CalibrationForms.push({label:"Jaguar", value:{ id: '6', name: 'Jaguar', description: 'Jaguar' }});
-        this.CalibrationForms.push({label:"Mercedes", value:{ id: '7', name: 'Mercedes', description: 'Mercedes' }});
-        this.CalibrationForms.push({label:"Renault", value:{ id: '8', name: 'Renault', description: 'Renault' }});
-        this.CalibrationForms.push({label:"VW", value:{ id: '9', name: 'VW', description: 'VW' }});
-        this.CalibrationForms.push({label:"Volvo", value:{ id: '10', name: 'Volvo', description: 'Volvo' }});
+        this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi' });
+        this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW' });
+        this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat' });
+        this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford' });
+        this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda' });
+        this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar' });
+        this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes' });
+        this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault' });
+        this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW' });
+        this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo' });
         // this.selectedCalibration="BMW";
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
