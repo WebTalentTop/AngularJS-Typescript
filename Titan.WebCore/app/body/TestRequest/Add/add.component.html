@@ -13,10 +13,9 @@
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" pInputText [(ngModel)]="number" name="number"
-                                       placeholder="Test Number"
-                                       class="form-control">
-                                
-                                <label>Test Number</label>                             
+                                       class="form-control" style="width:100%">
+
+                                <label>Test Number</label>
                             </div>
                         </div>
                         <div class="ui-grid-row ">
@@ -112,6 +111,24 @@
                     <footer>
                         <button id="create" pButton type="button" icon="ui-icon-save" label="Create" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
                     </footer>
+                    <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
+                        Test Request Info Details:
+
+
+                        <div class="form-group col-sm-6 col-md-4">
+                            <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
+                            <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
+                            </p-multiSelect>
+                        </div>
+
+                        <footer>
+                            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
+                                <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
+                                <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
+                            </div>
+                        </footer>
+                    </p-dialog>
                   </p-panel>
               </form>
 </div>

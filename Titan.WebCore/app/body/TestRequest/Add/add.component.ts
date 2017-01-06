@@ -126,7 +126,7 @@ export class AddComponent implements AfterViewInit {
         this.display = false;
     }
     confirm1() {
-              this.display = true;        
+              this.display = true;
     }
     ngOnInit() {
         this.getTestStages();
@@ -315,10 +315,10 @@ export class AddComponent implements AfterViewInit {
             this.departments = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                resultMap.push({
-                    label: "Select Department",
-                    value: null
-                });
+                // resultMap.push({
+                //     label: "Select Department",
+                //     value: null
+                // });
                 for (let template of response.$values) {
                     var temp = {
                         label: template.name,
@@ -444,10 +444,10 @@ export class AddComponent implements AfterViewInit {
             this.testTemplates = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                resultMap.push({
-                    label: "Select Test Template",
-                    value: null
-                });
+                // resultMap.push({
+                //     label: "Select Test Template",
+                //     value: null
+                // });
                 for (let template of response.$values) {
                     var temp = {
                         label: template.name,
@@ -559,7 +559,7 @@ export class AddComponent implements AfterViewInit {
             this.msgs.push({ severity: 'error', summary: 'Please select Build Levels', detail: '' });
             return null;
         }
-       
+
         //if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
         //    this.msgs = [];
         //    this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
@@ -594,9 +594,9 @@ export class AddComponent implements AfterViewInit {
 
                     EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
                     EntityId: res.result.id
-                  
+
                 };
-                //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId() 
+                //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId()
                 this.testrequestsensorserice.postWorkRequestAdd(workrequestbody).subscribe(workresult => {
 
                     this.selectedDepartment.forEach(dept => {
@@ -643,22 +643,22 @@ export class AddComponent implements AfterViewInit {
                     //});
 
               //  });
-               
+
 
 
                 //4. email to all prime engineer of selected departments ,, (get all primary incharge users for selected departments)
 
 
-               
+
           }
           if(res.isSuccess)
              this.router.navigate(['testrequest/details/', res.result.id]);
 
      });
-       
+
 
     }
-   
+
     navigateDetails(id: string) {
         this.router.navigate(['testrequest/sensor/details/', id]);
     }

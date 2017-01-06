@@ -2,716 +2,187 @@
     <div class="ui-g-12">
         <h3>Details</h3>
         <p-tabView (onChange)="handleChange($event)">
-
             <p-tabPanel header="Info ||" id="info">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">Add New Test Request</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-12">
+              <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+              <p-panel header="Edit Test Request">
+              <div class="body">
+                  <div class="ui-grid-row">
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="text" pInputText name="name" [(ngModel)]="name"
+                                 minlength="3"  required style="width:100%">
+                          <label>Test Name <span >*</span></label>
+                      </div>
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="text" pInputText [(ngModel)]="number" name="number"
+                                 class="form-control" style="width:100%">
 
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
-                                                    <div class="row">
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">Test Number</label>
-                                                            <input type="text" [(ngModel)]="testRequestDetails.testNumber" name="number"
-                                                                   placeholder="Test Number"
-                                                                   class="form-control">
-                                                        </div>
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">Project Code :</label>
-                                                            <p-dropdown [options]="projectCodes" [(ngModel)]="testRequestDetails.projectId" (onChange)="onProjectCodeChange($event)" name="projectCodes" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">Build Levels :</label>
-                                                            <p-dropdown [options]="buildLevels" [(ngModel)]="testRequestDetails.buildLevelId" (onChange)="onBuildLevelChange($event)" name="buildLevels" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-
-
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">Test Mode :</label>
-                                                            <p-dropdown [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-                                                        <!--<div class="ui-grid-col-1">
-                                                            Test Type :
-                                                        </div>
-                                                        <div class="ui-grid-col-2">
-                                                            <p-dropdown [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-                                                        <div class="ui-grid-col-1">
-                                                            Test Status :
-                                                        </div>
-                                                        <div class="ui-grid-col-2">
-                                                            <p-dropdown [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>-->
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0"> Test Roles:</label>
-                                                            <p-dropdown [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">  Test Facility :</label>
-                                                            <p-dropdown [options]="testFacilities" [(ngModel)]="testRequestDetails.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0"> Test Verification Method :</label>
-                                                            <p-dropdown [options]="testVerificationMethods" [(ngModel)]="testRequestDetails.verificationMethodId" (onChange)="onTestVerificationMethodChange($event)" name="testVerificationMethods" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">  Test Templates :</label>
-                                                            <p-dropdown [options]="testTemplates" [(ngModel)]="testRequestDetails.testTemplateId" (onChange)="onTestTemplateChange($event)" name="testtemplates" [style]="{'width':'auto'}">
-                                                            </p-dropdown>
-                                                        </div>
-                                                        <!--<div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">
-                                                                Test
-                                                                Type
-                                                            </label>
-                                                            <select name="" id=""
-                                                                    class="form-control">
-                                                                <option value=""
-                                                                        selected="selected">
-                                                                    ---- Select ----
-                                                                </option>
-                                                                <option value="">
-                                                                    Front
-                                                                    Suspension
-                                                                </option>
-                                                                <option value="">
-                                                                    Rear
-                                                                    Suspension
-                                                                </option>
-                                                                <option value="">
-                                                                    Spring
-                                                                </option>
-                                                                <option value="">
-                                                                    Front
-                                                                    Axle
-                                                                </option>
-                                                                <option value="">
-                                                                    Rear
-                                                                    Axle
-                                                                </option>
-                                                                <option value="">
-                                                                    Wheel
-                                                                </option>
-                                                                <option value="">
-                                                                    Chasis
-                                                                    mount
-                                                                </option>
-                                                                <option value="">
-                                                                    Stabi
-                                                                    Bar
-                                                                </option>
-                                                                <option value="">
-                                                                    Mount
-                                                                </option>
-                                                                <option value="">
-                                                                    Steering
-                                                                </option>
-                                                                <option value="">
-                                                                    Ground
-                                                                    Contact
-                                                                </option>
-                                                                <option value="">
-                                                                    Tailgate
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">
-                                                                Test
-                                                                Mode
-                                                            </label>
-                                                            <select name=""
-                                                                    id="testMode"
-                                                                    class="form-control">
-                                                                <option value="0"
-                                                                        selected="selected">
-                                                                    ---- Select ----
-                                                                </option>
-                                                                <option value="1">
-                                                                    -1
-                                                                    Ground contact limit
-                                                                </option>
-                                                                <option value="2">
-                                                                    -1
-                                                                    Parking brake fixing
-                                                                    point strength
-                                                                </option>
-                                                                <option value="3">
-                                                                    -4
-                                                                    B-pedal bracket
-                                                                    fixing point
-                                                                    durability
-                                                                </option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength FT +
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength FT -
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength FH +
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength FH -
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MT +
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MT -
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MB +
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MB -
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MH +
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -1 Assy. Static
-                                                                    Strength MH -
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -2 Assy.
-                                                                    Durability FT
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -2 Assy.
-                                                                    Durability FH
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -2 Assy.
-                                                                    Durability MT
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -2 Assy.
-                                                                    Durability MB
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -2 Assy.
-                                                                    Durability Torsion
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -3 Knuckle MH
-                                                                    Durability
-                                                                </option>
-                                                                option>
-                                                                <option>
-                                                                    -4 Chassis
-                                                                    Impact
-                                                                </option>
-                                                                option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">
-                                                                Project
-                                                                Code
-                                                            </label>
-                                                            <select name="" id=""
-                                                                    class="form-control">
-                                                                <option value="">
-                                                                    ----
-                                                                    Select ----
-                                                                </option>
-                                                                <option value=""
-                                                                        selected="selected">
-                                                                    A314
-                                                                </option>
-                                                                <option value="">
-                                                                    2C31
-                                                                </option>
-                                                                <option value="">
-                                                                    2C52
-                                                                </option>
-                                                                <option value="">
-                                                                    1D52
-                                                                </option>
-                                                                <option value="">
-                                                                    2C76
-                                                                </option>
-                                                                <option value="">
-                                                                    6C09
-                                                                </option>
-                                                                <option value="">
-                                                                    7C15
-                                                                </option>
-                                                                <option value="">
-                                                                    2VB
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">
-                                                                Build
-                                                                Level
-                                                            </label>
-                                                            <select name="" id=""
-                                                                    class="form-control">
-                                                                <option value=""
-                                                                        selected="selected">
-                                                                    ---- Select ----
-                                                                </option>
-                                                                <option value="">
-                                                                    Prototype
-                                                                </option>
-                                                                <option value="">
-                                                                    Phase
-                                                                    1
-                                                                </option>
-                                                                <option value="">
-                                                                    Phase
-                                                                    2
-                                                                </option>
-                                                                <option value="">
-                                                                    Production
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Vehicle</label>
-                                                            <select name="" id=""
-                                                                    class="form-control">
-                                                                <option value=""
-                                                                        selected="selected">
-                                                                    ---- Select ----
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ001
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ003
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ006
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ016
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ026
-                                                                </option>
-                                                                <option value="">
-                                                                    T7NZ036
-                                                                </option>
-                                                            </select>
-                                                        </div>-->
-                                                        <!-- <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Part #</label>
-                                                            <select name="" id="" class="form-control">
-                                                                <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
-                                                                <option value="">P1234</option>
-                                                                <option value="">P23456</option>
-                                                                <option value="">XY2345</option>
-                                                            </select>
-                                                        </div>-->
-
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label  col-sm-12 pl0">
-                                                                Planned
-                                                                Start Date
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <p-calendar name="plannedStartDate" [(ngModel)]="testRequestDetails.plannedStartDate" [showIcon]="true"></p-calendar>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label  col-sm-12 pl0">
-                                                                Due Date
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <p-calendar name="dueDate" [(ngModel)]="testRequestDetails.plannedEndDate" [showIcon]="true"></p-calendar>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">
-                                                                Planned
-                                                                End Date
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <p-calendar name="plannedEndDate" [(ngModel)]="testRequestDetails.plannedEndDate" [showIcon]="true"></p-calendar>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label col-sm-12 pl0">
-                                                                Test
-                                                                Duration
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       placeholder="Duration"
-                                                                       class="form-control">
-                                                                <span class="input-group-addon">days</span>
-                                                            </div>
-                                                        </div>
-                                                        <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
-                                                            Test Request Info Details:
-
-
-                                                            <div class="form-group col-sm-6 col-md-4">
-                                                                <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
-                                                                <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
-                                                                </p-multiSelect>
-                                                            </div>
-
-                                                            <footer>
-                                                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                                                    <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
-                                                                    <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
-                                                                    <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
-                                                                </div>
-                                                            </footer>
-                                                        </p-dialog>
-
-                                                        <!--<p-confirmDialog width="425"></p-confirmDialog>-->
-                                                        <p-checkbox name="groupname" value="IsThermoCouple" label="Are you sure you need thermo couple info?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()"></p-checkbox>
-                                                        <!--<button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button>-->
-                                                        <!--<div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Process Flow</label>
-                                                            <select name="" id="" class="form-control">
-                                                                <option value="" selected="selected"> &#45;&#45;&#45;&#45; Select &#45;&#45;&#45;&#45; </option>
-                                                                <option value="">Defau</option>
-                                                                <option value="">B028-2-1-1</option>
-                                                                <option value="">C028-3-1-1</option>
-                                                            </select>
-                                                        </div>-->
-                                                        <!--<div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Frame #</label>
-                                                            <input type="text" placeholder="Frame #"
-                                                                   class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Preparer Technician</label>
-                                                            <input type="text" placeholder="Preparer Technician"
-                                                                   class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Phone#</label>
-                                                            <input type="text" placeholder="Phone#"
-                                                                   class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Date</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy">
-                                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Supervisor</label>
-                                                            <input type="text" placeholder="Supervisor"
-                                                                   class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Phone#</label>
-                                                            <input type="text" placeholder="Phone#"
-                                                                   class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-sm-6 col-md-4">
-                                                            <label class="control-label">Date</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy">
-                                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                            </div>
-                                                        </div>-->
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-sm-6 col-md-4">
-                                            <button id="create" pButton type="submit" label="Create" (click)="onTestRequestSubmit()" class="btn btn-success">  </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                          <label>Test Number</label>
+                      </div>
+                  </div>
+                  <div class="ui-grid-row ">
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Project Code :</p>
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                        </p-dropdown>
                     </div>
-                </div><!-- Form End -->
-                <div class="row" ng-controller="testRequestCreateMaterialCtrl as vm">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        Material Service Parts List
-                                    </div>
-
-                                    <div class="col-sm-10 col-md-4">
-                                        <button class="btn btn-success" ng-click="openAddBB();">
-                                            <i class="fa fa-plus"></i> Add
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="table-responsive" style="min-height:400px;">
-                                            <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
-                                             class="grid"></div>-->
-                                            <p-dataTable [paginator]="true" rows="15" [responsive]="true">
-                                                <p-column header="PartNumber" sortable="true"></p-column>
-                                                <p-column header="DrawingNumber" sortable="true"></p-column>
-                                                <p-column header="Quantity Requested" sortable="true"></p-column>
-                                                <p-column header="Comments" sortable="true"></p-column>
-                                            </p-dataTable>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <button class="btn btn-success">
-                                        <i class="fa fa-plus"></i> Attachment
-                                    </button>
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Build Levels :</p>
+                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels">
+                        </p-dropdown>
                     </div>
-                </div>
+                  </div>
+                  <div class="ui-grid-row ">
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Vehicle :</p>
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Test Facility :</p>
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" >
+                        </p-dropdown>
+                    </div>
+                  </div><br /><br />
+                  <div class="ui-grid-row">
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="text" pInputText name="purpose" [(ngModel)]="purpose" style="width:100%">
+                          <label>Purpose</label>
+                      </div>
+                      <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-calendar [(ngModel)]="dueDate" name="dueDate" [showIcon]="true"></p-calendar>
+                        <label>Due Date :</label>
+                      </div>
+                  </div><br /><br />
+                  <div class="ui-grid-row " style="color:#777">
+                      <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" [showIcon]="true"></p-calendar>
+                        <label>Planned Start Date :</label>
+                      </div>
+                      <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" [showIcon]="true" ></p-calendar>
+                        <label>Planned End Date :</label>
+                      </div>
+                  </div><br /><br />
+                  <div class="ui-grid-row " >
+                      <div class="ui-g-12 ui-md-12" >
+                        <label style="color:#777">Description</label>
+                      </div>
+                      <div class="ui-g-12 ui-md-12 md-inputfield">
+                          <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                              <header>
+                                  <select class="ql-size">
+                                      <option value="small"></option>
 
+                                      <option selected></option>
+                                      <option value="large"></option>
+                                      <option value="huge"></option>
+                                  </select>
+                                  <span class="ql-formats">
+                                      <button class="ql-bold"></button>
+                                      <button class="ql-italic"></button>
+                                      <button class="ql-underline"></button>
+                                  </span>
+                              </header>
+                          </p-editor>
+                      </div>
+                  </div>
+              </div>
+              <footer>
+                  <button id="create" pButton type="button" icon="ui-icon-save" label="Save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+              </footer><br />
+            </p-panel>
+            <br />
+            </form>
             </p-tabPanel>
-
             <p-tabPanel header="AddTimeEntry ||" id="timeentry">
+                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                 <p-messages [value]="msgs" [closable]="true"></p-messages>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Hour Tracking</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                                            <div class="row">
+                <p-panel header="Hour Tracking">
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Test Step :</p>
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                              </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Test Stage :</p>
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testStages"  (onChange)="onTestStageChange($event)" name="testStages">
+                              </p-dropdown>
+                          </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Activity :</p>
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntries" >
+                              </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Down Time :</p>
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="downTimeReason"  (onChange)="onDownTimeReasonChange($event)" name="downTimeReason">
+                              </p-dropdown>
+                          </div>
+                        </div><br />
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="purpose" [(ngModel)]="purpose" style="width:100%">
+                                <label>Estimate Duration</label>
+                            </div>
+                        </div><br /><br />
+                        <div class="ui-grid-row " style="color:#777">
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                              <p-calendar [(ngModel)]="startTime" name="startTime" [showIcon]="true"></p-calendar>
+                              <label>Actual Start Date :</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                              <p-calendar [(ngModel)]="endTime" name="endTime" [showIcon]="true" ></p-calendar>
+                              <label>Actual End Date :</label>
+                            </div>
+                        </div><br />
+                        <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Notes</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor [(ngModel)]="model.notes" name="notes" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Test
-                                                        Step
-                                                    </label>
-                                                    <select name="" id=""
-                                                            class="form-control">
-                                                        <option value=""
-                                                                selected="selected">
-                                                            ---- Select ----
-                                                        </option>
-                                                        <option value="">
-                                                            Front
-                                                            Suspension
-                                                        </option>
-                                                        <option value="">
-                                                            Rear
-                                                            Suspension
-                                                        </option>
-                                                        <option value="">
-                                                            Spring
-                                                        </option>
-                                                        <option value="">
-                                                            Front
-                                                            Axle
-                                                        </option>
-                                                        <option value="">
-                                                            Rear
-                                                            Axle
-                                                        </option>
-                                                        <option value="">
-                                                            Wheel
-                                                        </option>
-                                                        <option value="">
-                                                            Chasis
-                                                            mount
-                                                        </option>
-                                                        <option value="">
-                                                            Stabi
-                                                            Bar
-                                                        </option>
-                                                        <option value="">
-                                                            Mount
-                                                        </option>
-                                                        <option value="">
-                                                            Steering
-                                                        </option>
-                                                        <option value="">
-                                                            Ground
-                                                            Contact
-                                                        </option>
-                                                        <option value="">
-                                                            Tailgate
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Test
-                                                        Stage
-                                                    </label>
-                                                    <p-dropdown [options]="testStages" (onChange)="onTestStageChange($event)" name="testStage" [style]="{'width':'150px'}">
-
-                                                    </p-dropdown>
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Activity
-                                                    </label>
-                                                    <p-dropdown [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntry" [style]="{'width':'150px'}">
-
-                                                    </p-dropdown>
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Down Time
-                                                    </label>
-                                                    <p-dropdown [options]="downTimeReasons" (onChange)="onDownTimeReasonChange($event)" name="downTimeReason" [style]="{'width':'150px'}">
-
-                                                    </p-dropdown>
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Estimate Duration
-                                                    </label>
-                                                    <p-calendar [(ngModel)]="estimateDuration" name="estimateDuration" [timeOnly]="true"></p-calendar>
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Actual   End Time
-                                                    </label>
-                                                    <p-calendar id="endTime" [(ngModel)]="endTime" name="endTime" showTime="true" hourFormat="24"></p-calendar>
-                                                    <!--<p-calendar [(ngModel)]="endTime" name="endTime" [showTime]="true" [showIcon]="true" icon="fa-calendar"></p-calendar>-->
-                                                </div>
-                                                <div class="form-group col-sm-6 col-md-4">
-                                                    <label class="control-label">
-                                                        Actual    Start Time
-                                                    </label>
-                                                    <p-calendar [(ngModel)]="startTime" name="startTime" showTime="showTime" [showIcon]="true"></p-calendar>
-                                                    <!--<div class="input-group">
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               placeholder="mm/dd/yyyy"
-                                                               id="TestStartDate">
-                                                        <span class="input-group-addon">
-                                                            <i class="glyphicon glyphicon-calendar"></i>
-                                                        </span>
-                                                    </div>-->
-                                                </div>
-                                                <div class="form-group col-sm-12 col-md-8">
-                                                    <label class="control-label col-sm-12 pl0 mb15">Notes</label><br />
-                                                    <!--<textarea rows="4" cols="170" name="notes" class="form-control" placeholder="Notes"></textarea>-->
-                                                    <div id="editor-container"></div>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group col-sm-6 col-md-4">
-                                                <div class="ui-grid-col-2"></div>
-                                                <div class="ui-grid-col-2">
-                                                    <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-edit" iconPos="left"></button>
-                                                </div>
-                                                <div class="ui-grid-col-4">
-
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Tracking List</strong></div>
-
-
-                                            <div class="panel-body">
-
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="table-responsive" style="min-height:400px;">
-                                                            <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
-                                                            class="grid"></div>-->
-                                                            <p-dataTable [value]="TrackingList" [paginator]="true" rows="15" [responsive]="true">
-                                                                <p-column header="Date" field="startDate" sortable="true"></p-column>
-                                                                <p-column header="TestStage" field="testStageName" sortable="true"></p-column>
-                                                                <p-column header="Estimate Time" field="estimateDuration" sortable="true"></p-column>
-                                                                <p-column header="Actual Time" field="actualDuration" sortable="true"></p-column>
-                                                                <p-column header="Downtime" field="downTimeReason" sortable="true"></p-column>
-                                                                <p-column header="Notes" field="description" sortable="true"></p-column>
-
-                                                            </p-dataTable>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
                             </div>
                         </div>
-                    </div>
-                </div>
-
+                </p-panel><br />
+                <p-panel header="Tracking List">
+                  <div class="panel-body">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12 col-xs-12">
+                              <div class="table-responsive" style="min-height:400px;">
+                                  <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
+                                  class="grid"></div>-->
+                                  <p-dataTable [value]="TrackingList" [paginator]="true" rows="15" [responsive]="true">
+                                      <p-column header="Date" field="startDate" sortable="true"></p-column>
+                                      <p-column header="TestStage" field="testStageName" sortable="true"></p-column>
+                                      <p-column header="Estimate Time" field="estimateDuration" sortable="true"></p-column>
+                                      <p-column header="Actual Time" field="actualDuration" sortable="true"></p-column>
+                                      <p-column header="Downtime" field="downTimeReason" sortable="true"></p-column>
+                                      <p-column header="Notes" field="description" sortable="true"></p-column>
+                                  </p-dataTable>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </p-panel>
+              </form>
             </p-tabPanel>
 
             <p-tabPanel header="Thermo Couple ||" id="timeentry">
@@ -761,6 +232,25 @@
 
                             </div>-->
                         </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Material Service Parts List ||" id="timeentry">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Material Service Parts List</div>
+                    <div class="panel-body">
+                        <div class="table-responsive" style="min-height:400px;">
+                            <!--<div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-auto-resize
+                             class="grid"></div>-->
+                            <p-dataTable [paginator]="true" rows="15" [responsive]="true">
+                                <p-column header="PartNumber" sortable="true"></p-column>
+                                <p-column header="DrawingNumber" sortable="true"></p-column>
+                                <p-column header="Quantity Requested" sortable="true"></p-column>
+                                <p-column header="Comments" sortable="true"></p-column>
+                            </p-dataTable>
+                        </div>
+                        <button class="btn btn-success" pButton icon="ui-icon-add" label="Attachment">
+                        </button>
                     </div>
                 </div>
             </p-tabPanel>
