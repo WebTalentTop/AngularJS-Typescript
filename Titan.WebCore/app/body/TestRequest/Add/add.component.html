@@ -1,8 +1,9 @@
 <div class="ui-g">
     <div class="ui-g-12">
+        <div class="card card-w-title">
         <h3>Add New Test Request</h3>
-        <p-tabView (onChange)="handleChange($event)">
-            <p-tabPanel header="Test Request Details ||" id="info">
+        <!--<p-tabView (onChange)="handleChange($event)">-->
+            <!--<p-tabPanel header="Test Request Details ||" id="info">-->
               <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                   <p-panel header="Basic Information">
                     <div class="body">
@@ -47,17 +48,17 @@
                                 <label>Purpose</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="dueDate" name="dueDate" showTime="true" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="dueDate" name="dueDate" [showIcon]="true"></p-calendar>
                               <label>Due Date :</label>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" showTime="true" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" [showIcon]="true"></p-calendar>
                               <label>Planned Start Date :</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" showTime="true" [showIcon]="true" ></p-calendar>
+                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" [showIcon]="true" ></p-calendar>
                               <label>Planned End Date :</label>
                             </div>
                         </div>
@@ -112,9 +113,8 @@
                     </footer>
                   </p-panel>
               </form>
-            </p-tabPanel>
-
-
-        </p-tabView>
+            <!--</p-tabPanel>-->
+        <!--</p-tabView>-->
+</div>
 </div>
 </div>
