@@ -1,26 +1,49 @@
-﻿<div class="ui-g">
+﻿<!--<div class="ui-g">
     <div class="ui-g-12">
         <a routerLink="add"><i class="fa ui-icon-add"></i>Add TestRequest</a>
-        <h3>Calendar Events</h3>       
-     
-       
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add TestRequest</a>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!--<div class="mb15">Next Calibration Date : Jul-15-2016</div>-->
-                                    <div id="calendar">
-                                        <!--
-                                            <p-calendar [(ngModel)]="date8" name="date8" [inline]="true"></p-calendar>-->
-                                    </div>
-                                </div>
+        <h3>Calendar Events</h3>
+        <a routerLink="add"><i class="fa ui-icon-add"></i>Add TestRequest</a>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">-->
+                            
+                            <!--<div class="mb15">Next Calibration Date : Jul-15-2016</div>-->
+                            <!--<p-calendar [(ngModel)]="date8" name="date8" [inline]="true"></p-calendar>-->
+                            
+                            <!--<div id="calendar">         
                             </div>
                         </div>
                     </div>
-                </div>      
-        
-       
+                </div>
+            </div>
+        </div>
     </div>
+</div>-->
+
+<div class="ui-g-12">
+   <div class="card card-w-title">
+    <header>
+        <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Test Request"></button>
+    </header>
+    <h1>Calendar</h1>
+    <div class="ui-grid-row">
+
+        <p-messages [value]="msgs"></p-messages>
+        <div class="col-sm-12">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!--<div class="mb15">Next Calibration Date : Jul-15-2016</div>-->
+                        <div id="calendar">
+                            <!--
+                                            <p-calendar [(ngModel)]="date8" name="date8" [inline]="true"></p-calendar>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

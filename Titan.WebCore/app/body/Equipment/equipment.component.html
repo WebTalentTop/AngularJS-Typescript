@@ -1,16 +1,17 @@
 <div class="ui-g-12">
     <div class="card card-w-title">
-        <h1> Equipment </h1>
+        <header>
+            <h1>Equipment</h1>
+            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New equipment"></button>
+        </header>
         <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add Equipment</a>
-            <a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Equipment</a>
-            <grid-data 
-                [gridData]="gridData"
-                [cols]='cols'
-                [confInfo]="confInfo"
-                [dataService]="service"
-                (navigateToDetails)="navigateDetails($event)"
-                [title]="title"></grid-data>
+            <!--<p-messages [value]="msgs"></p-messages>-->
+            <grid-data [gridData]="gridData"
+                       [cols]='cols'
+                       [confInfo]="confInfo"
+                       [dataService]="service"
+                       (navigateToDetails)="navigateDetails($event)"
+                       [title]="title"></grid-data>
         </div>
     </div>
 </div>

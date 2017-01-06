@@ -1,10 +1,9 @@
-import { EquipmentService }  from './../../shared/services/equipment.service';
-import { DataTable } from 'primeng/primeng';
-import { LazyLoadEvent} from 'primeng/primeng';
+import { EquipmentService } from '../../shared/services/equipment.service';
+import { LoggerService } from './../../shared/services/logger.service';
+import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, Params} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
-import {Router} from '@angular/router'
-
 @Component({
     selector: 'equipment',
       templateUrl: 'app/body/Equipment/equipment.component.html'
@@ -17,6 +16,7 @@ export class EquipmentComponent {
     gridFilter = {};
     idField:string;
     linkFieldId:string;
+    msgs: Message[] = [];
 
     constructor(private service: EquipmentService, private router:Router) {
 
