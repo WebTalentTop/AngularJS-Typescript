@@ -264,12 +264,50 @@ export class DetailsComponent {
        this.manufacturerPostal = '';
        this.manufacturerState = '';
        this.manufacturerCity = '';
-
-
-
    }
    onAddManufacturer()
    {
+
+       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
+           return null;
+       }
+       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
+           return null;
+       }
+       if (this.manufacturerAddressLine2 == null || this.manufacturerAddressLine2 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerCity == null || this.manufacturerCity == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerEmail == null || this.manufacturerEmail == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerPhone == null || this.manufacturerPhone == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerName == null || this.manufacturerName == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerState == null || this.manufacturerState == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
 
        let equipmentmanufacturermodel= {
            EquipmentId: this.id,

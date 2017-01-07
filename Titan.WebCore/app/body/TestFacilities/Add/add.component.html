@@ -5,7 +5,7 @@
 <br />
         <div class="card card-w-title">
 
-            <h2>Add Test Facility</h2>
+            <h2>Create New Test Facility</h2>
 
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
@@ -102,21 +102,21 @@
                             <div class="md-inputfield">
                                 <input type="text" pInputText class="form-control" row="20" name="postalCode" [(ngModel)]="postalCode" #tfpostalCodeRef="ngModel"
                                        (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
-                                <label>Postal Code</label>
+                                <label>Zip Code</label>
                             </div>
 
                             <!--<p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>-->
 
                         </div>
-                        <div class="form-group col-sm-6 col-md-4">
+                        <!--<div class="form-group col-sm-6 col-md-4">
                             <label class="control-label  col-sm-12 pl0">
                                 Last
                                 Maintenance Date
                             </label>
                             <div class="input-group">
-                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" showTime="true" [showIcon]="true"></p-calendar>
+                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="input-row md-spaced">
                             <label>Description</label>
                             <div class="md-inputfield">

@@ -155,7 +155,7 @@
                                 <div class="input-row md-spaced">
                                     <label>Maintenance Frequency</label>
                                     <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                                label="Maintenance Frequency"
+                                                label="Is Maintenance Frequency required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
                                     </p-checkbox>
@@ -166,6 +166,16 @@
                                     </div>
 
                                 </div>
+
+                                 <div class="form-group col-sm-6 col-md-4">
+                                        <label class="control-label  col-sm-12 pl0">
+                                            Last Maintenance Date
+                                        </label>
+                                        <div class="input-group">
+                                            <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
+                                        </div>
+                                    </div>
+
 
                                 <!-- End State -->
                                 <!-- Begin Delete -->
@@ -227,7 +237,7 @@
 
                         <!-- Begin Dialog - Assign User Role -->
 
-                        <p-dialog header="Add User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal"
+                        <p-dialog header="Add Users and Assign Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal"
                                   showEffect="fade" responsive="true">
 
                             <p>Please select one or more users and their role at the {{testFacility.name}} test
@@ -378,7 +388,7 @@
                                               [filter]="true" filterPlaceholder="Search"></p-column>
                                     <p-column field="role" header="Next Scheduled Test date"
                                               sortable="true"></p-column>
-                                    <p-column field="role" header="Department PIC" sortable="true"></p-column>
+                                    <p-column field="role" header="Department PIC" [filter]="true" sortable="true"></p-column>
                                     <p-column header="Action">
                                         <!--<template pTemplate type="header">
                                 <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"></button>

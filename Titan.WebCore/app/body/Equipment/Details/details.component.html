@@ -6,14 +6,16 @@
     
         <p-tabPanel header="Details ||" id='details'>
         
-        
+            <p-growl [value]="msgs"></p-growl>
             
                 <div class="subsection">
                     <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
+                       
                         <p-panel header="Basic Information">
+                            <br/>
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" id="name" [(ngModel)]="model.name" pInputText name="name" style="width:100%">
+                                    <input type="text" id="name" [(ngModel)]="model.name" required pInputText name="name" style="width:100%">
                                     <label>Name</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
@@ -217,7 +219,9 @@
                                           icon="ui-icon-person-add" label="Add Manufacturer&hellip;"></button>
                               </p>
                           </header>
+                          <br/>
                           <div class="ui-grid-row">
+                              <p style="color:#777">Select Manufacturer :</p>
                               <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId"  (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers">
                               </p-dropdown>
                           </div><br/><br/>
