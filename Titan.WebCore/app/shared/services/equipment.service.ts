@@ -51,7 +51,26 @@ export class EquipmentService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getLogComments(id): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getLogComments}/${id}`, { headers: this.headers })
 
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    PostLogComments(testFacilityId, comment): Observable<any> {
+
+        return this.http.post(`${EquipmentApiUrl.PostLogCommentsUrl}/${testFacilityId}`, comment, { headers: this.headers })
+
+            .map(this.getJson);
+    }
     postManufacturerAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${EquipmentApiUrl.postManufacturerCreatedUrl}`, filterBody, { headers: this.headers })

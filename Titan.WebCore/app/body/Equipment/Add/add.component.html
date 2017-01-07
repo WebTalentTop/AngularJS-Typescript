@@ -53,9 +53,15 @@
                            <label>Calibration Frequency :</label>
                          </div>
                           <div class="ui-g-12 ui-md-6" >
-                              <p-checkbox name="groupname" value="IsFrequency" label="Is Calibration Required" [(ngModel)]="IsFrequency" binary="true"></p-checkbox>
+                              <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
+                                          label="Maintenance Frequency"
+                                          [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
+                                          (onChange)="showHideCronPicker()">
+                              </p-checkbox>
+
+
                               <div class="md-inputfield">
-                                  <div id="selector" [hidden]="!IsFrequency"></div>
+                                  <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
                               </div>
                           </div>
                           <div class="ui-g-12 ui-md-6 md-inputfield">

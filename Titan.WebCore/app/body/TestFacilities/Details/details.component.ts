@@ -81,7 +81,7 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields: any[] = [];
+    formInstanceFields: any[] 
 
     // End Of Form Related Variables
 
