@@ -4,7 +4,8 @@ import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component'; 
-
+import { TitanUserProfileService } from '../../shared/services/titanUserProfile.service';
+import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
 @Component({
     selector: 'project',
     templateUrl: 'app/body/Project/project.component.html'
@@ -12,14 +13,22 @@ import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.comp
 
 export class ProjectComponent {
     // title = "Project";
+    currentUser:IUserProfile;
     gridData = [];
     confInfo: any = {};
     cols = [];
     gridFilter = {};
     idField:string ;
 
-    constructor(private service: ProjectService, private router:Router, private logger: LoggerService) {
-
+    constructor(
+        private service: ProjectService,
+        private router:Router,
+        private logger: LoggerService,
+        private titanUserProfileService:TitanUserProfileService) {
+            this.titanUserProfileService.getCurrentUserProfile()
+                .subscribe(res => {
+                    this.currentUser = res.result;
+                })
     }
 
     ngOnInit() {
@@ -31,6 +40,8 @@ export class ProjectComponent {
                 this.cols = res.Configuration.Columns;
                 this.confInfo = res.Configuration;
             });
+
+
     }
     navigateDetails(id:string){
         this.router.navigate(['project/detailsmain', id]);

@@ -13,6 +13,7 @@ import { FormsModule} from '@angular/forms';
 
 //Services
 import { LoggerService } from '../shared/services/logger.service';
+import { TitanUserProfileService } from '../shared/services/titanUserProfile.service';
 
 import {EquipmentComponent} from './Equipment/equipment.component';
 import {ProjectComponent} from './Project/project.component';
@@ -23,7 +24,7 @@ import appRoutes from './body.routes';
 @NgModule({
     imports: [CommonModule, HttpModule, FormsModule, ProjectModule,DepartmentModule,AdminModule,CalendarModule,LookupModule, EquipmentModule, appRoutes],
     declarations: [BodyComponent],
-    providers: [LoggerService],
+    providers: [TitanUserProfileService, LoggerService],
     exports: [BodyComponent]//,
     //bootstrap: [AppComponent]
 })

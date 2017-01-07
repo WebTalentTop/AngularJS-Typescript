@@ -24,6 +24,7 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { ContextMenuModule } from 'primeng/primeng';
 
 import calendarRoutes from "./titancalendar.routes";
+import {TitanService} from "../../shared/services/titan.service";
 
 @NgModule({
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
@@ -32,7 +33,7 @@ import calendarRoutes from "./titancalendar.routes";
         DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, RadioButtonModule],
 
     providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
-        TestTypeService, TestRequestService
+        TestTypeService, TestRequestService, TitanService
     ],
     declarations: [TitanCalendarComponent]
 })

@@ -48,6 +48,7 @@ export class DetailsComponent implements AfterViewInit {
     details: string;
     testFacilityTenants: any;
     equipments: any;
+    equipmentsToAdd :any;
     displayAssignDepartmentsDialog: boolean;
     displayAssignEquipmentsDialog: boolean;
     displayAssignUserRolesDialog: boolean;
@@ -307,9 +308,10 @@ export class DetailsComponent implements AfterViewInit {
     loadEquipmentTabViews(me) {
         me.getTestFacilities();
        // me.getavailableTestFacilities();
-        me.getavailableEquipments();
+       // me.getavailableEquipments();
         me.getTestFacilityEquipmentById();
-       // me.getEquipments();
+        me.getEquipmentsToAdd();
+
     }
 
     handleChange(event) {
@@ -396,7 +398,7 @@ export class DetailsComponent implements AfterViewInit {
 
     }
     onEquipmentChange(event) {
-        this.selectedEquipment = (event.value);
+        this.selectedEquipment = (event.value.id);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -601,27 +603,51 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
-    getavailableEquipments() {
+  // getavailableEquipments() {
+  //       //    userRoles
+  //       this.testFacilityService.getEquipments(this.id).subscribe(response => {
+  //           this.equipments = new Array();
+  //           if (response != null) {
+  //               var resultMap = new Array();
+  //               resultMap.push({
+  //                   label: "Select Equipment",
+  //                   value: null
+  //               });
+  //               for (let template of response) {
+  //                   var temp = {
+  //                       label: template.name,
+  //                       value: template.id
+  //                   }
+  //                   resultMap.push(temp);
+  //               }
+  //               this.equipments = resultMap;
+  //           }
+  //       });
+  //   }
+    getEquipmentsToAdd() {
         //    userRoles
-        this.testFacilityService.getEquipments(this.id).subscribe(response => {
-            this.equipments = new Array();
+        this.testFacilityService.getEquipmentsToAdd(this.id).subscribe(response => {
+            this.equipmentsToAdd = [];
             if (response != null) {
-                var resultMap = new Array();
+                var resultMap = [];
                 resultMap.push({
                     label: "Select Equipment",
-                    value: null
+                    value: {id:'',name:'',serialNumber:'',testFacilityName:''}
                 });
                 for (let template of response) {
                     var temp = {
                         label: template.name,
-                        value: template.id
+                        //value: template.id
+                        value: {id:template.id, name: template.name, serialNumber:template.serialNumber, testFacilityName: template.testFacilityName}
                     }
                     resultMap.push(temp);
                 }
-                this.equipments = resultMap;
+                console.log("equipments", resultMap);
+                this.equipmentsToAdd = resultMap;
             }
         });
     }
+
     getTestRoles() {
         //    userRoles
         this.testroleservice.getTestRoles().subscribe(response => {
@@ -968,7 +994,7 @@ export class DetailsComponent implements AfterViewInit {
     onAssignEquipments()
     {
         this.displayAssignEquipmentsDialog = true;
-        this.getavailableEquipments();
+        //this.getEquipmentsToAdd();
 
     }
     AddLogComment()
@@ -1014,7 +1040,9 @@ export class DetailsComponent implements AfterViewInit {
         });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Equipment Added', detail: '' });
+
+        this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+
     }
 
     filterUserNames(event) {
