@@ -17,6 +17,7 @@ export class DetailsComponent {
     details:string;
     equipmentManufacturers: any;
     selectedEquipmentManufacturerId: any;
+    displayAssignManufactureDialog: boolean = false;
     equipmentTypes: any;
     selectedCalibrationFrequency: any;
     selectedEquipmentTypeId: any;
@@ -30,7 +31,21 @@ export class DetailsComponent {
     entityType: string = "TestFacility";
      entityId: string = this.id;
     filepath: string = "TestFacility";
- 
+    manufacturerName: any;
+
+    manufacturerPhone: any;
+
+    manufacturerWebsite: any;
+    manufacturerEmail: any;
+
+    manufacturerFax: any;
+    manufacturerAddressLine1: any;
+    manufacturerAddressLine2: any;
+    manufacturerPostal: any;
+    manufacturerState: any;
+    manufacturerCity: any;
+    IsNewManufacturer: boolean;
+    manufacturerId: any;
     model:any = {
             id: '',
             name: '',
@@ -114,8 +129,57 @@ export class DetailsComponent {
               //  this.TestFacilityEquipments = res;
                                        
            // });
-    }
+   }
+   displayAssignManufacturerDialog()
+   {
+       this.displayAssignManufactureDialog = true;
+       this.IsNewManufacturer = true;
 
+       this.manufacturerName = '';
+       this.manufacturerPhone = '';
+       this.manufacturerFax = '';
+       this.manufacturerWebsite = '';
+       this.manufacturerEmail = '';
+       this.manufacturerAddressLine1 = '';
+       this.manufacturerAddressLine2 = '';
+       this.manufacturerCity = '';
+       this.manufacturerPostal = '';
+       this.manufacturerState = '';
+       this.manufacturerCity = '';
+
+
+
+   }
+   onAddManufacturer()
+   {
+
+       let equipmentmanufacturermodel= {
+           EquipmentId: this.id,
+           EquipmentManufacturerDetails: {
+               Name: this.manufacturerName,
+               PhoneNumber: this.manufacturerPhone,
+               FaxNumber: this.manufacturerFax,
+               Website: this.manufacturerWebsite,
+               Email: this.manufacturerEmail
+           },
+           address: {
+               addressLine1: this.manufacturerAddressLine1,
+               addressLine2: this.manufacturerAddressLine2,
+               city: this.manufacturerCity,
+               state: this.manufacturerState,
+               postalCode: this.manufacturerPostal,
+           }     
+
+       };
+
+       this.service.postManufacturerAdd(equipmentmanufacturermodel).subscribe(res => {
+           if (res.isSuccess)
+           {
+
+           }
+       });
+
+   }
    onEquipmentManufacturerChange(event) {
        this.selectedEquipmentManufacturerId = (event.value);
        
