@@ -16,7 +16,9 @@ export class DetailsComponent {
     username: string;
     details:string;
     equipmentManufacturers: any;
+    IsKeepOpen: boolean = false;
     selectedEquipmentManufacturerId: any;
+    displayAssignManufacturerDialog: boolean = false;
     equipmentTypes: any;
     selectedCalibrationFrequency: any;
     selectedEquipmentTypeId: any;
@@ -24,17 +26,36 @@ export class DetailsComponent {
     selectedTestFacilityId: any;
     formConfiguration:any;
     formObject:any;
-    formEquipmentObject:any;
+    formEquipmentObject: any;
+    equipmentLogComments: any;
+    selectedMaintenanceFrequency: any;
     id: string;
     equipmentId: any;
     entityType: string = "TestFacility";
      entityId: string = this.id;
     filepath: string = "TestFacility";
- 
+    manufacturerName: any='';
+
+    manufacturerPhone: any='';
+
+    manufacturerWebsite: any='';
+    manufacturerEmail: any = '';
+    isMaintenaceFrequencySelected: boolean;
+    isCronControlInitialized: boolean;
+    manufacturerFax: any='';
+    manufacturerAddressLine1: any='';
+    manufacturerAddressLine2: any='';
+    manufacturerPostal: any='';
+    manufacturerState: any='';
+    manufacturerCity: any='';
+    IsNewManufacturer: boolean;
+    comment: any;
+    manufacturerId: any;
     model:any = {
             id: '',
             name: '',
             equipmentTypeId: '',
+            calibrationFrequencyCronExpression: '',
             serialNumber: '',
             modelNumber: '' ,
             purchaseDate:'' ,
@@ -80,33 +101,60 @@ export class DetailsComponent {
        this.getEquipmentManufacturers();
        this.getEquipmentTypes();
        this.getTestFacilities();
-     
+       this.GetLogCommentsByEquipmentId();
         this.service.getById(this.id)
             .subscribe(res =>
             {
                 this.model = res.result;
+                this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerId;
+                this.selectedEquipmentTypeId = res.result.equipmentTypeId;
+                this.selectedTestFacilityId = res.result.testFacilityId;
                 this.model.purchaseDate = new Date(res.result.purchaseDate);
                 this.model.warrantyExpiration = new Date(res.result.warrantyExpiration);
                 this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
+                this.frequencyInit();
+                this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;
+                //if (res.testFacility.nextMaintenanceDate != null) {
+                //    this.hasNextMaintenanceDate = true;
+                //}
+                if (this.selectedEquipmentManufacturerId != "00000000-0000-0000-0000-000000000000") {
+                    this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res => {
+                        this.manufacturerPhone = res.result.phoneNumber;
+                        this.manufacturerFax = res.result.faxNumber;
+                        this.manufacturerWebsite = res.result.website;
+                        this.manufacturerName = res.result.name;
+                        this.manufacturerEmail = res.result.email;
+                        this.manufacturerAddressLine1 = res.result.addressLine1;
+                        this.manufacturerAddressLine2 = res.result.addressLine2;
+                        this.manufacturerPostal = res.result.postal;
+                        this.manufacturerCity = res.result.city;
+                        this.manufacturerState = res.result.state;
+
+                    });
+                }
+                else
+                {
+                    this.selectedEquipmentManufacturerId = null;
+                }
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
                
-                $("#selector").cron({
+                //$("#selector").cron({
 
-                    initial: "* * * * *",
-                    onChange: function () {
+                //    initial: "* * * * *",
+                //    onChange: function () {
 
-                        this.selectedCalibrationFrequency = $(this).cron("value");
-                        // $('#selector-val').text($(this).cron("value"));
-                    },
-                    effectOpts: {
-                        openEffect: "fade",
-                        openSpeed: "slow"
-                    },
-                     useGentleSelect: true
-                })
+                //        this.selectedCalibrationFrequency = $(this).cron("value");
+                //        // $('#selector-val').text($(this).cron("value"));
+                //    },
+                //    effectOpts: {
+                //        openEffect: "fade",
+                //        openSpeed: "slow"
+                //    },
+                //     useGentleSelect: true
+                //})
             });
-       
+     
 
         // this.dataService.getEquipmentsByIdusing(this.id)
           //  .subscribe(res =>
@@ -114,17 +162,213 @@ export class DetailsComponent {
               //  this.TestFacilityEquipments = res;
                                        
            // });
-    }
+   }
+   frequencyInit() {
+       if (this.model.calibrationFrequencyCronExpression != null) {
+           this.selectedMaintenanceFrequency = this.model.calibrationFrequencyCronExpression;
+           this.isMaintenaceFrequencySelected = true;
+           $("#selector").cron({
 
+               initial: this.selectedMaintenanceFrequency,
+               onChange: function () {
+                   this.selectedMaintenanceFrequency = $(this).cron("value");
+               }, useGentleSelect: false
+           });
+           this.isCronControlInitialized = true;
+       }
+       else {
+           this.selectedMaintenanceFrequency = "0 0 1 1 *";
+           this.isMaintenaceFrequencySelected = false;
+       }
+
+   }
+   showHideCronPicker() {
+       console.log("--inside cronpicker show hide");
+       debugger;
+       if (this.isMaintenaceFrequencySelected) {
+           if (!this.isCronControlInitialized) {
+               $("#selector").cron({
+
+                   initial: this.selectedMaintenanceFrequency,
+                   onChange: function () {
+                       this.selectedMaintenanceFrequency = $(this).cron("value");
+                   }, useGentleSelect: false
+               });
+           }
+       } else {
+           // Hide the cron
+       }
+   }
+   displayAssignManufacturerDialogBox()
+   {
+       this.displayAssignManufacturerDialog = true;
+       this.selectedEquipmentManufacturerId = null;
+       this.IsNewManufacturer = true;
+       this.manufacturerName = '';
+       this.manufacturerPhone = '';
+       this.manufacturerFax = '';
+       this.manufacturerWebsite = '';
+       this.manufacturerEmail = '';
+       this.manufacturerAddressLine1 = '';
+       this.manufacturerAddressLine2 = '';
+       this.manufacturerCity = '';
+       this.manufacturerPostal = '';
+       this.manufacturerState = '';
+       this.manufacturerCity = '';
+
+
+
+   }
+   GetLogCommentsByEquipmentId() {
+       this.service.getLogComments(this.id)
+           .subscribe(res => {
+               this.equipmentLogComments = res;
+           });
+
+   }
+   onMaintenanceFrequencyChange(event) {
+       this.selectedMaintenanceFrequency = (event.value);
+
+   }
+   AddLogComment() {
+       if (this.comment == null || this.comment == '') {
+           this.msgs = [];
+           this.msgs.push({ severity: 'warn', summary: 'Please write any comment', detail: '' });
+           return null;
+       }
+
+       this.service.PostLogComments(this.id, JSON.stringify(this.comment)).subscribe(filteredList => {
+           this.service.getLogComments(this.id)
+               .subscribe(res => {
+                   this.equipmentLogComments = res;
+               });
+
+       });
+
+       this.msgs = [];
+       this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
+
+   }
+   displayClear() {
+       this.displayAssignManufacturerDialog = true;
+       this.selectedEquipmentManufacturerId = null;
+       this.IsNewManufacturer = true;
+       this.manufacturerName = '';
+       this.manufacturerPhone = '';
+       this.manufacturerFax = '';
+       this.manufacturerWebsite = '';
+       this.manufacturerEmail = '';
+       this.manufacturerAddressLine1 = '';
+       this.manufacturerAddressLine2 = '';
+       this.manufacturerCity = '';
+       this.manufacturerPostal = '';
+       this.manufacturerState = '';
+       this.manufacturerCity = '';
+   }
+   onAddManufacturer()
+   {
+
+       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
+           return null;
+       }
+       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
+           return null;
+       }
+       if (this.manufacturerAddressLine2 == null || this.manufacturerAddressLine2 == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerCity == null || this.manufacturerCity == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerEmail == null || this.manufacturerEmail == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerPhone == null || this.manufacturerPhone == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerName == null || this.manufacturerName == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+       if (this.manufacturerState == null || this.manufacturerState == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           return null;
+       }
+
+       let equipmentmanufacturermodel= {
+           EquipmentId: this.id,
+           EquipmentManufacturerDetails: {
+               Name: this.manufacturerName,
+               PhoneNumber: this.manufacturerPhone,
+               FaxNumber: this.manufacturerFax,
+               Website: this.manufacturerWebsite,
+               Email: this.manufacturerEmail
+           },
+           ManufacturerAddress: {
+               addressLine1: this.manufacturerAddressLine1,
+               addressLine2: this.manufacturerAddressLine2,
+               city: this.manufacturerCity,
+               state: this.manufacturerState,
+               postalCode: this.manufacturerPostal,
+           }     
+
+       };
+
+       this.service.postManufacturerAdd(equipmentmanufacturermodel).subscribe(res => {
+           if (res.isSuccess)
+           {
+               this.getEquipmentManufacturers();               
+               this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerDetails.id;
+             //  this.manufacturerPhone = res.result.equipmentManufacturerDetails.phoneNumber;
+               //this.manufacturerFax = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerWebsite = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerName = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerEmail = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerAddressLine1 = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerAddressLine2 = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerPostal = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerCity = res.result.equipmentManufacturerDetails.PhoneNumber;
+               //this.manufacturerState = res.result.equipmentManufacturerDetails.PhoneNumber;
+           }
+       });
+
+   }
    onEquipmentManufacturerChange(event) {
        this.selectedEquipmentManufacturerId = (event.value);
-       
+       this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res => {
+           this.manufacturerPhone = res.result.phoneNumber;
+           this.manufacturerFax = res.result.faxNumber;
+           this.manufacturerWebsite = res.result.website;
+           this.manufacturerName = res.result.name;
+           this.manufacturerEmail = res.result.email;
+           this.manufacturerAddressLine1 = res.result.addressLine1;
+           this.manufacturerAddressLine2 = res.result.addressLine2;
+           this.manufacturerPostal = res.result.postal;
+           this.manufacturerCity = res.result.city;
+           this.manufacturerState = res.result.state;
+
+       });
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
    getEquipmentManufacturers() {
        //    userRoles
        this.service.getEquipmentManufacturers().subscribe(response => {
+           debugger;
            this.equipmentManufacturers = new Array();
            if (response != null) {
                var resultMap = new Array();
@@ -157,6 +401,7 @@ export class DetailsComponent {
    getTestFacilities() {
        //    userRoles
        this.testfacilityservice.getTestFacilities().subscribe(response => {
+           debugger;
            this.testFacilities = new Array();
            if (response != null) {
                var resultMap = new Array();
@@ -178,6 +423,7 @@ export class DetailsComponent {
    getEquipmentTypes() {
        //    userRoles
        this.service.getEquipmentTypes().subscribe(response => {
+           debugger;
            this.equipmentTypes = new Array();
            if (response != null) {
                var resultMap = new Array();
@@ -198,11 +444,18 @@ export class DetailsComponent {
    }
    onEquipmentSave(formRef) {   
      //  formRef.isDeleted = false;
-       
+       let cronexp: any;
+       if (this.isMaintenaceFrequencySelected) {
+           cronexp = $('#selector').cron("value");
+       }
+       else {
+           cronexp = '';
+       }
        let modeldata = {
            Id: this.id,
            Name: formRef.name,
            ModelNumber: formRef.modelNumber,
+           CalibrationFrequencyCronExpression: cronexp,
            LastCalibrationDate: formRef.lastCalibrationDate,
            EquipmentTypeId: this.selectedEquipmentTypeId,
            SerialNumber: formRef.serialNumber,         

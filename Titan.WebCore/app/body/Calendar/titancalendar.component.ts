@@ -7,9 +7,11 @@ import {ProjectService} from '../../shared/services/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
 import {TitanUserService} from '../../shared/services/titanuser.service';
+import { TitanUserProfileService } from '../../shared/services/titanUserProfile.service';
 import {TestRequestService} from '../../shared/services/testrequest.service';
-////
-//import * as moment from 'moment/moment';
+import {TitanService} from '../../shared/services/titan.service'
+import * as moment from 'moment/moment';
+import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {
     DataTable,
@@ -38,7 +40,10 @@ declare var fullcalendardef: FullCalendar.Calendar;
     selector: 'calendar',
     templateUrl: 'app/body/calendar/titancalendar.component.html'
 })
+
 export class TitanCalendarComponent implements AfterViewInit, OnInit {
+    // region fields
+    currentUser:IUserProfile;
     testRoles: any;
     buildLevels: any;
     projectCodes: any;
@@ -60,9 +65,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     daysofweek: SelectItem[];
     slotDurations: SelectItem[];
     selectedFirstDayValue: number = 0;
-    startWorkHoursValue: string = "05:00";
-    endWorkHoursValue: string = "19:00";
-    selectedSlotDurationValue: string = "24:00:00";
+    startWorkHoursValue: string = "00:00";
+    endWorkHoursValue: string = "23:59";
+    selectedSlotDurationValue: string = "08:00:00";
     filterResourcesWithEvents: boolean = false; //When this setting is activated, only resources that have associated events will be displayed
     tooltip: any;
     displayEventDialog: boolean = false;
@@ -129,9 +134,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     selectedTestRequestId: string = '';
 
     testOperators: any[] = [];
+//endregion fields
 
-
-
+// region constructor
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private testfacilityservice: TestFacilityService,
@@ -141,9 +146,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private projectservice: ProjectService,
                 private testmodeservice: TestModeService,
                 private testtypeservice: TestTypeService,
-                private testRequestService: TestRequestService,) {
-    }
-
+                private testRequestService: TestRequestService,
+                private titanService: TitanService,
+                private titanUserProfileService:TitanUserProfileService) {
+    this.titanUserProfileService.getCurrentUserProfile()
+.subscribe(res => {
+    this.currentUser = res.result;
+})
+}
+// endregion constructor
     initCalendarOptions() {
         this.daysofweek = [];
         this.daysofweek.push({label: 'Sunday', value: {id: 1, name: '0', code: 'SUN'}});
@@ -158,23 +169,28 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         //this.slotDurations.push({ label: 'Month', value: { id: 1, name: '30.00.', code: 'SUN' } });
         this.slotDurations.push({label: 'Week', value: "168:00:00"});
         this.slotDurations.push({label: 'Day', value: "24:00:00"});
-        this.slotDurations.push({label: 'Shift', value: "08:00"});
-        this.slotDurations.push({label: 'Hour', value: "01:00"});
-        this.slotDurations.push({label: '30 minutes', value: {id: 4, name: '00:00:30'}});
-        this.slotDurations.push({label: '15 minutes', value: {id: 5, name: '00:00:15'}});
+        this.slotDurations.push({label: 'Shift', value: "08:00:00"});
+        this.slotDurations.push({label: 'Hour', value: "01:00:00"});
+        //TODO: Make Slots Dynamic. 30 mins and 15 mins should show up in week and day mode only
+        //this.slotDurations.push({label: '30 minutes', value:  '00:30:00'});
+        //this.slotDurations.push({label: '15 minutes', value:  '00:15:00'});
 
 
     }
 
     initSchedule() {
+        let tz = this.titanService.getDefaultTimeZone;
+        console.log("---tz", tz);
         var self = this;
         let todayDate = moment().startOf('day');
         let YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
         let TODAY = todayDate.format('YYYY-MM-DD');
         let TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
         let DEFAULTDATE = todayDate.clone().add(-7, 'day').format('YYYY-MM-DD');
+
         var tt = this.tooltip;
         let scheduleConfig: any = {
+            timezone:'UTC',
             schedulerLicenseKey: '0799804275-fcs-1480895270',
             height: 650,
             theme: true,
@@ -188,7 +204,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             header: {
                 left: 'settings,prev,next today',
                 center: 'title',
-                right: 'timelineMonth timelineFifteenDays timelineWeek timelineDay month basicWeek basicDay listMonth'
+                right: 'timelineMonth timeline3weeks timelineWeek timelineDay month basicWeek basicDay listMonth'
             },
             customButtons: {
                 settings: {
@@ -201,11 +217,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 }
             },
             defaultDate: DEFAULTDATE,
-            defaultView: 'timelineMonth',
+            defaultView: 'timeline3weeks',
             views: {
-                timelineFifteenDays: {
+                timeline3weeks: {
                     type: 'timeline',
-                    duration: {days: 15},
+                    duration: {days: 21},
                     minTime: this.startWorkHoursValue,
                     maxTime: this.endWorkHoursValue,
                     slotDuration: this.selectedSlotDurationValue,
@@ -252,7 +268,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         data: {
                             startdate: start.utc().format(),
                             enddate: end.utc().format(),
-                            projectCodeIdList: []
+                            projectCodeIdList: [],
+                            timezone: tz
 
                         },
                         error: function () {
@@ -293,7 +310,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             },
             eventDrop: function (event, delta, revertFunc) {
 
-                console.log("resource",event.resourceId);
+                console.log("delta",delta);
                 console.log("event",event);
                 self.selectedEventId = event.id;//testFacilityScheduleId
                 self.moveToTestFacilityName = $("#calendar").fullCalendar( 'getResourceById', event.resourceId ).title;
@@ -379,8 +396,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                                     testUserScheduleId,
                                     testfacilityName} = x;
 
-                                //r.startDate = moment(r.startDate).toDate();
-                                //r.endDate = moment(r.endDate).toDate();
+                                r.startDate = moment(r.startDate).toDate();
+                                r.endDate = moment(r.endDate).toDate();
                                 return r;
                             });
                             selfRef.testOperatorsForBlock = items;

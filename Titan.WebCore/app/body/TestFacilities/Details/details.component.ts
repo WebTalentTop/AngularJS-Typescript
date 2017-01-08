@@ -48,6 +48,7 @@ export class DetailsComponent implements AfterViewInit {
     details: string;
     testFacilityTenants: any;
     equipments: any;
+    equipmentsToAdd :any;
     displayAssignDepartmentsDialog: boolean;
     displayAssignEquipmentsDialog: boolean;
     displayAssignUserRolesDialog: boolean;
@@ -80,7 +81,7 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields: any[] = [];
+    formInstanceFields: any[] 
 
     // End Of Form Related Variables
 
@@ -307,9 +308,10 @@ export class DetailsComponent implements AfterViewInit {
     loadEquipmentTabViews(me) {
         me.getTestFacilities();
        // me.getavailableTestFacilities();
-        me.getavailableEquipments();
+       // me.getavailableEquipments();
         me.getTestFacilityEquipmentById();
-       // me.getEquipments();
+        me.getEquipmentsToAdd();
+
     }
 
     handleChange(event) {
@@ -396,7 +398,7 @@ export class DetailsComponent implements AfterViewInit {
 
     }
     onEquipmentChange(event) {
-        this.selectedEquipment = (event.value);
+        this.selectedEquipment = (event.value.id);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -601,27 +603,51 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
-    getavailableEquipments() {
+  // getavailableEquipments() {
+  //       //    userRoles
+  //       this.testFacilityService.getEquipments(this.id).subscribe(response => {
+  //           this.equipments = new Array();
+  //           if (response != null) {
+  //               var resultMap = new Array();
+  //               resultMap.push({
+  //                   label: "Select Equipment",
+  //                   value: null
+  //               });
+  //               for (let template of response) {
+  //                   var temp = {
+  //                       label: template.name,
+  //                       value: template.id
+  //                   }
+  //                   resultMap.push(temp);
+  //               }
+  //               this.equipments = resultMap;
+  //           }
+  //       });
+  //   }
+    getEquipmentsToAdd() {
         //    userRoles
-        this.testFacilityService.getEquipments(this.id).subscribe(response => {
-            this.equipments = new Array();
+        this.testFacilityService.getEquipmentsToAdd(this.id).subscribe(response => {
+            this.equipmentsToAdd = [];
             if (response != null) {
-                var resultMap = new Array();
+                var resultMap = [];
                 resultMap.push({
                     label: "Select Equipment",
-                    value: null
+                    value: {id:'',name:'',serialNumber:'',testFacilityName:''}
                 });
                 for (let template of response) {
                     var temp = {
                         label: template.name,
-                        value: template.id
+                        //value: template.id
+                        value: {id:template.id, name: template.name, serialNumber:template.serialNumber, testFacilityName: template.testFacilityName}
                     }
                     resultMap.push(temp);
                 }
-                this.equipments = resultMap;
+                console.log("equipments", resultMap);
+                this.equipmentsToAdd = resultMap;
             }
         });
     }
+
     getTestRoles() {
         //    userRoles
         this.testroleservice.getTestRoles().subscribe(response => {
@@ -868,7 +894,7 @@ export class DetailsComponent implements AfterViewInit {
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Search any user to add', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please Select User', detail: '' });
             return null;
         }
         if (this.selectedRole == null) {
@@ -879,24 +905,24 @@ export class DetailsComponent implements AfterViewInit {
 
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Primary Incharge") != undefined) && (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Already user with PIC present', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Primary Incharge already assigned', detail: '' });
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for role PIC', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for primary Incharge', detail: '' });
             return null;
         }
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Secondary Incharge") != undefined) && (this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Already user with SIC present', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Secondary Incharge already assigned', detail: '' });
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for role SIC', detail: '' });
+            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for secondary Incharge', detail: '' });
             return null;
         }
        
@@ -968,7 +994,7 @@ export class DetailsComponent implements AfterViewInit {
     onAssignEquipments()
     {
         this.displayAssignEquipmentsDialog = true;
-        this.getavailableEquipments();
+        //this.getEquipmentsToAdd();
 
     }
     AddLogComment()
@@ -1014,7 +1040,9 @@ export class DetailsComponent implements AfterViewInit {
         });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Equipment Added', detail: '' });
+
+        this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+
     }
 
     filterUserNames(event) {
@@ -1046,7 +1074,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-
+        formData.lastMaintenanceDate = this.lastMaintenanceDate
         if (this.isMaintenaceFrequencySelected){
             formData.maintenanceFrequency = $('#selector').cron("value");
         }
@@ -1175,8 +1203,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.selectedCategory = null;
             });
 
-        this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        //this.msgs = [];
+        //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
 
     private getEntityIdentifierInfo() {

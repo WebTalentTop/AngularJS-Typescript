@@ -3,10 +3,12 @@ import { Component, Input, Output, EventEmitter, AfterViewInit, OnInit } from '@
 import { Router, ActivatedRoute } from '@angular/router';
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
 import { ITorqueSheet } from '../../../shared/services/definitions/ITorqueSheet';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
     selector: 'details-torquesheet',
-    templateUrl: 'app/body/TorqueSheet/Details/details.component.html'
+    templateUrl: 'app/body/TorqueSheet/Details/details.component.html',
+    styles: ['.latestVersion { color:green; font-weight:bold; font-size: large; } .oldVersion {color:red; font-weight:bold; font-size: large;}']
 })
 export class DetailsComponent {
     torqueSheetDetails: ITorqueSheet;
@@ -21,34 +23,47 @@ export class DetailsComponent {
     PICTURE_ROWCOUNT: number = 16;
     PICTURE_COLUMNCOUNT: number = 10;
     public torqueSheetId: string;
+    public getCurrentVersionOrLatestVersion: string;
+    public get latestVersionStyle() {
+        return (this.torqueSheetDetails != null && this.torqueSheetDetails.isUserViewingLatestVersion) ? "latestVersion" : "oldVersion";
+    }
+    public otherVersionId: any;
+    public get latestVersionText() {
+        if (this.torqueSheetDetails == null)
+            return "";
+        else if (this.torqueSheetDetails.isUserViewingLatestVersion)
+            return "You are viewing latest version of Torque Sheet";
+        else
+            return "You are viewing old version of Torque Sheet and a latest version is available";
+    }
     //@Input() isDisplayComponentInPopUp: boolean;
     //@Input() fromTorqueBookId: string;
     //@Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
     //@Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
-    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router) {
+    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService) {
         //this.torqueSheetDetails = <ITorqueSheet>{};
         this.route.params.subscribe(params => {
             //this.torqueSheetDetails.id = params['id'];
+            this.getCurrentVersionOrLatestVersion = params['getCurrentVersionOrLatestVersion'];
             this.getTorqueSheetDetails(params['id']);
             //this.torqueSheetDetails.torqueBookId = params['torqueBookId'];
-            this.getTorqueBooksTorqueSheetNames(params['torqueBookId']);
+            //this.getTorqueBooksTorqueSheetNames(params['torqueBookId']);
             this.landingFrom = params['landingFrom'];
             this.identifierId = params['identifierId'];
         });
     }
 
     getTorqueSheetDetails(id: string) {
-        this.service.getTorqueSheet(id).subscribe(a => {
+        this.service.getTorqueSheet(id, this.getCurrentVersionOrLatestVersion).subscribe(a => {
             //if (a.isSuccess) {
-                this.torqueSheetDetails = a;
-                if (this.torqueSheetNames != undefined) {
-                    this.torqueSheetNames.push({
-                        label: this.torqueSheetDetails.name,
-                        value: this.torqueSheetDetails.nameId
-                    });
-                }
+            this.torqueSheetDetails = a;
+            this.torqueSheetDetails.otherVersions = this.torqueSheetDetails.otherVersions.$values;
+            
+            this.getTorqueBooksTorqueSheetNames(a.torqueBookId);
+                
                 var obj = this;
                 setTimeout(function () {
+                   // $("#torqueSheetSpreadContainer").html("");
                     obj.spreadInstance = new GC.Spread.Sheets.Workbook($("#torqueSheetSpreadContainer").get(0));
                     obj.spreadInstance.isPaintSuspended(true);
                     obj.spreadInstance.fromJSON(JSON.parse(obj.torqueSheetDetails.contents));
@@ -56,6 +71,19 @@ export class DetailsComponent {
                 }, 200);
             //}
         });
+    }
+
+    onVersionChange() {
+        if (this.otherVersionId != null) {
+            this.getCurrentVersionOrLatestVersion = "CurrentVersion";
+            $("#torqueSheetSpreadContainer").html("");
+            //this.spreadInstance = new GC.Spread.Sheets.Workbook($("#torqueSheetSpreadContainer").get(0));
+            this.spreadInstance.destroy()
+            //this.spreadInstance.isPaintSuspended(true);
+            //this.spreadInstance.reset();
+            //this.spreadInstance.isPaintSuspended(false);
+            this.getTorqueSheetDetails(this.otherVersionId);
+        }
     }
 
     ngAfterViewInit() {
@@ -74,7 +102,7 @@ export class DetailsComponent {
     }
 
     ngOnInit() {
-
+        this.torqueSheetNames = new Array();
     }
 
     onInsertPictueClick() {
@@ -178,13 +206,19 @@ export class DetailsComponent {
                     }
                     resultMap.push(temp);
                 }
-                if (this.torqueSheetDetails != undefined) {
+                //if (this.torqueSheetDetails != undefined) {
+                //    this.torqueSheetNames.push({
+                //        label: this.torqueSheetDetails.name,
+                //        value: this.torqueSheetDetails.nameId
+                //    });
+                //}
+                this.torqueSheetNames = resultMap;
+                if (this.torqueSheetNames != undefined) {
                     this.torqueSheetNames.push({
                         label: this.torqueSheetDetails.name,
                         value: this.torqueSheetDetails.nameId
                     });
                 }
-                this.torqueSheetNames = resultMap;
             }
         });
     }
@@ -220,7 +254,18 @@ export class DetailsComponent {
     }
 
     onCreateNewVersion() {
-
+        this.confirmationService.confirm({
+            message: 'Are you sure that you want to create new version?',
+            accept: () => {
+                this.torqueSheetDetails.contents = JSON.stringify(this.spreadInstance.toJSON());
+                this.service.createNewTorqueSheetVersion(this.torqueSheetDetails).subscribe(res => {
+                    if (res.isSuccess) {
+                        this.torqueSheetDetails = res.result;
+                        this.torqueSheetDetails.otherVersions = this.torqueSheetDetails.otherVersions.$values;
+                    }
+                });
+            }
+        });
     }
 
     saveTorqueSheet(status) {
@@ -228,6 +273,7 @@ export class DetailsComponent {
         this.service.putTorqueSheet(status, this.torqueSheetDetails).subscribe(res => {
             if (res.isSuccess) {
                 this.torqueSheetDetails = res.result;
+                this.torqueSheetDetails.otherVersions = this.torqueSheetDetails.otherVersions.$values;
             }
         });
     }

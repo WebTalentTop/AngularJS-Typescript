@@ -5,7 +5,7 @@ import { AddComponent } from "./add.component";
 import { EquipmentService} from '../../../shared/services/equipment.service';
 import { TestFacilityService } from '../../../shared/services/testfacility.service';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, DropdownModule, CheckboxModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
+import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule,  DropdownModule, CheckboxModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { EditorModule, SharedModule } from 'primeng/primeng';
 
 import { RouterModule } from "@angular/router";

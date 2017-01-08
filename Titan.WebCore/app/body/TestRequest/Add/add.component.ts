@@ -600,7 +600,7 @@ export class AddComponent implements AfterViewInit {
                 this.testrequestsensorserice.postWorkRequestAdd(workrequestbody).subscribe(workresult => {
 
                     this.selectedDepartment.forEach(dept => {
-                        var primaryuserid = 'BE06471E-F53B-E013-642A-003087ABCAA3';
+                        var primaryuserid = '3BDC1617-D620-65D0-26EF-000E1090A386';
                         let taskbody = {
 
                             EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',

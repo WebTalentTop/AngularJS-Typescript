@@ -32,12 +32,15 @@ export class AddComponent {
     testFacilityId: any;
     equipmentManufacturers: any;
     selectedEquipmentManufacturerId: any;
+    calibrationFrequencyCronExpression: any;
+    selectedMaintenanceFrequency: any;
+    isMaintenaceFrequencySelected: boolean ;
     equipmentTypes: any;
     selectedEquipmentTypeId: any;
     testFacilities: any;
     selectedTestFacilityId: any;
     manufacturerName: any;
-
+    isCronControlInitialized: boolean = false;
     manufacturerPhone: any;
 
     manufacturerWebsite: any;
@@ -71,6 +74,7 @@ export class AddComponent {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
         this.getTestFacilities();
+        this.frequencyInit();
         // $("#selector").cron({
         //
         //     initial: "* * * * *",
@@ -109,6 +113,42 @@ export class AddComponent {
          
         });
       
+    }
+    frequencyInit() {
+        if (this.calibrationFrequencyCronExpression != null) {
+            this.selectedMaintenanceFrequency = this.calibrationFrequencyCronExpression;
+            this.isMaintenaceFrequencySelected = true;
+            $("#selector").cron({
+
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
+            });
+            this.isCronControlInitialized = true;
+        }
+        else {
+            this.selectedMaintenanceFrequency = "0 0 1 1 *";
+            this.isMaintenaceFrequencySelected = false;
+        }
+
+    }
+    showHideCronPicker() {
+        console.log("--inside cronpicker show hide");
+        debugger;
+        if (this.isMaintenaceFrequencySelected) {
+           // if (!this.isCronControlInitialized) {
+                $("#selector").cron({
+
+                    initial: this.selectedMaintenanceFrequency,
+                    onChange: function () {
+                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                    }, useGentleSelect: false
+                });
+          //  }
+        } else {
+            // Hide the cron
+        }
     }
     getEquipmentManufacturers() {
         //    userRoles
@@ -194,7 +234,16 @@ export class AddComponent {
 
     }
     onSubmit(formRef) {
+
+
         formRef.isDeleted = false;
+        let cronexp: any;
+        if (this.isMaintenaceFrequencySelected) {
+            cronexp = $('#selector').cron("value");
+        }
+        else {
+            cronexp = '';
+        }
         if (!this.IsNewManufacturer) {
             this.manufacturerId = this.selectedEquipmentManufacturerId;
         }
@@ -206,6 +255,7 @@ export class AddComponent {
             Name: formRef.name,
             ModelNumber: formRef.modelNumber,
             LastCalibrationDate: formRef.lastCalibrationDate,
+            CalibrationFrequencyCronExpression: cronexp,
             EquipmentTypeId: this.selectedEquipmentTypeId,
             SerialNumber: formRef.serialNumber,
             PurchaseDate: formRef.purchaseDate,
@@ -232,7 +282,7 @@ export class AddComponent {
         this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {
 
-                this.router.navigate(["equipment/details/"], res.result.id);
+                this.router.navigate(['equipment/details/', res.result.id]);
             }
         });
     }

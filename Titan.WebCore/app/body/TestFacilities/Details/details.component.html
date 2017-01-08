@@ -3,6 +3,7 @@
     <div class="ui-g-12">
 
         <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+        <br />
 
         <h1>{{testFacility.name}} Test Facility Details</h1>
 
@@ -154,7 +155,7 @@
                                 <div class="input-row md-spaced">
                                     <label>Maintenance Frequency</label>
                                     <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                                label="Maintenance Frequency"
+                                                label="Is Maintenance Frequency required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
                                     </p-checkbox>
@@ -165,6 +166,16 @@
                                     </div>
 
                                 </div>
+
+                                 <div class="form-group col-sm-6 col-md-4">
+                                        <label class="control-label  col-sm-12 pl0">
+                                            Last Maintenance Date
+                                        </label>
+                                        <div class="input-group">
+                                            <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
+                                        </div>
+                                    </div>
+
 
                                 <!-- End State -->
                                 <!-- Begin Delete -->
@@ -226,7 +237,7 @@
 
                         <!-- Begin Dialog - Assign User Role -->
 
-                        <p-dialog header="Add User Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal"
+                        <p-dialog header="Add Users and Assign Roles" [(visible)]="displayAssignUserRolesDialog" modal="modal"
                                   showEffect="fade" responsive="true">
 
                             <p>Please select one or more users and their role at the {{testFacility.name}} test
@@ -377,7 +388,7 @@
                                               [filter]="true" filterPlaceholder="Search"></p-column>
                                     <p-column field="role" header="Next Scheduled Test date"
                                               sortable="true"></p-column>
-                                    <p-column field="role" header="Department PIC" sortable="true"></p-column>
+                                    <p-column field="role" header="Department PIC" [filter]="true" sortable="true"></p-column>
                                     <p-column header="Action">
                                         <!--<template pTemplate type="header">
                                 <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"></button>
@@ -406,18 +417,25 @@
 
             <p-tabPanel header="Equipment" id="equipment" headerStyleClass="equipment">
                 <p-growl [value]="msgs"></p-growl>
-                <p-dialog header="Add Equipment" [(visible)]="displayAssignEquipmentsDialog" modal="modal"
+                <p-dialog header="Add Equipment  to {{testFacility.name}}" [(visible)]="displayAssignEquipmentsDialog" modal="modal"
                           showEffect="fade" responsive="true">
 
-                    <p>Please select any equipment at the {{testFacility.name}} test facility.</p>
+
 
                     <div class="input-row">
 
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
                         <span class="pseudo-label">Equipment</span>
+ 							<p-dropdown [options]="equipmentsToAdd" (onChange)="onEquipmentChange($event)" name="equipments" appendTo="body"
+                                    [autoWidth]="false" >
+                            <template let-item>
+                                <div class="ui-helper-clearfix">
+                                <div *ngIf="item.value.name !==''"> {{item.value.name}} ({{ item.value.serialNumber}})</div>
+                                <div *ngIf="item.value.name !==''">Facility Name: {{item.value.testFacilityName}}</div>
+                                </div>
+                            </template>
 
-                        <p-dropdown [options]="equipments" (onChange)="onEquipmentChange($event)" name="equipments"  [filter]="true"
-                                    [autoWidth]="false"></p-dropdown>
+                        </p-dropdown>
 
                     </div>
 

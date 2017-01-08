@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
 
-import { ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { ButtonModule, InputTextareaModule, InputTextModule, PanelModule, ConfirmDialogModule,ConfirmationService, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./details.routes";
 
@@ -18,12 +18,13 @@ import addRoutes from "./details.routes";
         InputTextModule, 
         PanelModule, 
         ButtonModule,
-        DropdownModule, 
+        DropdownModule,
+        ConfirmDialogModule,
         //RadioButtonModule,
         //MultiSelectModule,
         addRoutes
         ],
-    providers: [TorquesheetService],
+    providers: [TorquesheetService, ConfirmationService],
     declarations: [DetailsComponent]
 })
 

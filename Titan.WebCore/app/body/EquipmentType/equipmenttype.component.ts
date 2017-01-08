@@ -1,9 +1,9 @@
 import { EquipmentTypeService } from './../../shared/services/equipmentType.service';
 import { LoggerService } from './../../shared/services/logger.service';
 import {FileUploadModule} from 'primeng/primeng';
-import { LazyLoadEvent } from 'primeng/primeng';
+import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router, ActivatedRoute, Params} from '@angular/router';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import {DropdownModule} from 'primeng/primeng';
 
@@ -19,6 +19,7 @@ export class EquipmentTypeComponent {
     gridFilter = {};
     idField:string;
     linkFieldId:string;
+    msgs: Message[] = [];
 
     constructor(private service: EquipmentTypeService, private router:Router) {
 
