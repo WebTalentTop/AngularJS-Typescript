@@ -1,87 +1,55 @@
-﻿<div class="ui-g-12">
+<div class="ui-g-12">
     <div class="card card-w-title">
-       
-        <div class="ui-grid-row">
-            <div class="col-sm-12">
-                <div class="panel panel-default " *ngIf="HasTasks==true">
-                   <div class="panel-heading">Thermo Couple Pending Tasks</div>
-                    <!--<h2>TestRequestDetails:</h2>
-                    TestRequestId: {{testRequestId}}<br/>
-                    TestNumber: {{testNumber}}<br/>
-                    <div class="ui-grid-4"></div>
-                    <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a>-->
-                
-                    <!--<ul *ngIf="HasTasks==true">
-                        <li *ngFor="let task of tasks"> TestRequestNumber# {{task.entityId}} needs Thermo Couple Info <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}/{{task.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a></li>
-                    </ul>-->
-                    <p-dataTable [value]="pendingTasks" *ngIf="HasTasks==true" [paginator]="true" rows="15" [responsive]="true">
+        <h1>Tasks</h1>
+        <p-panel header="Thermo Couple Pending Tasks" *ngIf="HasTasks==true">
+          <p-dataTable [value]="pendingTasks" *ngIf="HasTasks==true" [paginator]="true" rows="15" [responsive]="true">
 
-                        <p-column header="Test Request" sortable="true">
-                            <template let-taskrow="rowData" pTemplate type="body">
-                                {{taskrow.entityId}}
-                            </template>
-                        </p-column>
-                        <p-column>
-                            <template pTemplate type="header">
-                                <button type="button" pButton icon="fa-refresh"></button>
-                            </template>
-                            <template let-taskrow="rowData" pTemplate type="body">
-                                <a href="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a>                               
-                            </template>
-                       </p-column>
+              <p-column header="Test Request" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.entityId}}
+                  </template>
+              </p-column>
+              <p-column>
+                  <template pTemplate type="header">
+                      <button type="button" pButton icon="fa-refresh"></button>
+                  </template>
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      <button id="add" pButton type="button" icon="ui-icon-add" label="Add Thermo Couple Info" routerLink="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"></button>
+                      <!-- <a href="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a> -->
+                  </template>
+             </p-column>
+          </p-dataTable>
+        </p-panel>
+        <p-panel header="Thermo Couple Tasks">
+          <p-dataTable [value]="allTasks" [paginator]="true" rows="15" [responsive]="true">
 
-                                            
-                    </p-dataTable>
-                    </div>           
-                <div class="panel panel-default">
-                    <div class="panel-heading">Thermo Couple Tasks</div>
-                    <!--<h2>TestRequestDetails:</h2>
-        TestRequestId: {{testRequestId}}<br/>
-        TestNumber: {{testNumber}}<br/>
-        <div class="ui-grid-4"></div>
-        <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a>-->
-                    <!--<ul *ngIf="HasTasks==true">
-            <li *ngFor="let task of tasks"> TestRequestNumber# {{task.entityId}} needs Thermo Couple Info <a href="{{titanApiUrl}}/testrequest/details/{{testRequestId}}/add/{{testRequestId}}/{{task.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a></li>
-        </ul>-->
-                    <p-dataTable [value]="allTasks" [paginator]="true" rows="15" [responsive]="true">
-
-                        <p-column header="Test Request" sortable="true">
-                            <template let-taskrow="rowData" pTemplate type="body">
-                               {{taskrow.entityId}}
-                                </template>
-                       </p-column>
-                        <p-column header="Task Name" sortable="true">
-                            <template let-taskrow="rowData" pTemplate type="body">
-                                {{taskrow.name}}
-                            </template>
-                        </p-column>
-                        <p-column header="Department" sortable="true">
-                            <template let-taskrow="rowData" pTemplate type="body">
-                                {{taskrow.departmentId}}
-                            </template>
-                        </p-column>
-                        <p-column>
-                            <template pTemplate type="header">
-                                <button type="button" pButton icon="fa-refresh"></button>
-                            </template>
-                            <template let-taskrow="rowData" pTemplate type="body">
-                                <a routerLink="details/{{taskrow.id}}">Details</a>
-                            </template>
-                        </p-column>
+              <p-column header="Test Request" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                     {{taskrow.entityId}}
+                      </template>
+             </p-column>
+              <p-column header="Task Name" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.name}}
+                  </template>
+              </p-column>
+              <p-column header="Department" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.departmentId}}
+                  </template>
+              </p-column>
+              <p-column>
+                  <template pTemplate type="header">
+                      <button type="button" pButton icon="fa-refresh"></button>
+                  </template>
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      <!-- <a routerLink="details/{{taskrow.id}}">Details</a> -->
+                      <button id="details" pButton type="button" label="Details" routerLink="details/{{taskrow.id}}"></button>
+                  </template>
+              </p-column>
 
 
-                    </p-dataTable>
-                </div>            
-
-                </div>
-                    <!--<a routerLink="edit/A70B5ABE-10AE-4D65-8667-F8ACECCF9987"><i class="fa ui-icon-edit"></i>Edit Test Facility</a>-->
-                    <!--<p-messages [value]="msgs"></p-messages>-->
-                    <!--<grid-data [gridData]="gridData"
-                           [cols]='cols'
-                           [confInfo]="confInfo"
-                           [dataService]="service"
-                           (navigateToDetails)="navigateDetails($event)"
-                           [title]="title"></grid-data>-->
-                </div>
-            </div>
-        </div>
+          </p-dataTable>
+        </p-panel>
+    </div>
+</div>

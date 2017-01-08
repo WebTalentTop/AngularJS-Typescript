@@ -1,7 +1,7 @@
 import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { TaskService } from '../../shared/services/task.service';
 import { LoggerService } from './../../shared/services/logger.service';
-import { LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
+import { PanelModule, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router'
 
@@ -50,9 +50,9 @@ export class TaskComponent {
                     this.pendingTasks = res.result.pendingTasks.$values;
                     this.allTasks = res.result.allTasks.$values;
                   //  this.taskId = res.result.id;
-                    this.testRequestId = res.result[0].entityId; 
-                    
-                
+                    this.testRequestId = res.result[0].entityId;
+
+
                 //resData = res;
                 //this.gridData = res.Data;
                 //this.cols = res.Configuration.Columns;
@@ -60,12 +60,12 @@ export class TaskComponent {
                 //this.confInfo = res.Configuration;
                 //console.log("------- Configuration --------", this.confInfo);
             });
-       
+
     }
 
     navigateDetails(id:string){
         this.router.navigate(['testfacilities/details', id]);
     }
 
-   
+
 }

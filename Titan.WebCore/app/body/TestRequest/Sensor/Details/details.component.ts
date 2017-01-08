@@ -7,7 +7,7 @@ import { EquipmentTypeService } from '../../../../shared/services/equipmentType.
 import { TestFacilityAttachmentService } from '../../../../shared/services/testFacilityAttachment.service';
 //import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 //import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -156,11 +156,11 @@ export class DetailsComponent {
         this.dataService.getById(this.id)
             .subscribe(res => {
               //  this.entityId = res.result.entityId;
-                this.selectedSensorTypeId = res.result.sensorTypeId;     
+                this.selectedSensorTypeId = res.result.sensorTypeId;
                 this.PIC = res.result.pic;
                 this.departmentId = res.result.departmentId;
-                       
-               
+
+
             });
         this.dataService.getSensorCommentIdByTestRequestSensorId(this.testRequestSensorId)
             .subscribe(res => {

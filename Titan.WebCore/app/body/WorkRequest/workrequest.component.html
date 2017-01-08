@@ -1,26 +1,26 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <div class="card card-w-title">
-        <h2> Work Request</h2>
     <!--<div class="panel panel-default">-->
         <!--<div class="panel-heading">Sensor Info</div>-->
-    <header>
-        <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Work Request"></button>
-    </header>
+        <header>
+            <h1>Work Request</h1>
+            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Work Request"></button>
+        </header>
         <div class="panel-body">
             <div class="row">
                 <div class="ui-grid-row">
                     <!--<a routerLink="add"><i class="fa ui-icon-add"></i>Add WorkRequest</a>-->
                     <!--<p-fileUpload [name]="sensorpic2"
                                   multiple="multiple" accept="image/*" maxFileSize="1000000">
-                          
+
                     </p-fileUpload>-->
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive" style="min-height:400px;">
                                 <p-dataTable [value]="workRequests" [paginator]="true" rows="15" [responsive]="true">
 
-                                  
+
 
                                     <p-column header="Work Request Name" field="name" sortable="true"></p-column>
 
@@ -51,8 +51,8 @@
 
                                             </p-fileUpload>
                                         </template>
-                                            
-                                          
+
+
                                     </p-column>-->
 
                                     <!--<p-column header="Comments" field="comment" sortable="true"></p-column>-->
@@ -71,7 +71,7 @@
 
 
                     </div>
-                  
+
                 </div>
                 <!--</div>
 

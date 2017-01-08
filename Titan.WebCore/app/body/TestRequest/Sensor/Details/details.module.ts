@@ -7,13 +7,13 @@ import { EquipmentTypeService } from '../../../../shared/services/equipmentType.
 //import { TestFacilityService } from '../../../shared/services/testFacility.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { TestFacilityAttachmentService } from '../../../../shared/services/testFacilityAttachment.service';
-import { DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import {MultiSelectModule} from 'primeng/primeng';
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, AutoCompleteModule,MultiSelectModule ,FormsModule, DataTableModule, TabViewModule, CalendarModule,ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, detailsRoutes],
+    imports: [EditorModule, SharedModule, CommonModule, RouterModule, AutoCompleteModule,MultiSelectModule ,FormsModule, DataTableModule, TabViewModule, CalendarModule,ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, detailsRoutes],
     providers: [TestRequestSensorService, EquipmentTypeService, TestFacilityAttachmentService],
     declarations: [DetailsComponent]
 })

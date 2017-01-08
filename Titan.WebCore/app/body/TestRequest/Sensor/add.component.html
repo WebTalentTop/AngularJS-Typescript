@@ -4,217 +4,126 @@
         <p-tabView (onChange)="handleChange($event)">
 
             <p-tabPanel header="Info ||" id="info">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default ">
-                            <div class="panel-heading">Add Thermo Couple Info</div>
-                            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)" action="post" enctype="multipart/form-data">
+              <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
+                 <p-panel>
 
-                                <!--<h3> Add Test Facility </h3>-->
-                                <p-panel>
-                                    <header class="with-controls">
-                                        <p class="ui-panel-title">Add Thermo Couple Info</p>
-                                        <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;"></button></p>
-                                    </header>
-                                    <!--<header>Test Facility Information</header>-->
-                                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                        <header class="with-controls">
+                            <p class="ui-panel-title">Add Thermo Couple Info</p>
+                            <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;"></button></p>
+                        </header>
+                        <div class="body">
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="partName" [(ngModel)]="partName"
+                                       minlength="3"  required style="width:100%">
+                                <label>Part Name <span >*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText [(ngModel)]="partNumber" name="partNumber"
+                                       minlength="3"  required style="width:100%">
+                                <label>Part Number <span >*</span></label>
+                            </div>
+                        </div><br /><br />
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText [(ngModel)]="departmentId" name="department" minlength="3"  required style="width:100%">
+                                <label>Department <span >*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="departmentpic" [(ngModel)]="departmentpic" minlength="3"  required style="width:100%">
+                                <label>Department PIC <span >*</span></label>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Category :</p>
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="categories" [(ngModel)]="selectedCategoryId" (onChange)="onCategoryChange($event)" name="category" >
+                              </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Material :</p>
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="materials" [(ngModel)]="selectedMaterialId" (onChange)="onMaterialChange($event)" name="material">
+                              </p-dropdown>
+                          </div>
+                        </div><br /><br />
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="steadyRequirement" [(ngModel)]="steadyRequirement"
+                                       minlength="3"  required style="width:100%">
+                                <label>Steady state Requirement <span >*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText [(ngModel)]="periodicRequirement" name="periodicRequirement"
+                                       minlength="3"  required style="width:100%">
+                                <label>Periodic Requirement <span >*</span></label>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Select Sensor :</p>
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="Sensors" (onChange)="onSensorChange($event)" name="sensor" >
+                              </p-dropdown>
+                          </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">
+                                    Upload File :
+                                </p>
+                                <p-fileUpload [name]="sensorpic"
+                                              multiple="multiple" accept="image/*" (onSelect)="onChange($event)" maxFileSize="1000000">
+                                </p-fileUpload>
+                        </div>
+                      </div>
+                      <div class="ui-grid-row " >
+                          <div class="ui-g-12 ui-md-12" >
+                            <label style="color:#777">Comments :</label>
+                          </div>
+                          <div class="ui-g-12 ui-md-12 md-inputfield">
+                              <!--Editor Section-->
 
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Part Name *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text" name="partName" [(ngModel)]="partName"
-                                                       placeholder="Part Name"
-                                                       class="form-control">
-                                            </div>
-                                           
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Part Number *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text" name="partNumber" [(ngModel)]="partNumber"
-                                                       placeholder="Part Number"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Department *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text" name="department" [(ngModel)]="departmentId"
-                                                       placeholder="Department"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Department PIC*
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text"  name="departmentpic"
-                                                       placeholder="PIC"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Category *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <p-dropdown [options]="categories" [(ngModel)]="selectedCategoryId" (onChange)="onCategoryChange($event)" name="category" [style]="{'width':'200px'}">
-
-                                                </p-dropdown>
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Material *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <p-dropdown [options]="materials" [(ngModel)]="selectedMaterialId" (onChange)="onMaterialChange($event)" name="material" [style]="{'width':'200px'}">
-
-                                                </p-dropdown>
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Steady state Requirement *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text" name="steadyRequirement" [(ngModel)]="steadyRequirement"
-                                                       placeholder="Test Number"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Periodic Requirement *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <input type="text" name="periodicRequirement" [(ngModel)]="periodicRequirement"
-                                                       placeholder="Test Number"
-                                                       class="form-control">
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                               Select Sensor *
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <p-dropdown [options]="Sensors" (onChange)="onSensorChange($event)" name="sensor" [style]="{'width':'200px'}">
-
-                                                </p-dropdown>
-                                            </div>
-                                            <div class="ui-grid-4"></div>
-                                        </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Upload File:
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <!--<input type="file" (onChange)="onChange($event)" required class="form-control " name="attach_file" id="attach_file">-->
-
-                                                <!--<input id="filePath" name="filePath" type="file" onchange="uploadfile(files)" accept="image/*" />
-                                                <button id="uploadImage" (click)="uploadFile()">Upload</button>-->
-                                                <p-fileUpload [name]="sensorpic" 
-                                                              multiple="multiple" accept="image/*" (onSelect)="onChange($event)" maxFileSize="1000000">
-                                            <!--<template pTemplate type="content">
-                                                <ul *ngIf="uploadedFiles.length">
-                                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                                </ul>
-                                             
-                                            </template>-->
-                                            </p-fileUpload>
-                                        </div>
-                                      </div>
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                Comments:
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                                <textarea type="text" pInputTextArea class="form-control" required row="20" name="comment" [(ngModel)]="comment"
-                                                         ></textarea>
-                                            </div>
-                                            <!--<div class="ui-grid-col-4">
-                                                <div class="ui-grid-col-4" *ngIf="tfAddress2Ref.errors?.required">
-                                                    *
-                                                </div>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                 
-                                    <div class="ui-grid-row">
-                                        <div class="ui-grid-row">
-                                            <div class="ui-grid-col-2">
-                                                <button id="add" pButton type="submit" label="Add">  </button>
-                                            </div>
-                                            <div class="ui-grid-col-6">
-                                            </div>
-                                            <div class="ui-grid-col-4">
-                                                <button id="cancel" pButton type="button" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </p-panel>
-                                <br />
-                                <br />
-                            </form>
-
-                          
-                                <br />
-                                <br />
-                           
-                       </div>
+                          </div>
+                      </div>
                     </div>
-                </div><!-- Form End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="table-responsive" style="min-height:400px;">
-                            <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
-                                <p-column header="Sensor Name" field="name" sortable="true"></p-column>
-                                <p-column header="Comments" field="comment" sortable="true"></p-column>
-                                <p-column header="Part Name" field="partName" sortable="true"></p-column>
-                                <p-column header="Part Number" field="partNumber" sortable="true"></p-column>
-                                <p-column header="Department" field="departmentId" sortable="true"></p-column>
-                                <p-column header="Department PIC" field="departmentId" sortable="true"></p-column>
-                                <p-column header="Material" field="materialId"  sortable="true"></p-column>
-                                <p-column header="Steady State Requirement" field="steadyRequirement" sortable="true"></p-column>
-                                <p-column header="Steady Periodic Requirement" field="periodicRequirement" sortable="true"></p-column>
-                                <p-column header="Category" field="categoryId" sortable="true"></p-column>
-                                <!--<p-column>
-                                    <template pTemplate type="header">
-                                        <button type="button" pButton icon="fa-refresh"></button>
-                                    </template>
-                                    <template let-sensorrow="rowData" pTemplate type="body">
-                                        <a routerLink="details/{{sensorrow.id}}/{{entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>
-                                    </template>
-                                </p-column>-->
+                    <footer>
+                        <button id="cancel" pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
+                        <button id="add" pButton type="submit" icon="ui-icon-save" label="Add"></button>
+                    </footer>
+                  </p-panel><br />
+                  <p-panel header="Thermo Couple Info List">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="table-responsive" style="min-height:400px;">
+                                <p-dataTable [value]="sensorRequests" [paginator]="true" rows="15" [responsive]="true">
+                                    <p-column header="Sensor Name" field="name" sortable="true"></p-column>
+                                    <p-column header="Comments" field="comment" sortable="true"></p-column>
+                                    <p-column header="Part Name" field="partName" sortable="true"></p-column>
+                                    <p-column header="Part Number" field="partNumber" sortable="true"></p-column>
+                                    <p-column header="Department" field="departmentId" sortable="true"></p-column>
+                                    <p-column header="Department PIC" field="departmentId" sortable="true"></p-column>
+                                    <p-column header="Material" field="materialId"  sortable="true"></p-column>
+                                    <p-column header="Steady State Requirement" field="steadyRequirement" sortable="true"></p-column>
+                                    <p-column header="Steady Periodic Requirement" field="periodicRequirement" sortable="true"></p-column>
+                                    <p-column header="Category" field="categoryId" sortable="true"></p-column>
+                                    <!--<p-column>
+                                        <template pTemplate type="header">
+                                            <button type="button" pButton icon="fa-refresh"></button>
+                                        </template>
+                                        <template let-sensorrow="rowData" pTemplate type="body">
+                                            <a routerLink="details/{{sensorrow.id}}/{{entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                        </template>
+                                    </p-column>-->
 
-                            </p-dataTable>
+                                </p-dataTable>
+                            </div>
                         </div>
                     </div>
-
-
-                </div>
+                  </p-panel>
+              </form>
 
             </p-tabPanel>
 
-           
+
         </p-tabView>
 </div>
 </div>
