@@ -3,11 +3,25 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogModule, InputTextModule, ButtonModule, SpinnerModule } from 'primeng/primeng';
+import { FormsModule } from '@angular/forms';
+import { DataTableModule, DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
 import { FormPreviewComponent } from './formPreview.component';
 
 @NgModule({
-    imports: [CommonModule, DialogModule, InputTextModule, ButtonModule, SpinnerModule ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        DataTableModule,
+        DragDropModule,
+        DialogModule,
+        InputTextModule,
+        SpinnerModule,
+        DropdownModule,
+        RadioButtonModule,
+        ButtonModule,
+        CheckboxModule,
+        CalendarModule
+    ],
     declarations: [FormPreviewComponent],
     exports: [FormPreviewComponent, CommonModule]
 })

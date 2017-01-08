@@ -1,6 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { TitanUserProfileService } from '../shared/services/titanUserProfile.service';
 import {IUserProfile} from "../shared/services/definitions/IUserProfile";
+import {Router} from "@angular/router";
+
 @Component({
     selector: 'titan-body',
     templateUrl: 'app/body/body.component.html'
@@ -8,10 +10,7 @@ import {IUserProfile} from "../shared/services/definitions/IUserProfile";
 export class BodyComponent {
     currentUser:IUserProfile;
 
-    constructor(private titanUserProfileService:TitanUserProfileService){
-        this.titanUserProfileService.getCurrentUserProfile()
-            .subscribe(res => {
-                this.currentUser = res.result;
-            })
+    constructor(private router:Router){
+        this.router.navigate(['login']);
     }
 }

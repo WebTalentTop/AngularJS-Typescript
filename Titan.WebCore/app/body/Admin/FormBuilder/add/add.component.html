@@ -1,0 +1,530 @@
+<h1>{{title}}</h1>
+<div style="margin-left:0;padding-left:0">
+    <!-- Draggable Items Section -->
+    <div class="ui-g-4 card card-w-title">
+        <div class="ui-g-12">
+            <h1>Form Fields To Add</h1>
+        </div>
+        <div class="ui-g-12 nopad form-group" style="padding-left:0">
+            <div class="ui-g-12">
+                <div class="ui-g-12" pDraggable="inputs" (onDragStart)="dragStart($event, item)"
+                     (onDragEnd)="dragEnd($event)" *ngFor="let item of draggableList.formFieldDataTypeList"
+                     [id]="item.id">
+                    <div class="ui-g-12" *ngIf="item.name === 'TextBox'">
+                        <div class="ui-g-4">
+                            <label>{{item.name}}</label>
+                        </div>
+                        <div class="ui-g-8">
+                            <input type="text" placeholder="placeholder" pInputText
+                                   title="TextBox"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12" *ngIf="item.name === 'CheckBox'" [id]="item.id">
+                        <div class="ui-g-4">
+                            <label>{{item.name}}</label>
+                        </div>
+                        <div class="ui-g-8">
+
+                            <div class="ui-g-12">
+                                <p-checkbox name="animal" value="Cat" label="Cat"
+                                            [(ngModel)]="selectedCheckbox"></p-checkbox>
+                            </div>
+
+                            <div class="ui-g-12">
+                                <p-checkbox name="animal" value="Dog" label="Dob"
+                                            [(ngModel)]="selectedCheckbox"></p-checkbox>
+                            </div>
+                            <div class="ui-g-12">
+                                <p-checkbox name="animal" value="Birds" label="Birds"
+                                            [(ngModel)]="selectedCheckbox"></p-checkbox>
+                            </div>
+                            <img [id]="item.name" *ngIf="item.name === 'CheckBox'"
+                                 src="Library/titanResources/images/form-images/small/checkBox.png"
+                                 title="TextBox"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12" *ngIf="item.name === 'RadioBox'">
+                        <div class="ui-g-4">
+                            <label>{{item.name}}</label>
+                        </div>
+                        <div class="ui-g-8">
+
+                            <div class="ui-g-12">
+                                <p-radioButton name="namelist" value="Bosch" label="Bosch"
+                                               [(ngModel)]="selectedRadiobox"></p-radioButton>
+                            </div>
+
+                            <div class="ui-g-12">
+                                <p-radioButton name="namelist" value="BridgeStone" label="BridgeStone"
+                                               [(ngModel)]="selectedRadiobox"></p-radioButton>
+                            </div>
+                            <div class="ui-g-12">
+                                <p-radioButton name="namelist" value="GoodYear" label="Good Year"
+                                               [(ngModel)]="selectedRadiobox"></p-radioButton>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12" *ngIf="item.name === 'SelectBox'">
+                        <div class="ui-g-4">
+                            <label>{{item.name}}</label>
+                        </div>
+                        <div class="ui-g-8">
+
+                            <div class="ui-g-12">
+                                <p-dropdown [options]="sampleSelectBoxItems"
+                                            [(ngModel)]="selectedSelectItem"></p-dropdown>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12" *ngIf="item.name === 'TextAreaBox'">
+                        <div class="ui-g-4">
+                            <label>{{item.name}}</label>
+                        </div>
+                        <div class="ui-g-8">
+                            <textarea pInputTextarea rows="5" cols="30" [(ngModel)]="sampleTextAreaData"
+                                      title="TextArea Field"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Draggable Section -->
+
+    <!-- Droppable Section -->
+    <div class="ui-g-8 card card-w-title" pDroppable="inputs"
+         (onDrop)="drop($event)">
+        <h1>Form Creation</h1>
+        <div class="ui-g ui-fluid form-group">
+            <div class="ui-g-12">
+                <div class="ui-g-3">
+                    <label>Form Name</label>
+                </div>
+                <div class="ui-g-9">
+                    <input pInputText name="formName" type="text" [(ngModel)]="formName"/>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid form-group">
+            <div class="ui-g-12">
+                <div class="ui-g-3">
+                    <label>Category</label>
+                </div>
+                <div class="ui-g-9">
+                    <p-dropdown [autoWidth]="true"
+                                [options]="formSchemaCategoryList"
+                                (onChange)="onFormSchemaCategoryChange($event)"
+                                [(ngModel)]="selectedFormSchemaCategory">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid form-group" *ngIf="entityEventsList">
+            <div class="ui-g-12">
+                <div class="ui-g-3">
+                    <label>Entity Event</label>
+                </div>
+                <div class="ui-g-9">
+                    <p-dropdown [autoWidth]="true"
+                                [options]="entityEventsList"
+                                [(ngModel)]="selectedEntityEvent">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid form-group" style="min-height: 200px;">
+            <div class="ui-g-12 ui-md-12" *ngIf="draggableList.selectedInputList">
+                <div class="ui-g-12" *ngFor="let item of draggableList.selectedInputList; let i=index;">
+                    <pre>{{item | json }}</pre>
+                    <div (click)="showOverlayPopInfo($event, item, i)">
+                        <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextBox'">
+                            <label>{{item.name}}</label><br>
+                            <input pInputText [disabled]="true"
+                                   type="text"
+                                   [placeholder]="item.label"/>
+                        </div>
+                        <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
+                            <label>{{item.label}}</label><br/>
+                            <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
+                                <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-checkbox>
+                            </div>
+                        </div>
+                        <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'RadioBox'">
+                            <label>{{item.label}}</label><br/>
+                            <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
+                                <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
+                            </div>
+                        </div>
+                        <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'SelectBox'">
+                            <label>{{item.label}}</label><br/>
+                            <div class="ui-g-12">
+                                <p-dropdown [options]="sampleSelectBoxItems"
+                                            [(ngModel)]="selectedSelectItem"></p-dropdown>
+                            </div>
+                        </div>
+                        <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextAreaBox'">
+                            <label>{{item.name}}</label><br>
+                            <textarea rows="5" cols="30" pInputTextarea [disabled]="true"
+                                      [placeholder]="item.label"></textarea>
+                        </div>
+                        <!-- <p-spinner size="30"
+                                    *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'NumberBox'"
+                                    [(ngModel)]="item.maxLength" [disabled]="true"></p-spinner>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g ui-flued form-group">
+            <div class="ui-g-12 ui-md-12">
+                <button type="button" (click)="saveForm()" pButton icon="fa-add" iconPos="right"
+                        label="Save form"></button>
+            </div>
+        </div>
+        <pre> {{ selectedInputList | json }}</pre>
+    </div>
+    <!-- End Of Droppable Section -->
+</div>
+
+<!-- Inital Element Add -->
+<p-dialog header="Textbox Information" [(visible)]="displayTextBox" modal="modal" width="900" responsive="true">
+
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Name of this object</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Textbox placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="20"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveTextBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="TextArea box Information" [(visible)]="displayTextAreaBox" modal="modal" width="900"
+          responsive="true">
+
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Name of this object</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>TextArea box placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [step]="25" [max]="2000"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveTextAreaBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+
+<p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-6">
+            <label>Name of the NumberBox</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-6">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [min]="0" [max]="400" [(ngModel)]="formInputData.maxLength"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="text" icon="fa-check" (click)="saveNumberBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="Radio Information" [(visible)]="displayRadioBox">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Checkbox description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this a Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>Please enter one option per-line!</label><br/>
+            <textarea pInputTextare [(ngModel)]="formInputData.radioBoxData" style="width: 200px;" rows="5"
+                      cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveRadioBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="CehckBox Information" [(visible)]="displayCheckBox">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Checkbox description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this a Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>Please enter one option per-line!</label><br/>
+            <textarea pInputTextarea [(ngModel)]="formInputData.checkBoxData" style="width: 200px;" rows="5"
+                      cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveCheckBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<p-dialog header="CehckBox Information" [(visible)]="displaySelectBox">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="formInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Checkbox description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="formInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="formInputData.isRequired"
+                        label="Is this a Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>Please enter one option per-line!</label><br/>
+            <textarea pInputTextarea [(ngModel)]="formInputData.selectBoxData" style="width: 200px;" rows="5"
+                      cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveSelectBox()" label="Save Input"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<!-- Closing Initial Element Add -->
+
+<!--region Popup Dialog Section-->
+<!-- Popup Modifying entered data -->
+
+<!-- Popup Modification of TextBox Field -->
+<p-dialog header="Textbox Information" [(visible)]="displayTextBoxMod" responsive="true">
+
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-5">
+            <label>Name of this object</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="selectedInputList.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Textbox placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="selectedInputList.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="selectedInputList.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [(ngModel)]="selectedInputList.maxLength" [min]="0" [max]="20"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveTextBoxMod()" label="Save Input"></button>
+            <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItemTextBoxMod(item)"
+                    iconPos="right">
+            </button>
+        </div>
+    </footer>
+</p-dialog>
+
+<!--- End of TextBox Modification -->
+
+<!-- Popup  CheckBox Notification -->
+<p-dialog header="CheckBox" [(visible)]="displayCheckBoxMod" responsive="true">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="selectedFormInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Checkbox description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="selectedFormInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="selectedFormInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label><br/>
+            <textarea pInputTextarea [(ngModel)]="selectedFormInputData.checkBoxData"
+                      (ngModelChange)="updateCheckBoxData()" style="width: 200px;" rows="5" cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveCheckBoxMod()" label="Save Input"></button>
+            <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItemCheckBoxMod(item)"
+                    iconPos="right"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<!-- End Of CheckBox Notification -->
+
+<!-- Popup RadioBUtton Notification -->
+<p-dialog header="Radio Button" [(visible)]="displayRadioBoxMod" responsive="true">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="selectedFormInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Checkbox description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="selectedFormInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="selectedFormInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label><br/>
+            <textarea pInputTextarea [(ngModel)]="selectedFormInputData.radioBoxData"
+                      (ngModelChange)="updateRadioBoxData()" style="width: 200px;" rows="5" cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveRadioBoxMod()" label="Save Input"></button>
+            <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItemRadioBoxMod(item)"
+                    iconPos="right"></button>
+        </div>
+    </footer>
+</p-dialog>
+<!-- End of RadiobButton Notificcation -->
+
+<!-- Popup SelectBox Notification -->
+<p-dialog header="Select Button" [(visible)]="displaySelectBoxMod" responsive="true">
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12">
+            <label>Name of this item</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="selectedFormInputData.name">
+        </div>
+        <div class="ui-g-12">
+            <label>Select dropdown description text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="selectedFormInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="selectedFormInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label><br/>
+            <textarea pInputTextarea [(ngModel)]="sampleSelectBoxItems"
+                      (ngModelChange)="updateSelectBoxData()" style="width: 200px;" rows="5" cols="1"></textarea>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveSelectBoxMod()" label="Save Input"></button>
+            <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItemSelectBoxMod(item)"
+                    iconPos="right"></button>
+        </div>
+    </footer>
+</p-dialog>
+<!-- End of RadiobButton Notificcation -->
+
+
+<!-- Popup Modification of TextAreaBox Field -->
+<p-dialog header="Textarea box Information" [(visible)]="displayTextAreaBoxMod" responsive="true">
+
+    <div class="ui-g ui-fluid form-group">
+        <div class="ui-g-12 ui-md-5">
+            <label>Name of this object</label><br/>
+            <input pInputText name="name" type="text" [(ngModel)]="selectedFormInputData.name">
+        </div>
+        <div class="ui-g-12 ui-md-6">
+            <label>Textbox placeholder text</label>
+            <input pInputText type="text" name="label" [(ngModel)]="selectedFormInputData.label">
+        </div>
+        <div class="ui-g-12">
+            <p-checkbox binary="true" [(ngModel)]="selectedFormInputData.isRequired"
+                        label="Is this TextBox Required Field"></p-checkbox>
+        </div>
+        <div class="ui-g-12">
+            <label>What is the allowable maximum length of the value</label>
+            <p-spinner size="30" [(ngModel)]="selectedFormInputData.maxLength" [min]="0" [step]="25"
+                       [max]="2000"></p-spinner>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button pButton type="button" icon="fa-check" (click)="saveTextBoxMod()" label="Save Input"></button>
+            <button pButton type="button" label="Remove" icon="fa fa-times" (click)="removeItemTextBoxMod(item)"
+                    iconPos="right">
+            </button>
+        </div>
+    </footer>
+</p-dialog>
+
+<!--- End of TextBox Modification -->
+
+
+<!-- End Of Popups -->
+<!--endregion-->

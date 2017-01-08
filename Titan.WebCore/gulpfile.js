@@ -113,6 +113,12 @@ gulp.task("resourcesPrimeThemes", function () {
 
 gulp.task("copy-thirdparty-files", ["sass","resourcesPrimeSpreadJs", "resourcesPrimeLayout", "resourcesPrimeThemes"]);
 
+gulp.task("moment", function () {
+    gulp.src(root_path.nmSrc + "moment/**/*")
+        .pipe(gulp.dest(root_path.package_lib + "moment/"));
+});
+
+
 gulp.task("NMprimeResources", function () {
     gulp.src(root_path.nmSrc + "primeng/**/*")
         .pipe(gulp.dest(root_path.package_lib + "primeng/"));
@@ -121,7 +127,18 @@ gulp.task("NMprimeResources", function () {
 gulp.task('copy-titanResources', function () {
     gulp.src('./titanResources/**/*')
         .pipe(gulp.dest(root_path.webroot + 'library/titanResources/'));
-})
+});
+
+gulp.task("ng2-dragula", function () {
+    gulp.src(root_path.nmSrc + "ng2-dragula/**/*")
+        .pipe(gulp.dest(root_path.package_lib + "ng2-dragula/"));
+});
+
+gulp.task("dragula", function () {
+    gulp.src(root_path.nmSrc + "dragula/**/*")
+        .pipe(gulp.dest(root_path.package_lib + "dragula/"));
+});
+
 
 gulp.task("css", function () {
     gulp.src(root_path.app + "**/*.css", { base: root_path.app })

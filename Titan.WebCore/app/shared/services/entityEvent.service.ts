@@ -77,7 +77,7 @@ export class EntityEventService {
     }
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+
         return response.json();
     }
 

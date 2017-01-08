@@ -1,5 +1,7 @@
 ﻿
 import { RouterModule } from "@angular/router";
+import {AuthGuard} from "../shared/services/auth/authGuard";
+import {LoginComponent} from "./Auth/login.component";
 
 
 const routes = [
@@ -7,7 +9,7 @@ const routes = [
     { path: 'equipment', loadChildren: 'app/body/equipment/equipment.module' },
     { path: 'equipmenttype', loadChildren: 'app/body/equipmenttype/equipmenttype.module' },
 
-    { path: 'project', loadChildren: 'app/body/project/project.module' },
+    { path: 'project', canActivate:[AuthGuard], loadChildren: 'app/body/project/project.module' },
     { path: 'admin', loadChildren: 'app/body/admin/admin.module' },
     { path: 'calendar', loadChildren: 'app/body/calendar/titancalendar.module' },
     { path: 'lookup', loadChildren: 'app/body/lookup/lookup.module' },
@@ -22,7 +24,9 @@ const routes = [
     { path: 'task', loadChildren: 'app/body/Task/task.module' },
     { path: 'vehicle', loadChildren: 'app/body/Vehicle/vehicle.module' },
     { path: 'torquesheet', loadChildren: 'app/body/TorqueSheet/torque-sheet.module' },
-    { path: 'testtemplate', loadChildren: 'app/body/TestTemplate/testtemplate.module' }
+    { path: 'testtemplate', loadChildren: 'app/body/TestTemplate/testtemplate.module' },
+    { path: 'login', component: LoginComponent},
+    //, canActivate:[AuthGuard], },
 ];
 
 export default RouterModule.forChild(routes);

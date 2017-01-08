@@ -9,9 +9,11 @@ export interface IFormSchemaField{
     label:string;
     isRequired:boolean;
     maxLength:number;
+    data?:any[];
     order?:number;
     checkBoxData?:any;
     radioBoxData?:any;
+    selectBoxData?:any;
     formSchemaFieldDataTypeId:string;
     formSchemaFieldDataTypeData?:IFormSchemaFieldDataTypeData[];
 }

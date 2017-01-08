@@ -38,12 +38,20 @@ import detailsRoutes from "./details.routes";
     TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, 
     FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
 
-    providers: [EntityIdentifierService,TestFacilityService,FormSchemaCategoryService, TestFacilityRoleService, 
-    TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, 
-    TestModeService, BreadCrumbsService, TestTypeService, TestTemplateService],
-
-
-
+    providers: [
+                EntityIdentifierService,
+                TestFacilityService,
+                FormSchemaCategoryService,
+                TestFacilityRoleService,
+                TestFacilityAttachmentService,
+                BuildLevelService,
+                ProjectService,
+                TestRoleService,
+                TestStatusService,
+                TestModeService,
+                TestTypeService,
+        TestTemplateService
+    ],
     declarations: [DetailsComponent]
 })
 

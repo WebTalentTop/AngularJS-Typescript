@@ -1,7 +1,10 @@
+/**
+ * Created by ZeroInfinity on 1/6/2017.
+ */
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TitanUserApiUrl } from './apiUrlConst/titanUserApiUrls';
+import { TitanUserProfileApiUrls } from './apiUrlConst/auth/titanUserProfile.ApiUrls';
 import { IUserProfile } from './definitions/IUserProfile';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';

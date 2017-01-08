@@ -5,6 +5,9 @@ import { Component, Input} from '@angular/core';
 import { FormSchemaFieldDataTypeService } from '../../../services/formSchemaFieldDataType.service';
 import { IFormSchemaFieldDataType } from '../../../services/definitions/IFormSchemaFieldDataType';
 import { IFormSchemaField } from "../../../services/definitions/IFormSchemaField";
+import {ITitanSelectItem} from "../../../services/definitions/ITitanSelectItem";
+import { LoggerService } from '../../../services/logger/logger.service';
+import {IFormSchema} from "../../../services/definitions/IFormSchema";
 
 @Component({
     selector:'form-preview',
@@ -13,14 +16,35 @@ import { IFormSchemaField } from "../../../services/definitions/IFormSchemaField
 
 export class FormPreviewComponent {
     @Input() formName:string;
+    @Input() formSchema:any;
+    @Input() fields:any[] = [];
     @Input() selectedInputList:IFormSchemaField[] = [];
+    @Input() entityEventsList: ITitanSelectItem[];
+    @Input() formSchemaCategoryList: ITitanSelectItem[];
     formFieldDataTypeList:IFormSchemaFieldDataType[] =[];
 
-    constructor(private formFieldDataTypeService: FormSchemaFieldDataTypeService) {
+    constructor(private formFieldDataTypeService: FormSchemaFieldDataTypeService,
+                private ls: LoggerService) {
 
     }
 
     ngOnInit() {
+        //this.selectedInputList = this.formSchema.fields;
+        this.ls.logConsole("Form Schema Passed on -----------", this.formSchema);
+        this.ls.logConsole("FormSchemaCategoryList --------", this.formSchemaCategoryList);
+        this.ls.logConsole("SelectedInputList passed -------", this.selectedInputList);
+        this.ls.logConsole("FormName passed ----", this.formName);
+
+        let items = this.fields.map(x => {
+            let item:IFormSchemaField = x;
+            item.data = x.data.$values;
+            item.formSchemaFieldDataTypeData = item.data.map(t => t.value);
+
+            this.ls.logConsole("Field Item info ----", item);
+        })
+        this.selectedInputList = this.fields;
+        this.ls.logConsole("Fields Extracted -----", this.fields);
+
         this.formFieldDataTypeService.getAll()
             .subscribe(res =>{
                 console.log("FormFieldDataType List  ----------", res);
