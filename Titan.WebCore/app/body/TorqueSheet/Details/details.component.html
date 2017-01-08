@@ -6,17 +6,42 @@
                 <h3> Edit Torque Sheet </h3>
                 <p-panel>
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
+                        <span [class]="latestVersionStyle">{{latestVersionText}}</span>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
                                 Torque Sheet Name *:
                             </div>
-                            <div class="ui-grid-col-8">
+                            <div class="ui-grid-col-3">
                                 <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'auto'}"
                                             name="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
                                 </p-dropdown>
                             </div>
-                            <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.required">
+                            <div class="ui-grid-col-2" *ngIf="newTorqueSheetNameRef.errors?.required">
                                 Torque Sheet Name field is required
+                            </div>
+
+                            <div class="ui-grid-col-2">
+                                Torque Sheet Status:
+                            </div>
+                            <div class="ui-grid-col-3">
+                                {{torqueSheetDetails.torqueSheetStatus}}
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                Version:
+                            </div>
+                            <div class="ui-grid-col-3">
+                                {{torqueSheetDetails.version}}
+                            </div>
+
+                            <div class="ui-grid-col-2" *ngIf="torqueSheetDetails.otherVersions">
+                                Other Versions:
+                            </div>
+                            <div class="ui-grid-col-3" *ngIf="torqueSheetDetails.otherVersions">
+                                <p-dropdown [options]="torqueSheetDetails.otherVersions" [style]="{'width':'auto'}" [(ngModel)]="otherVersionId" 
+                                            name="otherVersion" (onChange)="onVersionChange()">
+                                </p-dropdown>
                             </div>
                         </div>
                         <div class="hidden" style="display:none">
@@ -31,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
                     <div class="ui-grid-row" *ngIf="torqueSheetDetails">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">

@@ -19,8 +19,8 @@ export class TorquesheetService extends BaseService{
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
     
-    getTorqueSheet(id): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetUrl}` + id)
+    getTorqueSheet(id: string, getCurrentVersionOrLatestVersion: string): Observable<any> {
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetUrl}` + id + '&getCurrentVersionOrLatestVersion=' + getCurrentVersionOrLatestVersion )
             .map(super.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -73,6 +73,11 @@ export class TorquesheetService extends BaseService{
 
     putTorqueSheet(status:string, filterBody): Observable<any> {
         return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}` + status, filterBody)
+            .map(this.getJson)
+    }
+
+    createNewTorqueSheetVersion(filterBody): Observable<any> {
+        return this.http.post(`${TorqueSheetApiUrl.postNewTorqueSheetVersionUrl}`, filterBody)
             .map(this.getJson)
     }
 }

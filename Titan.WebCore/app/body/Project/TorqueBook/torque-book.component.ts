@@ -110,14 +110,14 @@ export class TorqueBookComponent {
                 this.torquesheetTemplates = resultMap;
             });
         } else {
-            this.torqueSheetService.getTorqueSheet(data.id).subscribe(res => {
+            this.torqueSheetService.getTorqueSheet(data.id, "LatestVersion").subscribe(res => {
                 this.initializeTemplate(res.contents);
             });
         }
     }
 
     onEditTorqueSheet(data, event) {
-        this.router.navigate(["/torquesheet/details/", data.id, data.torqueBookId, "Project", this.projectId]);
+        this.router.navigate(["/torquesheet/details/", data.id, data.torqueBookId, "Project", this.projectId, "LatestVersion"]);
     }
 
     onAddTorqueSheetTemplateConfirmation() {

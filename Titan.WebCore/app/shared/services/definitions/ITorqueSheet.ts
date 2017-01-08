@@ -8,6 +8,7 @@ export interface ITorqueSheet {
     contents: string;
     tenantId?: string;
     torqueSheetStatusId?: string;
+    torqueSheetStatus: string;
     version?: number;
     parentId?: string;
     endDate?: Date;
@@ -22,4 +23,6 @@ export interface ITorqueSheet {
     isSaveVersionVisible: boolean;
     isApproveVersionVisible: boolean;
     isRejectVersionVisible: boolean;
+    otherVersions: any;
+    isUserViewingLatestVersion: boolean;
 }
