@@ -23,3 +23,49 @@ div span {
     height: 30px;
     padding: 7px;
 }
+
+.circle {
+    width: 80px;
+	height: 80px;
+	background: #5180ce;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+    box-sizing: border-box;
+}
+.circle1 {
+    width: 80px;
+	height: 80px;
+	background: #A594B2;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+    box-sizing: border-box;
+}
+.circle2 {
+    width: 80px;
+	height: 80px;
+	background: #FFC107;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+    box-sizing: border-box;
+}
+.circle3 {
+    width: 84px;
+	height: 84px;
+	background: aquamarine;
+	-moz-border-radius: 53px;
+	-webkit-border-radius: 53px;
+	border-radius: 53px;
+    box-sizing: border-box;
+}
+
+.circleTextWrap
+{
+    vertical-align: middle;
+    line-height: 80%;
+    padding-top: 30%;
+    box-sizing: border-box;
+
+}

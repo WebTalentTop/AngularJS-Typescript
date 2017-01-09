@@ -1,5 +1,5 @@
 import { EquipmentTypeService } from './../../shared/services/equipmentType.service';
-import { LoggerService } from './../../shared/services/logger.service';
+import { LoggerService } from '../../shared/services/logger/logger.service';
 import {FileUploadModule} from 'primeng/primeng';
 import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';

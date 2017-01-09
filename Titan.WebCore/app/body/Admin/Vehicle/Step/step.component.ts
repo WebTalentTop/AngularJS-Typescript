@@ -1,5 +1,5 @@
 import { StepService } from '../../../../shared/services/step.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -72,6 +72,6 @@ export class StepComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/step/details', id]);
+        this.router.navigate(['admin/vehicle/step/details', id]);
     }
 }

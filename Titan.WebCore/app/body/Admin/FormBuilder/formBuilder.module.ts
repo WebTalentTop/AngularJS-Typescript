@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormBuildersComponent } from "./formBuilder.component";
-import { DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
+import { DataTableModule, DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
 import { FormsModule} from '@angular/forms';
 
 import formBuilderRoutes from "./formBuilder.routes";
@@ -9,6 +9,7 @@ import formBuilderRoutes from "./formBuilder.routes";
 @NgModule({
     imports: [
         CommonModule,
+        DataTableModule,
         DragDropModule,
         FormsModule,
         DragDropModule,

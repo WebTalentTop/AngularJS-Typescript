@@ -57,7 +57,7 @@ export class AddComponent {
 
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/vehicle/holiday"], { queryParams: { page: 1 } });
+                this.router.navigate(["admin/vehicle/holiday"], { queryParams: { page: 1 } });
                
             }
            

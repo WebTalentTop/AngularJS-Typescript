@@ -42,8 +42,8 @@ export class FormInstanceService {
     }*/
 
     postAdd(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        console.log("Post Schema URL ------------", FormInstanceApiUrl.postCreatedUrl);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("Post Schema URL ------------", FormInstanceApiUrl.postCreatedUrl);
         return this.http.post(`${FormInstanceApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
 
@@ -52,12 +52,17 @@ export class FormInstanceService {
     }
 
     postUpdate(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${FormInstanceApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
             /*.map(this.checkErrors)
             .catch(err => Observable.throw(err))
             .map(this.getJson);*/
+    }
+
+    getGridByEntityId(id):Observable<any> {
+        return this.http.get(`${FormInstanceApiUrl.getGridByEntityIdUrl}/${id}`, { headers: this.headers})
+            .map(this.getJson);
     }
 
     getById(id): Observable<any> {
@@ -85,7 +90,7 @@ export class FormInstanceService {
      }*/
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+
         return response.json();
     }
 }

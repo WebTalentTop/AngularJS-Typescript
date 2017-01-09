@@ -1,3 +1,4 @@
+import {SelectItem} from "primeng/primeng";
 /**
  * Created by ZeroInfinity on 12/19/2016.
  */
@@ -7,6 +8,7 @@ export interface IFormInstanceFieldDataItem{
     formSchemaFieldId:string;
     formSchemaField?:any;
     data?:any[];
+    id?:string;
 }
 
 export class FormInstanceFieldDataItem implements IFormInstanceFieldDataItem {
@@ -14,6 +16,7 @@ export class FormInstanceFieldDataItem implements IFormInstanceFieldDataItem {
         public formSchemaFieldId:string,
         public formSchemaField?:any,
         public value?:any,
+        public id?:string,
         public data?:any[]
     )
     {}
@@ -24,9 +27,13 @@ export interface IFormInstanceFieldDataItemForm{
     value?:any;
     name:string;
     label?:string;
+    checkBoxValue:string[];
+    radioBoxValue:string;
+    selectBoxValue:SelectItem[];
     formSchemaFieldId:string;
     formSchemaFieldDataTypeId:string;
     formSchemaFieldDataTypeName:string;
     formSchemaField?:any;
     data?:any[];
+    id?:string;
 }

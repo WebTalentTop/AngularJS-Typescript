@@ -4,12 +4,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DialogModule, InputTextModule, ButtonModule, SpinnerModule } from 'primeng/primeng';
+import { DialogModule, CheckboxModule, RadioButtonModule, InputTextModule, ButtonModule, SpinnerModule } from 'primeng/primeng';
 import { FormInstanceComponent } from './formInstance.component';
 import { FormInstanceService } from '../../../services/formInstance.service';
 
 @NgModule({
-    imports: [CommonModule,FormsModule, DialogModule, InputTextModule, ButtonModule, SpinnerModule ],
+    imports: [CommonModule, CheckboxModule, RadioButtonModule,FormsModule, DialogModule, InputTextModule, ButtonModule, SpinnerModule ],
     declarations: [FormInstanceComponent],
     providers: [FormInstanceService],
     exports: [FormInstanceComponent, CommonModule]

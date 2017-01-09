@@ -40,7 +40,7 @@ export class AddComponent {
             // this.router.navigate(["/vehicle/Permission/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/vehicle/permission"], { queryParams: { page: 1 } });
+                this.router.navigate(["/admin/vehicle/permission"], { queryParams: { page: 1 } });
                
             }
            

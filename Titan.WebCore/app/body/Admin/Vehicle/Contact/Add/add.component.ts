@@ -41,7 +41,7 @@ export class AddComponent {
             // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/vehicle/contact"], { queryParams: { page: 1 } });
+                this.router.navigate(["/admin/vehicle/contact"], { queryParams: { page: 1 } });
                
             }
            

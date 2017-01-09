@@ -1,5 +1,5 @@
 import { PermissionService } from '../../../../shared/services/permission.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -65,6 +65,6 @@ export class PermissionComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/permission/details', id]);
+        this.router.navigate(['admin/vehicle/permission/details', id]);
     }
 }

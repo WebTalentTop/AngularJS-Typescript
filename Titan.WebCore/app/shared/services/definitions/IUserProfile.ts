@@ -1,22 +1,25 @@
 /**
- * Created by 12thWonder on 1/5/2017.
+ * Created by ZeroInfinity on 1/6/2017.
  */
 
 export interface IUserProfile {
     id:string;
     firstName:string;
     lastName:string;
-    userName:string;
+    userName?:string;
     displayName:string;
     emailAddress:string;
     isEverLoggedIn:boolean;
-    lastLoggedOn:string;
+    lastLoggedOn?:string;
     defaultLocale:string;
     isDeleted:boolean;
-    departmentId:string;
-    createdOn:string;
-    userCreatedById:string;
-    userModifiedById:string;
-    userDeletedById:string;
-    deletedOn:string;
+    departmentId?:string;
+    defaultTenantId?:string;
+    createdOn?:string;
+    userCreatedById?:string;
+    userModifiedById?:string;
+    modifiedOn?:string;
+    userDeletedById?:string;
+    deletedOn?:string;
+    defaultTimeZoneId:string;
 }

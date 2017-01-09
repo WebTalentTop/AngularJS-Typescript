@@ -1,5 +1,5 @@
 import { ProjectRoleService } from '../../../../shared/services/projectRole.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MenuItem} from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -66,6 +66,6 @@ export class ProjectRoleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/projectRole/details', id]);
+        this.router.navigate(['admin/vehicle/projectRole/details', id]);
     }
 }

@@ -1,5 +1,5 @@
 import { ScheduleService } from '../../../../shared/services/schedule.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -51,6 +51,6 @@ export class ScheduleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/schedule/details', id]);
+        this.router.navigate(['admin/vehicle/schedule/details', id]);
     }
 }

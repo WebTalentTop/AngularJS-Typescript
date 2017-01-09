@@ -8,4 +8,5 @@ export class FormInstanceApiUrl {
     public static getByIdUrl: string = titanApiUrl + 'formInstance';
     public static getByFormSchemaCategoryId: string = titanApiUrl + 'formInstance/getByFormSchemaCategoryId';
     public static getByFormSchemaCategoryIdCol: string = titanApiUrl + 'formInstance/getByFormSchemaCategoryIdCol';
+    public static getGridByEntityIdUrl:string = titanApiUrl + 'formInstance/GetGridByEntityId';
 }

@@ -1,6 +1,6 @@
 ﻿import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { TestRequestService } from '../../shared/services/testrequest.service';
-import { LoggerService } from './../../shared/services/logger.service';
+import { LoggerService } from './../../shared/services/logger/logger.service';
 import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';

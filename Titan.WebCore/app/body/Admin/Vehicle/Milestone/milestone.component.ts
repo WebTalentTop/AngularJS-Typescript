@@ -1,5 +1,5 @@
 import { MilestoneService } from '../../../../shared/services/milestone.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -66,6 +66,6 @@ export class MilestoneComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/milestone/details', id]);
+        this.router.navigate(['admin/vehicle/milestone/details', id]);
     }
 }
