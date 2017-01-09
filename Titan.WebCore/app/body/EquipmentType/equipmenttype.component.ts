@@ -21,7 +21,9 @@ export class EquipmentTypeComponent {
     linkFieldId:string;
     msgs: Message[] = [];
 
-    constructor(private service: EquipmentTypeService, private router:Router) {
+    constructor(
+        private service: EquipmentTypeService,
+        private router:Router) {
 
     }
 

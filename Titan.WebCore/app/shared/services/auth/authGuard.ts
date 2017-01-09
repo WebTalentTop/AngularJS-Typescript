@@ -23,7 +23,7 @@ export class AuthGuard implements CanLoad, CanActivate {
         private userProfile: TitanUserProfileService,
         private ls: LoggerService) {
         this.ls.setShow(false);
-        this.ls.logConsole("AuthGuard constructor");
+        this.ls.logConsole("AuthGuard constructor","");
     }
 
     canLoad(route: Route): boolean {

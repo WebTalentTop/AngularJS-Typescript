@@ -1,23 +1,42 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { DataTable, TabViewModule, DialogModule, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipmentSubtype';
-import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
+
+import {EquipmentTypeService} from '../../../shared/services/equipmentType.service';
+import {
+    DataTable,
+    TabViewModule,
+    DialogModule,
+    SelectItem,
+    Dropdown,
+    LazyLoadEvent,
+    ButtonModule,
+    InputTextareaModule,
+    InputTextModule,
+    PanelModule,
+    FileUploadModule,
+    Message,
+    GrowlModule
+} from 'primeng/primeng';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {IEquipmentSubtype} from '../../../shared/services/definitions/IEquipmentSubtype';
+import {ICalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
+import {LoggerService} from "../../../shared/services/logger/logger.service";
+import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
+declare var useGentleSelect: false;
 
 @Component({
     selector: 'details-testfacility',
     templateUrl: 'app/body/equipmenttype/Details/details.component.html'
 })
 export class DetailsComponent implements OnInit {
-
+    entityIdentifierName: string = "Equipment";
+    //useGentleSelect:boolean = false;
     displayDialog: boolean;
     EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
-    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '','');
+    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
     IsSubType: boolean;
@@ -41,11 +60,11 @@ export class DetailsComponent implements OnInit {
     selectedstring: string = null;
     model: any = {
         id: '',
-       // isdeleted: '0',
+        // isdeleted: '0',
         parentId: '',
         description: '',
         name: '',
-         frequency: ''
+        frequency: ''
         //createdOn: '',
         //modifiedOn: '',
         //userCreatedById: '',
@@ -56,14 +75,19 @@ export class DetailsComponent implements OnInit {
 
     uploadedFiles: any[] = [];
 
-    constructor(
-        private route: ActivatedRoute,
-        private dataService: EquipmentTypeService
-
-    ) {
-
+    constructor(private route: ActivatedRoute,
+                private dataService: EquipmentTypeService,
+                private entityIdentifierService: EntityIdentifierService,
+                private ls: LoggerService) {
+        this.ls.setShow(true);
         this.CalibrationForms = [];
 
+        this.CalibrationForms.push({
+            id: '1',
+            name: 'Audi',
+            description: 'Audi',
+            calibrationFrequencyCronExpression: ''
+        });
         this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi', calibrationFrequencyCronExpression: '' });
         this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: '' });
         this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat', calibrationFrequencyCronExpression: '' });
@@ -77,10 +101,16 @@ export class DetailsComponent implements OnInit {
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
     }
+
     handleChange(event) {
     }
+
     ngOnInit() {
-               this.dataService.getById(this.id)
+        this.entityIdentifierService.getByName(this.entityIdentifierName)
+            .subscribe(res => {
+                this.ls.logConsole("EntityIdentifier Data By Name ----------", res);
+            })
+        this.dataService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
                 //this.formObject = res.formObject;
@@ -103,9 +133,9 @@ export class DetailsComponent implements OnInit {
 
     onEdit() {
 
-       let modelbody: any = {
+        let modelbody: any = {
             id: this.model.id,
-          
+
             parentId: null,
             description: this.model.description,
             name: this.model.name,
@@ -118,68 +148,61 @@ export class DetailsComponent implements OnInit {
         };
 
 
-
         this.EquipmentsubTypes.forEach((subtype: any) => {
-           // if (subtype.isdeleted =='' )
-                this.dataService.postAdd(subtype)
-                    .subscribe(res1 => {
+            // if (subtype.isdeleted =='' )
+            this.dataService.postAdd(subtype)
+                .subscribe(res1 => {
 
-                        this.EquipmentsubTypes.forEach((subtype: any) => {
-                            this.dataService.postUpdate(subtype)
-                                .subscribe(res2 => {
+                    this.EquipmentsubTypes.forEach((subtype: any) => {
+                        this.dataService.postUpdate(subtype)
+                            .subscribe(res2 => {
 
-                                    this.dataService.postUpdate(modelbody)
-                                        .subscribe(res => {
-                                            //this.model = res;
-                                            //this.model.name = res.name;
-                                            //this.model.description = res.description;
-                                            //this.msgs = [];
-                                            //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-                                        });
+                                this.dataService.postUpdate(modelbody)
+                                    .subscribe(res => {
+                                        //this.model = res;
+                                        //this.model.name = res.name;
+                                        //this.model.description = res.description;
+                                        //this.msgs = [];
+                                        //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+                                    });
 
-                                });
-                        });
+                            });
                     });
+                });
 
         });
 
-       
-
 
     }
+
     frequencyInit() {
+        let options = {
+            initial: this.selectedMaintenanceFrequency,
+            onChange: function() {
+                this.selectedMaintenanceFrequency = $(this).cron("value");
+            }
+        };
+
         if (this.model.frequency != null && this.model.frequency != "") {
             this.selectedMaintenanceFrequency = this.model.frequency;
-           
-            $("#selector").cron({
 
-                initial: this.selectedMaintenanceFrequency,
-                onChange: function () {
-                    this.selectedMaintenanceFrequency = $(this).cron("value");
-                }, useGentleSelect: false
-            });
-            
+            $("#selector").cron(options);
+
         }
         else {
-            this.selectedMaintenanceFrequency = "0 0 1 1 *";
-            $("#selector").cron({
-
-                initial: this.selectedMaintenanceFrequency,
-                onChange: function () {
-                    this.selectedMaintenanceFrequency = $(this).cron("value");
-                }, useGentleSelect: false
-            });
+            options.initial = this.selectedMaintenanceFrequency = "0 0 1 1 *";
+            $("#selector").cron(options);
         }
 
     }
+
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
         this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
         this.displayDialog = true;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
-        if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "" && !this.cronInitialized)
-        {
+        if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "" && !this.cronInitialized) {
             this.cronInitialized = true;
          // if (this.model.frequency != null && this.model.frequency != "") {
             //$("#cronselector").cron({
@@ -190,8 +213,8 @@ export class DetailsComponent implements OnInit {
             //    }, useGentleSelect: false
             //});
         }
-        else
-        {
+        }
+        else {
             if (this.model.frequency != null && this.model.frequency != "" && !this.cronInitialized) {
                 this.cronInitialized = true;
                 //$("#cronselector").cron({
@@ -228,23 +251,25 @@ export class DetailsComponent implements OnInit {
     showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
-        this.CalibrationForm = new PrimeCalibrationForm('', '', '','');
+        this.CalibrationForm = new PrimeCalibrationForm('', '', '', '');
         //this.IsSubType= false;
     }
+
     ok() {
         this.CalibrationForms.push(this.CalibrationForm);
         this.EquipmentSubType.calibrationform = this.CalibrationForm.name;
         this.selectedCalibration = this.CalibrationForm.name;
-      
+
         this.displayDialogForm = false;
     }
+
     cancel() {
         this.displayDialogForm = false;
     }
+
     save() {
         //   this.EquipmentSubType = EquipmentSubType.name;
-        if (this.newsubType)
-        {
+        if (this.newsubType) {
             this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             this.EquipmentsubTypes.push(this.EquipmentSubType);
         }
@@ -255,6 +280,7 @@ export class DetailsComponent implements OnInit {
         this.EquipmentSubType = null;
         this.displayDialog = false;
     }
+
     onCalibrationFormChange(event) {
         //   this.selectedCalibration=(event.target.selectedOptions[0].innerText);
         // this.EquipmentSubType.calibrationform= (event.target.selectedOptions[0].innerText);
@@ -262,6 +288,7 @@ export class DetailsComponent implements OnInit {
         this.EquipmentSubType.calibrationform = (event);
 
     }
+
     delete() {
         this.EquipmentsubTypes.splice(this.findSelectedCarIndex(), 1);
 
@@ -302,8 +329,8 @@ export class DetailsComponent implements OnInit {
                 }, useGentleSelect: false
             });
         }
-
     }
+
     onRowSelect(event) {
         this.newsubType = false;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
@@ -332,7 +359,7 @@ export class DetailsComponent implements OnInit {
         //{
         //    this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
         //    this.EquipmentSubType.frequency = "0 0 1 1 *";
-          
+
         //}
         //if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "" && !this.cronInitialized) {
         //    this.cronInitialized = true;
@@ -359,11 +386,11 @@ export class DetailsComponent implements OnInit {
         //    //                this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
         //    //    }, useGentleSelect: false
         //    //});
-            //}
-            //if ($("#cronselector") == undefined)
-            //{  }
+        //}
+        //if ($("#cronselector") == undefined)
+        //{  }
 
-       
+
         this.EquipmentSubType.calibrationform = event.data.calibrationform;
         this.selectedCalibration = event.data.calibrationform;
         this.displayDialog = true;

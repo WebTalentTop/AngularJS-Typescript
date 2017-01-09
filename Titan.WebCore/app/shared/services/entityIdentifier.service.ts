@@ -32,15 +32,13 @@ export class EntityIdentifierService {
 
     getById(id): Observable<any> {
         return this.http.get(`${EntityIdentifierApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
+            .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getByName(name): Observable<any> {
         return this.http.get(`${EntityIdentifierApiUrl.getByName}/${name}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
+            .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
