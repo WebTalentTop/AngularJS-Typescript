@@ -254,8 +254,8 @@ export class AddComponent {
         let model = {
             Name: formRef.name,
             ModelNumber: formRef.modelNumber,
-            LastCalibrationDate: formRef.lastCalibrationDate,
-            CalibrationFrequencyCronExpression: cronexp,
+           // LastCalibrationDate: formRef.lastCalibrationDate,
+           // CalibrationFrequencyCronExpression: cronexp,
             EquipmentTypeId: this.selectedEquipmentTypeId,
             SerialNumber: formRef.serialNumber,
             PurchaseDate: formRef.purchaseDate,

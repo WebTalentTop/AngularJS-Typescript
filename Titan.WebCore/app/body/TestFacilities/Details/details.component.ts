@@ -134,7 +134,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
-    lastMaintenanceDate: any;
+   
     displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
@@ -144,7 +144,7 @@ export class DetailsComponent implements AfterViewInit {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
-    testFacility = { name: '', maintenanceFrequency: '' , nextMaintenanceDate: '' };
+    testFacility : any = { name: '', maintenanceFrequency: '', nextMaintenanceDate: '', lastMaintenanceDate: '' };
     address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
@@ -241,8 +241,8 @@ export class DetailsComponent implements AfterViewInit {
     }
   
       frequencyInit()
-    {
-            if (this.testFacility.maintenanceFrequency != null)
+      {
+          if (this.testFacility.maintenanceFrequency != null && this.testFacility.maintenanceFrequency != "")
             {
                 this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency;
                 this.isMaintenaceFrequencySelected = true;
@@ -714,7 +714,9 @@ export class DetailsComponent implements AfterViewInit {
   			if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
                 }
-                this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                //  this.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
+                this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
+               // this.testFacility.lastMaintenanceDate = new Date(this.testFacility.lastMaintenanceDate);
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
@@ -1104,7 +1106,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.lastMaintenanceDate = this.lastMaintenanceDate
+        formData.lastMaintenanceDate = this.testFacility.lastMaintenanceDate;
         if (this.isMaintenaceFrequencySelected){
             formData.maintenanceFrequency = $('#selector').cron("value");
         }
@@ -1130,7 +1132,8 @@ export class DetailsComponent implements AfterViewInit {
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-                        this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                        //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                        this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
                         if (res.testFacility.nextMaintenanceDate != null) {
                             this.hasNextMaintenanceDate = true;

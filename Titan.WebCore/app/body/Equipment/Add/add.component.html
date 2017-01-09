@@ -25,7 +25,7 @@
                       <div class="ui-grid-row ">
                         <div class="ui-g-12 ui-md-6">
                             <p style="color:#777">Equipment Type :</p>
-                            <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
+                            <p-dropdown  [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
                             </p-dropdown>
                         </div>
                         <div class="ui-g-12 ui-md-6">
@@ -48,7 +48,7 @@
                       </div>
                       <!--End Year--><br />
                       <!--Calibration Frequency-->
-                      <div class="ui-grid-row " style="color:#777">
+                      <!--<div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-12" >
                            <label>Calibration Frequency :</label>
                          </div>
@@ -68,7 +68,7 @@
                             <p-calendar [(ngModel)]="lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
                             <label style="color:#777">Last Calibration Date :</label>
                           </div>
-                      </div>
+                      </div>-->
                       <!--Calibration Frequency--><br /><br />
                       <!-- Price -->
                       <div class="ui-grid-row " style="color:#777">

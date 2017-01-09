@@ -28,7 +28,23 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Equipment Type :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes">
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" appendTo="body"  [autoWidth]="false">
+                                        <template let-item>
+                                            <div class="ui-helper-clearfix">
+                                                <div *ngIf="item.value.name !==''"> {{item.value.name}} ({{ item.value.calibrationFrequencyCronExpression}})</div>                                              
+                                            </div>
+                                        </template>
+                                    </p-dropdown>
+
+                                    <p-dropdown [options]="equipmentsToAdd" (onChange)="onEquipmentChange($event)" name="equipments" appendTo="body"
+                                                [autoWidth]="false">
+                                        <template let-item>
+                                            <div class="ui-helper-clearfix">
+                                                <div *ngIf="item.value.name !==''"> {{item.value.name}} ({{ item.value.serialNumber}})</div>
+                                                <div *ngIf="item.value.name !==''">Facility Name: {{item.value.testFacilityName}}</div>
+                                            </div>
+                                        </template>
+
                                     </p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
@@ -42,7 +58,7 @@
                             <div class="ui-grid-row " style="color:#777">
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
                                     <p-calendar [(ngModel)]="model.purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
-                                    <label>Year Purchased :</label>
+                                    <label>Purchase Date :</label>
                                 </div>
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
                                     <p-calendar [(ngModel)]="model.warrantyExpiration" name="warrantyExpiration" [showIcon]="true"></p-calendar>
@@ -57,7 +73,7 @@
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                                label="Maintenance Frequency"
+                                                label="Is calibration Required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
                                     </p-checkbox>
@@ -216,7 +232,7 @@
                               <p class="ui-panel-title">Equipment Manufacturer Details</p>
                               <p class="controls">
                                   <button type="text" (click)="displayAssignManufacturerDialogBox()" pButton
-                                          icon="ui-icon-person-add" label="Add Manufacturer&hellip;"></button>
+                                          icon="ui-icon-person-add" label="Create New Manufacturer&hellip;"></button>
                               </p>
                           </header>
                           <br/>

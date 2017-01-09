@@ -8,7 +8,7 @@ import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipme
 import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
-
+import { Router } from '@angular/router';
 @Component({
     selector: 'add-equipmenttype',
     templateUrl: 'app/body/equipmenttype/Add/add.component.html'
@@ -17,7 +17,7 @@ export class AddComponent implements OnInit {
 
     displayDialog: boolean;
     EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
-    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '');
+    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '','');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
     IsSubType: boolean;
@@ -26,6 +26,7 @@ export class AddComponent implements OnInit {
     username: string;
     details: string;
     id: string;
+    description: any;
     msgs: Message[];
     entityType: string = '';
     entityId: string = '';
@@ -54,21 +55,22 @@ export class AddComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private dataService: EquipmentTypeService
+        private dataService: EquipmentTypeService,
+        private router: Router
 
     ) {
 
         this.CalibrationForms = [];
-        this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi' });
-        this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW' });
-        this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat' });
-        this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford' });
-        this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda' });
-        this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar' });
-        this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes' });
-        this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault' });
-        this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW' });
-        this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo' });
+        this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo', calibrationFrequencyCronExpression: '' });
         // this.selectedCalibration="BMW";
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
@@ -76,22 +78,53 @@ export class AddComponent implements OnInit {
     handleChange(event) {
     }
     ngOnInit() {
-        this.dataService.getById(this.id)
-            .subscribe(res => {
-                //this.formConfiguration = res.formConfiguration;
-                //this.formObject = res.formObject;
-                this.model = res;
-                this.model.id = res.id;
-                this.model.parentId = res.parentId;
-                this.model.name = res.name;
-                this.model.description = res.description;
-                this.dataService.getSubTypesById(this.model.id)
-                    .subscribe(result => {
-                        this.EquipmentsubTypes = result.$values;
-                    });
-            });
+        //this.dataService.getById(this.id)
+        //    .subscribe(res => {
+        //        //this.formConfiguration = res.formConfiguration;
+        //        //this.formObject = res.formObject;
+        //        this.model = res;
+        //        this.model.id = res.id;
+        //        this.model.parentId = res.parentId;
+        //        this.model.name = res.name;
+        //        this.model.description = res.description;
+        //        this.dataService.getSubTypesById(this.model.id)
+        //            .subscribe(result => {
+        //                this.EquipmentsubTypes = result.$values;
+        //            });
+        //    });
 
         //   this.EquipmentSubType = { name:'', description: '', calibrationform: '', frequency: ''}
+    }
+    onSubmit(formRef) {
+
+
+        formRef.isDeleted = false;
+        //let cronexp: any;
+        //if (this.isMaintenaceFrequencySelected) {
+        //    cronexp = $('#selector').cron("value");
+        //}
+        //else {
+        //    cronexp = '';
+        //}
+        //if (!this.IsNewManufacturer) {
+        //    this.manufacturerId = this.selectedEquipmentManufacturerId;
+        //}
+        //else {
+        //    this.manufacturerId = '';
+        //}
+        let model = {
+            Name: formRef.name,
+            ParentId: null,
+            Description: formRef.description
+
+        };
+
+        this.dataService.postAdd(model).subscribe(res => {
+            if (res.isSuccess) {
+
+                this.router.navigate(['equipmenttype/details/', res.result.id]);
+            }
+        });
     }
 
 
@@ -134,7 +167,7 @@ export class AddComponent implements OnInit {
     showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
-        this.CalibrationForm = new PrimeCalibrationForm('', '', '');
+        this.CalibrationForm = new PrimeCalibrationForm('', '', '','');
         //this.IsSubType= false;
     }
     ok() {
@@ -208,6 +241,6 @@ class PrimeEquipmentSubType implements IEquipmentSubtype {
 }
 class PrimeCalibrationForm implements ICalibrationForm {
 
-    constructor(public id, public name, public description) {
+    constructor(public id, public name, public description,public calibrationFrequencyCronExpression) {
     }
 }

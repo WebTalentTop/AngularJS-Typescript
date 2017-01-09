@@ -429,12 +429,12 @@ export class DetailsComponent {
                var resultMap = new Array();
                resultMap.push({
                    label: "--Select--",
-                   value: null
+                   value: { id: '', name: '', calibrationFrequencyCronExpression: '' }
                });
                for (let template of response.$values) {
                    var temp = {
                        label: template.name,
-                       value: template.id
+                       value: { id: template.id, name: template.name, calibrationFrequencyCronExpression: template.calibrationFrequencyCronExpression }
                    }
                    resultMap.push(temp);
                }
