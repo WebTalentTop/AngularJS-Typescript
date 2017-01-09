@@ -52,12 +52,12 @@ div span {
     box-sizing: border-box;
 }
 .circle3 {
-    width: 80px;
-	height: 80px;
+    width: 84px;
+	height: 84px;
 	background: aquamarine;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
+	-moz-border-radius: 53px;
+	-webkit-border-radius: 53px;
+	border-radius: 53px;
     box-sizing: border-box;
 }
 
