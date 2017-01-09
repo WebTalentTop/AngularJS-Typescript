@@ -1309,12 +1309,6 @@ export class DetailsComponent implements AfterViewInit {
             })
     }
 
-    selectedFormToView(formName,formSchemaItems) {
-        this.selectedFormName = formName;
-        this.selectedFormFields = formSchemaItems;
-        this.displayPreviewSelectedForm = true;
-	}
-
     private getGridFormInstanceInformationData() {
         // Getting Grid for FormInstance by this TestFacility Id
         this.formInstanceService.getGridByEntityId(this.id)

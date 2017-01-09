@@ -100,7 +100,7 @@ import { DropdownModule } from 'primeng/primeng';
 //import {CountryService} from './demo/service/countryservice';
 //import {EventService} from './demo/service/eventservice';
 //import {NodeService} from './demo/service/nodeservice';
-import {BodyModule} from './body/body.module';
+import BodyModule from './body/body.module';
 import appRoutes from "./app.routing";
 import {RouterModule} from "@angular/router";
 import {AuthComponent} from "./Auth/auth.component";

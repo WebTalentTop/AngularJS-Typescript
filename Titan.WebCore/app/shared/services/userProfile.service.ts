@@ -9,6 +9,7 @@ import { IUserProfile } from './definitions/IUserProfile';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {TitanUserApiUrl} from "./apiUrlConst/titanUserApiUrls";
 
 @Injectable()
 export class UserProfileService {

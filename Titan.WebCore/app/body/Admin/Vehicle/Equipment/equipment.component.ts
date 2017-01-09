@@ -1,5 +1,5 @@
 ﻿import { EquipmentService } from '../../../../shared/services/equipment.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';

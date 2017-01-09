@@ -13,6 +13,7 @@ namespace Titan.WebCore.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly TenantUser _options;
         private readonly AppSettings _appSettings;
         private TenantUser TenantUser { get; set; }
