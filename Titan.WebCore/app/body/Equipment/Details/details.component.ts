@@ -184,7 +184,6 @@ export class DetailsComponent {
    }
    showHideCronPicker() {
        console.log("--inside cronpicker show hide");
-       debugger;
        if (this.isMaintenaceFrequencySelected) {
            if (!this.isCronControlInitialized) {
                $("#selector").cron({
