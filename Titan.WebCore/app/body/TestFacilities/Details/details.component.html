@@ -162,6 +162,7 @@
 
 
                                     <div class="md-inputfield">
+                                        <br />
                                         <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
                                     </div>
 
@@ -275,15 +276,19 @@
                             </div>
 
                             <!-- End Role -->
-
+                            <br />
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                                [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
-                                    <button type="button" pButton icon="ui-icon-close"
-                                            (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
-                                            label="Add User Role"></button>
+                                    <div class="ui-g-12 ui-md-4" style="padding:1.3em">
+                                        <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                                  [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                      <button type="button" pButton icon="ui-icon-close"
+                                              (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
+                                      <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
+                                              label="Add User Role"></button>
+                                    </div>
                                 </div>
                             </footer>
 
@@ -355,12 +360,16 @@
 
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                  <div class="ui-g-12 ui-md-4" style="padding:1.3em">
                                     <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
                                                 [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                  </div>
+                                  <div class="ui-g-12 ui-md-8">
                                     <button type="button" pButton icon="ui-icon-close"
                                             (click)="displayAssignDepartmentsDialog=false" label="Cancel"></button>
                                     <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()"
                                             label="Add Department"></button>
+                                  </div>
                                 </div>
                             </footer>
 
@@ -440,16 +449,20 @@
                     </div>
 
                     <!-- End Role -->
-
+                    <br />
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                             <!--<label class="checkbox"><input type="checkbox"> Keep Open</label>-->
-                            <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen"
-                                        binary="true"></p-checkbox>
-                            <button type="button" pButton icon="ui-icon-close"
-                                    (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()"
-                                    label="Add Equipment"></button>
+                            <div class="ui-g-12 ui-md-4" style="padding:1.3em">
+                              <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen"
+                                          binary="true"></p-checkbox>
+                           </div>
+                           <div class="ui-g-12 ui-md-8">
+                              <button type="button" pButton icon="ui-icon-close"
+                                      (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
+                              <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()"
+                                      label="Add Equipment"></button>
+                           </div>
                         </div>
                     </footer>
 
