@@ -65,6 +65,6 @@ export class OperatingHoursComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/operatingHours/details', id]);
+        this.router.navigate(['admin/vehicle/operatingHours/details', id]);
     }
 }

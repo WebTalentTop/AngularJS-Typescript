@@ -67,6 +67,6 @@ export class PlatformComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/platform/details', id]);
+        this.router.navigate(['admin/vehicle/platform/details', id]);
     }
 }

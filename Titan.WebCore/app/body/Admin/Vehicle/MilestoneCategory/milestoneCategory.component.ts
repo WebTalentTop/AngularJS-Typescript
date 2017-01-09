@@ -66,6 +66,6 @@ export class MilestoneCategoryComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/milestoneCategory/details', id]);
+        this.router.navigate(['admin/vehicle/milestoneCategory/details', id]);
     }
 }

@@ -72,6 +72,6 @@ export class ModelYearComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/modelYear/details', id]);
+        this.router.navigate(['admin/vehicle/modelYear/details', id]);
     }
 }

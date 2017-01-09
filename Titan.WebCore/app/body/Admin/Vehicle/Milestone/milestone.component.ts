@@ -66,6 +66,6 @@ export class MilestoneComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/milestone/details', id]);
+        this.router.navigate(['admin/vehicle/milestone/details', id]);
     }
 }

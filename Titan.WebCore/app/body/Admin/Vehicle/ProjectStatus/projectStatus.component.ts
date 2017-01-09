@@ -67,6 +67,6 @@ export class ProjectStatusComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/projectStatus/details', id]);
+        this.router.navigate(['admin/vehicle/projectStatus/details', id]);
     }
 }

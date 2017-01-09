@@ -65,6 +65,6 @@ export class RequirementItemTypeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/requirementItemType/details', id]);
+        this.router.navigate(['admin/vehicle/requirementItemType/details', id]);
     }
 }

@@ -65,6 +65,6 @@ export class ModelNameComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/modelName/details', id]);
+        this.router.navigate(['admin/vehicle/modelName/details', id]);
     }
 }

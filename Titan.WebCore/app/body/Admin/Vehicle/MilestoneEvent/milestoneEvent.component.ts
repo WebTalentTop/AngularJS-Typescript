@@ -51,6 +51,6 @@ export class MilestoneEventComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/milestoneEvent/details', id]);
+        this.router.navigate(['admin/vehicle/milestoneEvent/details', id]);
     }
 }

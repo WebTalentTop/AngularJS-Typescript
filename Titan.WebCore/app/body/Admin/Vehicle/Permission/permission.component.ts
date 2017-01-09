@@ -65,6 +65,6 @@ export class PermissionComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/permission/details', id]);
+        this.router.navigate(['admin/vehicle/permission/details', id]);
     }
 }
