@@ -50,7 +50,8 @@ import detailsRoutes from "./details.routes";
                 TestStatusService,
                 TestModeService,
                 TestTypeService,
-        TestTemplateService
+        TestTemplateService,
+        BreadCrumbsService
     ],
     declarations: [DetailsComponent]
 })
