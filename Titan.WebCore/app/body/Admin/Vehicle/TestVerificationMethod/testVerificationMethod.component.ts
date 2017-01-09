@@ -66,6 +66,6 @@ export class TestVerificationMethodComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/testVerificationMethod/details', id]);
+        this.router.navigate(['admin/vehicle/testVerificationMethod/details', id]);
     }
 }

@@ -71,6 +71,6 @@ export class ShiftComponent {
 
     }
     navigateDetails(id: string) {
-        this.router.navigate(['vehicle/shift/details', id]);
+        this.router.navigate(['admin/vehicle/shift/details', id]);
     }
 }

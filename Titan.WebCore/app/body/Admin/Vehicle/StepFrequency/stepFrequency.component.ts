@@ -65,6 +65,6 @@ export class StepFrequencyComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/stepFrequency/details', id]);
+        this.router.navigate(['admin/vehicle/stepFrequency/details', id]);
     }
 }

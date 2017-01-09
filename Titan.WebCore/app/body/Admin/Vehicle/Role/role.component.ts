@@ -65,6 +65,6 @@ export class RoleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/role/details', id]);
+        this.router.navigate(['admin/vehicle/role/details', id]);
     }
 }

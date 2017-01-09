@@ -65,6 +65,6 @@ export class TestActivityComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/testActivity/details', id]);
+        this.router.navigate(['admin/vehicle/testActivity/details', id]);
     }
 }

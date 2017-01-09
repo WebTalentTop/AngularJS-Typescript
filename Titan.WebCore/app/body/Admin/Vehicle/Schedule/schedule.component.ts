@@ -51,6 +51,6 @@ export class ScheduleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/schedule/details', id]);
+        this.router.navigate(['admin/vehicle/schedule/details', id]);
     }
 }

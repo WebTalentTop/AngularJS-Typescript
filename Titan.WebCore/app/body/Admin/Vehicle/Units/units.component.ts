@@ -67,6 +67,6 @@ export class UnitsComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/units/details', id]);
+        this.router.navigate(['admin/vehicle/units/details', id]);
     }
 }

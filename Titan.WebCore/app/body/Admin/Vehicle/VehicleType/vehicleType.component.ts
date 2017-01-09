@@ -65,6 +65,6 @@ export class VehicleTypeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/vehicleType/details', id]);
+        this.router.navigate(['admin/vehicle/vehicleType/details', id]);
     }
 }

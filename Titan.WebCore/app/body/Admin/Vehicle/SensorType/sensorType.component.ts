@@ -65,6 +65,6 @@ export class SensorTypeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/sensorType/details', id]);
+        this.router.navigate(['admin/vehicle/sensorType/details', id]);
     }
 }

@@ -65,6 +65,6 @@ export class StepTypeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/stepType/details', id]);
+        this.router.navigate(['admin/vehicle/stepType/details', id]);
     }
 }

@@ -65,6 +65,6 @@ export class TestRequirementComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/testRequirement/details', id]);
+        this.router.navigate(['admin/vehicle/testRequirement/details', id]);
     }
 }

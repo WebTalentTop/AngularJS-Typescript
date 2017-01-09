@@ -67,6 +67,6 @@ export class TitanRoleComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/titanRole/details', id]);
+        this.router.navigate(['admin/vehicle/titanRole/details', id]);
     }
 }

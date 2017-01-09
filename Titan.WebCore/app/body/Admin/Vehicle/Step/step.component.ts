@@ -72,6 +72,6 @@ export class StepComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/step/details', id]);
+        this.router.navigate(['admin/vehicle/step/details', id]);
     }
 }
