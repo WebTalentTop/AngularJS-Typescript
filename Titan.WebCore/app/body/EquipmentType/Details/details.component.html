@@ -6,11 +6,11 @@
           <p-tabView (onChange)="handleChange($event)">
             <p-tabPanel header="Info ||" id="info">
                 <p-growl [value]="msgs"></p-growl>
-                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+              
 
         <h3>Edit EquipmentType</h3>
 
-        <div class="card card-w-title">
+        <!--<div class="card card-w-title">-->
         <!--<p-tabView (onChange)="handleChange($event)">-->
              <!--<p-panel > -->
                 <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
@@ -113,7 +113,7 @@
                               </footer>
                           </p-dialog>
                  </p-panel><br />
-                 <p-panel>
+                  <p-panel>
                        <header class="with-controls">
                            <p class="ui-panel-title">Equipment SubTypes</p>
                            <p class="controls">
@@ -183,7 +183,7 @@
                        </div>
                  </p-panel>
 
-                </form>
+               
          </p-tabPanel>
       </p-tabView>
 
