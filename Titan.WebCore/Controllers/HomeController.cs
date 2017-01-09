@@ -35,7 +35,7 @@ namespace Titan.WebCore.Controllers
         {
             using (var client = new HttpClient())
             {
-                var response = await client.GetStringAsync(_appSettings.ApiUrl + "/3BDC1617-D620-65D0-26EF-000E1090A386");
+                var response = await client.GetStringAsync(_appSettings.ApiUrl + "3BDC1617-D620-65D0-26EF-000E1090A386");
                 return response;
                 // The response object is a string that looks like this:
                 // "{ message: 'Hello world!' }"
