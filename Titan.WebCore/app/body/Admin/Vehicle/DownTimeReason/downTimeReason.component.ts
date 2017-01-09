@@ -65,6 +65,6 @@ export class DownTimeReasonComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/downTimeReason/details', id]);
+        this.router.navigate(['/admin/vehicle/downTimeReason/details', id]);
     }
 }

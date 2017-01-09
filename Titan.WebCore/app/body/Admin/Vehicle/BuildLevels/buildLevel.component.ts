@@ -66,6 +66,6 @@ export class BuildLevelComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/buildLevel/details', id]);
+        this.router.navigate(['admin/vehicle/buildLevel/details', id]);
     }
 }

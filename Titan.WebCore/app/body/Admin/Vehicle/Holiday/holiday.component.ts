@@ -72,6 +72,6 @@ export class HolidayComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/holiday/details', id]);
+        this.router.navigate(['admin/vehicle/holiday/details', id]);
     }
 }

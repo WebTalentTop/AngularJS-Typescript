@@ -66,6 +66,6 @@ export class GradeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/grade/details', id]);
+        this.router.navigate(['admin/vehicle/grade/details', id]);
     }
 }

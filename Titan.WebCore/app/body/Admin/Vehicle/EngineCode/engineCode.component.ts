@@ -65,6 +65,6 @@ export class EngineCodeComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/engineCode/details', id]);
+        this.router.navigate(['admin/vehicle/engineCode/details', id]);
     }
 }

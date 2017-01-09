@@ -65,6 +65,6 @@ export class MaintenanceFrequencyComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/maintenanceFrequency/details', id]);
+        this.router.navigate(['admin/vehicle/maintenanceFrequency/details', id]);
     }
 }

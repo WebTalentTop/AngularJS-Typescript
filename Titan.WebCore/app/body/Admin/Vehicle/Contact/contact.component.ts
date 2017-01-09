@@ -51,6 +51,6 @@ export class ContactComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/contact/details', id]);
+        this.router.navigate(['admin/vehicle/contact/details', id]);
     }
 }

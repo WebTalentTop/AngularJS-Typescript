@@ -65,6 +65,6 @@ export class PriorityComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/priority/details', id]);
+        this.router.navigate(['/admin/vehicle/priority/details', id]);
     }
 }

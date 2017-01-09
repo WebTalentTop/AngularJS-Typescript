@@ -65,6 +65,6 @@ export class AccessGroupComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/accessGroup/details', id]);
+        this.router.navigate(['/admin/vehicle/accessGroup/details', id]);
     }
 }

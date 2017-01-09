@@ -65,6 +65,6 @@ export class JudgementComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/judgement/details', id]);
+        this.router.navigate(['admin/vehicle/judgement/details', id]);
     }
 }

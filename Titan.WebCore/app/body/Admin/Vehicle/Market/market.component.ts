@@ -67,6 +67,6 @@ export class MarketComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/market/details', id]);
+        this.router.navigate(['admin/vehicle/market/details', id]);
     }
 }

@@ -64,6 +64,6 @@ export class AccessComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/access/details', id]);
+        this.router.navigate(['/admin/vehicle/access/details', id]);
     }
 }
