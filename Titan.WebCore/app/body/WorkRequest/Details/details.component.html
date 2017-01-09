@@ -22,7 +22,7 @@
 
                                                     <p-column header="Comments" field="comment" sortable="true"></p-column>
 
-                                                  
+
 
                                                     <p-column header="Module#" field="moduleNo"  sortable="true"></p-column>
                                                     <p-column header="Slot#" field="slotNo" sortable="true"></p-column>
@@ -64,7 +64,7 @@
                                                         <span class="pseudo-label">Upload</span>
 
                                                         <p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{testRequestSensorId}}/{{categoryId}}" (onUpload)="onUpload($event)"
-                                                                      multiple="multiple" accept="image/*" maxFileSize="1000000">                                                           
+                                                                      multiple="multiple" accept="image/*" maxFileSize="1000000">
                                                         </p-fileUpload>
                                                     </div>
                                                     <div class="input-row">
@@ -118,7 +118,7 @@
                                                                 <header>
                                                                     <select class="ql-size">
                                                                         <option value="small"></option>
-                                                                         Note a missing, thus falsy value, is used to reset to default 
+                                                                         Note a missing, thus falsy value, is used to reset to default
                                                                         <option selected></option>
                                                                         <option value="large"></option>
                                                                         <option value="huge"></option>
@@ -137,7 +137,7 @@
 
                                                     <footer>
                                                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                                            <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                                            <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                                             <!--<label class="checkbox"><input type="checkbox" name="keep" binary="true" > Keep Open</label>-->
                                                             <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel"></button>
                                                             <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Ok"></button>
@@ -151,7 +151,7 @@
 
                                     </div>
                                     <!--<header>Test Facility Information</header>-->
-                               
+
 
                                     <!--<div class="ui-grid-row">
                                         <div class="ui-grid-row">

@@ -279,16 +279,12 @@
                             <br />
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                    <div class="ui-g-12 ui-md-4" style="padding:1.3em">
-                                        <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                                  [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-8">
-                                      <button type="button" pButton icon="ui-icon-close"
-                                              (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
-                                      <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
-                                              label="Add User Role"></button>
-                                    </div>
+                                    <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                                [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
+                                    <button type="button" pButton icon="ui-icon-close"
+                                            (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
+                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
+                                            label="Add User Role"></button>
                                 </div>
                             </footer>
 
@@ -357,19 +353,15 @@
                             </div>
 
                             <!-- End Role -->
-
+                            <br />
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                  <div class="ui-g-12 ui-md-4" style="padding:1.3em">
-                                    <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                                [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
-                                  </div>
-                                  <div class="ui-g-12 ui-md-8">
+                                    <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                                [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                     <button type="button" pButton icon="ui-icon-close"
                                             (click)="displayAssignDepartmentsDialog=false" label="Cancel"></button>
                                     <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()"
                                             label="Add Department"></button>
-                                  </div>
                                 </div>
                             </footer>
 
@@ -453,16 +445,12 @@
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                             <!--<label class="checkbox"><input type="checkbox"> Keep Open</label>-->
-                            <div class="ui-g-12 ui-md-4" style="padding:1.3em">
-                              <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen"
-                                          binary="true"></p-checkbox>
-                           </div>
-                           <div class="ui-g-12 ui-md-8">
-                              <button type="button" pButton icon="ui-icon-close"
-                                      (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
-                              <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()"
-                                      label="Add Equipment"></button>
-                           </div>
+                            <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen"
+                                        binary="true"></p-checkbox></div>
+                            <button type="button" pButton icon="ui-icon-close"
+                                    (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
+                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()"
+                                    label="Add Equipment"></button>
                         </div>
                     </footer>
 
@@ -603,53 +591,56 @@
 
 
             <p-tabPanel header="Maintenance" id="tests">
-                <!--region Maintenance Information -->
-                <div class="card card-w-title" *ngIf="gridFormInstanceData">
-
-                    <p-dataTable [value]="gridFormInstanceData"
-                                 selectionMode="single"
-                                 [(selection)]="selectedGridFormInstance"
-                                 (onRowSelect)="maintenanceInformationFormRowSelect($event)">
-                        <header>Maintenance Information Filled</header>
-                        <p-column field="name" header="Name"></p-column>
-                        <p-column field="userName" header="Processed By"></p-column>
-                        <p-column field="createdOn" header="Created On"></p-column>
-                        <p-column field="notes" header="Notes"></p-column>
-                    </p-dataTable>
-
-                </div>
-                <!--endregion-->
-                <!--region Maintenance Forms -->
                 <div class="card card-w-title" *ngIf="formSchemaData">
 
-                    <p-dataTable [value]="formSchemaDataGridMF"
-                                 selectionMode="single"
-                                 [(selection)]="selectedMaintenanceForm"
-                                 >
+                    <p-dataGrid [value]="formSchemaData">
                         <header>List of Test Facility Forms</header>
-                        <p-column field="name" header="Name"></p-column>
-                        <p-column field="userFullName" header="Created By"></p-column>
-                        <p-column field="createdOn" header="Created On"></p-column>
-                        <p-column>
-                            <template pTemplate="header">
-                                Preview Form
-                            </template>
-                            <template let-item="rowData" pTemplate="body">
-                                <button type="button" pButton (click)="maintenanceFormRowSelect(item)" icon="fa-plus" iconPos="right" label="Preview Form"></button>
-                            </template>
-                        </p-column>
-                        <p-column>
-                            <template pTemplate="header">
-                                Enter Data
-                            </template>
-                            <template let-item="rowData" pTemplate="body">
-                                <button type="button" pButton (click)="createInstance(item)" icon="fa-plus" iconPos="right" label="Add Information"></button>
-                            </template>
-                        </p-column>
-                    </p-dataTable>
+                        <template let-item>
+                            <!--<pre style="height:auto; overflow-y: scroll">{{ item | json }}</pre><br/>-->
+                            <div style="padding:3px" class="ui-g-12 ui-md-3">
+                                <p-panel [header]="item.name"
+                                         [style]="{'text-align':'center'}">
+                                    <div>{{item.formSchemaCategories.$values[0].formSchemaCategory.name}}</div>
+                                    <hr class="ui-widget-content" style="border-top:0">
+                                    <button pButton
+                                            icon="fa fa-external-link-square"
+                                            type="text"
+                                            iconPos="right"
+                                            label="Preview Form"
+                                            (click)="selectedFormToView(item.name, item.fields.$values)"></button>
+                                    <button pButton
+                                            icon="fa fa-plus"
+                                            type="text"
+                                            iconPos="right"
+                                            label="Enter Information"
+                                            (click)="showFormInstance(item)"></button>
+                                </p-panel>
+                            </div>
+                        </template>
+                    </p-dataGrid>
 
+                    <!--<div *ngFor="let item of formSchemaData">
+                        <h3>{{item.name}}</h3>
+                        <span>
+                            {{item.formSchemaCategories.$values[0].formSchemaCategory.name}}
+                        </span>
+                        <br/>
+                        <button pButton
+                                icon="fa fa-external-link-square"
+                                type="text"
+                                iconPos="right"
+                                label="Preview Form"
+                                (click)="selectedFormToView(item.name, item.fields.$values)">
+                        </button>
+                        <button pButton
+                                icon="fa fa-plus"
+                                type="text"
+                                iconPos="right"
+                                label="Enter Information"
+                                (click)="showFormInstance()">
+                        </button>
+                    </div>-->
                 </div>
-                <!--endregion-->
 
                 <p-dialog header="Form Preview"
                           [(visible)]="displayPreviewSelectedForm"
@@ -657,10 +648,7 @@
                           responsive="true"
                           width="1200">
                     <div class="card card-w-title">
-                        <form-preview *ngIf="selectedFormSchemaFP"
-
-                                      [formSchema]="selectedFormSchemaFP"
-                                      [fields]="fieldsFP"
+                        <form-preview [selectedInputList]="selectedFormFields"
                                       [formName]="selectedFormName"></form-preview>
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -681,10 +669,6 @@
                           width="1200">
                     <div class="card card-w-title">
                         <form-instance *ngIf="displayFormInsanceForm"
-                                       [formInstanceId]="formInstanceId"
-                                       [formInstanceUpdateNotes]="formInstanceUpdateNotes"
-                                       [formInstanceUpdateView]="formInstanceUpdateView"
-                                       [formInstanceUpdateData]="formInstanceUpdateData"
                                        [formSchemaVersionId]="formInstanceFormSchemaVersionId"
                                        [entityIdentifierId]="entityIdentifierInfo.id"
                                        [entityId]="id"

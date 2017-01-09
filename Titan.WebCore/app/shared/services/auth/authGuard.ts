@@ -32,10 +32,8 @@ export class AuthGuard implements CanLoad, CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean> | boolean {
-
         console.log("---- STATE -----", state);
         return true;// this.isActivated(state);
-
     }
 
     isActivated(state): Observable<boolean> {

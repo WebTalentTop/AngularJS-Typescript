@@ -3,14 +3,14 @@
         <h3>Details</h3>
 <p-tabView  (onChange)="handleChange($event)">
 
-    
+
         <p-tabPanel header="Details ||" id='details'>
-        
+
             <p-growl [value]="msgs"></p-growl>
-            
+
                 <div class="subsection">
                     <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
-                       
+
                         <p-panel header="Basic Information">
                             <br/>
                             <div class="ui-grid-row">
@@ -137,10 +137,10 @@
                         <!--End Description-->
 </div>
 
-             
-             
-            
-          
+
+
+
+
               <div class="subsection">
 
                   <form>
@@ -153,7 +153,7 @@
                           <p>
                               Please add Manufacturer details
                           </p>
-                                              
+
 
                           <div class="ui-grid-row ">
                               <div class="md-inputfield ui-g-12 ui-md-6">
@@ -210,8 +210,8 @@
 
                           <footer>
                               <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                  <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                  <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                   <button type="button" pButton icon="ui-icon-add"
                                           (click)="displayClear()" label="Add New"></button>
                                   <button type="button" pButton icon="ui-icon-close"
@@ -301,7 +301,7 @@
                   </form>
 
               </div>
-         
+
 
 
       </p-tabPanel>
