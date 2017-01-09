@@ -32,6 +32,7 @@ export class ProjectComponent {
     }
 
     ngOnInit() {
+        this.logger.logConsole("Project is loaded --------", "yippie");
         let resData: any;
         this.service.postGridData()
             .subscribe(res => {

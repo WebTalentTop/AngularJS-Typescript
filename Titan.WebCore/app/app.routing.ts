@@ -3,8 +3,8 @@
 
 // // export const routes: Routes = [
 // //   { path: '', redirectTo: 'department', pathMatch: 'full'},
-// //   { path: 'project', loadChildren: 'app/body/body.module#CrisisModule' },
-// //   { path: 'heroes', loadChildren: 'app/hero/hero.module#HeroModule' }
+// //   { path: 'project', canActivate: [AuthGuard], loadChildren: 'app/body/body.module#CrisisModule' },
+// //   { path: 'heroes', canActivate: [AuthGuard], loadChildren: 'app/hero/hero.module#HeroModule' }
 // // ];
 
 // export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -13,6 +13,7 @@ import {TitanUserApiUrl} from "./apiUrlConst/titanUserApiUrls";
 
 @Injectable()
 export class UserProfileService {
+
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
     });
@@ -20,22 +21,15 @@ export class UserProfileService {
     userProfile: IUserProfile;
 
     constructor(private http: Http) {
-       
+        /*this.getCurrentUserProfile()
+         .subscribe(res =>{
+         this.userProfile = res.result;
+         });*/
     }
 
-    getCurrentUserProfile() {
-        this.getById().subscribe(res => {
-            this.userProfile = res.result;
-            return this.userProfile;
-        });
-    }
-    
-    getById(): Observable<any> {
-        return this.http.get(`${TitanUserApiUrl.getProfileByIdUrl}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
+    getCurrentUserProfile():Observable<any> {
+        return this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
+            .map(this.getJson);
     }
 
     private getJson(response: Response) {
@@ -54,4 +48,5 @@ export class UserProfileService {
             throw error;
         }
     }
+
 }

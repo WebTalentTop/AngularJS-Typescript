@@ -11,7 +11,7 @@ import { BodyComponent }   from './body.component';
 import { FormsModule} from '@angular/forms';
 import { AuthService } from '../shared/services/auth/auth.service';
 
-
+import { DropdownModule } from 'primeng/primeng';
 //Services
 import { TitanUserProfileService } from '../shared/services/titanUserProfile.service';
 import { LoggerService } from '../shared/services/logger/logger.service';
@@ -24,11 +24,12 @@ import appRoutes from './body.routes';
 import {Route} from "@angular/router";
 import {AuthGuard} from "../shared/services/auth/authGuard";
 import {LoginComponent} from "./Auth/login.component";
+import {TitanUserService} from "../shared/services/titanuser.service";
 
 @NgModule({
-    imports: [CommonModule, HttpModule, FormsModule, appRoutes],//ProjectModule,DepartmentModule,AdminModule,CalendarModule,LookupModule, EquipmentModule, appRoutes],
+    imports: [CommonModule, HttpModule, FormsModule, DropdownModule, appRoutes],//ProjectModule,DepartmentModule,AdminModule,CalendarModule,LookupModule, EquipmentModule, appRoutes],
     declarations: [BodyComponent, LoginComponent],
-    providers: [AuthGuard, LoggerService],
+    providers: [AuthGuard, TitanUserService ,LoggerService],
     exports: [BodyComponent]//,
     //bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 ﻿
+
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,7 +19,6 @@ import { AppComponent } from './app.component';
 import { DataGridModule } from 'primeng/primeng';
 import { enableProdMode } from '@angular/core';
 //import { DataTableModule } from 'primeng/primeng';
-
 //import {AccordionModule} from 'primeng/primeng';
 import {AutoCompleteModule} from 'primeng/primeng';
 //import {BreadcrumbModule} from 'primeng/primeng';
@@ -205,7 +205,7 @@ import {FakePageComponent} from "./fakepage/fakepage.component";
     ],
     //providers: [DataService],
 
-    providers: [AuthGuard, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
+    providers: [AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

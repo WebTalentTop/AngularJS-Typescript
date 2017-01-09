@@ -1,7 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { TitanUserProfileService } from '../shared/services/titanUserProfile.service';
 import {IUserProfile} from "../shared/services/definitions/IUserProfile";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'titan-body',
@@ -10,7 +9,6 @@ import {Router} from "@angular/router";
 export class BodyComponent {
     currentUser:IUserProfile;
 
-    constructor(private router:Router){
-        this.router.navigate(['login']);
+    constructor(){
     }
 }

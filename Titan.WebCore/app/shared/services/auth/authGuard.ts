@@ -8,11 +8,20 @@ import {
     CanLoad,
     CanActivate,
     ActivatedRouteSnapshot,
-    RouterStateSnapshot }       from '@angular/router';
+    RouterStateSnapshot, NavigationExtras
+}       from '@angular/router';
+import {LoggerService} from "../logger/logger.service";
+import {IUserProfile} from "../definitions/IUserProfile";
+import {TitanUserProfileService} from "../titanUserProfile.service";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate {
-    constructor(private router: Router) {
+    extraNav:NavigationExtras;
+    constructor(
+        private router: Router,
+        private userProfile: TitanUserProfileService,
+        private ls: LoggerService) {
         console.log("AuthGuard constructor")
     }
 
@@ -22,9 +31,31 @@ export class AuthGuard implements CanLoad, CanActivate {
         return false;
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log("---- STATE -----", state)
-        this.router.navigate(['login']);
-        return false;
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean> | boolean {
+
+        console.log("---- STATE -----", state);
+        return this.isActivated(state);
+
+    }
+
+    isActivated(state): Observable<boolean> {
+
+         return this.userProfile.getCurrentUserProfile().map(res => {
+            let currentUserProfile: IUserProfile = res.result;
+            this.ls.logConsole("CurrentUserProfile from server ----------", currentUserProfile);
+
+            if(currentUserProfile.defaultTenantId) {
+                return true;
+            }
+            else {
+                this.extraNav = { queryParams: {
+                                    'returnUrl': state.url,
+                                    'email': currentUserProfile.emailAddress}
+                                };
+                this.router
+                    .navigate(['login', currentUserProfile.id],this.extraNav);
+                return false;
+            }
+        });
     }
 }

@@ -6,7 +6,7 @@ import { EntityIdentifierService } from '../../../shared/services/entityIdentifi
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
 import { FormSchemaService } from '../../../shared/services/formSchema.service';
 import { FormInstanceService } from '../../../shared/services/formInstance.service';
-import {IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
+import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
 
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
