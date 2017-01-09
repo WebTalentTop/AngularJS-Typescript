@@ -22,7 +22,8 @@ export class AuthGuard implements CanLoad, CanActivate {
         private router: Router,
         private userProfile: TitanUserProfileService,
         private ls: LoggerService) {
-        console.log("AuthGuard constructor")
+        this.ls.setShow(false);
+        this.ls.logConsole("AuthGuard constructor");
     }
 
     canLoad(route: Route): boolean {
@@ -32,8 +33,9 @@ export class AuthGuard implements CanLoad, CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean> | boolean {
-        console.log("---- STATE -----", state);
-        return true;// this.isActivated(state);
+        this.ls.logConsole("---- STATE -----", state);
+
+        return true; //this.isActivated(state);
     }
 
     isActivated(state): Observable<boolean> {
