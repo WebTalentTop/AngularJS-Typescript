@@ -227,7 +227,7 @@ export class DetailsComponent {
 
         let innertext = event.path[0].innerText;
         this.formInputData.formSchemaFieldDataTypeId = this.draggedItem.id;
-        this.formInputData.name = this.draggedItem.name;
+        //this.formInputData.name = this.draggedItem.name;
         console.log("inner Text is --------", innertext);
     }
 
@@ -328,6 +328,7 @@ export class DetailsComponent {
         this.formInputData.maxLength = 0;
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
+        this.formInputData.checkBoxData = '';
         console.log('FormInputData in CheckBoxData ---------', this.formInputData);
         console.log("copyData ---------", copyData);
         console.log("SelectedInputList ----------", this.selectedInputList);
@@ -346,6 +347,7 @@ export class DetailsComponent {
         this.formInputData.maxLength = 0;
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
+        this.formInputData.selectBoxData = '';
         console.log('FormInputData in CheckBoxData ---------', this.formInputData);
         console.log("copyData ---------", copyData);
         console.log("SelectedInputList ----------", this.selectedInputList);
@@ -361,6 +363,7 @@ export class DetailsComponent {
         this.formInputData.maxLength = 0;
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
+        this.formInputData.radioBoxData = '';
         console.log('FormInputData in CheckBoxData ---------', this.formInputData);
         console.log("copyData ---------", copyData);
         console.log("SelectedInputList ----------", this.selectedInputList);
