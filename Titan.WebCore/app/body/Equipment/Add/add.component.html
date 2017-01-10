@@ -5,7 +5,7 @@
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
              
-                <h2> Add Equipment </h2>
+                <h2> Create New Equipment </h2>
                 <p-panel header="Basic Information">
                   <div class="body">
                       <!-- Begin Name -->
@@ -39,7 +39,7 @@
                       <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-6 md-inputfield">
                             <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
-                            <label>Year Purchased :</label>
+                            <label>Purchase Date :</label>
                           </div>
                           <div class="ui-g-12 ui-md-6 md-inputfield">
                             <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" [showIcon]="true" ></p-calendar>

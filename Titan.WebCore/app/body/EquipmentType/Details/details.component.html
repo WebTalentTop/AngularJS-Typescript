@@ -4,11 +4,11 @@
       <div class="card card-w-title">
         <h2>Edit EquipmentType</h2>
           <p-tabView (onChange)="handleChange($event)">
-            <p-tabPanel header="Info ||" id="info">
+            <p-tabPanel header="Information ||" id="info">
                 <p-growl [value]="msgs"></p-growl>
               
 
-        <h3>Edit EquipmentType</h3>
+      
 
         <!--<div class="card card-w-title">-->
         <!--<p-tabView (onChange)="handleChange($event)">-->
@@ -18,8 +18,9 @@
                       <div class="col-sm-12">
 
                               <p-growl [value]="msgs"></p-growl>
+                          <!--<button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>-->
                           <!--<ul class="rightIconNav pull-right mb10">-->
-                              <button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>
+                             
                           <!--</ul>-->
                       </div>
                   </div><br/>
@@ -44,6 +45,17 @@
                              <label>Frequency</label>
                             </div>
                           </div><br />
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Calibration Forms :</p>
+                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
+                                    <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
+                                </select>
+                                <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
+            </p-dropdown>-->
+                            </div>
+                            <br />
+                        </div><br/>
                           <div class="ui-grid-row " >
                               <div class="ui-g-12 ui-md-12" >
                                 <label style="color:#777">Description</label>

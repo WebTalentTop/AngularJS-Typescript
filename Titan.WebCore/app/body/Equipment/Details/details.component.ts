@@ -19,9 +19,9 @@ export class DetailsComponent {
     IsKeepOpen: boolean = false;
     selectedEquipmentManufacturerId: any;
     displayAssignManufacturerDialog: boolean = false;
-    equipmentTypes: any;
+    equipmentTypes: SelectItem[];
     selectedCalibrationFrequency: any;
-    selectedEquipmentTypeId: any;
+    selectedEquipmentTypeId: any = '';
     testFacilities: any;
     selectedTestFacilityId: any;
     formConfiguration:any;
@@ -37,7 +37,12 @@ export class DetailsComponent {
     manufacturerName: any='';
 
     manufacturerPhone: any='';
-
+    selectedEquipmentObj: any = {
+        id: '',
+        name: '',
+        frequency:''
+    }
+    selectedEquipmentTypeName: any = '';
     manufacturerWebsite: any='';
     manufacturerEmail: any = '';
     isMaintenaceFrequencySelected: boolean;
@@ -107,8 +112,14 @@ export class DetailsComponent {
             {
                 this.model = res.result;
                 this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerId;
-                this.selectedEquipmentTypeId = res.result.equipmentTypeId;
+                this.selectedEquipmentTypeName = "Analog";
                 this.selectedTestFacilityId = res.result.testFacilityId;
+                this.selectedEquipmentObj.id = res.result.equipmentTypeId;
+                this.selectedEquipmentObj.name = "Analog";
+
+                this.selectedEquipmentObj.frequency = "generic"; //res.result.calibrationFrequencyCronExpression;
+
+               // this.model.equipmentTypeId = "Analog";
                 this.model.purchaseDate = new Date(res.result.purchaseDate);
                 this.model.warrantyExpiration = new Date(res.result.warrantyExpiration);
                 this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
@@ -267,46 +278,13 @@ export class DetailsComponent {
    onAddManufacturer()
    {
 
-       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
-           return null;
-       }
-       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
-           return null;
-       }
-       if (this.manufacturerAddressLine2 == null || this.manufacturerAddressLine2 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerCity == null || this.manufacturerCity == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerEmail == null || this.manufacturerEmail == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerPhone == null || this.manufacturerPhone == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
+     
        if (this.manufacturerName == null || this.manufacturerName == "") {
            this.msgs = [];
            this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
            return null;
        }
-       if (this.manufacturerState == null || this.manufacturerState == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
+     
 
        let equipmentmanufacturermodel= {
            EquipmentId: this.id,
@@ -332,6 +310,7 @@ export class DetailsComponent {
            {
                this.getEquipmentManufacturers();               
                this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerDetails.id;
+               this.displayAssignManufacturerDialog = false;
              //  this.manufacturerPhone = res.result.equipmentManufacturerDetails.phoneNumber;
                //this.manufacturerFax = res.result.equipmentManufacturerDetails.PhoneNumber;
                //this.manufacturerWebsite = res.result.equipmentManufacturerDetails.PhoneNumber;
@@ -389,6 +368,10 @@ export class DetailsComponent {
 
    onEquipmentTypeChange(event) {
        this.selectedEquipmentTypeId = (event.value);
+
+       this.model.calibrationFrequencyCronExpression = "0 0 1 1 *";
+       this.frequencyInit();
+      // this.selectedCalibrationFrequency = event.
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
@@ -423,17 +406,18 @@ export class DetailsComponent {
        //    userRoles
        this.service.getEquipmentTypes().subscribe(response => {
            debugger;
-           this.equipmentTypes = new Array();
+           this.equipmentTypes = [];
            if (response != null) {
                var resultMap = new Array();
                resultMap.push({
                    label: "--Select--",
-                   value: { id: '', name: '', calibrationFrequencyCronExpression: '' }
+                   value: { id: '', name: '', frequency: '' }
                });
                for (let template of response.$values) {
+                  
                    var temp = {
                        label: template.name,
-                       value: { id: template.id, name: template.name, calibrationFrequencyCronExpression: template.calibrationFrequencyCronExpression }
+                       value: { id: template.id, name: template.name, frequency: template.frequency }
                    }
                    resultMap.push(temp);
                }
