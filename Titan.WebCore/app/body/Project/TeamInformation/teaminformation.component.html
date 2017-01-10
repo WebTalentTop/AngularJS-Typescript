@@ -1,0 +1,35 @@
+<!--<button (click)="onAddTorqueSheetTemplate()">Add Template</button>
+<button (click)="onViewTorqueSheetTemplate()">View Template</button>-->
+<div class="subsection">
+<p-panel>
+
+    <header class="with-controls">
+        <p class="ui-panel-title">Project Team</p>
+        <p class="controls">
+            <button type="text" (click)="displayAssignUserRolesDialog=true" pButton
+                    icon="ui-icon-person-add" label="Add User Roles&hellip;"></button>
+        </p>
+    </header>
+
+    <div class="ui-grid-row">
+
+        <p-dataTable [value]="TestFacilityRoles" [rows]="20" [paginator]="true"
+                     [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+            <p-column field="name" header="Name" sortable="true" [filter]="true"
+                      filterPlaceholder="Search"></p-column>
+            <p-column field="role" header="Role" sortable="true" [filter]="true"
+                      filterPlaceholder="Search"></p-column>
+            <p-column header="Action">
+
+                <template let-TestFacilityRole="rowData" pTemplate type="body">
+                    <button pButton type="button" icon="ui-icon-remove-circle"
+                            (click)="onDeleteUserRoleMap(TestFacilityRole.id)"
+                            label="Delete"></button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+    </div>
+
+</p-panel>
+</div>
