@@ -145,7 +145,7 @@ export class FormBuildersComponent {
         console.log("HandleRowSelect Event ----------", event);
         console.log("HandleRowSelect FormInstance Selected ----------", this.selectedFormInstance);
 
-        this.router.navigate(['formBuilders/details', this.selectedFormInstance.id]);
+        this.router.navigate(['admin/formBuilders/details', this.selectedFormInstance.id]);
     }
 
 }
