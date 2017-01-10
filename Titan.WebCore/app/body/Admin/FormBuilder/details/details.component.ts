@@ -23,6 +23,7 @@ import {ActivatedRoute, Router} from "@angular/router";
     templateUrl: 'app/body/Admin/FormBuilder/details/details.component.html'
 })
 export class DetailsComponent {
+    //region local variables for the class
     title: string = "Form Builder";
     formSchemaId: string;
     orderNumber: number = 0;
@@ -93,6 +94,7 @@ export class DetailsComponent {
     displaySelectBoxMod: boolean = false;
     displayNumberBoxMod: boolean = false;
     displayTextAreaBoxMod: boolean = false;
+    //endregion
 
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
@@ -158,7 +160,8 @@ export class DetailsComponent {
                                 formSchemaField.radioBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
                             }
                             if (m.fieldDataType.name === "SelectBox") {
-                                formSchemaField.selectBoxData = formSchemaField.formSchemaFieldDataTypeData.map(x => { return {label:x, value: x}});
+                                formSchemaField.data = formSchemaField.formSchemaFieldDataTypeData.map(x => {return { label:x, value:x}});
+                                formSchemaField.selectBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
                             }
                             return formSchemaField;
 
@@ -601,12 +604,12 @@ export class DetailsComponent {
         let name = this.checkFieldDataType(this.selectedFormInputData.formSchemaFieldDataTypeId).name;
         if(this.formInputData.formSchemaFieldDataTypeData.length > 0) {
             this.selectedFormInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {
-                return {name: x, value: x}
+                return {label: x, value: x}
             });
         }
         else {
-            this.selectedFormInputData.data = this.selectedFormInputData.radioBoxData.split("\n").map(x => {
-                return {name: x, value: x}
+            this.selectedFormInputData.data = this.selectedFormInputData.selectBoxData.split("\n").map(x => {
+                return {label: x, value: x}
             });
         }
         this.formInputData.data = this.selectedFormInputData.data;

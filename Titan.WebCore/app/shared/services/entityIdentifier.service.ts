@@ -37,7 +37,14 @@ export class EntityIdentifierService {
         //.map(this.getJson);
     }
     getByName(name): Observable<any> {
-        return this.http.get(`${EntityIdentifierApiUrl.getByName}/${name}`, { headers: this.headers })
+        return this.http.get(`${EntityIdentifierApiUrl.getByNameUrl}/${name}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getByNameForForms(name): Observable<any> {
+        return this.http.get(`${EntityIdentifierApiUrl.getByNameForFormsUrl}/${name}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);

@@ -152,19 +152,19 @@
                                    [placeholder]="item.label"/>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-checkbox>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'RadioBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'SelectBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12">
                                 <p-dropdown [options]="sampleSelectBoxItems"
                                             [(ngModel)]="selectedSelectItem"></p-dropdown>
@@ -212,7 +212,7 @@
         </div>
         <div class="ui-g-12">
             <label>What is the allowable maximum length of the value</label>
-            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="20"></p-spinner>
+            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="100"></p-spinner>
         </div>
     </div>
     <footer>
@@ -248,8 +248,7 @@
             <button pButton type="button" icon="fa-check" (click)="saveTextAreaBox()" label="Save Input"></button>
         </div>
     </footer>
-</p-dialog>
-
+</p-dialog>\
 
 <p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
     <div class="ui-g ui-fluid form-group">
@@ -331,7 +330,7 @@
     </footer>
 </p-dialog>
 
-<p-dialog header="CehckBox Information" [(visible)]="displaySelectBox">
+<p-dialog header="SelectBox Information" [(visible)]="displaySelectBox">
     <div class="ui-g ui-fluid form-group">
         <div class="ui-g-12">
             <label>Name of this item</label><br/>
@@ -490,7 +489,6 @@
 </p-dialog>
 <!-- End of RadiobButton Notificcation -->
 
-
 <!-- Popup Modification of TextAreaBox Field -->
 <p-dialog header="Textarea box Information" [(visible)]="displayTextAreaBoxMod" responsive="true">
 
@@ -528,3 +526,11 @@
 
 <!-- End Of Popups -->
 <!--endregion-->
+
+<p-dialog header="Save Form Message" [(visible)]="displaySaveFormMessage" responsive="true">
+    <div class="ui-g-fluid">
+        <div class="ui-g-12">
+            <p-messages [value]="msgs"></p-messages>
+        </div>
+    </div>
+</p-dialog>

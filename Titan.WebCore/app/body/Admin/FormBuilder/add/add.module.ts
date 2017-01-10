@@ -4,7 +4,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AddFormComponent } from "./add.component";
-import { DragDropModule, DialogModule, InputTextModule,InputTextareaModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
+import { DragDropModule, MessagesModule, DialogModule, InputTextModule,InputTextareaModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
 import { FormsModule} from '@angular/forms';
 
 import addFormRoutes from "./add.routes";
@@ -24,6 +24,7 @@ import addFormRoutes from "./add.routes";
         CheckboxModule,
         RadioButtonModule,
         CalendarModule,
+        MessagesModule,
         addFormRoutes],
     declarations: [AddFormComponent]
 })

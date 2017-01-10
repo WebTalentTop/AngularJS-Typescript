@@ -152,22 +152,23 @@
                                    type="text"
                                    [placeholder]="item.label"/>
                         </div>
+                        <pre style="font-size:11px">{{item | json }}</pre>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-checkbox>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'RadioBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'SelectBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12">
-                                <p-dropdown [options]="sampleSelectBoxItems"
+                                <p-dropdown [options]="item.data"
                                             [(ngModel)]="selectedSelectItem"></p-dropdown>
                             </div>
                         </div>
@@ -196,6 +197,7 @@
 </div>
 
 <!-- Inital Element Add -->
+<!--region Dragged item Popups-->
 <p-dialog header="Textbox Information" [(visible)]="displayTextBox" modal="modal" width="900" responsive="true">
 
     <div class="ui-g ui-fluid form-group">
@@ -250,7 +252,6 @@
         </div>
     </footer>
 </p-dialog>
-
 
 <p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
     <div class="ui-g ui-fluid form-group">
@@ -358,11 +359,13 @@
         </div>
     </footer>
 </p-dialog>
+<!--endregion-->
 
 <!-- Closing Initial Element Add -->
 
 <!-- Popup Modifying entered data -->
 
+<!--region Modification of the data Dialog Boxes-->
 <!-- Popup Modification of TextBox Field -->
 <p-dialog header="Textbox Information" [(visible)]="displayTextBoxMod" responsive="true">
 
@@ -476,7 +479,7 @@
         </div>
         <div class="ui-g-12">
             <label>What is the allowable maximum length of the value</label><br/>
-            <textarea pInputTextarea [(ngModel)]="sampleSelectBoxItems"
+            <textarea pInputTextarea [(ngModel)]="selectedFormInputData.selectBoxData"
                       (ngModelChange)="updateSelectBoxData()" style="width: 200px;" rows="5" cols="1"></textarea>
         </div>
     </div>
@@ -489,7 +492,6 @@
     </footer>
 </p-dialog>
 <!-- End of RadiobButton Notificcation -->
-
 
 <!-- Popup Modification of TextAreaBox Field -->
 <p-dialog header="Textarea box Information" [(visible)]="displayTextAreaBoxMod" responsive="true">
@@ -524,6 +526,7 @@
 </p-dialog>
 
 <!--- End of TextBox Modification -->
+<!--endregion-->
 
 
 <!-- End Of Popups -->

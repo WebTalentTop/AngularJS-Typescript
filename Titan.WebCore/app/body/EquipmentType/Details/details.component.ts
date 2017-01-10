@@ -23,6 +23,7 @@ import {IEquipmentSubtype} from '../../../shared/services/definitions/IEquipment
 import {ICalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
 import {LoggerService} from "../../../shared/services/logger/logger.service";
 import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
+import {FormSchemaCategoryService} from "../../../shared/services/formSchemaCategory.service";
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 declare var useGentleSelect: false;
@@ -78,9 +79,11 @@ export class DetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private dataService: EquipmentTypeService,
                 private entityIdentifierService: EntityIdentifierService,
+                private formSchemaCategoryService: FormSchemaCategoryService,
                 private ls: LoggerService) {
         this.ls.setShow(true);
-        this.CalibrationForms = [];
+        //region Default values for Calibration Form Dropdown. This is going to be deleted
+        /*this.CalibrationForms = [];
 
         this.CalibrationForms.push({
             id: '1',
@@ -106,9 +109,10 @@ export class DetailsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.entityIdentifierService.getByName(this.entityIdentifierName)
+        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
             .subscribe(res => {
                 this.ls.logConsole("EntityIdentifier Data By Name ----------", res);
+
             })
         this.dataService.getById(this.id)
             .subscribe(res => {

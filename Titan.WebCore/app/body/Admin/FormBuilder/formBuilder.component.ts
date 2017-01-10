@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
     templateUrl: 'app/body/Admin/FormBuilder/formbuilder.component.html'
 })
 export class FormBuildersComponent {
+    //region local variables
     title: string = "Form Builder";
 
     // Grid Variables
@@ -95,6 +96,7 @@ export class FormBuildersComponent {
     displaySelectBoxMod: boolean = false;
     displayNumberBoxMod: boolean = false;
     displayTextAreaBoxMod: boolean = false;
+    //endregion
 
     constructor(
                 private router: Router,
