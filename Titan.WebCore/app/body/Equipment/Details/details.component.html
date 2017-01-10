@@ -1,18 +1,18 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <h3>Details</h3>
+        <div class="card card-w-title">
+        <h1>Equipment Details</h1>
 <p-tabView  (onChange)="handleChange($event)">
 
-
-        <p-tabPanel header="Details ||" id='details'>
+        <p-tabPanel header="Information" id='details'>
 
             <p-growl [value]="msgs"></p-growl>
 
                 <div class="subsection">
                     <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
 
-                        <p-panel header="Basic Information">
-                            <br/>
+                        <p-panel header="Information">
+                            <br />
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" id="name" [(ngModel)]="model.name" required pInputText name="name" style="width:100%">
@@ -307,11 +307,9 @@
 
               </div>
 
-
-
       </p-tabPanel>
 
-        <p-tabPanel header="Schedule ||" id="schedule">
+        <p-tabPanel header="Schedule" id="schedule">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -343,7 +341,7 @@
                 </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Calibration History ||" id="calibrationhistory">
+        <p-tabPanel header="Calibration Historys" id="calibrationhistory">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -440,17 +438,16 @@
 
                       <div class="ui-grid-col-2"></div>
                       <p-dataTable [value]="equipmentLogComments" selectionMode="single"
-                                   [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                                   [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
                           [responsive]="true">
-                          <p-column field="event" header="Information" sortable="true" [filter]="true"
-                                    filterPlaceholder="Search"></p-column>
-                          <p-column field="comment" header="Audit/Comment" sortable="true" [filter]="true"
+                          <p-column field="event" header="Audit/Comment" sortable="true" [filter]="true"
                                     filterPlaceholder="Search">
-                              <template let-col let-item="rowData" pTemplate="body">
+                        </p-column>
+                          <p-column field="comment" header="Information" sortable="true" [filter]="true"
+                                    filterPlaceholder="Search">
+                            <template let-col let-item="rowData" pTemplate="body">
                                   <div [innerHtml]="item.comment"></div>
-                              </template>
-
-
+                            </template>
                           </p-column>
                           <p-column field="employee" header="Employee" sortable="true" [filter]="true"
                                     filterPlaceholder="Search"></p-column>
@@ -467,4 +464,5 @@
     </p-tabPanel>
 </p-tabView>
     </div>
+</div>
 </div>
