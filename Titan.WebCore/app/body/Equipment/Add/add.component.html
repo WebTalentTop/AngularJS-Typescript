@@ -4,7 +4,7 @@
     <p-tabView>-->
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-             
+                <p-messages [value]="msgs"></p-messages>
                 <h2> Create New Equipment </h2>
                 <p-panel header="Basic Information">
                   <div class="body">

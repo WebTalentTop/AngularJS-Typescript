@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CheckboxModule,DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+import { ITitanCalibrationSelectItem } from '../../../shared/services/definitions/ITitanCalibrationSelectItem';
+
+import { CheckboxModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, Message, CalendarModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
 
 import { Router } from '@angular/router';
@@ -35,14 +37,14 @@ export class AddComponent {
     calibrationFrequencyCronExpression: any;
     selectedMaintenanceFrequency: any;
     isMaintenaceFrequencySelected: boolean ;
-    equipmentTypes: any;
+    equipmentTypes: ITitanCalibrationSelectItem[];
     selectedEquipmentTypeId: any;
     testFacilities: any;
     selectedTestFacilityId: any;
     manufacturerName: any;
     isCronControlInitialized: boolean = false;
     manufacturerPhone: any;
-
+    msgs: Message[] = [];
     manufacturerWebsite: any;
     manufacturerEmail: any;
 
@@ -74,7 +76,7 @@ export class AddComponent {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
         this.getTestFacilities();
-        this.frequencyInit();
+      //  this.frequencyInit();
         // $("#selector").cron({
         //
         //     initial: "* * * * *",
@@ -114,42 +116,42 @@ export class AddComponent {
         });
       
     }
-    frequencyInit() {
-        if (this.calibrationFrequencyCronExpression != null) {
-            this.selectedMaintenanceFrequency = this.calibrationFrequencyCronExpression;
-            this.isMaintenaceFrequencySelected = true;
-            $("#selector").cron({
+    //frequencyInit() {
+    //    if (this.calibrationFrequencyCronExpression != null) {
+    //        this.selectedMaintenanceFrequency = this.calibrationFrequencyCronExpression;
+    //        this.isMaintenaceFrequencySelected = true;
+    //        $("#selector").cron({
 
-                initial: this.selectedMaintenanceFrequency,
-                onChange: function () {
-                    this.selectedMaintenanceFrequency = $(this).cron("value");
-                }, useGentleSelect: false
-            });
-            this.isCronControlInitialized = true;
-        }
-        else {
-            this.selectedMaintenanceFrequency = "0 0 1 1 *";
-            this.isMaintenaceFrequencySelected = false;
-        }
+    //            initial: this.selectedMaintenanceFrequency,
+    //            onChange: function () {
+    //                this.selectedMaintenanceFrequency = $(this).cron("value");
+    //            }, useGentleSelect: false
+    //        });
+    //        this.isCronControlInitialized = true;
+    //    }
+    //    else {
+    //        this.selectedMaintenanceFrequency = "0 0 1 1 *";
+    //        this.isMaintenaceFrequencySelected = false;
+    //    }
 
-    }
-    showHideCronPicker() {
-        console.log("--inside cronpicker show hide");
-        debugger;
-        if (this.isMaintenaceFrequencySelected) {
-           // if (!this.isCronControlInitialized) {
-                $("#selector").cron({
+    //}
+    //showHideCronPicker() {
+    //    console.log("--inside cronpicker show hide");
+    //    debugger;
+    //    if (this.isMaintenaceFrequencySelected) {
+    //       // if (!this.isCronControlInitialized) {
+    //            $("#selector").cron({
 
-                    initial: this.selectedMaintenanceFrequency,
-                    onChange: function () {
-                        this.selectedMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect: false
-                });
-          //  }
-        } else {
-            // Hide the cron
-        }
-    }
+    //                initial: this.selectedMaintenanceFrequency,
+    //                onChange: function () {
+    //                    this.selectedMaintenanceFrequency = $(this).cron("value");
+    //                }, useGentleSelect: false
+    //            });
+    //      //  }
+    //    } else {
+    //        // Hide the cron
+    //    }
+    //}
     getEquipmentManufacturers() {
         //    userRoles
         this.service.getEquipmentManufacturers().subscribe(response => {
@@ -174,6 +176,11 @@ export class AddComponent {
 
     onEquipmentTypeChange(event) {
         this.selectedEquipmentTypeId = (event.value);
+        //let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === event.value)[0].frequency;
+        //if (frequencyvar != null && frequencyvar != "") {
+        //    this.model.calibrationFrequencyCronExpression = "0 0 1 1 *";//event.frequency;
+        //    this.frequencyInit();
+        //}
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
@@ -206,21 +213,24 @@ export class AddComponent {
     getEquipmentTypes() {
         //    userRoles
         this.service.getEquipmentTypes().subscribe(response => {
-            this.equipmentTypes = new Array();
+
+            this.equipmentTypes = [];
             if (response != null) {
-                var resultMap = new Array();
-                resultMap.push({
+                var list = new Array();
+                this.equipmentTypes.push({
                     label: "--Select--",
-                    value: null
+                    value: null,
+                    frequency: null
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name,
-                        value: template.id
+                        label: template.name + "(" + template.frequency + ")",
+                        value: template.id,
+                        frequency: template.frequency
                     }
-                    resultMap.push(temp);
+                    this.equipmentTypes.push(temp);
                 }
-                this.equipmentTypes = resultMap;
+                this.equipmentTypes = this.equipmentTypes;
             }
         });
     }
@@ -235,7 +245,16 @@ export class AddComponent {
     }
     onSubmit(formRef) {
 
-
+        if (this.name == null || this.name == "") {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please enter Name', detail: '' });
+            return null;
+        }
+        if (this.selectedEquipmentTypeId == null || this.selectedEquipmentTypeId == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Equipment Type', detail: '' });
+            return null;
+        }
         formRef.isDeleted = false;
         let cronexp: any;
         if (this.isMaintenaceFrequencySelected) {

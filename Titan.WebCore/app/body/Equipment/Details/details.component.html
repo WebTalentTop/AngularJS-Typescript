@@ -28,13 +28,19 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Equipment Type :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeName" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" appendTo="body"  [autoWidth]="false">
-                                        <template let-item>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" appendTo="body"  [autoWidth]="false">
+                                        <!--<template let-item>
                                             <div class="ui-helper-clearfix">
+
                                                 <div *ngIf="item.value.name !==''"> {{item.value.name}} ({{ item.value.frequency}})</div>
                                             </div>
                                         </template>
                                     </p-dropdown>
+                                                <div *ngIf="item.name !==''"> {{item.name}} ({{ item.frequency}})</div>                                              
+                                            </div>
+                                        </template>-->
+                                    </p-dropdown>                                  
+
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Test Facility :</p>

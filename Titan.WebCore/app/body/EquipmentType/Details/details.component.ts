@@ -90,6 +90,7 @@ export class DetailsComponent implements OnInit {
                 this.model.name = res.name;
                 this.model.description = res.description;
                 this.frequencyInit();
+                this.onCronInit();
                 this.dataService.getSubTypesById(this.model.id)
                     .subscribe(result => {
                         this.EquipmentsubTypes = result.$values;
@@ -181,39 +182,48 @@ export class DetailsComponent implements OnInit {
         {
             this.cronInitialized = true;
          // if (this.model.frequency != null && this.model.frequency != "") {
-            $("#cronselector").cron({
-                initial: this.EquipmentSubType.frequency,
-                onChange: function () {
-                    this.EquipmentSubType.frequency = $(this).cron("value");
-                    this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-                }, useGentleSelect: false
-            });
+            //$("#cronselector").cron({
+            //    initial: this.EquipmentSubType.frequency,
+            //    onChange: function () {
+            //        this.EquipmentSubType.frequency = $(this).cron("value");
+            //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+            //    }, useGentleSelect: false
+            //});
         }
         else
         {
             if (this.model.frequency != null && this.model.frequency != "" && !this.cronInitialized) {
                 this.cronInitialized = true;
-                $("#cronselector").cron({
-                    initial: this.model.frequency,
-                    onChange: function () {
-                        this.EquipmentSubType.frequency = $(this).cron("value");
-                        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect: false
-                });
+                //$("#cronselector").cron({
+                //    initial: this.model.frequency,
+                //    onChange: function () {
+                //        this.EquipmentSubType.frequency = $(this).cron("value");
+                //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                //    }, useGentleSelect: false
+                //});
             } else {
                 this.cronInitialized = true;
-               
+                this.onCronAdd();
+               // $("#add").add("")
                 $("#cronselector").cron({
 
                     initial: this.selectedSubTypeMaintenanceFrequency,
-                    onChange: function () {
-                        //this.EquipmentSubType.frequency = $(this).cron("value");
-                        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect: false
+                    //onChange: function () {
+                    //    //this.EquipmentSubType.frequency = $(this).cron("value");
+                    //    this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                    //}//, useGentleSelect: false
                 });
             }
         }
         // this.IsSubType= true;
+    }
+    onCronAdd()
+    {
+        $("body").append("#cronselector");
+      //  $("#cronselector").u
+      //  $("#cronselector").remove();
+        
+
     }
     showDialogToAddForm() {
         this.displayDialogForm = true;
@@ -270,17 +280,29 @@ export class DetailsComponent implements OnInit {
 
     onCronInit()
     {
-        $("#cronselector").cron({
+        if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "") {
+            this.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
 
-            initial: this.EquipmentSubType.frequency,
-            onChange: function () {
-             //   this.EquipmentSubType.frequency = $(this).cron("value");
-                this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-            }
-            , useGentleSelect: false
-        });
+            $("#selector").cron({
 
-        //this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
+                initial: this.selectedSubTypeMaintenanceFrequency,
+                onChange: function () {
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
+            });
+
+        }
+        else {
+            this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+            $("#selector").cron({
+
+                initial: this.selectedSubTypeMaintenanceFrequency,
+                onChange: function () {
+                    this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
+            });
+        }
+
     }
     onRowSelect(event) {
         this.newsubType = false;
@@ -291,7 +313,7 @@ export class DetailsComponent implements OnInit {
             if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "") {
                 this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
                 this.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
-                this.onCronInit();
+              //  this.onCronInit();
                
             }
             else
@@ -301,7 +323,7 @@ export class DetailsComponent implements OnInit {
                 this.EquipmentSubType.frequency = "0 0 1 1 *";
                 if (!this.cronInitialized) {
                     this.cronInitialized = true;
-                    this.onCronInit();
+                    //this.onCronInit();
                 }
             }
            
