@@ -32,4 +32,49 @@
     </div>
 
 </p-panel>
+<p-dialog header="Add Users and Assign Roles" [(visible)]="displayAssignUserRolesDialog" [responsive]="true"
+          showEffect="fade" [modal]="true" width="400">
+          <p>Please select one or more users and their role.</p>
+          <div class="input-row">
+
+              <label>
+                  <span class="text">Users</span>
+
+                  <p-autoComplete [(ngModel)]="filteredSelectedUserNames"
+                                  [suggestions]="filteredUserNames"
+                                  (completeMethod)="filterUserNames($event)"
+                                  name="username" [minLength]="1" placeholder="Search by Name/#"
+                                  field="firstName" [multiple]="true">
+                  </p-autoComplete>
+
+              </label>
+
+          </div>
+
+          <!-- End Users -->
+          <!-- Begin Role -->
+
+          <div class="input-row">
+
+              <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
+              <span class="pseudo-label">Role</span>
+
+              <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)"
+                          name="userRole" [autoWidth]="false"></p-dropdown>
+
+          </div>
+
+          <!-- End Role -->
+          <br />
+          <footer>
+              <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                  <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
+                  <button type="button" pButton icon="ui-icon-close"
+                          (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
+                  <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
+                          label="Add User Role"></button>
+              </div>
+          </footer>
+</p-dialog>
 </div>
