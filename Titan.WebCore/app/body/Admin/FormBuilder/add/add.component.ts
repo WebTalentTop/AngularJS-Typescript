@@ -25,7 +25,7 @@ import {Router} from "@angular/router";
     templateUrl: 'app/body/Admin/FormBuilder/Add/add.component.html'
 })
 export class AddFormComponent {
-    title: string = "Form Builder";
+    title: string = "Create New Form";
     orderNumber: number = 0;
     draggableList: IDraggableList = new DraggableList([], []);
     formFieldDataTypeList: IFormSchemaFieldDataType[] = [];

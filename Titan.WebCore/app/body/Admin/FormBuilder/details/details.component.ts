@@ -25,7 +25,7 @@ import {Message} from "primeng/primeng";
 })
 export class DetailsComponent {
     //region local variables for the class
-    title: string = "Form Builder";
+    title: string = "Edit Form";
     formSchemaId: string;
     orderNumber: number = 0;
     draggableList: IDraggableList = new DraggableList([], []);

@@ -1,13 +1,10 @@
 <h1>{{title}}</h1>
-<div style="margin-left:0;padding-left:0">
+<div style="margin-left:0;padding-left:0" class="ui-g">
     <!-- Draggable Items Section -->
-    <div class="ui-g-4 card card-w-title">
-        <div class="ui-g-12">
-            <h1>Form Fields To Add</h1>
-        </div>
-        <div class="ui-g-12 nopad form-group" style="padding-left:0">
-            <div class="ui-g-12">
-                <div class="ui-g-12" pDraggable="inputs" (onDragStart)="dragStart($event, item)"
+    <div class="ui-g-12 ui-md-6 ui-lg-3  card card-w-title">
+      <p-panel header="Form Fields">
+
+                <div class="ui-grid-row ui-fluid" pDraggable="inputs" (onDragStart)="dragStart($event, item)"
                      (onDragEnd)="dragEnd($event)" *ngFor="let item of draggableList.formFieldDataTypeList"
                      [id]="item.id">
                     <div class="ui-g-12" *ngIf="item.name === 'TextBox'">
@@ -39,6 +36,9 @@
                                 <p-checkbox name="animal" value="Birds" label="Birds"
                                             [(ngModel)]="selectedCheckbox"></p-checkbox>
                             </div>
+                            <img [id]="item.name" *ngIf="item.name === 'CheckBox'"
+                                 src="Library/titanResources/images/form-images/small/checkBox.png"
+                                 title="TextBox"/>
                         </div>
                     </div>
 
@@ -73,33 +73,33 @@
 
                             <div class="ui-g-12">
                                 <p-dropdown [options]="sampleSelectBoxItems"
-                                            [(ngModel)]="selectedSelectItem"></p-dropdown>
+                                            [(ngModel)]="selectedSelectItem"  [style]="{'width':'100%'}"></p-dropdown>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="ui-g-12" *ngIf="item.name === 'TextAreaBox'">
-                        <div class="ui-g-4">
+                    <div class="ui-g" *ngIf="item.name === 'TextAreaBox'">
+                        <div class="ui-g-12 ui-md-6 ui-lg-4">
                             <label>{{item.name}}</label>
                         </div>
-                        <div class="ui-g-8">
+                        <div class="ui-g-12 ui-lg-8">
                             <textarea pInputTextarea rows="5" cols="30" [(ngModel)]="sampleTextAreaData"
-                                      title="TextArea Field"></textarea>
+                                      title="TextArea Field" style="width:100%"></textarea>
                         </div>
                     </div>
 
 
                 </div>
-            </div>
-        </div>
+
+      </p-panel>
     </div>
     <!-- End of Draggable Section -->
 
     <!-- Droppable Section -->
-    <div class="ui-g-8 card card-w-title" pDroppable="inputs"
-         (onDrop)="drop($event)">
-        <h1>Form Creation</h1>
+    <div class="ui-g-12 ui-md-6 ui-lg-9 card card-w-title" >
+      <p-panel header="Form Creation">
+
         <div class="ui-g ui-fluid form-group">
             <div class="ui-g-12">
                 <div class="ui-g-3">
@@ -119,7 +119,8 @@
                     <p-dropdown [autoWidth]="true"
                                 [options]="formSchemaCategoryList"
                                 (onChange)="onFormSchemaCategoryChange($event)"
-                                [(ngModel)]="selectedFormSchemaCategory">
+                                [(ngModel)]="selectedFormSchemaCategory"
+                                [style]="{'width':'100%'}">
                     </p-dropdown>
                 </div>
             </div>
@@ -132,14 +133,20 @@
                 <div class="ui-g-9">
                     <p-dropdown [autoWidth]="true"
                                 [options]="entityEventsList"
-                                [(ngModel)]="selectedEntityEvent">
+                                [(ngModel)]="selectedEntityEvent"
+                                [style]="{'width':'100%'}">
                     </p-dropdown>
                 </div>
             </div>
         </div>
-        <div class="ui-g ui-fluid form-group" style="min-height: 200px;">
+        <br />
+      </p-panel><br />
+      <p-panel header="Drag and Drop the form fields here">
+        <div class="ui-g ui-fluid form-group" style="min-height: 200px;" pDroppable="inputs"
+             (onDrop)="drop($event)">
             <div class="ui-g-12 ui-md-12" *ngIf="draggableList.selectedInputList">
                 <div class="ui-g-12" *ngFor="let item of draggableList.selectedInputList; let i=index;">
+                    <pre>{{item | json }}</pre>
                     <div (click)="showOverlayPopInfo($event, item, i)">
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextBox'">
                             <label>{{item.name}}</label><br>
@@ -148,19 +155,19 @@
                                    [placeholder]="item.label"/>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
-                            <label>{{item.name}}</label><br/>
+                            <label>{{item.label}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-checkbox>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'RadioBox'">
-                            <label>{{item.name}}</label><br/>
+                            <label>{{item.label}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'SelectBox'">
-                            <label>{{item.name}}</label><br/>
+                            <label>{{item.label}}</label><br/>
                             <div class="ui-g-12">
                                 <p-dropdown [options]="sampleSelectBoxItems"
                                             [(ngModel)]="selectedSelectItem"></p-dropdown>
@@ -179,13 +186,14 @@
                 </div>
             </div>
         </div>
+        <pre> {{ selectedInputList | json }}</pre>
         <div class="ui-g ui-flued form-group">
-            <div class="ui-g-12 ui-md-12">
-                <button type="button" (click)="saveForm()" pButton icon="fa-add" iconPos="right"
-                        label="Save form"></button>
+            <div class="ui-g-12 ui-md-12" style="text-align:right">
+                <button type="button" (click)="saveForm()" pButton icon="fa ui-icon-save"
+                        label="Save"></button>
             </div>
         </div>
-        <pre> {{ selectedInputList | json }}</pre>
+      </p-panel>
     </div>
     <!-- End Of Droppable Section -->
 </div>
@@ -208,7 +216,7 @@
         </div>
         <div class="ui-g-12">
             <label>What is the allowable maximum length of the value</label>
-            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="100"></p-spinner>
+            <p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="20"></p-spinner>
         </div>
     </div>
     <footer>
@@ -244,7 +252,8 @@
             <button pButton type="button" icon="fa-check" (click)="saveTextAreaBox()" label="Save Input"></button>
         </div>
     </footer>
-</p-dialog>\
+</p-dialog>
+
 
 <p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
     <div class="ui-g ui-fluid form-group">
@@ -299,7 +308,7 @@
     </footer>
 </p-dialog>
 
-<p-dialog header="CehckBox Information" [(visible)]="displayCheckBox">
+<p-dialog header="CheckBox Information" [(visible)]="displayCheckBox">
     <div class="ui-g ui-fluid form-group">
         <div class="ui-g-12">
             <label>Name of this item</label><br/>
@@ -485,6 +494,7 @@
 </p-dialog>
 <!-- End of RadiobButton Notificcation -->
 
+
 <!-- Popup Modification of TextAreaBox Field -->
 <p-dialog header="Textarea box Information" [(visible)]="displayTextAreaBoxMod" responsive="true">
 
@@ -522,11 +532,3 @@
 
 <!-- End Of Popups -->
 <!--endregion-->
-
-<p-dialog header="Save Form Message" [(visible)]="displaySaveFormMessage" responsive="true">
-    <div class="ui-g-fluid">
-        <div class="ui-g-12">
-            <p-messages [value]="msgs"></p-messages>
-        </div>
-    </div>
-</p-dialog>
