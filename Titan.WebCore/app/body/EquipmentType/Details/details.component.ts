@@ -218,7 +218,7 @@ export class DetailsComponent implements OnInit {
             //    }, useGentleSelect: false
             //});
         }
-        }
+        
         else {
             if (this.model.frequency != null && this.model.frequency != "" && !this.cronInitialized) {
                 this.cronInitialized = true;
@@ -250,7 +250,7 @@ export class DetailsComponent implements OnInit {
         $("body").append("#cronselector");
       //  $("#cronselector").u
       //  $("#cronselector").remove();
-        
+
 
     }
     showDialogToAddForm() {
@@ -346,19 +346,19 @@ export class DetailsComponent implements OnInit {
                 this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
                 this.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
               //  this.onCronInit();
-               
+
             }
             else
             {
                // this.cronInitialized = false;
-              
+
                 this.EquipmentSubType.frequency = "0 0 1 1 *";
                 if (!this.cronInitialized) {
                     this.cronInitialized = true;
                     //this.onCronInit();
                 }
             }
-           
+
         //}
         //else
         //{
