@@ -1,61 +1,120 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <base href="/">
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Layout CSS -->
-
-    <link id="theme-css" rel="stylesheet" type="text/css" href="/resources/theme/theme-titan.css">
-    <link rel="stylesheet" type="text/css" href="/resources/layout/css/animate.css">
-    <link id="layout-css" rel="stylesheet" type="text/css" href="/resources/layout/css/layout-titan.css">
-
-    <!-- Full Calendar, PrimeNG, QTIP, SpreadJS, CSS -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.css" />
-    <link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.css" />
-    <link rel="stylesheet" type="text/css" href="wwwroot/lib/primeng/resources/primeng.min.css" />
-    <link id="layout-spreadjs-css" rel="stylesheet" type="text/css" href="resources/spreadjs/css/gcspread.sheets.9.40.20161.0.css">
-    <link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
-    <link  rel="stylesheet" href="//cdn.quilljs.com/1.1.8/quill.snow.css" />
-    <!-- 1. Load libraries -->
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>                                     <!-- JQUERY-->
-    <script src="resources/layout/js/layout.js"></script>                                             <!-- Menu -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.js"></script>               <!-- FULL Calendar Dependency -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>   <!-- FULL Calendar -->
-    <script src="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.js"></script>        <!-- Scheduler -->
-    <script src="/resources/spreadjs/gcspread.sheets.all.9.40.20161.0.min.js"></script>              <!--SpreadJS-->
-    <script src="/resources/primeng.deps/quill.min.js"></script>              <!--QUILL (needed for primeng Editor)-->
-    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
-    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script>
-
-
-    <script src="wwwroot/lib/es6-shim/es6-shim.js"></script>
-    <script src="wwwroot/lib/zone/zone.min.js"></script>
-    <script src="wwwroot/lib/systemjs/system.src.js"></script>
-    <script src="wwwroot/lib/reflect/reflect.js"></script>
-    <script src="systemjs.config.js"></script>    <link rel="stylesheet" type="text/css" href="wwwroot/resources/spreadjs/jquery-gentleSelect.css" />
+﻿<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width" />
+
+
+
+
+
+    <!-- Layout CSS -->
+
+
+
+    <link id="theme-css" rel="stylesheet" type="text/css" href="/resources/theme/theme-titan.css">
+
+    <link rel="stylesheet" type="text/css" href="/resources/layout/css/animate.css">
+
+    <link id="layout-css" rel="stylesheet" type="text/css" href="/resources/layout/css/layout-titan.css">
+
+
+
+    <!-- Full Calendar, PrimeNG, QTIP, SpreadJS, CSS -->
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.css" />
+
+    <link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="wwwroot/lib/primeng/resources/primeng.min.css" />
+
+    <link id="layout-spreadjs-css" rel="stylesheet" type="text/css" href="resources/spreadjs/css/gcspread.sheets.9.40.20161.0.css">
+
+    <link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+
+    <link  rel="stylesheet" href="//cdn.quilljs.com/1.1.8/quill.snow.css" />
+
+    <!-- 1. Load libraries -->
+
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>                                     <!-- JQUERY-->
+
+    <script src="resources/layout/js/layout.js"></script>                                             <!-- Menu -->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.js"></script>               <!-- FULL Calendar Dependency -->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>   <!-- FULL Calendar -->
+
+    <script src="//fullcalendar.io/js/fullcalendar-scheduler-1.5.0/scheduler.min.js"></script>        <!-- Scheduler -->
+
+    <script src="resources/spreadjs/gc.spread.sheets.all.10.0.0.min.js"></script>                     <!--SpreadJS-->
+    
+    <script src="resources/primeng.deps/quill.min.js"></script>              <!--QUILL (needed for primeng Editor)-->
+
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
+
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script>
+
+
+
+
+
+    <script src="wwwroot/lib/es6-shim/es6-shim.js"></script>
+
+    <script src="wwwroot/lib/zone/zone.min.js"></script>
+
+    <script src="wwwroot/lib/systemjs/system.src.js"></script>
+
+    <script src="wwwroot/lib/reflect/reflect.js"></script>
+
+    <script src="systemjs.config.js"></script>
+    <link rel="stylesheet" type="text/css" href="wwwroot/resources/spreadjs/jquery-gentleSelect.css" />
     <link rel="stylesheet" type="text/css" href="wwwroot/resources/spreadjs/jquery-cron.css" />
-    <script src="wwwroot/resources/spreadjs/jquery-cron-min.js"></script>
-</head>
-<body>
-    <titan-web>
-        <div class="splash-screen">
-            <div class="splash-container">
-                <div class="logo"></div>
-                <div class="load-bar">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </div>
-    </titan-web>
-    <script>
-            System.config({ packages: { 'app': { defaultExtension: 'js' } }, });
-            System.import('app').then(null, console.error.bind(console));
-    </script>
-
-</body>
-</html>
+    <script src="wwwroot/resources/spreadjs/jquery-cron-min.js"></script>
+
+</head>
+
+<body>
+
+    <titan-web>
+
+        <div class="splash-screen">
+
+            <div class="splash-container">
+
+                <div class="logo"></div>
+
+                <div class="load-bar">
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </titan-web>
+
+    <script>
+
+            System.config({ packages: { 'app': { defaultExtension: 'js' } }, });
+
+            System.import('app').then(null, console.error.bind(console));
+
+    </script>
+
+
+
+</body>
+
+</html>
