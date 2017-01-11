@@ -1,0 +1,102 @@
+<!--<div class="ui-grid-row">
+    <div class="ui-grid-col-2">
+        Search by Module Name:
+    </div>
+    <div class="ui-grid-col-2">
+        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements" (completeMethod)="filterTestRequirements($event)"
+                        styleClass="wid100" [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
+        </p-autoComplete>
+    </div>
+
+    <div class="ui-grid-col-2">
+        <button pButton type="submit" class="btn btn-default" label="Add Requirement" (click)="onAddTestRequirement()"> </button>
+    </div>
+</div>-->
+<!--<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">-->
+<form #moduleCompForm="ngForm" (ngSubmit)="onSubmit(moduleCompForm.value)">
+
+    <!--<h3> {{addEditModuleText}} </h3>-->
+    <p-panel header="{{title}}">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    Module Name *
+                </div>
+                <div class="ui-grid-col-6">
+                    <input type="text" name="moduleName" pInputText [(ngModel)]="moduleDetails.name" placeholder="Please enter Module Name" class="form-control"
+                           required #moduleNameRef="ngModel" />
+                </div>
+                <div class="ui-grid-col-4" *ngIf="moduleNameRef.errors?.required">
+                    Module Name field is required
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                Description:
+            </div>
+            <div class="ui-grid-col-6">
+                <textarea type="text"
+                          pInputTextArea
+                          class="form-control"
+                          name="description"
+                          #DescriptionRef
+                          row="20"
+                          [(ngModel)]="moduleDetails.description"></textarea>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-10">
+                &nbsp;
+            </div>
+            <div class="ui-grid-col-2">
+                <button id="add" pButton label="Add Item" (click)="onAddNewItem()">  </button>
+            </div>
+        </div>
+        <div class="ui-grid-row" *ngIf="isAddNewItemRowVisible">
+            <div class="ui-grid-col-12">
+                <module-item-component (onAddComplete)="onAddItemComplete($event)" (onCancelComplete)="onCancelAddItemComplete($event)"></module-item-component>
+            </div>
+        </div>
+        <br />
+        <div class="ui-grid-row">
+            <p-panel header="Module Items">
+                <p-dataTable [value]="moduleDetails.moduleItems" expandableRows="true" *ngIf="moduleDetails && moduleDetails.moduleItems">
+                    <p-column expander="true" styleClass="col-icon"></p-column>
+                    <p-column field="name" header="Name"></p-column>
+                    <p-column field="description" header="Description"></p-column>
+                    <p-column field="itemType" header="Item Type"></p-column>
+                    <!--<p-column field="color" header="Color"></p-column>-->
+                    <template let-car pTemplate="rowexpansion">
+                        <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                            <div class="ui-grid-row">
+                                <module-item-component title="Edit Module Item" isAdd="false" saveButtonLabel="Save Module Item" (onAddComplete)="onEditItemComplete($event)" (onCancelComplete)="onCancelEditItemComplete($event)"></module-item-component>
+
+                            </div>
+                        </div>
+                    </template>
+                </p-dataTable>
+            </p-panel>
+        </div>
+        <br/>
+        
+        <div class="ui-grid-row">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    <button id="add" pButton type="button" [disabled]="!moduleCompForm.form.valid" label="Add" (click)="onAddModule()">  </button>
+                </div>
+                <div class="ui-grid-col-6">
+                </div>
+                <div class="ui-grid-col-4">
+                    <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+</form>
+
+<!--</div>
+    </div>
+</div>-->

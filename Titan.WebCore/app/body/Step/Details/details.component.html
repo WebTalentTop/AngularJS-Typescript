@@ -5,8 +5,7 @@
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)" *ngIf="stepDetails">
 
-                <h3> Details </h3>
-                <p-panel>
+                <p-panel header="Step Details">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
@@ -33,31 +32,6 @@
                             <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
                                 Test Stage field is required
                             </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                Step Type
-                            </div>
-                            <div class="ui-grid-col-6">
-                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepTypeId" (onChange)="onStepTypeChange()" name="stepType">
-                                </p-dropdown>
-                            </div>
-                            <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
-                                Step Type field is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row" *ngIf="stepTypeDetailList">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                {{stepTypeDetailLabelText}}
-                            </div>
-                            <div class="ui-grid-col-6">
-                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail"></p-multiSelect>
-                            </div>
-                            <div class="ui-grid-col-4"></div>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -99,6 +73,65 @@
                     <div class="ui-grid-row">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">
+                                Step Type
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepType" (onChange)="onStepTypeChange()" name="stepType">
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
+                                Step Type field is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row" *ngIf="stepTypeDetailList && isTorqueSheetNameVisible">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                {{stepTypeDetailLabelText}}
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail"></p-multiSelect>
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row" *ngIf="isModuleDivVisible">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-10">&nbsp;
+                            </div>
+                            <div class="ui-grid-col-2">
+                                <button id="addModule" pButton type="button" label="{{addStepTypeDetailLabelText}}" (click)="onAddModule()">  </button>
+                            </div>
+                            <module-component *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                        </div>
+                        <module-component (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                        <p-dataTable [value]="stepModules" expandableRows="true">
+                            <p-column expander="true" styleClass="col-icon" [style]="{'width':'22px'}"></p-column>
+                            <p-column field="name" header="Name"></p-column>
+                            <p-column field="description" header="Description"></p-column>
+                            <!--<p-column styleClass="col-button" header="Action">
+                                <template let-step="rowData" pTemplate="body">
+                                    <button type="button" pButton (click)="onDelete(step, 2)" icon="fa-trash" title="Delete"></button>
+                                    <button type="button" pButton (click)="onEditStep(step)" icon="fa-pencil-square-o" title="Edit"></button>
+                                    <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
+                                    <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
+                                </template>
+                            </p-column>-->
+                            <template let-step pTemplate="rowexpansion">
+                                <!--<div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                                    <div class="ui-grid-row" *ngIf="step.repeatStep">
+                                        <div class="ui-grid-col-2">Step Frequency: </div>
+                                        <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
+                                        <div class="ui-grid-col-2">Test % / # of Cycles: </div>
+                                        <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
+                                    </div>
+                                </div>-->
+                            </template>
+                        </p-dataTable>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
                                 <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save">  </button>
                             </div>
                             <div class="ui-grid-col-6">
@@ -109,12 +142,13 @@
                         </div>
                     </div>
                 </p-panel>
-                <br />
-                <br />
             </form>
             <div class="ui-grid-row">
                 <attachment-component title="Attachments" entityType="Step" [entityId]="id"></attachment-component>
             </div>
+            <p-dialog header="Add Module" [(visible)]="displayModulePopUp" width="800" height="600" [style]="{'overflow-y':'auto'}">
+                <module-component (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+            </p-dialog>
         </div>
     </div>
 </div>

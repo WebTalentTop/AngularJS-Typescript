@@ -5,9 +5,10 @@ import { DetailsComponent } from "./details.component";
 import { StepService} from '../../../shared/services/step.service';
 import { AttachmentModule } from '../../../shared/UIComponents/AttachmentComponent/attachment.module';
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
+import { ModuleModule } from '../../../shared/UIComponents/ModuleComponent/module.module';
 
 import { DataTableModule,TabViewModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule, 
-    RadioButtonModule, MultiSelectModule } from 'primeng/primeng';
+    RadioButtonModule, MultiSelectModule, DialogModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 //import addRoutes from "./details.routes";
 
@@ -24,7 +25,9 @@ import { RouterModule } from "@angular/router";
         DropdownModule, 
         RadioButtonModule,
         AttachmentModule,
-        MultiSelectModule
+        ModuleModule,
+        MultiSelectModule,
+        DialogModule
         ],
     providers: [StepService, TimeEntryService],
     exports:[DetailsComponent],

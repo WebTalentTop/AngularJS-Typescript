@@ -6,6 +6,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
+import { IModule } from '../../../shared/services/definitions/IModule';
 
 enum StepTypeEnum
 {
@@ -16,7 +17,9 @@ enum StepTypeEnum
     InspectionSheet =<any>'1AF2D2E3-0517-4092-B9D5-C71CA0EF1854',
     RemovalSheet =<any>'58DD1E1D-2A9F-42C0-B387-4E14349D6DCE',
     LoadSheet =<any>'7813C24A-450F-4026-B38F-E8F584CEA51C',
-    PictureSheet =<any>'8D875260-0811-4AEE-A5DD-7DCA6CFCFEB3'
+    PictureSheet = <any>'8D875260-0811-4AEE-A5DD-7DCA6CFCFEB3',
+    Instructions = <any>'E1CC6B89-E04F-4D42-9BB6-55B3FCF358EE',
+
 }
 
 enum StepFrequencyEnum 
@@ -45,7 +48,12 @@ export class DetailsComponent {
     public stepTypesLoaded:boolean;
     public stepFrequenciesLoaded:boolean;
     public testStages: any;
-
+    public displayModulePopUp: boolean;
+    public addStepTypeDetailLabelText: string;
+    public isAddModuleVisible: boolean = false;
+    public isTorqueSheetNameVisible: boolean = false;
+    public isModuleDivVisible: boolean = false;
+    public stepModules: IModule[];
     @Input() isDisplayComponentInPopUp: boolean;
     @Input() private set stepId(id: string) {
         this.id = id;
@@ -70,6 +78,7 @@ export class DetailsComponent {
     }
     
     ngOnInit() {
+        this.stepModules = new Array();
         this.getStepTypes();
         this.getStepFrequencies();
         this.getTestStages();
@@ -80,6 +89,14 @@ export class DetailsComponent {
             this.service.getById(id).subscribe(response => {
                 if (response != null && response.isSuccess) {
                     this.stepDetails = response.result;
+                    for (var stpType of this.stepTypes) {
+                        if (stpType.value != null && stpType.value.id == this.stepDetails.stepTypeId)
+                            this.stepDetails.stepType = stpType.value;
+                    }
+                    if (this.stepDetails.stepType != null && this.stepDetails.stepType.moduleTypeId != null) {
+                        this.getStepModules();
+                    }
+                    //this.stepDetails.stepType = { id: this.stepDetails.stepTypeId };
                     this.stepDetails.stepTypeDetailIds = this.stepDetails.stepTypeDetailIds.$values;
                     this.onRepeatChange(this.stepDetails.repeatStep);
                     this.stepDetails.repeatStep = this.stepDetails.repeatStep.toString();
@@ -88,6 +105,14 @@ export class DetailsComponent {
                 }
             });
         }
+    }
+
+    getStepModules() {
+        this.service.getStepModules(this.stepDetails.id).subscribe(response => {
+            if (response.isSuccess) {
+                this.stepModules = response.result;
+            }
+        });
     }
 
     getTestStages() {
@@ -112,17 +137,52 @@ export class DetailsComponent {
         });
     }
 
-      onStepTypeChange(){
+    onStepTypeChange() {
+        this.stepDetails.stepTypeId = this.stepDetails.stepType != null ? this.stepDetails.stepType.id : null;
+        if (this.stepDetails.stepType != null) {
+            if (this.stepDetails.stepType.moduleTypeId == null) {
+                this.isTorqueSheetNameVisible = true;
+                this.isModuleDivVisible = false;
+                this.stepTypeDetailLabelText = this.stepDetails.stepType.name;
+            } else {
+                this.isModuleDivVisible = true;
+                this.isTorqueSheetNameVisible = false;
+                this.addStepTypeDetailLabelText = "Add " + this.stepDetails.stepType.name;
+            }
+        }
+    
         this.service.getStepTypeDetails(this.stepDetails.stepTypeId).subscribe(response => {
             this.stepTypeDetailList = new Array();
             if (response != null && response.isSuccess) {
                 this.stepTypeDetailList = this.convertToArray(response.result.data, "");
                 this.stepTypeDetailLabelText = response.result.labelText;
-            }else{
+            } else {
                 this.stepTypeDetailLabelText = "";
                 this.stepTypeDetailList = null;
             }
         });
+
+    }
+
+    onCancelModuleComplete(event) {
+        this.isAddModuleVisible = false;
+        //this.displayModulePopUp = false;
+    }
+
+    onAddModule() {
+        this.isAddModuleVisible = true;
+    }
+
+    onAddModuleComplete(module:IModule) {
+        var modules = new Array();
+        modules.push(module.id);
+        this.service.postAddStepModule(modules, this.stepDetails.id).subscribe(res => {
+            if (res.isSuccess) {
+                this.isAddModuleVisible = false;
+                this.stepModules = res.result;
+            }
+        });
+        //this.displayModulePopUp = false;
     }
 
     onRepeatChange(isRepeat){
@@ -148,7 +208,20 @@ export class DetailsComponent {
         this.service.getStepTypes().subscribe(response => {
             this.stepTypes = new Array();
             if (response != null) {
-                this.stepTypes = this.convertToArray(response.result, "Select Step Type");
+                //this.stepTypes = this.convertToArray(response.result, );
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Step Type",
+                    value: null
+                });
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template
+                    }
+                    resultMap.push(temp);
+                }
+                this.stepTypes = resultMap;
                 this.stepTypesLoaded = true;
                 if(this.stepTypesLoaded && this.stepFrequenciesLoaded)
                     this.getDetails(this.id);

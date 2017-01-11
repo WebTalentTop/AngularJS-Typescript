@@ -54,6 +54,11 @@ export class StepService extends BaseService {
         //.map(this.getJson);
     }
 
+    postAddStepModule(filterBody, stepId): Observable<any> {
+        return this.http.post(`${StepApiUrl.postCreatedUrl}` + stepId, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
+
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${StepApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
@@ -79,6 +84,14 @@ export class StepService extends BaseService {
 
     getStepTypeDetails(stepTypeId): Observable<any> {
         return this.http.get(`${StepApiUrl.getStepTypeDetailsUrl}` + stepTypeId, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getStepModules(stepId): Observable<any> {
+        return this.http.get(`${StepApiUrl.getStepModulesUrl}` + stepId, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
