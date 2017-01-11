@@ -723,6 +723,7 @@ export class DetailsComponent implements AfterViewInit {
                 //this.loggerService.logConsole("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //this.loggerService.logConsole("----- Result of formObject -----", this.model);
             });
+
         if (this.id) {
             this.testFacilityService.getNotifications(this.id)
                 .subscribe(res => {
@@ -1243,7 +1244,7 @@ export class DetailsComponent implements AfterViewInit {
     private getEntityIdentifierInfo() {
         this.getGridFormInstanceInformationData();
         // Getting Entity Identifier Id first To get All The Form Categories
-        this.entityIdentifierService.getByName(this.entityIdentifierName)
+        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
             .subscribe(res => {
                 if(res.isSuccess) {
 
