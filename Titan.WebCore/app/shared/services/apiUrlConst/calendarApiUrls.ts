@@ -6,4 +6,6 @@ export class CalendarApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'calendar';
     public static postUpdateUrl: string = titanApiUrl + 'calendar';
     public static getByIdUrl: string = titanApiUrl + 'calendar';
+    public static getCalendarSettingsByTenantIdUrl: string = titanApiUrl + 'calendar/calendarSettings/';
+
 }

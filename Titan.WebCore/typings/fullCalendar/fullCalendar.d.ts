@@ -12,6 +12,7 @@ declare namespace FullCalendar {
          * Gets the version of Fullcalendar
          */
         version: string;
+        formatRange( arg1: any, arg2:any, arg3:any): any;
     }
 
     export interface BusinessHours {
