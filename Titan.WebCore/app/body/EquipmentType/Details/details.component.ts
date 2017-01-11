@@ -101,6 +101,7 @@ export class DetailsComponent implements OnInit {
         this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault', calibrationFrequencyCronExpression: '' });
         this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: '' });
         this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo', calibrationFrequencyCronExpression: ''});
+        */
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
     }
