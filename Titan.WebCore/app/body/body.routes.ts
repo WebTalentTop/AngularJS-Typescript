@@ -8,7 +8,7 @@ const routes = [
     { path: 'department', canActivate: [AuthGuard], loadChildren: 'app/body/department/department.module' },
     { path: 'equipment', canActivate: [AuthGuard], loadChildren: 'app/body/equipment/equipment.module' },
     { path: 'equipmenttype', canActivate: [AuthGuard], loadChildren: 'app/body/equipmenttype/equipmenttype.module' },
-
+    { path: 'user', canActivate: [AuthGuard], loadChildren: 'app/body/User/user.module' },
     { path: 'project', canActivate: [AuthGuard], loadChildren: 'app/body/project/project.module' },
     { path: 'admin', canActivate: [AuthGuard], loadChildren: 'app/body/admin/admin.module' },
     { path: 'calendar', canActivate: [AuthGuard], loadChildren: 'app/body/calendar/titancalendar.module' },

@@ -970,6 +970,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.postAddUserNames(selectedUserNames, this.id, this.selectedRole).subscribe(filteredList => {
             this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
+            this.selectedRole = null;
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
                     this.TestFacilityRoles = TestFacilityRoles;
@@ -1237,8 +1238,8 @@ export class DetailsComponent implements AfterViewInit {
                 this.selectedCategory = null;
             });
 
-        //this.msgs = [];
-        //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
 
     private getEntityIdentifierInfo() {

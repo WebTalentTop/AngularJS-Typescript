@@ -1,0 +1,42 @@
+<div class="ui-g-12">
+    <div class="card card-w-title">
+       
+       
+        <p-panel header="Users">
+          <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
+
+              <p-column header="First Name" sortable="true">
+                  <template let-userrow="rowData" pTemplate type="body">
+               <a routerLink="/details/{{userrow.id}}">{{userrow.firstName}}</a>
+                      </template>
+             </p-column>
+              <p-column header="Last Name" field="lastName" sortable="true">
+                  <!--<template let-taskrow="rowData" pTemplate type="body">
+                      {{userrow.lastName}}
+                  </template>-->
+              </p-column>
+              <p-column header="Role" field="lastName" sortable="true">
+                  <!--<template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.departmentId}}
+                  </template>-->
+              </p-column>
+              <p-column header="Department" field="lastName" sortable="true">
+                  <!--<template let-taskrow="rowData" pTemplate type="body">
+                       {{taskrow.departmentId}}
+                    </template>-->
+              </p-column>
+              <!--<p-column>
+                  <template pTemplate type="header">
+                      <button type="button" pButton icon="fa-refresh"></button>
+                  </template>
+                  <template let-taskrow="rowData" pTemplate type="body">
+                    
+                      <button id="details" pButton type="button" label="Details" routerLink="details/{{taskrow.id}}"></button>
+                  </template>
+              </p-column>-->
+
+
+          </p-dataTable>
+        </p-panel>
+    </div>
+</div>

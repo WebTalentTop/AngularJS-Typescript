@@ -79,6 +79,7 @@
                       </div>
                       <footer>
                           <button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>
+                          <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipmenttype"></button>
                       </footer><br />
                   </p-panel><br />
                   <p-panel>
@@ -174,7 +175,7 @@
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="frequency">Frequency</label></div>
                                          <div class="add">
-                                             <div class="new">
+                                             <div class="new" id="cronSelectorPlaceHolder">
                                                  <div id="cronselector"></div>
                                              </div>
                                            <!--<input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"/>-->
