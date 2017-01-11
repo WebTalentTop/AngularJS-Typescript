@@ -4,7 +4,7 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { TestFacilityService } from '../../../shared/services/testFacility.service';
+import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
 
 @Component({
     selector: 'add-test-Facilities',
