@@ -1,5 +1,5 @@
 import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
-import {TestFacilityService} from '../../shared/services/testFacility.service';
+import {TestFacilityService} from '../../shared/services/TestFacilityService/testfacility.service';
 import {BuildLevelService} from '../../shared/services/buildlevel.service';
 import {TestStatusService} from '../../shared/services/teststatus.service';
 import {TestRoleService} from '../../shared/services/testRole.service';

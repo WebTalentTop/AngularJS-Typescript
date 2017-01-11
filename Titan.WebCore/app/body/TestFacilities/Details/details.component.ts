@@ -1,4 +1,4 @@
-import { TestFacilityService } from '../../../shared/services/testFacility.service';
+import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
 import { LoggerService } from '../../../shared/services/logger/logger.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 

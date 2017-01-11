@@ -7,7 +7,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 
 import { EquipmentService } from '../../../shared/services/equipment.service';
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../../shared/services/TestFacilityService/testfacility.service';
 declare var cron: any;
 @Component({
     selector: 'add-equipment',

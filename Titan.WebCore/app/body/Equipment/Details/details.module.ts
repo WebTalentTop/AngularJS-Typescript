@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
 import { EquipmentService } from '../../../shared/services/equipment.service';
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../../shared/services/TestFacilityService/testfacility.service';
 
 import { CheckboxModule, EditorModule, SharedModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule,  DialogModule, InputTextModule, CalendarModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 

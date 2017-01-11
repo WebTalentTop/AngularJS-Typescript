@@ -1,4 +1,4 @@
-import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../shared/services/TestFacilityService/testfacility.service';
 import { TaskService } from '../../shared/services/task.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { PanelModule, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
