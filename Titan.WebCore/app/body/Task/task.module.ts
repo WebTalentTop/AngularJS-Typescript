@@ -5,7 +5,7 @@ import { TaskComponent } from "./task.component";
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, MessagesModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import {EditorModule,SharedModule} from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { TestFacilityService } from '../../shared/services/TestFacilityService/testfacility.service';
+import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testfacility.service';
 import { TaskService } from '../../shared/services/task.service';
 import taskRoutes from "./task.routes";
 

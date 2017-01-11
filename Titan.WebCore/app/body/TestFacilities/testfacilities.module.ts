@@ -5,7 +5,7 @@ import { TestFacilitiesComponent } from "./testFacilities.component";
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, MessagesModule, DropdownModule, 
     ButtonModule, BreadcrumbModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { TestFacilityService } from '../../shared/services/TestFacilityService/testfacility.service';
+import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 import testFacilitiesRoutes from "./testfacilities.routes";
 import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';

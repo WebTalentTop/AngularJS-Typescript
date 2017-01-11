@@ -2,7 +2,7 @@
 import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
-import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';

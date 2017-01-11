@@ -1,4 +1,4 @@
-import { TestFacilityService } from '../../shared/services/TestFacilityService/testfacility.service';
+import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';

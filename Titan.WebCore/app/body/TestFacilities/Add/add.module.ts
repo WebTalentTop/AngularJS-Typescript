@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
-import { TestFacilityService} from '../../../shared/services/TestFacilityService/testFacility.service';
+import { TestFacilityService} from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import {
     DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, EditorModule, SharedModule, MessagesModule, CalendarModule,
