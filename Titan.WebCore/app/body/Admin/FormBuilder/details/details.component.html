@@ -524,5 +524,13 @@
 <!--- End of TextBox Modification -->
 <!--endregion-->
 
-
+<p-dialog header="Save Form Message" [(visible)]="displaySaveFormMessage" responsive="true">
+    <div class="ui-g-fluid">
+        <div class="ui-g-12">
+            <p-messages [value]="msgs"></p-messages>
+        </div>
+    </div>
+</p-dialog>
 <!-- End Of Popups -->
+
+
