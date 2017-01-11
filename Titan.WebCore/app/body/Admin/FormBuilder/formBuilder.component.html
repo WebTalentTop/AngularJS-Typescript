@@ -1,26 +1,26 @@
-<h1>{{title}}</h1>
-<div class="ui-g">
+
+<div class="ui-g-12">
     <!-- Draggable Items Section -->
-    <div class="ui-g-12 card card-w-title">
-        <div class="ui-g-12">
-            <h1>Form Fields To Add</h1>
-        </div>
-        <div class="ui-g-12 nopad form-group">
-            <div class="ui-g-12">
-                <div class="ui-g-3">
-                    <label>Form Category</label>
-                </div>
-                <div class="ui-g-9">
-                    <p-dropdown [autoWidth]="true"
-                                [options]="formSchemaCategoryList"
-                                (onChange)="onFormSchemaCategoryChange($event)"
-                                [(ngModel)]="selectedFormSchemaCategory"
-                                [style]="{'width':'150px'}"
-                    >
-                    </p-dropdown>
-                </div>
-            </div>
-            <div class="ui-g-12">
+    <div class="card card-w-title">
+      <div class="ui-g">
+          <div class="ui-g-9 ui-g-nopad">
+              <div class="ui-g-12"><h1>Forms</h1></div>
+              <div class="ui-g-3"><label>Select the Form Category</label></div>
+              <div class="ui-g-9">
+                  <p-dropdown [autoWidth]="true"
+                              [options]="formSchemaCategoryList"
+                              (onChange)="onFormSchemaCategoryChange($event)"
+                              [(ngModel)]="selectedFormSchemaCategory"
+                              [style]="{'width':'150px'}">
+                  </p-dropdown>
+              </div>
+
+          </div>
+          <div class="ui-g-3" style="text-align:right"><br />
+              <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Create New Form"></button>
+          </div>
+      </div><br />
+      <div class="ui-grid-row">
                 <p-dataTable
                         [value]="gridData"
                         [paginator]="true"
@@ -37,8 +37,7 @@
                             filterMatchMode="contains"></p-column>
                     <p-column field="createdOn" header="Created On"></p-column>
                 </p-dataTable>
-            </div>
-        </div>
+      </div>
     </div>
     <!-- End of Draggable Section -->
 
