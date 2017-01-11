@@ -356,10 +356,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 }],
             eventRender: function (event, element) {
                 // The id is the testFacilityScheduleId
-                element.attr("event-id", event.id);
-                element.attr("testrequest-id", event.testRequestId);
-                element.attr("resource-id", event.resourceId);
-                element.attr("testName", event.testName);
+                element.attr("eventId", event.id);
+                element.attr("entityId", event.entityId);
+                element.attr("resourceId", event.resourceId);
+                element.attr("eventName", event.eventName);
                 element.attr("plannedStart", moment(event.plannedStartDate).format("llll"));
                 element.attr("plannedEnd", moment(event.plannedEndDate).format("llll"));
                 element.attr("dueDate", moment(event.dueDate).format("llll"));
@@ -510,18 +510,17 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             selector: '.showContextMenu',
             callback: function (key, options) {
                 var m = "clicked: " + key;
-                let testRequestId = $(this).attr("testrequest-id");
-                let id = $(this).attr("event-id");
-                console.log("testreqid", testRequestId)
-                switch (key) {
+                let entityId = $(this).attr("entityId");
+                let id = $(this).attr("eventId");
+                 switch (key) {
                     case "AssignResources": {
 
                         // selfRef.displayEventDialog = true;
                         selfRef.displayAssignDialog = true;
 
-                        selfRef.selectedTestRequestId = testRequestId;
+                        selfRef.selectedTestRequestId = entityId;
                         selfRef.selectedEventId = id;
-                        selfRef.selectedResourceId = $(this).attr("resource-id");
+                        selfRef.selectedResourceId = $(this).attr("resourceId");
                         selfRef.assignBlockTestFacilityName = $("#calendar").fullCalendar('getResourceById', selfRef.selectedResourceId).title;
 
                         selfRef.plannedStartDate = $(this).attr("plannedStart");
@@ -538,11 +537,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         selfRef.assignUserSchedule.endDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
                         selfRef.assignUserSchedule.testFacilityScheduleId = id;
                         selfRef.assignUserSchedule.updateTestFacilitySchedule = false;
-                        selfRef.assignUserSchedule.entityId = testRequestId;
+                        selfRef.assignUserSchedule.entityId = entityId;
                         selfRef.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
 
                         selfRef.dueDate = $(this).attr("dueDate");
-                        selfRef.testName = $(this).attr("testName");
+                        selfRef.testName = $(this).attr("eventName");
                         selfRef.displayEventDialogHeader = `${selfRef.testName}`;
                         selfRef.testRequestService.getUserScheduleById(selfRef.selectedEventId, "testfacilityscheduleid").subscribe(res => {
                             console.log("----GetUserScheduleById", res);
@@ -600,7 +599,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         break;
                     }
                     case "Details": {
-                        selfRef.router.navigate(['testrequest/details', testRequestId]);
+                        selfRef.router.navigate(['testrequest/details', entityId]);
                         break;
                     }
                     case "Split": {
@@ -620,6 +619,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 }
             },
             items: {
+                "Schedule" :{name:"Schedule", icon:"fa fa-clock"},
                 "AssignResources": {name: "Assign Resources", icon: "edit"}
                 , "Split": {name: "Split", icon: "cut"}
                 , "Details": {name: "Details", icon: "fa fa-beer"}
