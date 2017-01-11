@@ -17,6 +17,7 @@ import {IDraggableList, DraggableList} from '../../../../shared/services/definit
 import {ITitanSelectItem} from '../../../../shared/services/definitions/ITitanSelectItem';
 import {SelectItem} from 'primeng/primeng';
 import {ActivatedRoute, Router} from "@angular/router";
+import {Message} from "primeng/primeng";
 
 @Component({
     selector: 'addform',
@@ -94,8 +95,10 @@ export class DetailsComponent {
     displaySelectBoxMod: boolean = false;
     displayNumberBoxMod: boolean = false;
     displayTextAreaBoxMod: boolean = false;
+    displaySaveFormMessage: boolean = false;
     //endregion
 
+    msgs:Message[] = [];
     constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
                 private entityEventService: EntityEventService,
@@ -403,128 +406,18 @@ export class DetailsComponent {
         console.log("Form to sent ---------", formSchemaData);
         this.formSchemaService.postUpdate(formSchemaData)
             .subscribe(res => {
-                console.log("Form Schema Create post return Res--------", res)
+                console.log("Form Schema Create post return Res--------", res);
+                if(res.isSuccess) {
+                    this.msgs.push({severity:'success', summary: 'Form has been saved. ', detail: 'We are redirecting you to Form Builders home page to look at the forms list.'});
+                    this.displaySaveFormMessage = true;
+                    setTimeout(()=> {
+                        this.displaySaveFormMessage = false;
+                        this.router.navigate(['/admin/formBuilders']);
+                    }, 5000);
+                }
             });
         console.log('formschema Create called');
     }
-
-    /* dragEl:HTMLElement;
-     rootEl:HTMLDivElement;
-     onDragOver(evt) {
-     evt.preventDefault();
-     evt.dataTransfer.dropEffect = 'move';
-
-     var target = evt.target;
-     if( target && target !== this.dragEl && target.nodeName == 'LI' ){
-     // Сортируем
-     this.rootEl.insertBefore(this.dragEl, target.nextSibling || target);
-     }
-     }
-
-     // Окончание сортировки
-     onDragEnd(evt){
-     evt.preventDefault();
-
-     this.dragEl.classList.remove('ghost');
-
-     // Сообщаем об окончании сортировки
-     this.onUpdate(this.dragEl);
-     }
-
-     // Начало сортировки
-     dragstart(evt) {
-     this.dragEl = evt.target; // Запоминаем элемент который будет перемещать
-
-     // Ограничиваем тип перетаскивания
-     evt.dataTransfer.effectAllowed = 'move';
-     evt.dataTransfer.setData('Text', this.dragEl.textContent);
-
-     }
-     onUpdate(item){
-     console.log(item);
-     }
-     */
-    /*    private onDropModel(args: any) {
-     let [el, target, source] = args;
-     let inHtml = el.id;
-     console.log("OnDropModel ----",el[1]);
-     console.log("OnDropModel ----",target);
-     console.log("OnDropModel ----",source);
-
-     let item = this.formFieldDataTypeList.filter(filter => filter.id === el.id)[0];
-     console.log("---- Filter Item ----", item[0]);
-
-     switch (item.name){
-     case 'CheckBox':
-     this.displayCheckBox = true;
-     break;
-     case 'TextBox':
-     this.displayTextBox = true;
-     break;
-     case 'NumberBox':
-     this.displayNumberBox = true;
-     break;
-     case 'RadioBox':
-     this.displayRadioBox = true;
-     break;
-     case 'SelectBox':
-     this.displaySelectBox = true;
-     break;
-     case 'TextAreaBox':
-     this.displayTextAreaBox = true;
-     break;
-     }
-
-     this.formInputData.formSchemaFieldDataTypeId = item.id;
-     this.formInputData.name = item.name;
-
-     /!*let it = this.dropedItems.filter(x=> x.id === inHtml ? x : '');
-
-
-     let duplicateObject = this.utils.clone(it[0]);
-     let anotherDO = this.utils.clone(it[0]);
-
-     this.items.push(duplicateObject);
-
-     this.sourceSelection = '';
-     anotherDO.id = this.generateGUID();
-     this.lastItem = anotherDO;
-     /!*
-     this.lastItem.name = it[0].name;
-     this.lastItem.labelName = it[0].labelName;
-     this.lastItem.helpText = it[0].helpText;
-     this.lastItem.source = it[0].source;
-     this.lastItem.sourceData = it[0].sourceData;
-     this.lastItem.isRequired = it[0].isRequired;
-     this.lastItem.id = this.generateGUID();
-     *!/
-     let ind = this.dropedItems.map((obj, index) => {
-     if (obj.id === inHtml) {
-     return index;
-     }
-     });
-     console.log("-------LastItem on Drop Model---------",this.lastItem);//.sourceData({sourceItem:''});
-     this.dropedItems.splice(ind, 1);
-     this.dropedItems.push(this.lastItem);
-     //this.addClass(el, 'ex-moved');
-     this.showDialog();*!/
-     }
-
-     private hasClass(el:any, name:string):any {
-     return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
-     }
-
-     private addClass(el:any, name:string):void {
-     if (!this.hasClass(el, name)) {
-     el.className = el.className ? [el.className, name].join(' ') : name;
-     }
-     }
-
-     private removeClass(el:any, name:string):void {
-     if (this.hasClass(el, name)) {
-     el.className = el.className.replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
-     }
-     }*/
 
     // Popup Windows for editing form
     showOverlayPopInfo($event, item, i) {

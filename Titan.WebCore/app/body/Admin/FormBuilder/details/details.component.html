@@ -149,7 +149,6 @@
                                    type="text"
                                    [placeholder]="item.label"/>
                         </div>
-                        <pre style="font-size:11px">{{item | json }}</pre>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
                             <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">

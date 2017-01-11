@@ -465,7 +465,6 @@ export class AddFormComponent {
                         this.router.navigate(['/admin/formBuilders']);
                     }, 5000);
                 }
-
             });
         console.log('formschema Create called');
     }

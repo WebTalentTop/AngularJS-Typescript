@@ -8,7 +8,7 @@ import {CommonModule} from "@angular/common";
 import { FormsModule} from '@angular/forms';
 import {DetailsComponent} from "./details.component";
 import detailsRoute from './details.routes';
-import { DataTableModule, DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
+import { DataTableModule, MessagesModule, DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { DataTableModule, DragDropModule, DialogModule, InputTextModule, Spinner
         CheckboxModule,
         RadioButtonModule,
         CalendarModule,
+        MessagesModule,
         detailsRoute
     ],
     declarations:[DetailsComponent]

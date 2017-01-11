@@ -140,7 +140,6 @@
         <div class="ui-g ui-fluid form-group" style="min-height: 200px;">
             <div class="ui-g-12 ui-md-12" *ngIf="draggableList.selectedInputList">
                 <div class="ui-g-12" *ngFor="let item of draggableList.selectedInputList; let i=index;">
-                    <pre>{{item | json }}</pre>
                     <div (click)="showOverlayPopInfo($event, item, i)">
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextBox'">
                             <label>{{item.name}}</label><br>
