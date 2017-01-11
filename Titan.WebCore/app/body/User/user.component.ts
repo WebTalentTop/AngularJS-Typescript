@@ -1,4 +1,4 @@
-import { TestFacilityService } from '../../shared/services/testfacility.service';
+//import { TestFacilityService } from '../../shared/services/testfacility.service';
 import { UserService } from '../../shared/services/user.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { PanelModule, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
@@ -27,7 +27,7 @@ export class UserComponent {
     pendingTasks: any;
     allUsers: any;
     msgs: Message[] = [];
-    constructor(private service: TestFacilityService, private userservice: UserService, private route: ActivatedRoute, private router: Router) {
+    constructor( private userservice: UserService, private route: ActivatedRoute, private router: Router) {
         //this.route.queryParams.subscribe(params => {
 
         //    this.added = params['page'];

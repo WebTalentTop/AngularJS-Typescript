@@ -383,7 +383,7 @@ export class DetailsComponent {
 
        let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === event.value)[0].frequency;
        if (frequencyvar != null && frequencyvar != "") {
-           this.model.calibrationFrequencyCronExpression = "0 0 1 1 *";//event.frequency;
+           this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
            this.frequencyInit();
        }
       

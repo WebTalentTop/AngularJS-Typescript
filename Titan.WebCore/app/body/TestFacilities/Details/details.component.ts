@@ -173,7 +173,7 @@ export class DetailsComponent implements AfterViewInit {
 
     tabLoadStatus = [
         {loaded:true, method: this.loadDetailsTabViews},
-        {loaded:false, method: this.loadEquipmentTabViews},
+        { loaded: false, method: this.loadEquipmentTabViews },
         {loaded:false, method:this.loadScheduleTabViews},
         {loaded:false, method:this.loadMaintainanceTabViews},
         {loaded:false, method:this.loadAttachmentsTabViews},
@@ -289,9 +289,10 @@ export class DetailsComponent implements AfterViewInit {
     onTestFacilityDelete()
     {
         if (this.IsTestFacilityDelete)
-        this.testFacilityService.DeleteTestFacility(this.id).subscribe(res =>
-
-            console.log('-----delete-------', res)
+            this.testFacilityService.DeleteTestFacility(this.id).subscribe(res => {
+                this.IsTestFacilityDelete = true;
+                console.log('-----delete-------', res);
+            }
 
         );
 
@@ -709,6 +710,13 @@ export class DetailsComponent implements AfterViewInit {
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
+                if (res.testFacility.isDeleted) {
+                    this.IsTestFacilityDelete = true;
+                }
+                else
+                {
+                    this.IsTestFacilityDelete = false;
+                }
               //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
   			if (res.testFacility.nextMaintenanceDate != null) {
@@ -1134,6 +1142,12 @@ export class DetailsComponent implements AfterViewInit {
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
+                        if (res.testFacility.isDeleted) {
+                            this.IsTestFacilityDelete = true;
+                        }
+                        else {
+                            this.IsTestFacilityDelete = false;
+                        }
                         //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                         this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
