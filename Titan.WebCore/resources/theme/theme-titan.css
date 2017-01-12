@@ -4225,6 +4225,8 @@ body {
       content: "file_upload"; }
     body .ui-fileupload .ui-fileupload-buttonbar .ui-button {
       background-color: #FFC107; }
+      body .ui-fileupload .ui-fileupload-buttonbar .ui-button:nth-child(2) {
+        background-color: rgb(86, 33, 82); }
       body .ui-fileupload .ui-fileupload-buttonbar .ui-button.ui-state-hover {
         background-color: #FF8F00; }
   body .ui-fileupload .ui-fileupload-content .ui-messages-error .fa {
