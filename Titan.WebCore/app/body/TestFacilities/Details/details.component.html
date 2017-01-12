@@ -657,17 +657,17 @@
             </p-tabPanel>
 
             <p-tabPanel header="Attachments" id="attachments">
-                <h2>Attachments</h2>
+              <p-panel header="Attachments">
                 <p-growl [value]="msgs"></p-growl>
 
-                <div class="ui-grid-col-1">
-                    Category:
-                </div>
-                <div class="col-sm-12">
-                    <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories"
-                                [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
-                </div>
-
+                <br />
+                <div class="ui-g">
+                    <div class="ui-g-2"><label>Category:</label></div>
+                    <div class="ui-g-4">
+                      <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories"
+                                  [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
+                    </div>
+                </div><br />
                 <!--<div class="ui-grid-col-2"></div>-->
 
                 <p-fileUpload [name]="testfacility"
@@ -733,8 +733,8 @@
                                 <p-column header="Actions">
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
 
-                                        <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a>
-                                        <!--<button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>-->
+                                        <!-- <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a> -->
+                                        <button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>
                                         <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"
                                                 (click)="onDelete(TestFacilityAttachment)"></button>
                                     </template>
@@ -746,7 +746,7 @@
                         </div>
                     </template>
                 </p-fileUpload>
-
+              </p-panel>
             </p-tabPanel>
 
             <p-tabPanel header="Log" id="log" headerStyleClass="log">
