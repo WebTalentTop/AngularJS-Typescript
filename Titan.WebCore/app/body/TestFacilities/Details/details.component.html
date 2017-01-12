@@ -170,7 +170,7 @@
                             <footer>
                                 <p>* indicates required field</p>
                                 <button pButton type="submit" [disabled]="!tfForm.valid" label="Save"
-                                        icon="ui-icon-save"></button>
+                                        icon="ui-icon-save" class="purple-btn"></button>
                             </footer>
                             <br />
                         </p-panel><br />
@@ -250,7 +250,7 @@
                                 <p class="ui-panel-title">Test Facility Users</p>
                                 <p class="controls">
                                     <button type="text" (click)="displayAssignUserRolesDialog=true" pButton
-                                            icon="ui-icon-person-add" label="Add User Roles&hellip;"></button>
+                                            icon="ui-icon-person-add" label="Add User Roles" class="purple-btn"></button>
                                 </p>
                             </header>
 
@@ -330,7 +330,7 @@
                                 <p class="ui-panel-title">Departments</p>
                                 <p class="controls">
                                     <button type="text" (click)="displayAssignDepartmentsDialog=true" pButton
-                                            icon="ui-icon-person-add" label="Add Departments&hellip;"></button>
+                                            icon="ui-icon-person-add" label="Add Departments" class="purple-btn"></button>
                                 </p>
                             </header>
 
@@ -351,7 +351,7 @@
                                         <template let-TestFacilityTenant="rowData" pTemplate type="body">
                                             <button pButton type="button" icon="ui-icon-remove-circle"
                                                     (click)="onDeleteTenantMap(TestFacilityTenant.id)"
-                                                    label="Delete"></button>
+                                                    label="Delete" class="purple-btn"></button>
                                         </template>
 
                                     </p-column>
@@ -421,7 +421,7 @@
                         <p class="ui-panel-title"> Equipment List</p>
                         <p class="controls">
                             <button type="text" (click)="onAssignEquipments()" pButton
-                                    icon="ui-icon-person-add" label="Add Equipment&hellip;"></button>
+                                    icon="ui-icon-person-add" label="Add Equipment" class="purple-btn"></button>
                         </p>
                     </header>
                     <div class="ui-grid-col-4"></div>
@@ -440,10 +440,10 @@
                             <template let-TestFacilityEquipment="rowData" pTemplate type="body">
                                 <button pButton type="button" icon="ui-icon-arrow-forward" label="Move"
                                         (click)="showEquipmentDialog(TestFacilityEquipment)"
-                                        title="Move To Another Test Facility"></button>
+                                        title="Move To Another Test Facility" class="purple-btn"></button>
                                 <button pButton type="button" icon="ui-icon-remove-circle"
                                         (click)="onDeleteEquipmentMap(TestFacilityEquipment.id)"
-                                        label="Delete"></button>
+                                        label="Delete" class="purple-btn"></button>
                             </template>
 
                         </p-column>
@@ -748,9 +748,10 @@
                                     <template let-TestFacilityAttachment="rowData" pTemplate type="body">
 
                                         <!-- <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a> -->
-                                        <button pButton type="button" icon="ui-icon-file-download" label="Download" (click)="downloadAttachment(TestFacilityAttachment)"></button>
+                                        <button pButton type="button" icon="ui-icon-file-download" label="Download"
+                                        (click)="downloadAttachment(TestFacilityAttachment)" class="purple-btn"></button>
                                         <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"
-                                                (click)="onDelete(TestFacilityAttachment)"></button>
+                                                (click)="onDelete(TestFacilityAttachment)" class="purple-btn"></button>
                                     </template>
                                 </p-column>
 
@@ -801,7 +802,7 @@
                             <p class="ui-panel-title">Log/Comment List</p>
                             <p class="controls">
                                 <button pButton type="button" icon="ui-icon-add" label="Add Comment"
-                                        (click)="displayCommentDialog=true"></button>
+                                        (click)="displayCommentDialog=true" class="purple-btn"></button>
                             </p>
                         </header>
                         <div class="ui-grid-col-2"></div>
