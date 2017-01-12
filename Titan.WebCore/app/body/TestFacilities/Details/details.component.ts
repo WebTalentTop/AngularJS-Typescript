@@ -105,7 +105,7 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields: any[] 
+    formInstanceFields: any[]
 
     // End Of Form Related Variables
 
@@ -134,7 +134,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
-   
+
     displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
@@ -239,7 +239,7 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
-  
+
       frequencyInit()
       {
           if (this.testFacility.maintenanceFrequency != null && this.testFacility.maintenanceFrequency != "")
@@ -265,7 +265,7 @@ export class DetailsComponent implements AfterViewInit {
 
     showHideCronPicker(){
         console.log("--inside cronpicker show hide");
-        debugger;
+    
         if (this.isMaintenaceFrequencySelected){
             if (!this.isCronControlInitialized){
                 $("#selector").cron({
@@ -737,13 +737,13 @@ export class DetailsComponent implements AfterViewInit {
                 .subscribe(res => {
                     if (res) {
                         this.notifications = res;
-                       
+
                     }
-                   
+
                         this.notifications.forEach(x => {
                             this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                         })
-                    
+
                 })
         }
     }
@@ -966,7 +966,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'warn', summary: 'Please select only one user for secondary Incharge', detail: '' });
             return null;
         }
-       
+
 
         var selectedUserNames = new Array();
         for (var sel of this.filteredSelectedUserNames) {
@@ -994,7 +994,7 @@ export class DetailsComponent implements AfterViewInit {
                                 }
 
                                 this.notifications.forEach(x => {
-                                   
+
                                     this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                                 })
                             });
@@ -1065,7 +1065,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs = [];
             this.msgs.push({ severity: 'warn', summary: 'Search any equipment to add', detail: '' });
             return null;
-        }       
+        }
         if (!this.IsKeepOpen)
             this.displayAssignEquipmentsDialog = false;
         else
@@ -1154,8 +1154,8 @@ export class DetailsComponent implements AfterViewInit {
                         if (res.testFacility.nextMaintenanceDate != null) {
                             this.hasNextMaintenanceDate = true;
                         }
-                       
-                       
+
+
                     });
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
@@ -1201,11 +1201,11 @@ export class DetailsComponent implements AfterViewInit {
                             .subscribe(res => {
                                 if (res) {
                                     this.notifications = res;
-                                   
+
                                         if (res.length == 0) {
                                             this.notificationMsgs = [];
                                         }
-                                    
+
                                 }
 
                                 this.notifications.forEach(x => {
