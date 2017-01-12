@@ -144,7 +144,6 @@
              (onDrop)="drop($event)">
             <div class="ui-g-12 ui-md-12" *ngIf="draggableList.selectedInputList">
                 <div class="ui-g-12" *ngFor="let item of draggableList.selectedInputList; let i=index;">
-                    <pre>{{item | json }}</pre>
                     <div (click)="showOverlayPopInfo($event, item, i)">
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'TextBox'">
                             <label>{{item.name}}</label><br>
@@ -184,7 +183,6 @@
                 </div>
             </div>
         </div>
-        <pre> {{ selectedInputList | json }}</pre>
         <div class="ui-g ui-flued form-group">
             <div class="ui-g-12 ui-md-12" style="text-align:right">
                 <button type="button" (click)="saveForm()" pButton icon="fa ui-icon-save" icon="ui-icon-remove-circle" class="green-btn"
