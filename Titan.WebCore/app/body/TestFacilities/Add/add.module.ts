@@ -5,7 +5,7 @@ import { AddComponent } from "./add.component";
 import { TestFacilityService} from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import {
-    DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, EditorModule, SharedModule, MessagesModule, CalendarModule,
+    CheckboxModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, EditorModule, SharedModule, MessagesModule, CalendarModule,
     GrowlModule, PanelModule, DropdownModule, BreadcrumbModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
@@ -15,18 +15,18 @@ import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCr
 @NgModule({
     imports: [
         CommonModule,
-        TabViewModule, 
-        FormsModule, 
-        DataTableModule, 
-        InputTextareaModule, 
-        InputTextModule, 
+        TabViewModule,
+        FormsModule,
+        DataTableModule,
+        InputTextareaModule,
+        InputTextModule,
         PanelModule,
         EditorModule,
         SharedModule,
         ButtonModule,
         DropdownModule, CalendarModule,
         MessagesModule, GrowlModule,
-        addRoutes,
+        addRoutes,CheckboxModule, 
         BreadcrumbModule],
     providers: [TestFacilityService,BreadCrumbsService],
     declarations: [AddComponent]
