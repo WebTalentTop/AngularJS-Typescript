@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TitanCalendarComponent } from "./titancalendar.component";
 import { FormsModule, FormBuilder, Validator } from '@angular/forms';
-import { TestFacilityService } from '../../shared/services/TestFacilityService/testFacility.service';
+import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import { BuildLevelService } from '../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
