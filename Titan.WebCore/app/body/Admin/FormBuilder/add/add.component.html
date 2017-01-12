@@ -366,6 +366,14 @@
 
 <!-- Closing Initial Element Add -->
 
+<p-dialog header="Save Form Message" [(visible)]="displaySaveFormMessage" responsive="true">
+    <div class="ui-g-fluid">
+        <div class="ui-g-12">
+            <p-messages [value]="msgs"></p-messages>
+        </div>
+    </div>
+</p-dialog>
+
 <!--region Popup Dialog Section-->
 <!-- Popup Modifying entered data -->
 
