@@ -17,43 +17,32 @@
 
                         <!-- Begin Name -->
 
-                        <div class="input-row">
+                        <div class="ui-grid-row ">
 
-                            <div class="md-inputfield">
+                            <div class="md-inputfield ui-g-12 ui-md-6 ">
                                 <input type="text" id="firstName" pInputText name="firstName" [(ngModel)]="firstName"
-                                       minlength="3" class="form-control" required row="20"
+                                       minlength="3" class="form-control" required row="20" style="width:100%"
                                      >
-                                <label>First Name</label>
+                                <label>First Name *</label>
                             </div>
 
                             <!--<p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>-->
 
                         </div>
-
+                        <br />
                         <!-- End Name -->
                         <!-- Begin Address Line 1 -->
 
-                        <div class="input-row md-spaced">
+                        <div class="ui-grid-row ">
 
-                            <div class="md-inputfield">
+                            <div class="md-inputfield ui-g-12 ui-md-6 ">
                                 <input type="text" pInputText name="lastName" class="form-control" row="20"  [(ngModel)]="lastName"
-                                      >
-                                <label> Last Name </label>
+                                      style="width:100%">
+                                <label>Last Name</label>
                             </div>
-
-                            <!--<p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
-                            <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>-->
-
-                        </div>
-
-                        <!-- End Address Line 1 -->
-                        <!-- Begin Address Line 2 -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
+                            <div class="md-inputfield ui-g-12 ui-md-6 ">
                                 <input type="text" pInputText class="form-control" row="20" name="displayName" [(ngModel)]="displayName"
-                                    >
+                                    style="width:100%">
                                 <label>Display Name</label>
                             </div>
 
@@ -64,39 +53,25 @@
                         <!-- End Address Line 2 -->
                         <!-- Begin City -->
 
-                        <div class="input-row md-spaced">
+                        <div class="ui-grid-row">
 
-                            <div class="md-inputfield">
-                                <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
-
-                                  <label>Department </label>
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Department :</p>
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
                             </div>
-
-                            <!--<p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>-->
-
-                        </div>
+                        </div><br />
 
                         <!-- End City -->
                         <!-- Begin State -->
 
-                        <div class="input-row md-spaced">
+                        <div class="ui-grid-row">
 
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="emailAddress" [(ngModel)]="emailAddress">
+                            <div class="md-inputfield ui-g-12 ui-md-6 ">
+                                <input type="text" pInputText class="form-control" row="20" name="emailAddress" [(ngModel)]="emailAddress" style="width:100%">
                                 <label>Email Address</label>
                             </div>
-
-                            <!--<p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>-->
-
-                        </div>
-
-                        <!-- End State -->
-                        <!-- Begin Postal Code -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="userName"  [(ngModel)]="userName">
+                            <div class="md-inputfield ui-g-12 ui-md-6 ">
+                                <input type="text" pInputText class="form-control" row="20" name="userName"  [(ngModel)]="userName" style="width:100%">
                                 <label>User Name</label>
                             </div>
 
@@ -112,7 +87,7 @@
                                 <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
                             </div>
                         </div>-->
-                      
+
                         <!-- End Postal Code -->
 
                     </div>
@@ -122,7 +97,7 @@
                         <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/user"></button>
                         <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"></button>
                     </footer>
-
+                    <br />
                 </p-panel>
 
                 <!-- End Panel - Test Facility Name and Location -->
