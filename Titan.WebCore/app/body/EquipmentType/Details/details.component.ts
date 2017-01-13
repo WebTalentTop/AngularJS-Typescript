@@ -38,7 +38,7 @@ export class DetailsComponent implements OnInit {
     entityIdentifierName: string = "Equipment";
     //useGentleSelect:boolean = false;
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '','', '', '');
     CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
@@ -293,7 +293,7 @@ export class DetailsComponent implements OnInit {
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '','', this.id);
         this.displayDialog = true;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
 
@@ -369,8 +369,10 @@ export class DetailsComponent implements OnInit {
             this.dataService.postAdd(this.EquipmentSubType).subscribe(res=>{
                 if (res.isSuccess)
                 {
-                    this.dataService.getById(this.id)
-                        .subscribe(res => {
+                    this.dataService.getSubTypesById(this.model.id)
+                        .subscribe(result => {
+                            this.EquipmentsubTypes = result.$values;
+
                         });
                     this.msgs = [];
                     this.msgs.push({ severity: 'success', summary: 'Added', detail: '' });
@@ -385,8 +387,10 @@ export class DetailsComponent implements OnInit {
             this.dataService.postUpdate(this.EquipmentSubType).subscribe(res => {
 
                 if (res.isSuccess) {
-                    this.dataService.getById(this.id)
-                        .subscribe(res => {
+                    this.dataService.getSubTypesById(this.model.id)
+                        .subscribe(result => {
+                            this.EquipmentsubTypes = result.$values;
+
                         });
                     this.msgs = [];
                     this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
@@ -395,7 +399,7 @@ export class DetailsComponent implements OnInit {
             });
            
         }
-       this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+       this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '','', this.id);
         //this.EquipmentSubType = null;
         this.displayDialog = false;
     }
@@ -484,7 +488,7 @@ export class DetailsComponent implements OnInit {
     }
 
     clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
-        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.parentId);
+        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
         for (let prop in sub) {
             newType[prop] = sub[prop];
         }
@@ -498,7 +502,7 @@ export class DetailsComponent implements OnInit {
 
 class PrimeEquipmentSubType implements IEquipmentSubtype {
 
-    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public parentId) {
+    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency,public frequencyDescription, public parentId) {
     }
 }
 class PrimeCalibrationForm implements ICalibrationForm {

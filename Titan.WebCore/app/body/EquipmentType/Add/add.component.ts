@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class AddComponent implements OnInit {
 
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '','', '');
     CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '','');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
@@ -160,7 +160,7 @@ export class AddComponent implements OnInit {
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '','', this.id);
         this.displayDialog = true;
         // this.IsSubType= true;
     }
@@ -222,7 +222,7 @@ export class AddComponent implements OnInit {
     }
 
     clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
-        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.parentId);
+        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
         for (let prop in sub) {
             newType[prop] = sub[prop];
         }
@@ -236,7 +236,7 @@ export class AddComponent implements OnInit {
 
 class PrimeEquipmentSubType implements IEquipmentSubtype {
 
-    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public parentId) {
+    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency,public frequencyDescription, public parentId) {
     }
 }
 class PrimeCalibrationForm implements ICalibrationForm {

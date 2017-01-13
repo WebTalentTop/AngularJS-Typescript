@@ -5,5 +5,6 @@ export interface IEquipmentSubtype {
     description;
     calibrationform;
     frequency;
+    frequencyDescription;
     parentId;
 }
