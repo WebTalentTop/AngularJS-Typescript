@@ -1,0 +1,136 @@
+<div class="ui-g">
+
+    <div class="ui-g-12">
+<br/>
+        <div class="card card-w-title">
+
+            <h2>Create New User</h2>
+
+            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+                <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
+                <!-- Begin Panel - Test Facility Name and Location -->
+
+                <p-panel header="User Information">
+
+                    <div class="body">
+
+                        <!-- Begin Name -->
+
+                        <div class="input-row">
+
+                            <div class="md-inputfield">
+                                <input type="text" id="firstName" pInputText name="firstName" [(ngModel)]="firstName"
+                                       minlength="3" class="form-control" required row="20"
+                                     >
+                                <label>First Name</label>
+                            </div>
+
+                            <!--<p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>-->
+
+                        </div>
+
+                        <!-- End Name -->
+                        <!-- Begin Address Line 1 -->
+
+                        <div class="input-row md-spaced">
+
+                            <div class="md-inputfield">
+                                <input type="text" pInputText name="lastName" class="form-control" row="20"  [(ngModel)]="lastName"
+                                      >
+                                <label> Last Name </label>
+                            </div>
+
+                            <!--<p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
+                            <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>-->
+
+                        </div>
+
+                        <!-- End Address Line 1 -->
+                        <!-- Begin Address Line 2 -->
+
+                        <div class="input-row md-spaced">
+
+                            <div class="md-inputfield">
+                                <input type="text" pInputText class="form-control" row="20" name="displayName" [(ngModel)]="displayName"
+                                    >
+                                <label>Display Name</label>
+                            </div>
+
+                            <!--<p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>-->
+
+                        </div>
+
+                        <!-- End Address Line 2 -->
+                        <!-- Begin City -->
+
+                        <div class="input-row md-spaced">
+
+                            <div class="md-inputfield">
+                                <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
+
+                                  <label>Department </label>
+                            </div>
+
+                            <!--<p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>-->
+
+                        </div>
+
+                        <!-- End City -->
+                        <!-- Begin State -->
+
+                        <div class="input-row md-spaced">
+
+                            <div class="md-inputfield">
+                                <input type="text" pInputText class="form-control" row="20" name="emailAddress" [(ngModel)]="emailAddress">
+                                <label>Email Address</label>
+                            </div>
+
+                            <!--<p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>-->
+
+                        </div>
+
+                        <!-- End State -->
+                        <!-- Begin Postal Code -->
+
+                        <div class="input-row md-spaced">
+
+                            <div class="md-inputfield">
+                                <input type="text" pInputText class="form-control" row="20" name="userName"  [(ngModel)]="userName">
+                                <label>User Name</label>
+                            </div>
+
+                            <!--<p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>-->
+
+                        </div>
+                        <!--<div class="form-group col-sm-6 col-md-4">
+                            <label class="control-label  col-sm-12 pl0">
+                                Last
+                                Maintenance Date
+                            </label>
+                            <div class="input-group">
+                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
+                            </div>
+                        </div>-->
+                      
+                        <!-- End Postal Code -->
+
+                    </div>
+
+                    <footer>
+                        <p>* indicates required field</p>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/user"></button>
+                        <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"></button>
+                    </footer>
+
+                </p-panel>
+
+                <!-- End Panel - Test Facility Name and Location -->
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
