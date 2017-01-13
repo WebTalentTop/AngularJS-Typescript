@@ -4,7 +4,7 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-// import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
+
 import { UserService } from '../../../shared/services/user.service';
 @Component({
     selector: 'add-user',
@@ -35,7 +35,9 @@ export class AddComponent {
     //        }
 
     constructor(private breadCrumbsService: BreadCrumbsService,
+
                 private userservice: UserService,
+
                 private router: Router) {
 
     }
@@ -82,7 +84,7 @@ export class AddComponent {
     onSubmit(formRef) {
         formRef.isDeleted = false;
         let formData: any = {
-            firstName: '', lastName: '', departmentId: '', userName: '', displayName: '', defaultTimeZoneId: '', emailAddress:''
+            firstName: '', lastName: '', departmentId: '', userName: '', displayName: '', defaultTimeZoneId: '', emailAddress:'', tenantId:''
                     };
         formData.firstName = formRef.firstName;
         formData.lastName = formRef.lastName,
@@ -90,6 +92,7 @@ export class AddComponent {
         formData.userName = formRef.userName;
         formData.displayName = formRef.displayName;
         formData.emailAddress = formRef.emailAddress;
+        formData.tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
       //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
       
 
