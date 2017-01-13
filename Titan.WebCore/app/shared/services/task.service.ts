@@ -40,6 +40,23 @@ export class TaskService {
             //});
             ;
     }
+    onDeletetask(id)
+    {
+        return this.http.post(`${TaskApiUrl.deleteTaskUrl}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log('---------getbyusing testdata---------', data);
+            //    return data.$values
+            //});
+            ;
+          //.catch(err => Observable.throw(err))
+          //.map(this.getJson);
+
+    }
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

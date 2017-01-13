@@ -40,6 +40,17 @@ export class UserService {
             //});
             ;
     }
+    postAdd(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${UserApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     getUserDetailsById(id): Observable<any> {
         return this.http.get(`${UserApiUrl.getUserDetailsById}/${id}`, { headers: this.headers })
             .map(this.getJson)
@@ -57,6 +68,40 @@ export class UserService {
             //    return data.$values
             //});
             ;
+    }
+    postUpdate(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.put(`${UserApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+           // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getAllFunctionGroups(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getAllFunctionGroups}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getTimeZones(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getTimeZones}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getTitanRoles(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getTitanRoles}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getDepartments(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getDepartments}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
     }
     RemoveFunctionGroup(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);

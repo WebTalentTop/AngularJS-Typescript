@@ -6,12 +6,22 @@ import { TestRequestSensorService } from '../../../shared/services/testrequestse
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { UserService } from '../../../shared/services/user.service';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, DropdownModule, FileUploadModule, PanelModule } from 'primeng/primeng';
+import {
+    DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule,
+    CheckboxModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, EditorModule,
+    FileUploadModule, GrowlModule, DialogModule, PaginatorModule, SpinnerModule, BreadcrumbModule
+} from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
+
+
+
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, FileUploadModule, PanelModule, DropdownModule, detailsRoutes],
+    imports: [CommonModule,  DataGridModule,  RouterModule, AutoCompleteModule,
+        CheckboxModule,  FormsModule, SpinnerModule, PaginatorModule, EditorModule, DataTableModule,
+        TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule,
+        FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
     providers: [EquipmentTypeService, UserService, TestRequestSensorService],
     declarations: [DetailsComponent]
 })

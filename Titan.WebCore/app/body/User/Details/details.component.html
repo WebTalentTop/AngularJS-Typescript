@@ -1,138 +1,129 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <h3> User Details</h3>      
+  
+                <h3> User Details</h3>
+       
+            <p-growl [value]="msgs"></p-growl>
+            <div class="subsection">
 
-        <div class="subsection">
+                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-            <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                    <!-- Begin Panel - Test Facility Name and Location -->
 
-                <!-- Begin Panel - Test Facility Name and Location -->
+                    <p-panel header="Information">
 
-                <p-panel header="Information">
+                        <div class="body">
 
-                    <div class="body">
+                            <!-- Begin Name -->
 
-                        <!-- Begin Name -->
+                            <div class="input-row">
 
-                        <div class="input-row">
+                            
+                                <div class="md-inputfield">
+                                    <input type="text" pInputText name="firstName" [(ngModel)]="userProfile.firstName"
+                                           minlength="3" class="form-control" required row="20">
+                                    <label>First Name </label>
+                                </div>
 
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="name" [(ngModel)]="userProfile.firstName" #testFacilityNameRef="ngModel"
-                                       minlength="3" class="form-control" required row="20"
-                                       (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
-                                <label>First Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
+                                <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
+
                             </div>
 
-                            <p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>
+                            <!-- End Name -->
+                            <!-- Begin Address Line 1 -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <input type="text" pInputText name="lastName" class="form-control" required row="20" [(ngModel)]="userProfile.firstName">
+                                    <label>Last Name </label>
+                                </div>
+
+                                <!--<p class="helper hint" *ngIf="lastNameRef.focus">For example, 123 Main Street</p>
+                                <p class="helper error" *ngIf="lastNameRef.errors?.required && !lastNameRef.focus">Required</p>-->
+
+                            </div>
+
+                            <!-- End Address Line 1 -->
+                            <!-- Begin Address Line 2 -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments" [autoWidth]="false"></p-dropdown>
+
+                                    <label>Department</label>
+                                </div>
+
+                             
+                            </div>
+
+                            <!-- End Address Line 2 -->
+                            <!-- Begin City -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <input type="text" pInputText class="form-control" required row="20" name="emailAddress" [(ngModel)]="userProfile.emailAddress"
+                                         >
+                                    <label>Email Address </label>
+                                </div>                           
+                            </div>
+
+                            <!-- End City -->
+                            <!-- Begin State -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <input type="text" pInputText class="form-control" required row="20" name="phoneNumber" [(ngModel)]="userProfile.firstName">
+                                    <label>Phone Number</label>
+                                </div>
+
+                                
+                            </div>
+
+                            <!-- End State -->
+                            <!-- Begin Postal Code -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <p-dropdown [options]="titanRoles" (onChange)="onTitanRoleChange($event)"  name="titanRoles" [autoWidth]="false"></p-dropdown>
+
+                                    <label>Role </label>
+                                </div>                             
+                            </div>
+
+                            <!-- End Postal Code -->
+                            <!-- Begin Operation Hours -->
+
+                            <div class="input-row md-spaced">
+
+                                <div class="md-inputfield">
+                                    <p-dropdown [options]="timeZones" (onChange)="onTimeZoneChange($event)" [(ngModel)]="userProfile.defaultTimeZoneId" name="timeZones" [autoWidth]="false"></p-dropdown>
+
+                                    <label>Time Zone</label>
+                                </div>
+
+                            </div>
+
 
                         </div>
 
-                        <!-- End Name -->
-                        <!-- Begin Address Line 1 -->
+                        <footer>
+                            <p>* indicates required field</p>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-save"></button>
+                        </footer>
 
-                        <div class="input-row md-spaced">
+                    </p-panel>
 
-                            <div class="md-inputfield">
-                                <input type="text" pInputText name="addressLine1" class="form-control" required row="20" [(ngModel)]="userProfile.lirstName"
-                                       #tfAddress1Ref="ngModel"
-                                       (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
-                                <label>Last Name <span [ngClass]="{'error': tfAddress1Ref.errors?.required}">*</span></label>
-                            </div>
+                    <!-- End Panel - Test Facility Name and Location -->
 
-                            <p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
-                            <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>
+                </form>
 
-                        </div>
+            </div>
 
-                        <!-- End Address Line 1 -->
-                        <!-- Begin Address Line 2 -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="userProfile.firstName"
-                                       #tfAddress2Ref="ngModel"
-                                       (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
-                                <label>Department</label>
-                            </div>
-
-                            <p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>
-
-                        </div>
-
-                        <!-- End Address Line 2 -->
-                        <!-- Begin City -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" required row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="userProfile.firstName"
-                                       (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
-                                <label>Email Address <span [ngClass]="{'error': tfCityRef.errors?.required}">*</span></label>
-                            </div>
-
-                            <p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>
-
-                        </div>
-
-                        <!-- End City -->
-                        <!-- Begin State -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" required row="20" name="state" [(ngModel)]="userProfile.firstName" #tfstateRef="ngModel"
-                                       (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                <label>Phone Number <span [ngClass]="{'error': tfstateRef.errors?.required}">*</span></label>
-                            </div>
-
-                            <p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>
-
-                        </div>
-
-                        <!-- End State -->
-                        <!-- Begin Postal Code -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" required row="20" name="postalCode" [(ngModel)]="userProfile.firstName" #tfpostalCodeRef="ngModel"
-                                       (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
-                                <label>Role <span [ngClass]="{'error': tfpostalCodeRef.errors?.required}">*</span></label>
-                            </div>
-
-                            <p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>
-
-                        </div>
-
-                        <!-- End Postal Code -->
-                        <!-- Begin Operation Hours -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <p-dropdown [options]="operatingHours" (onChange)="onOperatingHourChange($event)" name="operatingHours" [autoWidth]="false"></p-dropdown>
-
-                                <label>Time Zone</label>
-                            </div>
-
-                        </div>
-
-                       
-                    </div>
-
-                    <footer>
-                        <p>* indicates required field</p>
-                        <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" icon="ui-icon-save"></button>
-                    </footer>
-
-                </p-panel>
-
-                <!-- End Panel - Test Facility Name and Location -->
-
-            </form>
-
-        </div>
 
         <div class="subsection">
 
@@ -142,16 +133,17 @@
 
                 <p-dialog header="Assign Function Group" [(visible)]="displayFunctionGroupDialog" modal="modal" showEffect="fade" responsive="true">
 
-                    <p>Please select function group or tenants.</p>
+                    <p>Please select function groups or tenants.</p>
 
                     <!-- Begin Users -->
+                   
 
                     <div class="input-row">
 
                         <label>
                             <span class="text">Function Group</span>
 
-                            <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>
+                            <p-dropdown [options]="functionGroups" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
 
                         </label>
 
@@ -165,7 +157,7 @@
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
                         <span class="pseudo-label">Tenants</span>
 
-                        <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>
+                        <!--<p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>-->
 
                     </div>
 
@@ -197,9 +189,8 @@
                             <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
-
                                 <template let-FunctionGroup="rowData" pTemplate type="body">
-                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup.functionGroupId)" label="Delete"></button>
+                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
                                 </template>
                             </p-column>
                         </p-dataTable>
@@ -213,9 +204,8 @@
             </form>
 
         </div>
-                    
-              
-          
-       
+
+
+
 </div>
 </div>

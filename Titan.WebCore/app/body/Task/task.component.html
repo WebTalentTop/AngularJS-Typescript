@@ -6,18 +6,21 @@
 
               <p-column header="Test Request" sortable="true">
                   <template let-taskrow="rowData" pTemplate type="body">
-                      {{taskrow.entityId}}
+                     
+                      <a routerLink="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}">{{taskrow.entityId}}</a>
                   </template>
+                 
               </p-column>
-              <p-column>
+              <!--<p-column>
                   <template pTemplate type="header">
                       <button type="button" pButton icon="fa-refresh"></button>
                   </template>
                   <template let-taskrow="rowData" pTemplate type="body">
                       <button id="add" pButton type="button" icon="ui-icon-add" label="Add Thermo Couple Info" routerLink="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"></button>
-                      <!-- <a href="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a> -->
-                  </template>
-             </p-column>
+                       <a href="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/add/{{taskrow.entityId}}/{{taskrow.id}}" *ngIf="HasTasks==true"><i class="fa ui-icon-add"></i> Add Thermo Couple Info</a> 
+                 
+                   </template>
+             </p-column>-->
           </p-dataTable>
         </p-panel>
         <p-panel header="Thermo Couple Tasks">
@@ -25,7 +28,8 @@
 
               <p-column header="Test Request" sortable="true">
                   <template let-taskrow="rowData" pTemplate type="body">
-                     {{taskrow.entityId}}
+                  
+                      <a routerLink="details/{{taskrow.id}}">{{taskrow.entityId}}</a>
                       </template>
              </p-column>
               <p-column header="Task Name" sortable="true">
@@ -38,13 +42,24 @@
                       {{taskrow.departmentId}}
                   </template>
               </p-column>
-              <p-column>
-                  <template pTemplate type="header">
-                      <button type="button" pButton icon="fa-refresh"></button>
-                  </template>
+              <p-column header="Status" sortable="true">
                   <template let-taskrow="rowData" pTemplate type="body">
+                      <div *ngIf="taskrow.isCompleted==true">
+                          Completed
+                      </div>
+                      <div *ngIf="taskrow.isCompleted==false">
+                          Pending
+                      </div>
+                      
+                  </template>
+              </p-column>
+              <p-column header="Actions">
+                  
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"
+                              (click)="onDelete(taskrow.id)"></button>
                       <!-- <a routerLink="details/{{taskrow.id}}">Details</a> -->
-                      <button id="details" pButton type="button" label="Details" routerLink="details/{{taskrow.id}}"></button>
+                      <!--<button id="details" pButton type="button" label="Details" routerLink="details/{{taskrow.id}}"></button>-->
                   </template>
               </p-column>
 

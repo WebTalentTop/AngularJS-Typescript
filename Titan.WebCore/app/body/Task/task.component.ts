@@ -39,7 +39,27 @@ export class TaskComponent {
         //    this.msgs.push({ severity: 'Success', summary: 'Success', detail: '' });
         //}
     }
+    onDelete(id) {
+        console.log('------event------------', event)
+        this.taskservice.onDeletetask(id).subscribe(res => {
+            if (res.success)
+            {
+                this.taskservice.gettasksbyuserid()
+                    .subscribe(res => {
+                        if (res.result.pendingTasks.$values.length != 0) {
+                            this.HasTasks = true
+                        }
+                        this.pendingTasks = res.result.pendingTasks.$values;
+                        this.allTasks = res.result.allTasks.$values;
+                        //  this.taskId = res.result.id;
+                        this.testRequestId = res.result[0].entityId;
 
+                    });
+            }
+        });
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     ngOnInit() {
         let resData: any;
         this.taskservice.gettasksbyuserid()

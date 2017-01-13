@@ -2,19 +2,19 @@ import { TestRequestSensorService } from '../../../shared/services/testrequestse
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
-
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
 
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
-import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 //import { UUID } from 'angular2-uuid'
-import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'sensor-details',
+    selector: 'user-details',
     templateUrl: 'app/body/User/Details/details.component.html'
 })
 export class DetailsComponent {
@@ -51,8 +51,15 @@ export class DetailsComponent {
     selectedSensorTypeId: any;
     comment: any;
     sensorRequests: any;
+    selectedFunctionGroupId: any;
+    functionGroups: any;
     displayFunctionGroupDialog: boolean = false;
-   // selectedTimeEntryTypeId: any;
+    selectedTimeZoneId: any;
+    selectedTitanRoleId: any;
+    selectedDepartmentId: any;
+    departments: any;
+    timeZones: any;
+    titanRoles: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
@@ -64,8 +71,15 @@ export class DetailsComponent {
    userId: any;
    tenantId: any;
    userFunctionGroups: any;
-   userProfile: IUserProfile;
+   functionGroupsPerUserList: any;
+   userProfile: any = {
+      
+       firstName: ' ',
+       lastName: ' ',
+     
+   };
    departmentId: any;
+
    // filepath: string = "TestFacility";
    // TrackingList: any;
    // startTime: any;
@@ -107,15 +121,27 @@ export class DetailsComponent {
        console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
-     //  this.getSensorList();
-
+       this.getFunctionGroups();
+       this.getDepartments();
+       this.getTimeZones();
+       this.getTitanRoles()
        //get the departmentId through taskId
        //get sensors by department and entityId
        this.userservice.getUserDetailsById(this.userId)
            .subscribe(userresult => {
-               this.userProfile.firstName = userresult.result.firstName;
-               this.userProfile.lastName = userresult.result.lastName;
-               this.userFunctionGroups = userresult.result.functionGroupMapping;
+               this.userProfile = userresult.result;
+              
+              //this.userProfile.firstName = userresult.result.firstName;
+             // this.userProfile.lastName = userresult.result.lastName;
+               let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res => {
+
+                 //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
+                //   console.log('--------filtered-------', filterfuntiongroups);
+                   this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+                  // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
+               });
+              
                
            });
       
@@ -145,85 +171,60 @@ export class DetailsComponent {
 
    }
   
-   onChange(event) {
-       var files = event.files;
-       //let fileList: FileList = event.target.files;
-       //if (fileList.length > 0) {
-       //    let file: File = fileList[0];
+  
 
-       //    let formData: FormData = new FormData();
-       //    formData.append('degree_attachment', file, file.name);
-       //this.dataService.postCommentAdd(formData).subscribe(res => {
-       //    console.log("-------- Test Sensor Adding new result ----- ", res);
-       //    if (res.IsSuccess) {
-       //        this.router.navigate(["/testrequest/details/", this.id]);
-       //    }
-       //});
-       for (let file of event.files) {
-           // this.fileInfo.name = file.name;
-
-           //this.fileData.push(this.fileInfo);
-           this.uploadedFiles.push(file);
-           // this.fileInfo.name = '';
-       }
-       //this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], files).subscribe(() => {
-       //    console.log('sent');
-       //});
-
-       //  let headers = new Headers();
-       //  headers.append('Accept', 'application/json');
-       //  let options = new RequestOptions({ headers: headers });
-       //this.http.post('http://url', formData, options)
-       //    .map(res => res.json())
-       //    .catch(error => Observable.throw(error))
-       //    .subscribe(
-       //    data => console.log('success'),
-       //    error => console.log(error)
-       //    )
-
-   }
-   onCompleteTask()
-   {
-       let completetaskbody =
-           {
-               id: this.taskId
-               //entityId: this.id,
-               //entityIdentifier: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',               
-               //departmentId: '8BF81DFE-FF64-2AFD-5C55-2D2D290C4490'
-
-           }
-       this.dataService.postTasksComplete(this.taskId).subscribe(res => {
-
-
-
-       });
-
-   }
-   onBeforeUpload(event) {
-       for (let file of event.files) {
-           // this.fileInfo.name = file.name;
-
-           //this.fileData.push(this.fileInfo);
-           this.uploadedFiles.push(file);
-          // this.fileInfo.name = '';
-       }
-
-       //this.testfacilityattachmentservice.getByIdusing(this.id)
-       //    .subscribe(TestFacilityAttachments => {
-       //        console.log('-----------  TestFacilitiesroles------------------', TestFacilityAttachments);
-       //        this.TestFacilityAttachments = TestFacilityAttachments;
-       //    });
-
-       //this.msgs = [];
-       //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-   }
    onSensorChange(event) {
        console.log('------event------------', event)
        this.selectedSensorTypeId = (event.value);
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
+   onFunctionGroupChange(event)
+   {
+       this.selectedFunctionGroupId = event.value;
+   }
+   onTimeZoneChange(event) {
+       this.selectedTimeZoneId = event.value;
+   }
+   onTitanRoleChange(event) {
+       this.selectedTitanRoleId = event.value;
+   }
+   onDepartmentChange(event) {
+       this.selectedDepartmentId = event.value;
+   }
+   onAddFunctionGroup()
+   {
+       let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+       this.displayFunctionGroupDialog = false;
+       let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
+       let userFunctionGroupModel = {
 
+           userId: this.userId,
+           functionGroupId: this.selectedFunctionGroupId,
+           functionGroupName: functionGroupName,
+           tenantId: tenantId
+       };
+       this.userservice.postAddFunctionGroupToUser(userFunctionGroupModel).subscribe(res => {
+           if (res.isSuccess) {
+              // this.selectedFunctionGroupId = null;
+             
+               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res=>{
+                   if(res.result != null)
+                   {
+                       this.functionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+                   }
+
+               });
+
+           }
+       });
+
+   }
+   onRemoveFunctionGroupMap(functionGroup)
+   {
+       this.userservice.RemoveFunctionGroup(functionGroup).subscribe(res => { });
+
+   }
    //onDownTimeReasonChange(event) {
    //    console.log('------event------------', event)
    //    this.selectedDownTimeReasonId = (event.value);
@@ -237,10 +238,10 @@ export class DetailsComponent {
    //    //   this.EquipmentSubType.calibrationform = (event);
 
    //}
-   getSensorList() {
-        //    userRoles
-       this.equipmenttypeservice.getSensorList().subscribe(response => {
-           this.Sensors = new Array();
+   getFunctionGroups() {
+       //    userRoles
+       this.userservice.getAllFunctionGroups().subscribe(response => {
+           this.functionGroups = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -254,12 +255,77 @@ export class DetailsComponent {
                     }
                     resultMap.push(temp);
                 }
-                this.Sensors = resultMap;
+                this.functionGroups = resultMap;
             }
             console.log(response);
         });
    }
-
+   getTimeZones() {
+       //    userRoles
+       this.userservice.getTimeZones().subscribe(response => {
+           this.timeZones = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "--Select--",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.name
+                   }
+                   resultMap.push(temp);
+               }
+               this.timeZones = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getDepartments() {
+       //    userRoles
+       this.userservice.getDepartments().subscribe(response => {
+           this.departments = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "--Select--",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.departments = resultMap;
+           }
+           console.log(response);
+       });
+   }
+   getTitanRoles() {
+       //    userRoles
+       this.userservice.getTitanRoles().subscribe(response => {
+           this.titanRoles = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "--Select--",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.titanRoles = resultMap;
+           }
+           console.log(response);
+       });
+   }
    //getDownTimeReasons() {
    //    //    userRoles
    //    this.dataService.GetAllDownTimeReasons().subscribe(response => {
@@ -310,186 +376,30 @@ export class DetailsComponent {
    //    this.file = inputValue.files[0];
    //    console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
    //}
-   uploadFile(event)
-   {
-       for (let file of event.files) {
-
-           this.formData = new FormData();
-           this.formData.append('file', file);
-       }
-
-       //this.dataService.postCommentAdd(null).subscribe(res => {
-       //    console.log("-------- Test Sensor Adding new result ----- ", res);
-       //    if (res.IsSuccess) {
-       //        this.router.navigate(["/testrequest/details/", this.id]);
-       //    }
-       //});
-
-   }
+  
    onSubmit(formRef) {
        //formRef.isDeleted = false;
-       let formData: any = {
+       let userFormData: any = {
 
-           SensorTypeId: this.selectedSensorTypeId,
-
-          TestRequestId : this.id,
-          DepartmentId: this.departmentId,
-
-         IsCompleted :'false',
-         IsDeleted: 'false'
+           Id: this.userId,
+           firstName: formRef.firstName,
+           lastName: formRef.lastName,
+           emailAddress: formRef.emailAddress,
+           defaultTimeZoneId: this.selectedTimeZoneId,
+           departmentId: this.selectedDepartmentId
+            
 
 
        };
-       //let formCommentData: any = {
+       this.userservice.postUpdate(userFormData).subscribe(res => {
+           if (res.isSuccess)
+           {
 
-       //    Comment: this.comment,
-
-       //    TestRequestId: this.id,
-
-
-
-       //    IsDeleted: 'false'
-
-       //};
-       //for (let i of this.fileData)
-       //{
-
-       //}
-       //formData.name = formRef.name;
-       //formData.address.addressLine1 = formRef.addressLine1;
-       //formData.address.addressLine2 = formRef.addressLine2;
-       //formData.address.city = formRef.city;
-       //formData.address.state = formRef.state;
-       //formData.address.postalCode = formRef.postalCode;
-       //formData.locale = "en-us";
-    //   console.log(formData);
-       //let xhr = new XMLHttpRequest();
-       //let path = titanApiUrl + 'testrequestsensor/post/uploadfile';
-       //xhr.onreadystatechange = function state_change() {
-       //    if (xhr.readyState == 4) {// 4 = "loaded"
-       //        if (xhr.status == 200) {// 200 = OK
-       //            // ...our code here...
-       //            alert('ok');
-       //        }
-       //        else {
-       //            alert("Problem retrieving XML data");
-       //        }
-       //    }
-       //};
-       //xhr.open('POST', path, false);
-       //xhr.setRequestHeader("Content-Type", "multipart/form-data");
-       //xhr.setRequestHeader("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
-
-
-       //  xhr.withCredentials = true;
-     //  xhr.send(null);
-       this.dataService.postAdd(formData,this.comment).subscribe(res => {
-           console.log("-------- Test Sensor Adding new result ----- ", res);
-           if (res.isSuccess) {
-               var testRequestSensorId = res.result.id;
-           //    console.log("", res.object.id); 
-               this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(result => {
-                   console.log('sent');
-                 //  this.router.navigate(["/testrequest/details/", this.id]);
-                   // make a call with id and update the datatable
-                   this.dataService.GetAllTestRequestSensors(this.entityId, this.departmentId)
-                       .subscribe(res => {
-                           this.sensorRequests = res.result;                         
-                       });
-               });             
            }
        });
-       //var fd = new FormData();
-       //fd.append('files', this.uploadedFiles[0]);
-       //this.dataService.postCommentAdd(fd).subscribe(res => {
-       //    console.log("-------- Test Sensor Adding new result ----- ", res);
-       //    if (res.IsSuccess) {
-       //        this.router.navigate(["/testrequest/details/", this.id]);
-       //    }
-       //});
-
-       //this.dataService.postAdd(formData).subscribe(res => {
-       //    console.log("-------- Test Sensor Adding new result ----- ", res);
-       //    if (res.IsSuccess) {
-       //        this.router.navigate(["/testrequest/details/", this.id]);
-       //    }
-       //});
+      
    }
 
-   // onSubmit(formRef) {
-   //     console.log(formRef);
-   //  //   console.log(this.testFacility.name);
-   //     formRef.isDeleted = false;
-   //     //let formData: any = {
-   //     //    id: this.id,
-   //     //    name: '',
-   //     //    address: {
-
-   //     //        id: '',
-   //     //        addressLine1: '',
-   //     //        addressLine2: '',
-   //     //        city: '',
-   //     //        state: '',
-   //     //        postalCode: '',
-   //     //    }
-   //     //};
-   //     var quill = new Quill('#editor-container');
-   //  //   var delta = quill.getContents();
-   //     var text = quill.getText();
-   //    // var test = quill.setText(text);
-   //     var format = quill.getFormat(0);
-   //     var quilltext = quill.formatText(0, 0, format);
-
-
-
-   //     let formData: any = {
-   //        timeEntryTypeId: this.selectedTimeEntryTypeId,
-   //       entityTypeId : '',
-   //       entityId: this.id,
-   //       startTime : this.startTime,
-   //       endTime : this.endTime,
-   //       userId: '',
-   //       projectId: '53FE9592-1A9B-07D0-85D7-006A30BCD348',
-   //       testStageId: this.selectedTestStageId,
-   //       isDownTime: false,
-   //       estimateDuration: this.estimateDuration,
-   //       downTimeReasonId: this.selectedDownTimeReasonId,
-   //       description: quill.getText(),
-   //       tenantId: '',
-   //       userCreatedById: '' ,
-   //       id : ' '
-
-   //     };
-
-   //   //  formData.id = this.id;
-   //   //  formData.name = formRef.name;
-   //     //formData.address.id = this.addressid;
-   //     //formData.address.addressLine1 = formRef.addressLine1;
-   //     //formData.address.addressLine2 = formRef.addressLine2;
-   //     //formData.address.city = formRef.city;
-   //     //formData.address.state = formRef.state;
-   //     //formData.address.postalCode = formRef.postalCode;
-   //     formData.locale = "en-us";
-   //     console.log(formData);
-    
-   //     this.dataService.postAdd(formData).subscribe(res => {
-
-   //        // console.log(res);
-   //         this.TrackingList = res.$values;
-
-   //         //if (!res.errorMessage) {
-   //         //    //this.router.navigate(["/testfacilities/details/", res.result.id]);
-   //         //}
-
-   //     });
-   //     this.msgs = [];
-   //     this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
-
-   // }
-   // navigateDetails(id: string) {
-   //     this.router.navigate(['testrequest/sensor/details', id]);
-   // }
-
-
+   
 
 }

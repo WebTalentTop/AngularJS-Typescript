@@ -45,7 +45,7 @@ export class UserComponent {
         let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
         this.userservice.getUsersByTenantId(tenantId)
             .subscribe(res => {                               
-                    this.allUsers = res.result.$values;                 
+                    this.allUsers = res.result;                 
             });
 
     }

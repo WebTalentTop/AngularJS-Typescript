@@ -9,7 +9,7 @@ export class TaskApiUrl {
     //public static postUpdateUrl: string = titanApiUrl + 'testFacility/update';
     //public static getByIdUrl: string = titanApiUrl + 'testFacility/get';
     public static gettasksbyuseridUrl: string = titanApiUrl + 'task/GetTasks';
-    //public static getEquipmentDetailsByIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityEquipments';
+    public static deleteTaskUrl: string = titanApiUrl + 'task/DeleteTask';
     //public static getfilesByIdUrl: string = titanApiUrl + 'testFacilityAttachment/file';
     //public static getNotifications: string = titanApiUrl + 'testFacility/CheckNotifications';
     //public static getRoles: string = titanApiUrl + 'testFacility/GetRoles';
