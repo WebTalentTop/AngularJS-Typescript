@@ -69,31 +69,34 @@
                         <footer>
                             <button pButton type="submit" icon="ui-icon-save" label="Save" [disabled]="!testTemplateForm.form.valid"></button>
                         </footer>
-                        
+
                         <!--</div>-->
                     </p-panel>
                 </form>
             </p-tabPanel>
             <p-tabPanel header="Requirement(s) ||" leftIcon="fa fa-print">
+              <p-panel header="Test Requirement Numbers">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Search by Reference#:
-                    </div>
-                    <div class="ui-grid-col-8">
-                        <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
-                                        (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                                        [minLength]="1" placeholder="Search By Reference#" field="referenceNumber" [multiple]="true">
-                        </p-autoComplete>
-                    </div>
-                    <div class="ui-grid-col-2">
-                        <button class="btn btn-default" (click)="onAddTestRequirement()">Add Requirement</button>
+                    <div class="ui-g">
+                        <div class="ui-g-2">
+                            Search by Reference#:
+                        </div>
+                        <div class="ui-g-2">
+                            <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
+                                            (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
+                                            [minLength]="1" placeholder="Search by Reference#" field="referenceNumber" [multiple]="true">
+                            </p-autoComplete>
+                        </div>
+                        <div class="ui-g-2">
+                            <button  pButton type="submit" icon="ui-icon-add" (click)="onAddTestRequirement()" label="Add Requirement"></button>
+                        </div>
                     </div>
                 </div>
                 <div class="ui-grid-row">
-                    <p-dataTable [value]="selectedTestRequirements">
-                        <p-column field="referenceNumber" header="Reference#"></p-column>
-                        <p-column field="title" header="Title"></p-column>
-                        <p-column>
+                    <p-dataTable [value]="selectedTestRequirements" [paginator]="true" rows="15" [responsive]="true">
+                        <p-column field="referenceNumber" header="Reference#" sortable="true"></p-column>
+                        <p-column field="title" header="Title" sortable="true"></p-column>
+                        <p-column sortable="true">
                             <template pTemplate type="header">
                                 Action
                             </template>
@@ -103,6 +106,7 @@
                         </p-column>
                     </p-dataTable>
                 </div>
+              </p-panel>
             </p-tabPanel>
             <p-tabPanel header="Procedure(s) ||">
                 <div class="ui-grid-row">
