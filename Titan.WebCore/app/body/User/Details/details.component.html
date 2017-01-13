@@ -205,7 +205,78 @@
 
         </div>
 
+        <div class="subsection">
 
+            <form>
+
+                <!-- Begin Dialog - Assign User Role -->
+
+                <p-dialog header="Assign Tenant" [(visible)]="displayTenantDialog" modal="modal" showEffect="fade" responsive="true">
+
+                    <p>Please select  tenants.</p>
+
+                    <!-- Begin Users -->
+
+
+                    <div class="input-row">
+
+                        <label>
+                            <span class="text">Tenants</span>
+
+                            <p-dropdown [options]="tenants" (onChange)="onTenantChange($event)" name="tenants" [autoWidth]="false"></p-dropdown>
+
+                        </label>
+
+                    </div>
+
+                    <!-- End Users -->
+                    <!-- Begin Role -->
+
+                  
+
+                    <!-- End Role -->
+
+                    <footer>
+                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                            <label class="checkbox"><input type="checkbox"> Keep Open</label>
+                            <button type="button" pButton icon="ui-icon-close" (click)="displayTenantDialog=false" label="Cancel"></button>
+                            <button type="button" pButton icon="ui-icon-save" (click)="onAddTenant()" label="Assign Tenant"></button>
+                        </div>
+                    </footer>
+
+                </p-dialog>
+
+                <!-- End Dialog - Assign User Role -->
+                <!-- Begin Panel - Test Facility Users -->
+
+                <p-panel>
+
+                    <header class="with-controls">
+                        <p class="ui-panel-title"> Tenants </p>
+                        <p class="controls"><button type="text" (click)="displayTenantDialog=true" pButton icon="ui-icon-person-add" label="Assign Tenant&hellip;"></button></p>
+                    </header>
+
+                    <div class="ui-grid-row">
+
+                        <p-dataTable [value]="userTenants" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                            <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
+                            <p-column header="Action">
+                                <template let-FunctionGroup="rowData" pTemplate type="body">
+                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
+                                </template>
+                            </p-column>
+                        </p-dataTable>
+
+                    </div>
+
+                </p-panel>
+
+                <!-- End Panel - Test Facility Users -->
+
+            </form>
+
+        </div>
 
 </div>
 </div>

@@ -38,7 +38,8 @@ export class DetailsComponent {
    // details:string;
     Sensors: any;
     fileData: any[] = [];
-
+    userTenants: any;
+    displayTenantDialog: boolean = false;
     uploadedFiles: any[] = [];
    // TestFacilityAttachments: ITestFacilityAttachment[];
        // hourEntries: any;
