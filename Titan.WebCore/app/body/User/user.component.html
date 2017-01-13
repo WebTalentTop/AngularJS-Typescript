@@ -1,10 +1,15 @@
 <div class="ui-g-12">
     <div class="card card-w-title">
-       
-        <header>
-            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New User"></button>
-        </header>
-        <p-panel header="Users">
+      <h2> Create New User</h2>
+      <br />
+
+        <p-panel>
+          <header class="with-controls">
+              <p class="ui-panel-title">Users</p>
+              <p class="controls">
+                <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New User"></button>
+              </p>
+          </header>
           <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
 
               <p-column header="First Name" sortable="true">
@@ -20,12 +25,12 @@
               </p-column>
               <p-column header="Role" field="lastName" sortable="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
-                      
+
                   </template>-->
               </p-column>
               <p-column header="Department" field="lastName" sortable="true">
                   <!--<template let-userrow="rowData" pTemplate type="body">
-                       
+
                     </template>-->
               </p-column>
               <p-column>
@@ -33,7 +38,7 @@
                       <button type="button" pButton icon="fa-refresh"></button>
                   </template>
                   <template let-taskrow="rowData" pTemplate type="body">
-                    
+
                       <button id="details" pButton type="button" label="Details" routerLink="details/{{taskrow.id}}"></button>
                   </template>
               </p-column>
