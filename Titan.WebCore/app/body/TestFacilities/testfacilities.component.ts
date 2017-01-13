@@ -1,8 +1,8 @@
-import { TestFacilityService } from '../../shared/services/testfacility.service';
-import { LoggerService } from './../../shared/services/logger.service';
-import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
+﻿import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
+import { LoggerService } from './../../shared/services/logger/logger.service';
+import { LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
@@ -14,15 +14,15 @@ import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumb
 export class TestFacilitiesComponent {
     // title = "Test Facilities";
     gridData = [];
-    confInfo:any = {};
+    confInfo: any = {};
     cols = [];
     gridFilter = {};
-    idField:string;
+    idField: string;
     linkFieldId: string;
     added: any;
     msgs: Message[] = [];
 
-    constructor(private breadCrumbsService: BreadCrumbsService,private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router:Router, private logger: LoggerService) {
+    constructor(private breadCrumbsService: BreadCrumbsService, private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
@@ -44,7 +44,7 @@ export class TestFacilitiesComponent {
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
     ngOnInit() {
-        let resData:any;
+        let resData: any;
         this.testFacilityService.postGridData()
             .subscribe(res => {
                 resData = res;
@@ -54,9 +54,9 @@ export class TestFacilitiesComponent {
             });
     }
 
-    navigateDetails(id:string){
+    navigateDetails(id: string) {
         this.router.navigate(['testFacilities/details', id]);
     }
 
-   
+
 }

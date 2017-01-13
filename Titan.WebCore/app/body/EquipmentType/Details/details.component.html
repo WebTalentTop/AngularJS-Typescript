@@ -1,11 +1,27 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
+
       <div class="card card-w-title">
         <h2>Edit EquipmentType</h2>
           <p-tabView (onChange)="handleChange($event)">
-            <p-tabPanel header="Info ||" id="info">
+            <p-tabPanel header="Information" id="info">
                 <p-growl [value]="msgs"></p-growl>
-                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+        <!--<div class="card card-w-title">-->
+        <!--<p-tabView (onChange)="handleChange($event)">-->
+             <!--<p-panel > -->
+                <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
+                  <div class="row">
+                      <div class="col-sm-12">
+
+                              <p-growl [value]="msgs"></p-growl>
+                          <!--<button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>-->
+                          <!--<ul class="rightIconNav pull-right mb10">-->
+                             
+                          <!--</ul>-->
+                      </div>
+                  </div><br/>
+
                   <p-panel header="Basic Information">
                     <header>
 
@@ -19,10 +35,24 @@
                                 <label>Name <span >*</span></label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="frequency" [(ngModel)]="model.frequency" style="width:100%">
+                                <div class="md-inputfield">
+                                    <div id="selector"></div>
+                                </div>
+                                <!--<input type="text" pInputText name="frequency" [(ngModel)]="model.frequency" style="width:100%">-->
                              <label>Frequency</label>
                             </div>
                           </div><br />
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Calibration Forms :</p>
+                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
+                                    <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
+                                </select>
+                                <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
+            </p-dropdown>-->
+                            </div>
+                            <br />
+                        </div><br/>
                           <div class="ui-grid-row " >
                               <div class="ui-g-12 ui-md-12" >
                                 <label style="color:#777">Description</label>
@@ -49,21 +79,25 @@
                       </div>
                       <footer>
                           <button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>
+                          <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipmenttype"></button>
                       </footer><br />
                   </p-panel><br />
                   <p-panel>
                       <header class="with-controls">
                           <p class="ui-panel-title">Calibration Forms</p>
-                          <p class="controls">
+                          <!--<p class="controls">
                             <button type="button" pButton icon="fa-plus" style="float:left"
                                                            (click)="showDialogToAddForm()" label="Add Calibration Form"></button>
-                          </p>
+                          </p>-->
                       </header>
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                         <p style="color:#777">Calibration Forms :</p>
-                                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
-                                        </p-dropdown>
+                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
+                                    <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
+                                </select>
+                                        <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
+                                        </p-dropdown>-->
                             </div>
                             <br/>
                         </div>
@@ -89,7 +123,7 @@
                               </footer>
                           </p-dialog>
                  </p-panel><br />
-                 <p-panel>
+                  <p-panel>
                        <header class="with-controls">
                            <p class="ui-panel-title">Equipment SubTypes</p>
                            <p class="controls">
@@ -124,8 +158,11 @@
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="calibrationform">Calibration Form</label></div>
                                          <div class="ui-grid-col-8">
-                                             <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
-                                             </p-dropdown>
+                                             <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
+                                             </p-dropdown>-->
+                                             <select [(ngModel)]="selectedCalibration" class="form-control" name="calibrationform" width="300" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
+                                                 <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
+                                             </select>
                                         </div>
                                       </div><br />        <!-- <div class="ui-grid-col-8"><input pInputText name="calibrationform" [(ngModel)]="EquipmentSubType.calibrationform" #equipmentSubTypecalibrationformRef="ngModel"
                                              /></div>-->
@@ -137,24 +174,34 @@
                                     </div><br />
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="frequency">Frequency</label></div>
-                                         <div class="ui-grid-col-8">
-                                           <input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"/>
+                                         <div class="add">
+                                             <div class="new" id="cronSelectorPlaceHolder">
+                                                 <div id="cronselector"></div>
+                                             </div>
+                                           <!--<input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"/>-->
                                          </div>
                                      </div>
 
                                  </div>
                                  <footer>
                                      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                         <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+                                         <!--<button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>-->
                                          <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
                                      </div>
                                  </footer>
                              </p-dialog>
                        </div>
                  </p-panel>
-                </form>
+
+               
          </p-tabPanel>
       </p-tabView>
+
+                <!--</form>-->
+     <!--</p-panel>-->
+        <!--</p-tabView>-->
+    </div>
+
     </div>
   </div>
-</div>
+

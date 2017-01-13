@@ -1,11 +1,12 @@
-
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
+import { LoggerService } from '../../../shared/services/logger/logger.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
 
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
 import { FormSchemaService } from '../../../shared/services/formSchema.service';
-import { IFormSchema, FormSchema} from '../../../shared/services/definitions/IFormSchema';
+import { FormInstanceService } from '../../../shared/services/formInstance.service';
+import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
 
 import { BuildLevelService } from '../../../shared/services/buildlevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
@@ -25,7 +26,12 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelectItem";
+
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+
+import * as moment from 'moment/moment';
+
 
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
@@ -61,16 +67,34 @@ export class DetailsComponent implements AfterViewInit {
     // Form Related variables
     entityIdentifierName:string = 'TestFacility';
     entityIdentifierInfo:any = {};
-    formSchemaCategoryInfo:IFormSchemaCategory[] = [];
+    formSchemaCategories:IFormSchemaCategory[] = [];
+    formSchemaCategoryList: ITitanSelectItem[];
     formSchemaInfo:any = {};
     formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
     comment: any;
     testFacilityLogComments: any;
+    formSchemaDataGridMF:IFormSchemaGridMF[] = [];
+    selectedMaintenanceForm:IFormSchemaGridMF;
+
+    //region Grid -- FormInstance Filled
+
+    gridFormInstanceData: any[] = [];
+    formInstanceUpdateView:boolean = false;
+    formInstanceUpdateData: any;
+    selectedGridFormInstance:any;
+    formInstanceUpdateNotes:string;
+    formInstanceId:string;
+    //endregion
+
+    selectedFormSchemaFP:any;
+    fieldsFP:any[] = [];
+
     displayPreviewSelectedForm:boolean = false;
     operatingHours: any;
     maintenanceFrequencies: any;
     selectedOperatingHour: any;
     selectedMaintenanceFrequency: any;
+
     // Form Display
     selectedFormSchemaCategory;
     selectedFormFields:any[] = [];
@@ -81,7 +105,7 @@ export class DetailsComponent implements AfterViewInit {
     displayFormInsanceForm:boolean = false;
     formInstanceFormSchemaVersionId:string;
     formInstanceFormSchema:any;
-    formInstanceFields: any[] 
+    formInstanceFields: any[]
 
     // End Of Form Related Variables
 
@@ -110,7 +134,7 @@ export class DetailsComponent implements AfterViewInit {
     selectedBuildLevels: any[];
     selectedTestStatuses: any[];
     selectedProjectCodes: any[];
-    lastMaintenanceDate: any;
+
     displayEquipmentDialog: boolean = false;
     formConfiguration: any;
     formObject: any;
@@ -120,7 +144,7 @@ export class DetailsComponent implements AfterViewInit {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
-    testFacility = { name: '', maintenanceFrequency: '' , nextMaintenanceDate: '' };
+    testFacility : any = { name: '', maintenanceFrequency: '', nextMaintenanceDate: '', lastMaintenanceDate: '' };
     address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
@@ -149,7 +173,7 @@ export class DetailsComponent implements AfterViewInit {
 
     tabLoadStatus = [
         {loaded:true, method: this.loadDetailsTabViews},
-        {loaded:false, method: this.loadEquipmentTabViews},
+        { loaded: false, method: this.loadEquipmentTabViews },
         {loaded:false, method:this.loadScheduleTabViews},
         {loaded:false, method:this.loadMaintainanceTabViews},
         {loaded:false, method:this.loadAttachmentsTabViews},
@@ -157,12 +181,14 @@ export class DetailsComponent implements AfterViewInit {
     ];
 
     constructor(
-        private breadCrumbsService: BreadCrumbsService,
+    	private breadCrumbsService: BreadCrumbsService,
+        private loggerService: LoggerService,
         private route: ActivatedRoute,
         private router: Router,
         private testFacilityService: TestFacilityService,
         private entityIdentifierService: EntityIdentifierService,
         private formSchemaCategoryService: FormSchemaCategoryService,
+        private formInstanceService: FormInstanceService,
         private formSchemaService: FormSchemaService,
         private testfacilityroleservice: TestFacilityRoleService,
         private buildlevelservice: BuildLevelService,
@@ -174,6 +200,9 @@ export class DetailsComponent implements AfterViewInit {
 
         private testfacilityattachmentservice: TestFacilityAttachmentService
     ) {
+        this.loggerService.setShow(false);
+        this.loggerService.logConsole("Router ----------", this.router.url);
+
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
 
@@ -186,6 +215,7 @@ export class DetailsComponent implements AfterViewInit {
             this.breadcrumbs = testFacilitiesDetailsBreadCrumb.items;
 
             this.breadcrumbsHome = { routerLink: ['/'] };
+	        this.loggerService.logConsole("---- TF Details ID Param -----", this.id);
     }
 
     ngOnInit() {
@@ -209,10 +239,10 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
-  
+
       frequencyInit()
-    {
-            if (this.testFacility.maintenanceFrequency != null)
+      {
+          if (this.testFacility.maintenanceFrequency != null && this.testFacility.maintenanceFrequency != "")
             {
                 this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency;
                 this.isMaintenaceFrequencySelected = true;
@@ -235,7 +265,7 @@ export class DetailsComponent implements AfterViewInit {
 
     showHideCronPicker(){
         console.log("--inside cronpicker show hide");
-        debugger;
+    
         if (this.isMaintenaceFrequencySelected){
             if (!this.isCronControlInitialized){
                 $("#selector").cron({
@@ -259,9 +289,10 @@ export class DetailsComponent implements AfterViewInit {
     onTestFacilityDelete()
     {
         if (this.IsTestFacilityDelete)
-        this.testFacilityService.DeleteTestFacility(this.id).subscribe(res =>
-
-            console.log('-----delete-------', res)
+            this.testFacilityService.DeleteTestFacility(this.id).subscribe(res => {
+                this.IsTestFacilityDelete = true;
+                console.log('-----delete-------', res);
+            }
 
         );
 
@@ -445,7 +476,7 @@ export class DetailsComponent implements AfterViewInit {
         this.selectedTestStatuses = (event.value);
         //this.testFacilityService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
         //    .subscribe(TestFacilityEvents => {
-        //        console.log('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
+        //        this.loggerService.logConsole('-----------  TestFacilitiesEvents------------------', TestFacilityEvents);
         //        //this.TestFacilityEvents = TestFacilityEvents;
         //    });
         //   this.EquipmentSubType.calibrationform = (event);
@@ -679,30 +710,40 @@ export class DetailsComponent implements AfterViewInit {
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
+                if (res.testFacility.isDeleted) {
+                    this.IsTestFacilityDelete = true;
+                }
+                else
+                {
+                    this.IsTestFacilityDelete = false;
+                }
               //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
   			if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
                 }
-                this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                //  this.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
+                this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
+               // this.testFacility.lastMaintenanceDate = new Date(this.testFacility.lastMaintenanceDate);
             //    this.selectedOperatingHour = res.testFacility.operatingHourName;
               //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
-                //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-                //console.log("----- Result of formObject -----", this.model);
+                //this.loggerService.logConsole("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
+                //this.loggerService.logConsole("----- Result of formObject -----", this.model);
             });
+
         if (this.id) {
             this.testFacilityService.getNotifications(this.id)
                 .subscribe(res => {
                     if (res) {
                         this.notifications = res;
-                       
+
                     }
-                   
+
                         this.notifications.forEach(x => {
                             this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                         })
-                    
+
                 })
         }
     }
@@ -925,7 +966,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs.push({ severity: 'warn', summary: 'Please select only one user for secondary Incharge', detail: '' });
             return null;
         }
-       
+
 
         var selectedUserNames = new Array();
         for (var sel of this.filteredSelectedUserNames) {
@@ -937,6 +978,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.postAddUserNames(selectedUserNames, this.id, this.selectedRole).subscribe(filteredList => {
             this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
+            this.selectedRole = null;
             this.testfacilityroleservice.getByIdusing(this.id)
                 .subscribe(TestFacilityRoles => {
                     this.TestFacilityRoles = TestFacilityRoles;
@@ -952,7 +994,7 @@ export class DetailsComponent implements AfterViewInit {
                                 }
 
                                 this.notifications.forEach(x => {
-                                   
+
                                     this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
                                 })
                             });
@@ -1023,7 +1065,7 @@ export class DetailsComponent implements AfterViewInit {
             this.msgs = [];
             this.msgs.push({ severity: 'warn', summary: 'Search any equipment to add', detail: '' });
             return null;
-        }       
+        }
         if (!this.IsKeepOpen)
             this.displayAssignEquipmentsDialog = false;
         else
@@ -1074,7 +1116,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.description = formRef.description;
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
-        formData.lastMaintenanceDate = this.lastMaintenanceDate
+        formData.lastMaintenanceDate = this.testFacility.lastMaintenanceDate;
         if (this.isMaintenaceFrequencySelected){
             formData.maintenanceFrequency = $('#selector').cron("value");
         }
@@ -1100,13 +1142,20 @@ export class DetailsComponent implements AfterViewInit {
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-                        this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                        if (res.testFacility.isDeleted) {
+                            this.IsTestFacilityDelete = true;
+                        }
+                        else {
+                            this.IsTestFacilityDelete = false;
+                        }
+                        //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
+                        this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
                         if (res.testFacility.nextMaintenanceDate != null) {
                             this.hasNextMaintenanceDate = true;
                         }
-                       
-                       
+
+
                     });
                 this.msgs = [];
                 this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
@@ -1152,11 +1201,11 @@ export class DetailsComponent implements AfterViewInit {
                             .subscribe(res => {
                                 if (res) {
                                     this.notifications = res;
-                                   
+
                                         if (res.length == 0) {
                                             this.notificationMsgs = [];
                                         }
-                                    
+
                                 }
 
                                 this.notifications.forEach(x => {
@@ -1203,37 +1252,66 @@ export class DetailsComponent implements AfterViewInit {
                 this.selectedCategory = null;
             });
 
-        //this.msgs = [];
-        //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
 
     private getEntityIdentifierInfo() {
-        this.entityIdentifierService.getByName(this.entityIdentifierName)
+        this.getGridFormInstanceInformationData();
+        // Getting Entity Identifier Id first To get All The Form Categories
+        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
             .subscribe(res => {
                 if(res.isSuccess) {
+
+                    this.loggerService.logConsole("EntityIdentifierInfo Call ----------", res);
                     this.entityIdentifierInfo = res.result;
 
+                    // Getting All the Form Schema Categories with The EntityIdentifierId
                     this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
                         .subscribe(fsCategory => {
+                            this.loggerService.logConsole("FormSchemaCategoryInfo ----------", fsCategory);
                             if(fsCategory.isSuccess) {
-                                this.formSchemaCategoryInfo = fsCategory.result;
+                                this.loggerService.logConsole("Form Schema Category List-------------", res);
+                                this.formSchemaCategories = fsCategory.result;
+                                let listFormSchemaCaterory = fsCategory.result.map(newRes => {
+                                    return {label: newRes.name, value: newRes.id, entityIdentifierId: newRes.entityIdentifierId};
+                                });
+                                this.formSchemaCategoryList = [];
+                                this.formSchemaCategoryList.push({label: 'Select Category', value: null});
+                                this.formSchemaCategoryList = this.formSchemaCategoryList.concat(listFormSchemaCaterory);
+                                this.loggerService.logConsole("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
+                                this.loggerService.logConsole("ListFormSchemaCategory -----------", listFormSchemaCaterory);
 
-                                let fscIds = this.formSchemaCategoryInfo.map(fsc => fsc.id);
+                                let fscIds = fsCategory.result.map(fsc => fsc.id);
+                                // Getting all the FormSchema created by the FormSchemaCategory by the EntityIdentifierId
+                                this.loggerService.logConsole("Form Schema Category Ids -----", fscIds);
 
+                                this.formSchemaService.getFormSchemaGridByEntityIdentifierId(this.entityIdentifierInfo.id)
+                                    .subscribe(res => {
+                                        if (res.isSuccess) {
+                                            this.loggerService.logConsole("FSGridByEntityIdentifierId ----------", res.result);
+                                            this.formSchemaDataGridMF = res.result;
+                                            this.formSchemaDataGridMF = this.formSchemaDataGridMF.map(x => {
+                                                x.createdOn = moment(x.createdOn).format("MM-DD-YYYY").toString();
+                                                return x;
+                                            })
+                                        }
 
-                                /*this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
+                                    });
+
+                                this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
                                     .subscribe(formSchemaResult => {
-                                        console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        this.loggerService.logConsole("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
                                         this.formSchemaData = formSchemaResult.result;
-                                        console.log("FormSchemaData ----------", this.formSchemaData);
+                                        this.loggerService.logConsole("FormSchemaData ----------", this.formSchemaData);
 
-                                    });*/
+                                    });
                                 this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
                                     .subscribe(formSchemaResult => {
-                                        console.log("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        this.loggerService.logConsole("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
                                         if (formSchemaResult.isSuccess){
                                             this.formSchemaData = formSchemaResult.result;
-                                            console.log("FormSchemaData ----------", this.formSchemaData);
+                                            this.loggerService.logConsole("FormSchemaData ----------", this.formSchemaData);
                                         }
                                         else {
                                             this.formSchemaData = [];
@@ -1250,21 +1328,31 @@ export class DetailsComponent implements AfterViewInit {
             })
     }
 
-    selectedFormToView(formName,formSchemaItems) {
-        this.selectedFormName = formName;
-        this.selectedFormFields = formSchemaItems;
-        this.displayPreviewSelectedForm = true;
+    private getGridFormInstanceInformationData() {
+        // Getting Grid for FormInstance by this TestFacility Id
+        this.formInstanceService.getGridByEntityId(this.id)
+            .subscribe(res => {
+                this.loggerService.logConsole("GridFormInstance Data ------", res);
+                if (res.isSuccess) {
+                    this.gridFormInstanceData = res.result;
+                }
+            });
     }
+
 
     closeFormPreviewDialog() {
         this.displayPreviewSelectedForm = false;
         this.selectedFormName = '';
         this.selectedFormFields = [];
+        this.loggerService.logConsole("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
+        this.loggerService.logConsole("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
+        this.loggerService.logConsole("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
     }
 
 
     // Entering data to the form to create a Form Instance
     showFormInstance(formSchema) {
+        this.loggerService.logConsole("ShowFOrmInstance ----", formSchema);
         this.selectedFormName = formSchema.name;
         this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
         this.formInstanceFields = formSchema.fields.$values;
@@ -1277,6 +1365,65 @@ export class DetailsComponent implements AfterViewInit {
         this.selectedFormName = '';
         this.formInstanceFormSchemaVersionId = '';
         this.formInstanceFields = [];
+        this.getGridFormInstanceInformationData();
     }
+
+
+    createInstance(item) {
+        this.selectedMaintenanceForm = item;
+        //this.loggerService.logConsole("Create Instance -=----", item);
+        this.getFormSchemaInfoSelectedByGridMF(false);
+    }
+
+    maintenanceFormRowSelect(item) {
+        this.loggerService.logConsole("MaintenanceFormRowSelect --------", item);
+        this.selectedMaintenanceForm = item;
+        this.loggerService.logConsole("Selected Maintenance Item -------", this.selectedMaintenanceForm);
+        this.getFormSchemaInfoSelectedByGridMF(true);
+    }
+
+    selectedFormToView(formName,formSchemaItems) {
+        this.selectedFormName = formName;
+        this.selectedFormSchemaFP = formSchemaItems;
+        this.displayPreviewSelectedForm = true;
+        // this.loggerService.logConsole("FormName -------", this.selectedFormName);
+        //this.loggerService.logConsole("Form Schema To View clicked ----", this.selectedFormSchemaFP);
+        //his.loggerService.logConsole("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
+    }
+
+    getFormSchemaInfoSelectedByGridMF(formToView) {
+        this.formSchemaService.getById(this.selectedMaintenanceForm.id)
+            .subscribe(res => {
+                this.loggerService.logConsole("After selection from the MF ----", res);
+                let formSchema = res.result;
+                let f = formSchema.fields.$values;
+                this.fieldsFP = f;
+                this.loggerService.logConsole("FormSchema by Selected Form-----", formSchema);
+                if (formToView) {
+                    this.selectedFormToView(this.selectedMaintenanceForm.name, res.result);
+                }
+                else {
+                    this.showFormInstance(formSchema);
+                }
+            })
+    }
+
+    maintenanceInformationFormRowSelect(event) {
+        this.formInstanceUpdateView = true;
+        this.selectedMaintenanceForm = this.formSchemaDataGridMF.filter(filter => filter.id === this.selectedGridFormInstance.formSchemaId)[0];
+        this.formInstanceId = this.selectedGridFormInstance.id;
+         console.log("FormSchemaGridMF---------", this.formSchemaDataGridMF);
+        console.log("SelectedGridFormInstance --------",this.selectedGridFormInstance);
+        console.log("SelectedMaintance form -----", this.selectedMaintenanceForm);
+
+        this.formInstanceUpdateNotes = this.selectedGridFormInstance.notes;
+
+        this.formInstanceService.getById(this.selectedGridFormInstance.id)
+            .subscribe(res => {
+               this.formInstanceUpdateData = res.result;
+               this.getFormSchemaInfoSelectedByGridMF(false);
+            });
+    }
+
 
 }

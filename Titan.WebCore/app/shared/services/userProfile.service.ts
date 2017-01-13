@@ -1,14 +1,19 @@
+/**
+ * Created by ZeroInfinity on 1/6/2017.
+ */
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TitanUserApiUrl } from './apiUrlConst/titanUserApiUrls';
+import { TitanUserProfileApiUrls } from './apiUrlConst/auth/titanUserProfile.ApiUrls';
 import { IUserProfile } from './definitions/IUserProfile';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {TitanUserApiUrl} from "./apiUrlConst/titanUserApiUrls";
 
 @Injectable()
 export class UserProfileService {
+
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
     });
@@ -16,22 +21,15 @@ export class UserProfileService {
     userProfile: IUserProfile;
 
     constructor(private http: Http) {
-       
+        /*this.getCurrentUserProfile()
+         .subscribe(res =>{
+         this.userProfile = res.result;
+         });*/
     }
 
-    getCurrentUserProfile() {
-        this.getById().subscribe(res => {
-            this.userProfile = res.result;
-            return this.userProfile;
-        });
-    }
-    
-    getById(): Observable<any> {
-        return this.http.get(`${TitanUserApiUrl.getProfileByIdUrl}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
+    getCurrentUserProfile():Observable<any> {
+        return this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
+            .map(this.getJson);
     }
 
     private getJson(response: Response) {
@@ -50,4 +48,5 @@ export class UserProfileService {
             throw error;
         }
     }
+
 }

@@ -1,6 +1,6 @@
 ﻿import { EquipmentTypeService } from '../../../../shared/services/equipmentType.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { Router} from '@angular/router';
 import { Component } from '@angular/core';
 import { GridComponent } from '../../../../shared/UIComponents/GridComponent/grid.component';

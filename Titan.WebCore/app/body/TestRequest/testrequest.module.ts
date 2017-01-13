@@ -4,7 +4,7 @@ import { TestRequestComponent } from "./testrequest.component";
 
 import { EditorModule, SharedModule, DataTableModule, TabViewModule, InputTextModule, InputTextareaModule,MessagesModule,ButtonModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { TestFacilityService } from '../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testfacility.service';
 import { TestRequestService } from '../../shared/services/testrequest.service';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
 import testRequestRoutes from "./testrequest.routes";

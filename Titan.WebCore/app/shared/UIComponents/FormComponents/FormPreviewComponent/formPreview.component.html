@@ -2,9 +2,129 @@
     <h3>{{formName}}</h3>
     <!--<pre>{{selectedInputList | json}}</pre>-->
     <div class="ui-g-12 ui-md-12">
-        <div class="ui-g-12 ui-md-4" id="dragme" *ngFor="let formInput of selectedInputList">
-            <div>
-                <!--<pre style="overflow-y: scroll;height: 250px;">{{formInput | json}}</pre>-->
+        <div class="ui-g ui-fluid form-group" style="min-height: 200px;">
+            <div class="ui-g-12 ui-md-12" *ngIf="selectedInputList">
+                <div class="ui-g-4 ui-md-4" *ngFor="let item of selectedInputList; let i=index;">
+                    <div *ngIf="item.fieldDataType.name === 'TextBox'">
+                        <label>{{item.name}}</label><br>
+                        <input pInputText [disabled]="true"
+                               type="text"
+                               [placeholder]="item.label"/>
+                    </div>
+                    <div *ngIf="item.fieldDataType.name === 'CheckBox'">
+                        <label>{{item.label}}</label><br/>
+                        <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
+                            <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}" [(ngModel)]="item.checkBoxData"></p-checkbox>
+                        </div>
+                    </div>
+                    <div *ngIf="item.fieldDataType.name === 'RadioBox'">
+                        <label>{{item.label}}</label><br/>
+                        <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
+                            <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
+                        </div>
+                    </div>
+                    <div *ngIf="item.fieldDataType.name === 'SelectBox'">
+                        <label>{{item.label}}</label><br/>
+                        <div class="ui-g-12">
+                            <p-dropdown [options]="sampleSelectBoxItems"
+                                        [(ngModel)]="selectedSelectItem"></p-dropdown>
+                        </div>
+                    </div>
+                    <div *ngIf="item.fieldDataType.name === 'TextAreaBox'">
+                        <label>{{item.name}}</label><br>
+                        <textarea rows="5" cols="30" pInputTextarea [disabled]="true"
+                                  [placeholder]="item.label"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Original Html Tags
+            <div class="ui-g-12" *ngIf="item.name === 'TextBox'">
+                <div class="ui-g-4">
+                    <label>{{item.name}}</label>
+                </div>
+                <div class="ui-g-8">
+                    <input type="text" placeholder="placeholder" pInputText
+                           title="TextBox"/>
+                </div>
+            </div>
+
+            <div class="ui-g-12" *ngIf="item.name === 'CheckBox'" [id]="item.id">
+                <div class="ui-g-4">
+                    <label>{{item.name}}</label>
+                </div>
+                <div class="ui-g-8">
+
+                    <div class="ui-g-12">
+                        <p-checkbox name="animal" value="Cat" label="Cat"
+                                    [(ngModel)]="selectedCheckbox"></p-checkbox>
+                    </div>
+
+                    <div class="ui-g-12">
+                        <p-checkbox name="animal" value="Dog" label="Dob"
+                                    [(ngModel)]="selectedCheckbox"></p-checkbox>
+                    </div>
+                    <div class="ui-g-12">
+                        <p-checkbox name="animal" value="Birds" label="Birds"
+                                    [(ngModel)]="selectedCheckbox"></p-checkbox>
+                    </div>
+                    <img [id]="item.name" *ngIf="item.name === 'CheckBox'"
+                         src="Library/titanResources/images/form-images/small/checkBox.png"
+                         title="TextBox"/>
+                </div>
+            </div>
+
+            <div class="ui-g-12" *ngIf="item.name === 'RadioBox'">
+                <div class="ui-g-4">
+                    <label>{{item.name}}</label>
+                </div>
+                <div class="ui-g-8">
+
+                    <div class="ui-g-12">
+                        <p-radioButton name="namelist" value="Bosch" label="Bosch"
+                                       [(ngModel)]="selectedRadiobox"></p-radioButton>
+                    </div>
+
+                    <div class="ui-g-12">
+                        <p-radioButton name="namelist" value="BridgeStone" label="BridgeStone"
+                                       [(ngModel)]="selectedRadiobox"></p-radioButton>
+                    </div>
+                    <div class="ui-g-12">
+                        <p-radioButton name="namelist" value="GoodYear" label="Good Year"
+                                       [(ngModel)]="selectedRadiobox"></p-radioButton>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ui-g-12" *ngIf="item.name === 'SelectBox'">
+                <div class="ui-g-4">
+                    <label>{{item.name}}</label>
+                </div>
+                <div class="ui-g-8">
+
+                    <div class="ui-g-12">
+                        <p-dropdown [options]="sampleSelectBoxItems"
+                                    [(ngModel)]="selectedSelectItem"></p-dropdown>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ui-g-12" *ngIf="item.name === 'TextAreaBox'">
+                <div class="ui-g-4">
+                    <label>{{item.name}}</label>
+                </div>
+                <div class="ui-g-8">
+                            <textarea pInputTextarea rows="5" cols="30" [(ngModel)]="sampleTextAreaData"
+                                      title="TextArea Field"></textarea>
+                </div>
+            </div>
+
+            -->
+            <!--<div>
+                &lt;!&ndash;<pre style="overflow-y: scroll;height: 250px;">{{formInput | json}}</pre>&ndash;&gt;
                 <label>{{formInput.name}}</label><br>
                 <input pInputText [disabled]="true"
                        *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'TextBox'"
@@ -13,7 +133,7 @@
                 <p-spinner size="30"
                            *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'NumberBox'"
                            [disabled]="true"></p-spinner>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="ui-g-12 ui-md-12">

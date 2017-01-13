@@ -6,6 +6,7 @@ import { TitanUserApiUrl} from './apiUrlConst/TitanUserApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {IUserTenantDBViewModel} from "./definitions/titanUserDefinitions/IUserTenantDBViewModel";
 
 @Injectable()
 export class TitanUserService {
@@ -69,8 +70,19 @@ export class TitanUserService {
         //.map(this.getJson);
     }
 
+
+    getAllowedTenantsList(id):Observable<any> {
+        return this.http.get(`${TitanUserApiUrl.getAllowedTenantsListUrl}/${id}`,{headers: this.headers})
+            .map(this.getJson);
+    }
+
+    putSetDefaultTenantId(userTenantDBViewModel:IUserTenantDBViewModel):Observable<any> {
+        return this.http.put(`${TitanUserApiUrl.putSetDefaultTenantIdUrl}`, userTenantDBViewModel, {headers: this.headers})
+            .map(this.getJson);
+    }
+
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+
         return response.json();
     }
 

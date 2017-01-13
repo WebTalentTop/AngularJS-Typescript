@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormSchemaCategoryApiUrl } from './apiUrlConst/formSchemaCategory.ApiUrls';
-
+import { LoggerService } from './logger/logger.service';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
@@ -25,7 +25,10 @@ export class FormSchemaCategoryService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
+    constructor(
+        private ls: LoggerService,
+        private http: Http) {
+        this.ls.setShow(false);
         /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
          this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
          this.headers.append('Content-Type', 'application/json');*/
@@ -38,14 +41,14 @@ export class FormSchemaCategoryService {
             .map(this.getJson);
     }
     postGridDataFilter(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        this.ls.logConsole("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${FormSchemaCategoryApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
     }*/
 
     /*postAdd(filterBody): Observable<any> {
-        console.log("-------- Post FilterBody --------", filterBody);
-        console.log("Post Schema URL ------------", FormSchemaCategoryApiUrl.postCreatedUrl);
+        this.ls.logConsole("-------- Post FilterBody --------", filterBody);
+        this.ls.logConsole("Post Schema URL ------------", FormSchemaCategoryApiUrl.postCreatedUrl);
         return this.http.post(`${FormSchemaCategoryApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
 
@@ -54,7 +57,7 @@ export class FormSchemaCategoryService {
     }
 
     postUpdate(filterBody): Observable<any> {
-        console.log("-------- Post FilterBody --------", filterBody);
+        this.ls.logConsole("-------- Post FilterBody --------", filterBody);
         return this.http.put(`${FormSchemaCategoryApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         /!*.map(this.checkErrors)
@@ -83,7 +86,7 @@ export class FormSchemaCategoryService {
     }
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+        //this.ls.logConsole("In Data Service response.json() call: ", response.json());
         return response.json();
     }
 }

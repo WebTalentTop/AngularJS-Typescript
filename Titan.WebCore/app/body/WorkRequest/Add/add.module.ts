@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { AddComponent } from "./add.component";
 import { FormsModule} from '@angular/forms';
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/testTemplate.service';

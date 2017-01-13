@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { EntityIdentifierApiUrl} from './apiUrlConst/entityIdentifier.ApiUrls';
-
+import { LoggerService } from './logger/logger.service';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -19,7 +19,10 @@ export class EntityIdentifierService {
         // 'Access-Control-Allow-Origin': '*'
     });
 
-    constructor(private http: Http) {
+    constructor(
+        private ls: LoggerService,
+        private http: Http) {
+        this.ls.setShow(false);
         /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
          this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
          this.headers.append('Content-Type', 'application/json');*/
@@ -29,21 +32,26 @@ export class EntityIdentifierService {
 
     getById(id): Observable<any> {
         return this.http.get(`${EntityIdentifierApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
+            .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getByName(name): Observable<any> {
-        return this.http.get(`${EntityIdentifierApiUrl.getByName}/${name}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
+        return this.http.get(`${EntityIdentifierApiUrl.getByNameUrl}/${name}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    getByNameForForms(name): Observable<any> {
+        return this.http.get(`${EntityIdentifierApiUrl.getByNameForFormsUrl}/${name}`, { headers: this.headers })
+            .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+        //this.ls.logConsole("In Data Service response.json() call: ", response.json());
         return response.json();
     }
 }

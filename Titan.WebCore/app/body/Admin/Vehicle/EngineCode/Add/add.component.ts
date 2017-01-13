@@ -39,7 +39,7 @@ export class AddComponent {
             // this.router.navigate(["/vehicle/engineCode/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/vehicle/engineCode"], { queryParams: { page: 1 } });
+                this.router.navigate(["/admin/vehicle/engineCode"], { queryParams: { page: 1 } });
                
             }
            

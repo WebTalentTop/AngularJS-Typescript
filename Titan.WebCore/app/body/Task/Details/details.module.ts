@@ -10,7 +10,7 @@ import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, FileUploadModule, PanelModule, DropdownModule, detailsRoutes],
+    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, PanelModule, TabViewModule, ButtonModule, InputTextareaModule, CalendarModule, InputTextModule, FileUploadModule, PanelModule, DropdownModule, detailsRoutes],
     providers: [EquipmentTypeService, TestRequestSensorService],
     declarations: [DetailsComponent]
 })

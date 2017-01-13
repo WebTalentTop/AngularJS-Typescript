@@ -2,9 +2,7 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-
-                <h3> Edit Torque Sheet </h3>
-                <p-panel>
+                <p-panel header="Edit Torque Sheet">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
                         <span [class]="latestVersionStyle">{{latestVersionText}}</span>
                         <div class="ui-grid-row">

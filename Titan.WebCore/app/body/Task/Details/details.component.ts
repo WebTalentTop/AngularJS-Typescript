@@ -219,6 +219,8 @@ export class DetailsComponent {
 
    }
 
+  
+
    //onDownTimeReasonChange(event) {
    //    console.log('------event------------', event)
    //    this.selectedDownTimeReasonId = (event.value);

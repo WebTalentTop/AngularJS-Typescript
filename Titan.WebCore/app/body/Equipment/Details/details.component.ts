@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
-
+import { ITitanCalibrationSelectItem } from '../../../shared/services/definitions/ITitanCalibrationSelectItem';
 import { EquipmentService } from '../../../shared/services/equipment.service';
-import { TestFacilityService } from '../../../shared/services/testfacility.service';
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 declare var cron: any;
 declare var useGentleSelect: any;
@@ -19,9 +19,9 @@ export class DetailsComponent {
     IsKeepOpen: boolean = false;
     selectedEquipmentManufacturerId: any;
     displayAssignManufacturerDialog: boolean = false;
-    equipmentTypes: any;
+    equipmentTypes: ITitanCalibrationSelectItem[];
     selectedCalibrationFrequency: any;
-    selectedEquipmentTypeId: any;
+    selectedEquipmentTypeId: any = '';
     testFacilities: any;
     selectedTestFacilityId: any;
     formConfiguration:any;
@@ -37,7 +37,12 @@ export class DetailsComponent {
     manufacturerName: any='';
 
     manufacturerPhone: any='';
-
+    selectedEquipmentObj: any = {
+        id: '',
+        name: '',
+        frequency:''
+    }
+    selectedEquipmentTypeName: any = '';
     manufacturerWebsite: any='';
     manufacturerEmail: any = '';
     isMaintenaceFrequencySelected: boolean;
@@ -107,11 +112,29 @@ export class DetailsComponent {
             {
                 this.model = res.result;
                 this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerId;
-                this.selectedEquipmentTypeId = res.result.equipmentTypeId;
+             //   this.selectedEquipmentTypeName = "Analog";
                 this.selectedTestFacilityId = res.result.testFacilityId;
-                this.model.purchaseDate = new Date(res.result.purchaseDate);
-                this.model.warrantyExpiration = new Date(res.result.warrantyExpiration);
-                this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
+            //    this.selectedEquipmentObj.id = res.result.equipmentTypeId;
+               // this.selectedEquipmentObj.name = "Analog";
+
+              //  this.selectedEquipmentObj.frequency = "generic"; //res.result.calibrationFrequencyCronExpression;
+
+                this.model.equipmentTypeId = res.result.equipmentTypeId;
+                if (res.result.purchaseDate == null)
+                    this.model.purchaseDate = null;
+                else
+                    this.model.purchaseDate = new Date(res.result.purchaseDate);
+
+                if (res.result.warrantyExpiration == null)
+                    this.model.warrantyExpiration = null;
+                else
+                    this.model.warrantyExpiration = new Date(res.result.warrantyExpiration);
+
+                if (res.result.lastCalibrationDate == null)
+                    this.model.lastCalibrationDate = null;
+                else
+                    this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
+
                 this.frequencyInit();
                 this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;
                 //if (res.testFacility.nextMaintenanceDate != null) {
@@ -184,7 +207,6 @@ export class DetailsComponent {
    }
    showHideCronPicker() {
        console.log("--inside cronpicker show hide");
-       debugger;
        if (this.isMaintenaceFrequencySelected) {
            if (!this.isCronControlInitialized) {
                $("#selector").cron({
@@ -268,46 +290,13 @@ export class DetailsComponent {
    onAddManufacturer()
    {
 
-       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
-           return null;
-       }
-       if (this.manufacturerAddressLine1 == null || this.manufacturerAddressLine1 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test Number', detail: '' });
-           return null;
-       }
-       if (this.manufacturerAddressLine2 == null || this.manufacturerAddressLine2 == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerCity == null || this.manufacturerCity == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerEmail == null || this.manufacturerEmail == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
-       if (this.manufacturerPhone == null || this.manufacturerPhone == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
+     
        if (this.manufacturerName == null || this.manufacturerName == "") {
            this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
+           this.msgs.push({ severity: 'error', summary: 'Please enter Manufacturer Name', detail: '' });
            return null;
        }
-       if (this.manufacturerState == null || this.manufacturerState == "") {
-           this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Test manufacturerAddressLine1', detail: '' });
-           return null;
-       }
+     
 
        let equipmentmanufacturermodel= {
            EquipmentId: this.id,
@@ -333,6 +322,7 @@ export class DetailsComponent {
            {
                this.getEquipmentManufacturers();               
                this.selectedEquipmentManufacturerId = res.result.equipmentManufacturerDetails.id;
+               this.displayAssignManufacturerDialog = false;
              //  this.manufacturerPhone = res.result.equipmentManufacturerDetails.phoneNumber;
                //this.manufacturerFax = res.result.equipmentManufacturerDetails.PhoneNumber;
                //this.manufacturerWebsite = res.result.equipmentManufacturerDetails.PhoneNumber;
@@ -390,6 +380,14 @@ export class DetailsComponent {
 
    onEquipmentTypeChange(event) {
        this.selectedEquipmentTypeId = (event.value);
+
+       let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === event.value)[0].frequency;
+       if (frequencyvar != null && frequencyvar != "") {
+           this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
+           this.frequencyInit();
+       }
+      
+      // this.selectedCalibrationFrequency = event.
        //   this.EquipmentSubType.calibrationform = (event);
 
    }
@@ -423,26 +421,38 @@ export class DetailsComponent {
    getEquipmentTypes() {
        //    userRoles
        this.service.getEquipmentTypes().subscribe(response => {
-           debugger;
-           this.equipmentTypes = new Array();
+         
+           this.equipmentTypes = [];
            if (response != null) {
-               var resultMap = new Array();
-               resultMap.push({
+               var list = new Array();
+               this.equipmentTypes.push({
                    label: "--Select--",
-                   value: null
+                   value: null,
+                   frequency: null
                });
-               for (let template of response.$values) {
+               for (let template of response.$values) {                  
                    var temp = {
-                       label: template.name,
-                       value: template.id
+                       label: template.name + "(" + template.frequency +")",
+                       value:  template.id ,
+                       frequency:  template.frequency
                    }
-                   resultMap.push(temp);
+                   this.equipmentTypes.push(temp);
                }
-               this.equipmentTypes = resultMap;
+               this.equipmentTypes = this.equipmentTypes;
            }
        });
    }
-   onEquipmentSave(formRef) {   
+   onEquipmentSave(formRef) {
+       if (formRef.name == null || formRef.name == "") {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please enter Name', detail: '' });
+           return null;
+       }
+       if (this.selectedEquipmentTypeId == null || this.selectedEquipmentTypeId == undefined) {
+           this.msgs = [];
+           this.msgs.push({ severity: 'error', summary: 'Please select Equipment Type', detail: '' });
+           return null;
+       }
      //  formRef.isDeleted = false;
        let cronexp: any;
        if (this.isMaintenaceFrequencySelected) {

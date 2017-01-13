@@ -9,7 +9,7 @@ export class TestReqestApiUrl {
     public static getUserScheduleByTestFacilityScheduleIdUrl: string = titanApiUrl + 'testRequest/GetUserScheduleByTestFacilityScheduleId/';
     public static postDeleteUserScheduleInstanceUrl: string = titanApiUrl + 'testRequest/DeleteUserScheduleInstance/';
     public static postMoveTestRequestUrl: string = titanApiUrl + 'testRequest/Move/';
-    public static postAssignUserUrl: string = titanApiUrl + 'testRequest/AssignUser/';
+    public static postAssignUserUrl: string = titanApiUrl + 'testRequest/AssignUsers/';
 
     
 }

@@ -1,18 +1,18 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <h3>Details</h3>
+        <div class="card card-w-title">
+        <h1>Equipment Details</h1>
 <p-tabView  (onChange)="handleChange($event)">
 
-    
-        <p-tabPanel header="Details ||" id='details'>
-        
+        <p-tabPanel header="Information" id='details'>
+
             <p-growl [value]="msgs"></p-growl>
-            
+
                 <div class="subsection">
                     <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
-                       
-                        <p-panel header="Basic Information">
-                            <br/>
+
+                        <p-panel header="Information">
+                            <br />
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" id="name" [(ngModel)]="model.name" required pInputText name="name" style="width:100%">
@@ -28,8 +28,19 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Equipment Type :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes">
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" appendTo="body"  [autoWidth]="false">
+                                        <!--<template let-item>
+                                            <div class="ui-helper-clearfix">
+
+                                                <div *ngIf="item.value.name !==''"> {{item.value.name}} ({{ item.value.frequency}})</div>
+                                            </div>
+                                        </template>
                                     </p-dropdown>
+                                                <div *ngIf="item.name !==''"> {{item.name}} ({{ item.frequency}})</div>                                              
+                                            </div>
+                                        </template>-->
+                                    </p-dropdown>                                  
+
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Test Facility :</p>
@@ -42,7 +53,7 @@
                             <div class="ui-grid-row " style="color:#777">
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
                                     <p-calendar [(ngModel)]="model.purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
-                                    <label>Year Purchased :</label>
+                                    <label>Purchase Date :</label>
                                 </div>
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
                                     <p-calendar [(ngModel)]="model.warrantyExpiration" name="warrantyExpiration" [showIcon]="true"></p-calendar>
@@ -57,7 +68,7 @@
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                                label="Maintenance Frequency"
+                                                label="Is calibration Required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
                                     </p-checkbox>
@@ -121,10 +132,10 @@
                         <!--End Description-->
 </div>
 
-             
-             
-            
-          
+
+
+
+
               <div class="subsection">
 
                   <form>
@@ -137,9 +148,19 @@
                           <p>
                               Please add Manufacturer details
                           </p>
-                                              
+
+
+
+
+                          <div class="ui-grid-row">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" style="width:100%">
+                                  <label>Name</label>
+                              </div>
+                          </div><br/>
 
                           <div class="ui-grid-row ">
+
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerAddressLine1" [(ngModel)]="manufacturerAddressLine1" style="width:100%">
                                   <label>Address Line1</label>
@@ -147,6 +168,26 @@
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerAddressLine2" [(ngModel)]="manufacturerAddressLine2" style="width:100%">
                                   <label>Address Line2</label>
+                              </div>
+                          </div><br />
+                          <div class="ui-grid-row ">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerPostal" [(ngModel)]="manufacturerPostal" style="width:100%">
+                                  <label>Postal</label>
+                              </div>
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerCity" [(ngModel)]="manufacturerCity" style="width:100%">
+                                  <label>City</label>
+                              </div>
+                          </div><br />
+                          <div class="ui-grid-row ">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerState" [(ngModel)]="manufacturerState" style="width:100%">
+                                  <label>State</label>
+                              </div>
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" style="width:100%">
+                                  <label>Website</label>
                               </div>
                           </div><br />
                           <div class="ui-grid-row ">
@@ -164,40 +205,20 @@
                                   <input type="text" pInputText name="manufacturerEmail" [(ngModel)]="manufacturerEmail" style="width:100%">
                                   <label>Email</label>
                               </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" style="width:100%">
-                                  <label>Name</label>
-                              </div>
-                          </div><br />
-                          <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerPostal" [(ngModel)]="manufacturerPostal" style="width:100%">
-                                  <label>Postal</label>
-                              </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerCity" [(ngModel)]="manufacturerCity" style="width:100%">
-                                  <label>City</label>
-                              </div>
                           </div><br />
 
 
-                          <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerState" [(ngModel)]="manufacturerState" style="width:100%">
-                                  <label>State</label>
-                              </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" style="width:100%">
-                                  <label>Website</label>
-                              </div>
-                          </div><br />
+
+
 
                           <footer>
                               <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                  <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+
+                                  <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                   <button type="button" pButton icon="ui-icon-add"
                                           (click)="displayClear()" label="Add New"></button>
+
                                   <button type="button" pButton icon="ui-icon-close"
                                           (click)="displayAssignManufacturerDialog=false" label="Cancel"></button>
                                   <button type="button" pButton icon="ui-icon-save" (click)="onAddManufacturer()"
@@ -216,7 +237,7 @@
                               <p class="ui-panel-title">Equipment Manufacturer Details</p>
                               <p class="controls">
                                   <button type="text" (click)="displayAssignManufacturerDialogBox()" pButton
-                                          icon="ui-icon-person-add" label="Add Manufacturer&hellip;"></button>
+                                          icon="ui-icon-person-add" label="Create New Manufacturer&hellip;"></button>
                               </p>
                           </header>
                           <br/>
@@ -285,12 +306,10 @@
                   </form>
 
               </div>
-         
-
 
       </p-tabPanel>
 
-        <p-tabPanel header="Schedule ||" id="schedule">
+        <p-tabPanel header="Schedule" id="schedule">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -322,7 +341,7 @@
                 </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Calibration History ||" id="calibrationhistory">
+        <p-tabPanel header="Calibration Historys" id="calibrationhistory">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -379,65 +398,71 @@
     <p-tabPanel header="Log" id="log" headerStyleClass="log">
         <p-growl [value]="msgs"></p-growl>
         <form name="tForm2" enctype="application/x-www-form-urlencoded">
-            <p-panel>
+          <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400">
+                  <div class="ui-grid-row">
+                      <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
+                          <header>
+                              <select class="ql-size">
+                                  <option value="small"></option>
+                                  <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                  <option selected></option>
+                                  <option value="large"></option>
+                                  <option value="huge"></option>
+                              </select>
+                              <span class="ql-formats">
+                                  <button class="ql-bold"></button>
+                                  <button class="ql-italic"></button>
+                                  <button class="ql-underline"></button>
+                              </span>
+                          </header>
+                      </p-editor>
+                  </div>
+                  <footer>
+                      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                          <button type="button" pButton icon="fa-close" (click)="displayCommentDialog=false" label="Cancel"></button>
+                          <button type="button" pButton icon="ui-icon-comment" (click)="AddLogComment()" label="Add Comment"></button>
+                      </div>
+                  </footer>
+              </p-dialog>
+              <p-panel>
+                  <header class="with-controls">
+                      <p class="ui-panel-title">Log/Comment List</p>
+                      <p class="controls">
+                        <button pButton type="button" icon="ui-icon-add" label="Add Comment"
+                              (click)="displayCommentDialog=true"></button>
+                      </p>
+                  </header>
+                  <div class="ui-grid-col-2"></div>
+                  <div class="ui-grid-row">
 
-                <header class="with-controls">
-                    <p class="ui-panel-title">Comments</p>
 
-                </header>
-                <div class="ui-grid-row">
-                    <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
-                        <header>
-                            <select class="ql-size">
-                                <option value="small"></option>
-                                <!-- Note a missing, thus falsy value, is used to reset to default -->
-                                <option selected></option>
-                                <option value="large"></option>
-                                <option value="huge"></option>
-                            </select>
-                            <span class="ql-formats">
-                                <button class="ql-bold"></button>
-                                <button class="ql-italic"></button>
-                                <button class="ql-underline"></button>
-                            </span>
-                        </header>
-                    </p-editor>
-                </div>
+                      <div class="ui-grid-col-2"></div>
+                      <p-dataTable [value]="equipmentLogComments" selectionMode="single"
+                                   [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                          [responsive]="true">
+                          <p-column field="event" header="Audit/Comment" sortable="true" [filter]="true"
+                                    filterPlaceholder="Search">
+                        </p-column>
+                          <p-column field="comment" header="Information" sortable="true" [filter]="true"
+                                    filterPlaceholder="Search">
+                            <template let-col let-item="rowData" pTemplate="body">
+                                  <div [innerHtml]="item.comment"></div>
+                            </template>
+                          </p-column>
+                          <p-column field="employee" header="Employee" sortable="true" [filter]="true"
+                                    filterPlaceholder="Search"></p-column>
+                          <p-column field="createdOn" header="Timestamp" sortable="true"></p-column>
+                      </p-dataTable>
 
-
-                <div class="ui-grid-col-2"></div>
-                <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
-                <button pButton type="button" icon="ui-icon-comment" label="Add Comment"
-                        (click)="AddLogComment()"></button>
+                  </div>
+                  <div class="ui-grid-col-2"></div>
             </p-panel>
         </form>
-        <div class="ui-grid-col-2"></div>
-        <div class="ui-grid-row">
 
-
-            <div class="ui-grid-col-2"></div>
-            <p-dataTable [value]="equipmentLogComments" selectionMode="single"
-                         [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                [responsive]="true">
-                <p-column field="event" header="Information" sortable="true" [filter]="true"
-                          filterPlaceholder="Search"></p-column>
-                <p-column field="comment" header="Audit/Comment" sortable="true" [filter]="true"
-                          filterPlaceholder="Search">
-                    <template let-col let-item="rowData" pTemplate="body">
-                        <div [innerHtml]="item.comment"></div>
-                    </template>
-
-
-                </p-column>
-                <p-column field="employee" header="Employee" sortable="true" [filter]="true"
-                          filterPlaceholder="Search"></p-column>
-                <p-column field="createdOn" header="Timestamp" sortable="true"></p-column>
-            </p-dataTable>
-
-        </div>
 
 
     </p-tabPanel>
 </p-tabView>
     </div>
+</div>
 </div>

@@ -1,6 +1,6 @@
-﻿import { titanApiUrl } from './titanApiUrl';
-import { localizationApiUrl } from './localizationApiUrl';
-import { GridApiUrl } from './gridApiUrls';
+﻿import { titanApiUrl } from '../titanApiUrl';
+import { localizationApiUrl } from '../localizationApiUrl';
+import { GridApiUrl } from '../gridApiUrls';
 
 export class TestFacilityApiUrl {
 
@@ -36,5 +36,6 @@ export class TestFacilityApiUrl {
     public static postReserveUrl: string = titanApiUrl + 'testFacility/reserve/';
     public static postFreeUrl: string = titanApiUrl + 'testFacility/Free/';
     public static postMoveTestUrl: string = titanApiUrl + 'testFacility/MoveTest/';
-    public static getEquipmentToAddUrl:string = titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility/'
+    public static getEquipmentToAddUrl:string = titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility/';
+    public static postSplitTestFacilityEvent: string = titanApiUrl + 'testFacility/Split/';
 }

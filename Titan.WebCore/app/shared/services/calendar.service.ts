@@ -85,4 +85,9 @@ export class CalendarService {
             throw error;
         }
     }
+    getDefaultSettings(tenantId){
+        return this.http.get(`${CalendarApiUrl.getCalendarSettingsByTenantIdUrl}${tenantId}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+    }
 }

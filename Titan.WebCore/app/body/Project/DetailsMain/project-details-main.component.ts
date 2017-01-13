@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectService } from './../../../shared/services/project.service';
 import { TemplatesComponent} from '../Templates/templates.component';
+import { TeamInformationComponent} from '../TeamInformation/teaminformation.component';
 //import { DetailsComponent } from "./../Details/details.component"
 
 @Component({
@@ -15,17 +16,17 @@ export class ProjectDetailsMainComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: ProjectService) {} 
+        private service: ProjectService) {}
 
 
-    ngOnInit() { 
+    ngOnInit() {
           this.route.params.subscribe(params => this.id = params['id']);
         // this.route.params.forEach((params: Params) => {
         //     let projectId = params['projectId']; // (+) converts string 'id' to a number
         //     //let locale = params['locale'];
 
         //     this.service.getProjectDetails(projectId).subscribe(ProjectDetails => {this.ProjectDetails = ProjectDetails
-        //         console.log(this.ProjectDetails);    
+        //         console.log(this.ProjectDetails);
         //     });
         // });
     }

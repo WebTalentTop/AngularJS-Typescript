@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestFacilityApiUrl } from './apiUrlConst/TestFacilityApiUrls';
-
+import { TestFacilityApiUrl } from '../../apiUrlConst/TestFacility/testFacilityApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -318,7 +317,10 @@ export class TestFacilityService {
         return this.http.post(`${TestFacilityApiUrl.postMoveTestUrl}`, formData, { headers: this.headers })
             .map(this.getJson);
     }
-
+    postSplitTestFacilityEvent(viewModel): Observable<any> {
+        return this.http.post(`${TestFacilityApiUrl.postSplitTestFacilityEvent}`, viewModel, { headers: this.headers })
+            .map(this.getJson);
+    }
 	getLocalizationInformationObservable(resourceSetName,cultureName):Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getDetailsTabLocJs}${resourceSetName}&cultureName=${cultureName}`)
             .map(res =>{

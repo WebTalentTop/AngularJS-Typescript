@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response, URLSearchParams} from '@angular/http';
+import { Http, Headers, Response, URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { FormSchemaApiUrl } from './apiUrlConst/formSchema.ApiUrls';
-import {IFormSchema} from "./definitions/IFormSchema";
+import { IFormSchema } from "./definitions/IFormSchema";
+import { LoggerService } from './logger/logger.service';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -15,6 +16,9 @@ export class FormSchemaService {
         // 'Access-Control-Allow-Origin': '*'
     });
 
+    pageNumber:number = 0;
+    pageSize:number = 15;
+
     body = {
         "locale": "en-us",
         "defaultLocale": "en-us",
@@ -23,7 +27,10 @@ export class FormSchemaService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
+    constructor(
+        private ls: LoggerService,
+        private http: Http) {
+        this.ls.setShow(false);
         /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
          this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
          this.headers.append('Content-Type', 'application/json');*/
@@ -36,14 +43,14 @@ export class FormSchemaService {
             .map(this.getJson);
     }
     postGridDataFilter(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        this.ls.logConsole("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${FormSchemaApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
 
     postAdd(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
-        console.log("Post Schema URL ------------", FormSchemaApiUrl.postCreatedUrl);
+        this.ls.logConsole("-------- Post Customers FilterBody --------", filterBody);
+        this.ls.logConsole("Post Schema URL ------------", FormSchemaApiUrl.postCreatedUrl);
         return this.http.post(`${FormSchemaApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
 
@@ -52,7 +59,7 @@ export class FormSchemaService {
     }
 
     postUpdate(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        this.ls.logConsole("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${FormSchemaApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
             /*.map(this.checkErrors)
@@ -75,17 +82,27 @@ export class FormSchemaService {
             .map(this.getJson);
     }
 
+    getFormSchemaGrid(formSchemaCategoryId): Observable<any> {
+        return this.http.get(`${FormSchemaApiUrl.getFormSchemaGridUrl}/${formSchemaCategoryId}/${this.pageNumber}/${this.pageSize}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
+    getFormSchemaGridByEntityIdentifierId(entityIdentifierId): Observable<any> {
+        return this.http.get(`${FormSchemaApiUrl.getFormSchemaGridByEntityIdentifierIdUrl}/${entityIdentifierId}/${this.pageNumber}/${this.pageSize}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
     /* getNotifications(id): Observable<any> {
      return this.http.get(`${FormSchemaFieldDataTypeApiUrl.getNotifications}/${id}`, {headers: this.headers})
      .map(this.getJson)
      .map(data => {
-     console.log("Notification data --------", data);
+     this.ls.logConsole("Notification data --------", data);
      return data.$values
      });
      }*/
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+        //this.ls.logConsole("In Data Service response.json() call: ", response.json());
         return response.json();
     }
 

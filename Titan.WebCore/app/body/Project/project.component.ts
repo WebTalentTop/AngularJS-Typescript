@@ -1,5 +1,5 @@
 import { ProjectService } from './../../shared/services/project.service';
-import { LoggerService } from './../../shared/services/logger.service';
+import { LoggerService } from '../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
@@ -32,6 +32,7 @@ export class ProjectComponent {
     }
 
     ngOnInit() {
+        this.logger.logConsole("Project is loaded --------", "yippie");
         let resData: any;
         this.service.postGridData()
             .subscribe(res => {

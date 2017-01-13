@@ -3,36 +3,30 @@
 
 // // export const routes: Routes = [
 // //   { path: '', redirectTo: 'department', pathMatch: 'full'},
-// //   { path: 'project', loadChildren: 'app/body/body.module#CrisisModule' },
-// //   { path: 'heroes', loadChildren: 'app/hero/hero.module#HeroModule' }
+// //   { path: 'project', canActivate: [AuthGuard], loadChildren: 'app/body/body.module#CrisisModule' },
+// //   { path: 'heroes', canActivate: [AuthGuard], loadChildren: 'app/hero/hero.module#HeroModule' }
 // // ];
 
 // export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
 
-import { RouterModule } from '@angular/router';
+import {RouterModule, CanActivate, Routes} from '@angular/router';
+import {AuthService} from "./shared/services/auth/auth.service";
+import {AuthComponent} from "./Auth/auth.component";
+import {FakePageComponent} from "./fakepage/fakepage.component";
+import {AuthGuard} from "./shared/services/auth/authGuard";
 
-
-const appRoutes = [
-  {
-    path: '',
-    loadChildren: 'app/body/body.module'
+export const appRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: '/project',
+        pathMatch: 'full'
     },
-  //  ,
-  //{
-  //    path: 'equipment',
-  //    loadChildren: 'app/body/equipment/equipment.module'
-  //},
-  //{
-  //  path: 'project',
-  //  loadChildren: "app/body/project/project.module"
-  //},
-  {
-    path: '',
-    redirectTo: '/project',
-    pathMatch: 'full'
-  }
+    {
+        path: 'project',
+        loadChildren: 'app/body/body.module'
+    },
+
 ];
 
-export default RouterModule.forRoot(appRoutes);
 
-
+export default appRoutes;

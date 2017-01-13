@@ -25,4 +25,3 @@ import { CalendarModule, ButtonModule, InputTextareaModule, InputTextModule, Pan
 })
 
 export default class ProjectModule { }
-

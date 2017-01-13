@@ -2,7 +2,7 @@
 import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
-import { TestFacilityService } from '../../../shared/services/testFacility.service';
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
@@ -38,12 +38,21 @@ import detailsRoutes from "./details.routes";
     TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, 
     FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
 
-    providers: [EntityIdentifierService,TestFacilityService,FormSchemaCategoryService, TestFacilityRoleService, 
-    TestFacilityAttachmentService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, 
-    TestModeService, BreadCrumbsService, TestTypeService, TestTemplateService],
-
-
-
+    providers: [
+                EntityIdentifierService,
+                TestFacilityService,
+                FormSchemaCategoryService,
+                TestFacilityRoleService,
+                TestFacilityAttachmentService,
+                BuildLevelService,
+                ProjectService,
+                TestRoleService,
+                TestStatusService,
+                TestModeService,
+                TestTypeService,
+        TestTemplateService,
+        BreadCrumbsService
+    ],
     declarations: [DetailsComponent]
 })
 

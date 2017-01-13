@@ -1,10 +1,12 @@
 ﻿
+
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from './header/header.module';
 import { TitanUserProfileService } from './shared/services/titanUserProfile.service';
+import { LoggerService } from './shared/services/logger/logger.service';
 import { EntityEventService } from './shared/services/entityEvent.service';
 import { FormSchemaService } from './shared/services/formSchema.service';
 import { FormSchemaCategoryService } from './shared/services/formSchemaCategory.service';
@@ -17,7 +19,6 @@ import { AppComponent } from './app.component';
 import { DataGridModule } from 'primeng/primeng';
 import { enableProdMode } from '@angular/core';
 //import { DataTableModule } from 'primeng/primeng';
-
 //import {AccordionModule} from 'primeng/primeng';
 import {AutoCompleteModule} from 'primeng/primeng';
 //import {BreadcrumbModule} from 'primeng/primeng';
@@ -101,7 +102,10 @@ import { DropdownModule } from 'primeng/primeng';
 //import {NodeService} from './demo/service/nodeservice';
 import BodyModule from './body/body.module';
 import appRoutes from "./app.routing";
-
+import {RouterModule} from "@angular/router";
+import {AuthComponent} from "./Auth/auth.component";
+import {AuthGuard} from "./shared/services/auth/authGuard";
+import {FakePageComponent} from "./fakepage/fakepage.component";
 //enableProdMode();
 
 
@@ -178,10 +182,11 @@ import appRoutes from "./app.routing";
         //TooltipModule,
         //TreeModule,
         //TreeTableModule,
-        appRoutes
+        RouterModule.forRoot(appRoutes)
     ],//, DataTableModule],
     declarations: [
-        AppComponent
+        AppComponent,
+        AuthComponent
         //DashboardDemo,
         //SampleDemo,
         //FormsDemo,
@@ -200,7 +205,7 @@ import appRoutes from "./app.routing";
     ],
     //providers: [DataService],
 
-    providers: [TitanUserProfileService, EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
+    providers: [AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

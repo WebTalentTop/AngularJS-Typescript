@@ -1,11 +1,29 @@
+<script src="formInstance.component.ts"></script>
 <div class="ui-g-12" *ngIf="selectedInputList.length > 0">
     <h3>{{formName}}</h3>
-    <!--<pre>{{formInstance | json}}</pre>-->
-    <form #fiForm="ngForm" (ngSubmit)="saveForm(fiForm)">
+    <pre>{{formInstance | json}}</pre>
+    <form #fiForm="ngForm" (ngSubmit)="collectForm(fiForm)">
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-12 ui-md-4" *ngFor="let formInput of formFieldDataItemList">
-                <div>
-                    <!--<pre style="overflow-y: scroll;height: 250px;">{{formInput | json}}</pre>-->
+                <div *ngIf="formInput.formSchemaFieldDataTypeName === 'CheckBox'">
+                    <label>{{formInput.label}}</label>
+                    <div class="ui-g-12" *ngFor="let ck of formInput.formSchemaFieldDataTypeData">
+                        <p-checkbox name="{{formInput.name}}" label="{{ck}}" value="{{ck}}"
+                                    [(ngModel)]="formInput.checkBoxValue"></p-checkbox>
+                    </div>
+                </div>
+                <div *ngIf="formInput.formSchemaFieldDataTypeName === 'RadioBox'">
+                    <label>{{formInput.label}}</label>
+                    <div class="ui-g-12" *ngFor="let ck of formInput.formSchemaFieldDataTypeData">
+                        <p-radioButton
+                                name="{{formInput.name}}"
+                                label="{{ck}}" value="{{ck}}"
+                                [(ngModel)]="formInput.radioBoxValue">
+                        </p-radioButton>
+
+                    </div>
+                </div>
+                <div *ngIf="formInput.formSchemaFieldDataTypeName === 'TextBox'">
                     <label>{{formInput.name}}</label><br>
                     <input pInputText
                            id="{{formInput.formSchemaFieldId}}"
@@ -15,25 +33,53 @@
                            *ngIf="formInput.formSchemaFieldDataTypeName === 'TextBox'"
                            type="text"
                            [placeholder]="formInput.label"/>
-                    <!--<p-spinner size="30"
-                               [(ngModel)]="formInput.value"
-                               *ngIf="checkFieldDataType(formInput.formSchemaFieldDataTypeId).name === 'NumberBox'"
-                               [disabled]="true"></p-spinner>-->
                 </div>
+
+            </div>
+            <div class="ui-g-12" *ngIf="formInstanceUpdateView">
+                <label>Notes</label><br/>
+                <textarea
+                        type="text"
+                        pInputTextarea
+                        name="notes"
+                        [(ngModel)]="formInstance.notes">
+                </textarea>
             </div>
         </div>
 
         <div class="ui-grid-row">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-2">
-                    <button id="add" pButton type="submit" label="Add">  </button>
+                <div class="ui-grid-col-2" *ngIf="!formInstanceUpdateView">
+                    <button id="add" pButton type="submit" label="Add"></button>
+                </div>
+                <div class="ui-grid-col-2" *ngIf="formInstanceUpdateView">
+                    <button id="update" pButton type="submit" label="Update"></button>
                 </div>
                 <div class="ui-grid-col-6">
                 </div>
                 <div class="ui-grid-col-4">
-                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/testfacilities">  </button>
+                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/testfacilities"></button>
                 </div>
             </div>
         </div>
     </form>
+
+    <p-dialog header="Please enter notes" minHeight="400" minWidth="500" [(visible)]="displayNotesDialog">
+        <div class="ui-g ui-fluid form-group">
+            <div class="ui-g-12">
+                <label>Notes</label><br/>
+                <textarea
+                        type="text"
+                        pInputTextarea
+                        name="notes"
+                        [(ngModel)]="notes">
+                </textarea>
+            </div>
+        </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <button pButton type="button" icon="fa-check" (click)="saveForm()" label="Save Note"></button>
+            </div>
+        </footer>
+    </p-dialog>
 </div>

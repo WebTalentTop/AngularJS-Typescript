@@ -6,161 +6,521 @@
 
                 <h4> User Management </h4>
                 <div class="ui-grid-row small-width">
-                     <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> User Management </span></a>
-                    </div>
+                    <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    User Management 
+                                </span>
+                            </div>
+                            </a>
+                </div>
                 </div>
 
 
                 <h1 style="border-bottom:groove; border-bottom-color:lightblue"></h1>
                 <h4> Roles and Permission </h4>
                 <div class="ui-grid-row small-width">
-                     <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Roles and Permission </span></a>
-                    </div>
+                    <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Roles and Permission 
+                                </span>
+                            </div>
+                            </a>
+                </div>
                 </div>
 
 
                 <h1 style="border-bottom:groove; border-bottom-color:aquamarine"></h1>
                 <h4> Lookups </h4>
                 <div class="ui-grid-row small-width">
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/access']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Access </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/accessGroup']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Access Group </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/buildLevel']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Build Levels </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/downTimeReason']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> DownTime Reason </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/engineCode']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Engine Code </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/grade']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Grade </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/holiday']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Holiday </span></a>
-                    </div>
-                     <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/judgement']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Judgement</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/maintenanceFrequency']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Maintenance Frequency </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/milestoneCategory']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Milestone Category </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/market']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Market </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/milestone']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Milestone </span></a>
-                    </div>
-                    
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/milestoneStatus']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Milestone Status </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/milestoneType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Milestone Type </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/modelName']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Model Name </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/modelYear']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Model Year </span></a>
-                    </div>   
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/operatingHours']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Operating Hours</span></a>
-                    </div>  
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/permission']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Permission </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/platform']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Platform </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/priority']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Priority</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/projectRole']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Project Role </span></a>
-                    </div>
-                     <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/projectStatus']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Project Status </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/stepFrequency']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Step Frequency</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/role']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Role </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/sensorType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Sensor Type </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/shift']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Shift </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/step']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Step </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/requirementItemType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Requirement ItemType </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/stepType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Step Type</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testActivity']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Activity</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testMode']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Mode</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testRole']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Role</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testRequirement']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Requirement</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testStatus']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Status </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testStage']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Stage</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testVerificationMethod']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Verification Method </span></a>
-                    </div>
-                     <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/testType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Test Type</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/tenant']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Tenant </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/titanRole']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Titan Role </span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/units']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Units</span></a>
-                    </div>
-                    <div class="ui-g-2 ui-md-2">
-                        <a [routerLink]="['/vehicle/vehicleType']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Vehicle Type </span></a>
+            <div class="ui-grid-row body">
+                <div class="ui-g-1">
+                <div class="ui-g-4 ui-md-4 circle"> 
+                        <a [routerLink]="['/admin/vehicle/access']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Access 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                   <div class="ui-g-4 ui-md-4 circle"> 
+                        <a [routerLink]="['/admin/vehicle/accessGroup']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Access Group
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-4 circle"> 
+                        <a [routerLink]="['/admin/vehicle/buildLevel']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Build Levels 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-4 circle"> 
+                        <a [routerLink]="['/admin/vehicle/downTimeReason']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Down Time Reason 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/admin/vehicle/engineCode']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Engine Code 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/admin/vehicle/grade']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Grade 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/admin/vehicle/holiday']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Holiday 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                
+                <div class="ui-g-1">
+                     <div class="ui-g-2 ui-md-2 circle"> 
+                        <a [routerLink]="['/admin/vehicle/judgement']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Judgement 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+            </div>
+
+            <div class="ui-grid-row body">
+                 <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/maintenanceFrequency']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Maintenance Frequency 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+                  
+                  <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/milestoneCategory']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Milestone Category 
+                                </span>
+                            </div>
+                            </a>
                     </div>
                 </div>
+                 
+                 <div class="ui-g-1">
+                  <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/market']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Market 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+                  
+                  <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/milestone']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Milestone 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                  </div>
+                   
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/milestoneStatus']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Milestone Status 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                   </div>
+                    
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/milestoneType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Milestone Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                    </div>
+                     
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/modelName']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Model Name 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                     </div>
+                    
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/modelYear']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Model Year 
+                                </span>
+                            </div>
+                            </a>
+                </div>   
+                      </div>
+                    
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/operatingHours']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Operating Hours 
+                                </span>
+                            </div>
+                            </a>
+                </div> 
+                    </div>
+                     
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/permission']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Permission 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                     </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/platform']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Platform 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                      </div>
+                <div class="ui-g-1">
+                  <div class="ui-g-2 ui-md-2 circle1"> 
+                        <a [routerLink]="['/admin/vehicle/priority']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Priority 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+            </div>
+
+            <div class="ui-grid-row body">
+                 <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/projectRole']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Project Role 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+                  <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/projectStatus']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Project Status 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                  </div>
+                   <div class="ui-g-1">
+                     <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/stepFrequency']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Step Frquency 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                   </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/role']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Role 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                    </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/sensorType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Sensor Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                     </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/shift']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Shift 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                      </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/step']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Step 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                       </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/stepType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Step Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                    </div>
+            <div class="ui-g-1">
+                <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/vehicle/requirementItemType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Requirement Item Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+            </div>
+                 
+            <div class="ui-grid-row body">
+                 <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testActivity']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Activity 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testMode']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Mode 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                  </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testRole']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Role 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                   </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testRequirement']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Requirement 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+
+                 <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testStatus']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Status 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                 </div>
+                  <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testStage']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Stage 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                  </div>
+                <div class="ui-g-1">
+                   <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testVerificationMethod']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Verification Method
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                   </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/testType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Test Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                    </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/titanRole']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    titan Role 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                     </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/units']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Units 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                      </div>
+                <div class="ui-g-1">
+                    <div class="ui-g-2 ui-md-2 circle3"> 
+                        <a [routerLink]="['/admin/vehicle/vehicleType']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Vehicle Type 
+                                </span>
+                            </div>
+                            </a>
+                </div>
+                </div>
+                    </div>
 
 
                 <h1 style="border-bottom:groove; border-bottom-color:lightyellow"></h1>
                 <h4> Form Builder </h4>
                 <div class="ui-grid-row small-width">
-                    <div class="ui-g-12 ui-md-2">
-                        <a [routerLink]="['/formBuilders']"><i class="material-icons fa">snapchat_square</i><span style="display:block;text-align:center;"> Form Builder</span></a>
-                    </div>
+                   <div class="ui-g-2 ui-md-2 circle2"> 
+                        <a [routerLink]="['/admin/formBuilders']">
+                            <div class="circleTextWrap">
+                                <span style="display:block;text-align:center;"> 
+                                    Form Builder 
+                                </span>
+                            </div>
+                            </a>
                 </div>
-
-
+                </div>
                 
             </div>
+</div>
 </div>
 </div>

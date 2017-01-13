@@ -8,6 +8,8 @@ export interface IFormInstance {
  entityId:string;
  formInstanceStateId?:string;
  fieldData:IFormInstanceFieldDataItem[];
+ id?:string;
+ notes?:string;
 }
 
 
@@ -17,7 +19,9 @@ export class FormInstance implements IFormInstance {
      public entityIdentifierId:string,
      public formSchemaVersionId:string,
      public fieldData:IFormInstanceFieldDataItem[],
-     public formInstanceStateId?:string
+     public formInstanceStateId?:string,
+     public id?:string,
+     public notes?:string
  )
  {}
 }

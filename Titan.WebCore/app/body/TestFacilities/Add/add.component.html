@@ -1,7 +1,6 @@
 <div class="ui-g">
 
     <div class="ui-g-12">
-<p-breadcrumb [model]="breadcrumbs" ></p-breadcrumb>
 <br />
         <div class="card card-w-title">
 
@@ -14,142 +13,116 @@
 
                 <p-panel header="Test Facility Name and Location">
 
-                    <div class="body">
+                  <div class="body">
 
-                        <!-- Begin Name -->
+                      <!-- Begin Name -->
 
-                        <div class="input-row">
+                      <div class="ui-grid-row">
 
-                            <div class="md-inputfield">
-                                <input type="text" id="name" pInputText name="name" [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
-                                       minlength="3" class="form-control" required row="20"
-                                       (focus)="testFacilityNameRef.focus=true" (blur)="testFacilityNameRef.focus=false">
-                                <label>Name <span [ngClass]="{'error': testFacilityNameRef.errors?.required}">*</span></label>
-                            </div>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                              <input type="text" id="name" pInputText name="name"
+                                     [(ngModel)]="testFacility.name" #testFacilityNameRef="ngModel"
+                                     minlength="3" class="form-control" required row="20"
+                                     (focus)="testFacilityNameRef.focus=true"
+                                     (blur)="testFacilityNameRef.focus=false" style="width:100%">
+                              <label>Name <span
+                                      [ngClass]="{'error': testFacilityNameRef.dirty && testFacilityNameRef.errors?.required}">*</span></label>
+                          </div>
+                          <p class="helper error"
+                             *ngIf="testFacilityNameRef.dirty && (testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength)">
+                              At least three characters</p>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText class="form-control" row="20" name="postalCode"
+                                       [(ngModel)]="postalCode" #tfpostalCodeRef="ngModel"
+                                       (focus)="tfpostalCodeRef.focus=true"
+                                       (blur)="tfpostalCodeRef.focus=false" style="width:100%">
+                                <label>Postal Code </label>
+                          </div>
 
-                            <p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>
 
-                        </div>
+                      </div><br /><br />
 
-                        <!-- End Name -->
-                        <!-- Begin Address Line 1 -->
+                      <!-- End Name -->
+                      <!-- Begin Address Line 1 -->
 
-                        <div class="input-row md-spaced">
+                      <div class="ui-grid-row">
 
-                            <div class="md-inputfield">
-                                <input type="text" pInputText name="addressLine1" class="form-control" row="20" [(ngModel)]="addressLine1"
-                                       #tfAddress1Ref="ngModel"
-                                       (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false">
-                                <label>Address Line 1 </label>
-                            </div>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                              <input type="text" pInputText name="addressLine1" class="form-control" row="20"
+                                     [(ngModel)]="addressLine1"
+                                     #tfAddress1Ref="ngModel"
+                                     (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false" style="width:100%">
+                              <label>Address Line 1</label>
+                          </div>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                              <input type="text" pInputText class="form-control" row="20" name="addressLine2"
+                                     [(ngModel)]="addressLine2"
+                                     #tfAddress2Ref="ngModel"
+                                     (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false" style="width:100%">
+                              <label>Address Line 2</label>
+                          </div>
+                          <!--<p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
+      <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>-->
 
-                            <!--<p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
-                            <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>-->
+                      </div><br /><br />
 
-                        </div>
+                      <!-- End Address Line 1 -->
+                      <!-- Begin Address Line 2 -->
+                      <div class="ui-grid-row">
 
-                        <!-- End Address Line 1 -->
-                        <!-- Begin Address Line 2 -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="addressLine2" [(ngModel)]="addressLine2"
-                                       #tfAddress2Ref="ngModel"
-                                       (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false">
-                                <label>Address Line 2</label>
-                            </div>
-
-                            <!--<p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>-->
-
-                        </div>
-
-                        <!-- End Address Line 2 -->
-                        <!-- Begin City -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="city" #tfCityRef="ngModel" [(ngModel)]="city"
-                                       (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false">
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText class="form-control" row="20" name="city"
+                                       #tfCityRef="ngModel" [(ngModel)]="city"
+                                       (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false" style="width:100%">
                                 <label>City </label>
-                            </div>
+                          </div>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText class="form-control" row="20" name="state"
+                                       [(ngModel)]="state" #tfstateRef="ngModel"
+                                       (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false" style="width:100%">
+                                <label>State </label>
+                          </div>
+                          <!--<p class="helper hint" *ngIf="tfAddress1Ref.focus">For example, 123 Main Street</p>
+      <p class="helper error" *ngIf="tfAddress1Ref.errors?.required && !tfAddress1Ref.focus">Required</p>-->
 
-                            <!--<p class="helper error" *ngIf="tfCityRef.errors?.required && !tfCityRef.focus">Required</p>-->
+                      </div><br />
+                      <!-- End State -->
+                      <!-- Begin Delete -->
 
-                        </div>
+                      <div class="ui-grid-row">
 
-                        <!-- End City -->
-                        <!-- Begin State -->
+                          <p>Description</p>
+                          <div class="md-inputfield">
 
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="state" [(ngModel)]="state" #tfstateRef="ngModel"
-                                       (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false">
-                                <label>State</label>
-                            </div>
-
-                            <!--<p class="helper error" *ngIf="tfstateRef.errors?.required && !tfstateRef.focus">Required</p>-->
-
-                        </div>
-
-                        <!-- End State -->
-                        <!-- Begin Postal Code -->
-
-                        <div class="input-row md-spaced">
-
-                            <div class="md-inputfield">
-                                <input type="text" pInputText class="form-control" row="20" name="postalCode" [(ngModel)]="postalCode" #tfpostalCodeRef="ngModel"
-                                       (focus)="tfpostalCodeRef.focus=true" (blur)="tfpostalCodeRef.focus=false">
-                                <label>Zip Code</label>
-                            </div>
-
-                            <!--<p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>-->
-
-                        </div>
-                        <!--<div class="form-group col-sm-6 col-md-4">
-                            <label class="control-label  col-sm-12 pl0">
-                                Last
-                                Maintenance Date
-                            </label>
-                            <div class="input-group">
-                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
-                            </div>
-                        </div>-->
-                        <div class="input-row md-spaced">
-                            <label>Description</label>
-                            <div class="md-inputfield">
-
-                                <p-editor [(ngModel)]="testFacility.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
-                                    <header>
-                                        <select class="ql-size">
-                                            <option value="small"></option>
-                                            <!-- Note a missing, thus falsy value, is used to reset to default -->
-                                            <option selected></option>
-                                            <option value="large"></option>
-                                            <option value="huge"></option>
-                                        </select>
-                                        <span class="ql-formats">
-                                            <button class="ql-bold"></button>
-                                            <button class="ql-italic"></button>
-                                            <button class="ql-underline"></button>
-                                        </span>
-                                    </header>
-                                </p-editor>
+                              <p-editor [(ngModel)]="testFacility.description" name="description"
+                                        [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <header>
+                                      <select class="ql-size">
+                                          <option value="small"></option>
+                                          <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                          <option selected></option>
+                                          <option value="large"></option>
+                                          <option value="huge"></option>
+                                      </select>
+                                      <span class="ql-formats">
+                                              <button class="ql-bold"></button>
+                                              <button class="ql-italic"></button>
+                                              <button class="ql-underline"></button>
+                                          </span>
+                                  </header>
+                              </p-editor>
 
 
-                            </div>
-                        </div>
-                        <!-- End Postal Code -->
+                          </div>
 
+                      </div>
                     </div>
 
                     <footer>
                         <p>* indicates required field</p>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testfacilities"></button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testFacilities"></button>
                         <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"></button>
-                    </footer>
+                    </footer><br />
 
                 </p-panel>
 

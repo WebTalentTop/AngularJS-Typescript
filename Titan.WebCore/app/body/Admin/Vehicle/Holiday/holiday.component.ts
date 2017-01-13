@@ -1,5 +1,5 @@
 import { HolidayService } from '../../../../shared/services/holiday.service';
-import { LoggerService } from '../../../../shared/services/logger.service';
+import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -72,6 +72,6 @@ export class HolidayComponent {
         
     }
     navigateDetails(id:string){
-        this.router.navigate(['vehicle/holiday/details', id]);
+        this.router.navigate(['admin/vehicle/holiday/details', id]);
     }
 }

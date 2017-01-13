@@ -1,23 +1,45 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { DataTable, TabViewModule, DialogModule, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipmentSubtype';
-import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
+
+import {EquipmentTypeService} from '../../../shared/services/equipmentType.service';
+import {
+    DataTable,
+    TabViewModule,
+    DialogModule,
+    SelectItem,
+    Dropdown,
+    LazyLoadEvent,
+    ButtonModule,
+    InputTextareaModule,
+    InputTextModule,
+    PanelModule,
+    FileUploadModule,
+    Message,
+    GrowlModule
+} from 'primeng/primeng';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {IEquipmentSubtype} from '../../../shared/services/definitions/IEquipmentSubtype';
+import {ICalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
+
+import {LoggerService} from "../../../shared/services/logger/logger.service";
+import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
+import {FormSchemaCategoryService} from "../../../shared/services/formSchemaCategory.service";
+
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
+declare var useGentleSelect: false;
 
 @Component({
     selector: 'details-testfacility',
     templateUrl: 'app/body/equipmenttype/Details/details.component.html'
 })
 export class DetailsComponent implements OnInit {
-
+    entityIdentifierName: string = "Equipment";
+    //useGentleSelect:boolean = false;
     displayDialog: boolean;
     EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '');
-    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '');
+    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
     IsSubType: boolean;
@@ -26,6 +48,7 @@ export class DetailsComponent implements OnInit {
     username: string;
     details: string;
     id: string;
+    cronInitialized: boolean = false;
     msgs: Message[];
     entityType: string = '';
     entityId: string = '';
@@ -33,16 +56,18 @@ export class DetailsComponent implements OnInit {
     displayDialogForm: boolean;
     emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
-
+    selectedMaintenanceFrequency: any;
     cities: SelectItem[];
     selectedcity: any;
+    selectedSubTypeMaintenanceFrequency: any;
     selectedstring: string = null;
     model: any = {
         id: '',
-       // isdeleted: '0',
+        // isdeleted: '0',
         parentId: '',
         description: '',
-         name: ''
+        name: '',
+        frequency: ''
         //createdOn: '',
         //modifiedOn: '',
         //userCreatedById: '',
@@ -53,30 +78,99 @@ export class DetailsComponent implements OnInit {
 
     uploadedFiles: any[] = [];
 
-    constructor(
-        private route: ActivatedRoute,
-        private dataService: EquipmentTypeService
+    constructor(private route: ActivatedRoute,
 
-    ) {
+        private dataService: EquipmentTypeService,
+        private entityIdentifierService: EntityIdentifierService,
+        private formSchemaCategoryService: FormSchemaCategoryService,
+      
+        private ls: LoggerService) {
+        this.ls.setShow(true);
+  
 
         this.CalibrationForms = [];
-        // this.CalibrationForms.push({label:"Audi", value:{ id: '1', name: 'Audi', description: 'Audi' }});
-        // this.CalibrationForms.push({label:"BMW", value:{ id: '2', name: 'BMW', description: 'BMW' }});
-        // this.CalibrationForms.push({label:"Fiat", value:{ id: '3', name: 'Fiat', description: 'Fiat' }});
-        // this.CalibrationForms.push({label:"Ford", value:{ id: '4', name: 'Ford', description: 'Ford' }});
-        // this.CalibrationForms.push({label:"Honda", value:{ id: '5', name: 'Honda', description: 'Honda' }});
-        // this.CalibrationForms.push({label:"Jaguar", value:{ id: '6', name: 'Jaguar', description: 'Jaguar' }});
-        // this.CalibrationForms.push({label:"Mercedes", value:{ id: '7', name: 'Mercedes', description: 'Mercedes' }});
-        // this.CalibrationForms.push({label:"Renault", value:{ id: '8', name: 'Renault', description: 'Renault' }});
-        // this.CalibrationForms.push({label:"VW", value:{ id: '9', name: 'VW', description: 'VW' }});
-        // this.CalibrationForms.push({label:"Volvo", value:{ id: '10', name: 'Volvo', description: 'Volvo' }});
-        // this.selectedCalibration="BMW";
+
+
+        this.CalibrationForms.push({
+            id: '1',
+            name: 'Audi',
+            description: 'Audi',
+            calibrationFrequencyCronExpression: ''
+        });
+
+        //this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford', calibrationFrequencyCronExpression: ''});
+        //this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: '' });
+        //this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo', calibrationFrequencyCronExpression: ''});
+        
+
+        this.CalibrationForms.push({id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: ''});
+        this.CalibrationForms.push({
+            id: '3',
+            name: 'Fiat',
+            description: 'Fiat',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '4',
+            name: 'Ford',
+            description: 'Ford',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '5',
+            name: 'Honda',
+            description: 'Honda',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '6',
+            name: 'Jaguar',
+            description: 'Jaguar',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '7',
+            name: 'Mercedes',
+            description: 'Mercedes',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '8',
+            name: 'Renault',
+            description: 'Renault',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: ''});
+        this.CalibrationForms.push({
+            id: '10',
+            name: 'Volvo',
+            description: 'Volvo',
+            calibrationFrequencyCronExpression: ''
+        });
+
+
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
     }
+
     handleChange(event) {
     }
+
     ngOnInit() {
+
+        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
+            .subscribe(res => {
+                this.ls.logConsole("EntityIdentifier Data By Name ----------", res);
+
+            })
+
         this.dataService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
@@ -86,6 +180,9 @@ export class DetailsComponent implements OnInit {
                 this.model.parentId = res.parentId;
                 this.model.name = res.name;
                 this.model.description = res.description;
+                this.model.frequency = res.frequency;
+                this.frequencyInit(this.model.frequency);
+                // this.onCronInit();
                 this.dataService.getSubTypesById(this.model.id)
                     .subscribe(result => {
                         this.EquipmentsubTypes = result.$values;
@@ -98,29 +195,97 @@ export class DetailsComponent implements OnInit {
 
     onEdit() {
 
-        this.dataService.postUpdate(this.model)
-            .subscribe(res => {
-                //this.model = res;
-                //this.model.name = res.name;
-                //this.model.description = res.description;
-                //this.msgs = [];
-                //this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        let modelbody: any = {
+            id: this.model.id,
+
+            parentId: null,
+            description: this.model.description,
+            name: this.model.name,
+            frequency: this.selectedMaintenanceFrequency
+            //createdOn: '',
+            //modifiedOn: '',
+            //userCreatedById: '',
+            //userInChargedId: '',
+            //userModifiedById: ''
+        };
+
+
+
+     //   this.EquipmentsubTypes.forEach((subtype: any) => {
+            // if (subtype.isdeleted =='' )
+            //this.dataService.postAdd(subtype)
+            //    .subscribe(res1 => {
+
+              //      this.EquipmentsubTypes.forEach((subtype: any) => {
+              //          this.dataService.postAdd(subtype)
+                //            .subscribe(res1 => {
+
+                              //  this.EquipmentsubTypes.forEach((subtype: any) => {
+                               //     this.dataService.postUpdate(subtype)
+                                 //       .subscribe(res2 => {
+
+                                            this.dataService.postUpdate(modelbody)
+                                                .subscribe(res => {
+
+                                                    if (res.isSuccess) {
+                                                        this.msgs = [];
+                                                        this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
+
+                                                        
+                                                    }
+                                                });
+
+                                    //    });
+                               // });
+                           // });
+
+                   // });
+
+                //});
+      //  });
+    }
+
+
+    //frequencyInit() {
+    //    let options = {
+    //        initial: this.selectedMaintenanceFrequency,
+    //        onChange: function() {
+    //            this.selectedMaintenanceFrequency = $(this).cron("value");
+    //        }
+    //    };
+
+
+
+
+    frequencyInit(cronExp) {
+        var angularRef = this;
+        if (cronExp != null && cronExp != "") {
+            this.selectedMaintenanceFrequency = cronExp;
+        }
+        else
+        {
+
+            this.selectedMaintenanceFrequency = "0 0 1 1 *";
+        }
+            $("#selector").cron({
+
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
+                    angularRef.selectedMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
             });
 
+        
+        //else {
+        //    this.selectedMaintenanceFrequency = "0 0 1 1 *";
+        //    $("#selector").cron({
 
-        this.EquipmentsubTypes.forEach((subtype: any) => {
-           // if (subtype.isdeleted =='' )
-                this.dataService.postAdd(subtype)
-                    .subscribe(res1 => {
-                    });
-
-        });
-
-        this.EquipmentsubTypes.forEach((subtype: any) => {
-            this.dataService.postUpdate(subtype)
-                .subscribe(res2 => {
-                });
-        });
+        //        initial: this.selectedMaintenanceFrequency,
+        //        onChange: function () {
+        //            this.selectedMaintenanceFrequency = $(this).cron("value");
+        //        }, useGentleSelect: false
+        //    });
+        //}
 
 
     }
@@ -130,34 +295,111 @@ export class DetailsComponent implements OnInit {
         this.selectedCalibration = null;
         this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
         this.displayDialog = true;
+        this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+
+      /*  if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "" && !this.cronInitialized) {
+            this.cronInitialized = true;
+            // if (this.model.frequency != null && this.model.frequency != "") {
+            //$("#cronselector").cron({
+            //    initial: this.EquipmentSubType.frequency,
+            //    onChange: function () {
+            //        this.EquipmentSubType.frequency = $(this).cron("value");
+            //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+            //    }, useGentleSelect: false
+            //});
+        }
+
+
+
+
+        else {
+            if (this.model.frequency != null && this.model.frequency != "" && !this.cronInitialized) {
+                this.cronInitialized = true;
+                //$("#cronselector").cron({
+                //    initial: this.model.frequency,
+                //    onChange: function () {
+                //        this.EquipmentSubType.frequency = $(this).cron("value");
+                //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                //    }, useGentleSelect: false
+                //});
+            } else {
+                this.cronInitialized = true;
+                this.onCronAdd();
+                // $("#add").add("")
+                $("#cronselector").cron({
+
+                    initial: this.selectedSubTypeMaintenanceFrequency,
+                    //onChange: function () {
+                    //    //this.EquipmentSubType.frequency = $(this).cron("value");
+                    //    this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                    //}//, useGentleSelect: false
+                });
+            }
+        }*/
         // this.IsSubType= true;
+
+        this.onCronInit(this.EquipmentSubType.frequency);
+
     }
-    showDialogToAddForm() {
+
+   showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
-        this.CalibrationForm = new PrimeCalibrationForm('', '', '');
+        this.CalibrationForm = new PrimeCalibrationForm('', '', '', '');
         //this.IsSubType= false;
     }
+
     ok() {
         this.CalibrationForms.push(this.CalibrationForm);
         this.EquipmentSubType.calibrationform = this.CalibrationForm.name;
         this.selectedCalibration = this.CalibrationForm.name;
+
         this.displayDialogForm = false;
     }
+
     cancel() {
         this.displayDialogForm = false;
     }
+
     save() {
         //   this.EquipmentSubType = EquipmentSubType.name;
-        if (this.newsubType)
+        if (this.newsubType) {
+            this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             this.EquipmentsubTypes.push(this.EquipmentSubType);
+            this.dataService.postAdd(this.EquipmentSubType).subscribe(res=>{
+                if (res.isSuccess)
+                {
+                    this.dataService.getById(this.id)
+                        .subscribe(res => {
+                        });
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Added', detail: '' });
 
-        else
+                }
+
+            });
+        }
+        else {
+            this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             this.EquipmentsubTypes[this.findSelectedCarIndex()] = this.EquipmentSubType;
+            this.dataService.postUpdate(this.EquipmentSubType).subscribe(res => {
 
-        this.EquipmentSubType = null;
+                if (res.isSuccess) {
+                    this.dataService.getById(this.id)
+                        .subscribe(res => {
+                        });
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
+
+                }
+            });
+           
+        }
+       this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', this.id);
+        //this.EquipmentSubType = null;
         this.displayDialog = false;
     }
+
     onCalibrationFormChange(event) {
         //   this.selectedCalibration=(event.target.selectedOptions[0].innerText);
         // this.EquipmentSubType.calibrationform= (event.target.selectedOptions[0].innerText);
@@ -165,6 +407,7 @@ export class DetailsComponent implements OnInit {
         this.EquipmentSubType.calibrationform = (event);
 
     }
+
     delete() {
         this.EquipmentsubTypes.splice(this.findSelectedCarIndex(), 1);
 
@@ -181,9 +424,60 @@ export class DetailsComponent implements OnInit {
         this.displayDialog = false;
     }
 
+
+  
+
+    onCronInit(cronExpression) {
+        var selfRef = this;
+        //$("#cronselector").remove();
+        //let cronContainer = $("<div id='cronselector'></div>");
+        //$("#cronSelectorPlaceHolder").append(cronContainer);
+        debugger;
+        if (cronExpression !== null && cronExpression !== "") {
+            this.selectedSubTypeMaintenanceFrequency = cronExpression;
+
+        }
+        else {
+            this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+
+        }
+
+        //$("#cronselector").remove();
+        $("#cronselector").cron({
+            initial: this.selectedSubTypeMaintenanceFrequency,
+            onChange: function () {
+                selfRef.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+            },
+            useGentleSelect: false
+        });
+
+    }
+
     onRowSelect(event) {
         this.newsubType = false;
+        this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
         this.EquipmentSubType = this.clonesubType(event.data);
+
+        //   if (!this.cronInitialized) {
+        //     this.cronInitialized = true;
+        if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "") {
+            this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
+            this.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
+            //  this.onCronInit();
+
+        }
+        else {
+            // this.cronInitialized = false;
+
+            this.EquipmentSubType.frequency = "0 0 1 1 *";
+            if (!this.cronInitialized) {
+                this.cronInitialized = true;
+                //this.onCronInit();
+            }
+        }
+        this.onCronInit(this.EquipmentSubType.frequency);
+       
+
         this.EquipmentSubType.calibrationform = event.data.calibrationform;
         this.selectedCalibration = event.data.calibrationform;
         this.displayDialog = true;
@@ -209,6 +503,6 @@ class PrimeEquipmentSubType implements IEquipmentSubtype {
 }
 class PrimeCalibrationForm implements ICalibrationForm {
 
-    constructor(public id, public name, public description) {
+    constructor(public id, public name, public description, public calibrationFrequencyCronExpression) {
     }
 }

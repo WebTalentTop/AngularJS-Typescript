@@ -8,7 +8,8 @@ import { titanApiUrl } from './titanApiUrl';
 export class EntityIdentifierApiUrl {
     //public static entityIdentifierApiUrl:string  = `${titanApiUrl}entityIdentifier`;
     public static getByIdUrl: string = `${titanApiUrl}entityIdentifier/get`;
-    public static getByName: string = `${titanApiUrl}entityIdentifier/getByName/`;
+    public static getByNameUrl: string = `${titanApiUrl}entityIdentifier/getByName`;
+    public static getByNameForFormsUrl = titanApiUrl + "entityIdentifier/getByNameForForms"
 
     /*public static gridApiUrl:string  = GridApiUrl.testFacilityGridUrl;
     public static postCreatedUrl: string = titanApiUrl + 'testFacility/post';
