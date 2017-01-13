@@ -11,6 +11,11 @@
                   </template>
                  
               </p-column>
+              <p-column header="Due Date" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.dueDate}}
+                  </template>
+              </p-column>
               <!--<p-column>
                   <template pTemplate type="header">
                       <button type="button" pButton icon="fa-refresh"></button>
@@ -40,6 +45,11 @@
               <p-column header="Department" sortable="true">
                   <template let-taskrow="rowData" pTemplate type="body">
                       {{taskrow.departmentId}}
+                  </template>
+              </p-column>
+              <p-column header="Due Date" sortable="true">
+                  <template let-taskrow="rowData" pTemplate type="body">
+                      {{taskrow.dueDate}}
                   </template>
               </p-column>
               <p-column header="Status" sortable="true">
