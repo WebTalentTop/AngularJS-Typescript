@@ -84,6 +84,7 @@ export class AddComponent implements AfterViewInit {
     startTime: any;
     display: boolean = false;
     endTime: any;
+    testRequestEntityId: any;
     model: any = {
         id: '',
         isDeleted: false,
@@ -590,6 +591,7 @@ export class AddComponent implements AfterViewInit {
           //  this.TrackingList = res.$values;
             if (res.isSuccess && this.IsThermoCouple) {
 
+                this.testRequestEntityId = res.result.id;
                 let workrequestbody = {
 
                     EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
@@ -612,7 +614,11 @@ export class AddComponent implements AfterViewInit {
 
                         this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
 
+                            if (taskresult.isSuccess)
+                            {
+                                this.router.navigate(['testrequest/details/', this.testRequestEntityId]);
 
+                            }
 
                         });
                     });
@@ -651,7 +657,7 @@ export class AddComponent implements AfterViewInit {
 
 
           }
-          if(res.isSuccess)
+          if (res.isSuccess && !this.IsThermoCouple)
              this.router.navigate(['testrequest/details/', res.result.id]);
 
      });
