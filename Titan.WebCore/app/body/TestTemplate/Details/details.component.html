@@ -109,30 +109,33 @@
               </p-panel>
             </p-tabPanel>
             <p-tabPanel header="Procedure(s) ||">
+              <p-panel header="Test Requirement Numbers">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
+                  <div class="ui-g">
+                    <div class="ui-g-2">
                         Search by Procedure Name:
                     </div>
-                    <div class="ui-grid-col-2">
+                    <div class="ui-g-2">
                         <p-autoComplete [(ngModel)]="filteredSelectedProcedures" [suggestions]="filteredProcedures" (completeMethod)="filterProcedures($event)"
-                            styleClass="wid100" [minLength]="1" placeholder="Search By Name" field="name" [multiple]="true">
+                            styleClass="wid100" [minLength]="1" placeholder="Search by Name" field="name" [multiple]="true">
                         </p-autoComplete>
                     </div>
 
-                    <div class="ui-grid-col-2">
-                        <button pButton type="submit" class="btn btn-default" label="Add Procedure" (click)="onAddProcedure()"> </button>
+                    <div class="ui-g-2">
+                        <button pButton type="submit" icon="ui-icon-add" label="Add Procedure" (click)="onAddProcedure()"> </button>
                     </div>
+                  </div>
                 </div>
-                <br/><br/>
+
                 <!--<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>-->
                 <div class="ui-grid-row">
-                    <p-dataTable [value]="selectedProcedures" expandableRows="true" (onRowExpand)="onLoadProcedureSteps($event)">
+                    <p-dataTable [value]="selectedProcedures" expandableRows="true" [paginator]="true" rows="15" (onRowExpand)="onLoadProcedureSteps($event)">
                         <p-column expander="true" [style]="{'width':'30px'}" styleClass="col-icon"></p-column>
-                        <p-column field="name" header="Name"></p-column>
-                        <p-column field="description" header="Description"></p-column>
-                        <p-column field="testTypeName" header="Test Type"></p-column>
-                        <p-column field="testModeName" header="Test Mode"></p-column>
-                        <p-column field="estimatedTime" header="Estimated Time"></p-column>
+                        <p-column field="name" header="Name" sortable="true"></p-column>
+                        <p-column field="description" header="Description" sortable="true"></p-column>
+                        <p-column field="testTypeName" header="Test Type" sortable="true"></p-column>
+                        <p-column field="testModeName" header="Test Mode" sortable="true"></p-column>
+                        <p-column field="estimatedTime" header="Estimated Time" sortable="true"></p-column>
                         <!--<p-column field="title" header="Title"></p-column>-->
                         <p-column>
                             <template pTemplate type="header">
@@ -177,6 +180,7 @@
                         </template>
                     </p-dataTable>
                 </div>
+              </p-panel>
             </p-tabPanel>
         </p-tabView>
     </div>
