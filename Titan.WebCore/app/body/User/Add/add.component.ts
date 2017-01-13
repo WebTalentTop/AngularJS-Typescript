@@ -4,7 +4,7 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
+// import { TestFacilityService } from '../../../shared/services/TestFacilityService/testFacility.service';
 import { UserService } from '../../../shared/services/user.service';
 @Component({
     selector: 'add-user',
@@ -35,7 +35,7 @@ export class AddComponent {
     //        }
 
     constructor(private breadCrumbsService: BreadCrumbsService,
-                private service: TestFacilityService, private userservice: UserService,
+                private userservice: UserService,
                 private router: Router) {
 
     }
