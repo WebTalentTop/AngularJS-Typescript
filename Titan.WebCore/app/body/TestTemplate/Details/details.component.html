@@ -7,33 +7,43 @@
                 <!--<h1>Details Panel</h1>-->
                 <form #testTemplateForm="ngForm" (ngSubmit)="onSubmit()">
                     <p-panel header="Information">
-                        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="testTemplate">
-                            <!--<div class="ui-grid-row body">-->
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Test Template Name *:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <input type="text" name="testTemplateName" pInputText #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name" maxlength="255"
-                                        placeholder="Name" class="form-control" required />
-                                </div>
-                                <div class="ui-grid-col-4" *ngIf="testTemplateNameRef.errors?.required">
-                                    *
-                                </div>
-                            </div>
+                      <div class="body" *ngIf="testTemplate">
+                          <!--<div class="ui-grid-row body">-->
 
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
-                                    Description *:
-                                </div>
-                                <div class="ui-grid-col-6">
-                                    <textarea type="text" pInputTextArea class="form-control" required name="testTemplateDescription" row="20" maxlength="4000"
-                                        #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description"></textarea>
-                                </div>
-                                <!--<div class="ui-grid-col-4" *ngIf="testTemplateDescriptionRef.errors?.required">
-                                    *
-                                </div>-->
-                            </div>
+                          <div class="ui-grid-row">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="testTemplateName" #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name"
+                                         minlength="3"  required style="width:100%">
+                                  <label>Test Template Name <span >*</span></label>
+                              </div>
+                          </div>
+                          <div class="ui-grid-row">
+
+                              <p>Description <span >*</span></p>
+                              <div class="md-inputfield">
+
+                                  <p-editor [(ngModel)]="testTemplate.description" name="testTemplateDescription" required
+                                            [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description">
+                                      <header>
+                                          <select class="ql-size">
+                                              <option value="small"></option>
+                                              <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                              <option selected></option>
+                                              <option value="large"></option>
+                                              <option value="huge"></option>
+                                          </select>
+                                          <span class="ql-formats">
+                                                  <button class="ql-bold"></button>
+                                                  <button class="ql-italic"></button>
+                                                  <button class="ql-underline"></button>
+                                              </span>
+                                      </header>
+                                  </p-editor>
+
+
+                              </div>
+
+                          </div>
 
                             <!--<div class="ui-grid-row">
                                 <div class="ui-grid-col-2">
@@ -67,9 +77,10 @@
                             </div>-->
                         </div>
                         <footer>
+                            <p>* indicates required field</p>
                             <button pButton type="submit" icon="ui-icon-save" label="Save" [disabled]="!testTemplateForm.form.valid"></button>
                         </footer>
-
+                        <br />
                         <!--</div>-->
                     </p-panel>
                 </form>

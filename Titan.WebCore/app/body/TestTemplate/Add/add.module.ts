@@ -6,12 +6,12 @@ import { TestTypeService} from './../../../shared/services/testtype.service';
 import { TestModeService } from './../../../shared/services/testmode.service';
 import { TestTemplateService} from './../../../shared/services/testtemplate.service';
 
-import { PanelModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, PanelModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [PanelModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, ButtonModule,DropdownModule, addRoutes],
+    imports: [EditorModule, SharedModule, PanelModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, ButtonModule,DropdownModule, addRoutes],
     providers: [TestTemplateService, TestTypeService, TestModeService ],
     declarations: [AddComponent]
 })

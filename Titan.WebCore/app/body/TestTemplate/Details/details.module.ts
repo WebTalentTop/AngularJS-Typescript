@@ -8,13 +8,13 @@ import { TestTemplateService} from './../../../shared/services/testtemplate.serv
 import { TestRequirementService} from './../../../shared/services/testrequirement.service';
 import { ProcedureService } from '../../../shared/services/procedure.service';
 
-import { PanelModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
+import { EditorModule, SharedModule, PanelModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     AutoCompleteModule, ConfirmDialogModule,ConfirmationService  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [PanelModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
+    imports: [EditorModule, SharedModule, PanelModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
         InputTextModule, PanelModule, detailsRoutes, AutoCompleteModule, ConfirmDialogModule],
     providers: [TestTemplateService, TestTypeService, TestModeService, TestRequirementService, ConfirmationService, ProcedureService],
     declarations: [DetailsComponent]
