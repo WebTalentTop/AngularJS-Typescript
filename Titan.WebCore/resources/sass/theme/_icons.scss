@@ -35,7 +35,8 @@
 .fa-calendar { @include icon-override("date_range"); }
 .fa-arrow-down{ @include icon-override("arrow_downward"); } 
 .fa-arrow-up { @include icon-override("arrow_upward"); }
-
+.fa-refresh {@include icon-override("refresh")}
+.fa-cogs {@include icon-override("settings") }
 .ui-icon-carat-2-n-s {@include icon-override("sort");}
 .ui-icon-triangle-1-n { @include icon-override("keyboard_arrow_up"); }
 .ui-icon-triangle-1-e { @include icon-override("keyboard_arrow_right"); }

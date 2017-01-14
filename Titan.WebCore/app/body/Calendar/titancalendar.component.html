@@ -1,94 +1,128 @@
-﻿<div class="ui-g-12">
-    <p-growl [value]="msgs"></p-growl>
-</div>
-<p-accordion>
-    <p-accordionTab header="Search Options">
+﻿
+<div class="ui-g-12" style="border:1px red solid">
+    <div class="ui-g-3">
+        <div class="ui-toolbar-group-left">
+            <button pButton type="button" icon="fa-chevron-circle-left" (click)="moveCalendar('backward')"></button>
+            <button pButton type="button" icon="fa-chevron-circle-right" (click)="moveCalendar('forward')"></button>
 
-        <div class="ui-g-12">
-
-            <div class="ui-g form-group">
-
-                <div class="ui-g-12 ui-md-3">
-                    <label>Slots</label> <br/>
-                    <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue"
-                                (onChange)="updateCalendarSettings($event)">
-                    </p-dropdown>
-                </div>
-
-                <div class="ui-g-12 ui-md-3">
-                    <label>Project Code</label> <br/>
-                    <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes"
-                                   [style]="{'width':'100%'}">
-                    </p-multiSelect>
-
-                </div>
-
-                <div class="ui-g-12 ui-md-3">
-                    <label>Test Facility</label> <br/>
-                    <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)"
-                                   name="testFacilities" [style]="{'width':'100%'}">
-                    </p-multiSelect>
-
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <label>Test Types</label> <br/>
-                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes"
-                                   [style]="{'width':'100%'}">
-                    </p-multiSelect>
-
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <label>Test Mode</label> <br/>
-                    <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes"
-                                   [style]="{'width':'100%'}">
-                    </p-multiSelect>
-
-                </div>
-
-                <div class="ui-g-12 ui-md-3">
-                    <label>Test Status</label> <br/>
-                    <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus"
-                                   [style]="{'width':'100%'}">
-                    </p-multiSelect>
-
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <label>PIC</label> <br/>
-                    <p-autoComplete [(ngModel)]="filteredSelectedTestUserNames" [suggestions]="filteredTestUserNames"
-                                    (completeMethod)="getTestUsers($event)"
-                                    name="testUsers" [minLength]="1" placeholder="Search by Name"
-                                    field="displayName" [multiple]="false">
-                    </p-autoComplete>
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <label>Build Levels</label> <br/>
-                    <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels"
-                                   [style]="{'width':'100%'}">
-                    </p-multiSelect>
-                </div>
-                <div class="ui-g-12">
-                    <div class="ui-g-12 ui-md-3">
-                        <button pButton type="button" label="Search" (click)="filterCalendarEvents()"></button>
-
-                    </div>
-                </div>
-            </div>
         </div>
-    </p-accordionTab>
-
-</p-accordion>
-
-
-<div class="ui-g-12">
-    <div id="calendar">
+    </div>
+    <div class="ui-g-6">
+        <div class="ui-toolbar-group-left"><h2><i>{{calendarHeader}}</i></h2></div>
+    </div>
+    <div class="ui-g-3">
+        <div class="ui-toolbar-group-right">
+            <button pButton type="button" icon="fa-search" (click)="showSearchOptions()"></button>
+            <button pButton type="button" icon="fa-cogs" (click)="showCalendarSettings()"></button>
+        </div>
     </div>
 </div>
 
 
-<p-dialog header="Calendar Settings" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade">
+<div class="ui-g-12" style="border:1px red solid">
+    <div id="calendar" style="margin:0px;">
+    </div>
+</div>
+
+<p-dialog header="Filter Events" [(visible)]="displayCalendarSearchDialog" modal="modal" showEffect="fade"
+          hideEffect="zoomOut">
+    <div class="ui-g-12">
+
+        <div class="ui-g form-group">
+
+
+            <div class="ui-g-12 ui-md-3">
+                <label>Project Code</label> <br/>
+                <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes"
+                               [style]="{'width':'100%'}">
+                </p-multiSelect>
+
+            </div>
+
+            <div class="ui-g-12 ui-md-3">
+                <label>Test Facility</label> <br/>
+                <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)"
+                               name="testFacilities" [style]="{'width':'100%'}">
+                </p-multiSelect>
+
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <label>Test Types</label> <br/>
+                <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes"
+                               [style]="{'width':'100%'}">
+                </p-multiSelect>
+
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <label>Test Mode</label> <br/>
+                <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)" name="testModes"
+                               [style]="{'width':'100%'}">
+                </p-multiSelect>
+
+            </div>
+
+            <div class="ui-g-12 ui-md-3">
+                <label>Test Status</label> <br/>
+                <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)" name="testStatus"
+                               [style]="{'width':'100%'}">
+                </p-multiSelect>
+
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <label>PIC</label> <br/>
+                <p-autoComplete [(ngModel)]="filteredSelectedTestUserNames" [suggestions]="filteredTestUserNames"
+                                (completeMethod)="getTestUsers($event)"
+                                name="testUsers" [minLength]="1" placeholder="Search by Name"
+                                field="displayName" [multiple]="false">
+                </p-autoComplete>
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <label>Build Levels</label> <br/>
+                <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels"
+                               [style]="{'width':'100%'}">
+                </p-multiSelect>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-g-12 ui-md-3">
+                    <button pButton type="button" label="Search" (click)="filterCalendarEvents()"></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="Calendar Settings" [(visible)]="displayCalendarSetting" modal="modal" showEffect="fade"
+          [minWidth]="800" [responsive]="true">
 
     <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+            View Duration
+        </div>
 
+        <div class="ui-grid-col-6">
+            <p-dropdown [options]="durationOptions" [(ngModel)]="selectedDurationOption"
+                        (onChange)="updateCalendarSettings($event)" [style]="{'width':'auto'}">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="ui-grid-row">
+
+
+        <div class="ui-grid-col-6">
+            <div class="ui-grid-col-6">
+                Slots Width
+            </div>
+        </div>
+        <div class="ui-grid-col-6">
+            <p-dropdown [options]="slotDurations" [(ngModel)]="selectedSlotDurationValue"
+                        (onChange)="updateCalendarSettings($event)" [style]="{'width':'auto'}">
+            </p-dropdown>
+        </div>
+
+
+    </div>
+    <div class="ui-grid-row">
         <div class="ui-grid-col-6">
             Show Weekends
         </div>
@@ -98,11 +132,9 @@
                            (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
             <p-radioButton name="groupname" label="No" value="false" [(ngModel)]="selectedHideWeekendValue"
                            (click)="updateCalendarSettings($event,'weekends','selectedHideWeekendValue')"></p-radioButton>
-
         </div>
 
     </div>
-
     <div class="ui-grid-row">
 
         <div class="ui-grid-col-6">
@@ -110,7 +142,8 @@
         </div>
 
         <div class="ui-grid-col-6">
-            <p-dropdown [options]="daysofweek" [(ngModel)]="selectedFirstDayValue"></p-dropdown>
+            <p-dropdown [options]="daysofweek" [(ngModel)]="selectedFirstDayValue"
+                        [style]="{'width':'auto'}"></p-dropdown>
         </div>
 
     </div>
@@ -142,7 +175,8 @@
 </p-dialog>
 
 
-<p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="800" [responsive]="true" showEffect="fade"
+<p-dialog [(header)]="displayEventDialogHeader" [(visible)]="displayEventDialog" [minWidth]="800" [responsive]="true"
+          showEffect="fade"
 >
 
     <div>
@@ -309,7 +343,8 @@
 </p-dialog>
 
 
-<p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog" showEffect="fade" [minWidth]="800" [responsive]="true">
+<p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog" showEffect="fade" [minWidth]="800"
+          [responsive]="true">
     <form #tfMoveForm="ngForm" (ngSubmit)="onSubmitMoveTestFacilitySchedule(tfMoveForm.value)">
         <div class="ui-g-12">
 
@@ -361,83 +396,90 @@
     </form>
 </p-dialog>
 
-<p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog" showEffect="fade" [minWidth]="800">
+<p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog" showEffect="fade" [minWidth]="800"
+          (onBeforeHide)="onBeforeDialogHide($event)">
 
 
-    <div class="ui-helper-clearfix" >
+    <div class="ui-helper-clearfix">
         <button type="button" pButton icon="ui-icon-person-add" style="float:left" (click)="addEmptyRowOperatorBlock()"
                 label="Add User"></button>
         <button type="button" pButton icon="ui-icon-save" style="float:left" (click)="saveAssignResourcesChanges()"
                 label="Save"></button>
 
     </div>
-    <div class="ui-grid-row" style="width: 700px;">
-        <!--scrollHeight="200px" scrollable="true"-->
-        <p-dataTable [value]="testOperatorsForBlock">
-            <header></header>
-            <p-column hidden="true" field="titanUserScheduleId"></p-column>
+    <form>
+        <div class="ui-grid-row" style="width: 700px;">
+            <!--scrollHeight="200px" scrollable="true"-->
+            <p-dataTable [value]="testOperatorsForBlock">
+                <header></header>
+                <p-column hidden="true" field="titanUserScheduleId"></p-column>
 
-            <p-column field="userDisplayName">
-                <template pTemplate="body" let-item="rowData" let-i="rowIndex">
-                    <p-dropdown [options]="titanUsersListForTenant" [(ngModel)]="testOperatorsForBlock[i].titanUserId"
-                                appendTo="body"
-                                [style]="{'width':'100%'}"
-                                (onSelect)="testOperatorsForBlockChange(item, i)">
+                <p-column field="userDisplayName">
+                    <template pTemplate="body" let-item="rowData" let-i="rowIndex">
+                        <p-dropdown [options]="titanUsersListForTenant"
+                                    [(ngModel)]="testOperatorsForBlock[i].titanUserId"
+                                    name="testOperatorsForBlock{{[i]}}.titanUserId"
+                                    appendTo="body"
+                                    [style]="{'width':'100%'}"
+                                    (onSelect)="testOperatorsForBlockChange(item, i)">
 
-                    </p-dropdown>
-                </template>
-            </p-column>
-            <!--<p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>-->
-            <p-column field="startDate" sortable="true">
-                <template pTemplate="header">
-                    Start
-                </template>
-                <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                    <p-calendar [(ngModel)]="testOperatorsForBlock[i].startDate"  appendTo="body"
-                                [selectOtherMonths]="true" [showOtherMonths]="true"
-                                [minDate]="selectedBlockStartDate"
-                                [maxDate]="selectedBlockEndDate"
-                                (onSelect)="testOperatorsForBlockChange(item,i)">
+                        </p-dropdown>
+                    </template>
+                </p-column>
+                <!--<p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>-->
+                <p-column field="startDate" sortable="true">
+                    <template pTemplate="header">
+                        Start
+                    </template>
+                    <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                        <p-calendar [(ngModel)]="testOperatorsForBlock[i].startDate" appendTo="body"
+                                    [selectOtherMonths]="true" [showOtherMonths]="true"
+                                    [minDate]="selectedBlockStartDate"
+                                    [maxDate]="selectedBlockEndDate"
+                                    (onSelect)="testOperatorsForBlockChange(item,i)"
+                                    name="testOperatorsForBlock{{[i]}}.startDate">
 
-                    </p-calendar>
-                </template>
-            </p-column>
-            <p-column field="endDate" sortable="true">
-                <template pTemplate="header">
-                    End
-                </template>
-                <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                    <p-calendar [(ngModel)]="testOperatorsForBlock[i].endDate" appendTo="body"
-                                [selectOtherMonths]="true" [showOtherMonths]="true"
-                                [minDate]="selectedBlockStartDate"
-                                [maxDate]="selectedBlockEndDate"
-                                (onSelect)="testOperatorsForBlockChange(item,i)">
+                        </p-calendar>
+                    </template>
+                </p-column>
+                <p-column field="endDate" sortable="true">
+                    <template pTemplate="header">
+                        End
+                    </template>
+                    <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                        <p-calendar [(ngModel)]="testOperatorsForBlock[i].endDate" appendTo="body"
+                                    [selectOtherMonths]="true" [showOtherMonths]="true"
+                                    [minDate]="selectedBlockStartDate"
+                                    [maxDate]="selectedBlockEndDate"
+                                    (onSelect)="testOperatorsForBlockChange(item,i)"
+                                    name="testOperatorsForBlock{{[i]}}.endDate>
 
-                    </p-calendar>
-                    <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
+                        </p-calendar>
+                        <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
 
-                                <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
-                                <!--[selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body" [maxDate]="selectedBlockEndDate"-->
-                                <!--[icon]="fa-calendar"></p-calendar>-->
-                </template>
-            </p-column>
-            <p-column styleClass="col-button">
+                        <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
+                        <!--[selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body" [maxDate]="selectedBlockEndDate"-->
+                        <!--[icon]="fa-calendar"></p-calendar>-->
+                    </template>
+                </p-column>
+                <p-column styleClass="col-button">
 
-                <template let-operatorBlock="rowData" pTemplate="body" let-i="rowIndex">
-                    <button type="button" pButton (click)="removeOperator(i,operatorBlock)" icon="ui-icon-remove"></button>
+                    <template let-operatorBlock="rowData" pTemplate="body" let-i="rowIndex">
+                        <button type="button" pButton (click)="removeOperator(i,operatorBlock)"
+                                icon="ui-icon-remove"></button>
 
-                </template>
-            </p-column>
-        </p-dataTable>
+                    </template>
+                </p-column>
+            </p-dataTable>
 
-    </div>
-
+        </div>
+    </form>
 </p-dialog>
 
-<p-dialog header="Split Timeblock"[(visible)]="displaySplitDialog" showEffect="fade" [minWidth]="800">
-    <div class="ui-helper-clearfix" >
+<p-dialog header="Split Timeblock" [(visible)]="displaySplitDialog" showEffect="fade" [minWidth]="800">
+    <div class="ui-helper-clearfix">
         <!--<button type="button" pButton icon="ui-icon-person-add" style="float:left" (click)="addEmptyRowOperatorBlock()"-->
-                <!--label="Add User"></button>-->
+        <!--label="Add User"></button>-->
         <button type="button" pButton icon="ui-icon-save" style="float:left"
                 (click)="saveSplitEventChanges($event)"
                 label="Save Changes"></button>
@@ -448,7 +490,7 @@
         <div class="ui-g-12 ui-md-4">
             <label>
                 <span class="text">Start </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.startDate"  hourFormat="12"
+                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.startDate" hourFormat="12"
                             [icon]="fa-calendar" required
                             name="splitTestFacilityEventExistingScheduleStartDate"
                             [selectOtherMonths]="true" [showOtherMonths]="true"
@@ -462,7 +504,7 @@
         <div class="ui-g-12 ui-md-4">
             <label>
                 <span class="text">End </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.endDate"  hourFormat="12"
+                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.endDate" hourFormat="12"
                             [icon]="fa-calendar" required
                             name="splitTestFacilityEventExistingScheduleEndDate"
                             [selectOtherMonths]="true" [showOtherMonths]="true"
@@ -516,10 +558,35 @@
 
 </p-dialog>
 
+<p-dialog header="Schedule Test" [(visible)]="displayScheduleDialog" showEffect="fade" [minWidth]="800">
+    <div class="ui-g-12">
+        <div class="ui-g-4">
+
+            <label>
+                <span class="text">Start</span> <br/>
+                <p-dropdown [options]="timeOptions" [(ngModel)]="scheduleDefaultStartTime"></p-dropdown>
+            </label>
+
+        </div>
+        <div class="ui-g-4">
+
+            <label>
+                <span class="text">End</span> <br/>
+                <p-dropdown [options]="timeOptions" [(ngModel)]="scheduleDefaultEndTime"></p-dropdown>
+            </label>
+
+        </div>
+    </div>
+</p-dialog>
+<div class="ui-g-12">
+    <p-growl [value]="msgs"></p-growl>
+</div>
+
 <style>
     #calendar {
     }
+
     span.fc-time {
-        display:none;
+        display: none;
     }
 </style>
