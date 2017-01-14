@@ -28,6 +28,7 @@ export class DetailsComponent {
     formObject:any;
     formEquipmentObject: any;
     equipmentLogComments: any;
+    displayCommentDialog: boolean = false;
     selectedMaintenanceFrequency: any;
     id: string;
     equipmentId: any;
@@ -266,7 +267,7 @@ export class DetailsComponent {
                });
 
        });
-
+       this.displayCommentDialog = false;
        this.msgs = [];
        this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
 
@@ -501,6 +502,11 @@ export class DetailsComponent {
        this.msgs = [];
        this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
 
+   }
+
+   addCommentButton(event) {
+       this.comment = '';
+       this.displayCommentDialog = true;
    }
 
 }

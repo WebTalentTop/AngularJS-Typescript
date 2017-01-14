@@ -59,6 +59,7 @@ export class DetailsComponent implements AfterViewInit {
     displayAssignEquipmentsDialog: boolean;
     displayAssignUserRolesDialog: boolean;
     departments: any;
+    displayCommentDialog: boolean = false;
     selectedDepartment: any;
     selectedEquipment: any;
     categories: any;
@@ -1054,7 +1055,7 @@ export class DetailsComponent implements AfterViewInit {
                 });
 
         });
-
+        this.displayCommentDialog = false;
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
 
@@ -1412,18 +1413,23 @@ export class DetailsComponent implements AfterViewInit {
         this.formInstanceUpdateView = true;
         this.selectedMaintenanceForm = this.formSchemaDataGridMF.filter(filter => filter.id === this.selectedGridFormInstance.formSchemaId)[0];
         this.formInstanceId = this.selectedGridFormInstance.id;
-         console.log("FormSchemaGridMF---------", this.formSchemaDataGridMF);
-        console.log("SelectedGridFormInstance --------",this.selectedGridFormInstance);
+        console.log("FormSchemaGridMF---------", this.formSchemaDataGridMF);
+        console.log("SelectedGridFormInstance --------", this.selectedGridFormInstance);
         console.log("SelectedMaintance form -----", this.selectedMaintenanceForm);
 
         this.formInstanceUpdateNotes = this.selectedGridFormInstance.notes;
 
         this.formInstanceService.getById(this.selectedGridFormInstance.id)
             .subscribe(res => {
-               this.formInstanceUpdateData = res.result;
-               this.getFormSchemaInfoSelectedByGridMF(false);
+                this.formInstanceUpdateData = res.result;
+                this.getFormSchemaInfoSelectedByGridMF(false);
             });
     }
 
+       addCommentButton(event) {
+       this.comment = '';
+       this.displayCommentDialog = true;    
 
+
+}
 }

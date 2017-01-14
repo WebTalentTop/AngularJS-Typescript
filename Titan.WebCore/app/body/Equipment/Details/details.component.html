@@ -404,7 +404,7 @@
     <p-tabPanel header="Log" id="log" headerStyleClass="log">
         <p-growl [value]="msgs"></p-growl>
         <form name="tForm2" enctype="application/x-www-form-urlencoded">
-          <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" onSubmit="CloseModal()" width="400">
+          <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400">
                   <div class="ui-grid-row">
                       <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
                           <header>
@@ -435,7 +435,7 @@
                       <p class="ui-panel-title">Log/Comment List</p>
                       <p class="controls">
                         <button pButton type="button" icon="ui-icon-add" label="Add Comment"
-                              (click)="displayCommentDialog=true"></button>
+                              (click)="addCommentButton($event)"></button>
                       </p>
                   </header>
                   <div class="ui-grid-col-2"></div>

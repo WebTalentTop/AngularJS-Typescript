@@ -188,7 +188,7 @@
 
                         <p-dialog header="Add Users and Assign Roles" [(visible)]="displayAssignUserRolesDialog"
                                   modal="modal"
-                                  showEffect="fade" responsive="false">
+                                  showEffect="fade" responsive="true">
 
                             <p>Please select one or more users and their role at the {{testFacility.name}} test
                                 facility.</p>
@@ -233,7 +233,7 @@
                                                     [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                                     </div>
                                     <button type="button" pButton icon="ui-icon-close"
-                                            (click)="displayAssignUserRolesDialog=true" label="Cancel"></button>
+                                            (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
                                     <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
                                             label="Add User Role"></button>
                                 </div>
@@ -803,7 +803,7 @@
                             <p class="ui-panel-title">Log/Comment List</p>
                             <p class="controls">
                                 <button pButton type="button" icon="ui-icon-add" label="Add Comment"
-                                        (click)="displayCommentDialog=true" class="purple-btn"></button>
+                                        (click)="addCommentButton($event)" class="purple-btn"></button>
                             </p>
                         </header>
                         <div class="ui-grid-col-2"></div>
