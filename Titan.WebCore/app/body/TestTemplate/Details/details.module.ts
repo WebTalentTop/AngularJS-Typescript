@@ -2,20 +2,20 @@
 import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
-import { TestTypeService} from './../../../shared/services/testtype.service';
-import { TestModeService } from './../../../shared/services/testmode.service';
-import { TestTemplateService} from './../../../shared/services/testtemplate.service';
+import { TestTypeService} from './../../../shared/services/testType.service';
+import { TestModeService } from './../../../shared/services/testMode.service';
+import { TestTemplateService} from './../../../shared/services/testTemplate.service';
 import { TestRequirementService} from './../../../shared/services/testrequirement.service';
-import { ProcedureService } from '../../../shared/services/procedure.service';
+import { ProcedureService } from './../../../shared/services/procedure.service';
 
-import { EditorModule, SharedModule, PanelModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, DropdownModule,
+import { EditorModule, SharedModule,  DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     AutoCompleteModule, ConfirmDialogModule,ConfirmationService  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [EditorModule, SharedModule, PanelModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
-        InputTextModule, detailsRoutes, AutoCompleteModule, ConfirmDialogModule],
+    imports: [EditorModule, SharedModule,  CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
+        InputTextModule, PanelModule, detailsRoutes, AutoCompleteModule, ConfirmDialogModule],
     providers: [TestTemplateService, TestTypeService, TestModeService, TestRequirementService, ConfirmationService, ProcedureService],
     declarations: [DetailsComponent]
 })

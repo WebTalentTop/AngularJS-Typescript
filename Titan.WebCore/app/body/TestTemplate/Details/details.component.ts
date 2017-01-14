@@ -1,8 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TestTemplateService } from '../../../shared/services/testtemplate.service'
-import { TestTypeService } from '../../../shared/services/testtype.service'
-import { TestModeService } from '../../../shared/services/testmode.service'
+import { TestTemplateService } from '../../../shared/services/testTemplate.service'
+import { TestTypeService } from '../../../shared/services/testType.service'
+import { TestModeService } from '../../../shared/services/testMode.service'
 import { ProcedureService } from '../../../shared/services/procedure.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
