@@ -1,6 +1,6 @@
-﻿<div class="ui-g">
-    <div class="ui-g-12">
-        <h3>Details</h3>
+﻿<div class="ui-g-12">
+    <div class="card card-w-title">
+        <h2>Details</h2>
         <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
         <p-tabView>
             <p-tabPanel header="Details ||">
@@ -78,7 +78,7 @@
                         </div>
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="submit" icon="ui-icon-save" label="Save" [disabled]="!testTemplateForm.form.valid"></button>
+                            <button pButton type="submit" icon="ui-icon-save" class="green-btn"  label="Save" [disabled]="!testTemplateForm.form.valid"></button>
                         </footer>
                         <br />
                         <!--</div>-->
@@ -90,15 +90,15 @@
                 <div class="ui-grid-row">
                     <div class="ui-g">
                         <div class="ui-g-2">
-                            Search by Reference#:
+                            <b>Search by Reference :</b>
                         </div>
                         <div class="ui-g-2">
                             <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
                                             (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                                            [minLength]="1" placeholder="Search by Reference#" field="referenceNumber" [multiple]="true">
+                                            [minLength]="1" placeholder="Search by Reference" field="referenceNumber" [multiple]="true">
                             </p-autoComplete>
                         </div>
-                        <div class="ui-g-2">
+                        <div class="ui-g-2" style='text-align:right'>
                             <button  pButton type="submit" icon="ui-icon-add" (click)="onAddTestRequirement()" label="Add Requirement"></button>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                 <div class="ui-grid-row">
                   <div class="ui-g">
                     <div class="ui-g-2">
-                        Search by Procedure Name:
+                        <b>Search by Procedure Name :</b>
                     </div>
                     <div class="ui-g-2">
                         <p-autoComplete [(ngModel)]="filteredSelectedProcedures" [suggestions]="filteredProcedures" (completeMethod)="filterProcedures($event)"
@@ -132,7 +132,7 @@
                         </p-autoComplete>
                     </div>
 
-                    <div class="ui-g-2">
+                    <div class="ui-g-2" style='text-align:right'>
                         <button pButton type="submit" icon="ui-icon-add" label="Add Procedure" (click)="onAddProcedure()"> </button>
                     </div>
                   </div>
