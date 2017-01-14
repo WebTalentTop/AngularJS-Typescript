@@ -15,9 +15,15 @@
                             <br />
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" id="name" [(ngModel)]="model.name" required pInputText name="name" style="width:100%">
-                                    <label>Name</label>
+                                    <input type="text" id="name" 
+                                    [(ngModel)]="model.name" required pInputText
+                                    #equipmentNameRef="ngModel"
+                                    minlength="3" class="form-control" required row="20"
+                                    (focus)="equipmentNameRef.focus=true" name="name" style="width:100%">
+                                    <!--[(ngModel)]="model.name" required pInputText name="name" style="width:100%">-->
+                                    <label>Name <span >*</span></label>
                                 </div>
+
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" name="serialNumber" pInputText [(ngModel)]="model.serialNumber" style="width:100%">
                                     <label>Serial #</label>
@@ -341,7 +347,7 @@
                 </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Calibration Historys" id="calibrationhistory">
+        <p-tabPanel header="Calibration History" id="calibrationhistory">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -398,7 +404,7 @@
     <p-tabPanel header="Log" id="log" headerStyleClass="log">
         <p-growl [value]="msgs"></p-growl>
         <form name="tForm2" enctype="application/x-www-form-urlencoded">
-          <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400">
+          <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" onSubmit="CloseModal()" width="400">
                   <div class="ui-grid-row">
                       <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
                           <header>
