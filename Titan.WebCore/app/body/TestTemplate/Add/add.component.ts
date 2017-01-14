@@ -1,14 +1,14 @@
 import { Component} from '@angular/core';
-import { TestTemplateService } from '../../../shared/services/testtemplate.service'
-import { TestTypeService } from '../../../shared/services/testtype.service'
-import { TestModeService } from '../../../shared/services/testmode.service'
+import { TestTemplateService } from '../../../shared/services/testTemplate.service'
+import { TestTypeService } from '../../../shared/services/testType.service'
+import { TestModeService } from '../../../shared/services/testMode.service'
 import { Validators } from '@angular/forms';
 import {Router} from '@angular/router'
 import { SelectItem } from 'primeng/primeng';
 
 @Component({
     selector: 'add-testtemplate',
-    styleUrls: ['app/body/TestTemplate/Add/add.component.css'], 
+    styleUrls: ['app/body/TestTemplate/Add/add.component.css'],
     templateUrl: 'app/body/TestTemplate/Add/add.component.html'
 })
 
@@ -57,7 +57,7 @@ export class AddComponent {
         this.testModes = new Array();
         //this.testModes
         this.testModeService.getAllByTestTypeId(this.testTemplate.testTypeId).subscribe(response => {
-            if (response != null && response.$values.length > 0) { 
+            if (response != null && response.$values.length > 0) {
                 var resultMap = new Array();
                 resultMap.push({
                     label: "Select Test Mode",
@@ -74,7 +74,7 @@ export class AddComponent {
             }
             else {
                 var testMode = [{
-                    label: "No Modes available", 
+                    label: "No Modes available",
                     value: null
                 }];
                 this.testModes = testMode;
@@ -88,4 +88,3 @@ export class AddComponent {
         });
     }
 }
-                                                                          
