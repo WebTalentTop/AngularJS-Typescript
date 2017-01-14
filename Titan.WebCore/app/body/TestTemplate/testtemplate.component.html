@@ -1,13 +1,9 @@
 ﻿<div class="ui-g-12">
     <div class="card card-w-title">
-        <header>
-            <h1> Test Template </h1>
-            
-            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Template"></button>
-        </header>
-
+        <h1> Test Template </h1>
         <div class="ui-grid-row">
-            <grid-data
+            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Template</a>
+            <grid-data 
                 [gridData]="gridData"
                 [cols]='cols'
                 [confInfo]="confInfo"

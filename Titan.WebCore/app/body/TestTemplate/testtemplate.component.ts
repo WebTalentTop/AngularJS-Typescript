@@ -1,4 +1,4 @@
-import { TestTemplateService } from '../../shared/services/testTemplate.service';
+import { TestTemplateService } from './../../shared/services/testTemplate.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -37,5 +37,5 @@ export class TestTemplateComponent {
         this.router.navigate(['testtemplate/details', id]);
     }
 
-
+   
 }
