@@ -1,4 +1,5 @@
 import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
+import {RefToNg} from '../../shared/services/definitions/RefToNg';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
@@ -44,13 +45,15 @@ import {
     ITestFacilitySplitEventViewModel,
     ITestFacilityScheduleViewModel
 } from "../../shared/services/definitions/Scheduler/ITestFacilitySplitEventDbViewModel";
+import {ICalendarDurationOptions} from "../../shared/services/definitions/ICalendarSlotOptions";
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 
-
 @Component({
     selector: 'calendar',
-    templateUrl: 'app/body/calendar/titancalendar.component.html'
+    styleUrls: ['app/body/Calendar/titancalendar.component.css'],
+    templateUrl: 'app/body/Calendar/titancalendar.component.html'
+
 })
 
 export class TitanCalendarComponent implements AfterViewInit, OnInit {
@@ -60,8 +63,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     assignUserSchedule: ITestFacilityUserScheduleDbViewModel;
     moveTestFacilityEvent: ITestFacilityMoveEventDbViewModel;
     splitTestFacilityEvent: ITestFacilitySplitEventViewModel;
-
+    calendarDurationOptions: ICalendarDurationOptions[] = [];
     displaySplitDialog: boolean = false;
+    displayScheduleDialog: boolean = false;
+    displayCalendarSearchDialog: boolean = false;
+
     testRoles: any;
     buildLevels: any;
     projectCodes: any;
@@ -131,7 +137,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     dueDate: string = '';
     testDuration: string = '';
     titanUsersListForTenant: SelectItem[] = [];
-
+    timeOptions: SelectItem[] = [];
     // For assigning operators/technicians
     selectedOperatorUserNames: any[] = [];
     filteredOperatorUserNames: any[] = [];
@@ -154,6 +160,13 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     testOperators: any[] = [];
     msgs: Message[] = [];
+    scheduleDefaultStartTime: string = '';
+    scheduleDefaultEndTime: string = '';
+    durationOptions: SelectItem[] = [];
+    selectedDurationOption: SelectItem;
+    allSlotOptions = [];
+    calendarHeader: string ='Ajay';
+
 //endregion fields
 
 // region constructor
@@ -178,6 +191,63 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
 // endregion constructor
     initCalendarOptions() {
+
+        //region quarter
+        let quarter = <ICalendarDurationOptions>{};
+        quarter.durationItem = {label: 'Quarter', value: 'Quarter'};
+
+        quarter.defaultSlotWidth = {label: 'Week', value: {weeks: 1}};
+        quarter.slotOptions = [];
+        quarter.slotOptions.push({label: 'Month', value: {months: 1}});
+        quarter.slotOptions.push({label: 'week', value: {weeks: 1}});
+        quarter.slotOptions.push({label: 'day', value: {days: 1}});
+        this.calendarDurationOptions.push(quarter);
+        //endregion quarter
+
+        //region month
+        let month = <ICalendarDurationOptions>{};
+        month.durationItem = {label: 'Month', value: 'Month'};
+        month.defaultSlotWidth = {label: 'day', value: {days: 1}};
+        month.slotOptions = [];
+        month.slotOptions.push({label: 'Week', value: {weeks: 1}});
+        month.slotOptions.push({label: 'day', value: {days: 1}});
+        month.slotOptions.push({label: 'Shift', value: {hours: 8}});
+        month.slotOptions.push({label: 'hour', value: {hours: 1}});
+        month.slotOptions.push({label: 'half-hour', value: {minutes: 30}});
+        this.calendarDurationOptions.push(month);
+        //endregion month
+
+        //region day
+        let day = <ICalendarDurationOptions>{};
+        day.durationItem = {label: 'Day', value: 'Day'};
+        day.defaultSlotWidth = {label: 'hour', value: {hours: 1}};
+        day.slotOptions = [];
+        day.slotOptions.push({label: 'day', value: {days: 1}});
+        day.slotOptions.push({label: 'Shift', value: {hours: 8}});
+        day.slotOptions.push({label: 'hour', value: {hours: 1}});
+        day.slotOptions.push({label: 'half-hour', value: {minutes: 30}});
+        this.calendarDurationOptions.push(day);
+        //endregion day
+
+        this.allSlotOptions.push('HALF-HOUR');
+        this.allSlotOptions.push('HOUR');
+        this.allSlotOptions.push('SHIFT');
+        this.allSlotOptions.push('DAY');
+        this.allSlotOptions.push('WEEK');
+        this.allSlotOptions.push('MONTH');
+        this.allSlotOptions.push('YEAR');
+
+
+        this.selectedDurationOption = month.durationItem;
+        this.slotDurations = [];
+        for (let item of this.calendarDurationOptions) {
+            this.durationOptions.push(item.durationItem);
+            if (item.durationItem.value === this.selectedDurationOption.value) {
+                this.slotDurations = item.slotOptions;
+            }
+        }
+
+
         this.daysofweek = [];
         this.daysofweek.push({label: 'Sunday', value: {id: 1, name: '0', code: 'SUN'}});
         this.daysofweek.push({label: 'Monday', value: {id: 2, name: '1', code: 'NY'}});
@@ -187,12 +257,14 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.daysofweek.push({label: 'Friday', value: {id: 6, name: '5', code: 'NY'}});
         this.daysofweek.push({label: 'Saturday', value: {id: 7, name: '6', code: 'NY'}});
 
-        this.slotDurations = [];
+
         //this.slotDurations.push({ label: 'Month', value: { id: 1, name: '30.00.', code: 'SUN' } });
-        this.slotDurations.push({label: 'Week', value: {weeks: 1}});
-        this.slotDurations.push({label: 'Day', value: {days: 1}});
-        this.slotDurations.push({label: 'Shift', value: {hours: 8}});
-        //this.slotDurations.push({label: 'Hour', value: {hours: 1}});
+        // this.slotDurations.push({label: 'Month', value: {months: 1}});
+        // this.slotDurations.push({label: 'Week', value: {weeks: 1}});
+        // this.slotDurations.push({label: 'Day', value: {days: 1}});
+        // this.slotDurations.push({label: 'Shift', value: {hours: 8}});
+        // this.slotDurations.push({label: 'Hour', value: {hours: 1}});
+        // this.slotDurations.push({label: 'HalfHour', value: {minutes: 30}});
         //TODO: Make Slots Dynamic. 30 mins and 15 mins should show up in week and day mode only
         //this.slotDurations.push({label: '30 minutes', value:  '00:30:00'});
         //this.slotDurations.push({label: '15 minutes', value:  '00:15:00'});
@@ -213,12 +285,14 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
         let tz = this.titanService.getDefaultTimeZone;
         var self = this;
+
         let todayDate = moment().startOf('day');
         let YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
         let TODAY = todayDate.format('YYYY-MM-DD');
         let TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-        let DEFAULTDATE = todayDate.clone().add(-7, 'day').format('YYYY-MM-DD');
-
+        let DEFAULTDATE = todayDate.clone().add(-5, 'day').format('YYYY-MM-DD');
+        let slotOptions = self.allSlotOptions;
+        let slotDurationInMinutes = moment.duration(self.selectedSlotDurationValue).asMinutes();
         var tt = this.tooltip;
         let scheduleConfig: any = {
             timezone: this.defaultCalendarSetting.defaultTimeZone,
@@ -233,31 +307,31 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 refresh: 'circle-triangle-w'
             },
             header: {
-                left: 'settings,prev,next today',
-                center: 'title',
-                right: 'month timeline3weeks'
+                center:'title'
             },
-            customButtons: {
-                settings: {
-                    text: 'room',
-                    click: function () {
-                        self.displayCalendarSetting = true;
 
-                    },
-                    themeIcon: 'refresh'
-                }
-            },
+            //     {
+            //     left: 'settings,prev,next today',
+            //     center: 'title',
+            //     right: 'month timeline3weeks'
+            // },
             defaultDate: DEFAULTDATE,
-            defaultView: 'timeline3weeks',
+            defaultView: 'timelineTitanDefault',
             buttonText: {
                 today: 'today',
                 month: 'month',
                 week: 'week',
                 day: 'day',
                 list: 'list',
-                timeline3weeks: 'Schedule'
+                timeline3weeks: 'Schedule',
+                timelineTitanDefault: 'Timeline'
             },
             views: {
+                timelineTitanDefault: {
+
+                    duration: {months: 1},
+                    type: 'timeline'
+                },
                 timeline3weeks: {
                     type: 'timeline',
                     duration: {months: 1},
@@ -300,7 +374,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
             eventSources: [{
                 id: 'testFacilityEventSource',
+
                 events: function (start, end, timezone, callback) {
+                    let slotOption = self.allSlotOptions.indexOf(self.selectedSlotDurationValue)
+                    self.calendarHeader =  $.fullCalendar.formatRange(moment(start), moment(end), 'MMM D YYYY');
                     $.ajax({
                         url: titanApiUrl + 'TestFacility/Schedule',
                         type: 'POST',
@@ -308,7 +385,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                             startdate: start.utc().format(),
                             enddate: end.utc().format(),
                             projectCodeIdList: [],
-                            timezone: tz
+                            timezone: tz,
+                            slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
+
 
                         },
                         error: function () {
@@ -326,7 +405,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                     });
                 }
             }
-            ,{
+                , {
                     id: 'testFacilityUserSource',
                     events: function (start, end, timezone, callback) {
                         $.ajax({
@@ -336,7 +415,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                                 startdate: start.utc().format(),
                                 enddate: end.utc().format(),
                                 projectCodeIdList: [],
-                                timezone: tz
+                                timezone: tz,
+                                slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
 
                             },
                             error: function () {
@@ -369,8 +449,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 //    content: event.description
                 //});
             },
-            eventAfterAllRender: function(){
-                    $("span.fc-time").hide();
+            eventAfterAllRender: function (view) {
+               // alert($('.fc-center h2').html());
+                //$('.fc-center h2').hide();
+                $('.fc-header-toolbar').hide();
+                $("span.fc-time").hide();
             },
             eventClick: function (calEvent, jsEvent, view) {
                 //self.displayEventDialog = true;
@@ -423,6 +506,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
+
+        RefToNg.ngRef = this;
+        console.log("RefToNg", RefToNg.ngRef);
         this.getTestFacilities();
         this.getTestModes();
         this.getTestTypes();
@@ -430,8 +516,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.getTestStatus();
         this.getProjectCodes();
         this.getTestRoles();
-        this.initSchedule();
         this.initCalendarOptions();
+        this.initSchedule();
+
 
         this.moveTestFacilityEvent = <ITestFacilityMoveEventDbViewModel>{};
         this.splitTestFacilityEvent = <ITestFacilitySplitEventViewModel>{}
@@ -440,6 +527,17 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
         //this.splitTestFacilityEvent.existingSchedule.startDate = new Date();
     }
+
+    //region toolbar
+    showSearchOptions() {
+        this.displayCalendarSearchDialog = true;
+    }
+
+    showCalendarSettings() {
+        this.displayCalendarSetting = true;
+    }
+
+    //endregion toolbar
 
     populateUpdateTestFacilityAndUserSchedule(selfRef, entityId, eventId, action) {
         selfRef.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
@@ -450,7 +548,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         selfRef.assignUserSchedule.entityId = entityId;
         if (action === 'resize') {
             selfRef.assignResourceHeader = "Event resized - Assign resources " + selfRef.assignBlockTestFacilityName + " from " +
-                $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
+                $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMM D YYYY');
         } else {
             selfRef.assignResourceHeader = "Assign resources" + selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
@@ -512,7 +610,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 var m = "clicked: " + key;
                 let entityId = $(this).attr("entityId");
                 let id = $(this).attr("eventId");
-                 switch (key) {
+
+
+                switch (key) {
                     case "AssignResources": {
 
                         // selfRef.displayEventDialog = true;
@@ -614,12 +714,58 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         selfRef.splitTestFacilityEvent.existingSchedule.id = id;
                         break;
                     }
-
+                    case "Schedule": {
+                        selfRef.displayScheduleDialog = true;
+                        if (selfRef.timeOptions.length == 0) {
+                            selfRef.timeOptions.push({value: '0', label: "12:00 AM"});
+                            selfRef.timeOptions.push({value: '30', label: "12:30 AM"});
+                            selfRef.timeOptions.push({value: '60', label: "1:00 AM"});
+                            selfRef.timeOptions.push({value: '90', label: "1:30 AM"});
+                            selfRef.timeOptions.push({value: '120', label: "2:00 AM"});
+                            selfRef.timeOptions.push({value: '150', label: "2:30 AM"});
+                            selfRef.timeOptions.push({value: '180', label: "3:00 AM"});
+                            selfRef.timeOptions.push({value: '210', label: "3:30 AM"});
+                            selfRef.timeOptions.push({value: '240', label: "4:00 AM"});
+                            selfRef.timeOptions.push({value: '270', label: "4:30 AM"});
+                            selfRef.timeOptions.push({value: '300', label: "5:00 AM"});
+                            selfRef.timeOptions.push({value: '330', label: "5:30 AM"});
+                            selfRef.timeOptions.push({value: '360', label: "6:00 AM"});
+                            selfRef.timeOptions.push({value: '390', label: "6:30 AM"});
+                            selfRef.timeOptions.push({value: '420', label: "7:00 AM"});
+                            selfRef.timeOptions.push({value: '450', label: "7:30 AM"});
+                            selfRef.timeOptions.push({value: '480', label: "8:00 AM"});
+                            selfRef.timeOptions.push({value: '510', label: "8:30 AM"});
+                            selfRef.timeOptions.push({value: '540', label: "9:00 AM"});
+                            selfRef.timeOptions.push({value: '570', label: "9:30 AM"});
+                            selfRef.timeOptions.push({value: '600', label: "10:00 AM"});
+                            selfRef.timeOptions.push({value: '630', label: "10:30 AM"});
+                            selfRef.timeOptions.push({value: '660', label: "11:00 AM"});
+                            selfRef.timeOptions.push({value: '690', label: "11:30 AM"});
+                            selfRef.timeOptions.push({value: '720', label: "12:00 PM"});
+                            selfRef.timeOptions.push({value: '750', label: "12:30 PM"});
+                            selfRef.timeOptions.push({value: '780', label: "1:00 PM"});
+                            selfRef.timeOptions.push({value: '810', label: "1:30 PM"});
+                            selfRef.timeOptions.push({value: '840', label: "2:00 PM"});
+                            selfRef.timeOptions.push({value: '870', label: "2:30 PM"});
+                            selfRef.timeOptions.push({value: '900', label: "3:00 AM"});
+                            selfRef.timeOptions.push({value: '930', label: "3:30 AM"});
+                            selfRef.timeOptions.push({value: '960', label: "4:00 PM"});
+                            selfRef.timeOptions.push({value: '990', label: "4:30 PM"});
+                            selfRef.timeOptions.push({value: '1020', label: "5:00 PM"});
+                            selfRef.timeOptions.push({value: '1050', label: "5:30 PM"});
+                            selfRef.timeOptions.push({value: '1080', label: "6:00 PM"});
+                            selfRef.timeOptions.push({value: '1110', label: "6:30 PM"});
+                            selfRef.timeOptions.push({value: '1140', label: "7:00 PM"});
+                            selfRef.timeOptions.push({value: '1170', label: "7:30 PM"});
+                            selfRef.timeOptions.push({value: '1200', label: "8:00 PM"});
+                        }
+                        break;
+                    }
 
                 }
             },
             items: {
-                "Schedule" :{name:"Schedule", icon:"fa fa-clock"},
+                "Schedule": {name: "Schedule", icon: "fa fa-clock"},
                 "AssignResources": {name: "Assign Resources", icon: "edit"}
                 , "Split": {name: "Split", icon: "cut"}
                 , "Details": {name: "Details", icon: "fa fa-beer"}
@@ -858,9 +1004,34 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         schedulerOptions.firstDay = this.selectedFirstDayValue;
         schedulerOptions.minTime = this.startWorkHoursValue;
         schedulerOptions.maxTime = this.endWorkHoursValue;
-        schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         console.log(this.selectedSlotDurationValue, schedulerOptions);
+        for (let item of this.calendarDurationOptions) {
+            if (item.durationItem.value === this.selectedDurationOption) {
+                this.slotDurations = item.slotOptions;
+                break;
+            }
+        }
+        let optionExist: boolean = false;
+        for (let opt of this.slotDurations) {
+            if (this.jsonEqual(opt.value, this.selectedSlotDurationValue)) {
+                optionExist = true;
+                this.selectedSlotDurationValue = opt.value;
+                break;
+            }
+        }
+        if (!optionExist) {
+            this.selectedSlotDurationValue = this.slotDurations[0].value;
+        }
+
+        //this.selectedSlotDurationValue = this.slotDurations[]
+        schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         $('#calendar').fullCalendar('option', schedulerOptions);
+        $('#calendar').fullCalendar('changeView', 'timeline3weeks');
+        $('#calendar').fullCalendar('refetchEvents');
+    }
+
+    jsonEqual(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
     }
 
     filterCalendarEvents(event) {
@@ -873,9 +1044,6 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         let testFacilityEventSource = $("#calendar").fullCalendar('getEventSourceById', 'testFacilityEventSource');
         $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource)
         $("#calendar").fullCalendar('removeEventSource', {id: 'testFacilityEventSource'});
-        console.log("-- Clearing the events");
-
-        debugger;
         var payload = {
             startdate: '12-1-2016',
             enddate: '12-12-2017',
@@ -937,6 +1105,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             if (res.result !== null && res.result) {
                 this.msgs.push({severity: 'success', detail: 'Schedules updated successfully.', summary: 'Success'});
                 this.displayAssignDialog = false;
+                $("#calendar").fullCalendar('refetchEvents')
             } else {
                 this.msgs.push({
                     severity: 'error',
@@ -1129,14 +1298,33 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     //#region Split
     saveSplitEventChanges(uiEvent) {
-        debugger;
+
         console.log("Hello", "saveSplitEventChanges")
         this.displaySplitDialog = false;
-        this.testfacilityservice.postSplitTestFacilityEvent(this.splitTestFacilityEvent).subscribe(res=>{
+        this.testfacilityservice.postSplitTestFacilityEvent(this.splitTestFacilityEvent).subscribe(res => {
             console.log("Hello", res)
 
         });
     }
 
     //#endregion split
+    //region MISC
+    initializeTimeOptions(selfRef) {
+
+    }
+
+    //endregion
+    moveCalendar(direction) {
+        if (direction === 'forward') {
+            $("#calendar").fullCalendar('next')
+        } else {
+            $("#calendar").fullCalendar('prev')
+        }
+    }
+    onBeforeDialogHide(event){
+        console.log("Just before the dialog is closing");
+        event.preventDefault();
+        return false;
+
+    }
 }
