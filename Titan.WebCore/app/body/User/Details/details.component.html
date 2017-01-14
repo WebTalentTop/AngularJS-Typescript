@@ -21,11 +21,11 @@
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" style="width:100%" pInputText name="firstName" [(ngModel)]="userProfile.firstName"
                                            minlength="3" class="form-control" required row="20">
-                                    <label>First Name </label>
+                                    <label>First Name *</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" style="width:100%" pInputText name="lastName" class="form-control" required row="20" [(ngModel)]="userProfile.firstName">
-                                    <label>Last Name </label>
+                                    <label>Last Name *</label>
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
 
@@ -40,12 +40,12 @@
 
                             <div class="ui-grid-row ">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control" required row="20" name="emailAddress" [(ngModel)]="userProfile.emailAddress"
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="emailAddress" [(ngModel)]="userProfile.emailAddress"
                                          >
-                                    <label>Email Address </label>
+                                    <label>Email Address</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control" required row="20" name="phoneNumber" [(ngModel)]="userProfile.firstName">
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber" [(ngModel)]="userProfile.firstName">
                                     <label>Phone Number</label>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                         <footer>
                             <p>* indicates required field</p>
                             <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save"></button>
-                        </footer>
+                        </footer><br />
 
                     </p-panel>
 
@@ -83,7 +83,7 @@
 
                 <!-- Begin Dialog - Assign User Role -->
 
-                <p-dialog header="Assign Function Group" [(visible)]="displayFunctionGroupDialog" modal="modal" showEffect="fade" responsive="true">
+                <p-dialog header="Assign Function Group" [(visible)]="displayFunctionGroupDialog" modal="modal" showEffect="fade" responsive="true" width="500">
 
                     <p>Please select function groups or tenants.</p>
 
@@ -92,32 +92,32 @@
 
                     <div class="input-row">
 
-                        <label>
-                            <span class="text">Function Group</span>
+                            <div class="ui-g-4"><b>Function Group :</b></div>
 
-                            <p-dropdown [options]="functionGroups" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
-
-                        </label>
-
+                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
+                            </div>
                     </div>
 
                     <!-- End Users -->
                     <!-- Begin Role -->
 
-                    <div class="input-row">
+                    <!-- <div class="input-row"> -->
 
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
-                        <span class="pseudo-label">Tenants</span>
+                        <!-- <span class="pseudo-label">Tenants</span> -->
 
                         <!--<p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>-->
 
-                    </div>
+                    <!-- </div> -->
 
                     <!-- End Role -->
-
+                    <br /><br />
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                            <label class="checkbox"><input type="checkbox"> Keep Open</label>
+                            <div style='float:left;padding:0.85em'>
+                              <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                          [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                            </div>
                             <button type="button" pButton icon="ui-icon-close" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
                             <button type="button" pButton icon="ui-icon-save" (click)="onAddFunctionGroup()" label="Assign Function Group"></button>
                         </div>
@@ -132,7 +132,7 @@
 
                     <header class="with-controls">
                         <p class="ui-panel-title"> Function Groups </p>
-                        <p class="controls"><button type="text" (click)="displayFunctionGroupDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Function Group&hellip;"></button></p>
+                        <p class="controls"><button type="text" (click)="displayFunctionGroupDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Function Group"></button></p>
                     </header>
 
                     <div class="ui-grid-row">
@@ -142,7 +142,7 @@
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
                                 <template let-FunctionGroup="rowData" pTemplate type="body">
-                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
+                                    <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
                                 </template>
                             </p-column>
                         </p-dataTable>
@@ -163,7 +163,7 @@
 
                 <!-- Begin Dialog - Assign User Role -->
 
-                <p-dialog header="Assign Tenant" [(visible)]="displayTenantDialog" modal="modal" showEffect="fade" responsive="true">
+                <p-dialog header="Assign Tenant" [(visible)]="displayTenantDialog" modal="modal" showEffect="fade" responsive="true" width="400">
 
                     <p>Please select  tenants.</p>
 
@@ -173,7 +173,7 @@
                     <div class="input-row">
 
                         <label>
-                            <span class="text">Tenants</span>
+                            <b>Tenants :</b>
 
                             <p-dropdown [options]="tenants" (onChange)="onTenantChange($event)" name="tenants" [autoWidth]="false"></p-dropdown>
 
@@ -187,10 +187,13 @@
 
 
                     <!-- End Role -->
-
+                    <br />
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                            <label class="checkbox"><input type="checkbox"> Keep Open</label>
+                          <div style='float:left;padding:0.85em'>
+                            <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                        [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                          </div>
                             <button type="button" pButton icon="ui-icon-close" (click)="displayTenantDialog=false" label="Cancel"></button>
                             <button type="button" pButton icon="ui-icon-save" (click)="onAddTenant()" label="Assign Tenant"></button>
                         </div>
@@ -205,7 +208,7 @@
 
                     <header class="with-controls">
                         <p class="ui-panel-title"> Tenants </p>
-                        <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant&hellip;"></button></p>
+                        <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant"></button></p>
                     </header>
 
                     <div class="ui-grid-row">
@@ -215,7 +218,7 @@
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
                                 <template let-FunctionGroup="rowData" pTemplate type="body">
-                                    <button pButton type="button" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
+                                    <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
                                 </template>
                             </p-column>
                         </p-dataTable>

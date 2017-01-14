@@ -112,7 +112,7 @@
                                 Action
                             </template>
                             <template let-testRequirement="rowData" pTemplate type="body">
-                                <button type="button" pButton (click)="onDeleteTestRequirement(testRequirement)" icon="fa-trash"></button>
+                                <button type="button" pButton (click)="onDeleteTestRequirement(testRequirement)" class="red-btn" icon="fa-trash"></button>
                             </template>
                         </p-column>
                     </p-dataTable>
@@ -153,9 +153,9 @@
                                 Action
                             </template>
                             <template let-procedure="rowData" pTemplate type="body">
-                                <button type="button" pButton (click)="onDelete(procedure)" icon="fa-trash"></button>
-                                <button type="button" pButton (click)="onMoveProcedureUp(procedure)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(procedure)" title="Move Up"></button>
-                                <button type="button" pButton (click)="onMoveProcedureDown(procedure)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(procedure)" title="Mode Down"></button>
+                                <button type="button" pButton (click)="onDelete(procedure)" icon="fa-trash" class="red-btn"></button>
+                                <button type="button" pButton (click)="onMoveProcedureUp(procedure)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(procedure)" title="Move Up" class="blue-grey-btn"></button>
+                                <button type="button" pButton (click)="onMoveProcedureDown(procedure)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(procedure)" title="Mode Down" class="blue-grey-btn"></button>
                             </template>
                         </p-column>
                         <template let-procedure pTemplate="rowexpansion">
