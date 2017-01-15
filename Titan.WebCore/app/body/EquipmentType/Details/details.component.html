@@ -17,7 +17,7 @@
                               <p-growl [value]="msgs"></p-growl>
                           <!--<button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>-->
                           <!--<ul class="rightIconNav pull-right mb10">-->
-                             
+
                           <!--</ul>-->
                       </div>
                   </div><br/>
@@ -79,8 +79,8 @@
                       </div>
                       <footer>
                          <p>* indicates required field</p>
-                          <button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>
-                          <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipmenttype"></button>
+                          <button pButton type="submit" label="Save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
+
                       </footer><br />
                   </p-panel><br />
                   <p-panel>
@@ -129,7 +129,7 @@
                            <p class="ui-panel-title">Equipment SubTypes</p>
                            <p class="controls">
                              <button type="button" pButton icon="fa-plus" style="float:left"
-                                             (click)="showDialogToAdd()" label="Add SubType"></button>
+                                             (click)="showDialogToAdd()" label="Add SubType"  class="blue-grey-btn" ></button>
                            </p>
                        </header>
                        <div class="body">
@@ -149,12 +149,12 @@
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="name">Name<span >*</span></label></div>
                                          <div class="ui-grid-col-8">
-                                              <input pInputText name="name"  
+                                              <input pInputText name="name"
                                     [(ngModel)]="EquipmentSubType.name" required pInputText
                                     #equipmentSubTypeNameRef="ngModel"
                                     minlength="3" class="form-control" required row="20"
                                     (focus)="equipmentSubTypeNameRef.focus=true" name="name" style="width:100%">
-                                             
+
                                              <!--<input pInputText name="name" [(ngModel)]="EquipmentSubType.name"   #equipmentSubTypeNameRef="ngModel"
                                              />-->
                                              </div>
@@ -196,7 +196,7 @@
                        </div>
                  </p-panel>
 
-               
+
          </p-tabPanel>
       </p-tabView>
 
@@ -207,4 +207,3 @@
 
     </div>
   </div>
-
