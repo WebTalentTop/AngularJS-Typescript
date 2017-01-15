@@ -1,4 +1,4 @@
-import { MilestoneService } from '../../../../shared/services/milestone.service';
+import { MilestoneService } from '../../../../shared/services/Containers/MileStoneService/mileStone.service';
 import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';

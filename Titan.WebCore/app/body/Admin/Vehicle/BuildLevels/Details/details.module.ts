@@ -2,7 +2,7 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
-import { BuildLevelService} from '../../../../../shared/services/buildLevel.service';
+import { BuildLevelService} from '../../../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { DataTableModule, ButtonModule, InputTextareaModule,ToggleButtonModule, InputTextModule,BreadcrumbModule ,GrowlModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

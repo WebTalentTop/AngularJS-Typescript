@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { MilestoneService } from '../../../../../shared/services/milestone.service';
+import { MilestoneService } from '../../../../../shared/services/Containers/MileStoneService/mileStone.service';
 import { Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';

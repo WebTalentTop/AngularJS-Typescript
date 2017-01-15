@@ -2,7 +2,7 @@
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { TorqueBookComponent } from "./torque-book.component";
-import { ProjectService} from './../../../shared/services/project.service';
+import { ProjectService} from './../../../shared/services/Containers/ProjectService/project.service';
 
 import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     TreeTableModule,TreeNode,SharedModule, DialogModule } from 'primeng/primeng';

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from './../../../shared/services/project.service'
+import { ProjectService } from './../../../shared/services/Containers/ProjectService/project.service'
 import { TorquesheetService } from './../../../shared/services/torquesheet.service'
 
 declare var $:any;

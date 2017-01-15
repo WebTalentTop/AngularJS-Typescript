@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
-import { MilestoneService} from '../../../../../shared/services/milestone.service';
+import { MilestoneService} from '../../../../../shared/services/Containers/MileStoneService/mileStone.service';
 
 import { DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

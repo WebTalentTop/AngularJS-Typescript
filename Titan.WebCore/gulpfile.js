@@ -6,6 +6,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 
 "use strict";
 var gulp = require("gulp");
+var watch = require("gulp-watch");
 var sass = require('gulp-sass');
 var del = require("del");
 var sourcemaps = require("gulp-sourcemaps");
@@ -318,7 +319,13 @@ gulp.task("ts", function () {
 });
 
 gulp.task('tswatch', function () {
-    gulp.watch(root_path.app + "**/*.ts", ['ts']);
+    //gulp.watch(root_path.app + "**/*.ts", ['ts']);
+    gulp.src(root_path.app + "**/*.ts")
+        .pipe(watch(root_path.app + "**/*.ts"))
+        .pipe(gulp.dest(root_path.webroot + "app/"));
+
+    /*return watch(root_path.app + "**!/!*.ts", {ignoreInitial:false })
+        .pipe(gulp.dest(root_path.webroot + "app/"))*/
 });
 
 gulp.task("copy-@types", function () {
