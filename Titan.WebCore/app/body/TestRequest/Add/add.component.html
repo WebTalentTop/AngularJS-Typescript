@@ -127,7 +127,8 @@
                         </div>
                     </div>
                     <footer>
-                        <button id="create" pButton type="submit" icon="ui-icon-save"  class="green-btn" label="Add" (click)="onTestRequestSubmit()"></button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testrequest"></button>
+                        <button id="create" pButton type="submit" icon="ui-icon-save"  class="green-btn" label="Add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
                     </footer>
                     <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
                         Test Request Info Details:
