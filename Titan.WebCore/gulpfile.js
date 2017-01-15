@@ -319,11 +319,11 @@ gulp.task("ts", function () {
 });
 
 gulp.task('tswatch', function () {
-    //gulp.watch(root_path.app + "**/*.ts", ['ts']);
-    gulp.src(root_path.app + "**/*.ts")
-        .pipe(watch(root_path.app + "**/*.ts"))
+    gulp.watch(root_path.app + "**/*.ts", ['ts']);
+    /*gulp.src(root_path.app + "**!/!*.ts")
+        .pipe(watch(root_path.app + "**!/!*.ts"))
         .pipe(gulp.dest(root_path.webroot + "app/"));
-
+*/
     /*return watch(root_path.app + "**!/!*.ts", {ignoreInitial:false })
         .pipe(gulp.dest(root_path.webroot + "app/"))*/
 });
