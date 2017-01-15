@@ -1,0 +1,46 @@
+<div class="card card-w-title">
+    <h1>Select build levels</h1>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <div class="ui-g-2" *ngFor="let item of buildLevels">
+                <p-checkbox
+                        name="buildLevels"
+                        value="{{item.id}}"
+                        label="{{item.name}}"
+                        (onChange)="addToProject($event, item)"
+                        [(ngModel)]="selectedNewBuildLevels">
+                </p-checkbox>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table" *ngIf="isBuildLevelData">
+    <div class="row header blue">
+        <div class="cell">
+            Mile Stone
+        </div>
+        <div class="cell" *ngFor="let item of buildLevels">
+            <span style="width:75px;padding:1px;">{{item.name}}</span>
+        </div>
+    </div>
+    <div class="row" *ngFor="let row of mileStoneBuildLevel; let ii = index;">
+        <div class="cell">{{ mileStones[ii].name}}</div>
+        <div class="cell" *ngFor="let col of row">
+            <div *ngIf="col.enabled">
+                Start Date: <p-calendar [(ngModel)]="col.plannedStartDate" dateFormat="mm/dd/yy"></p-calendar><br/>
+                End Date: <p-calendar [(ngModel)]="col.plannedEndDate" dateFormat="mm/dd/yy"></p-calendar>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isBuildLevelData">
+    <button
+        type="text"
+        pButton
+        label="Save"
+        icon="fa-plus"
+        iconPos="right"
+        class="indigo-btn"
+        (click)="saveGrid($event)">
+    </button>
+</div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProjectService } from './../../../shared/services/project.service';
+import { ProjectService } from './../../../shared/services/Containers/ProjectService/project.service';
 import { TemplatesComponent} from '../Templates/templates.component';
 import { TeamInformationComponent} from '../TeamInformation/teaminformation.component';
 //import { DetailsComponent } from "./../Details/details.component"
+import { ProjectScheduleComponent } from '../ProjectSchedule/projectSchedule.component';
 
 @Component({
     //moduleId: module.id,
