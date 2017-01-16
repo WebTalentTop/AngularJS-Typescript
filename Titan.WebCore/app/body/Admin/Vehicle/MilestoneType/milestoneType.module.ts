@@ -11,7 +11,7 @@ import milestoneTypeRoutes from "./milestoneType.routes";
 
 @NgModule({
     imports: [CommonModule, DataTableModule, GridModule, milestoneTypeRoutes, MessagesModule, GrowlModule, BreadcrumbModule],
-    providers: [MilestoneTypeService],
+    providers: [MilestoneTypeService, BreadCrumbsService],
     declarations: [MilestoneTypeComponent]
 })
 
