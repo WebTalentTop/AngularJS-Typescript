@@ -1,4 +1,4 @@
-import { TestTemplateService } from '../../shared/services/testTemplate.service';
+﻿import { TestTemplateService } from '../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -6,8 +6,8 @@ import {Router} from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 
 @Component({
-    selector: 'test-template',
-    templateUrl: 'app/body/TestTemplate/testtemplate.component.html'
+    selector: 'test-Template',
+    templateUrl: 'app/body/TestTemplate/testTemplate.component.html'
 })
 export class TestTemplateComponent {
     // title = "Test Template";
@@ -34,7 +34,7 @@ export class TestTemplateComponent {
     }
 
     navigateDetails(id:string){
-        this.router.navigate(['testtemplate/details', id]);
+        this.router.navigate(['testTemplate/details', id]);
     }
 
 

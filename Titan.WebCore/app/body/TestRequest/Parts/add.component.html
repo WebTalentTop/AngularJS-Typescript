@@ -1,0 +1,108 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <!--<h3>Details</h3>-->
+        <p-tabView (onChange)="handleChange($event)">
+
+            <p-tabPanel header="Info ||" id="info">
+              <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                 <p-panel>
+
+                        <header class="with-controls">
+                            <p class="ui-panel-title">Add Parts Info</p>
+                            <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;"></button></p>
+                        </header>
+                        <div class="body">
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="drawingNumber" [(ngModel)]="drawingNumber"
+                                       minlength="3"  required style="width:100%">
+                                <label>Drawing Number <span >*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText [(ngModel)]="partNumber" name="partNumber"
+                                       minlength="3"  required style="width:100%">
+                                <label>Part Number <span >*</span></label>
+                            </div>
+                        </div><br /><br />
+                       
+  
+              
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <input type="text" pInputText [(ngModel)]="quantity" name="quantity"
+                                     minlength="3" required style="width:100%">
+                              <label>Quantity Requested<span>*</span></label>
+                          </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">
+                                    Upload File :
+                                </p>
+                                <p-fileUpload [name]="sensorpic"
+                                              multiple="multiple" accept="image/*" (onSelect)="onChange($event)" maxFileSize="1000000">
+                                </p-fileUpload>
+                        </div>
+                      </div>
+                      <div class="ui-grid-row " >
+                          <div class="ui-g-12 ui-md-12" >
+                            <label style="color:#777">Comments :</label>
+                          </div>
+                          <div class="ui-g-12 ui-md-12 md-inputfield">
+                              <!--Editor Section-->
+                              <p-editor [(ngModel)]="comment" name="comment" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <header>
+                                      <select class="ql-size">
+                                          <option value="small"></option>
+
+                                          <option selected></option>
+                                          <option value="large"></option>
+                                          <option value="huge"></option>
+                                      </select>
+                                      <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                      </span>
+                                  </header>
+                              </p-editor>
+                          </div>
+                      </div>
+                    </div>
+                    <footer>
+                        <button id="cancel" pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testrequest/details/{{entityId}}">  </button>
+                        <button id="add" pButton type="submit" icon="ui-icon-save" label="Add"></button>
+                    </footer>
+                  </p-panel><br />
+                  <p-panel header="Parts List">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="table-responsive" style="min-height:400px;">
+                                <p-dataTable [value]="partsList" [paginator]="true" rows="15" [responsive]="true">
+                                    <p-column header="Quantity Requested" field="quantity" sortable="true"></p-column>
+                                    <p-column header="Comments" field="comment" sortable="true"></p-column>
+                                    <p-column header="Drawing Number" field="drawingNumber" sortable="true"></p-column>
+                                    <p-column header="Part Number" field="partNumber" sortable="true"></p-column>
+ 
+                                    <!--<p-column>
+                                        <template pTemplate type="header">
+                                            <button type="button" pButton icon="fa-refresh"></button>
+                                        </template>
+                                        <template let-sensorrow="rowData" pTemplate type="body">
+                                            <a routerLink="details/{{sensorrow.id}}/{{entityId}}"><i class="fa ui-icon-edit"></i>Edit</a>
+                                        </template>
+                                    </p-column>-->
+
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </div>
+                  </p-panel>
+              </form>
+
+            </p-tabPanel>
+
+
+        </p-tabView>
+</div>
+</div>

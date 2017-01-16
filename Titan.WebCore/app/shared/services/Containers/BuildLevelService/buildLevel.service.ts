@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BuildLevelApiUrl} from './apiUrlConst/BuildLevelApiUrls';
+import { BuildLevelApiUrl} from '../../apiUrlConst/BuildLevel/buildlevelApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -53,7 +53,7 @@ export class BuildLevelService {
     }
 
     postUpdate(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${BuildLevelApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
             .map(this.checkErrors)
@@ -80,7 +80,7 @@ export class BuildLevelService {
         //.map(this.getJson);
     }
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+        //console.log("In Data Service response.json() call: ", response.json());
         return response.json();
     }
 

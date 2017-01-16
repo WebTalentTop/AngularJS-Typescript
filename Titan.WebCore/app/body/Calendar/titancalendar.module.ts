@@ -5,10 +5,10 @@ import { TitanCalendarComponent } from "./titancalendar.component";
 import { FormsModule, FormBuilder, Validator } from '@angular/forms';
 import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 
-import { BuildLevelService } from '../../shared/services/buildlevel.service';
+import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
 import { TestRoleService } from '../../shared/services/testRole.service';
-import { ProjectService } from '../../shared/services/project.service';
+import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
 import { TestRequestService } from '../../shared/services/testrequest.service';

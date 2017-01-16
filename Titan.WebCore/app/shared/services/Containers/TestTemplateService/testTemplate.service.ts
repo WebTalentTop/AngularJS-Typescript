@@ -1,8 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestTemplateApiUrl} from './apiUrlConst/TestTemplateApiUrls';
-import { BaseService } from './base.service'
+import { TestTemplateApiUrl} from '../../apiUrlConst/TestTemplate/TestTemplateApiUrls';
+import { BaseService } from '../../base.service';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';

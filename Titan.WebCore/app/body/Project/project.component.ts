@@ -1,4 +1,4 @@
-import { ProjectService } from './../../shared/services/project.service';
+import { ProjectService } from './../../shared/services/Containers/ProjectService/project.service';
 import { LoggerService } from '../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';

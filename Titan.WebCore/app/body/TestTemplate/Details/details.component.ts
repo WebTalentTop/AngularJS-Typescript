@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TestTemplateService } from '../../../shared/services/testTemplate.service'
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service'
 import { TestTypeService } from '../../../shared/services/testType.service'
 import { TestModeService } from '../../../shared/services/testMode.service'
 import { ProcedureService } from '../../../shared/services/procedure.service'
@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 
 @Component({
-    selector: 'details-testtemplate',
+    selector: 'details-testTemplate',
     templateUrl: 'app/body/TestTemplate/Details/details.component.html'
 })
 export class DetailsComponent {

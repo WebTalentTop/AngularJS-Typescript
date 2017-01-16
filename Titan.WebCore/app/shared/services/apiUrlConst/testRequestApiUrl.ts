@@ -10,6 +10,13 @@ export class TestReqestApiUrl {
     public static postDeleteUserScheduleInstanceUrl: string = titanApiUrl + 'testRequest/DeleteUserScheduleInstance/';
     public static postMoveTestRequestUrl: string = titanApiUrl + 'testRequest/Move/';
     public static postAssignUserUrl: string = titanApiUrl + 'testRequest/AssignUsers/';
+    public static postTestRequestTestTemplateInsert: string = titanApiUrl + 'testRequest/TestRequestTestTemplateProcedureMap';
+    public static getProcedures: string = titanApiUrl + 'procedure/GetAll';
+    public static GetAllTestRequestPartsList: string = titanApiUrl + 'partsList';
+    public static postAddPartsList: string = titanApiUrl + 'partsList';
+
+    public static getTestTemplateProceduresByTestRequestId: string = titanApiUrl + 'testrequest/GetAllTemplateProcedureListByTestRequestId';
+ 
 
     
 }

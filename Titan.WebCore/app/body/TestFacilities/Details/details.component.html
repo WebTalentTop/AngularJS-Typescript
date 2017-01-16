@@ -1,4 +1,4 @@
-﻿
+
 <div class="ui-g">
 
     <div class="ui-g-12">
@@ -53,13 +53,13 @@
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                         <input type="text" pInputText name="addressLine1" class="form-control" row="20"
                                                [(ngModel)]="address.addressLine1"
-                                               #tfAddress1Ref="ngModel"
+                                               #tfAddress1Ref="ngModel" id="addressLine1"
                                                (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false" style="width:100%">
                                         <label>Address Line 1</label>
                                     </div>
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                         <input type="text" pInputText class="form-control" row="20" name="addressLine2"
-                                               [(ngModel)]="address.addressLine2"
+                                               [(ngModel)]="address.addressLine2" id="addressLine2"
                                                #tfAddress2Ref="ngModel"
                                                (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false" style="width:100%">
                                         <label>Address Line 2</label>
@@ -75,13 +75,13 @@
 
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                           <input type="text" pInputText class="form-control" row="20" name="city"
-                                                 #tfCityRef="ngModel" [(ngModel)]="address.city"
+                                                 #tfCityRef="ngModel" [(ngModel)]="address.city" id="city"
                                                  (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false" style="width:100%">
                                           <label>City </label>
                                     </div>
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                           <input type="text" pInputText class="form-control" row="20" name="state"
-                                                 [(ngModel)]="address.state" #tfstateRef="ngModel"
+                                                 [(ngModel)]="address.state" #tfstateRef="ngModel" id="state"
                                                  (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false" style="width:100%">
                                           <label>State </label>
                                     </div>
@@ -94,13 +94,13 @@
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                           <input type="text" pInputText class="form-control" row="20" name="postalCode"
                                                  [(ngModel)]="address.postalCode" #tfpostalCodeRef="ngModel"
-                                                 (focus)="tfpostalCodeRef.focus=true"
+                                                 (focus)="tfpostalCodeRef.focus=true" id="postalCode"
                                                  (blur)="tfpostalCodeRef.focus=false" style="width:100%">
                                           <label>Postal Code </label>
                                     </div>
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                           <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate"
-                                                          name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
+                                                          name="lastMaintenanceDate" id="lastMaintenanceDate"  [showIcon]="true"></p-calendar>
                                                           <label class="control-label  col-sm-12 pl0">
                                                               Last Maintenance Date
                                                           </label>
@@ -113,7 +113,7 @@
                                     <div class="ui-g-12">
                                             <label>Maintenance Frequency</label>
                                             <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                                        label="Is Maintenance Frequency required?"
+                                                        label="Is Maintenance Frequency required?" id="isMaintenanceFrequencySelected"
                                                         [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                         (onChange)="showHideCronPicker()">
                                             </p-checkbox>
@@ -135,7 +135,7 @@
                                     <p>Description</p>
                                     <div class="md-inputfield">
 
-                                        <p-editor [(ngModel)]="testFacility.description" name="description"
+                                        <p-editor [(ngModel)]="testFacility.description" name="description" id="description"
                                                   [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                             <header>
                                                 <select class="ql-size">
@@ -160,7 +160,7 @@
 
                                 <div class="input-row md-spaced">
 
-                                    <p-checkbox name="groupname" value="IsTestFacilityDelete"
+                                    <p-checkbox name="groupname" value="IsTestFacilityDelete" id="IsTestFacilityDelete"
                                                 label="Do you want retire this testFacility?"
                                                 [(ngModel)]="IsTestFacilityDelete" (onChange)="onTestFacilityDelete()"
                                                 binary="true"></p-checkbox>
@@ -169,8 +169,8 @@
                               </div>
                             <footer>
                                 <p>* indicates required field</p>
-                                <button pButton type="submit" [disabled]="!tfForm.valid" label="Save"
-                                        icon="ui-icon-save" class="purple-btn"></button>
+                                <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save"
+                                        icon="ui-icon-save"  class="green-btn" ></button>
                             </footer>
                             <br />
                         </p-panel><br />
@@ -203,7 +203,7 @@
                                     <p-autoComplete [(ngModel)]="filteredSelectedUserNames"
                                                     [suggestions]="filteredUserNames"
                                                     (completeMethod)="filterUserNames($event)"
-                                                    name="username" [minLength]="1" placeholder="Search by Name/#"
+                                                    name="username"  id="username" [minLength]="1" placeholder="Search by Name/#"
                                                     field="firstName" [multiple]="true">
                                     </p-autoComplete>
 
@@ -220,7 +220,7 @@
                                 <span class="pseudo-label">Role</span>
 
                                 <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)"
-                                            name="userRole" [autoWidth]="false"></p-dropdown>
+                                            name="userRole" id="userRole"  [autoWidth]="false"></p-dropdown>
 
                             </div>
 
@@ -230,11 +230,11 @@
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <div style='float:left;padding:0.85em'>
                                         <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                                    [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                                    [(ngModel)]="IsKeepOpen" binary="true" id="userIsKeepOpen" ></p-checkbox>
                                     </div>
-                                    <button type="button" pButton icon="ui-icon-close"
+                                    <button type="button" pButton icon="ui-icon-close" id="userCancel"
                                             (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
+                                    <button type="button" pButton icon="ui-icon-save"  id="userSave" (click)="onAddUserRole()"
                                             label="Add User Role"></button>
                                 </div>
                             </footer>
@@ -250,7 +250,7 @@
                                 <p class="ui-panel-title">Test Facility Users</p>
                                 <p class="controls">
                                     <button type="text" (click)="displayAssignUserRolesDialog=true" pButton
-                                            icon="ui-icon-person-add" label="Add User Roles" class="purple-btn"></button>
+                                            icon="ui-icon-person-add" label="Add User Roles" class="blue-grey-btn" id="userRoleAdd" ></button>
                                 </p>
                             </header>
 
@@ -265,7 +265,7 @@
                                     <p-column header="Action">
 
                                         <template let-TestFacilityRole="rowData" pTemplate type="body">
-                                            <button pButton type="button" icon="ui-icon-remove-circle"
+                                            <button pButton type="button" icon="ui-icon-remove-circle" class="red-btn"
                                                     (click)="onDeleteUserRoleMap(TestFacilityRole.id)"
                                                     label="Delete"></button>
                                         </template>
@@ -299,7 +299,7 @@
                                 <span class="pseudo-label">Departments</span>
 
                                 <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)"
-                                            name="departments" [autoWidth]="false"></p-dropdown>
+                                            name="departments" [autoWidth]="false" id="departments" ></p-dropdown>
 
                             </div>
 
@@ -309,11 +309,11 @@
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <div style='float:left;padding:0.85em'>
                                         <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                                    [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                                    [(ngModel)]="IsKeepOpen" binary="true" id="departmentIsKeepOpen" ></p-checkbox>
                                     </div>
-                                    <button type="button" pButton icon="ui-icon-close"
+                                    <button type="button" pButton icon="ui-icon-close" id="departmentClose"
                                             (click)="displayAssignDepartmentsDialog=false" label="Cancel"></button>
-                                    <button type="button" pButton icon="ui-icon-save" (click)="onAddDepartment()"
+                                    <button type="button" pButton icon="ui-icon-save" id="departmentAdd"  (click)="onAddDepartment()"
                                             label="Add Department"></button>
                                 </div>
                             </footer>
@@ -330,7 +330,7 @@
                                 <p class="ui-panel-title">Departments</p>
                                 <p class="controls">
                                     <button type="text" (click)="displayAssignDepartmentsDialog=true" pButton
-                                            icon="ui-icon-person-add" label="Add Departments" class="purple-btn"></button>
+                                            icon="ui-icon-person-add" label="Add Departments" id="departmentAdd"   class="blue-grey-btn" ></button>
                                 </p>
                             </header>
 
@@ -351,7 +351,7 @@
                                         <template let-TestFacilityTenant="rowData" pTemplate type="body">
                                             <button pButton type="button" icon="ui-icon-remove-circle"
                                                     (click)="onDeleteTenantMap(TestFacilityTenant.id)"
-                                                    label="Delete" class="purple-btn"></button>
+                                                    label="Delete" class="red-btn"></button>
                                         </template>
 
                                     </p-column>
@@ -382,7 +382,7 @@
                         <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
                         <span class="pseudo-label">Equipment</span>
                         <p-dropdown [options]="equipmentsToAdd" (onChange)="onEquipmentChange($event)" name="equipments"
-                                    appendTo="body"
+                                    appendTo="body" id="equipments"
                                     [autoWidth]="false">
                             <template let-item>
                                 <div class="ui-helper-clearfix">
@@ -405,12 +405,12 @@
                             <!--<label class="checkbox"><input type="checkbox"> Keep Open</label>-->
                             <div style='float:left;padding:0.85em'>
                                 <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                            [(ngModel)]="IsKeepOpen"
+                                            [(ngModel)]="IsKeepOpen" id="equipmentIsKeepOpen"
                                             binary="true"></p-checkbox>
                             </div>
-                            <button type="button" pButton icon="ui-icon-close"
+                            <button type="button" pButton icon="ui-icon-close" id="equipmentCancel"
                                     (click)="displayAssignEquipmentsDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddEquipment()"
+                            <button type="button" pButton icon="ui-icon-save" id="equipmentAdd"  (click)="onAddEquipment()"
                                     label="Add Equipment"></button>
                         </div>
                     </footer>
@@ -421,7 +421,7 @@
                         <p class="ui-panel-title"> Equipment List</p>
                         <p class="controls">
                             <button type="text" (click)="onAssignEquipments()" pButton
-                                    icon="ui-icon-person-add" label="Add Equipment" class="purple-btn"></button>
+                                    icon="ui-icon-person-add" label="Add Equipment" id="addEquipment"  class="blue-grey-btn" ></button>
                         </p>
                     </header>
                     <div class="ui-grid-col-4"></div>
@@ -440,10 +440,10 @@
                             <template let-TestFacilityEquipment="rowData" pTemplate type="body">
                                 <button pButton type="button" icon="ui-icon-arrow-forward" label="Move"
                                         (click)="showEquipmentDialog(TestFacilityEquipment)"
-                                        title="Move To Another Test Facility" class="purple-btn"></button>
+                                        title="Move To Another Test Facility"  class="blue-grey-btn" ></button>
                                 <button pButton type="button" icon="ui-icon-remove-circle"
                                         (click)="onDeleteEquipmentMap(TestFacilityEquipment.id)"
-                                        label="Delete" class="purple-btn"></button>
+                                        label="Delete" class="red-btn"></button>
                             </template>
 
                         </p-column>
@@ -454,15 +454,15 @@
                             <div class="ui-grid-col-4"><label for="name">Choose Test Facility</label></div>
                             <div class="ui-grid-col-8">
                                 <p-dropdown [options]="currentTestFacilities" (onChange)="onTestFacilityChange($event)"
-                                            name="testFacilities" [style]="{'width':'auto'}">
+                                            name="testFacilities" id="chooseTestFacilities"  [style]="{'width':'auto'}">
                                 </p-dropdown>
                             </div>
                         </div>
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                <button type="button" pButton icon="fa-close" routerLink="/testFacilities"
+                                <button type="button" pButton icon="fa-close" id="facilityCancel"  routerLink="/testFacilities"
                                         label="Cancel"></button>
-                                <button type="button" pButton icon="fa-check" (click)="moveEquipmenttoTestFacility()"
+                                <button type="button" pButton icon="fa-check" id="facilityOk"  (click)="moveEquipmenttoTestFacility()"
                                         label="Ok"></button>
                             </div>
                         </footer>
@@ -483,7 +483,7 @@
                                 </div>
                                 <div class="ui-g-6">
                                     <p-multiSelect [options]="projectCodes" (onChange)="onProjectCodeChange($event)"
-                                                   name="projectCodes" [style]="{'width':'100%'}">
+                                                   name="projectCodes" id="projectCodes" [style]="{'width':'100%'}">
                                     </p-multiSelect>
                                 </div>
                         </div>
@@ -493,7 +493,7 @@
                                 </div>
                                 <div class="ui-g-6">
                                     <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)"
-                                                   name="testFacilities" [style]="{'width':'100%'}">
+                                                   name="testFacilities" id="testFacilities" [style]="{'width':'100%'}">
                                     </p-multiSelect>
                                 </div>
                         </div>
@@ -503,7 +503,7 @@
                                 </div>
                                 <div class="ui-g-6">
                                     <p-multiSelect [options]="testAllModes" (onChange)="onTestModeChange($event)"
-                                                   name="testModes" [style]="{'width':'100%'}">
+                                                   name="testModes" id="testModes" [style]="{'width':'100%'}">
                                     </p-multiSelect>
                                 </div>
                         </div>
@@ -512,7 +512,7 @@
                                     Test Type :
                                 </div>
                                 <div class="ui-g-6">
-                                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes"
+                                    <p-multiSelect [options]="testTypes" (onChange)="onTestTypeChange($event)" name="testTypes" id="testTypes"
                                                    [style]="{'width':'100%'}">
                                     </p-multiSelect>
                                 </div>
@@ -523,7 +523,7 @@
                                   </div>
                                   <div class="ui-g-6">
                                       <p-multiSelect [options]="testStatus" (onChange)="onTestStatusChange($event)"
-                                                     name="testStatus" [style]="{'width':'100%'}">
+                                                     name="testStatus" id="testStatus" [style]="{'width':'100%'}">
                                       </p-multiSelect>
                                   </div>
                         </div>
@@ -533,7 +533,7 @@
                                   </div>
                                   <div class="ui-g-6">
                                       <p-multiSelect [options]="testRoles" (onChange)="onTestRoleChange($event)" name="testRoles"
-                                                     [style]="{'width':'100%'}">
+                                                     id="testRoles" [style]="{'width':'100%'}">
                                       </p-multiSelect>
                                   </div>
                         </div>
@@ -543,7 +543,7 @@
                                   </div>
                                   <div class="ui-g-6">
                                       <p-multiSelect [options]="buildLevels" (onChange)="onBuildLevelChange($event)"
-                                                     name="buildLevels" [style]="{'width':'100%'}">
+                                                     name="buildLevels"  id="buildLevels" [style]="{'width':'100%'}">
                                       </p-multiSelect>
                                   </div>
                           </div>
@@ -678,7 +678,7 @@
                 <div class="ui-g">
                     <div class="ui-g-2"><label>Category:</label></div>
                     <div class="ui-g-4">
-                      <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories"
+                      <p-dropdown [options]="categories" (onChange)="onCategoryChange($event)" name="categories"  id="categories"
                                   [(ngModel)]="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
                     </div>
                 </div><br />
@@ -749,9 +749,9 @@
 
                                         <!-- <a href="{{titanApiUrl}}TestFacilityAttachment/file/{{TestFacilityAttachment.id}}">Download</a> -->
                                         <button pButton type="button" icon="ui-icon-file-download" label="Download"
-                                        (click)="downloadAttachment(TestFacilityAttachment)" class="purple-btn"></button>
+                                        (click)="downloadAttachment(TestFacilityAttachment)" class="blue-grey-btn" ></button>
                                         <button pButton type="button" icon="ui-icon-remove-circle" label="Delete"
-                                                (click)="onDelete(TestFacilityAttachment)" class="purple-btn"></button>
+                                                (click)="onDelete(TestFacilityAttachment)" class="red-btn"></button>
                                     </template>
                                 </p-column>
 
@@ -769,9 +769,9 @@
                 <form name="tForm2" enctype="application/x-www-form-urlencoded">
                     <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true"
                               showEffect="fade" [modal]="true" width="400">
-                              
+
                         <div class="ui-grid-row">
-                            <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
+                            <p-editor [(ngModel)]="comment" name="comment" id="comment" [style]="{'height':'320px'}">
                                 <header>
                                     <select class="ql-size">
                                         <option value="small"></option>
@@ -790,9 +790,9 @@
                         </div>
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                <button type="button" pButton icon="fa-close" (click)="displayCommentDialog=false"
+                                <button type="button" pButton icon="fa-close" id="commentCancel" (click)="displayCommentDialog=false"
                                         label="Cancel"></button>
-                                <button type="button" pButton icon="ui-icon-comment" (click)="AddLogComment()"
+                                <button type="button" pButton icon="ui-icon-comment" id="commentAdd" (click)="AddLogComment()"
                                         label="Add Comment"></button>
                             </div>
                         </footer>
@@ -802,8 +802,8 @@
                         <header class="with-controls">
                             <p class="ui-panel-title">Log/Comment List</p>
                             <p class="controls">
-                                <button pButton type="button" icon="ui-icon-add" label="Add Comment"
-                                        (click)="addCommentButton($event)" class="purple-btn"></button>
+                                <button pButton type="button" icon="ui-icon-add" label="Add Comment" id="addComment"
+                                        (click)="addCommentButton($event)" class="blue-grey-btn" ></button>
                             </p>
                         </header>
                         <div class="ui-grid-col-2"></div>

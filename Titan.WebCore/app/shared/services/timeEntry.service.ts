@@ -107,6 +107,7 @@ export class TimeEntryService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+  
   /*  getEquipmentsByIdusing(id): Observable<any> {
         return this.http.get(`${TestRequestApiUrl.getEquipmentDetailsByIdUrl}/${id}`, { headers: this.headers })
 

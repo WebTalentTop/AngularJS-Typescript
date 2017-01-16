@@ -5,13 +5,13 @@ import { TestFacilityService } from '../../shared/services/Containers/TestFacili
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../shared/services/equipmentType.service';
 import { WorkRequestService } from '../../shared/services/workrequest.service';
-import { TestTemplateService } from '../../shared/services/testTemplate.service';
+import { TestTemplateService } from '../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
 import { TestRoleService } from '../../shared/services/testRole.service';
-import { ProjectService } from '../../shared/services/project.service';
+import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
-import { BuildLevelService } from '../../shared/services/buildlevel.service';
+import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';

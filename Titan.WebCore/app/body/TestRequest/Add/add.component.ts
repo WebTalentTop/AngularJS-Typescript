@@ -1,16 +1,17 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { TestRequestService } from '../../../shared/services/testrequest.service';
 import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testfacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { TestTemplateService } from '../../../shared/services/testTemplate.service';
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
-import { ProjectService } from '../../../shared/services/project.service';
+import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
-import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -29,6 +30,9 @@ export class AddComponent implements AfterViewInit {
     }
     // qui
     gridData = [];
+    IsPartsList: boolean = false;
+    procedures: any;
+    selectedProcedureId: any;
     confInfo: any = {};
     cols = [];
     gridFilter = {};
@@ -114,7 +118,8 @@ export class AddComponent implements AfterViewInit {
         private testtypeservice: TestTypeService,
         private buildlevelservice: BuildLevelService,
         private confirmservice: ConfirmationService,
-        private departmentservice: DepartmentService
+        private departmentservice: DepartmentService,
+        private testrequestservice: TestRequestService
 
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -129,6 +134,10 @@ export class AddComponent implements AfterViewInit {
     confirm1() {
               this.display = true;
     }
+    confirmPartsDialog()
+    {
+       // this.IsPartsList = true;
+    }
     ngOnInit() {
         this.getTestStages();
         this.getDepartments();
@@ -141,6 +150,7 @@ export class AddComponent implements AfterViewInit {
         this.getProjectCodes();
         this.getTestTemplates();
         this.getTestRoles();
+        this.getProcedures();
       //  this.getHourEntryByEntityIdentifierId();
         this.getDownTimeReasons();
         let resData: any;
@@ -187,6 +197,11 @@ export class AddComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onProcedureChange(event) {
+        this.selectedProcedureId = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
+
+    }
     onDownTimeReasonChange(event) {
         this.selectedDownTimeReasonId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
@@ -205,7 +220,7 @@ export class AddComponent implements AfterViewInit {
 
     }
     onTestTemplateChange(event) {
-        this.selectedTestTemplates = (event.value[0]);
+        this.selectedTestTemplates = (event.value);
 
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -502,6 +517,27 @@ export class AddComponent implements AfterViewInit {
             }
         });
     }
+    getProcedures() {
+        //    userRoles
+        this.testrequestservice.getProcedures().subscribe(response => {
+            this.procedures = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "--Select--",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.procedures = resultMap;
+            }
+        });
+    }
     getHourEntryByEntityIdentifierId() {
         //    userRoles
         this.dataService.getHourEntryByEntityIdentifierId(this.id).subscribe(response => {
@@ -529,8 +565,8 @@ export class AddComponent implements AfterViewInit {
         let formTestRequestData: any = {
       //   Id : ' ' ,
          TestNumber : this.number ,
-        // TenantId: ' ',
-         TestTemplateId: this.selectedTestTemplates,
+         // TenantId: ' ',
+         TestTemplateId: null,
          TestFacilityId: this.selectedTestFacilities,
          ProjectId: this.selectedProjectCodes,
          BuildLevelId: this.selectedBuildLevels,
@@ -561,16 +597,16 @@ export class AddComponent implements AfterViewInit {
             return null;
         }
 
-        //if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
-        //    this.msgs = [];
-        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
-        //    return null;
-        //}
-        //if (this.selectedTestVerificationMethods == null || this.selectedTestVerificationMethods == undefined) {
-        //    this.msgs = [];
-        //    this.msgs.push({ severity: 'error', summary: 'Please select Test Verification Method' });
-        //    return null;
-        //}
+        if (this.selectedTestTemplates == null || this.selectedTestTemplates == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Test Template', detail: '' });
+            return null;
+        }
+        if (this.selectedProcedureId == null || this.selectedProcedureId == undefined) {
+            this.msgs = [];
+            this.msgs.push({ severity: 'error', summary: 'Please select Procedure' });
+            return null;
+        }
         if (this.plannedStartDate == null || this.plannedStartDate == "") {
             this.msgs = [];
             this.msgs.push({ severity: 'error', summary: 'Please select Planned Start Date', detail: '' });
@@ -587,13 +623,67 @@ export class AddComponent implements AfterViewInit {
             return null;
         }
 
-      this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+        this.testrequestsensorserice.postTestRequestAdd(formTestRequestData).subscribe(res => {
+
+            if (res.isSuccess && this.IsPartsList)
+            {
+                this.testRequestEntityId = res.result.id;
+                let testtemplateprocedurebody= {
+                    TestRequestId: this.testRequestEntityId,
+                    TestTemplateIdList: this.selectedTestTemplates,
+                    ProcedureId: this.selectedProcedureId,
+
+                }
+            
+
+               
+                let workrequestbody = {
+                    Name: "Parts List -WR",
+                    ProjectId: this.selectedProjectCodes,
+                    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                    EntityId: res.result.id
+
+                };
+                //1. save workrequest for testrequest(res.id) , testrequestentityidentifierId()
+                this.testrequestsensorserice.postWorkRequestAdd(workrequestbody).subscribe(workresult => {
+
+                    if (workresult.isSuccess) {
+                        this.testrequestservice.postTestRequestTestTemplateInsert(testtemplateprocedurebody).subscribe(result => {
+                            if (result.result.isSuccess)
+                              {
+                         //   this.selectedDepartment.forEach(dept => {
+                          //      var primaryuserid = '3BDC1617-D620-65D0-26EF-000E1090A386';
+                                let taskbody = {
+
+                                    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
+                                    EntityId: res.result.id,
+                                  //  DepartmentId: dept,
+                                   // UserId: "3BDC1617-D620-65D0-26EF-000E1090A386",
+                                    Name: "Parts List Info",
+                                    ShowModule: "PartsModule"
+                                };
+
+                                this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
+
+                                    if (taskresult.isSuccess) {
+                                        this.router.navigate(['testrequest/details/', this.testRequestEntityId]);
+
+                                    }
+
+                                });
+                           // });
+                        }
+                        });
+                    }
+                });
+            }
           //  this.TrackingList = res.$values;
             if (res.isSuccess && this.IsThermoCouple) {
 
                 this.testRequestEntityId = res.result.id;
                 let workrequestbody = {
-
+                    Name: "Thermo Couple -WR",
+                    ProjectId: this.selectedProjectCodes,
                     EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
                     EntityId: res.result.id
 
@@ -608,8 +698,9 @@ export class AddComponent implements AfterViewInit {
                             EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
                             EntityId: res.result.id,
                             DepartmentId: dept,
-                            UserId: primaryuserid
-
+                            UserId: primaryuserid,
+                            Name: "Thermo Couple Info",
+                            ShowModule: "SensorModule"
                         };
 
                         this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
@@ -623,41 +714,8 @@ export class AddComponent implements AfterViewInit {
                         });
                     });
                 });
-
-                //2. save to testrequestexternaldepartments--skip
-
-
-
-                //3. save to tasks table for user,department,entityid,entityidentifier,showmodule....(userservice , get all primary incharge users for selected departments )
-              //  this.selectedDepartment.forEach(dept => {
-
-                    // make service call to get primaryUserId for each department-- TODO
-                    //var primaryuserid ='BE06471E-F53B-E013-642A-003087ABCAA3' ;
-                    //let taskbody = {
-
-                    //    EntityIdentifierId: '756BCBA4-6FA5-4BB6-88D9-C1773471C7A0',
-                    //    EntityId: 'E428D5D6-D91F-4DD9-8C4C-52AB264C4B78',//res.id,
-                    //    DepartmentId: this.selectedDepartment,
-                    //    UserId: primaryuserid
-
-                    //};
-
-                    //this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
-
-
-
-                    //});
-
-              //  });
-
-
-
-                //4. email to all prime engineer of selected departments ,, (get all primary incharge users for selected departments)
-
-
-
-          }
-          if (res.isSuccess && !this.IsThermoCouple)
+            }
+            if (res.isSuccess && !this.IsThermoCouple && !this.IsPartsList)
              this.router.navigate(['testrequest/details/', res.result.id]);
 
      });

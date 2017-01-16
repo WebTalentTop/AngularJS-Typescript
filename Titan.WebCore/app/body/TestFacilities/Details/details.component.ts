@@ -1,17 +1,17 @@
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { LoggerService } from '../../../shared/services/logger/logger.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
-
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
 import { FormSchemaService } from '../../../shared/services/formSchema.service';
 import { FormInstanceService } from '../../../shared/services/formInstance.service';
 import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
 
-import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
-import { ProjectService } from '../../../shared/services/project.service';
+import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';

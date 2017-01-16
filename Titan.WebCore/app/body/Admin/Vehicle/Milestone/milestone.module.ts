@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
-import { MilestoneService } from '../../../../shared/services/milestone.service';
+import { MilestoneService } from '../../../../shared/services/Containers/MileStoneService/mileStone.service';
 
 import milestoneRoutes from "./milestone.routes";
 

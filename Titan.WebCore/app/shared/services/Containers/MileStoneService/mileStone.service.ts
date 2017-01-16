@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { MilestoneApiUrl} from './apiUrlConst/MilestoneApiUrls';
+import { MilestoneApiUrl} from '../../apiUrlConst/MileStone/mileStoneApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -33,7 +33,7 @@ export class MilestoneService {
         //.map(this.getJson);
     }
     postGridDataFilter(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${MilestoneApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         //this.checkErrors)
@@ -42,7 +42,7 @@ export class MilestoneService {
     }
 
     postAdd(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${MilestoneApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
@@ -53,11 +53,18 @@ export class MilestoneService {
     }
 
     postUpdate(filterBody): Observable<any> {
-        console.log("-------- Post Customers FilterBody --------", filterBody);
+        //console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${MilestoneApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
+            .map(this.getJson);
+    }
+
+    getAll(): Observable<any> {
+        return this.http.get(
+            `${MilestoneApiUrl.getAllUrl}`,
+            {headers: this.headers})
             .map(this.getJson);
     }
 
@@ -70,7 +77,7 @@ export class MilestoneService {
     }
 
     private getJson(response: Response) {
-        console.log("In Data Service response.json() call: ", response.json());
+        //console.log("In Data Service response.json() call: ", response.json());
         return response.json();
     }
 

@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { BuildLevelService } from '../../../../../shared/services/buildLevel.service';
+import { BuildLevelService } from '../../../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { Validators } from '@angular/forms';
 import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';

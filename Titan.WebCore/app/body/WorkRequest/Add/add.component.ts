@@ -4,13 +4,13 @@ import { TestVerificationMethodService } from '../../../shared/services/testveri
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { TestTemplateService } from '../../../shared/services/testTemplate.service';
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
-import { ProjectService } from '../../../shared/services/project.service';
+import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
-import { BuildLevelService } from '../../../shared/services/buildlevel.service';
+import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { PriorityService } from '../../../shared/services/priority.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';

@@ -1,5 +1,5 @@
-import { titanApiUrl } from './titanApiUrl';
-import { GridApiUrl } from './gridApiUrls';
+import { titanApiUrl } from '../titanApiUrl';
+import { GridApiUrl } from '../gridApiUrls';
 
 export class ProjectApiUrl {
     public static gridApiUrl: string = GridApiUrl.projectGridUrl;

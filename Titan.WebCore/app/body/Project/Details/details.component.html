@@ -3,108 +3,72 @@
 
     <!--<h4>Please fill out Project Information</h4>-->
     <form #projectForm>
-        <br/>
-        <p-panel *ngIf="ProjectDetails" >
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <p-panel header="Information" *ngIf="ProjectDetails" >
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Project Code *:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" pInputText
-                               [(ngModel)]="ProjectDetails.code"
-                               name="Code"
-                               #CodeRef
-                               placeholder="Required"
-                               minlength="3"
-                               maxlength="10"
-                               class="form-control" required />
-                    </div>
+                  <div class="md-inputfield ui-g-12 ui-md-6">
+                      <input type="text" pInputText name="name" [(ngModel)]="ProjectDetails.code" #CodeRef
+                             minlength="3"  maxlength="10" required style="width:100%">
+                      <label>Project Code *</label>
+                  </div>
+                  <div class="md-inputfield ui-g-12 ui-md-6">
+                      <input type="text" pInputText name="PlatformName" [(ngModel)]="ProjectDetails.platformName" #PlatformNameRef
+                             style="width:100%">
+                      <label>Platform Name</label>
+                  </div>
                     <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.required"> * </div>
 
                     <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.minlength"> * </div>
-                </div>
+                </div><br /><br />
 
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Platform Name:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <!--<p-dropdown [options]="platforms" [(ngModel)]="ProjectDetails.PlatformId" *ngIf="platforms"
-                            filter="filter" name="platforms">
-                            <template let-platform>
-                                <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
-                                    <div style="font-size:14px;float:right;margin-top:4px">{{platform.name}}</div>
-                                </div>
-                            </template>
-                        </p-dropdown>-->
-                        <input type="text" pInputText
-                               [(ngModel)]="ProjectDetails.platformName"
-                               name="PlatformName"
-                               #PlatformNameRef
-                               class="form-control" />
-                    </div>
-                </div>
-
+                  <div class="ui-g-12 ui-md-6 md-inputfield">
+                    <p-calendar [(ngModel)]="ProjectDetails.plannedStartDate" name="plannedStartDate" [showIcon]="true" #PlannedStartDateRef></p-calendar>
+                    <label>Planned Start Date :</label>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 md-inputfield">
+                    <p-calendar [(ngModel)]="ProjectDetails.plannedEndDate" name="PlannedEndDate" [showIcon]="true" #PlannedEndDateRef></p-calendar>
+                    <label>Planned End Date :</label>
+                  </div>
+                </div><br /><br />
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Planned Start Date:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <p-calendar #PlannedStartDateRef [(ngModel)]="ProjectDetails.plannedStartDate"
-                                    name="PlannedStartDate" showAnim="slideDown" [showIcon]="true"></p-calendar>
-                    </div>
+                  <div class="md-inputfield ui-g-12 ui-md-6">
+                      <input type="text" pInputText name="EstimatedCost" [(ngModel)]="ProjectDetails.estimatedCost" #EstimatedCostRef
+                             style="width:100%">
+                      <label>Estimated Cost</label>
+                  </div>
                 </div>
-
+                <br /><br />
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Planned End Date:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <p-calendar #PlannedEndDateRef [(ngModel)]="ProjectDetails.plannedEndDate"
-                                    name="PlannedEndDate" showAnim="slideDown" [showIcon]="true"></p-calendar>
-                    </div>
-                </div>
+                      <div class="ui-g-12 ui-md-12" >
+                        <label style="color:#777">Platform Description</label>
+                      </div>
+                      <div class="ui-g-12 ui-md-12 md-inputfield">
+                          <p-editor [(ngModel)]="ProjectDetails.platformDescription" #PlatformDescriptionRef name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                              <header>
+                                  <select class="ql-size">
+                                      <option value="small"></option>
 
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Estimated Cost:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" pInputText
-                               [(ngModel)]="ProjectDetails.estimatedCost"
-                               name="EstimatedCost"
-                               #EstimatedCostRef
-                               class="form-control" />
-                    </div>
-                </div>
+                                      <option selected></option>
+                                      <option value="large"></option>
+                                      <option value="huge"></option>
+                                  </select>
+                                  <span class="ql-formats">
+                                      <button class="ql-bold"></button>
+                                      <button class="ql-italic"></button>
+                                      <button class="ql-underline"></button>
+                                  </span>
+                              </header>
+                          </p-editor>
+                      </div>
 
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Platform Description:
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="text"
-                                  pInputTextArea
-                                  class="form-control"
-                                  name="description"
-                                  #PlatformDescriptionRef
-                                  row="20"
-                                  [(ngModel)]="ProjectDetails.platformDescription"></textarea>
-                    </div>
-
-
-                    <!--<div class="ui-grid-col-4">{{ description | json }}</div>-->
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2"></div>
-                    <div class="ui-grid-col-2">
+                      <!--<div class="ui-grid-col-4">{{ description | json }}</div>-->
+                  </div>
+                  <footer>
                         <button pButton type="submit" label="Save" icon="ui-icon-save" iconPos="left"
-                                (click)="onSubmit()"></button>
+                                (click)="onSubmit()" class="green-btn"></button>
                         <!--[disabled]="!projectForm.valid"-->
-                    </div>
-                    <div class="ui-grid-col-4"></div>
-                </div>
+                  </footer><br />
                 <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
                     Form Submitted
                     <br>
@@ -114,4 +78,3 @@
     </form>
 
 </div>
-

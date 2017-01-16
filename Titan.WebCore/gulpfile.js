@@ -6,6 +6,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 
 "use strict";
 var gulp = require("gulp");
+//var watch = require("gulp-watch");
 var sass = require('gulp-sass');
 var del = require("del");
 var sourcemaps = require("gulp-sourcemaps");
@@ -128,18 +129,6 @@ gulp.task('copy-titanResources', function () {
     gulp.src('./titanResources/**/*')
         .pipe(gulp.dest(root_path.webroot + 'library/titanResources/'));
 });
-
-gulp.task("ng2-dragula", function () {
-    gulp.src(root_path.nmSrc + "ng2-dragula/**/*")
-        .pipe(gulp.dest(root_path.package_lib + "ng2-dragula/"));
-});
-
-gulp.task("dragula", function () {
-    gulp.src(root_path.nmSrc + "dragula/**/*")
-        .pipe(gulp.dest(root_path.package_lib + "dragula/"));
-});
-
-
 gulp.task("css", function () {
     gulp.src(root_path.app + "**/*.css", { base: root_path.app })
         .pipe(gulp.dest(root_path.webroot + "app/"));
@@ -319,6 +308,12 @@ gulp.task("ts", function () {
 
 gulp.task('tswatch', function () {
     gulp.watch(root_path.app + "**/*.ts", ['ts']);
+    /*gulp.src(root_path.app + "**!/!*.ts")
+        .pipe(watch(root_path.app + "**!/!*.ts"))
+        .pipe(gulp.dest(root_path.webroot + "app/"));
+*/
+    /*return watch(root_path.app + "**!/!*.ts", {ignoreInitial:false })
+        .pipe(gulp.dest(root_path.webroot + "app/"))*/
 });
 
 gulp.task("copy-@types", function () {

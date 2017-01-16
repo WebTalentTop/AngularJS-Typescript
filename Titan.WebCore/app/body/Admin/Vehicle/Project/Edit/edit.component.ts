@@ -1,4 +1,4 @@
-import { ProjectService} from '../../../../../shared/services/project.service';
+import { ProjectService} from '../../../../../shared/services/Containers/ProjectService/project.service';
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';

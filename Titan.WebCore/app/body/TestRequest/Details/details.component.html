@@ -89,7 +89,7 @@
                   </div>
               </div>
               <footer>
-                  <button id="create" pButton type="button" icon="ui-icon-save" label="Save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+                  <button id="create" pButton type="button" icon="ui-icon-save"  class="green-btn" label="Save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
               </footer><br />
             </p-panel>
             <br />
@@ -255,6 +255,80 @@
                     </div>
                 </div>
             </p-tabPanel>
+            <p-tabPanel header="Test Plan" id="timeentry">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Test Plan</div>
+                    <div class="panel-body">
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Test Templates :</p>
+                                <p-multiSelect [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates">
+                                </p-multiSelect>
+                            </div>
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Test Procedures :</p>
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures">
+                                </p-dropdown>
+                            </div>
+                        </div><br /><br />
+                        <div class="ui-grid-row ">
+                            <button id="add" pButton type="button" icon="ui-icon-save" label="Add" (click)="onAddProcedure()"></button>
+                        </div><br /><br />
+                        <div class="ui-grid-row">
+                            <p-dataTable [value]="selectedProcedures" expandableRows="true" [paginator]="true" rows="15" (onRowExpand)="onLoadProcedureSteps($event)">
+                                <p-column expander="true" [style]="{'width':'30px'}" styleClass="col-icon"></p-column>
+                                <p-column field="name" header="Name" sortable="true"></p-column>
+                                <p-column field="description" header="Description" sortable="true"></p-column>
+                                <p-column field="testTypeName" header="Test Type" sortable="true"></p-column>
+                                <p-column field="testModeName" header="Test Mode" sortable="true"></p-column>
+                                <p-column field="estimatedTime" header="Estimated Time" sortable="true"></p-column>
+                                <!--<p-column field="title" header="Title"></p-column>-->
+                                <p-column>
+                                    <template pTemplate type="header">
+                                        Action
+                                    </template>
+                                    <template let-procedure="rowData" pTemplate type="body">
+                                        <button type="button" pButton (click)="onDelete(procedure)" icon="fa-trash"></button>
+                                        <button type="button" pButton (click)="onMoveProcedureUp(procedure)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(procedure)" title="Move Up"></button>
+                                        <button type="button" pButton (click)="onMoveProcedureDown(procedure)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(procedure)" title="Mode Down"></button>
+                                    </template>
+                                </p-column>
+                                <template let-procedure pTemplate="rowexpansion">
+                                    <p-dataTable [value]="procedure.steps" expandableRows="true" *ngIf="procedure.steps">
+                                        <p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>
+                                        <p-column field="name" header="Name"></p-column>
+                                        <p-column field="stepTypeName" header="Step Type"></p-column>
+                                        <!--<p-column field="repeatStep" header="Repeat?"></p-column>-->
+                                        <p-column field="repeatStep" header="Repeat?">
+                                            <template let-col let-step="rowData" pTemplate="body">
+                                                <span>{{(step.repeatStep ? 'Yes' : 'No')}}</span>
+                                            </template>
+                                        </p-column>
+                                        <!--<p-column styleClass="col-button" header="Action">
+                        <template let-step="rowData" pTemplate="body">
+                            <button type="button" pButton (click)="onDelete(step, 2)" icon="fa-trash" title="Delete"></button>
+                            <button type="button" pButton (click)="onEditStep(step)" icon="fa-pencil-square-o" title="Edit"></button>
+                            <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
+                            <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
+                        </template>
+                    </p-column>-->
+                                        <template let-step pTemplate="rowexpansion">
+                                            <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                                                <div class="ui-grid-row" *ngIf="step.repeatStep">
+                                                    <div class="ui-grid-col-2">Step Frequency: </div>
+                                                    <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
+                                                    <div class="ui-grid-col-2">Test % / # of Cycles: </div>
+                                                    <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </p-dataTable>
+                                </template>
+                            </p-dataTable>
+                        </div>
+                        </div>
+                </div>
+            </p-tabPanel>
              <p-tabPanel header="Log" id="log" headerStyleClass="log">
         <p-growl [value]="msgs"></p-growl>
         <form name="tForm2" enctype="application/x-www-form-urlencoded">
@@ -288,7 +362,7 @@
                   <header class="with-controls">
                       <p class="ui-panel-title">Log/Comment List</p>
                       <p class="controls">
-                        <button pButton type="button" icon="ui-icon-add" label="Add Comment"
+                        <button pButton type="button" icon="ui-icon-add" label="Add Comment"  class="blue-grey-btn"
                               (click)="displayCommentDialog=true"></button>
                       </p>
                   </header>

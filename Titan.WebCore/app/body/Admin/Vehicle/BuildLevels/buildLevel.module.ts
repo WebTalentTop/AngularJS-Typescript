@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
-import { BuildLevelService } from '../../../../shared/services/buildLevel.service';
+import { BuildLevelService } from '../../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 
 import buildLevelRoutes from "./buildLevel.routes";
 

@@ -9,7 +9,7 @@ import { UserService } from '../../../shared/services/user.service';
 import {
 
     DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule,
-    CheckboxModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, EditorModule, CheckboxModule,
+    CheckboxModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, EditorModule,
     FileUploadModule, GrowlModule, DialogModule, PaginatorModule, SpinnerModule, BreadcrumbModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
@@ -21,7 +21,7 @@ import detailsRoutes from "./details.routes";
 @NgModule({
     imports: [CommonModule,  DataGridModule,  RouterModule, AutoCompleteModule,
         CheckboxModule,  FormsModule, SpinnerModule, PaginatorModule, EditorModule, DataTableModule,
-        TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule, CheckboxModule,
+        TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule,
         FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
     providers: [EquipmentTypeService, UserService, TestRequestSensorService],
     declarations: [DetailsComponent]

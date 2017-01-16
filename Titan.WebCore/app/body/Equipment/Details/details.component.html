@@ -15,7 +15,7 @@
                             <br />
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" id="name" 
+                                    <input type="text" id="name"
                                     [(ngModel)]="model.name" required pInputText
                                     #equipmentNameRef="ngModel"
                                     minlength="3" class="form-control" required row="20"
@@ -42,10 +42,10 @@
                                             </div>
                                         </template>
                                     </p-dropdown>
-                                                <div *ngIf="item.name !==''"> {{item.name}} ({{ item.frequency}})</div>                                              
+                                                <div *ngIf="item.name !==''"> {{item.name}} ({{ item.frequency}})</div>
                                             </div>
                                         </template>-->
-                                    </p-dropdown>                                  
+                                    </p-dropdown>
 
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
@@ -130,8 +130,8 @@
                             </div>
                             <footer>
                                 <p>* indicates required field</p>
-                                <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipment"></button>
-                                <button pButton type="submit" icon="ui-icon-save" label="Save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid"></button>
+
+                                <button pButton type="submit" icon="ui-icon-save" label="Save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid"  class="green-btn"></button>
                             </footer>
                         </p-panel>
                     </form>
@@ -243,7 +243,7 @@
                               <p class="ui-panel-title">Equipment Manufacturer Details</p>
                               <p class="controls">
                                   <button type="text" (click)="displayAssignManufacturerDialogBox()" pButton
-                                          icon="ui-icon-person-add" label="Create New Manufacturer&hellip;"></button>
+                                          icon="ui-icon-person-add" label="Create New Manufacturer"  class="blue-grey-btn"></button>
                               </p>
                           </header>
                           <br/>
@@ -435,7 +435,7 @@
                       <p class="ui-panel-title">Log/Comment List</p>
                       <p class="controls">
                         <button pButton type="button" icon="ui-icon-add" label="Add Comment"
-                              (click)="addCommentButton($event)"></button>
+                              (click)="addCommentButton($event)"  class="blue-grey-btn"></button>
                       </p>
                   </header>
                   <div class="ui-grid-col-2"></div>
