@@ -2,7 +2,7 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
         <h2>Add New Test Request</h2>
-              <form #tfForm="ngForm" (ngSubmit)="onTestRequestSubmit(tfForm.value)">
+              <form #tfForm="ngForm">
                   <p-panel header="Basic Information">
                     <div class="body">
                         <div class="ui-grid-row">
@@ -65,13 +65,16 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Templates :</p>
-                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" [(ngModel)]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" >
+
+                 
+                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" >
+
                               </p-multiSelect>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Procedures :</p>
-                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testProcedures" [(ngModel)]="testProcedures" (onChange)="onTestProceduresChange($event)" name="testProcedures" >
-                              </p-multiSelect>
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures">
+                              </p-dropdown>
                           </div>
                         </div><br /><br />
                         <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
@@ -98,7 +101,7 @@
                                 </p-checkbox>
                             </div>
                             <div class="ui-g-12 ui-md-6" >
-                                <p-checkbox name="groupname" value="PartsList" label="Does this Test require Parts Type?" [(ngModel)]="PartsList" binary="true" (onChange)="confirm1()">
+                                <p-checkbox name="groupname" value="PartsList" label="Does this Test require Parts Type?" [(ngModel)]="IsPartsList" binary="true" (onChange)="confirmPartsDialog()">
                                 </p-checkbox>
                             </div>
                         </div><br /><br />
@@ -143,7 +146,7 @@
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                 <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
-                                <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
+                                <button type="text" pButton icon="fa-close" label="OK" (click)="OK()"></button>
                                 <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
                             </div>
                         </footer>

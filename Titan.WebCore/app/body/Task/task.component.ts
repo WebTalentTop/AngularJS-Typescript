@@ -18,13 +18,15 @@ export class TaskComponent {
     cols = [];
     gridFilter = {};
     testRequestId: any;
-    HasTasks: boolean = false;
+    hasThermoTasks: boolean = false;
+    hasPartsTasks: boolean = false;
     idField:string;
     linkFieldId: string;
     testNumber: string;
     taskId: any;
     added: any;
-    pendingTasks: any;
+    pendingThermoTasks: any;
+    pendingPartsTasks: any;
     allTasks: any;
     msgs: Message[] = [];
     constructor(private service: TestFacilityService, private taskservice: TaskService, private route: ActivatedRoute, private router: Router) {
@@ -44,43 +46,34 @@ export class TaskComponent {
         this.taskservice.onDeletetask(id).subscribe(res => {
             if (res.success)
             {
-                this.taskservice.gettasksbyuserid()
-                    .subscribe(res => {
-                        if (res.result.pendingTasks.$values.length != 0) {
-                            this.HasTasks = true
-                        }
-                        this.pendingTasks = res.result.pendingTasks.$values;
-                        this.allTasks = res.result.allTasks.$values;
-                        //  this.taskId = res.result.id;
-                        this.testRequestId = res.result[0].entityId;
-
-                    });
+                this.getTaskDetailsByUserId();
             }
-        });
-        //   this.EquipmentSubType.calibrationform = (event);
-
+        });       
     }
-    ngOnInit() {
-        let resData: any;
+    getTaskDetailsByUserId()
+    {
         this.taskservice.gettasksbyuserid()
             .subscribe(res => {
                 if (res.result.pendingTasks.$values.length != 0) {
-                    this.HasTasks = true
+                    if (((res.result.pendingTasks.$values).filter(pt => pt.showModule == "SensorModule")).length > 0) {
+                        this.hasThermoTasks = true;
+                        this.pendingThermoTasks = res.result.pendingTasks.$values;
+                    }
+                    if (((res.result.pendingTasks.$values).filter(pt => pt.showModule === "PartsModule")).length > 0) {
+                        this.hasPartsTasks = true;
+                        this.pendingPartsTasks = res.result.pendingTasks.$values;
+                    }
+
                 }
-                    this.pendingTasks = res.result.pendingTasks.$values;
-                    this.allTasks = res.result.allTasks.$values;
-                  //  this.taskId = res.result.id;
-                    this.testRequestId = res.result[0].entityId;
 
+                this.allTasks = res.result.allTasks.$values;
+                this.testRequestId = res.result[0].entityId;
 
-                //resData = res;
-                //this.gridData = res.Data;
-                //this.cols = res.Configuration.Columns;
-                ////console.log("-------- Cols --------", this.cols);
-                //this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
             });
-
+    }
+    ngOnInit() {
+        let resData: any;
+        this.getTaskDetailsByUserId();
     }
 
     navigateDetails(id:string){

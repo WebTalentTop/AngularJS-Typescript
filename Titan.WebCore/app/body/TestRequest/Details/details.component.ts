@@ -6,12 +6,15 @@ import { TestFacilityService } from '../../../shared/services/Containers/TestFac
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestRequestService } from '../../../shared/services/testrequest.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../../shared/services/department.service';
+
+import { ProcedureService } from '../../../shared/services/procedure.service'
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -27,6 +30,15 @@ declare var $: JQueryStatic;
 export class DetailsComponent implements AfterViewInit {
     ngAfterViewInit() {
     }
+    public testTemplate: any;
+    public testTypes: any;
+    public testModes: Array<any> = new Array();
+    public selectedProcedures: Array<any> = new Array();
+    public filteredProcedures: Array<any> = new Array();
+    public filteredSelectedProcedures: Array<any> = new Array();
+    public selectedTestRequirements: Array<any> = new Array();
+    public filteredTestRequirements: Array<any> = new Array();
+    public filteredSelectedTestRequirements: Array<any> = new Array();
     // qui
     gridData = [];
     confInfo: any = {};
@@ -36,7 +48,7 @@ export class DetailsComponent implements AfterViewInit {
     plannedStartDate: any;
     plannedEndDate: any;
     projectCodes: any;
-    testTypes: any;
+   // testTypes: any;
     testTemplates: any;
     testAllModes: any;
     testStatus: any;
@@ -48,6 +60,10 @@ export class DetailsComponent implements AfterViewInit {
     IsThermoCouple: boolean = false;
     selectedDepartment: any;
     departments: any;
+    procedures: any;
+    //testTemplates: any;
+    selectedProcedureId: any;
+    selectedTestTemplates: any;
     selectedBuildLevels: any;
     selectedTestVerificationMethods: any;
     selectedProjectCodes: any;
@@ -55,7 +71,7 @@ export class DetailsComponent implements AfterViewInit {
     number: any;
     selectedTestFacilities: any;
     selectedTestStatuses: any;
-    selectedTestTemplates: any;
+  //  selectedTestTemplates: any;
     sensorRequests: any;
     idField: string;
     linkFieldId: string;
@@ -124,7 +140,9 @@ export class DetailsComponent implements AfterViewInit {
         private testtypeservice: TestTypeService,
         private buildlevelservice: BuildLevelService,
         private confirmservice: ConfirmationService,
-        private departmentservice: DepartmentService
+        private departmentservice: DepartmentService,
+        private testrequestservice: TestRequestService,
+        private procedureService: ProcedureService
 
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
@@ -138,6 +156,66 @@ export class DetailsComponent implements AfterViewInit {
     }
     confirm1() {
               this.display = true;        
+    }
+
+    onMoveProcedureUp(procedure) {
+        var oldIndex = this.selectedProcedures.indexOf(procedure);
+        this.selectedProcedures.splice(oldIndex - 1, 0, this.selectedProcedures.splice(oldIndex, 1)[0]);
+        this.updateProcedureProcedureDisplayOrder();
+    }
+
+    onMoveProcedureDown(procedure) {
+        var oldIndex = this.selectedProcedures.indexOf(procedure);
+        this.selectedProcedures.splice(oldIndex + 1, 0, this.selectedProcedures.splice(oldIndex, 1)[0])
+        this.updateProcedureProcedureDisplayOrder();
+    }
+
+    updateProcedureProcedureDisplayOrder() {
+        this.testtemplateservice.putTestTemplateProcedureDisplayOrder(this.selectedProcedures, this.testTemplate.id).subscribe(filteredList => {
+            this.selectedProcedures = filteredList.result;
+        });
+    }
+
+    onLoadProcedureSteps(event) {
+        console.log(event);
+        if (event.data != undefined) {
+            this.procedureService.getProcedureSteps(event.data.id).subscribe(res => {
+                event.data.steps = res.$values;
+            });
+        } else {
+            this.procedureService.getProcedureSteps(event.id).subscribe(res => {
+                event.steps = res.$values;
+            });
+        }
+    }
+
+    onAddProcedure() {
+        let testtemplateprocedurebody = {
+            TestRequestId: this.id,
+            TestTemplateIdList: this.selectedTestTemplates,
+            ProcedureId: this.selectedProcedureId,
+
+        }
+        this.testrequestservice.postTestRequestTestTemplateInsert(testtemplateprocedurebody).subscribe(procresult => {
+
+            if (procresult.isSuccess) {
+                this.testrequestservice.getTestTemplateProceduresByTestRequestId(this.id).subscribe(getprocresult => {
+                    this.selectedProcedures = getprocresult.result;
+                });
+            }
+        });
+    }
+
+    isUpButtonVisible(procedure) {
+        if (this.selectedProcedures != undefined && this.selectedProcedures.length > 1 && procedure.id != this.selectedProcedures[0].id)
+            return true;
+        return false;
+    }
+
+    isDownButtonVisible(procedure) {
+        if (this.selectedProcedures != undefined && this.selectedProcedures.length > 1 && procedure.id != this.selectedProcedures[this.selectedProcedures.length - 1].id)
+            return true;
+        return false;
     }
     ngOnInit() {
         this.getTestStages();
@@ -153,22 +231,31 @@ export class DetailsComponent implements AfterViewInit {
         this.getTestRoles();
         this.getHourEntryByEntityIdentifierId();
         this.getDownTimeReasons();
+        this.getProcedures();
+        this.getTestTemplates();
         let resData: any;
+        //TODO: get testtemplateids for selected testrequest..... and get testtemplate,procedure-step details....
+        //this.testtemplateservice.getById(params['id']).subscribe(res => {
+        //    this.testTemplate = res.result;
+        //    //if (this.testTemplate.testTypeId != null) {
+        //    //    this.onTestTypeChange();
+        //    //}
+        //});
+        //  let testTemplateId = "0a594b8c-3040-4056-9250-445073668be6";
+        this.testrequestservice.getTestTemplateProceduresByTestRequestId(this.id).subscribe(res => {
+            this.selectedProcedures = res.result;
+        });
+       
         // get test request details byid
-        this.testrequestsensorserice.getTestRequestById(this.id)
-            .subscribe(res => {
-                this.testRequestDetails = res.result;
+        //this.testrequestsensorserice.getTestRequestById(this.id)
+        //    .subscribe(res => {
+        //        this.testRequestDetails = res.result;
 
-                this.testRequestDetails.plannedStartDate = new Date(res.result.plannedStartDate);
-                this.testRequestDetails.plannedEndDate = new Date(res.result.plannedEndDate);
-                this.testRequestDetails.dueDate = new Date(res.result.dueDate);
-                //  resData = res;
-                //this.gridData = res.Data;
-                //this.cols = res.Configuration.Columns;
-                ////console.log("-------- Cols --------", this.cols);
-                //this.confInfo = res.Configuration;
-                //console.log("------- Configuration --------", this.confInfo);
-            });
+        //        this.testRequestDetails.plannedStartDate = new Date(res.result.plannedStartDate);
+        //        this.testRequestDetails.plannedEndDate = new Date(res.result.plannedEndDate);
+        //        this.testRequestDetails.dueDate = new Date(res.result.dueDate);
+               
+        //    });
         let departmentId = '00000000-0000-0000-0000-000000000000';
         this.testrequestsensorserice.GetAllTestRequestSensors(this.entityId, departmentId)
             .subscribe(res => {
@@ -261,8 +348,12 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+    onProcedureChange(event) {
+        this.selectedProcedureId = (event.value);
+        //   this.EquipmentSubType.calibrationform = (event);
 
-    onTestModeChange(event) {
+    }
+   onTestModeChange(event) {
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
@@ -295,6 +386,48 @@ export class DetailsComponent implements AfterViewInit {
                     resultMap.push(temp);
                 }
                 this.testStages = resultMap;
+            }
+        });
+    }
+    getTestTemplates() {
+        //    userRoles
+        this.testtemplateservice.getTestTemplates().subscribe(response => {
+            this.testTemplates = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                // resultMap.push({
+                //     label: "Select Test Template",
+                //     value: null
+                // });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testTemplates = resultMap;
+            }
+        });
+    }
+    getProcedures() {
+        //    userRoles
+        this.testrequestservice.getProcedures().subscribe(response => {
+            this.procedures = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "--Select--",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.procedures = resultMap;
             }
         });
     }
@@ -470,27 +603,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
-    getTestTemplates() {
-        //    userRoles
-        this.testtemplateservice.getTestTemplates().subscribe(response => {
-            this.testTemplates = new Array();
-            if (response != null) {
-                var resultMap = new Array();
-                resultMap.push({
-                    label: "Select Test Template",
-                    value: null
-                });
-                for (let template of response.$values) {
-                    var temp = {
-                        label: template.name,
-                        value: template.id
-                    }
-                    resultMap.push(temp);
-                }
-                this.testTemplates = resultMap;
-            }
-        });
-    }
+   
     getBuildLevels() {
         //    userRoles
         this.buildlevelservice.getBuildLevels().subscribe(response => {
@@ -785,6 +898,11 @@ export class DetailsComponent implements AfterViewInit {
         this.router.navigate(['testrequest/sensor/details/', id]);
     }
 
+    onProcedureUpdate() {
 
+        this.testtemplateservice.postUpdate(this.testTemplate).subscribe(res => {
+            //this.router.navigate(['testtemplate/details', res.$values.id]);
+        });
+    }
 
 }

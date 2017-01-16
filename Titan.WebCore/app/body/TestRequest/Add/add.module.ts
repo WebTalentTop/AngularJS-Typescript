@@ -15,6 +15,7 @@ import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../../shared/services/department.service';
+import { TestRequestService } from '../../../shared/services/testrequest.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
 import { ConfirmationService } from 'primeng/primeng';
@@ -26,7 +27,7 @@ import addRoutes from "./add.routes";
     imports: [EditorModule, SharedModule, MultiSelectModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, addRoutes],
 
     providers: [TimeEntryService, EquipmentTypeService, ConfirmationService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
-        TestTypeService, TestFacilityService, TestTemplateService, DepartmentService],
+        TestTypeService, TestFacilityService, TestTemplateService, TestRequestService, DepartmentService],
     declarations: [AddComponent]
 })
 
