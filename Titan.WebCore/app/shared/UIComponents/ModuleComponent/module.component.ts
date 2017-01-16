@@ -49,7 +49,7 @@ export class ModuleComponent {
         if (this.moduleDetails.moduleItems == undefined)
             this.moduleDetails.moduleItems = new Array();
         this.moduleDetails.moduleItems.push(moduleItem);
-        this.isAddNewItemRowVisible = true;
+        this.isAddNewItemRowVisible = false;
     }
 
     onCancelAddItemComplete(event) {
@@ -98,16 +98,18 @@ export class ModuleComponent {
             this.moduleService.postAdd(this.moduleDetails).subscribe(response => {
                 if (response.isSuccess) {
                     this.moduleDetails.id = response.result;
-                    var moduleModuleTypeMap = {
-                        moduleId: response.result,
-                        moduleTypeId: this.moduleTypeId
-                    };
-                    this.moduleService.postModuleModuleTypeMap(moduleModuleTypeMap).subscribe(response => {
-                        if (response.isSuccess) {
-                            this.onAddModuleComplete.emit(this.moduleDetails);
-                            this.moduleDetails = <IModule>{};
-                        }
-                    });
+                    //var moduleModuleTypeMap = {
+                    //    moduleId: response.result,
+                    //    moduleTypeId: this.moduleTypeId
+                    //};
+                    this.onAddModuleComplete.emit(this.moduleDetails);
+                    this.moduleDetails = <IModule>{};
+                    //this.moduleService.postModuleModuleTypeMap(moduleModuleTypeMap).subscribe(response => {
+                    //    if (response.isSuccess) {
+                    //        this.onAddModuleComplete.emit(this.moduleDetails);
+                    //        this.moduleDetails = <IModule>{};
+                    //    }
+                    //});
                 }
             });
         } else {

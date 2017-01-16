@@ -55,7 +55,7 @@ export class StepService extends BaseService {
     }
 
     postAddStepModule(filterBody, stepId): Observable<any> {
-        return this.http.post(`${StepApiUrl.postCreatedUrl}` + stepId, filterBody, { headers: this.headers })
+        return this.http.post(`${StepApiUrl.postAddStepModuleUrl}` + stepId, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
 

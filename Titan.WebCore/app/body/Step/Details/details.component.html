@@ -100,11 +100,14 @@
                             <div class="ui-grid-col-10">&nbsp;
                             </div>
                             <div class="ui-grid-col-2">
-                                <button id="addModule" pButton type="button" label="{{addStepTypeDetailLabelText}}" (click)="onAddModule()">  </button>
+                                <button id="addModule" pButton type="button" *ngIf="!isAddModuleVisible" label="{{addStepTypeDetailLabelText}}" (click)="onAddModule()">  </button>
                             </div>
-                            <module-component *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-12">
+                                    <module-component *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                                </div>
+                            </div>
                         </div>
-                        <module-component (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
                         <p-dataTable [value]="stepModules" expandableRows="true">
                             <p-column expander="true" styleClass="col-icon" [style]="{'width':'22px'}"></p-column>
                             <p-column field="name" header="Name"></p-column>

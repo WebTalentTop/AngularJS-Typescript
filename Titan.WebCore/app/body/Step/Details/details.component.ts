@@ -174,8 +174,15 @@ export class DetailsComponent {
     }
 
     onAddModuleComplete(module:IModule) {
+        this.isAddModuleVisible = false;
+
         var modules = new Array();
         modules.push(module.id);
+        this.service.postUpdate(this.stepDetails).subscribe(res => {
+            if (res.isSuccess) {
+                
+            }
+        });
         this.service.postAddStepModule(modules, this.stepDetails.id).subscribe(res => {
             if (res.isSuccess) {
                 this.isAddModuleVisible = false;

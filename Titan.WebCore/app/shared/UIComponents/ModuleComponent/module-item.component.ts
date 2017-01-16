@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DataTable, LazyLoadEvent, MessagesModule, Message, DropdownModule, Dropdown, ConfirmationService} from 'primeng/primeng';
-import { IModuleItem, IMultiSelectViewData } from '../../../shared/services/definitions/IModule';
+import { DataTable, LazyLoadEvent, MessagesModule, Message, DropdownModule, Dropdown, ConfirmationService } from 'primeng/primeng';
+import { IModuleItem, IMultiSelectViewData, IModuleItemOption } from '../../../shared/services/definitions/IModule';
 import { ModuleItemService } from '../../../shared/services/moduleItem.service';
 import { ModuleItemTypeEnum } from '../../../shared/Enum/module-item-type.enum';
 
@@ -15,9 +15,12 @@ export class ModuleItemComponent {
     isAdd: boolean = true;
     @Input()
     saveButtonLabel: string = "Add Module Item";
-
+    public selectedItemType: IMultiSelectViewData;
     @Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
     @Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
+    public isAddNewItemOptionRowVisible: boolean;
+    public optionName: string;
+    @Input()
     public moduleItemDetails: IModuleItem;
     public moduleItemTypes: IMultiSelectViewData[];
 
@@ -26,6 +29,17 @@ export class ModuleItemComponent {
     ngOnInit() { 
         this.moduleItemDetails = <IModuleItem>{};
         this.getModuleItemTypes();
+    }
+
+    onAddItemOptionComplete() {
+        if (this.moduleItemDetails.moduleItemOptions == undefined)
+            this.moduleItemDetails.moduleItemOptions = new Array();
+        if (this.optionName != undefined && this.optionName.trim() != "") {
+            var option = <IModuleItemOption>{};
+            option.name = this.optionName;
+            this.moduleItemDetails.moduleItemOptions.push(option);
+            this.optionName = "";
+        }
     }
 
     onAddItemComplete() {
@@ -50,7 +64,7 @@ export class ModuleItemComponent {
                 for (let template of response.result) {
                     var temp = {
                         label: template.label,
-                        value: template.value
+                        value: template
                     }
                     resultMap.push(temp);
                 }
@@ -69,25 +83,28 @@ export class ModuleItemComponent {
 
     onItemTypeChange() {
         this.resetItemType();
-        switch (this.moduleItemDetails.itemTypeId) {
-            case ModuleItemTypeEnum.TextBox.toString():
-                this.moduleItemDetails.isTextBoxVisible = true;
-                break;
-            case ModuleItemTypeEnum.LongComments.toString():
-                this.moduleItemDetails.isTextAreaVisible = true;
-                break;
-            case ModuleItemTypeEnum.RadioButton.toString():
-                this.moduleItemDetails.isRadioButtonGroupVisible = true;
-                break;
-            case ModuleItemTypeEnum.Verification.toString():
-                this.moduleItemDetails.isCheckBoxGroupVisible = true;
-                break;
-            case ModuleItemTypeEnum.Attachment.toString():
-                this.moduleItemDetails.isAttachmentVisible = true;
-                break;
-            default:
-                break;
+        if (this.selectedItemType != null) {
+            this.moduleItemDetails.itemTypeId = this.selectedItemType.value;
+            this.moduleItemDetails.itemType = this.selectedItemType.label;
+            switch (this.moduleItemDetails.itemTypeId.toLowerCase()) {
+                case ModuleItemTypeEnum.TextBox.toString().toLowerCase():
+                case ModuleItemTypeEnum.LongComments.toString().toLowerCase():
+                case ModuleItemTypeEnum.Verification.toString().toLowerCase():
+                case ModuleItemTypeEnum.Attachment.toString().toLowerCase():
+                    this.isAddNewItemOptionRowVisible = false;
+                    this.moduleItemDetails.moduleItemOptions = new Array();
+                    break;
+                case ModuleItemTypeEnum.RadioButton.toString().toLowerCase():
+                case ModuleItemTypeEnum.Dropdown.toString().toLowerCase():
+                    this.isAddNewItemOptionRowVisible = true;
+                    break;
+                default:
+                    break;
 
+            }
+        } else {
+            this.moduleItemDetails.itemTypeId = null;
+            this.moduleItemDetails.itemType = null;
         }
     }
 }

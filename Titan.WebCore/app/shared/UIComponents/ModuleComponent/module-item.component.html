@@ -4,53 +4,64 @@
             <div class="ui-grid-col-2">
                 Module Item Name *
             </div>
-            <div class="ui-grid-col-6">
+            <div class="ui-grid-col-2">
                 <input type="text" name="moduleItemName" pInputText [(ngModel)]="moduleItemDetails.name" placeholder="Please enter Module Item Name" class="form-control"
                        required #moduleItemNameRef="ngModel" />
             </div>
-            <div class="ui-grid-col-4" *ngIf="moduleItemNameRef.errors?.required">
+            <div class="ui-grid-col-2" *ngIf="moduleItemNameRef.errors?.required">
                 Module Item Name field is required
+            </div>
+            <div class="ui-grid-col-2">
+                Description:
+            </div>
+            <div class="ui-grid-col-4">
+                <textarea type="text"
+                          pInputTextArea
+                          class="form-control"
+                          name="description"
+                          #DescriptionRef
+                          row="20"
+                          [(ngModel)]="moduleItemDetails.description"></textarea>
             </div>
         </div>
     </div>
-    <div class="ui-grid-row">
-        <div class="ui-grid-col-2">
-            Description:
-        </div>
-        <div class="ui-grid-col-6">
-            <textarea type="text"
-                      pInputTextArea
-                      class="form-control"
-                      name="description"
-                      #DescriptionRef
-                      row="20"
-                      [(ngModel)]="moduleItemDetails.description"></textarea>
-        </div>
-    </div>
-    <!--<div class="ui-grid-col-4">{{ description | json }}</div>-->
+    
     <div class="ui-grid-row">
         <div class="ui-grid-col-2">
             Item Type
         </div>
-        <div class="ui-grid-col-6">
-            <p-dropdown [options]="moduleItemTypes" [(ngModel)]="moduleItemDetails.itemTypeId" (onChange)="onItemTypeChange()" name="moduleItemType">
+        <div class="ui-grid-col-4">
+            <p-dropdown [options]="moduleItemTypes" [(ngModel)]="selectedItemType" (onChange)="onItemTypeChange()" name="moduleItemType">
             </p-dropdown>
         </div>
-        <div class="ui-grid-col-4"></div>
+        <div class="ui-grid-col-6"><p-checkbox [(ngModel)]="moduleItemDetails.isRequired" binary="true" label="Is Required"></p-checkbox></div>
     </div>
-    <!--<div class="ui-grid-row">
-        <div *ngIf="moduleItemDetails.isTextBoxVisible">
-            <div class="ui-grid-col-2">
-                Item Text
-            </div>
-            <div class="ui-grid-col-6">
-                <p-dropdown [options]="moduleItemTypes" [(ngModel)]="moduleItemDetails.itemTypeId" (onChange)="onItemTypeChange()" name="moduleItemType">
-                </p-dropdown>
-            </div>
-            <div class="ui-grid-col-4"></div>
+    <div class="ui-grid-row" *ngIf="isAddNewItemOptionRowVisible">
+        <div class="ui-grid-col-2">
+            Module Item Option*
         </div>
-        
-    </div>-->
+        <div class="ui-grid-col-6">
+            <input type="text" name="moduleItemOption" pInputText [(ngModel)]="optionName" placeholder="Please enter Item Option" class="form-control"
+                   required #moduleItemOptionRef="ngModel" />
+        </div>
+        <div class="ui-grid-col-2" [hidden]="!moduleItemOptionRef.errors?.required">
+            Module Item Option field is required
+        </div>
+        <div class="ui-grid-col-2">
+            <button id="addOption" pButton type="button" label="Add New Option" (click)="onAddItemOptionComplete()">  </button>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <p-panel header="Module Items">
+                    <p-dataTable [value]="moduleItemDetails.moduleItemOptions">
+                        <p-column field="name" header="Name"></p-column>
+                    </p-dataTable>
+                </p-panel>
+            </div>
+        </div>
+    </div>
+    <br />
+    
     <div class="ui-grid-row">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2">

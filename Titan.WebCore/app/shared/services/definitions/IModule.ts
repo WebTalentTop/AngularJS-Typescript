@@ -18,6 +18,7 @@ export interface IModuleItem{
     itemType: string;
     displayOrder: number;
     isDeleted: boolean;
+    isRequired: boolean;
     isTextBoxVisible: boolean;
     isTextAreaVisible: boolean;
     isRadioButtonGroupVisible: boolean;
