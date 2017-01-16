@@ -6,7 +6,7 @@ import { TestFacilityService } from '../../../shared/services/Containers/TestFac
 
 import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
 import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
-import { TestTemplateService } from '../../../shared/services/testTemplate.service';
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';

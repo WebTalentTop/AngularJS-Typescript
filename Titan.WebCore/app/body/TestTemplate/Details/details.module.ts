@@ -4,7 +4,7 @@ import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
 import { TestTypeService} from './../../../shared/services/testType.service';
 import { TestModeService } from './../../../shared/services/testMode.service';
-import { TestTemplateService} from './../../../shared/services/testTemplate.service';
+import { TestTemplateService} from './../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestRequirementService} from './../../../shared/services/testrequirement.service';
 import { ProcedureService } from './../../../shared/services/procedure.service';
 

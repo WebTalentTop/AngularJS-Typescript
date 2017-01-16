@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TestTypeService} from '../../../shared/services/testType.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
-import { TestTemplateService} from '../../../shared/services/testTemplate.service';
+import { TestTemplateService} from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 
 import { EditorModule, SharedModule, PanelModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

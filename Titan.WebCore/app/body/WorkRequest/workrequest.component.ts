@@ -5,7 +5,7 @@ import { TestFacilityService } from '../../shared/services/Containers/TestFacili
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../shared/services/equipmentType.service';
 import { WorkRequestService } from '../../shared/services/workrequest.service';
-import { TestTemplateService } from '../../shared/services/testTemplate.service';
+import { TestTemplateService } from '../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
 import { TestRoleService } from '../../shared/services/testRole.service';
 import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';

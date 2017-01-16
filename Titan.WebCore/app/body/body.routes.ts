@@ -16,7 +16,7 @@ const routes = [
     { path: 'problemtracking', canActivate: [AuthGuard], loadChildren: 'app/body/ProblemTracking/problemtracking.module' },
     { path: 'workrequest', canActivate: [AuthGuard], loadChildren: 'app/body/WorkRequest/workrequest.module' },
     //{ path: 'testcatalog', canActivate: [AuthGuard], loadChildren: 'app/body/TestCatalog/testcatalog.module' },
-    { path: 'testtempalte', canActivate: [AuthGuard], loadChildren: 'app/body/TestTemplate/testtemplate.module' },
+    { path: 'testtempalte', canActivate: [AuthGuard], loadChildren: 'app/body/TestTemplate/testTemplate.module' },
     { path: 'testFacilities', canActivate: [AuthGuard], loadChildren: 'app/body/TestFacilities/testFacilities.module' },
     { path: 'step', canActivate: [AuthGuard], loadChildren: 'app/body/Step/step.module' },
     { path: 'procedure', canActivate: [AuthGuard], loadChildren: 'app/body/Procedure/procedure.module' },
@@ -24,7 +24,7 @@ const routes = [
     { path: 'task', loadChildren: 'app/body/Task/task.module' },
     { path: 'vehicle', canActivate: [AuthGuard], loadChildren: 'app/body/Vehicle/vehicle.module' },
     { path: 'torquesheet', canActivate: [AuthGuard], loadChildren: 'app/body/TorqueSheet/torque-sheet.module' },
-    { path: 'testtemplate', canActivate: [AuthGuard], loadChildren: 'app/body/TestTemplate/testtemplate.module' },
+    { path: 'testTemplate', canActivate: [AuthGuard], loadChildren: 'app/body/TestTemplate/testTemplate.module' },
     { path: 'login/:id', component: LoginComponent },
     { path: 'login', component: LoginComponent }
     //, canActivate:[AuthGuard], },

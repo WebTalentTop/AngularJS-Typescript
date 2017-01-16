@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { TestTemplateService } from '../../../shared/services/testTemplate.service'
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service'
 import { TestTypeService } from '../../../shared/services/testType.service'
 import { TestModeService } from '../../../shared/services/testMode.service'
 import { Validators } from '@angular/forms';
@@ -84,7 +84,7 @@ export class AddComponent {
 
     onSubmit() {
         this.testTemplateService.postAdd(this.testTemplate).subscribe(res => {
-            this.router.navigate(['testtemplate/details', res.result]);
+            this.router.navigate(['testTemplate/details', res.result]);
         });
     }
 }
