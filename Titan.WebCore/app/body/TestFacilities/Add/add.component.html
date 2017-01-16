@@ -32,7 +32,7 @@
                              *ngIf="testFacilityNameRef.dirty && (testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength)">
                               At least three characters</p>
                           <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText class="form-control" row="20" name="postalCode"
+                                <input type="text" pInputText class="form-control" row="20" id="postalCode" name="postalCode"
                                        [(ngModel)]="postalCode" #tfpostalCodeRef="ngModel"
                                        (focus)="tfpostalCodeRef.focus=true"
                                        (blur)="tfpostalCodeRef.focus=false" style="width:100%">
@@ -48,14 +48,14 @@
                       <div class="ui-grid-row">
 
                           <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText name="addressLine1" class="form-control" row="20"
+                              <input type="text" pInputText name="addressLine1" id="addressLine1" class="form-control" row="20"
                                      [(ngModel)]="addressLine1"
                                      #tfAddress1Ref="ngModel"
                                      (focus)="tfAddress1Ref.focus=true" (blur)="tfAddress1Ref.focus=false" style="width:100%">
                               <label>Address Line 1</label>
                           </div>
                           <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText class="form-control" row="20" name="addressLine2"
+                              <input type="text" pInputText class="form-control"  id="addressLine2" row="20" name="addressLine2"
                                      [(ngModel)]="addressLine2"
                                      #tfAddress2Ref="ngModel"
                                      (focus)="tfAddress2Ref.focus=true" (blur)="tfAddress2Ref.focus=false" style="width:100%">
@@ -72,13 +72,13 @@
 
                           <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" pInputText class="form-control" row="20" name="city"
-                                       #tfCityRef="ngModel" [(ngModel)]="city"
+                                       #tfCityRef="ngModel" [(ngModel)]="city" id="city"
                                        (focus)="tfCityRef.focus=true" (blur)="tfCityRef.focus=false" style="width:100%">
                                 <label>City </label>
                           </div>
                           <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" pInputText class="form-control" row="20" name="state"
-                                       [(ngModel)]="state" #tfstateRef="ngModel"
+                                       [(ngModel)]="state" #tfstateRef="ngModel"  id="state"
                                        (focus)="tfstateRef.focus=true" (blur)="tfstateRef.focus=false" style="width:100%">
                                 <label>State </label>
                           </div>
@@ -94,7 +94,7 @@
                           <p>Description</p>
                           <div class="md-inputfield">
 
-                              <p-editor [(ngModel)]="testFacility.description" name="description"
+                              <p-editor [(ngModel)]="testFacility.description" name="description" id="description"
                                         [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                   <header>
                                       <select class="ql-size">
@@ -120,8 +120,8 @@
 
                     <footer>
                         <p>* indicates required field</p>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testFacilities"></button>
-                        <button pButton type="submit" icon="ui-icon-save" label="Add"  class="green-btn" [disabled]="!tfForm.valid"></button>
+                        <button pButton type="button" icon="ui-icon-close" id="cancel"  label="Cancel" class="blue-grey-btn" routerLink="/testFacilities"></button>
+                        <button pButton type="submit" icon="ui-icon-save" id="add"  label="Add"  class="green-btn" [disabled]="!tfForm.valid"></button>
                     </footer><br />
 
                 </p-panel>
