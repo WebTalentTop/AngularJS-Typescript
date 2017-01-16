@@ -31,6 +31,15 @@ namespace Titan.WebCore
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
+            });
+            
             services.AddMvc();
             services.AddOptions();
             var loggerFactory = new LoggerFactory();
@@ -45,6 +54,7 @@ namespace Titan.WebCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors("CorsPolicy");
             loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             app.UseStaticFiles();
