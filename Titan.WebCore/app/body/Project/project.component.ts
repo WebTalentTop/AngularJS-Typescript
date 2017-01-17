@@ -3,6 +3,7 @@ import { LoggerService } from '../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
+import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import { TitanUserProfileService } from '../../shared/services/titanUserProfile.service';
 import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
@@ -49,16 +50,8 @@ export class ProjectComponent {
         this.router.navigate(['project/detailsmain', id]);
     }
     onUpload(event) {
-        for (let file of event.files) {
-
-            this.uploadedFiles.push(file);
-
-        }
-
-
-
-        this.msgs = [];
+                this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
-    
 
+      }
 }

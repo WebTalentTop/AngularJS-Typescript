@@ -12,4 +12,5 @@ export class ProjectApiUrl {
     public static getBuildLevelsUrl: string = titanApiUrl + 'project/GetProjectBuildLevels?projectId='
     public static postTorqueBookUrl: string = titanApiUrl + 'TorqueBook/Post'
     public static getTorqueBooksByBuildLevelIdUrl: string = titanApiUrl + 'TorqueBook/GetTorqueBooksByBuildLevel?projectId='
+    public static postImportUrl: string = titanApiUrl + 'importexport/importproject';
 }

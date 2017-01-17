@@ -10,17 +10,27 @@ import {BaseService} from './../../shared/services/base.service'
 
 @Injectable()
 export class ProjectService extends BaseService{
-    private getProjectDetailsUrl: string = 'http://localhost:9998/api/project/Get?id=';
-    private getTorqueBooksByBuildLevelIdUrl: string = 'http://localhost:9998/api/TorqueBook/GetTorqueBooksByBuildLevel?projectId=';
-    private getTorqueSheetsByTorqueBookIdUrl: string = 'http://localhost:9998/api/TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
-    private putProjectDetailsUrl: string = 'http://localhost:9998/api/project/Put';
-    private putTorqueSheetTemplateUrl: string = 'http://localhost:9998/api/TorqueSheet/PutTorqueSheetTemplate';
-    private getTorqueSheetUrl: string = 'http://localhost:9998/api/TorqueSheet/Get?id=';
-    private postTorqueBookUrl: string = 'http://localhost:9998/api/TorqueBook/Post';
-    private postTorqueSheetUrl: string = 'http://localhost:9998/api/TorqueSheet/Post';
-    private getBuildLevelsUrl: string = 'http://localhost:9998/api/project/GetProjectBuildLevels?projectId=';
+  private localUrl = 'http://localhost:9998/api';
+  private preprodUrl = 'http://titanapi-preprod.12thwonder.com/api/';
+  private urlToUse = preprodUrl;
 
+    private getProjectDetailsUrl: string = this.urlToUse + 'project/Get?id=';
+    private getTorqueBooksByBuildLevelIdUrl: string = this.urlToUse + 'TorqueBook/GetTorqueBooksByBuildLevel?projectId=';
+    private getTorqueSheetsByTorqueBookIdUrl: string =this.urlToUse + 'TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
+    private putProjectDetailsUrl: string = this.urlToUse + 'project/Put';
+    private putTorqueSheetTemplateUrl: string = this.urlToUse + 'TorqueSheet/PutTorqueSheetTemplate';
+    private getTorqueSheetUrl: string = this.urlToUse + 'TorqueSheet/Get?id=';
+    private postTorqueBookUrl: string = this.urlToUse + 'TorqueBook/Post';
+    private postTorqueSheetUrl: string = this.urlToUse + 'TorqueSheet/Post';
+    private getBuildLevelsUrl: string = this.urlToUse + 'project/GetProjectBuildLevels?projectId=';
+    private postImportUrl: string = this.urlToUse + 'importexport/importproject';
+    private getImportUrl: string = this.urlToUse + 'importexport/downloadTemplate';
     constructor(private http:Http) { super();}
+
+
+
+
+
 
     getProjectDetails(id): Observable<any> {
         return this.http.get(this.getProjectDetailsUrl + id)
@@ -42,7 +52,7 @@ export class ProjectService extends BaseService{
         return this.http.put(this.putProjectDetailsUrl, filterBody)
             .map(this.getJson)
         //.chec
-        // .catch(err => Observable.throw(err)) 
+        // .catch(err => Observable.throw(err))
         // .map(this.getJson);
     }
 
@@ -58,7 +68,7 @@ export class ProjectService extends BaseService{
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-    
+
     postTorqueBook(torqueBookBody): Observable<any> {
         return this.http.post(this.postTorqueBookUrl, torqueBookBody)
             .map(super.getJson)
@@ -90,5 +100,18 @@ export class ProjectService extends BaseService{
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    postFileUpload(fileToUpload): Observable<any> {
+        return this.http.post(this.postImportUrl, fileToUpload)
+            .map(super.getJson)
+        //.chec
+        // .catch(err => Observable.throw(err))
+        // .map(this.getJson);
+    }
+    getFileUpload(): Observable<any> {
+        return this.http.get(this.getImportUrl)
+            .map(super.getJson)
+        //.chec
+        // .catch(err => Observable.throw(err))
+        // .map(this.getJson);
+    }
 }
-
