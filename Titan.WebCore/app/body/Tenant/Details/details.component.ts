@@ -223,7 +223,7 @@ export class DetailsComponent {
    }
    onRemoveFunctionGroupMap(functionGroup)
    {
-       this.userservice.RemoveFunctionGroup(functionGroup).subscribe(res => { });
+       this.userservice.RemoveFunctionGroupUserMap(functionGroup).subscribe(res => { });
 
    }
    //onDownTimeReasonChange(event) {
