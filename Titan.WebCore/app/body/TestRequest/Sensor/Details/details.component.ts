@@ -4,7 +4,7 @@ import { TestRequestSensorService } from '../../../../shared/services/testreques
 import { EquipmentTypeService } from '../../../../shared/services/equipmentType.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 //import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
 //import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 //import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { EditorModule, SharedModule, DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';
@@ -84,7 +84,7 @@ export class DetailsComponent {
 
         private dataService: TestRequestSensorService,
         //private testfacilityroleservice: TestFacilityRoleService,
-        private testfacilityattachmentservice: TestFacilityAttachmentService
+        private testFacilityAttachmentservice: TestFacilityAttachmentService
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -170,7 +170,7 @@ export class DetailsComponent {
 
             });
         // getSensorAttachmentsByEntityIdUrl
-        this.testfacilityattachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
+        this.testFacilityAttachmentservice.getSensorAttachmentsByEntityIdUrl(this.testRequestSensorId).subscribe(
             res => {
                 this.uploadedFiles = res.$values;
             }

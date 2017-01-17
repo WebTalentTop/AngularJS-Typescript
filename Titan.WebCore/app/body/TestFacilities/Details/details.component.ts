@@ -17,7 +17,7 @@ import { TestTypeService } from '../../../shared/services/testType.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { IFormSchemaCategory } from '../../../shared/services/definitions/IFormSchemaCateogry';
 import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
 import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
@@ -199,7 +199,7 @@ export class DetailsComponent implements AfterViewInit {
         private testmodeservice: TestModeService,
         private testtypeservice: TestTypeService,
 
-        private testfacilityattachmentservice: TestFacilityAttachmentService
+        private testFacilityAttachmentservice: TestFacilityAttachmentService
     ) {
         this.loggerService.setShow(false);
         this.loggerService.logConsole("Router ----------", this.router.url);
@@ -912,7 +912,7 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
     getTestFacilityAttachmentServiceById() {
-        this.testfacilityattachmentservice.getByIdusing(this.id)
+        this.testFacilityAttachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 this.TestFacilityAttachments = TestFacilityAttachments;
             });
@@ -1181,10 +1181,10 @@ export class DetailsComponent implements AfterViewInit {
         }
     }
     onDelete(TestFacilityAttachment: ITestFacilityAttachment) {
-        this.testfacilityattachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
+        this.testFacilityAttachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
             .subscribe(res => {
 
-                this.testfacilityattachmentservice.getByIdusing(this.id)
+                this.testFacilityAttachmentservice.getByIdusing(this.id)
                     .subscribe(TestFacilityAttachments => {
                         this.TestFacilityAttachments = TestFacilityAttachments;
                     });
@@ -1247,7 +1247,7 @@ export class DetailsComponent implements AfterViewInit {
 
         }
 
-        this.testfacilityattachmentservice.getByIdusing(this.id)
+        this.testFacilityAttachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 this.TestFacilityAttachments = TestFacilityAttachments;
                 this.selectedCategory = null;

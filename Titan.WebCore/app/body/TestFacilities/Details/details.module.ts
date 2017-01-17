@@ -14,7 +14,7 @@ import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
-import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
 import { FormPreviewModule } from '../../../shared/UIComponents/FormComponents/FormPreviewComponent/formPreview.module';
 import { FormInstanceModule } from '../../../shared/UIComponents/FormComponents/FormInstanceComponent/formInstance.module';
 

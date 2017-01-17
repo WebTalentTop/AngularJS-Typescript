@@ -4,7 +4,7 @@ import { TestRequestSensorService } from '../../../shared/services/testrequestse
 import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 //import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
 //import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
 //import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule } from 'primeng/primeng';

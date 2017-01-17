@@ -6,7 +6,7 @@ import { TestRequestSensorService } from '../../../../shared/services/testreques
 import { EquipmentTypeService } from '../../../../shared/services/equipmentType.service';
 //import { TestFacilityService } from '../../../shared/services/testFacility.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
-import { TestFacilityAttachmentService } from '../../../../shared/services/testFacilityAttachment.service';
+import { TestFacilityAttachmentService } from '../../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
 import { EditorModule, SharedModule, DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, CalendarModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, FileUploadModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import {MultiSelectModule} from 'primeng/primeng';
