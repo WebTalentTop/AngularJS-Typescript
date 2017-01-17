@@ -599,7 +599,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         break;
                     }
                     case "Details": {
-                        selfRef.router.navigate(['testrequest/details', entityId]);
+                        selfRef.router.navigate(['testRequest/details', entityId]);
                         break;
                     }
                     case "Split": {

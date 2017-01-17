@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'details-testrequest',
+    selector: 'details-testRequest',
     templateUrl: 'app/body/TestRequest/Details/details.component.html'
 })
 export class DetailsComponent implements AfterViewInit {

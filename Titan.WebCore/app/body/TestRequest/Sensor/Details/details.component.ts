@@ -330,12 +330,12 @@ export class DetailsComponent {
         //formData.locale = "en-us";
         this.dataService.postUpdate(formData).subscribe(res => {
             if (res.IsSuccess) {
-                this.router.navigate(["/testrequest/details/", this.id]);
+                this.router.navigate(["/testRequest/details/", this.id]);
             }
         });
         this.dataService.postCommentUpdate(formCommentData).subscribe(res => {
             if (res.IsSuccess) {
-                this.router.navigate(["/testrequest/details/", this.id]);
+                this.router.navigate(["/testRequest/details/", this.id]);
             }
         });
 

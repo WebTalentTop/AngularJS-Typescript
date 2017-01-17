@@ -1,8 +1,8 @@
 ﻿import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testfacility.service';
 import { TestRequestService } from '../../shared/services/Containers/TestRequestService/testRequest.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
-import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
-import { Component,AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
@@ -15,7 +15,7 @@ declare var fullcalendardef: FullCalendar.Calendar;
     templateUrl: 'app/body/TestRequest/testRequest.component.html'
 })
 export class TestRequestComponent implements AfterViewInit {
-    
+
     ngAfterViewInit() {
         $('#calendar').fullCalendar({
             theme: true,
@@ -26,7 +26,7 @@ export class TestRequestComponent implements AfterViewInit {
             },
             defaultDate: '2016-09-12',
 
-           // events:
+            // events:
             //function (start, end, timezone, callback) {
             //    $.ajax({
             //        url: titanApiUrl + 'TestFacility/Schedule',
@@ -61,7 +61,7 @@ export class TestRequestComponent implements AfterViewInit {
                 {
                     title: 'Click for Event',
                     url: titanApiUrl + 'timeEntry/get/{B4E2A8E1-ABA0-43E7-A9F1-6748DAB85FDD}',
-                    type:'GET',
+                    type: 'GET',
                     start: '2016-12-28'
                 }
             ],
@@ -72,9 +72,9 @@ export class TestRequestComponent implements AfterViewInit {
 
     }
     ngOnInit() {
-   
+
     }
 
-    
+
 
 }

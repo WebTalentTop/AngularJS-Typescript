@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 declare var $: JQueryStatic;
 
 @Component({
-    selector: 'add-testrequest',
+    selector: 'add-testRequest',
     templateUrl: 'app/body/WorkRequest/Add/add.component.html'
 })
 export class AddComponent implements AfterViewInit {
@@ -668,7 +668,7 @@ export class AddComponent implements AfterViewInit {
     }
    
     navigateDetails(id: string) {
-        this.router.navigate(['testrequest/sensor/details/', id]);
+        this.router.navigate(['testRequest/sensor/details/', id]);
     }
 
 
