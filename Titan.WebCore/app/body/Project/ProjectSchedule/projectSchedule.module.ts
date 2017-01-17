@@ -3,7 +3,7 @@
  */
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CheckboxModule, ToggleButtonModule, CalendarModule, ButtonModule} from 'primeng/primeng';
+import { CheckboxModule, ToggleButtonModule, CalendarModule, ButtonModule, DialogModule, DataTableModule, SharedModule} from 'primeng/primeng';
 import { ProjectService } from "../../../shared/services/Containers/ProjectService/project.service";
 import { ProjectScheduleComponent } from "./projectSchedule.component";
 import { BuildLevelService } from "../../../shared/services/Containers/BuildLevelService/buildLevel.service";
@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
         CalendarModule,
         ButtonModule,
         CheckboxModule,
-        FormsModule
+        FormsModule, DialogModule, DataTableModule, SharedModule
     ],
     providers: [
         ProjectService,
