@@ -15,7 +15,6 @@ import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 
 import { TestRequestService } from '../../../shared/services/testrequest.service';
-import { ProjectService } from '../../../shared/services/project.service';
 
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
