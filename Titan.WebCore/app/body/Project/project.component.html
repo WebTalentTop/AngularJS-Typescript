@@ -5,12 +5,14 @@
               <p>Please select one or more excel file attachments.</p>
               <p-growl [value]="msgs"></p-growl>
 
-              <p-fileUpload name="myfile[]" url="./upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" multiple="multiple"></p-fileUpload>
+              <p-fileUpload name="myfile[]" url="http://titan-preprod.12thwonder.com/api/importExport/importProject"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" multiple="multiple" (onUpload)="onUpload($event)">
+            </p-fileUpload>
               <footer>
                   <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                      <button type="button" pButton icon="fa-close" id="importCancel"  routerLink="/Project"
+                      <button type="button" pButton icon="fa-close" id="importCancel"  (click)="displayExcelDialog=false"
                               label="Cancel"></button>
-                      <button type="button" pButton icon="fa-check" id="importOk"  
+                      <button type="button" pButton icon="fa-check" id="importOk"
                               label="OK"></button>
                   </div>
               </footer>

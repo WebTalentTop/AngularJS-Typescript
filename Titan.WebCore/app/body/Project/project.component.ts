@@ -19,7 +19,8 @@ export class ProjectComponent {
     cols = [];
     gridFilter = {};
     idField:string ;
-
+    msgs: Message[];
+    uploadedFiles: any[] = [];
     constructor(
         private service: ProjectService,
         private router:Router,
@@ -47,6 +48,17 @@ export class ProjectComponent {
     navigateDetails(id:string){
         this.router.navigate(['project/detailsmain', id]);
     }
+    onUpload(event) {
+        for (let file of event.files) {
 
+            this.uploadedFiles.push(file);
+
+        }
+
+
+
+        this.msgs = [];
+        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+    
 
 }
