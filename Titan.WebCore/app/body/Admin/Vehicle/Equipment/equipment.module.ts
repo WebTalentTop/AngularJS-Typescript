@@ -4,7 +4,7 @@ import { EquipmentComponent } from "./equipment.component";
 import { DataTableModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import equipmentRoutes from "./equipment.routes";
-import { EquipmentService } from '../../../../shared/services/equipment.service';
+import { EquipmentService } from '../../../../shared/services/Containers/EquipmentService/equipment.service';
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 
 @NgModule({

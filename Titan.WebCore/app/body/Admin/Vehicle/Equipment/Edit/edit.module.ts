@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { EditComponent } from "./edit.component";
-import { EquipmentService} from '../../../../../shared/services/equipment.service';
+import { EquipmentService} from '../../../../../shared/services/Containers/EquipmentService/equipment.service';
 
 import { ButtonModule, InputTextareaModule, InputTextModule, PanelModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";

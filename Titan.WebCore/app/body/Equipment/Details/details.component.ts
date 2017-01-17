@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import { ITitanCalibrationSelectItem } from '../../../shared/services/definitions/ITitanCalibrationSelectItem';
-import { EquipmentService } from '../../../shared/services/equipment.service';
+import { EquipmentService } from '../../../shared/services/Containers/EquipmentService/equipment.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 declare var cron: any;

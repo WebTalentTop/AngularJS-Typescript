@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
-import { EquipmentService } from '../../../shared/services/equipment.service';
+import { EquipmentService } from '../../../shared/services/Containers/EquipmentService/equipment.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
 import { CheckboxModule, EditorModule, SharedModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule,  DialogModule, InputTextModule, CalendarModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';

@@ -1,4 +1,4 @@
-import { EquipmentService} from '../../../../../shared/services/equipment.service';
+import { EquipmentService} from '../../../../../shared/services/Containers/EquipmentService/equipment.service';
 import { ActivatedRoute} from '@angular/router';
 import { Component } from '@angular/core';
 import { InputTextModule, PanelModule } from 'primeng/primeng';

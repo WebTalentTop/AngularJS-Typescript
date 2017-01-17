@@ -5,7 +5,7 @@ import { EquipmentComponent } from "./equipment.component";
 import { CheckboxModule,DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, MessagesModule, DropdownModule, 
     ButtonModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { EquipmentService } from '../../shared/services/equipment.service';
+import { EquipmentService } from '../../shared/services/Containers/EquipmentService/equipment.service';
 import { GridModule} from '../../shared/UIComponents/GridComponent/grid.module';
 import equipmentRoutes from "./equipment.routes";
 
