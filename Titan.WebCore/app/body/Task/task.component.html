@@ -7,7 +7,7 @@
               <p-column header="Test Request" sortable="true">
                   <template let-taskrow="rowData" pTemplate type="body">
                      
-                      <a routerLink="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/sensor/{{taskrow.entityId}}/{{taskrow.id}}">{{taskrow.entityId}}</a>
+                      <a routerLink="{{titanApiUrl}}/testRequest/details/{{taskrow.entityId}}/sensor/{{taskrow.entityId}}/{{taskrow.id}}">{{taskrow.entityId}}</a>
                   </template>
                  
               </p-column>
@@ -34,7 +34,7 @@
                 <p-column header="Test Request" sortable="true">
                     <template let-taskrow="rowData" pTemplate type="body">
 
-                        <a routerLink="{{titanApiUrl}}/testrequest/details/{{taskrow.entityId}}/parts/{{taskrow.entityId}}/{{taskrow.id}}">{{taskrow.entityId}}</a>
+                        <a routerLink="{{titanApiUrl}}/testRequest/details/{{taskrow.entityId}}/parts/{{taskrow.entityId}}/{{taskrow.id}}">{{taskrow.entityId}}</a>
                     </template>
 
                 </p-column>

@@ -11,8 +11,8 @@ import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 @Component({
-    selector: 'test-request',
-    templateUrl: 'app/body/TestRequest/testrequest.component.html'
+    selector: 'test-Request',
+    templateUrl: 'app/body/TestRequest/testRequest.component.html'
 })
 export class TestRequestComponent implements AfterViewInit {
     

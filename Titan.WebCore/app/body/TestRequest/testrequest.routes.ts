@@ -1,4 +1,4 @@
-﻿import { TestRequestComponent } from "./testrequest.component";
+﻿import { TestRequestComponent } from "./testRequest.component";
 import { RouterModule } from "@angular/router";
 import {AuthGuard} from "../../shared/services/auth/authGuard";
 

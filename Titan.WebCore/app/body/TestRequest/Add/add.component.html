@@ -91,7 +91,7 @@
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
                                     <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
-                                    <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
+                                    <button type="button" pButton icon="fa-check" routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
                                 </div>
                             </footer>
                         </p-dialog>
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <footer>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testrequest"></button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testRequest"></button>
                         <button id="create" pButton type="submit" icon="ui-icon-save"  class="green-btn" label="Add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
                     </footer>
                     <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
@@ -147,7 +147,7 @@
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                 <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
                                 <button type="text" pButton icon="fa-close" label="OK" (click)="OK()"></button>
-                                <button type="button" pButton icon="fa-check" routerLink="/testrequest/details/{{entityId}}" label="CANCEL"></button>
+                                <button type="button" pButton icon="fa-check" routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
                             </div>
                         </footer>
                     </p-dialog>
