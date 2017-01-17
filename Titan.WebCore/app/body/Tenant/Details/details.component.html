@@ -1,0 +1,158 @@
+<div class="ui-g-12">
+    <div class="card card-w-title">
+              <h1>Tenant Details</h1> 
+<p-tabView  (onChange)="handleChange($event)">
+  <p-tabPanel header="Details" id='detailstab'>
+            <p-growl [value]="msgs"></p-growl>
+            <div class="subsection">
+
+                <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+
+                    <!-- Begin Panel - Test Facility Name and Location -->
+
+                    <p-panel header="Information">
+
+                        <div class="body">
+
+                            <!-- Begin Name -->
+
+                            <div class="ui-grid-row ">
+
+
+                                <div class="md-inputfield ui-g-12 ui-md-6">
+                                    <input type="text" style="width:100%" pInputText name="name" [(ngModel)]="userProfile.firstName"
+                                           minlength="3" class="form-control" required row="20">
+                                    <label>Name *</label>
+                                </div>
+                                <div class="md-inputfield ui-g-12 ui-md-6">
+                                    <input type="text" style="width:100%" pInputText name="url" class="form-control" required minlength="3" row="20" [(ngModel)]="userProfile.firstName">
+                                    <label>Url *</label>
+                                </div>
+                                <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
+
+                            </div>
+                        </div>
+
+                        <footer>
+                            <p>* indicates required field</p>
+                            <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/tenant" class="blue-grey-btn"></button>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save"></button>
+                        </footer><br />
+
+                    </p-panel>
+
+                    <!-- End Panel - Test Facility Name and Location -->
+
+                </form>
+
+            </div>
+
+
+        <div class="subsection">
+
+            <form>
+
+                <!-- Begin Dialog - Assign User Role -->
+
+                <p-dialog header="Add Function Group" [(visible)]="displayFunctionGroupDialog" modal="modal" showEffect="fade" responsive="true" width="500">
+
+                    <p>Please select function groups.</p>
+
+                    <!-- Begin Users -->
+
+
+                    <div class="input-row">
+
+                            <div class="ui-g-4"><b>Function Group :</b></div>
+
+                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
+                            </div>
+                    </div>
+
+                    <!-- End Users -->
+                    <!-- Begin Role -->
+
+                    <!-- <div class="input-row"> -->
+
+                        <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
+                        <!-- <span class="pseudo-label">Tenants</span> -->
+
+                        <!--<p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)" name="userRole" [autoWidth]="false"></p-dropdown>-->
+
+                    <!-- </div> -->
+
+                    <!-- End Role -->
+                    <br /><br />
+                    <footer>
+                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                            <div style='float:left;padding:0.85em'>
+                              <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                                          [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                            </div>
+                            <button type="button" pButton icon="ui-icon-close" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
+                            <button type="button" pButton icon="ui-icon-save" (click)="onAddFunctionGroup()" label="Add Function Group"></button>
+                        </div>
+                    </footer>
+
+                </p-dialog>
+
+                <!-- End Dialog - Assign User Role -->
+                <!-- Begin Panel - Test Facility Users -->
+
+                <p-panel>
+
+                    <header class="with-controls">
+                        <p class="ui-panel-title"> Function Groups </p>
+                        <p class="controls"><button type="text" (click)="displayFunctionGroupDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Add Function Group"></button></p>
+                    </header>
+
+                    <div class="ui-grid-row">
+
+                        <p-dataTable [value]="userFunctionGroups" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                            <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
+                            <p-column header="Action">
+                                <template let-FunctionGroup="rowData" pTemplate type="body">
+                                    <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
+                                </template>
+                            </p-column>
+                        </p-dataTable>
+
+                    </div>
+
+                </p-panel>
+
+                <!-- End Panel - Test Facility Users -->
+
+            </form>
+
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Users" id='userstab'>
+            <p-panel>
+              <header class="with-controls">
+                  <p class="ui-panel-title">Users</p>
+                  <p class="controls">
+                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" icon="ui-icon-add" label="Add New User"></button>
+                  </p>
+              </header>
+              <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
+                  <p-column header="Name" sortable="true">
+                      <template let-userrow="rowData" pTemplate type="body">
+                          <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
+                   <a routerLink="details/{{userrow.id}}">{{userrow.firstName}} {{userrow.lastName}}</a>
+                          </template>
+                 </p-column>
+                  <p-column header="Action">
+                      <template let-FunctionGroup="rowData" pTemplate type="body">
+                          <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" label="Delete"></button>
+                      </template>
+                  </p-column>
+
+
+              </p-dataTable>
+            </p-panel>
+      </p-tabPanel>
+  </p-tabView>
+</div>
+</div>
