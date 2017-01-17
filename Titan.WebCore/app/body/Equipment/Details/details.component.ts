@@ -336,7 +336,7 @@ export class DetailsComponent {
                //this.manufacturerState = res.result.equipmentManufacturerDetails.PhoneNumber;
            }
            this.msgs = [];
-           this.msgs.push({ severity: 'success', summary: 'Saved ', detail: '' });
+           this.msgs.push({ severity: 'success', summary: 'Created ', detail: '' });
            
        });
        

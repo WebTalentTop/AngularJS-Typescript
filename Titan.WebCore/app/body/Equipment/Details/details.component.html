@@ -260,7 +260,15 @@
                               <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" filter="filter"
                               [(ngModel)]="selectedEquipmentManufacturerId"  (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers">
                               </p-dropdown>
-                          </div><br/><br/>
+                          </div><br /><br />
+                          
+                          <div class="ui-grid-row">
+                          <div class="md-inputfield ui-g-6 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerName"  [(ngModel)]="manufacturerName" style="width:100%">
+                                  <label>Name</label>
+                              </div>
+                          </div><br />
+                          
                           <div class="ui-grid-row ">
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerAddressLine1" [(ngModel)]="manufacturerAddressLine1"  style="width:100%">
