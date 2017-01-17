@@ -1,1 +1,1 @@
-export const titanApiUrl = "http://titanapi-preprod.12thwonder.com/api/";
+export const titanApiUrl = "http://localhost:9998/api/";

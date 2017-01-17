@@ -106,6 +106,7 @@ import {RouterModule} from "@angular/router";
 import {AuthComponent} from "./Auth/auth.component";
 import {AuthGuard} from "./shared/services/auth/authGuard";
 import {FakePageComponent} from "./fakepage/fakepage.component";
+import {UserProfileService} from "./shared/services/userProfile.service";
 //enableProdMode();
 
 
@@ -205,7 +206,7 @@ import {FakePageComponent} from "./fakepage/fakepage.component";
     ],
     //providers: [DataService],
 
-    providers: [AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
+    providers: [UserProfileService, AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,13 +14,15 @@ import {LoggerService} from "../logger/logger.service";
 import {IUserProfile} from "../definitions/IUserProfile";
 import {TitanUserProfileService} from "../titanUserProfile.service";
 import {Observable} from "rxjs";
+import {UserProfileService} from "../userProfile.service";
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate {
     extraNav:NavigationExtras;
+    currentUser: IUserProfile;
     constructor(
         private router: Router,
-        private userProfile: TitanUserProfileService,
+        private userProfile: UserProfileService,
         private ls: LoggerService) {
         this.ls.setShow(false);
         this.ls.logConsole("AuthGuard constructor","");
@@ -32,28 +34,21 @@ export class AuthGuard implements CanLoad, CanActivate {
         return false;
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean> | boolean {
-        this.ls.logConsole("---- STATE -----", state);
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Promise<boolean>{
+        let user: Promise<IUserProfile> = this.userProfile.getCurrentUserProfile();
 
-        return true; //this.isActivated(state);
-    }
-
-    isActivated(state): Observable<boolean> {
-
-         return this.userProfile.getCurrentUserProfile().map(res => {
-            let currentUserProfile: IUserProfile = res.result;
-            this.ls.logConsole("CurrentUserProfile from server ----------", currentUserProfile);
-
-            if(currentUserProfile.defaultTenantId) {
+        return user.then((data) => {
+            data.defaultTenantId = "sadfa";
+            if (data.defaultTenantId) {
                 return true;
             }
             else {
                 this.extraNav = { queryParams: {
-                                    'returnUrl': state.url,
-                                    'email': currentUserProfile.emailAddress}
-                                };
+                    'returnUrl': state.url,
+                    'email': data.emailAddress}
+                };
                 this.router
-                    .navigate(['login', currentUserProfile.id],this.extraNav);
+                    .navigate(['login', data.id],this.extraNav);
                 return false;
             }
         });

@@ -10,6 +10,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import {TitanUserApiUrl} from "./apiUrlConst/titanUserApiUrls";
+import {subscribeOn} from "rxjs/operator/subscribeOn";
 
 @Injectable()
 export class UserProfileService {
@@ -21,15 +22,36 @@ export class UserProfileService {
     userProfile: IUserProfile;
 
     constructor(private http: Http) {
-        /*this.getCurrentUserProfile()
-         .subscribe(res =>{
-         this.userProfile = res.result;
-         });*/
+        this.getCurrentUserProfile();
     }
 
-    getCurrentUserProfile():Observable<any> {
-        return this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
-            .map(this.getJson);
+    getCurrentUserProfile(): Promise<IUserProfile> {
+       return new Promise((resolve, reject) => {
+           this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
+               .map(this.getJson)
+                .subscribe(res => {
+                    this.userProfile = res.result;
+                    console.log("User ifno", this.userProfile);
+                    return resolve(this.userProfile);
+                });
+       });
+        /* this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
+            .map(this.getJson)
+            .subscribe(res => {
+                    this.userProfile = res.result;
+                    console.log("Hello -----", this.userProfile);
+        });
+        return new Promise(resolve => {
+            resolve(this.userProfile);
+        });*/
+/*        return new Promise(resolve =>{this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
+            .map(this.getJson))
+            .subscribe(res => {this.userProfile = res.result});
+            resolve.
+        })
+        return Promise.resolve(.then(function(data) {
+                console.log("Data ----", data);
+                return data});*/
     }
 
     private getJson(response: Response) {
