@@ -6,7 +6,7 @@ import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testfacility.service';
 import { ProcedureService } from '../../../shared/services/procedure.service'
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
 import { TestStatusService } from '../../../shared/services/teststatus.service';

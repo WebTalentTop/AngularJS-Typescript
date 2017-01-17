@@ -4,7 +4,7 @@ import {EquipmentTypeComponent } from "./equipmenttype.component";
 
 import { DataTableModule, TabViewModule, InputTextModule,DialogModule,FileUploadModule,MessagesModule, InputTextareaModule, DropdownModule, ButtonModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
-import { EquipmentTypeService } from '../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
 import equipmenttypeRoutes from "./equipmenttype.routes";
 

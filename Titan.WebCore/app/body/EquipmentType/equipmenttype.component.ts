@@ -1,4 +1,4 @@
-import { EquipmentTypeService } from './../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from './../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { LoggerService } from '../../shared/services/logger/logger.service';
 import {FileUploadModule} from 'primeng/primeng';
 import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';

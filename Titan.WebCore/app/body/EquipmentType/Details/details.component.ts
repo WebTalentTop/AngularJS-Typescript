@@ -1,7 +1,7 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
 
-import {EquipmentTypeService} from '../../../shared/services/equipmentType.service';
+import {EquipmentTypeService} from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import {
     DataTable,
     TabViewModule,

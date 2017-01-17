@@ -1,7 +1,7 @@
 ﻿//import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 //import { TestFacilityService } from '../../../shared/services/testfacility.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 //import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 //import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
 import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';

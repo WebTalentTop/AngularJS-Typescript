@@ -3,7 +3,7 @@ import { TestRequestSensorService } from '../../shared/services/testrequestsenso
 import { TestVerificationMethodService } from '../../shared/services/testverificationMethod.service';
 import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
-import { EquipmentTypeService } from '../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { WorkRequestService } from '../../shared/services/workrequest.service';
 import { TestTemplateService } from '../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';

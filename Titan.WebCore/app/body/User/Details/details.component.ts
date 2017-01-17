@@ -1,6 +1,6 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
 import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';

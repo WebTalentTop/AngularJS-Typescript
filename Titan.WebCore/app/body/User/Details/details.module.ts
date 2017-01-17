@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { UserService } from '../../../shared/services/user.service';
 
 import {

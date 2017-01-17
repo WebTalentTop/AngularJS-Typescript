@@ -1,6 +1,6 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { DataTable, TabViewModule, DialogModule, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

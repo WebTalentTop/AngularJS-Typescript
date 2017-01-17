@@ -6,7 +6,7 @@ import { BuildLevelService } from '../../../shared/services/Containers/BuildLeve
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
-import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
+import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { DropdownModule, EditorModule, SharedModule, DataTableModule, TabViewModule,  ButtonModule,DialogModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
