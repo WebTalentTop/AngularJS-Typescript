@@ -15,7 +15,7 @@ import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../../shared/services/department.service';
-import { TestRequestService } from '../../../shared/services/testrequest.service';
+import { TestRequestService } from '../../../shared/services/Containers/TestRequestService/testRequest.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
 import { ConfirmationService } from 'primeng/primeng';

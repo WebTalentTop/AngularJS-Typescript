@@ -1,6 +1,6 @@
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
-import { TestRequestService } from '../../../shared/services/testrequest.service';
+import { TestRequestService } from '../../../shared/services/Containers/TestRequestService/testRequest.service';
 import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testfacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';

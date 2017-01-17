@@ -1,4 +1,4 @@
-﻿/// <reference path="../../shared/services/testrequest.service.ts" />
+﻿/// <reference path="../../shared/services/Containers/TestRequestService/testRequest.service.ts" />
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TitanCalendarComponent } from "./titancalendar.component";
@@ -11,7 +11,7 @@ import { TestRoleService } from '../../shared/services/testRole.service';
 import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
-import { TestRequestService } from '../../shared/services/testrequest.service';
+import { TestRequestService } from '../../shared/services/Containers/TestRequestService/testrequest.service';
 
 
 
