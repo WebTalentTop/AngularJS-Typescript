@@ -1,6 +1,6 @@
-﻿import { titanApiUrl } from './titanApiUrl';
-import { localizationApiUrl } from './localizationApiUrl';
-import { GridApiUrl } from './gridApiUrls';
+﻿import { titanApiUrl } from '../titanApiUrl';
+import { localizationApiUrl } from '../localizationApiUrl';
+import { GridApiUrl } from '../gridApiUrls';
 
 export class WorkRequestApiUrl {
 
