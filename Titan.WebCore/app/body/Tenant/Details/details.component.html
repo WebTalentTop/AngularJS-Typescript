@@ -133,7 +133,7 @@
               <header class="with-controls">
                   <p class="ui-panel-title">Users</p>
                   <p class="controls">
-                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" icon="ui-icon-add" label="Add New User"></button>
+                    <button pButton type="button" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User"></button>
                   </p>
               </header>
               <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
@@ -152,6 +152,27 @@
 
               </p-dataTable>
             </p-panel>
+            <p-dialog header="Add User" [(visible)]="displayAddUserDialog" modal="modal" showEffect="fade" responsive="true" width="500">
+
+                <p>Please select users.</p>
+                <div class="input-row">
+
+                        <div class="ui-g-4"><b>Users :</b></div>
+                        <div class="ui-g-8">
+                          <p-multiSelect [options]="allUsers" 
+                                         name="allUsers" id="allusers" [style]="{'width':'100%'}">
+                          </p-multiSelect>
+                        </div>
+                </div>
+              <br /><br />
+                <footer>
+                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                        <button type="button" pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
+                        <button type="button" pButton icon="ui-icon-save" label="Add User"></button>
+                    </div>
+                </footer>
+
+            </p-dialog>
       </p-tabPanel>
   </p-tabView>
 </div>
