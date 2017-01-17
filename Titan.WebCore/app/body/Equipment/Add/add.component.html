@@ -1,5 +1,6 @@
 <div class="ui-g">
     <div class="ui-g-12">
+        
         <!--<h1> {{title}}</h1>
     <p-tabView>-->
         <div class="card card-w-title">
@@ -24,13 +25,15 @@
                       <!-- Begin Equipment Type # -->
                       <div class="ui-grid-row ">
                         <div class="ui-g-12 ui-md-6">
-                            <p style="color:#777">Equipment Type :</p>
-                            <p-dropdown  [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
+                            <p style="color:#777">Equipment Type : <span >*</span></p>
+                            <p-dropdown class="form-control" [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" (onChange)="onEquipmentTypeChange($event)" 
+                            name="equipmentTypes" filter="filter" [(ngModel)]="selectedEquipmentTypeId" required>
                             </p-dropdown>
                         </div>
                         <div class="ui-g-12 ui-md-6">
                             <p style="color:#777">Test Facility :</p>
-                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities">
+                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" 
+                            (onChange)="onTestFacilityChange($event)" name="testFacilities" filter="filter">
                             </p-dropdown>
                         </div>
                       </div>
@@ -113,7 +116,7 @@
                   <footer>
                       <p>* indicates required field</p>
                       <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipment" class="blue-grey-btn"></button>
-                      <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"  class="green-btn"></button>
+                      <button pButton type="submit" icon="ui-icon-save" label="Save" [disabled]="!tfForm.valid"  class="green-btn"></button>
                   </footer>
                 </p-panel><br />
 
