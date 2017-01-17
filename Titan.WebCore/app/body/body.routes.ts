@@ -20,7 +20,7 @@ const routes = [
     { path: 'testFacilities', canActivate: [AuthGuard], loadChildren: 'app/body/TestFacilities/testFacilities.module' },
     { path: 'step', canActivate: [AuthGuard], loadChildren: 'app/body/Step/step.module' },
     { path: 'procedure', canActivate: [AuthGuard], loadChildren: 'app/body/Procedure/procedure.module' },
-    { path: 'testrequest', canActivate: [AuthGuard], loadChildren: 'app/body/TestRequest/testrequest.module' },
+    { path: 'testRequest', canActivate: [AuthGuard], loadChildren: 'app/body/TestRequest/testRequest.module' },
     { path: 'task', loadChildren: 'app/body/Task/task.module' },
     { path: 'vehicle', canActivate: [AuthGuard], loadChildren: 'app/body/Vehicle/vehicle.module' },
     { path: 'torquesheet', canActivate: [AuthGuard], loadChildren: 'app/body/TorqueSheet/torque-sheet.module' },

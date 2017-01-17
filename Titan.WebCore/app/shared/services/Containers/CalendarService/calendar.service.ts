@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { CalendarApiUrl} from './apiUrlConst/CalendarApiUrls';
+import { CalendarApiUrl} from '../../apiUrlConst/Calendar/CalendarApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';

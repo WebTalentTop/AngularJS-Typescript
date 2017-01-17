@@ -4,7 +4,7 @@ import { TestVerificationMethodService } from '../../shared/services/testverific
 import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-import { WorkRequestService } from '../../shared/services/workrequest.service';
+import { WorkRequestService } from '../../shared/services/Containers/WorkRequestService/workrequest.service';
 import { TestTemplateService } from '../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestStatusService } from '../../shared/services/teststatus.service';
 import { TestRoleService } from '../../shared/services/testRole.service';

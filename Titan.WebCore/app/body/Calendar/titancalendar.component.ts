@@ -8,7 +8,7 @@ import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
 import {TitanUserService} from '../../shared/services/titanuser.service';
 import {TitanUserProfileService} from '../../shared/services/titanUserProfile.service';
-import {CalendarService} from '../../shared/services/calendar.service';
+import {CalendarService} from '../../shared/services/Containers/CalendarService/calendar.service';
 import {TestRequestService} from '../../shared/services/Containers/TestRequestService/testRequest.service';
 import {TitanService} from '../../shared/services/titan.service'
 import * as moment from 'moment/moment';

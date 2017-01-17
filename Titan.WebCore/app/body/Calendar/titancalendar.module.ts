@@ -11,7 +11,7 @@ import { TestRoleService } from '../../shared/services/testRole.service';
 import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
-import { TestRequestService } from '../../shared/services/Containers/TestRequestService/testrequest.service';
+import { TestRequestService } from '../../shared/services/Containers/TestRequestService/testRequest.service';
 
 
 
@@ -25,7 +25,7 @@ import { ContextMenuModule } from 'primeng/primeng';
 
 import calendarRoutes from "./titancalendar.routes";
 import {TitanService} from "../../shared/services/titan.service";
-import {CalendarService} from "../../shared/services/calendar.service";
+import {CalendarService} from "../../shared/services/Containers/CalendarService/calendar.service";
 
 @NgModule({
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,

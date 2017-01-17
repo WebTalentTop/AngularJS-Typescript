@@ -14,7 +14,7 @@ import { ProjectService } from '../../shared/services/Containers/ProjectService/
 import { TestModeService } from '../../shared/services/testMode.service';
 import { TestTypeService } from '../../shared/services/testType.service';
 import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import { WorkRequestService } from '../../shared/services/workrequest.service';
+import { WorkRequestService } from '../../shared/services/Containers/WorkRequestService/workrequest.service';
 import { DepartmentService } from '../../shared/services/department.service';
 import { TestRequestSensorService } from '../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
