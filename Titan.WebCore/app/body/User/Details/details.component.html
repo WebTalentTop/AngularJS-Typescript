@@ -138,7 +138,7 @@
                     <div class="ui-grid-row">
 
                         <p-dataTable [value]="userFunctionGroups" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                            <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <p-column field="name" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
                                 <template let-FunctionGroup="rowData" pTemplate type="body">
@@ -175,8 +175,9 @@
                         <label>
                             <b>Tenants :</b>
 
-                            <p-dropdown [options]="tenants" (onChange)="onTenantChange($event)" name="tenants" [autoWidth]="false"></p-dropdown>
-
+                            <div class="ui-g-8">
+                                <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants" [autoWidth]="false"></p-dropdown>
+                            </div>
                         </label>
 
                     </div>
@@ -214,11 +215,12 @@
                     <div class="ui-grid-row">
 
                         <p-dataTable [value]="userTenants" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                            <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <p-column field="tenantName" header="Tenant Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <p-column field="isInheritedPermission" header="Inherited Permission" sortable="true"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
-                                <template let-FunctionGroup="rowData" pTemplate type="body">
-                                    <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
+                                <template let-UserTenant="rowData" pTemplate type="body">
+                                    <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveUserTenantMap(UserTenant)" label="Delete"></button>
                                 </template>
                             </p-column>
                         </p-dataTable>

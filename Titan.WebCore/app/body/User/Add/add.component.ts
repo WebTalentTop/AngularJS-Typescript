@@ -4,7 +4,7 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-
+import { TitanUserProfileService } from '../../../shared/services/titanUserProfile.service';
 import { UserService } from '../../../shared/services/user.service';
 @Component({
     selector: 'add-user',
@@ -18,8 +18,9 @@ export class AddComponent {
     emailAddress:string;
     phoneNumber:string;
     userName: string;
-    selectedDepartmentId: any;
-    departments: any;
+    selectedUserId: any;
+    tenantId: any;
+    users: any;
     displayName:string;
     notificationMsgs: Message[] = [];
     testFacility = {
@@ -36,7 +37,8 @@ export class AddComponent {
 
     constructor(private breadCrumbsService: BreadCrumbsService,
 
-                private userservice: UserService,
+        private userservice: UserService,
+        private userprofileservice: TitanUserProfileService,
 
                 private router: Router) {
 
@@ -45,7 +47,13 @@ export class AddComponent {
         breadcrumbsHome: MenuItem;
 
         ngOnInit() {
-            this.getDepartments();
+            this.userprofileservice.getCurrentUserProfile().subscribe(tenresult => {
+                this.tenantId = tenresult.result;
+            });
+            this.userprofileservice.getById().subscribe(tenresult => {
+                this.tenantId = tenresult.result;
+            });
+            this.getUsers();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
             filter.pageName === 'TestFacilitiesAddPage'
@@ -55,14 +63,15 @@ export class AddComponent {
 
 
         this.breadcrumbsHome = { routerLink: ['/'] };
+
         }
-    onDepartmentChange(event) {
-        this.selectedDepartmentId = event.value;
+    onUserChange(event) {
+        this.selectedUserId = event.value;
     }
-    getDepartments() {
+    getUsers() {
         //    userRoles
-        this.userservice.getDepartments().subscribe(response => {
-            this.departments = new Array();
+        this.userservice.getUsers().subscribe(response => {
+            this.users = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -71,45 +80,45 @@ export class AddComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name,
+                        label: template.firstName,
                         value: template.id
                     }
                     resultMap.push(temp);
                 }
-                this.departments = resultMap;
+                this.users = resultMap;
             }
             console.log(response);
         });
     }
     onSubmit(formRef) {
-        formRef.isDeleted = false;
-        let formData: any = {
-            firstName: '', lastName: '', departmentId: '', userName: '', displayName: '', defaultTimeZoneId: '', emailAddress:'', tenantId:''
-                    };
-        formData.firstName = formRef.firstName;
-        formData.lastName = formRef.lastName,
-            formData.departmentId = this.selectedDepartmentId;
-        formData.userName = formRef.userName;
-        formData.displayName = formRef.displayName;
-        formData.emailAddress = formRef.emailAddress;
-        formData.tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+       
       //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
-      
+        let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+        let userTenantModel = {
 
-        this.userservice.postAdd(formData).subscribe(res => { 
-            
+            userId: this.selectedUserId,
+            tenantId: tenantId 
+        };
+        this.userservice.CreateUserTenantAccess(userTenantModel).subscribe(res => {
             if (res.isSuccess) {
 
-                this.router.navigate(['user/details/', res.result.id]);
-               // this.router.navigate(["./testFacilities"], { queryParams: { page: 1 } });
-            }
-            else
-            {
-                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'test Facility name exists.' });
-               
-
+                this.router.navigate(['user/details/', this.selectedUserId]);
             }
         });
+        //this.userservice.postAdd(formData).subscribe(res => { 
+            
+        //    if (res.isSuccess) {
+
+        //        this.router.navigate(['user/details/', res.result.id]);
+        //       // this.router.navigate(["./testFacilities"], { queryParams: { page: 1 } });
+        //    }
+        //    else
+        //    {
+        //        this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'test Facility name exists.' });
+               
+
+        //    }
+        //});
     }
    
 

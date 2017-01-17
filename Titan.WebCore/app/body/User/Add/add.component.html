@@ -17,78 +17,18 @@
 
                         <!-- Begin Name -->
 
-                        <div class="ui-grid-row ">
-
-                            <div class="md-inputfield ui-g-12 ui-md-6 ">
-                                <input type="text" id="firstName" pInputText name="firstName" [(ngModel)]="firstName"
-                                       minlength="3" class="form-control" required row="20" style="width:100%"
-                                     >
-                                <label>First Name *</label>
-                            </div>
-
-                            <!--<p class="helper error" *ngIf="testFacilityNameRef.errors?.required || testFacilityNameRef.errors?.minlength">At least three characters</p>-->
-
-                        </div>
+                      
                         <br /><br />
-                        <!-- End Name -->
-                        <!-- Begin Address Line 1 -->
-
-                        <div class="ui-grid-row ">
-
-                            <div class="md-inputfield ui-g-12 ui-md-6 ">
-                                <input type="text" pInputText name="lastName" class="form-control" required row="20"  [(ngModel)]="lastName"
-                                      style="width:100%">
-                                <label>Last Name *</label>
-                            </div>
-                            <div class="md-inputfield ui-g-12 ui-md-6 ">
-                                <input type="text" pInputText class="form-control"  row="20" name="displayName" [(ngModel)]="displayName"
-                                    style="width:100%">
-                                <label>Display Name</label>
-                            </div>
-
-                            <!--<p class="helper hint" *ngIf="tfAddress2Ref.focus">For example, Suite 100 or Building 1</p>-->
-
-                        </div>
-
-                        <!-- End Address Line 2 -->
-                        <!-- Begin City -->
+                     
 
                         <div class="ui-grid-row">
 
                             <div class="ui-g-12 ui-md-6">
-                                <p style="color:#777">Department :</p>
-                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
+                                <p style="color:#777">Users :</p>
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="users" [(ngModel)]="selectedUserId" (onChange)="onUserChange($event)" name="departments" [autoWidth]="false"></p-dropdown>
                             </div>
                         </div><br /><br />
 
-                        <!-- End City -->
-                        <!-- Begin State -->
-
-                        <div class="ui-grid-row">
-
-                            <div class="md-inputfield ui-g-12 ui-md-6 ">
-                                <input type="text" pInputText class="form-control" row="20" name="emailAddress" [(ngModel)]="emailAddress" style="width:100%">
-                                <label>Email Address </label>
-                            </div>
-                            <div class="md-inputfield ui-g-12 ui-md-6 ">
-                                <input type="text" pInputText class="form-control" row="20" name="userName"  [(ngModel)]="userName" style="width:100%">
-                                <label>User Name</label>
-                            </div>
-
-                            <!--<p class="helper error" *ngIf="tfpostalCodeRef.errors?.required && !tfpostalCodeRef.focus">Required</p>-->
-
-                        </div>
-                        <!--<div class="form-group col-sm-6 col-md-4">
-                            <label class="control-label  col-sm-12 pl0">
-                                Last
-                                Maintenance Date
-                            </label>
-                            <div class="input-group">
-                                <p-calendar [(ngModel)]="testFacility.lastMaintenanceDate" name="lastMaintenanceDate" [showIcon]="true"></p-calendar>
-                            </div>
-                        </div>-->
-
-                        <!-- End Postal Code -->
 
                     </div>
 

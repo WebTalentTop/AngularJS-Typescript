@@ -15,12 +15,12 @@
               <p-column header="First Name" sortable="true">
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
-               <a routerLink="details/{{userrow.id}}">{{userrow.firstName}}</a>
+               <a routerLink="details/{{userrow.userId}}">{{userrow.userName}}</a>
                       </template>
              </p-column>
               <p-column header="Last Name" field="lastName" sortable="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
-                      {{userrow.lastName}}
+                      {{userrow.displayName}}
                   </template>-->
               </p-column>
               <p-column header="Role" field="lastName" sortable="true">

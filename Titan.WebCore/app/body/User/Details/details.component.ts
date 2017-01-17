@@ -61,6 +61,8 @@ export class DetailsComponent {
     departments: any;
     timeZones: any;
     titanRoles: any;
+    selectedTenantId: any;
+    tenants: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
@@ -125,50 +127,34 @@ export class DetailsComponent {
        this.getFunctionGroups();
        this.getDepartments();
        this.getTimeZones();
-       this.getTitanRoles()
+       this.getTitanRoles();
+       this.getTenants();
        //get the departmentId through taskId
        //get sensors by department and entityId
        this.userservice.getUserDetailsById(this.userId)
            .subscribe(userresult => {
-               this.userProfile = userresult.result;
-              
-              //this.userProfile.firstName = userresult.result.firstName;
-             // this.userProfile.lastName = userresult.result.lastName;
-               let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res => {
+               this.userProfile = userresult.result;             
+            
+               this.userservice.GetUserFunctionGroupsByUser(this.userId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
+                   }
 
                  //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
                 //   console.log('--------filtered-------', filterfuntiongroups);
-                   this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+               //    this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
                   // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
                });
               
                
            });
-      
-   //    this.getHourEntryByEntityIdentifierId();
-   //    this.getDownTimeReasons();
-   //    //this.dataService.GetProjectId(this.id)
-   //    //    .subscribe(res => {
-   //    //        this.projectId = res.$values;
 
-   //    //        //this.formConfiguration = res.formConfiguration;
-   //    //        //this.formObject = res.formObject;
-   //    //        //this.model = res.formObject;
-   //    //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //    //        //console.log("----- Result of formObject -----", this.model);
-   //    //    });
-   //     this.dataService.GetTrackingListByEntityId(this.id)
-   //         .subscribe(res =>
-   //         {
-   //             this.TrackingList = res.$values;
-
-   //             //this.formConfiguration = res.formConfiguration;
-   //             //this.formObject = res.formObject;
-   //             //this.model = res.formObject;
-   //             //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //             //console.log("----- Result of formObject -----", this.model);
-   //         });
+       this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
+           if (usertenants.isSuccess) {
+               this.userTenants = usertenants.result.tenantMemberships.$values;
+           }
+       });
+ 
 
    }
   
@@ -183,6 +169,9 @@ export class DetailsComponent {
    onFunctionGroupChange(event)
    {
        this.selectedFunctionGroupId = event.value;
+   }
+   onTenantChange(event) {
+       this.selectedTenantId = event.value;
    }
    onTimeZoneChange(event) {
        this.selectedTimeZoneId = event.value;
@@ -209,12 +198,38 @@ export class DetailsComponent {
            if (res.isSuccess) {
               // this.selectedFunctionGroupId = null;
              
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res=>{
-                   if(res.result != null)
-                   {
-                       this.functionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+               this.userservice.GetUserFunctionGroupsByUser(this.userId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
                    }
 
+                   //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
+                   //   console.log('--------filtered-------', filterfuntiongroups);
+                   //    this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+                   // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
+               });
+
+           }
+       });
+
+   }
+   onAddTenant()
+   {
+       //let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+       //this.displayFunctionGroupDialog = false;
+       //let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
+       let userTenantModel = {
+
+           userId: this.userId,          
+           tenantId: this.selectedTenantId
+       };
+       this.userservice.CreateUserTenantAccess(userTenantModel).subscribe(res => {
+           if (res.isSuccess) {
+               // this.selectedFunctionGroupId = null;
+
+               this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
+
+                   this.userTenants = usertenants.tenantMemberships.$values;
                });
 
            }
@@ -223,7 +238,29 @@ export class DetailsComponent {
    }
    onRemoveFunctionGroupMap(functionGroup)
    {
-       this.userservice.RemoveFunctionGroup(functionGroup).subscribe(res => { });
+       this.userservice.RemoveFunctionGroupUserMap(functionGroup).subscribe(res => {
+
+           this.userservice.GetUserFunctionGroupsByUser(this.userId).subscribe(res => {
+               if (res.isSuccess) {
+                   this.userFunctionGroups = res.result;
+               }             
+           });
+       });
+
+   }
+   onRemoveUserTenantMap(userTenant) {
+       let userTenantModel = {
+
+           userId: this.userId,
+           tenantId: userTenant.tenantId
+       };
+       this.userservice.RemoveTenantMapping(userTenantModel).subscribe(res => {
+
+           this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
+
+               this.userTenants = usertenants.result.tenantMemberships.$values;
+           });
+       });
 
    }
    //onDownTimeReasonChange(event) {
@@ -260,6 +297,28 @@ export class DetailsComponent {
             }
             console.log(response);
         });
+   }
+   getTenants() {
+       //    userRoles
+       this.userservice.getTenants().subscribe(response => {
+           this.tenants = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "--Select--",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.name,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.tenants = resultMap;
+           }
+           console.log(response);
+       });
    }
    getTimeZones() {
        //    userRoles
