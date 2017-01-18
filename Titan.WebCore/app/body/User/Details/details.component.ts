@@ -139,22 +139,13 @@ export class DetailsComponent {
                    if (res.isSuccess) {
                        this.userFunctionGroups = res.result;
                    }
-
-                 //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
-                //   console.log('--------filtered-------', filterfuntiongroups);
-               //    this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
-                  // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
                });
-              
-               
-           });
-
-       this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
-           if (usertenants.isSuccess) {
-               this.userTenants = usertenants.result.tenantMemberships.$values;
-           }
-       });
- 
+               this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
+                   if (usertenants.isSuccess) {
+                       this.userTenants = usertenants.result.tenantMemberships.$values;
+                   }
+               });               
+           });     
 
    }
   
@@ -215,6 +206,7 @@ export class DetailsComponent {
    }
    onAddTenant()
    {
+       this.displayTenantDialog = false;
        //let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
        //this.displayFunctionGroupDialog = false;
        //let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
@@ -226,11 +218,12 @@ export class DetailsComponent {
        this.userservice.CreateUserTenantAccess(userTenantModel).subscribe(res => {
            if (res.isSuccess) {
                // this.selectedFunctionGroupId = null;
-
                this.userservice.GetTenantMembershipsByUser(this.userId).subscribe(usertenants => {
-
-                   this.userTenants = usertenants.tenantMemberships.$values;
+                   if (usertenants.isSuccess) {
+                       this.userTenants = usertenants.result.tenantMemberships.$values;
+                   }
                });
+              
 
            }
        });

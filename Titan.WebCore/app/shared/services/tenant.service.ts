@@ -60,9 +60,9 @@ export class TenantService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-    postAddFunctionGroupToTenant(filterBody,functionGroupId,userId): Observable<any> {
+    postAddFunctionGroupToTenant(filterBody,functionGroupId): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${TenantApiUrl.postAddFunctionGroupToTenant}/${functionGroupId}/${userId}`, filterBody, { headers: this.headers })
+        return this.http.post(`${TenantApiUrl.postAddFunctionGroupToTenant}/${functionGroupId}`, filterBody, { headers: this.headers })
             // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
