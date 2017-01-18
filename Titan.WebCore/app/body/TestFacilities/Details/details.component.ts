@@ -906,7 +906,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     getTestFacilityRoleService() {
-        this.testfacilityroleservice.getByIdusing(this.id)
+        this.testfacilityroleservice.getByTestFacilityId(this.id)
             .subscribe(TestFacilityRoles => {
                 this.TestFacilityRoles = TestFacilityRoles;
             });
@@ -980,7 +980,7 @@ export class DetailsComponent implements AfterViewInit {
             this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
             this.selectedRole = null;
-            this.testfacilityroleservice.getByIdusing(this.id)
+            this.testfacilityroleservice.getByTestFacilityId(this.id)
                 .subscribe(TestFacilityRoles => {
                     this.TestFacilityRoles = TestFacilityRoles;
                     if (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8" || this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
@@ -1195,7 +1195,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.DeleteUserRoleMap(event)
             .subscribe(res => {
 
-                this.testfacilityroleservice.getByIdusing(this.id)
+                this.testfacilityroleservice.getByTestFacilityId(this.id)
                     .subscribe(TestFacilityRoles => {
                         this.TestFacilityRoles = TestFacilityRoles;
                         this.testFacilityService.getNotifications(this.id)

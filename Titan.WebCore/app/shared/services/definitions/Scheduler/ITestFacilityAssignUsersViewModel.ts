@@ -9,7 +9,14 @@
     testFacilityScheduleId:string;
     startDate : Date;
     endDate: Date;
+     // Number of minutes past midnight
+     defaultStartMinutesPastMidnight: number;
+     defaultEndMinutesPastMidnight: number;
     action:string;
+
+
+
+
 }
 
 

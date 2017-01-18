@@ -9,5 +9,7 @@ export interface ITestFacilityUserScheduleDbViewModel {
     updateTestFacilitySchedule: boolean;
     entityId:string;
     entityIdentifierId:string;
+    defaultStartMinutesPastMidnight : number;
+    defaultEndMinutesPastMidnight: number;
     schedules:ITitanUserScheduleViewModel[];
 }

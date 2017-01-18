@@ -42,6 +42,11 @@ export class TestRequestService extends BaseService {
 
     }
 
+    postScheduleTest(viewModel) :Observable<any>{
+        return this.http.post(`${TestReqestApiUrl.postScheduleTestUrl}`,
+            viewModel, {headers: this.headers})
+            .map(this.getJson);
+    }
     postDeleteUserScheduleInstance(formBody): Observable<any> {
         console.log("-------- testRequest/DeleteUserScheduleInstance --------", formBody);
         return this.http.post(`${TestReqestApiUrl.postDeleteUserScheduleInstanceUrl}`,
@@ -49,7 +54,6 @@ export class TestRequestService extends BaseService {
             .map(this.getJson);
     }
     postAssignUser(formBody): Observable<any> {
-        console.log("-------- testRequest/DeleteUserScheduleInstance --------", formBody);
         return this.http.post(`${TestReqestApiUrl.postAssignUserUrl}`,
             formBody, {headers: this.headers})
             .map(this.getJson);

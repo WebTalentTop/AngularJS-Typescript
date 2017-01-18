@@ -1,5 +1,4 @@
-﻿
-<div class="ui-g-12" style="border:1px red solid">
+﻿<div class="ui-g-12" style="border:1px red solid">
     <div class="ui-g-3">
         <div class="ui-toolbar-group-left">
             <button pButton type="button" icon="fa-chevron-circle-left" (click)="moveCalendar('backward')"></button>
@@ -343,8 +342,12 @@
 </p-dialog>
 
 
-<p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog" showEffect="fade" [minWidth]="800"
-          [responsive]="true">
+<p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog"
+          showEffect="fade"
+          [minWidth]="800"
+          [responsive]="true"
+          [closeOnEscape]="false"
+          [closable]="false">
     <form #tfMoveForm="ngForm" (ngSubmit)="onSubmitMoveTestFacilitySchedule(tfMoveForm.value)">
         <div class="ui-g-12">
 
@@ -361,7 +364,7 @@
 
             </div>
 
-            <div class="ui-g-4">
+            <div class="ui-g-4" *ngIf="!facilityChanged">
 
                 <label>
                     <span class="text">End</span> <br/>
@@ -374,7 +377,7 @@
                 </label>
 
             </div>
-            <div class="ui-g-4">
+            <div class="ui-g-4" *ngIf="!facilityChanged">
 
 
                 <span class="text">Operators:</span> <br/>
@@ -384,11 +387,12 @@
                                label="Move"></p-radioButton>
 
 
+
             </div>
             <div class="ui-g-4">
-                <button type="button" pButton icon="ui-icon-calendar" label="Cancel" (click)="cancelMove($event)"
+                <button type="button" pButton icon="ui-icon-cancel" label="Cancel" (click)="cancelMove($event)"
                 ></button>
-                <button type="submit" pButton icon="ui-icon-calendar" label="Move"
+                <button type="submit" pButton icon="ui-icon-arrow-forward" label="Move"
                         [disabled]='!tfMoveForm.valid'></button>
 
             </div>
@@ -396,32 +400,69 @@
     </form>
 </p-dialog>
 
-<p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog" showEffect="fade" [minWidth]="800"
-          (onBeforeHide)="onBeforeDialogHide($event)">
+<p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog"
+          showEffect="fade"
+          width="800"
+          (onBeforeHide)="onBeforeDialogHide($event)"
+          [closeOnEscape]="false"
+          [closable]="!(assignResourceForm.dirty)">
 
+    <form #assignResourceForm="ngForm" (ngSubmit)="saveAssignResourcesChanges(assignResourceForm)">
+        <div class="ui-g form-group">
 
-    <div class="ui-helper-clearfix">
-        <button type="button" pButton icon="ui-icon-person-add" style="float:left" (click)="addEmptyRowOperatorBlock()"
-                label="Add User"></button>
-        <button type="button" pButton icon="ui-icon-save" style="float:left" (click)="saveAssignResourcesChanges()"
-                label="Save"></button>
+            <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
+                <span class="text"> Default Start Time</span> <br/>
+                <p-dropdown [options]="timeOptions"
+                            [(ngModel)]="scheduleStartTime"
+                            name="scheduleStartTime"
+                            id="scheduleStartTime"
+                            appendTo="body"
+                            [style]="{'width':'100%'}"
+                            (onSelect)="testOperatorsForBlockChange(item, i)"
+                            [required]="true">
 
-    </div>
-    <form>
-        <div class="ui-grid-row" style="width: 700px;">
+                </p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
+                <span class="text"> Default End Time</span> <br/>
+                <p-dropdown [options]="timeOptions"
+                            [(ngModel)]="scheduleEndTime"
+                            name="scheduleEndTime"
+                            id="scheduleEndTime"
+                            appendTo="body"
+                            [style]="{'width':'100%'}"
+                            (onSelect)="testOperatorsForBlockChange(item, i)"
+                            [required]="true"
+                >
+                </p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-sm-4">
+                <button type="button" pButton icon="ui-icon-person-add" (click)="addEmptyRowOperatorBlock()"
+                        label="Add User"></button>
+                <button type="submit" pButton icon="ui-icon-save" [disabled]="!assignResourceForm.valid"
+                        label="Save"></button>
+                <button type="button" pButton icon="ui-icon-close" (click)="closeAssignResourceDialog()"
+                        label="Cancel"></button>
+            </div>
+
+        </div>
+
+        <div class="ui-g-12">
             <!--scrollHeight="200px" scrollable="true"-->
             <p-dataTable [value]="testOperatorsForBlock">
                 <header></header>
                 <p-column hidden="true" field="titanUserScheduleId"></p-column>
 
-                <p-column field="userDisplayName">
+                <p-column field="titanUserId">
                     <template pTemplate="body" let-item="rowData" let-i="rowIndex">
                         <p-dropdown [options]="titanUsersListForTenant"
-                                    [(ngModel)]="testOperatorsForBlock[i].titanUserId"
-                                    name="testOperatorsForBlock{{[i]}}.titanUserId"
+                                    [(ngModel)]="item.titanUserId"
+                                    name="testOperatorsForBlock[{{i}}].titanUserId"
                                     appendTo="body"
                                     [style]="{'width':'100%'}"
-                                    (onSelect)="testOperatorsForBlockChange(item, i)">
+                                    (onChange)="testOperatorsForBlockChange(item, i)"
+                                    [required]="true"
+                        >
 
                         </p-dropdown>
                     </template>
@@ -432,14 +473,24 @@
                         Start
                     </template>
                     <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                        <p-calendar [(ngModel)]="testOperatorsForBlock[i].startDate" appendTo="body"
+                        <p-calendar [(ngModel)]="item.startDate" appendTo="body"
                                     [selectOtherMonths]="true" [showOtherMonths]="true"
                                     [minDate]="selectedBlockStartDate"
                                     [maxDate]="selectedBlockEndDate"
                                     (onSelect)="testOperatorsForBlockChange(item,i)"
-                                    name="testOperatorsForBlock{{[i]}}.startDate">
-
+                                    name="testOperatorsForBlock[{{i}}].startDate"
+                                    [required]="true">
                         </p-calendar>
+                        <p-dropdown [options]="timeOptions" *ngIf="showTimeDuringAssignOperation"
+                                    [(ngModel)]="item.defaultStartMinutesPastMidnight"
+                                    name="testOperatorsForBlock[{{i}}].defaultStartMinutesPastMidnight"
+
+                                    appendTo="body"
+                                    [style]="{'width':'100%'}"
+                                    (onChange)="testOperatorsForBlockChange(item, i)"
+                                    [required]="true"
+                        >
+                        </p-dropdown>
                     </template>
                 </p-column>
                 <p-column field="endDate" sortable="true">
@@ -447,14 +498,25 @@
                         End
                     </template>
                     <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                        <p-calendar [(ngModel)]="testOperatorsForBlock[i].endDate" appendTo="body"
+                        <p-calendar [(ngModel)]="item.endDate" appendTo="body"
                                     [selectOtherMonths]="true" [showOtherMonths]="true"
-                                    [minDate]="selectedBlockStartDate"
+                                    [minDate]="item.startDate"
                                     [maxDate]="selectedBlockEndDate"
                                     (onSelect)="testOperatorsForBlockChange(item,i)"
-                                    name="testOperatorsForBlock{{[i]}}.endDate>
+                                    name="testOperatorsForBlock[{{i}}].endDate"
+                                    [required]="true">
 
                         </p-calendar>
+                        <p-dropdown [options]="timeOptions" *ngIf="showTimeDuringAssignOperation"
+                                    [(ngModel)]="item.defaultEndMinutesPastMidnight"
+                                    name="testOperatorsForBlock[{{i}}].defaultEndMinutesPastMidnight"
+
+                                    appendTo="body"
+                                    [style]="{'width':'100%'}"
+                                    (onChange)="testOperatorsForBlockChange(item, i)"
+                                    [required]="true"
+                        >
+                        </p-dropdown>
                         <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
 
                         <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
@@ -516,6 +578,7 @@
             </label>
         </div>
     </div>
+
     <div class="ui-g-12">
         <h3>Split Event</h3>
         <div class="ui-g-12 ui-md-4">
