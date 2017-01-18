@@ -20,12 +20,12 @@
 
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="name"
+                                    <input type="text" style="width:100%" pInputText name="name" [(ngModel)]="tenantProfile.name"
                                            minlength="3" class="form-control" required row="20">
                                     <label>Name *</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="url" class="form-control" required minlength="3" row="20">
+                                    <input type="text" style="width:100%" pInputText name="url" [(ngModel)]="tenantProfile.hostAddress" class="form-control" required minlength="3" row="20">
                                     <label>Url *</label>
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
@@ -136,7 +136,7 @@
                     <button pButton type="button" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User"></button>
                   </p>
               </header>
-              <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
+              <p-dataTable [value]="tenantUsers" [paginator]="true" rows="15" [responsive]="true">
                   <p-column header="Name" sortable="true">
                       <template let-userrow="rowData" pTemplate type="body">
                           <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
@@ -144,8 +144,8 @@
                           </template>
                  </p-column>
                   <p-column header="Action">
-                      <template let-FunctionGroup="rowData" pTemplate type="body">
-                          <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" label="Delete"></button>
+                      <template let-UserInfo="rowData" pTemplate type="body">
+                          <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" label="Delete" (click)="onDeleteUserTenantMap(UserInfo)"></button>
                       </template>
                   </p-column>
 
@@ -159,16 +159,14 @@
 
                         <div class="ui-g-4"><b>Users :</b></div>
                         <div class="ui-g-8">
-                          <p-multiSelect [options]="allUsers"
-                                         name="allUsers" id="allusers" [style]="{'width':'100%'}">
-                          </p-multiSelect>
+                            <p-dropdown [options]="users" [style]="{'width':'100%'}" (onChange)="onUserChange($event)" name="users" [autoWidth]="false"></p-dropdown>
                         </div>
                 </div>
               <br /><br />
                 <footer>
                     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                         <button type="button" pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
-                        <button type="button" pButton icon="ui-icon-save" label="Add User"></button>
+                        <button type="button" pButton icon="ui-icon-save" label="Add User" (click)="onAddUser()"></button>
                     </div>
                 </footer>
 
