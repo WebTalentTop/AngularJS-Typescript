@@ -4,13 +4,7 @@
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                 <h2> Create New Torque Sheet </h2><br />
-                <p-panel>
-                  <header class="with-controls">
-                      <p class="ui-panel-title">Torque Sheet</p>
-                      <p class="controls">
-                        <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
-                      </p>
-                  </header>
+                <p-panel header="Torque Sheet">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" *ngIf="torqueSheetDetails">
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
@@ -18,6 +12,9 @@
                               <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'100%'}"
                                   name="newTorqueSheetNameId" required #newTorqueSheetNameRef required >
                               </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6" style="text-align:right"><br /><br />
+                            <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
                           </div>
                         </div>
                         <div class="hidden" style="display:none">

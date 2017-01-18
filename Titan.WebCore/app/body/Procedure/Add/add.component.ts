@@ -8,18 +8,20 @@ import { SelectItem } from 'primeng/primeng';
 
 @Component({
     selector: 'add-procedure',
-    styleUrls: ['app/body/Procedure/Add/add.component.css'], 
+    styleUrls: ['app/body/Procedure/Add/add.component.css'],
     templateUrl: 'app/body/Procedure/Add/add.component.html'
 })
 
 export class AddComponent {
     public procedure:any;
     public testTypes: any;
+    testAllModes: any;
     public testModes: Array<any> = new Array();
     constructor(private procedureService: ProcedureService,
         private testTypeService: TestTypeService,
         private testModeService: TestModeService,
         private testtypeService: TestTypeService,
+        private testmodeservice: TestModeService,
         private router: Router) {
 
     }
@@ -27,6 +29,7 @@ export class AddComponent {
     ngOnInit() {
         this.procedure = new Object();
         this.getTestType();
+        this.getTestModes();
         var testMode = {
             label: "Select Test Type to Populate",
             value: null
@@ -55,7 +58,28 @@ export class AddComponent {
             }
         });
     }
-
+    getTestModes() {
+        //    userRoles
+        this.testmodeservice.getAllTestModes().subscribe(response => {
+            this.testAllModes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                //resultMap.push({
+                //    label: "Select Test Role",
+                //    value: null
+                //});
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testAllModes = resultMap;
+            }
+            console.log(response);
+        });
+    }
     onTestTypeChange() {
         this.testModes = new Array();
         //this.testModes
@@ -77,7 +101,7 @@ export class AddComponent {
             }
             else {
                 var testMode = [{
-                    label: "No Modes available", 
+                    label: "No Modes available",
                     value: null
                 }];
                 this.testModes = testMode;
@@ -93,4 +117,3 @@ export class AddComponent {
         });
     }
 }
-                                                                          
