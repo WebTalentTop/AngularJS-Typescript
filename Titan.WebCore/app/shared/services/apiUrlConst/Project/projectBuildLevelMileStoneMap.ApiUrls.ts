@@ -6,9 +6,9 @@ import { GridApiUrl } from '../gridApiUrls';
 
 export class ProjectBuildLevelMileStoneMapApiUrl {
     //public static gridApiUrl: string = GridApiUrl.projectBuildLevelMilestoneMapGridUrl;
-    public static postCreatedUrl: string = titanApiUrl + 'projectBuildLevelMilestone/create';
-    public static postUpdateByIdUrl: string = titanApiUrl + 'projectBuildLevelMilestone';
-    public static getAllBuilLevelMilestoneByProjectUrl: string = titanApiUrl + 'projectBuildLevelMilestone/project';
-    public static getByIdUrl: string = titanApiUrl + 'projectBuildLevelMilestone';
+    public static postCreatedUrl: string = titanApiUrl + 'projectBuildLevelMilestonemap/create';
+    public static postUpdateByIdUrl: string = titanApiUrl + 'projectBuildLevelMilestonemap';
+    public static getAllBuilLevelMilestoneByProjectUrl: string = titanApiUrl + 'projectBuildLevelMilestonemap/project';
+    public static getByIdUrl: string = titanApiUrl + 'projectBuildLevelMilestonemap';
 
 }

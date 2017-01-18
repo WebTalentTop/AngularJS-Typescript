@@ -2,7 +2,7 @@
  * Created by ZeroInfinity on 1/11/2017.
  */
 
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 import {ProjectService} from "../../../shared/services/Containers/ProjectService/project.service";
 import {BuildLevelService} from "../../../shared/services/Containers/BuildLevelService/buildLevel.service";
@@ -21,6 +21,8 @@ import {IMileStoneBuildLevelCol} from "../../../shared/services/definitions/Proj
 import {IProjectBuildLevelMilestoneMapViewModel} from "../../../shared/services/definitions/ProjectBuildLevelMileStoneView/IProjectBuildLevelMilestoneMapViewModel";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/forkJoin';
+import { Message } from 'primeng/primeng';
+import {isBoolean} from "util";
 
 @Component({
     selector: 'project-schedule',
@@ -29,14 +31,15 @@ import 'rxjs/add/observable/forkJoin';
 })
 
 export class ProjectScheduleComponent {
-    projectId: string = '53FE9592-1A9B-07D0-85D7-006A30BCD348';
+    @Input() projectId:string;
+    msgs:Message[] = [];
     buildLevels: IBuildLevel[] = [];
+    buildLevelsColHeaders:any[] = [];
     mileStones: IMileStone[] = [];
     projectBLMapList: IProjectBuildLevelMap[] = [];
     projectBLMSMapList: IMileStoneBuildLevelCol[] = [];
     dataToSaveProjectBLMSMapList: IProjectBuildLevelMileStoneView;
-    mileStoneBuildLevel:any[] = [];
-
+    mileStoneBuildLevel: any[] = [];
     isBuildLevelData: boolean = false;
 
     selectedNewBuildLevels: string[] = [];
@@ -49,7 +52,7 @@ export class ProjectScheduleComponent {
                 private buildLevelService: BuildLevelService,
                 private mileStoneService: MilestoneService,
                 private projectBuildLevelMapService: ProjectBuildLevelMapService,
-                private projectMapService: ProjectBuildLevelMileStoneMapService) {
+                private projectBuildLevelMileStoneMapService: ProjectBuildLevelMileStoneMapService) {
         this.ls.setShow(true);
     }
 
@@ -57,7 +60,7 @@ export class ProjectScheduleComponent {
         let buildLevelCall = this.buildLevelService.getBuildLevels();
         let mileStoneCall = this.mileStoneService.getAll();
         let projectBLMapCall = this.projectBuildLevelMapService.getAllByProjectId(this.projectId);
-        let projectBLMSMapCall = this.projectMapService.getAllBuildLevelMileStoneByProjectUrl(this.projectId);
+        let projectBLMSMapCall = this.projectBuildLevelMileStoneMapService.getAllBuildLevelMileStoneByProjectUrl(this.projectId);
 
         Observable.forkJoin([buildLevelCall, mileStoneCall, projectBLMapCall, projectBLMSMapCall])
             .subscribe(results => {
@@ -114,7 +117,7 @@ export class ProjectScheduleComponent {
 
     initialize() {
         let pBLMSMapListHasData: boolean = (this.projectBLMSMapList.length > 0);
-        let pBLMapListHasData: boolean = false; //this.projectBLMapList.length > 0;
+        let pBLMapListHasData: boolean = this.projectBLMapList.length > 0;
 
         this.ls.logConsole("pBLMSMapListHasData ---", pBLMSMapListHasData);
         this.ls.logConsole("pBLMapListHasData -----", pBLMapListHasData);
@@ -125,11 +128,22 @@ export class ProjectScheduleComponent {
         let mileStoneBuildLevelRow = [];
         let mileStoneCols = [];
 
+        this.buildLevelsColHeaders[0] = {id:'',name:'Mile Stones', visible:true};
+        if (pBLMapListHasData) {
+            this.projectBLMapList.forEach(item => {
+                let blMatchingProjectBLList = this.buildLevels.filter(filter => filter.id === item.buildLevelId)[0];
+                this.buildLevelsColHeaders.push({id: blMatchingProjectBLList.id, name: blMatchingProjectBLList.name, visible: true});
+                this.selectedNewBuildLevels.push(item.buildLevelId)
+
+            });
+        }
+
         //region Initialize all data with check points
         this.mileStones.map(ms => {
             let mileStoneCol: IMileStoneBuildLevelCol;
 
             this.buildLevels.map(bl => {
+
                 let currentBuildLevelInfo: IProjectBuildLevelMap;
                 //= this.projectBLMapList
                 //  .filter(pBLMfilter => bl.id === pBLMfilter.buildLevelId)[0];
@@ -145,7 +159,7 @@ export class ProjectScheduleComponent {
                             isCurrentBuildLevelMapped = true;
                             return x;
                         }
-                        if (x.mileStone.id === ms.id) {
+                        if (x.mileStoneId === ms.id) {
                             isCurrentMileStoneMapped = true;
                         }
                     });
@@ -165,6 +179,7 @@ export class ProjectScheduleComponent {
                     id: this.projectId,
                     buildLevelId: currentBuildId,
                     buildLevelMap: currentBuildLevelInfo,
+                    mileStoneId: ms.id,
                     mileStone: ms,
                     plannedStartDate: '',
                     plannedEndDate: '',
@@ -204,35 +219,6 @@ export class ProjectScheduleComponent {
 
     }
 
-    saveGrid(event) {
-        let blmsMap: IProjectBuildLevelMilestoneMapViewModel[] = [];
-        this.ls.logConsole("Form Values ----", this.mileStoneBuildLevel);
-        this.mileStoneBuildLevel.map(row => {
-            let projectBLMSView: IProjectBuildLevelMilestoneMapViewModel = {
-                projectId: '',
-                projectBuildLevelId: '',
-                buildLevelName: '',
-                mileStoneId: '',
-                mileStoneName: '',
-                plannedStartDate: '',
-                plannedEndDate: ''
-            };
-
-
-            if (row.plannedStartDate) {
-                projectBLMSView.projectId = this.projectId;
-                projectBLMSView.projectBuildLevelId = row.buildLevelId;
-                projectBLMSView.buildLevelName = row.buildLevelMap.name;
-                projectBLMSView.mileStoneId = row.mileStone.id;
-                projectBLMSView.mileStoneName = row.mileStone.name;
-                projectBLMSView.plannedStartDate = row.plannedStartDate;
-                projectBLMSView.plannedEndDate = row.plannedEndDate;
-                blmsMap.push(projectBLMSView);
-            }
-        });
-        this.ls.logConsole("Data to push -----", blmsMap);
-    }
-
     handleToggleEvent(event, id) {
         this.ls.logConsole("Toggle Selected ------------------", this.selectedToggleBuildLevel);
         this.ls.logConsole("Toggle Id Passed to the event ----", id);
@@ -253,43 +239,225 @@ export class ProjectScheduleComponent {
         if (this.buildLevelsToAdd.length > 0) {
             this.isBuildLevelData = true;
         }
+
+
+        this.buildLevelsColHeaders = [];
+        this.buildLevelsColHeaders[0] = {id: '', name: 'Mile Stones', visible: true};
+        this.ls.logConsole("SelectedNewBuildLevels ----", this.selectedNewBuildLevels);
+
+        this.selectedNewBuildLevels.forEach(newBuildLevels => {
+            let blMatchingProjectBLList = this.buildLevels.filter(filter => filter.id === newBuildLevels)[0];
+            this.ls.logConsole("BLMatchingProjectBLList -----", blMatchingProjectBLList);
+
+            this.buildLevelsColHeaders.push({
+                id: blMatchingProjectBLList.id,
+                name: blMatchingProjectBLList.name,
+                visible: true
+            });
+        });
+
         this.enableBuildLevelById(item.id, event);
         //this.ls.logConsole("New Build Level List", this.buildLevelsToAdd);
     }
 
     /*private newAddedBuildListGeneration() {
-        this.ls.logConsole("Newly Added Build List Generation called", "");
-        //this.mileStoneBuildLevel = [];
-        let mileStoneBuildLevelRow = [];
-        let mileStoneCols = [];
+     this.ls.logConsole("Newly Added Build List Generation called", "");
+     //this.mileStoneBuildLevel = [];
+     let mileStoneBuildLevelRow = [];
+     let mileStoneCols = [];
 
-        if (this.buildLevelsToAdd.length > 0) {
-            this.isBuildLevelData = true;
+     if (this.buildLevelsToAdd.length > 0) {
+     this.isBuildLevelData = true;
 
-            this.buildLevelsToAdd.forEach(item => {
-                /!* let currentBuildLevelInfo = this.projectBLMapList
-                 .filter(pBLMfilter => item.id === pBLMfilter.buildLevelId)[0];*!/
-                let isBuildLevelsEnabled: boolean = false;
+     this.buildLevelsToAdd.forEach(item => {
+     /!* let currentBuildLevelInfo = this.projectBLMapList
+     .filter(pBLMfilter => item.id === pBLMfilter.buildLevelId)[0];*!/
+     let isBuildLevelsEnabled: boolean = false;
 
-                this.enableBuildLevelById(item.id);
+     this.enableBuildLevelById(item.id);
 
-                //let testCurrentMileStoneBuildLevel = this.mileStoneBuildLevel.find(x=> x.mileStoneRow.find(y=> y.buildLevelId === item.id));
-            });
-        }
-    }*/
+     //let testCurrentMileStoneBuildLevel = this.mileStoneBuildLevel.find(x=> x.mileStoneRow.find(y=> y.buildLevelId === item.id));
+     });
+     }
+     }*/
 
     enableBuildLevelById(id, toggleEvent) {
         let mileStoneEnabled: boolean = toggleEvent;
 
+        /*console.time('arrowFunc');
         this.mileStoneBuildLevel
             .filter(filterItemRow => {
                 this.ls.logConsole("filterItemRow -------", filterItemRow);
                 filterItemRow.filter(filterItemCol => {
                     if (filterItemCol.buildLevelId === id) {
                         filterItemCol.enabled = mileStoneEnabled;
-                        return filterItemCol;
                     }
                 })
             });
+        console.timeEnd("arrowFunc");*/
+
+        console.time("forEach");
+        this.mileStoneBuildLevel.forEach(row => {
+            row.forEach(col =>{
+                if (col.buildLevelId === id) {
+                    col['enabled'] = mileStoneEnabled;
+                }
+            })
+        })
+
+        console.timeEnd('forEach');
+    }
+
+    shorOrHideBuildLevelHeader(id):boolean {
+        return this.selectedNewBuildLevels.filter(filter => filter === id).length > 0;
+    }
+
+    saveGrid(event) {
+        this.msgs = [];
+        let mileStoneStatusId: string = '1036C8A9-81DD-4577-9878-6AD0D3816270';
+        let formIsValid:boolean[] = [];
+        let blmsMap: IProjectBuildLevelMilestoneMapViewModel[] = [];
+        this.ls.logConsole("Form Values ----", this.mileStoneBuildLevel);
+
+        this.mileStoneBuildLevel.map(row => {
+            let projectBLMSView: IProjectBuildLevelMilestoneMapViewModel = {
+                projectId: '',
+                projectBuildLevelId: '',
+                buildLevelName: '',
+                mileStoneId: '',
+                mileStoneName: '',
+                plannedStartDate: '',
+                plannedEndDate: ''
+            };
+
+            row.map(col => {
+
+                if (col.plannedStartDate) {
+                    if (col.isDatesValid) {
+                        projectBLMSView.projectId = this.projectId;
+                        projectBLMSView.projectBuildLevelId = col.buildLevelId;
+                        //projectBLMSView.buildLevelName = row.buildLevelMap.name;
+                        projectBLMSView.mileStoneId = col.mileStone.id;
+                        projectBLMSView.mileStoneStatusId = mileStoneStatusId;
+                        //projectBLMSView.mileStoneName = col.mileStone.name;
+                        projectBLMSView.plannedStartDate = col.plannedStartDate;
+                        projectBLMSView.plannedEndDate = col.plannedEndDate;
+                        blmsMap.push(projectBLMSView);
+                    }
+                    else {
+                        formIsValid.push(false);
+                    }
+                }
+            });
+        });
+
+        if (formIsValid.length === 0 && blmsMap.length > 0) {
+            this.projectBuildLevelMileStoneMapService.postAdd(blmsMap)
+                .subscribe(res => {
+                    this.ls.logConsole("Posting Build Level MileStone Map Service", res);
+                });
+        }
+
+        if (formIsValid.length > 0) {
+            this.msgs.push({severity: 'warn', summary: 'Form is not valid', detail: 'Form has some invalid dates entered. Please fix before submit!'})
+        }
+
+        if (blmsMap.length === 0 ){
+            this.msgs.push({severity: 'info', summary: 'No Data', detail: 'Form has no data. Please enter some data before submit!'})
+        }
+        this.ls.logConsole("Data to push -----", blmsMap);
+    }
+
+    validateStartDate(event, item:IMileStoneBuildLevelCol):boolean {
+        this.msgs = [];
+        let errorColor = "2px solid #FF3366";
+        let startDateChangedValue = event;
+        item.startDateErrorColor = 'none';
+        item.endDateErrorColor = 'none';
+        item.validDateMessage = '';
+
+        if (startDateChangedValue) {
+            if (!item.plannedEndDate) {
+                item.isDatesValid = false;
+                item.endDateErrorColor =errorColor;
+                item.validDateMessage = 'End date require if you have a Start Date';
+                return item.isDatesValid;
+            }
+        }
+
+        if (item.plannedEndDate) {
+            if (!startDateChangedValue) {
+                item.isDatesValid = false;
+                item.startDateErrorColor = errorColor;
+                item.validDateMessage = 'Start date require if you have a End Date';
+                return item.isDatesValid;
+            }
+        }
+
+        if (startDateChangedValue && item.plannedEndDate) {
+            let sd = new Date(startDateChangedValue);
+            let ed = new Date(item.plannedEndDate);
+
+            if (sd > ed) {
+                item.isDatesValid = false;
+                item.startDateErrorColor = errorColor;
+                item.validDateMessage = "Start date can't be in the feature than end date";
+                return item.isDatesValid;
+            }
+        }
+        item.startDateErrorColor = 'none';
+        item.endDateErrorColor = 'none';
+        item.startDateErrorColor = '';
+        item.endDateErrorColor = '';
+        item.isDatesValid = true;
+        return true;
+
+    }
+
+    validateEndDate(event, item:IMileStoneBuildLevelCol):boolean {
+        this.msgs = [];
+        let errorColor = "2px solid #FF3366";
+        let endDateChangedValue = event;
+        item.startDateErrorColor = 'none';
+        item.endDateErrorColor = 'none';
+        item.validDateMessage = '';
+
+        if (item.plannedStartDate) {
+            if (!endDateChangedValue) {
+                item.isDatesValid = false;
+                item.endDateErrorColor =errorColor;
+                item.validDateMessage = 'End date require if you have a Start Date';
+                return item.isDatesValid;
+            }
+        }
+
+        if (endDateChangedValue) {
+            if (!item.plannedStartDate) {
+                item.isDatesValid = false;
+                item.startDateErrorColor = errorColor;
+                item.validDateMessage = 'Start date require if you have a End Date';
+                return item.isDatesValid;
+            }
+        }
+
+        if (item.plannedStartDate && endDateChangedValue) {
+            let sd = new Date(item.plannedStartDate);
+            let ed = new Date(endDateChangedValue);
+
+            if (sd > ed) {
+                item.isDatesValid = false;
+                item.startDateErrorColor = errorColor;
+                item.validDateMessage = "Start date can't be in the feature than end date";
+                return item.isDatesValid;
+            }
+        }
+        item.startDateErrorColor = 'none';
+        item.endDateErrorColor = 'none';
+        item.startDateErrorColor = '';
+        item.endDateErrorColor = '';
+        item.isDatesValid = true;
+
+        return true;
+
     }
 }
