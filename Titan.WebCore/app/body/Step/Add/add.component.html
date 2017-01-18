@@ -4,7 +4,7 @@
                                 Step Name *
                             </div>
                             <div class="ui-g-8">
-                                <input type="text" name="stepName" pInputText [(ngModel)]="stepDetails.name" placeholder="Please enter Step Name" class="form-control" style="width:100%"
+                                <input type="text" name="stepName"  id="stepName" pInputText [(ngModel)]="stepDetails.name" placeholder="Please enter Step Name" class="form-control" style="width:100%"
                                     required #stepNameRef="ngModel"/>
                             </div>
                     </div>
@@ -13,7 +13,7 @@
                                 Test Stage
                             </div>
                             <div class="ui-g-8">
-                                <p-dropdown [options]="testStages" [(ngModel)]="stepDetails.testStageId" name="testStage" [style]="{'width':'100%'}">
+                                <p-dropdown [options]="testStages" [(ngModel)]="stepDetails.testStageId" name="testStage"  id="testStage" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
                     </div>
@@ -22,7 +22,7 @@
                                 Step Type
                             </div>
                             <div class="ui-g-8">
-                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepTypeId"  (onChange)="onStepTypeChange()" name="stepType" [style]="{'width':'100%'}">
+                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepTypeId"  (onChange)="onStepTypeChange()" name="stepType"  id="stepType" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
                     </div>
@@ -31,7 +31,7 @@
                                 {{stepTypeDetailLabelText}}
                             </div>
                             <div class="ui-g-8">
-                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail"></p-multiSelect>                                
+                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail" id="stepTypeDetail"></p-multiSelect>                                
                             </div>
                     </div>
                     <div class="ui-grid-row">
@@ -39,8 +39,8 @@
                                 Repeat
                             </div>
                             <div class="ui-g-8">
-                                 <div class="ui-g-3"><p-radioButton name="repeat" value="true" [(ngModel)]="stepDetails.repeatStep" label="Yes" (onClick)="onRepeatChange(true)"></p-radioButton></div>
-                                <div class="ui-g-3"><p-radioButton name="repeat" value="false" [(ngModel)]="stepDetails.repeatStep" label="No" (onClick)="onRepeatChange(false)"></p-radioButton></div>                            
+                                 <div class="ui-g-3"><p-radioButton name="repeat"  id="repeatyes" value="true" [(ngModel)]="stepDetails.repeatStep" label="Yes" (onClick)="onRepeatChange(true)"></p-radioButton></div>
+                                <div class="ui-g-3"><p-radioButton name="repeat"  id="repeatno" value="false" [(ngModel)]="stepDetails.repeatStep" label="No" (onClick)="onRepeatChange(false)"></p-radioButton></div>                            
                             </div>
                     </div>
                     <div class="ui-grid-row" *ngIf="showRepeatDetails">
@@ -48,7 +48,7 @@
                                 Step Frequency
                             </div>
                             <div class="ui-g-8">
-                                <p-dropdown [options]="stepFrequencies" [(ngModel)]="stepDetails.stepFrequencyId"  (onChange)="onStepFrequencyChange()" name="stepFrequency" [style]="{'width':'100%'}">
+                                <p-dropdown [options]="stepFrequencies" [(ngModel)]="stepDetails.stepFrequencyId"  (onChange)="onStepFrequencyChange()" name="stepFrequency"  id="stepFrequency" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
                     </div>
@@ -57,7 +57,7 @@
                                 Test % / # of Cycles
                             </div>
                             <div class="ui-g-8">
-                                <input type="text" name="testOrCycle" pInputText [(ngModel)]="stepDetails.cycleOrTestPercentage" placeholeder="Please enter Test % / # of Cycles"
+                                <input type="text" name="testOrCycle"   id="testOrCycle" pInputText [(ngModel)]="stepDetails.cycleOrTestPercentage" placeholeder="Please enter Test % / # of Cycles"
                                     class="form-control"/>
                             </div>
                     </div><br />
