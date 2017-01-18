@@ -10,13 +10,13 @@ import { TestRequirementService} from './../../../shared/services/testrequiremen
 import AddSharedModule from './../../Step/Add/add-shared.module';
 import DetailsSharedModule from './../../Step/Details/details-shared.module';
 
-import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, 
+import { EditorModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, 
     AutoCompleteModule, ConfirmDialogModule,ConfirmationService, DataListModule, DialogModule  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
+    imports: [ EditorModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, DropdownModule, InputTextareaModule,
         InputTextModule, PanelModule, detailsRoutes, AutoCompleteModule, ConfirmDialogModule, DataListModule, DialogModule
         , AddSharedModule, DetailsSharedModule],
     providers: [ProcedureService, TestTypeService, TestModeService, TestRequirementService, ConfirmationService, StepService],

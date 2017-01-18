@@ -39,6 +39,7 @@ export class DetailsComponent {
         private procedureService: ProcedureService,
         private testtypeService: TestTypeService,
         private testmodeService: TestModeService,
+        private testmodeservice: TestModeService,
         private router: Router,
         private route: ActivatedRoute,
         private testrequirementService: TestRequirementService,
@@ -53,11 +54,7 @@ export class DetailsComponent {
 
     ngOnInit() {
         this.getTestType();
-        var testMode = {
-            label: "Select Test Type to Populate",
-            value: null
-        };
-        this.testModes.push(testMode);
+        this.getTestModes();
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.procedureService.getById(params['id']).subscribe(res => {
@@ -230,7 +227,27 @@ export class DetailsComponent {
             }
         });
     }
-
+     getTestModes() {
+        //    userRoles
+        this.testmodeservice.getAllTestModes().subscribe(response => {
+            this.testAllModes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Mode",
+                    value: null
+                });
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testAllModes = resultMap;
+            }
+        });
+    }
     isUpButtonVisible(step)
     {
         if (this.selectedSteps != undefined && this.selectedSteps.length > 1 && step.id != this.selectedSteps[0].id)
