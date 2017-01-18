@@ -5,7 +5,7 @@ import { FormsModule} from '@angular/forms';
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { UserService } from '../../../shared/services/user.service';
-
+import { TenantService } from '../../../shared/services/tenant.service';
 import {
 
     DataTableModule, AutoCompleteModule, DataGridModule, TabViewModule, ButtonModule, CalendarModule, MultiSelectModule,
@@ -23,7 +23,7 @@ import detailsRoutes from "./details.routes";
         CheckboxModule,  FormsModule, SpinnerModule, PaginatorModule, EditorModule, DataTableModule,
         TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule,
         FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
-    providers: [EquipmentTypeService, UserService, TestRequestSensorService],
+    providers: [EquipmentTypeService, TenantService, UserService, TestRequestSensorService],
     declarations: [DetailsComponent]
 })
 
