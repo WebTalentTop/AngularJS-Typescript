@@ -7,7 +7,7 @@
                     <div class="body">
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-12">
-                                <input type="text" pInputText name="title" [(ngModel)]="workRequestTitle"
+                                <input type="text" pInputText name="title" id="title"  [(ngModel)]="workRequestTitle"
                                        minlength="3"  required style="width:100%">
                                 <label>Work Request Title <span >*</span></label>
                             </div>
@@ -15,51 +15,51 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Project Code :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" [(ngModel)]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" [(ngModel)]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes"  id="projectCodes">
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Build Levels :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels" [(ngModel)]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels" [(ngModel)]="buildLevels" (onChange)="onBuildLevelChange($event)" name="buildLevels"  id="buildLevels">
                               </p-dropdown>
                           </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Vehicle :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" [(ngModel)]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" [(ngModel)]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle"  id="vehicle" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Priority :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="priority" [(ngModel)]="priority" (onChange)="onPriorityChange($event)" name="priority">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="priority" [(ngModel)]="priority" (onChange)="onPriorityChange($event)" name="priority"  id="priority">
                               </p-dropdown>
                           </div>
                         </div><br /><br />
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <input type="text" pInputText name="priorityReason" [(ngModel)]="priorityReason" style="width:100%">
+                              <input type="text" pInputText name="priorityReason"  id="priorityReason" [(ngModel)]="priorityReason" style="width:100%">
                               <label>Priority Reason</label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="personInCharge" [(ngModel)]="personInCharge" style="width:100%">
+                                <input type="text" pInputText name="personInCharge" id="personInCharge" [(ngModel)]="personInCharge" style="width:100%">
                                 <label>Person In Charge</label>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" id="plannedStartDate"  [showIcon]="true"></p-calendar>
                               <label>Start Date :</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" [showIcon]="true" ></p-calendar>
+                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" id="plannedEndDate" [showIcon]="true" ></p-calendar>
                               <label>End Date :</label>
                             </div>
                         </div>
                     </div>
                     <footer>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/workrequest"></button>
-                        <button id="create" pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()" class="btn btn-success">  </button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" class="blue-grey-btn" routerLink="/workrequest"></button>
+                        <button  pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()" class="btn btn-success">  </button>
                     </footer>
                   </p-panel>
               </form>
