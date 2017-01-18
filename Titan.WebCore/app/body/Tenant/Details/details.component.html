@@ -20,12 +20,12 @@
 
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="name" [(ngModel)]="userProfile.firstName"
+                                    <input type="text" style="width:100%" pInputText name="name"
                                            minlength="3" class="form-control" required row="20">
                                     <label>Name *</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="url" class="form-control" required minlength="3" row="20" [(ngModel)]="userProfile.firstName">
+                                    <input type="text" style="width:100%" pInputText name="url" class="form-control" required minlength="3" row="20">
                                     <label>Url *</label>
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
@@ -65,7 +65,7 @@
 
                             <div class="ui-g-4"><b>Function Group :</b></div>
 
-                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
+                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" [(ngModel)]="selectedFunctionGroupId" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
                             </div>
                     </div>
 
@@ -109,7 +109,7 @@
                     <div class="ui-grid-row">
 
                         <p-dataTable [value]="userFunctionGroups" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-                            <p-column field="functionGroupName" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            <p-column field="name" header="Function Group Name"  sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">
                                 <template let-FunctionGroup="rowData" pTemplate type="body">

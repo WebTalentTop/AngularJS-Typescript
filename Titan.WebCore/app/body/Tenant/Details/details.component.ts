@@ -1,4 +1,5 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { TenantService } from '../../../shared/services/tenant.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
@@ -61,6 +62,7 @@ export class DetailsComponent {
     departments: any;
     timeZones: any;
     titanRoles: any;
+    tenantProfile: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
@@ -104,12 +106,13 @@ export class DetailsComponent {
         private dataService: TestRequestSensorService,
         private equipmenttypeservice: EquipmentTypeService,
         private userservice: UserService,
+        private tenantservice: TenantService,
         private router: Router
 
     ){
         this.route.params.subscribe(params => {
-         //   this.id = params['id'];
-            this.userId = params['id'];
+            //   this.id = params['id'];
+            this.tenantId = params['id'];
         });
          // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
@@ -122,54 +125,29 @@ export class DetailsComponent {
        console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
-       this.getFunctionGroups();
-       this.getDepartments();
-       this.getTimeZones();
-       this.getTitanRoles()
+       //this.getFunctionGroups();
+       //this.getDepartments();
+       //this.getTimeZones();
+       //this.getTitanRoles()
        //get the departmentId through taskId
        //get sensors by department and entityId
-       this.userservice.getUserDetailsById(this.userId)
-           .subscribe(userresult => {
-               this.userProfile = userresult.result;
+       this.tenantservice.getById(this.tenantId)
+           .subscribe(tenantresult => {
+               this.tenantProfile = tenantresult.result;
 
               //this.userProfile.firstName = userresult.result.firstName;
              // this.userProfile.lastName = userresult.result.lastName;
-               let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res => {
+            //   let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
+                   }
 
-                 //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
-                //   console.log('--------filtered-------', filterfuntiongroups);
-                   this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
-                  // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
+                  
                });
 
 
            });
-
-   //    this.getHourEntryByEntityIdentifierId();
-   //    this.getDownTimeReasons();
-   //    //this.dataService.GetProjectId(this.id)
-   //    //    .subscribe(res => {
-   //    //        this.projectId = res.$values;
-
-   //    //        //this.formConfiguration = res.formConfiguration;
-   //    //        //this.formObject = res.formObject;
-   //    //        //this.model = res.formObject;
-   //    //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //    //        //console.log("----- Result of formObject -----", this.model);
-   //    //    });
-   //     this.dataService.GetTrackingListByEntityId(this.id)
-   //         .subscribe(res =>
-   //         {
-   //             this.TrackingList = res.$values;
-
-   //             //this.formConfiguration = res.formConfiguration;
-   //             //this.formObject = res.formObject;
-   //             //this.model = res.formObject;
-   //             //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //             //console.log("----- Result of formObject -----", this.model);
-   //         });
-
    }
 
 
@@ -195,25 +173,20 @@ export class DetailsComponent {
    }
    onAddFunctionGroup()
    {
-       let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-       this.displayFunctionGroupDialog = false;
-       let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
-       let userFunctionGroupModel = {
+      
+       let tenantFunctionGroupModel = {
 
-           userId: this.userId,
-           functionGroupId: this.selectedFunctionGroupId,
-           functionGroupName: functionGroupName,
-           tenantId: tenantId
+           Tenant: this.tenantProfile
        };
-       this.userservice.postAddFunctionGroupToUser(userFunctionGroupModel).subscribe(res => {
+       this.tenantservice.postAddFunctionGroupToTenant(tenantFunctionGroupModel, this.selectedFunctionGroupId,"").subscribe(res => {
            if (res.isSuccess) {
               // this.selectedFunctionGroupId = null;
 
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res=>{
-                   if(res.result != null)
-                   {
-                       this.functionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
                    }
+
 
                });
 
@@ -223,7 +196,25 @@ export class DetailsComponent {
    }
    onRemoveFunctionGroupMap(functionGroup)
    {
-       this.userservice.RemoveFunctionGroupUserMap(functionGroup).subscribe(res => { });
+       let tenantFunctionGroupModel = {
+
+           Tenant: this.tenantProfile
+       };
+       this.tenantservice.RemoveFunctionGroupTenantMap(tenantFunctionGroupModel, functionGroup.id).subscribe(res => {
+
+           if (res.isSuccess) {
+               // this.selectedFunctionGroupId = null;
+
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
+                   }
+
+
+               });
+
+           }
+       });
 
    }
    //onDownTimeReasonChange(event) {

@@ -47,12 +47,12 @@ export class AddComponent {
         breadcrumbsHome: MenuItem;
 
         ngOnInit() {
-            this.userprofileservice.getCurrentUserProfile().subscribe(tenresult => {
-                this.tenantId = tenresult.result;
-            });
-            this.userprofileservice.getById().subscribe(tenresult => {
-                this.tenantId = tenresult.result;
-            });
+            //this.userprofileservice.getCurrentUserProfile().subscribe(tenresult => {
+            //    this.tenantId = tenresult.result;
+            //});
+            //this.userprofileservice.getById().subscribe(tenresult => {
+            //    this.tenantId = tenresult.result;
+            //});
             this.getUsers();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>

@@ -32,6 +32,15 @@ export class TenantService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    GetTenantFunctionGroupsByTenant(tenantId): Observable<any> {
+        return this.http.get(`${TenantApiUrl.GetTenantFunctionGroupsByTenant}/${tenantId}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+    }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${TenantApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
@@ -51,7 +60,26 @@ export class TenantService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    postAddFunctionGroupToTenant(filterBody,functionGroupId,userId): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TenantApiUrl.postAddFunctionGroupToTenant}/${functionGroupId}/${userId}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
 
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    RemoveFunctionGroupTenantMap(filterBody,functionGroupId): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${TenantApiUrl.RemoveFunctionGroupUserMap}/${functionGroupId}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.put(`${TenantApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })

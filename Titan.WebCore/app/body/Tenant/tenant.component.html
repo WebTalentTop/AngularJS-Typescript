@@ -8,26 +8,15 @@
                 <button pButton type="button" class="blue-grey-btn" icon="ui-icon-add" label="Add New Tenant" (click)="displayTenantDialog=true"></button>
               </p>
           </header>
-          <p-dataTable [value]=" allUsers" [paginator]="true" rows="15" [responsive]="true">
+          <p-dataTable [value]="tenants" [paginator]="true" rows="15" [responsive]="true">
 
-              <p-column header="Name" sortable="true">
+              <p-column header="Tenant Name" sortable="true">
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
-               <a routerLink="details/{{userrow.id}}">{{userrow.firstName}}</a>
+               <a routerLink="details/{{userrow.id}}">{{userrow.name}}</a>
                       </template>
            </p-column>
-              <p-column header="Url" field="url" sortable="true">
-                  <!--<template let-taskrow="rowData" pTemplate type="body">
-                      {{userrow.lastName}}
-                  </template>-->
-              </p-column>
-              <p-column header="Number of Users" field="numberofusers" sortable="true">
-                  <!--<template let-taskrow="rowData" pTemplate type="body">
-
-                  </template>-->
-              </p-column>
-
-
+            
 
           </p-dataTable>
           <p-dialog header="Add Tenant" [(visible)]="displayTenantDialog"
