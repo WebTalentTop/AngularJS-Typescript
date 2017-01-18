@@ -30,11 +30,7 @@ export class AddComponent {
         this.procedure = new Object();
         this.getTestType();
         this.getTestModes();
-        var testMode = {
-            label: "Select Test Type to Populate",
-            value: null
-        };
-        this.testModes.push(testMode);
+        
     }
 
     getTestType(){
@@ -58,16 +54,16 @@ export class AddComponent {
             }
         });
     }
-    getTestModes() {
+     getTestModes() {
         //    userRoles
         this.testmodeservice.getAllTestModes().subscribe(response => {
             this.testAllModes = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Role",
-                //    value: null
-                //});
+                resultMap.push({
+                    label: "Select Test Mode",
+                    value: null
+                });
                 for (let template of response.result) {
                     var temp = {
                         label: template.name,
@@ -77,7 +73,6 @@ export class AddComponent {
                 }
                 this.testAllModes = resultMap;
             }
-            console.log(response);
         });
     }
     onTestTypeChange() {

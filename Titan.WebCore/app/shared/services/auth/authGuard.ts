@@ -34,23 +34,24 @@ export class AuthGuard implements CanLoad, CanActivate {
         return false;
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Promise<boolean>{
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Promise<boolean> | boolean {
         let user: Promise<IUserProfile> = this.userProfile.getCurrentUserProfile();
 
-        return user.then((data) => {
-            data.defaultTenantId = "sadfa";
-            if (data.defaultTenantId) {
-                return true;
-            }
-            else {
-                this.extraNav = { queryParams: {
-                    'returnUrl': state.url,
-                    'email': data.emailAddress}
-                };
-                this.router
-                    .navigate(['login', data.id],this.extraNav);
-                return false;
-            }
-        });
+        return true;
+        // user.then((data) => {
+        //     data.defaultTenantId = "sadfa";
+        //     if (data.defaultTenantId) {
+        //         return true;
+        //     }
+        //     else {
+        //         this.extraNav = { queryParams: {
+        //             'returnUrl': state.url,
+        //             'email': data.emailAddress}
+        //         };
+        //         this.router
+        //             .navigate(['login', data.id],this.extraNav);
+        //         return false;
+        //     }
+        // });
     }
 }
