@@ -1,7 +1,7 @@
 import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
-import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildlevel.service';
-import {TestStatusService} from '../../shared/services/teststatus.service';
+import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
+import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
 import {TestRoleService} from '../../shared/services/testRole.service';
 import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';

@@ -1,4 +1,4 @@
-import { TestStatusService } from '../../../../shared/services/testStatus.service';
+import { TestStatusService } from '../../../../shared/services/Containers/TestStatusService/testStatus.service';
 import { LoggerService } from '../../../../shared/services/logger/logger.service';
 import { DataTable, LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
