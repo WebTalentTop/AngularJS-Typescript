@@ -68,7 +68,7 @@ export class TestStatusService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-    getTestStatus(): Observable<any> {
+    getAll(): Observable<any> {
         return this.http.get(`${TestStatusApiUrl.getAllUrl}`, { headers: this.headers })
             .map(this.getJson)
             .map(data => {

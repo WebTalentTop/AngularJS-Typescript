@@ -2,11 +2,9 @@ import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
 import {RefToNg} from '../../shared/services/definitions/RefToNg';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
-
 import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
-
 import {TestRoleService} from '../../shared/services/testRole.service';
-import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
+import {ProjectService} from '../../shared/services/Containers/ProjectService/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
 import {TitanUserProfileService} from '../../shared/services/titanUserProfile.service';
@@ -175,7 +173,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     showTimeDuringAssignOperation: boolean = false;
     draggedResourceId: string = '';
-    facilityChanged:boolean = false;
+    facilityChanged: boolean = false;
 //endregion fields
 
 // region constructor
@@ -305,6 +303,68 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         let slotOptions = self.allSlotOptions;
         let slotDurationInMinutes = moment.duration(self.selectedSlotDurationValue).asMinutes();
         var tt = this.tooltip;
+        let tfEventSource: any =  {
+            id: 'testFacilityEventSource',
+
+            events: function (start, end, timezone, callback) {
+                let slotOption = self.allSlotOptions.indexOf(self.selectedSlotDurationValue)
+                self.calendarHeader = $.fullCalendar.formatRange(moment(start), moment(end), 'MMM D YYYY');
+                $.ajax({
+                    url: titanApiUrl + 'TestFacility/Schedule',
+                    type: 'POST',
+                    data: {
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
+                        projectCodeIdList: [],
+                        timezone: tz,
+                        slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
+
+
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }
+        }
+        let tfUserSource:any = {
+            id: 'testFacilityUserSource',
+            events: function (start, end, timezone, callback) {
+                $.ajax({
+                    url: titanApiUrl + 'TitanUser/Schedule',
+                    type: 'POST',
+                    data: {
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
+                        projectCodeIdList: [],
+                        timezone: tz,
+                        slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
+
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }
+        }
         let scheduleConfig: any = {
             timezone: this.defaultCalendarSetting.defaultTimeZone,
             schedulerLicenseKey: '0799804275-fcs-1480895270',
@@ -383,68 +443,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
             },
 
-            eventSources: [{
-                id: 'testFacilityEventSource',
-
-                events: function (start, end, timezone, callback) {
-                    let slotOption = self.allSlotOptions.indexOf(self.selectedSlotDurationValue)
-                    self.calendarHeader = $.fullCalendar.formatRange(moment(start), moment(end), 'MMM D YYYY');
-                    $.ajax({
-                        url: titanApiUrl + 'TestFacility/Schedule',
-                        type: 'POST',
-                        data: {
-                            startdate: start.utc().format(),
-                            enddate: end.utc().format(),
-                            projectCodeIdList: [],
-                            timezone: tz,
-                            slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
-
-
-                        },
-                        error: function () {
-                            alert('there was an error while fetching events!');
-                        },
-                        success: function (result) {
-                            var events = [];
-                            $.each(result.calendarEvents.$values, function (index, item) {
-                                events.push(item);
-                                console.log('------item------------', item)
-                            });
-                            console.log('------Event Source callback------------', events)
-                            callback(events);
-                        }
-                    });
-                }
-            }
-                , {
-                    id: 'testFacilityUserSource',
-                    events: function (start, end, timezone, callback) {
-                        $.ajax({
-                            url: titanApiUrl + 'TitanUser/Schedule',
-                            type: 'POST',
-                            data: {
-                                startdate: start.utc().format(),
-                                enddate: end.utc().format(),
-                                projectCodeIdList: [],
-                                timezone: tz,
-                                slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
-
-                            },
-                            error: function () {
-                                alert('there was an error while fetching events!');
-                            },
-                            success: function (result) {
-                                var events = [];
-                                $.each(result.calendarEvents.$values, function (index, item) {
-                                    events.push(item);
-                                    console.log('------item------------', item)
-                                });
-                                console.log('------Event Source callback------------', events)
-                                callback(events);
-                            }
-                        });
-                    }
-                }],
+            eventSources: [
+                tfEventSource
+                , tfUserSource
+                ],
             eventRender: function (event, element) {
                 // The id is the testFacilityScheduleId
                 element.attr("eventId", event.id);
@@ -467,7 +469,6 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 $("span.fc-time").hide();
             },
             eventClick: function (calEvent, jsEvent, view) {
-                //self.displayEventDialog = true;
                 console.log("---click is blocked--");
                 return false;
             },
@@ -488,10 +489,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                  *  2. Change the test facility
                  * */
                 self.facilityChanged = self.draggedResourceId !== event.resourceId;
-                if (self.facilityChanged){
-                    self.moveToTestFacilityHeader ='Change Test Facility to ' + $("#calendar").fullCalendar('getResourceById', event.resourceId).title;
+                if (self.facilityChanged) {
+                    self.moveToTestFacilityHeader = 'Change Test Facility to ' + $("#calendar").fullCalendar('getResourceById', event.resourceId).title;
                 } else {
-                    self.moveToTestFacilityHeader =  self.moveToTestFacilityName;
+                    self.moveToTestFacilityHeader = self.moveToTestFacilityName;
                 }
                 self.displayMoveDialog = true;
                 self.moveRevertFunction = revertFunc;
@@ -972,19 +973,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     getTestStatus() {
         //    userRoles
-        this.teststatusservice.getTestStatus().subscribe(response => {
-            this.testStatus = new Array();
+        this.teststatusservice.getAll().subscribe(response => {
+            this.testStatus = [];
 
             if (response != null) {
-                var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Status",
-                //    value: null
-                //});
+                var resultMap = [];
                 for (let template of response) {
                     var temp = {
                         label: template.name,
-                        value: template.id
+                        value: {id: template.id, calendarDisplayColor:template.calendarDisplayColor}
                     }
                     resultMap.push(temp);
                 }
@@ -997,9 +994,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     getProjectCodes() {
         //    userRoles
         this.projectservice.getProjectCodes().subscribe(response => {
-            this.projectCodes = new Array();
+            this.projectCodes = [];
             if (response != null) {
-                var resultMap = new Array();
+                var resultMap = [];
                 //resultMap.push({
                 //    label: "Select Project Code",
                 //    value: null

@@ -1,34 +1,49 @@
-import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
-import { LoggerService } from '../../../shared/services/logger/logger.service';
-import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
-import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
-import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
-import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
-import { FormSchemaService } from '../../../shared/services/formSchema.service';
-import { FormInstanceService } from '../../../shared/services/formInstance.service';
-import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
+import {TestFacilityService} from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
+import {LoggerService} from '../../../shared/services/logger/logger.service';
+import {titanApiUrl} from '../../../shared/services/apiurlconst/titanapiurl';
+import {TestTemplateService} from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
+import {EntityIdentifierService} from '../../../shared/services/entityIdentifier.service';
+import {FormSchemaCategoryService} from '../../../shared/services/formSchemaCategory.service';
+import {FormSchemaService} from '../../../shared/services/formSchema.service';
+import {FormInstanceService} from '../../../shared/services/formInstance.service';
+import {IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
 
-import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
-import { TestRoleService } from '../../../shared/services/testRole.service';
-import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
-import { TestModeService } from '../../../shared/services/testMode.service';
-import { TestTypeService } from '../../../shared/services/testType.service';
-import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
-import { IFormSchemaCategory } from '../../../shared/services/definitions/IFormSchemaCateogry';
-import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
-import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
-import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
-import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
-import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
-import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import {BuildLevelService} from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
+import {TestStatusService} from '../../../shared/services/teststatus.service';
+import {TestRoleService} from '../../../shared/services/testRole.service';
+import {ProjectService} from '../../../shared/services/Containers/ProjectService/project.service';
+import {TestModeService} from '../../../shared/services/testMode.service';
+import {TestTypeService} from '../../../shared/services/testType.service';
+import {TestFacilityRoleService} from '../../../shared/services/testFacilityRole.service';
+import {IFormSchemaCategory} from '../../../shared/services/definitions/IFormSchemaCateogry';
+import {ITestFacilityRole} from '../../../shared/services/definitions/ITestFacilityRole';
+import {TestFacilityAttachmentService} from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
+import {ITestFacilityAttachment} from '../../../shared/services/definitions/ITestFacilityAttachment';
+import {ITestFacilityEquipment} from '../../../shared/services/definitions/ITestFacilityEquipment';
+import {
+    DataTable,
+    Header,
+    Footer,
+    TabViewModule,
+    LazyLoadEvent,
+    ButtonModule,
+    InputTextareaModule,
+    InputTextModule,
+    PanelModule,
+    FileUploadModule,
+    MessagesModule,
+    Message,
+    GrowlModule,
+    MenuItem
+} from 'primeng/primeng';
+import {Component, AfterViewInit, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
+import {SelectItem, ConfirmationService} from 'primeng/primeng';
 import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelectItem";
 
-import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import {BreadCrumbsService} from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 import * as moment from 'moment/moment';
 
@@ -43,9 +58,9 @@ declare var cron: any;
 })
 export class DetailsComponent implements AfterViewInit {
 
-   hasNextMaintenanceDate: boolean = false;
+    hasNextMaintenanceDate: boolean = false;
     isMaintenaceFrequencySelected: boolean = false;
-    isCronControlInitialized : boolean=false;
+    isCronControlInitialized: boolean = false;
 
     frequency: any;
     IsTestFacilityDelete: boolean = false;
@@ -54,7 +69,7 @@ export class DetailsComponent implements AfterViewInit {
     details: string;
     testFacilityTenants: any;
     equipments: any;
-    equipmentsToAdd :any;
+    equipmentsToAdd: any;
     displayAssignDepartmentsDialog: boolean;
     displayAssignEquipmentsDialog: boolean;
     displayAssignUserRolesDialog: boolean;
@@ -66,31 +81,31 @@ export class DetailsComponent implements AfterViewInit {
     selectedCategory: any = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
     IsKeepOpen: boolean = false;
     // Form Related variables
-    entityIdentifierName:string = 'TestFacility';
-    entityIdentifierInfo:any = {};
-    formSchemaCategories:IFormSchemaCategory[] = [];
+    entityIdentifierName: string = 'TestFacility';
+    entityIdentifierInfo: any = {};
+    formSchemaCategories: IFormSchemaCategory[] = [];
     formSchemaCategoryList: ITitanSelectItem[];
-    formSchemaInfo:any = {};
-    formSchemaData:IFormSchema[] = [];// new FormSchema('', []);
+    formSchemaInfo: any = {};
+    formSchemaData: IFormSchema[] = [];// new FormSchema('', []);
     comment: any;
     testFacilityLogComments: any;
-    formSchemaDataGridMF:IFormSchemaGridMF[] = [];
-    selectedMaintenanceForm:IFormSchemaGridMF;
+    formSchemaDataGridMF: IFormSchemaGridMF[] = [];
+    selectedMaintenanceForm: IFormSchemaGridMF;
 
     //region Grid -- FormInstance Filled
 
     gridFormInstanceData: any[] = [];
-    formInstanceUpdateView:boolean = false;
+    formInstanceUpdateView: boolean = false;
     formInstanceUpdateData: any;
-    selectedGridFormInstance:any;
-    formInstanceUpdateNotes:string;
-    formInstanceId:string;
+    selectedGridFormInstance: any;
+    formInstanceUpdateNotes: string;
+    formInstanceId: string;
     //endregion
 
-    selectedFormSchemaFP:any;
-    fieldsFP:any[] = [];
+    selectedFormSchemaFP: any;
+    fieldsFP: any[] = [];
 
-    displayPreviewSelectedForm:boolean = false;
+    displayPreviewSelectedForm: boolean = false;
     operatingHours: any;
     maintenanceFrequencies: any;
     selectedOperatingHour: any;
@@ -98,14 +113,14 @@ export class DetailsComponent implements AfterViewInit {
 
     // Form Display
     selectedFormSchemaCategory;
-    selectedFormFields:any[] = [];
-    selectedFormName:string;
+    selectedFormFields: any[] = [];
+    selectedFormName: string;
     // End of Form Display
 
     // FormInstance variables
-    displayFormInsanceForm:boolean = false;
-    formInstanceFormSchemaVersionId:string;
-    formInstanceFormSchema:any;
+    displayFormInsanceForm: boolean = false;
+    formInstanceFormSchemaVersionId: string;
+    formInstanceFormSchema: any;
     formInstanceFields: any[]
 
     // End Of Form Related Variables
@@ -129,7 +144,7 @@ export class DetailsComponent implements AfterViewInit {
     filteredSelectedUserNames: Array<any> = new Array();
     selectedRole: any;
     selectedTestRoles: any[];
-    selectedTestFacilities: any[];
+    selectedTestFacilities: string[] = [];
     selectedTestTypes: any[];
     selectedTestModes: any[];
     selectedBuildLevels: any[];
@@ -145,8 +160,8 @@ export class DetailsComponent implements AfterViewInit {
     entityType: string = "TestFacility";
     entityId: string = this.id;
     filepath: string = "TestFacility";
-    testFacility : any = { name: '', maintenanceFrequency: '', nextMaintenanceDate: '', lastMaintenanceDate: '' };
-    address = { addressLine1: '', addressLine2: '', city: '', state: '', postalCode: '' };
+    testFacility: any = {name: '', maintenanceFrequency: '', nextMaintenanceDate: '', lastMaintenanceDate: ''};
+    address = {addressLine1: '', addressLine2: '', city: '', state: '', postalCode: ''};
     TestFacilityAttachments: ITestFacilityAttachment[];
     TestFacilityRoles: ITestFacilityRole[];
     TestFacilityEquipments: ITestFacilityEquipment[];
@@ -173,34 +188,31 @@ export class DetailsComponent implements AfterViewInit {
 
 
     tabLoadStatus = [
-        {loaded:true, method: this.loadDetailsTabViews},
-        { loaded: false, method: this.loadEquipmentTabViews },
-        {loaded:false, method:this.loadScheduleTabViews},
-        {loaded:false, method:this.loadMaintainanceTabViews},
-        {loaded:false, method:this.loadAttachmentsTabViews},
-        {loaded:false, method:this.loadLogsTabViews}
+        {loaded: true, method: this.loadDetailsTabViews},
+        {loaded: false, method: this.loadEquipmentTabViews},
+        {loaded: false, method: this.loadScheduleTabViews},
+        {loaded: false, method: this.loadMaintainanceTabViews},
+        {loaded: false, method: this.loadAttachmentsTabViews},
+        {loaded: false, method: this.loadLogsTabViews}
     ];
 
-    constructor(
-    	private breadCrumbsService: BreadCrumbsService,
-        private loggerService: LoggerService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private testFacilityService: TestFacilityService,
-        private entityIdentifierService: EntityIdentifierService,
-        private formSchemaCategoryService: FormSchemaCategoryService,
-        private formInstanceService: FormInstanceService,
-        private formSchemaService: FormSchemaService,
-        private testfacilityroleservice: TestFacilityRoleService,
-        private buildlevelservice: BuildLevelService,
-        private teststatusservice: TestStatusService,
-        private testroleservice: TestRoleService,
-        private projectservice: ProjectService,
-        private testmodeservice: TestModeService,
-        private testtypeservice: TestTypeService,
-
-        private testFacilityAttachmentservice: TestFacilityAttachmentService
-    ) {
+    constructor(private breadCrumbsService: BreadCrumbsService,
+                private loggerService: LoggerService,
+                private route: ActivatedRoute,
+                private router: Router,
+                private testFacilityService: TestFacilityService,
+                private entityIdentifierService: EntityIdentifierService,
+                private formSchemaCategoryService: FormSchemaCategoryService,
+                private formInstanceService: FormInstanceService,
+                private formSchemaService: FormSchemaService,
+                private testfacilityroleservice: TestFacilityRoleService,
+                private buildlevelservice: BuildLevelService,
+                private teststatusservice: TestStatusService,
+                private testroleservice: TestRoleService,
+                private projectservice: ProjectService,
+                private testmodeservice: TestModeService,
+                private testtypeservice: TestTypeService,
+                private testFacilityAttachmentservice: TestFacilityAttachmentService) {
         this.loggerService.setShow(false);
         this.loggerService.logConsole("Router ----------", this.router.url);
 
@@ -209,14 +221,14 @@ export class DetailsComponent implements AfterViewInit {
 
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesDetailsBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'TestFacilitiesDetailsPage'
-            )[0];
+            filter.pageName === 'TestFacilitiesDetailsPage'
+        )[0];
 
-            this.breadcrumbs = [];
-            this.breadcrumbs = testFacilitiesDetailsBreadCrumb.items;
+        this.breadcrumbs = [];
+        this.breadcrumbs = testFacilitiesDetailsBreadCrumb.items;
 
-            this.breadcrumbsHome = { routerLink: ['/'] };
-	        this.loggerService.logConsole("---- TF Details ID Param -----", this.id);
+        this.breadcrumbsHome = {routerLink: ['/']};
+        this.loggerService.logConsole("---- TF Details ID Param -----", this.id);
     }
 
     ngOnInit() {
@@ -241,63 +253,60 @@ export class DetailsComponent implements AfterViewInit {
         }
     }
 
-      frequencyInit()
-      {
-          if (this.testFacility.maintenanceFrequency != null && this.testFacility.maintenanceFrequency != "")
-            {
-                this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency;
-                this.isMaintenaceFrequencySelected = true;
-                $("#selector").cron({
+    frequencyInit() {
+        if (this.testFacility.maintenanceFrequency != null && this.testFacility.maintenanceFrequency != "") {
+            this.selectedMaintenanceFrequency = this.testFacility.maintenanceFrequency;
+            this.isMaintenaceFrequencySelected = true;
+            $("#selector").cron({
 
-                    initial: this.selectedMaintenanceFrequency,
-                    onChange: function () {
-                        this.selectedMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect:false
-                });
-                this.isCronControlInitialized = true;
-            }
-            else
-            {
-                this.selectedMaintenanceFrequency = "0 0 1 1 *";
-                this.isMaintenaceFrequencySelected = false;
-            }
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
+            });
+            this.isCronControlInitialized = true;
+        }
+        else {
+            this.selectedMaintenanceFrequency = "0 0 1 1 *";
+            this.isMaintenaceFrequencySelected = false;
+        }
 
     }
 
-    showHideCronPicker(){
+    showHideCronPicker() {
         console.log("--inside cronpicker show hide");
-    
-        if (this.isMaintenaceFrequencySelected){
-            if (!this.isCronControlInitialized){
+
+        if (this.isMaintenaceFrequencySelected) {
+            if (!this.isCronControlInitialized) {
                 $("#selector").cron({
 
                     initial: this.selectedMaintenanceFrequency,
                     onChange: function () {
                         this.selectedMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect:false
+                    }, useGentleSelect: false
                 });
             }
-        } else
-        {
+        } else {
             // Hide the cron
         }
     }
+
     ngAfterViewInit() {
         //var frequency: any;
 
 
     }
-    onTestFacilityDelete()
-    {
+
+    onTestFacilityDelete() {
         if (this.IsTestFacilityDelete)
             this.testFacilityService.DeleteTestFacility(this.id).subscribe(res => {
-                this.IsTestFacilityDelete = true;
-                console.log('-----delete-------', res);
-            }
-
-        );
+                    this.IsTestFacilityDelete = true;
+                    console.log('-----delete-------', res);
+                }
+            );
 
     }
+
     downloadAttachment(attachment) {
 
         window.open(titanApiUrl + '/TestFacilityAttachment/file/' + attachment.id);
@@ -323,11 +332,18 @@ export class DetailsComponent implements AfterViewInit {
     loadScheduleTabViews(me) {
         //schedule tab
         me.getUserRoles();
-        me.getTestFacilities();
+        //me.getTestFacilities();
+        me.testFacilities = [];
+        debugger;
+        me.testFacilities.push({
+            label: me.testFacility.name,
+            value: me.testFacility.id
+        });
+        me.selectedTestFacilities.push(me.testFacility.id);
         me.getTestModes();
         me.getTestTypes();
         me.getBuildLevels();
-        me.getTestStatus();
+        me.getAll();
         me.getProjectCodes();
         me.getTestRoles();
         me.getTestFacilityRoleService();
@@ -335,12 +351,15 @@ export class DetailsComponent implements AfterViewInit {
         me.displayScheduleTab = true;
         $("#calendar").parent('.ui-tabview-panel').show();
         let ref = me;
-        setTimeout(function () { ref.initSchedule(); }, 10);
+        setTimeout(function () {
+            ref.initSchedule();
+        }, 10);
     }
+
     loadEquipmentTabViews(me) {
         me.getTestFacilities();
-       // me.getavailableTestFacilities();
-       // me.getavailableEquipments();
+        // me.getavailableTestFacilities();
+        // me.getavailableEquipments();
         me.getTestFacilityEquipmentById();
         me.getEquipmentsToAdd();
 
@@ -354,8 +373,12 @@ export class DetailsComponent implements AfterViewInit {
             load.loaded = true;
         }
     }
+
     initSchedule() {
+        var self = this;
+        //alert(self.selectedTestFacilities);
         var scheduleConfig = {
+            schedulerLicenseKey: '0799804275-fcs-1480895270',
             theme: true,
             header: {
                 left: 'prev,next today',
@@ -363,7 +386,7 @@ export class DetailsComponent implements AfterViewInit {
                 right: 'month,basicWeek,basicDay,listMonth'
             },
             editable: true,
-            eventSources:[]
+            eventSources: []
             //events:{}
         };
         scheduleConfig.eventSources = [function (start, end, timezone, callback) {
@@ -373,33 +396,20 @@ export class DetailsComponent implements AfterViewInit {
                 data: {
                     startdate: start.utc().format(),
                     enddate: end.utc().format(),
-
+                    testFacilityIdList: self.selectedTestFacilities
                 },
-                error: function () {
-                    alert('there was an error while fetching events!');
-                },
-                success: function (result) {
-                    var events = [];
+               /* data: {
+                    startdate: start,
+                    enddate: end,
+                    // projectCodeIdList: self.selectedProjectCodes,
+                    // buildLevelIdList: self.selectedBuildLevels,
+                    // testStatusIdList: self.selectedTestStatuses,
+                    // testTypeIdList: self.selectedTestTypes,
+                    // testModeIdList: self.selectedTestModes,
+                    //testFacilityIdList: self.selectedTestFacilities
 
-                    $.each(result.calendarEvents.$values, function (index, element) {
-                        element.start = element.start;
-                        element.end = element.end;
-                        element.title = element.title;
-                        element.url = element.url;
-                        events.push(element);
-                    });
-                    callback(events);
-                }
-            });
-        }, function (start, end, timezone, callback) {
-            $.ajax({
-                url: titanApiUrl + 'TestFacility/Schedule',
-                type: 'POST',
-                data: {
-                    startdate: start.utc().format(),
-                    enddate: end.utc().format(),
 
-                },
+                },*/
                 error: function () {
                     alert('there was an error while fetching events!');
                 },
@@ -425,10 +435,12 @@ export class DetailsComponent implements AfterViewInit {
         this.selectedRole = (event.value);
 
     }
+
     onDepartmentChange(event) {
         this.selectedDepartment = (event.value);
 
     }
+
     onEquipmentChange(event) {
         this.selectedEquipment = (event.value.id);
         //   this.EquipmentSubType.calibrationform = (event);
@@ -439,40 +451,49 @@ export class DetailsComponent implements AfterViewInit {
         this.selectedMaintenanceFrequency = (event.value);
 
     }
+
     onOperatingHourChange(event) {
         this.selectedOperatingHour = (event.value);
 
     }
+
     onTestRoleChange(event) {
         this.selectedTestRoles = (event.value);
 
 
     }
+
     onBuildLevelChange(event) {
         this.selectedBuildLevels = (event.value);
 
     }
+
     onProjectCodeChange(event) {
         this.selectedProjectCodes = (event.value);
 
     }
+
     onCategoryChange(event) {
         this.selectedCategory = (event.value);
     }
+
     onTestFacilityChange(event) {
         this.selectedTestFacilities = (event.value);
 
     }
+
     onTestModeChange(event) {
         this.selectedTestModes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestTypeChange(event) {
         this.selectedTestTypes = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestStatusChange(event) {
         this.selectedTestStatuses = (event.value);
         //this.testFacilityService.getFilteredEvents(this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses, this.selectedTestStatuses)
@@ -483,6 +504,7 @@ export class DetailsComponent implements AfterViewInit {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     showEquipmentDialog(event) {
         this.displayEquipmentDialog = true;
         this.selectedEquipmentId = event.equipmentId;
@@ -491,11 +513,11 @@ export class DetailsComponent implements AfterViewInit {
         //this.displayDialog = true;
         // this.IsSubType= true;
     }
-    moveEquipmenttoTestFacility()
-    {
+
+    moveEquipmenttoTestFacility() {
         if (this.selectedTestFacilities == null || this.selectedTestFacilities == undefined) {
             this.msgs = [];
-            this.msgs.push({ severity: 'error', summary: 'Please select Test Facility', detail: '' });
+            this.msgs.push({severity: 'error', summary: 'Please select Test Facility', detail: ''});
             return null;
         }
         let postbody = {
@@ -515,14 +537,14 @@ export class DetailsComponent implements AfterViewInit {
         // selected testfacility,selectedequipment info .... call to assign testfacility to equipment
     }
 
-    GetTenantsByTestFacilityId()
-    {
+    GetTenantsByTestFacilityId() {
         this.testFacilityService.getTenants(this.id)
             .subscribe(res => {
                 this.testFacilityTenants = res;
             });
 
     }
+
     GetLogCommentsByTestFacilityId() {
         this.testFacilityService.getLogComments(this.id)
             .subscribe(res => {
@@ -530,6 +552,7 @@ export class DetailsComponent implements AfterViewInit {
             });
 
     }
+
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
@@ -551,6 +574,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getCategories() {
         //    userRoles
         this.testFacilityService.getCategories().subscribe(response => {
@@ -572,6 +596,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getDepartments() {
         //    userRoles
         this.testFacilityService.getDepartments().subscribe(response => {
@@ -593,6 +618,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getMaintenanceFrequencies() {
         //    userRoles
         this.testFacilityService.getMaintenanceFrequencies().subscribe(response => {
@@ -614,6 +640,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getOperatingHours() {
         //    userRoles
         this.testFacilityService.getOperatingHours().subscribe(response => {
@@ -635,27 +662,28 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
-  // getavailableEquipments() {
-  //       //    userRoles
-  //       this.testFacilityService.getEquipments(this.id).subscribe(response => {
-  //           this.equipments = new Array();
-  //           if (response != null) {
-  //               var resultMap = new Array();
-  //               resultMap.push({
-  //                   label: "Select Equipment",
-  //                   value: null
-  //               });
-  //               for (let template of response) {
-  //                   var temp = {
-  //                       label: template.name,
-  //                       value: template.id
-  //                   }
-  //                   resultMap.push(temp);
-  //               }
-  //               this.equipments = resultMap;
-  //           }
-  //       });
-  //   }
+
+    // getavailableEquipments() {
+    //       //    userRoles
+    //       this.testFacilityService.getEquipments(this.id).subscribe(response => {
+    //           this.equipments = new Array();
+    //           if (response != null) {
+    //               var resultMap = new Array();
+    //               resultMap.push({
+    //                   label: "Select Equipment",
+    //                   value: null
+    //               });
+    //               for (let template of response) {
+    //                   var temp = {
+    //                       label: template.name,
+    //                       value: template.id
+    //                   }
+    //                   resultMap.push(temp);
+    //               }
+    //               this.equipments = resultMap;
+    //           }
+    //       });
+    //   }
     getEquipmentsToAdd() {
         //    userRoles
         this.testFacilityService.getEquipmentsToAdd(this.id).subscribe(response => {
@@ -664,13 +692,18 @@ export class DetailsComponent implements AfterViewInit {
                 var resultMap = [];
                 resultMap.push({
                     label: "Select Equipment",
-                    value: {id:'',name:'',serialNumber:'',testFacilityName:''}
+                    value: {id: '', name: '', serialNumber: '', testFacilityName: ''}
                 });
                 for (let template of response) {
                     var temp = {
                         label: template.name,
                         //value: template.id
-                        value: {id:template.id, name: template.name, serialNumber:template.serialNumber, testFacilityName: template.testFacilityName}
+                        value: {
+                            id: template.id,
+                            name: template.name,
+                            serialNumber: template.serialNumber,
+                            testFacilityName: template.testFacilityName
+                        }
                     }
                     resultMap.push(temp);
                 }
@@ -702,7 +735,7 @@ export class DetailsComponent implements AfterViewInit {
         });
     }
 
-    getTestFacilityById(){
+    getTestFacilityById() {
         this.testFacilityService.getById(this.id)
             .subscribe(res => {
                 //this.formConfiguration = res.formConfiguration;
@@ -714,20 +747,19 @@ export class DetailsComponent implements AfterViewInit {
                 if (res.testFacility.isDeleted) {
                     this.IsTestFacilityDelete = true;
                 }
-                else
-                {
+                else {
                     this.IsTestFacilityDelete = false;
                 }
-              //  onMaintenanceNeeded();
+                //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-  			if (res.testFacility.nextMaintenanceDate != null) {
+                if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
                 }
                 //  this.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                 this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
-               // this.testFacility.lastMaintenanceDate = new Date(this.testFacility.lastMaintenanceDate);
-            //    this.selectedOperatingHour = res.testFacility.operatingHourName;
-              //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
+                // this.testFacility.lastMaintenanceDate = new Date(this.testFacility.lastMaintenanceDate);
+                //    this.selectedOperatingHour = res.testFacility.operatingHourName;
+                //  this.selectedMaintenanceFrequency = res.testFacility.frequency;
                 //this.model = res.formObject;
                 //this.loggerService.logConsole("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
                 //this.loggerService.logConsole("----- Result of formObject -----", this.model);
@@ -741,9 +773,9 @@ export class DetailsComponent implements AfterViewInit {
 
                     }
 
-                        this.notifications.forEach(x => {
-                            this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
-                        })
+                    this.notifications.forEach(x => {
+                        this.notificationMsgs.push({severity: 'warn', summary: x.ruleMessage, detail: x.description});
+                    })
 
                 })
         }
@@ -753,7 +785,7 @@ export class DetailsComponent implements AfterViewInit {
         //    userRoles
         this.testFacilityService.getAvailableTestFacilities(this.id).subscribe(response => {
             this.testFacilities = new Array();
-          //  this.currentTestFacilities = new Array();
+            //  this.currentTestFacilities = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -767,7 +799,7 @@ export class DetailsComponent implements AfterViewInit {
                     }
                     resultMap.push(temp);
                 }
-             //   this.currentTestFacilities = resultMap.filter(tf => tf.value != this.id);
+                //   this.currentTestFacilities = resultMap.filter(tf => tf.value != this.id);
                 this.testFacilities = resultMap;
             }
         });
@@ -843,7 +875,7 @@ export class DetailsComponent implements AfterViewInit {
 
     getTestStatus() {
         //    userRoles
-        this.teststatusservice.getTestStatus().subscribe(response => {
+        this.teststatusservice.getAll().subscribe(response => {
             this.testStatus = new Array();
             if (response != null) {
                 var resultMap = new Array();
@@ -862,6 +894,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getProjectCodes() {
         //    userRoles
         this.projectservice.getProjectCodes().subscribe(response => {
@@ -883,6 +916,7 @@ export class DetailsComponent implements AfterViewInit {
             }
         });
     }
+
     getBuildLevels() {
         //    userRoles
         this.buildlevelservice.getBuildLevels().subscribe(response => {
@@ -911,6 +945,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.TestFacilityRoles = TestFacilityRoles;
             });
     }
+
     getTestFacilityAttachmentServiceById() {
         this.testFacilityAttachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
@@ -936,35 +971,39 @@ export class DetailsComponent implements AfterViewInit {
 
         if (this.filteredSelectedUserNames.length == 0) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please Select User', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Please Select User', detail: ''});
             return null;
         }
         if (this.selectedRole == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please select Role', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Please select Role', detail: ''});
             return null;
         }
 
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Primary Incharge") != undefined) && (this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Primary Incharge already assigned', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Primary Incharge already assigned', detail: ''});
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "1753ca8b-5162-4d98-8fc0-64ff08377ae8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for primary Incharge', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Please select only one user for primary Incharge', detail: ''});
             return null;
         }
         if ((this.TestFacilityRoles.find(tfr => tfr.role == "Secondary Incharge") != undefined) && (this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8")) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Secondary Incharge already assigned', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Secondary Incharge already assigned', detail: ''});
             return null;
         }
 
         if (this.filteredSelectedUserNames.length > 1 && this.selectedRole == "c8d592a9-3cac-41c1-803d-c8f0464db0b8") {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please select only one user for secondary Incharge', detail: '' });
+            this.msgs.push({
+                severity: 'warn',
+                summary: 'Please select only one user for secondary Incharge',
+                detail: ''
+            });
             return null;
         }
 
@@ -988,15 +1027,18 @@ export class DetailsComponent implements AfterViewInit {
                             .subscribe(res => {
                                 if (res) {
                                     this.notifications = res;
-                                    if (res.length == 0)
-                                    {
+                                    if (res.length == 0) {
                                         this.notificationMsgs = [];
                                     }
                                 }
 
                                 this.notifications.forEach(x => {
 
-                                    this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                                    this.notificationMsgs.push({
+                                        severity: 'warn',
+                                        summary: x.ruleMessage,
+                                        detail: x.description
+                                    });
                                 })
                             });
                     }
@@ -1005,16 +1047,15 @@ export class DetailsComponent implements AfterViewInit {
         });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
+        this.msgs.push({severity: 'info', summary: 'User Added', detail: ''});
     }
 
     onAddDepartment() {
 
 
-
         if (this.selectedDepartment == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Search any department to add', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Search any department to add', detail: ''});
             return null;
         }
         if (!this.IsKeepOpen)
@@ -1032,23 +1073,23 @@ export class DetailsComponent implements AfterViewInit {
         });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Department Added', detail: '' });
+        this.msgs.push({severity: 'info', summary: 'Department Added', detail: ''});
     }
-    onAssignEquipments()
-    {
+
+    onAssignEquipments() {
         this.displayAssignEquipmentsDialog = true;
         //this.getEquipmentsToAdd();
 
     }
-    AddLogComment()
-    {
+
+    AddLogComment() {
         if (this.comment == null || this.comment == '') {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Please write any comment', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Please write any comment', detail: ''});
             return null;
         }
 
-        this.testFacilityService.PostLogComments(this.id,JSON.stringify(this.comment)).subscribe(filteredList => {
+        this.testFacilityService.PostLogComments(this.id, JSON.stringify(this.comment)).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
                     this.testFacilityLogComments = res;
@@ -1057,14 +1098,15 @@ export class DetailsComponent implements AfterViewInit {
         });
         this.displayCommentDialog = false;
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
+        this.msgs.push({severity: 'info', summary: 'Comment saved', detail: ''});
 
     }
+
     onAddEquipment() {
 
         if (this.selectedEquipment == null) {
             this.msgs = [];
-            this.msgs.push({ severity: 'warn', summary: 'Search any equipment to add', detail: '' });
+            this.msgs.push({severity: 'warn', summary: 'Search any equipment to add', detail: ''});
             return null;
         }
         if (!this.IsKeepOpen)
@@ -1084,7 +1126,7 @@ export class DetailsComponent implements AfterViewInit {
 
         this.msgs = [];
 
-        this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+        this.msgs.push({severity: 'success', summary: 'Success', detail: ''});
 
     }
 
@@ -1102,7 +1144,7 @@ export class DetailsComponent implements AfterViewInit {
             description: '',
             operatingHourId: '',
             maintenanceFrequency: '',
-            lastMaintenanceDate : '',
+            lastMaintenanceDate: '',
             address: {
 
                 id: '',
@@ -1118,11 +1160,11 @@ export class DetailsComponent implements AfterViewInit {
         formData.name = formRef.name;
         formData.operatingHourId = this.selectedOperatingHour;
         formData.lastMaintenanceDate = this.testFacility.lastMaintenanceDate;
-        if (this.isMaintenaceFrequencySelected){
+        if (this.isMaintenaceFrequencySelected) {
             formData.maintenanceFrequency = $('#selector').cron("value");
         }
         else {
-            formData.maintenanceFrequency = '' ;
+            formData.maintenanceFrequency = '';
         }
 
         formData.address.id = this.addressid;
@@ -1151,7 +1193,7 @@ export class DetailsComponent implements AfterViewInit {
                         }
                         //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                         this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
-                       // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
+                        // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
                         if (res.testFacility.nextMaintenanceDate != null) {
                             this.hasNextMaintenanceDate = true;
                         }
@@ -1159,17 +1201,16 @@ export class DetailsComponent implements AfterViewInit {
 
                     });
                 this.msgs = [];
-                this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+                this.msgs.push({severity: 'info', summary: 'saved', detail: ''});
             }
-            else
-            {
-            this.msgs = [];
-                this.msgs.push({ severity: 'warn', summary: res.errorMessage, detail: '' });
-}
+            else {
+                this.msgs = [];
+                this.msgs.push({severity: 'warn', summary: res.errorMessage, detail: ''});
+            }
 
         });
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+        this.msgs.push({severity: 'info', summary: 'saved', detail: ''});
 
     }
 
@@ -1180,6 +1221,7 @@ export class DetailsComponent implements AfterViewInit {
 
         }
     }
+
     onDelete(TestFacilityAttachment: ITestFacilityAttachment) {
         this.testFacilityAttachmentservice.DeleteAttachmentsById(TestFacilityAttachment.id)
             .subscribe(res => {
@@ -1203,20 +1245,25 @@ export class DetailsComponent implements AfterViewInit {
                                 if (res) {
                                     this.notifications = res;
 
-                                        if (res.length == 0) {
-                                            this.notificationMsgs = [];
-                                        }
+                                    if (res.length == 0) {
+                                        this.notificationMsgs = [];
+                                    }
 
                                 }
 
                                 this.notifications.forEach(x => {
-                                    this.notificationMsgs.push({ severity: 'warn', summary: x.ruleMessage, detail: x.description });
+                                    this.notificationMsgs.push({
+                                        severity: 'warn',
+                                        summary: x.ruleMessage,
+                                        detail: x.description
+                                    });
                                 })
                             });
 
                     });
             });
     }
+
     onDeleteEquipmentMap(event) {
         this.testFacilityService.DeleteEquipmentMap(event)
             .subscribe(res => {
@@ -1228,6 +1275,7 @@ export class DetailsComponent implements AfterViewInit {
                     });
             });
     }
+
     onDeleteTenantMap(event) {
         this.testFacilityService.DeleteTenantMap(event)
             .subscribe(res => {
@@ -1254,7 +1302,7 @@ export class DetailsComponent implements AfterViewInit {
             });
 
         this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+        this.msgs.push({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
 
     private getEntityIdentifierInfo() {
@@ -1262,7 +1310,7 @@ export class DetailsComponent implements AfterViewInit {
         // Getting Entity Identifier Id first To get All The Form Categories
         this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
             .subscribe(res => {
-                if(res.isSuccess) {
+                if (res.isSuccess) {
 
                     this.loggerService.logConsole("EntityIdentifierInfo Call ----------", res);
                     this.entityIdentifierInfo = res.result;
@@ -1271,11 +1319,15 @@ export class DetailsComponent implements AfterViewInit {
                     this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
                         .subscribe(fsCategory => {
                             this.loggerService.logConsole("FormSchemaCategoryInfo ----------", fsCategory);
-                            if(fsCategory.isSuccess) {
+                            if (fsCategory.isSuccess) {
                                 this.loggerService.logConsole("Form Schema Category List-------------", res);
                                 this.formSchemaCategories = fsCategory.result;
                                 let listFormSchemaCaterory = fsCategory.result.map(newRes => {
-                                    return {label: newRes.name, value: newRes.id, entityIdentifierId: newRes.entityIdentifierId};
+                                    return {
+                                        label: newRes.name,
+                                        value: newRes.id,
+                                        entityIdentifierId: newRes.entityIdentifierId
+                                    };
                                 });
                                 this.formSchemaCategoryList = [];
                                 this.formSchemaCategoryList.push({label: 'Select Category', value: null});
@@ -1310,7 +1362,7 @@ export class DetailsComponent implements AfterViewInit {
                                 this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
                                     .subscribe(formSchemaResult => {
                                         this.loggerService.logConsole("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
-                                        if (formSchemaResult.isSuccess){
+                                        if (formSchemaResult.isSuccess) {
                                             this.formSchemaData = formSchemaResult.result;
                                             this.loggerService.logConsole("FormSchemaData ----------", this.formSchemaData);
                                         }
@@ -1322,7 +1374,7 @@ export class DetailsComponent implements AfterViewInit {
                             }
                         });
                 }
-                else{
+                else {
                     //Add a message to the user and maybe after certain seconds take them to home page or ...
                     //this.msgs.push({})
                 }
@@ -1383,7 +1435,7 @@ export class DetailsComponent implements AfterViewInit {
         this.getFormSchemaInfoSelectedByGridMF(true);
     }
 
-    selectedFormToView(formName,formSchemaItems) {
+    selectedFormToView(formName, formSchemaItems) {
         this.selectedFormName = formName;
         this.selectedFormSchemaFP = formSchemaItems;
         this.displayPreviewSelectedForm = true;
@@ -1426,10 +1478,10 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
-       addCommentButton(event) {
-       this.comment = '';
-       this.displayCommentDialog = true;    
+    addCommentButton(event) {
+        this.comment = '';
+        this.displayCommentDialog = true;
 
 
-}
+    }
 }
