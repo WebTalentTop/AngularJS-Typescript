@@ -22,6 +22,7 @@ import {IProjectBuildLevelMilestoneMapViewModel} from "../../../shared/services/
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/forkJoin';
 import { Message } from 'primeng/primeng';
+import * as moment from 'moment/moment';
 import {isBoolean} from "util";
 
 @Component({
@@ -120,6 +121,7 @@ export class ProjectScheduleComponent {
         let pBLMapListHasData: boolean = this.projectBLMapList.length > 0;
 
         this.ls.logConsole("pBLMSMapListHasData ---", pBLMSMapListHasData);
+        this.ls.logConsole("projectBLMSMapList Count ----", this.projectBLMSMapList.length);
         this.ls.logConsole("pBLMapListHasData -----", pBLMapListHasData);
 
         this.isBuildLevelData = (pBLMSMapListHasData || pBLMapListHasData);
@@ -151,19 +153,8 @@ export class ProjectScheduleComponent {
                 let isBuildLevelsEnabled: boolean = false;
                 let isCurrentBuildLevelMapped: boolean = false;
                 let isCurrentMileStoneMapped: boolean = false;
+                let pBLMSDataNow;
 
-                if (pBLMSMapListHasData) {
-                    this.projectBLMSMapList.filter(x => {
-                        if (x.buildLevelId === bl.id) {
-                            isBuildLevelsEnabled = true;
-                            isCurrentBuildLevelMapped = true;
-                            return x;
-                        }
-                        if (x.mileStoneId === ms.id) {
-                            isCurrentMileStoneMapped = true;
-                        }
-                    });
-                }
                 if (pBLMapListHasData) {
                     currentBuildLevelInfo = this.projectBLMapList
                         .filter(pBLMfilter => bl.id === pBLMfilter.buildLevelId)[0];
@@ -174,9 +165,13 @@ export class ProjectScheduleComponent {
                         }
                     }
                 }
+
+
                 let currentBuildId = (currentBuildLevelInfo) ? currentBuildLevelInfo.buildLevelId : bl.id;
+
                 mileStoneCol = {
                     id: this.projectId,
+                    projectBuildLevelId: currentBuildId,
                     buildLevelId: currentBuildId,
                     buildLevelMap: currentBuildLevelInfo,
                     mileStoneId: ms.id,
@@ -189,11 +184,23 @@ export class ProjectScheduleComponent {
                     mileStoneMapped: JSON.parse(JSON.stringify(isCurrentMileStoneMapped))
                 };
 
+                if (pBLMSMapListHasData) {
+                    this.projectBLMSMapList.filter(x => {
+
+                        if (x.projectBuildLevelId === mileStoneCol.buildLevelId && x.mileStoneId === mileStoneCol.mileStoneId) {
+                            mileStoneCol.enabled = true;
+                            mileStoneCol.buildLevelMapped = true;
+                            mileStoneCol.mileStoneMapped = true;
+                            mileStoneCol.isDatesValid = true;
+                            mileStoneCol.plannedStartDate = JSON.parse(JSON.stringify(x.plannedStartDate)).slice(0, 10);
+                            mileStoneCol.plannedEndDate = JSON.parse(JSON.stringify(x.plannedEndDate)).slice(0, 10);
+                        }
+
+                    });
+                }
 
                 mileStoneCols.push(mileStoneCol);
-                isBuildLevelsEnabled = false;
-                isCurrentBuildLevelMapped = false;
-                isCurrentMileStoneMapped = false;
+
             })// End Of Build Level Loop
             mileStoneBuildLevelRow.push(mileStoneCols);
             //this.mileStoneBuildLevel.push(mileStoneCols);
@@ -335,14 +342,24 @@ export class ProjectScheduleComponent {
                 if (col.plannedStartDate) {
                     if (col.isDatesValid) {
                         projectBLMSView.projectId = this.projectId;
-                        projectBLMSView.projectBuildLevelId = col.buildLevelId;
+                        projectBLMSView.projectBuildLevelId = JSON.parse(JSON.stringify(col.projectBuildLevelId));
                         //projectBLMSView.buildLevelName = row.buildLevelMap.name;
-                        projectBLMSView.mileStoneId = col.mileStone.id;
-                        projectBLMSView.mileStoneStatusId = mileStoneStatusId;
+                        projectBLMSView.mileStoneId = JSON.parse(JSON.stringify(col.mileStone.id));
+                        projectBLMSView.mileStoneStatusId = JSON.parse(JSON.stringify(mileStoneStatusId));
                         //projectBLMSView.mileStoneName = col.mileStone.name;
-                        projectBLMSView.plannedStartDate = col.plannedStartDate;
-                        projectBLMSView.plannedEndDate = col.plannedEndDate;
+                        projectBLMSView.plannedStartDate = JSON.parse(JSON.stringify(col.plannedStartDate));
+                        projectBLMSView.plannedEndDate = JSON.parse(JSON.stringify(col.plannedEndDate));
                         blmsMap.push(projectBLMSView);
+
+                        projectBLMSView = {
+                            projectId: '',
+                            projectBuildLevelId: '',
+                            buildLevelName: '',
+                            mileStoneId: '',
+                            mileStoneName: '',
+                            plannedStartDate: '',
+                            plannedEndDate: ''
+                        };
                     }
                     else {
                         formIsValid.push(false);

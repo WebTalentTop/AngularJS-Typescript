@@ -26,15 +26,15 @@
             <div class="cell">{{ mileStones[ii].name}}</div>
             <template ngFor let-item [ngForOf]="row">
                 <div class="cell" *ngIf="item.enabled">
+                    SD {{ item.plannedStartDate | json }}
+                    ED {{ item.plannedEndDate | json }}
+                    BLID{{item.buildLevelId | json }}
+                    MSID {{item.mileStoneId}}
                     Start Date:
                     <input [style.border]="item.startDateErrorColor" (ngModelChange)="validateStartDate($event,item)" type="date" [(ngModel)]="item.plannedStartDate">
                     <br>
                     End Date:
                     <input [style.border]="item.endDateErrorColor" (ngModelChange)="validateEndDate($event,item)" type="date" [(ngModel)]="item.plannedEndDate">
-                    <br>
-                    <span *ngIf="!item.isDatesValid" style="color:indianred; font-size:12px">
-                        {{item.validDateMessage}}
-                    </span>
                 </div>
             </template>
 
