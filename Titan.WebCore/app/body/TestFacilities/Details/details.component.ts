@@ -9,7 +9,7 @@ import { FormInstanceService } from '../../../shared/services/formInstance.servi
 import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
 
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';

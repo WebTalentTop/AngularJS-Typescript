@@ -9,7 +9,7 @@ import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCa
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
