@@ -6,6 +6,8 @@ import { CalendarApiUrl} from '../../apiUrlConst/Calendar/CalendarApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {IUserProfile} from "../../definitions/IUserProfile";
+import {UserProfileService} from "../../userProfile.service";
 
 @Injectable()
 export class CalendarService {
@@ -21,8 +23,15 @@ export class CalendarService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+
+    currentUserProfile: IUserProfile;
+
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        debugger;
+        //this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+        let user: Promise<IUserProfile> | any = this.userProfileService.getCurrentUserProfile();
+        this.currentUserProfile = user;
+        this.headers.append("TenantId", this.currentUserProfile.defaultTenantId);
     }
 
     postGridData(): Observable<any> {

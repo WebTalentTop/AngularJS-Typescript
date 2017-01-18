@@ -140,7 +140,7 @@ export class WorkRequestComponent implements AfterViewInit {
         //this.getTestVerificationMethods();
         //this.getTestTypes();
         //this.getBuildLevels();
-        //this.getTestStatus();
+        //this.getAll();
         //this.getProjectCodes();
         //this.getTestTemplates();
         //this.getTestRoles();
@@ -370,7 +370,7 @@ export class WorkRequestComponent implements AfterViewInit {
     }
     getTestStatus() {
         //    userRoles
-        this.teststatusservice.getTestStatus().subscribe(response => {
+        this.teststatusservice.getAll().subscribe(response => {
             this.testStatus = new Array();
             if (response != null) {
                 var resultMap = new Array();

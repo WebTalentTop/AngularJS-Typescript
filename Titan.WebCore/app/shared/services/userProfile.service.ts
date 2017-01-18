@@ -26,7 +26,10 @@ export class UserProfileService {
     }
 
 
-    getCurrentUserProfile(): Promise<IUserProfile> {
+    getCurrentUserProfile(): Promise<IUserProfile> | any {
+        if(this.userProfile){
+            return this.userProfile;
+        }
         return new Promise((resolve, reject) => {
             this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
                 .map(this.getJson)
