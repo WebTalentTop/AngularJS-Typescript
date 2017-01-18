@@ -24,7 +24,7 @@ enum procedureDependentItemType {
 export class DetailsComponent {
     public procedure: any;
     public testTypes: any;
-    public testModes: Array<any> = new Array();
+    public testAllModes: Array<any> = new Array();
     public selectedTestRequirements: Array<any> = new Array();
     public filteredTestRequirements: Array<any> = new Array();
     public filteredSelectedTestRequirements: Array<any> = new Array();
@@ -262,7 +262,7 @@ export class DetailsComponent {
     }
 
     onTestTypeChange() {
-        this.testModes = new Array();
+        this.testAllModes = new Array();
         //this.testModes
         this.testtypeService.getById(this.procedure.testTypeId).subscribe(response => {
             if (response != null) {
@@ -280,14 +280,14 @@ export class DetailsComponent {
                         resultMap.push(temp);
                     }
                     //resultMap.concat(response.result.selectedTestModesList);
-                    this.testModes = resultMap;
+                    this.testAllModes = resultMap;
                 }
                 else {
-                    var testMode = [{
+                    var testAllModes = [{
                         label: "No Modes available",
                         value: null
                     }];
-                    this.testModes = testMode;
+                    this.testAllModes = testAllModes;
                 }
             }
         });
