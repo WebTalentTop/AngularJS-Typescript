@@ -6,6 +6,7 @@ import {IProjectBuildLevelMap} from "../ProjectBuildLevelMapView/IProjectBuildLe
  */
 export interface IMileStoneBuildLevelCol {
     id:string;
+    projectBuildLevelId:string;
     buildLevelId:string;
     buildLevelMap:IProjectBuildLevelMap;
     mileStoneId: string;
