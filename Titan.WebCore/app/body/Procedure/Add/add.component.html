@@ -1,6 +1,6 @@
 <div class="ui-g-12">
     <div class="card card-w-title">
-        <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+        <form #procedureForm="ngForm" (ngSubmit)="onSubmit()">
 
             <h2> Create New Test Procedure</h2>
             <br />
@@ -65,7 +65,7 @@
               <footer>
                   <p>* indicates required field</p>
                   <button pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" id="cancel" routerLink="/procedure">  </button>
-                  <button id="create" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.form.valid"></button>
+                  <button id="create" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" id="add" [disabled]="!procedureForm.form.valid"></button>
               </footer><br />
             </p-panel>
         </form>
