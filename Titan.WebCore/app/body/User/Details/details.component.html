@@ -19,12 +19,12 @@
 
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="firstName" [(ngModel)]="userProfile.firstName"
+                                    <input type="text" style="width:100%" pInputText name="firstName"  id="firstName" [(ngModel)]="userProfile.firstName"
                                            minlength="3" class="form-control" required row="20">
                                     <label>First Name *</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="lastName" class="form-control" required row="20" [(ngModel)]="userProfile.lastName">
+                                    <input type="text" style="width:100%" pInputText name="lastName"  id="lastName" class="form-control" required row="20" [(ngModel)]="userProfile.lastName">
                                     <label>Last Name *</label>
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
@@ -33,30 +33,30 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Department :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments" [autoWidth]="false"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
 
                                 </div>
                             </div><br /><br />
 
                             <div class="ui-grid-row ">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="emailAddress" [(ngModel)]="userProfile.emailAddress"
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="emailAddress"  id="emailAddress" [(ngModel)]="userProfile.emailAddress"
                                          >
                                     <label>Email Address</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber" [(ngModel)]="userProfile.firstName">
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.firstName">
                                     <label>Phone Number</label>
                                 </div>
                             </div>
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Role :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)"  name="titanRoles" [autoWidth]="false"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)"  name="titanRoles"  id="titanRoles" [autoWidth]="false"></p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Time Zone :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="timeZones" (onChange)="onTimeZoneChange($event)" [(ngModel)]="userProfile.defaultTimeZoneId" name="timeZones" [autoWidth]="false"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="timeZones" (onChange)="onTimeZoneChange($event)" [(ngModel)]="userProfile.defaultTimeZoneId" name="timeZones"  id="timeZones" [autoWidth]="false"></p-dropdown>
                                 </div>
                             </div>
 
@@ -65,7 +65,7 @@
 
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save"></button>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save" class="green-btn" icon="ui-icon-save"></button>
                         </footer><br />
 
                     </p-panel>
@@ -94,7 +94,7 @@
 
                             <div class="ui-g-4"><b>Function Group :</b></div>
 
-                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
+                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" (onChange)="onFunctionGroupChange($event)" name="functionGroups"  id="functionGroups" [autoWidth]="false"></p-dropdown>
                             </div>
                     </div>
 
@@ -115,11 +115,11 @@
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                             <div style='float:left;padding:0.85em'>
-                              <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                              <p-checkbox name="groupname" value="IsKeepOpen"  id="functiongroupIsKeepOpen" label="Keep Open"
                                           [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                             </div>
-                            <button type="button" pButton icon="ui-icon-close" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddFunctionGroup()" label="Assign Function Group"></button>
+                            <button type="button" pButton icon="ui-icon-close" id="functiongroupCancel" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
+                            <button type="button" pButton icon="ui-icon-save" id="functiongroupAdd" (click)="onAddFunctionGroup()" label="Assign Function Group"></button>
                         </div>
                     </footer>
 
@@ -176,7 +176,7 @@
                             <b>Tenants :</b>
 
                             <div class="ui-g-8">
-                                <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants" [autoWidth]="false"></p-dropdown>
+                                <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants"  id="tenants" [autoWidth]="false"></p-dropdown>
                             </div>
                         </label>
 
@@ -192,11 +192,11 @@
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                           <div style='float:left;padding:0.85em'>
-                            <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
+                            <p-checkbox name="groupname" value="IsKeepOpen"  id="tenantIsKeepOpen" label="Keep Open"
                                         [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                           </div>
-                            <button type="button" pButton icon="ui-icon-close" (click)="displayTenantDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddTenant()" label="Assign Tenant"></button>
+                            <button type="button" pButton icon="ui-icon-close" id="tenantCancel" (click)="displayTenantDialog=false" label="Cancel"></button>
+                            <button type="button" pButton icon="ui-icon-save" id="tenantAdd" (click)="onAddTenant()" label="Assign Tenant"></button>
                         </div>
                     </footer>
 
@@ -209,7 +209,7 @@
 
                     <header class="with-controls">
                         <p class="ui-panel-title"> Tenants </p>
-                        <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant"></button></p>
+                        <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant" id="assignTenant"></button></p>
                     </header>
 
                     <div class="ui-grid-row">
