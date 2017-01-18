@@ -270,7 +270,7 @@ export class DetailsComponent {
       
        let userTenantModel = {
 
-           userId: UserInfo.id,
+           userId: UserInfo.userId,
            tenantId: this.tenantId
        };
        this.userservice.RemoveTenantMapping(userTenantModel).subscribe(res => {
