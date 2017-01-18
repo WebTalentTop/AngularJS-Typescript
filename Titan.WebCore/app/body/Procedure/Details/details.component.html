@@ -146,8 +146,9 @@
                                     Action
                                 </template>
                                 <template let-step="rowData" pTemplate type="body">
-                                    <button type="button" pButton (click)="onDelete(step)" icon="fa-trash" class="red-btn"></button>
-                                    <button type="button" pButton (click)="onMoveProcedureUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up" class="blue-grey-btn"></button>
+                                    <button type="button" pButton (click)="onDelete(step)" icon="ui-icon-remove-circle" class="red-btn" label="Delete"></button>
+                                    <button type="button" pButton (click)="onEditStep(step)" icon="ui-icon-edit"  class="blue-grey-btn" label="Edit"></button>
+                                    <button type="button" pButton (click)="onMoveProcedureUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up" class="blue-grey-btn" class="blue-grey-btn"></button>
                                     <button type="button" pButton (click)="onMoveProcedureDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down" class="blue-grey-btn"></button>
                                 </template>
                             </p-column>
@@ -164,8 +165,8 @@
                                 </p-column>
                                 <p-column styleClass="col-button" header="Action">
                                     <template let-step="rowData" pTemplate="body">
-                                        <button type="button" pButton (click)="onDelete(step, 2)" icon="fa-trash" title="Delete"></button>
-                                        <button type="button" pButton (click)="onEditStep(step)" icon="fa-pencil-square-o" title="Edit"></button>
+                                        <button type="button" pButton (click)="onDelete(step, 2)" icon="ui-icon-remove-circle" class="red-btn" label="Delete"></button>
+                                        <button type="button" pButton (click)="onEditStep(step)" icon="ui-icon-edit"  class="blue-grey-btn" label="Edit"></button>
                                         <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
                                         <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
                                     </template>
