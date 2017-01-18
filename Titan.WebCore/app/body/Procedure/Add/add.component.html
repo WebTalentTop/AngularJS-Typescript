@@ -18,19 +18,19 @@
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Type *:</p>
                         <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testTypes"
-                            (onChange)="onTestTypeChange()" name="testType" required >
+                            (onChange)="onTestTypeChange()" name="testType"  id="testType"  required >
                         </p-dropdown>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Mode *:</p>
                         <p-dropdown [style]="{'width':'100%','color':'#777'}"
-                        [options]="testAllModes" name="testMode" required>
+                        [options]="testAllModes" name="testMode" id="testMode" required>
                         </p-dropdown>
                     </div>
                   </div><br /><br />
                   <div class="ui-grid-row">
                       <div class="md-inputfield ui-g-12 ui-md-6">
-                          <input type="number" style="width:100%" name="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
+                          <input type="number" style="width:100%" name="estimatedTime" id="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
                               max="999">
                           <label>Estimated Time :</label>
                       </div>
@@ -64,8 +64,8 @@
               </div>
               <footer>
                   <p>* indicates required field</p>
-                  <button pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" routerLink="/procedure">  </button>
-                  <button id="create" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" [disabled]="!tfForm.form.valid"></button>
+                  <button pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" id="cancel" routerLink="/procedure">  </button>
+                  <button id="create" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.form.valid"></button>
               </footer><br />
             </p-panel>
         </form>

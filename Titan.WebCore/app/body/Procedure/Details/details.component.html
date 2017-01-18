@@ -21,19 +21,19 @@
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Test Type *:</p>
                                     <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testTypes" [(ngModel)]="procedure.testTypeId"
-                                        (onChange)="onTestTypeChange()" name="testType" required >
+                                        (onChange)="onTestTypeChange()" name="testType" id="testType" required >
                                     </p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Test Mode *:</p>
                                     <p-dropdown [style]="{'width':'100%','color':'#777'}"
-                                    [options]="testAllModes" [(ngModel)]="procedure.testModeId" name="testMode" required>
+                                    [options]="testAllModes" [(ngModel)]="procedure.testModeId" name="testMode"  id="testMode" required>
                                     </p-dropdown>
                                 </div>
                               </div><br /><br />
                               <div class="ui-grid-row">
                                   <div class="md-inputfield ui-g-12 ui-md-6">
-                                      <input type="number" style="width:100%" name="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
+                                      <input type="number" style="width:100%" name="estimatedTime" id="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
                                           max="999">
                                       <label>Estimated Time :</label>
                                   </div>
@@ -66,7 +66,7 @@
                         </div>
                         <br />
                         <footer>
-                            <button pButton type="submit" class="green-btn" icon="ui-icon-save"label="Save" [disabled]="!procedureForm.form.valid">  </button>
+                            <button pButton type="submit" class="green-btn" icon="ui-icon-save" id="save" label="Save" [disabled]="!procedureForm.form.valid">  </button>
                         </footer><br />
 
                         <!--</div>-->
@@ -83,11 +83,11 @@
                         <div class="ui-g-2">
                             <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
                                             (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                                            [minLength]="1" placeholder="Search by Reference" field="referenceNumber" [multiple]="true">
+                                            [minLength]="1" placeholder="Search by Reference" field="referenceNumber" id="referenceNumber" [multiple]="true">
                             </p-autoComplete>
                         </div>
                         <div class="ui-g-2" style='text-align:right'>
-                            <button  pButton type="submit" icon="ui-icon-add" (click)="onAddTestRequirement()" label="Add Requirement"></button>
+                            <button  pButton type="submit" icon="ui-icon-add" id="requirementadd" (click)="onAddTestRequirement()" label="Add Requirement"></button>
                         </div>
                     </div>
                 </div>
@@ -114,12 +114,12 @@
                     </div>
                     <div class="ui-grid-col-2">
                         <p-autoComplete [(ngModel)]="filteredSelectedSteps" [suggestions]="filteredSteps" (completeMethod)="filterSteps($event)"
-                                        styleClass="wid100" [minLength]="1" placeholder="Search by Step Name" field="name" [multiple]="true">
+                                        styleClass="wid100" [minLength]="1" placeholder="Search by Step Name" field="name" id="searchname" [multiple]="true">
                         </p-autoComplete>
                     </div>
 
                     <div class="ui-grid-col-2" style="text-align:right">
-                        <button pButton type="submit" class="btn btn-default" label="Add Step(s)" (click)="onAddStep()"> </button>
+                        <button pButton type="submit" class="btn btn-default" label="Add Step(s)" id="addsteps" (click)="onAddStep()"> </button>
                     </div>
                 </div><br />
                 <p-dialog header="Add Step" [(visible)]="displayAddStep" width="600">
