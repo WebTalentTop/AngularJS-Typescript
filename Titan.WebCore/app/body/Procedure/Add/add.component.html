@@ -8,7 +8,7 @@
               <div class="body">
                   <div class="ui-grid-row">
                       <div class="md-inputfield ui-g-12 ui-md-6">
-                          <input type="text" pInputText name="procedureName" id="procedureName"
+                          <input type="text" pInputText name="procedureName" id="procedureName" #procedureNameRef="ngModel" [(ngModel)]="procedure.name"
                             style="width:100%" minlength="3" maxlength="255"
                               class="form-control" required >
                           <label>Name *</label>
@@ -17,13 +17,13 @@
                   <div class="ui-grid-row ">
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Type *:</p>
-                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testTypes"
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [(ngModel)]="procedure.testTypeId" [options]="testTypes"
                             (onChange)="onTestTypeChange()" name="testType"  id="testType"  required >
                         </p-dropdown>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Mode *:</p>
-                        <p-dropdown [style]="{'width':'100%','color':'#777'}"
+                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [(ngModel)]="procedure.testModeId"
                         [options]="testAllModes" name="testMode" id="testMode" required>
                         </p-dropdown>
                     </div>
