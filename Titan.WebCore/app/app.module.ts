@@ -206,7 +206,8 @@ import {UserProfileService} from "./shared/services/userProfile.service";
     ],
     //providers: [DataService],
 
-    providers: [UserProfileService, AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService],
+    providers: [AuthGuard,TitanUserProfileService, LoggerService,EntityEventService, FormSchemaService, FormSchemaCategoryService, FormSchemaFieldDataTypeService, UserProfileService],
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }

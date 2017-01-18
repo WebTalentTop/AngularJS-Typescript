@@ -27,19 +27,12 @@ export class TestFacilityRoleService {
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
 
-    getByIdusing(id): Observable<ITestFacilityRole[]> {
-        return this.http.get(`${TestFacilityRoleApiUrl.getRolesByTestFacilityIdUrl}/${id}`, { headers: this.headers })
-            
-      //     .toPromise()
-        //  .then(res => <ITestFacilityRole[]> res.json().data)
-         // .then(data => { return data; });
+    getByTestFacilityId(id): Observable<ITestFacilityRole[]> {
+        return this.http.get(`${TestFacilityRoleApiUrl.getTestFacilityUsersByTestFacilityIdUrl}/${id}`, { headers: this.headers })
          .map(this.getJson)
          .map(data=> {
-             console.log('---------getbyusing testdata---------',data); 
              return data.$values
             });
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
     }
 
    

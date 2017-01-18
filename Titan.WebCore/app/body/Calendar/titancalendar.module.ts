@@ -24,16 +24,22 @@ import { ContextMenuModule } from 'primeng/primeng';
 
 import calendarRoutes from "./titancalendar.routes";
 import {TitanService} from "../../shared/services/titan.service";
+
 import {CalendarService} from "../../shared/services/Containers/CalendarService/calendar.service";
+import {TenantService} from "../../shared/services/tenant.service";
+import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.service";
+import {BuildLevelService} from "../../shared/services/Containers/BuildLevelService/buildLevel.service";
+
 
 @NgModule({
     imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
         InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
-        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, RadioButtonModule],
+        DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule,
+        ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, RadioButtonModule],
 
-    providers: [TestFacilityService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
-        TestTypeService, TestRequestService, TitanService, CalendarService
+    providers: [TestFacilityService,  ProjectService, TestRoleService, TestStatusService, TestModeService, BuildLevelService,
+        TestTypeService, TestRequestService, TitanService, CalendarService, TenantService, TestFacilityRoleService
     ],
     declarations: [TitanCalendarComponent]
 })

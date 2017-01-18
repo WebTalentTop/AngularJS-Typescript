@@ -12,6 +12,7 @@ import projectRoutes from "./project.routes";
 import { FormsModule, Validator} from '@angular/forms';
 import { GrowlModule, FileUploadModule, CalendarModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     TabViewModule, TreeTableModule, TreeNode, SharedModule, DialogModule, Header, Footer } from 'primeng/primeng';
+import {UserProfileService} from "../../shared/services/userProfile.service";
 //import { TorqueBookComponent } from "./TorqueBook/torque-book.component";
 //import { TemplatesComponent } from "./Templates/templates.component";
 //import { TorquesheetService } from './../../shared/services/torquesheet.service'
@@ -21,7 +22,7 @@ import { GrowlModule, FileUploadModule, CalendarModule, ButtonModule, InputTexta
         PanelModule, CommonModule, DataTableModule, projectRoutes, FormsModule, TreeTableModule,
         SharedModule, DialogModule],
     declarations: [ProjectComponent],
-    providers: [ProjectService]
+    providers: [ProjectService,UserProfileService]
 })
 
 export default class ProjectModule { }

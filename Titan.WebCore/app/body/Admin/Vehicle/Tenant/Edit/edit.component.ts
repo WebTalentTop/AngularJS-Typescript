@@ -1,8 +1,10 @@
 import { TenantService} from '../../../../../shared/services/tenant.service';
+import {ITenantViewModel} from "../../../../../shared/services/definitions/tenantDefinitions/ITenantViewModel";
 import { ActivatedRoute} from '@angular/router';
 import { InputTextModule, PanelModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import "rxjs/add/operator/map";
+
 
 @Component({
     selector: 'edit',
@@ -14,7 +16,7 @@ export class EditComponent {
     id;
     username: string;
     description: string;
-    model:any;
+    model:ITenantViewModel;
 
     constructor(private route:ActivatedRoute, private service: TenantService) {
         route.params.subscribe(params => this.id = params['id']);
