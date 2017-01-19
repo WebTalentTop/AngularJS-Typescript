@@ -9,15 +9,18 @@ import 'rxjs/add/observable/throw';
 export class LoggerService{
     show:boolean = true;
 
-    public logConsole(message, data) {
-        if(this.show) {
-            this.log(message, data);
-        }
+    public logConsole(message, data?) {
+        this.log(message)
     }
 
-    private log(message, data) {
+    private log(message, data?) {
         if(this.show) {
-            console.log(message, data);
+            if (data) {
+                console.log(message, data);
+            }
+            else {
+                console.log(message);
+            }
         }
     }
 
@@ -25,19 +28,19 @@ export class LoggerService{
         this.show = showing;
     }
 
-    public error(message, data) {
+    public error(message, data?) {
         if(this.show) {
             console.error(message, data);
         }
     }
 
-    public info(message, data) {
+    public info(message, data?) {
         if(this.show) {
             console.info(message, data);
         }
     }
 
-    public warn(message, data) {
+    public warn(message, data?) {
         if(this.show) {
             console.warn(message, data);
         }
