@@ -18,6 +18,7 @@ import {ITitanSelectItem} from '../../../../shared/services/definitions/ITitanSe
 import {SelectItem} from 'primeng/primeng';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Message} from "primeng/primeng";
+import { Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'addform',
@@ -67,6 +68,7 @@ export class DetailsComponent {
         checkBoxData: '',
         radioBoxData: '',
         selectBoxData: '',
+        displaySelectBoxData:[],
         formSchemaFieldDataTypeData: [],
         formSchemaFieldDataTypeId: ''
     };
@@ -115,107 +117,90 @@ export class DetailsComponent {
     }
 
     ngOnInit() {
-        this.formSchemaCategoryService.getAll()
-            .subscribe(res => {
-                console.log("Form Schema Category List-------------", res);
-                this.formSchemaCategories = res.result;
-                let listFormSchemaCaterory = res.result.map(newRes => {
-                    return {label: newRes.name, value: newRes.id, entityIdentifierId: newRes.entityIdentifierId};
-                });
-                this.formSchemaCategoryList = [];
-                this.formSchemaCategoryList.push({label: 'Select Category', value: null});
-                this.formSchemaCategoryList = this.formSchemaCategoryList.concat(listFormSchemaCaterory);
-                console.log("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
-                console.log("ListFormSchemaCategory -----------", listFormSchemaCaterory);
-                //listFormSchemaCaterory.forEach(x=> this.formSchemaCategoryList.push(x))
-            });
-        // Getting FormFieldDataType List
-        this.formFieldDataTypeService.getAll()
-            .subscribe(res => {
-                console.log("FormFieldDataType List  ----------", res);
-                if (res.isSuccess) {
-                    this.formFieldDataTypeList = res.result;
-                    console.log("FormFieldDataTypeList itself -----------", this.formFieldDataTypeList);
-                    this.draggableList.formFieldDataTypeList = this.formFieldDataTypeList;
+
+        let formSchemaCategoryServiceCall = this.formSchemaCategoryService.getAll();
+        let formFieldDataTypeServiceCall = this.formFieldDataTypeService.getAll();
+        let formSchemaServiceCall = this.formSchemaService.getById(this.formSchemaId);
+
+        Observable.forkJoin([formSchemaCategoryServiceCall, formFieldDataTypeServiceCall, formSchemaServiceCall])
+            .subscribe(results => {
+                let responseFormSchemaCategoryServiceCall = results[0];
+                let responseFormFieldDataTypeServiceCall = results[1];
+                let responseFormSchemaServiceCall = results[2];
+
+                if (responseFormSchemaCategoryServiceCall.isSuccess) {
+                    this.formSchemaCategories = results[0].result;
+                    this.initializeFormSchemaCategories();
                 }
 
-                this.formSchemaService.getById(this.formSchemaId)
-                    .subscribe(res => {
-                        console.log("formSchemaService getById result ----------", res.result);
-                        let result = res.result;
-                        let fields = result.fields.$values;
-                        let entityEventId = result.formSchemaEntityEvents.$values[0].entityEventId;
-                        this.selectedEntityEvent = entityEventId;
-                        let formSchemaVersionId = result.formSchemaVersion.id;
-                        let formSchemaCategoriesToSelect = result.formSchemaCategories.$values[0].formSchemaCategory;
+                if (responseFormFieldDataTypeServiceCall.isSuccess) {
+                    this.formFieldDataTypeList = results[1].result;
+                    this.initializeFormFieldDataTypeService();
+                }
 
-                        this.formName = result.name;
-                        this.draggableList.selectedInputList = fields.map(m => {
-                            let formSchemaField: IFormSchemaField = m;
-                            console.log("Data Values from the server -----", m.data.$values);
-                            formSchemaField.data = m.data.$values.map(x => { return {name: x.name, value: x.name}});
-                            formSchemaField.formSchemaFieldDataTypeData = formSchemaField.data.map(d => d.name);
-
-                            if (m.fieldDataType.name === "CheckBox") {
-                                formSchemaField.checkBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
-                            }
-                            if (m.fieldDataType.name === "RadioBox") {
-                                formSchemaField.radioBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
-                            }
-                            if (m.fieldDataType.name === "SelectBox") {
-                                formSchemaField.data = formSchemaField.formSchemaFieldDataTypeData.map(x => {return { label:x, value:x}});
-                                formSchemaField.selectBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
-                            }
-                            return formSchemaField;
-
-                        });
-
-                        //console.log("DraggableList.selectedInputList -----", this.draggableList.selectedInputList);
-                        this.selectedFormSchemaCategory = formSchemaCategoriesToSelect.id;
-
-                        if (formSchemaCategoriesToSelect.id) {
-                            this.entityEventListDropDown(this.selectedFormSchemaCategory);
-                        }
-
-                    });
-            });
-
+                if (responseFormSchemaServiceCall.isSuccess) {
+                    let data = results[2].result;
+                    this.initializeFormSchemaById(data);
+                }
+            })
     }
 
-    /*    private onDrag(args:any):void {
-     let [e] = args;
-     this.removeClass(e, 'ex-moved');
-     }
+    initializeFormSchemaCategories() {
+        let listFormSchemaCaterory = this.formSchemaCategories.map(newRes => {
+            return {label: newRes.name, value: newRes.id, entityIdentifierId: newRes.entityIdentifierId};
+        });
+        this.formSchemaCategoryList = [];
+        this.formSchemaCategoryList.push({label: 'Select Category', value: null});
+        this.formSchemaCategoryList = this.formSchemaCategoryList.concat(listFormSchemaCaterory);
+        console.log("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
+        console.log("ListFormSchemaCategory -----------", listFormSchemaCaterory);
+        //listFormSchemaCaterory.forEach(x=> this.formSchemaCategoryList.push(x))
+    }
 
-     private onOver(args:any):void {
-     let [el] = args;
-     this.addClass(el, 'ex-over');
-     }
+    initializeFormFieldDataTypeService() {
+        console.log("FormFieldDataTypeList itself -----------", this.formFieldDataTypeList);
+        this.draggableList.formFieldDataTypeList = this.formFieldDataTypeList;
+    }
 
-     private onOut(args: any): void {
-     let [e, el, container] = args;
-     this.removeClass(el, 'ex-over');
+    initializeFormSchemaById(data) {
+        let result = data;
+        let fields = result.fields.$values;
+        console.log("Fields first ------", fields);
+        let entityEventId = result.formSchemaEntityEvents.$values[0].entityEventId;
+        this.selectedEntityEvent = entityEventId;
+        let formSchemaVersionId = result.formSchemaVersion.id;
+        let formSchemaCategoriesToSelect = result.formSchemaCategories.$values[0].formSchemaCategory;
 
-     console.log("OnOut ---- e ---",e.id);
-     console.log("OnOut ---- el ---",el);
-     console.log("OnOut ---- container ---",container);
+        this.formName = result.name;
+        this.draggableList.selectedInputList = fields.map(m => {
+            let fieldDataTypes = m.data.$values;
+            console.log("fieldDataTypes ------", fieldDataTypes);
+            let formSchemaField: IFormSchemaField = m;
+            console.log("Data Values from the server -----", m.data.$values);
+            formSchemaField.data = m.data.$values.map(x => { return {name: x.value, value: x.value}});
+            formSchemaField.formSchemaFieldDataTypeData = formSchemaField.data.map(d => d.name);
 
-     /!*console.log("--------- On Out Dropped Items Vlaue", this.dropedItems);
-     console.log("--------- InnerHtml -----------", e.innerHTML);
-     console.log("---------- e ----------", e);
-     console.log("---------- el ----------", el);
-     console.log("---------- container ----------", container);*!/
-     }
+            if (m.fieldDataType.name === "CheckBox") {
+                formSchemaField.checkBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
+            }
+            if (m.fieldDataType.name === "RadioBox") {
+                formSchemaField.radioBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
+            }
+            if (m.fieldDataType.name === "SelectBox") {
+                formSchemaField.displaySelectBoxData = formSchemaField.formSchemaFieldDataTypeData.map(x => {return { label:x, value:x}});
+                formSchemaField.selectBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
+            }
+            return formSchemaField;
 
-     private onDrop(args: any): void {
-     let [el, target, sour] = args;
-     console.log("OnDrop ---- el ---",el);
-     console.log("OnDrop ---- target ---",target);
-     console.log("OnDrop ---- sour ---",sour);
+        });
 
+        //console.log("DraggableList.selectedInputList -----", this.draggableList.selectedInputList);
+        this.selectedFormSchemaCategory = formSchemaCategoriesToSelect.id;
 
-     }*/
-
+        if (formSchemaCategoriesToSelect.id) {
+            this.entityEventListDropDown(this.selectedFormSchemaCategory);
+        }
+    }
 
     dragStart(event, item: IFormSchemaFieldDataType) {
         this.draggedItem = item;
@@ -272,10 +257,6 @@ export class DetailsComponent {
         return fieldDataType;
     }
 
-    removeItem(item) {
-        this.draggableList.selectedInputList = this.selectedInputList.filter(x => x != item);
-    }
-
     saveTextBox() {
         this.displayTextBox = false;
         this.saveTextBoxData();
@@ -324,6 +305,7 @@ export class DetailsComponent {
     saveCheckBoxData() {
         this.formInputData.order = this.orderNumber++;
         this.formInputData.formSchemaFieldDataTypeData = this.formInputData.checkBoxData.split("\n");
+        this.formInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {name:x, value: x}})
         let copyData = Object.assign({}, this.formInputData);
         this.draggableList.selectedInputList.push(copyData);
         this.formInputData.name = '';
@@ -339,12 +321,15 @@ export class DetailsComponent {
 
     saveSelectBoxData() {
         this.formInputData.order = this.orderNumber++;
-        this.sampleSelectBoxItems = this.formInputData.selectBoxData.split("\n").map(item => {
+        /*this.sampleSelectBoxItems = this.formInputData.selectBoxData.split("\n").map(item => {
             return {label: item, value: item};
-        });
+        });*/
         this.formInputData.formSchemaFieldDataTypeData = this.formInputData.selectBoxData.split("\n");
+        this.formInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {name:x, value: x}})
+        this.formInputData.displaySelectBoxData = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {label:x, value: x}})
         let copyData = Object.assign({}, this.formInputData);
         this.draggableList.selectedInputList.push(copyData);
+        this.formInputData.data = [];
         this.formInputData.name = '';
         this.formInputData.label = '';
         this.formInputData.maxLength = 0;
@@ -359,6 +344,8 @@ export class DetailsComponent {
     saveRadioBoxData() {
         this.formInputData.order = this.orderNumber++;
         this.formInputData.formSchemaFieldDataTypeData = this.formInputData.radioBoxData.split("\n");
+        this.formInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {name:x, value: x}})
+
         let copyData = Object.assign({}, this.formInputData);
         this.draggableList.selectedInputList.push(copyData);
         this.formInputData.name = '';
@@ -389,34 +376,6 @@ export class DetailsComponent {
                 this.entityEvents.forEach(item => this.entityEventsList.push(item));
                 console.log("EntityEventsList -----", this.entityEventsList);
             });
-    }
-
-    saveForm() {
-        let formSchemaData: IFormSchema = new FormSchema('', false, []);
-
-        formSchemaData.id = this.formSchemaId;
-        formSchemaData.name = this.formName;
-        formSchemaData.fields = this.draggableList.selectedInputList;
-        formSchemaData.formSchemaCategoryIds.push(this.selectedFormSchemaCategory);
-        formSchemaData.formSchemaEntityEvents.push({
-            entityEventId: this.selectedEntityEvent
-        });
-
-
-        console.log("Form to sent ---------", formSchemaData);
-        this.formSchemaService.postUpdate(formSchemaData)
-            .subscribe(res => {
-                console.log("Form Schema Create post return Res--------", res);
-                if(res.isSuccess) {
-                    this.msgs.push({severity:'success', summary: 'Form has been saved. ', detail: 'We are redirecting you to Form Builders home page to look at the forms list.'});
-                    this.displaySaveFormMessage = true;
-                    setTimeout(()=> {
-                        this.displaySaveFormMessage = false;
-                        this.router.navigate(['/admin/formBuilders']);
-                    }, 5000);
-                }
-            });
-        console.log('formschema Create called');
     }
 
     // Popup Windows for editing form
@@ -516,80 +475,20 @@ export class DetailsComponent {
         console.log("SelectedFormInputData ----------", this.selectedFormInputData);
     }
 
-    removeItemTextBoxMod() {
-        this.displayTextBoxMod = false;
+    removeItemMod() {
+        this.closeModDialogs();
         let item = this.selectedFormInputData;
-        console.log("RadioBoxModRemoveItem ----------", item);
-        let itemOutList = this.draggableList.selectedInputList.filter(x =>{
-            console.log("Filter x value ----------", x);
-            console.log("Item passed to removeItemRadioBoxMod ----------", item);
-
-            return x != item;
-        });
-        console.log("Item Out List ----------", itemOutList);
-
-        this.draggableList.selectedInputList = itemOutList;
+        this.draggableList.selectedInputList = this.draggableList.selectedInputList.filter(x => x != item);
     }
 
-    removeItemTextAreaBoxMod() {
-        this.displayTextAreaBoxMod = false;
-        let item = this.selectedFormInputData;
-        console.log("RadioBoxModRemoveItem ----------", item);
-        let itemOutList = this.draggableList.selectedInputList.filter(x =>{
-            console.log("Filter x value ----------", x);
-            console.log("Item passed to removeItemRadioBoxMod ----------", item);
-
-            return x != item;
-        });
-        console.log("Item Out List ----------", itemOutList);
-
-        this.draggableList.selectedInputList = itemOutList;
-    }
-
-    removeItemCheckBoxMod() {
+    closeModDialogs() {
         this.displayCheckBoxMod = false;
-        let item = this.selectedFormInputData;
-        console.log("RadioBoxModRemoveItem ----------", item);
-        let itemOutList = this.draggableList.selectedInputList.filter(x =>{
-            console.log("Filter x value ----------", x);
-            console.log("Item passed to removeItemRadioBoxMod ----------", item);
-
-            return x != item;
-        });
-        console.log("Item Out List ----------", itemOutList);
-
-        this.draggableList.selectedInputList = itemOutList;
-    }
-
-    removeItemRadioBoxMod() {
-        this.displayRadioBoxMod = false;
-        let item = this.selectedFormInputData;
-        console.log("RadioBoxModRemoveItem ----------", item);
-        let itemOutList = this.draggableList.selectedInputList.filter(x =>{
-            console.log("Filter x value ----------", x);
-            console.log("Item passed to removeItemRadioBoxMod ----------", item);
-
-            return x != item;
-        });
-        console.log("Item Out List ----------", itemOutList);
-
-        this.draggableList.selectedInputList = itemOutList;
-    }
-
-    removeItemSelectBoxMod() {
         this.displaySelectBoxMod = false;
-        let item = this.selectedFormInputData;
-        console.log("RadioBoxModRemoveItem ----------", item);
-        let itemOutList = this.draggableList.selectedInputList.filter(x =>{
-            console.log("Filter x value ----------", x);
-            console.log("Item passed to removeItemRadioBoxMod ----------", item);
-
-            return x != item;
-        });
-        console.log("Item Out List ----------", itemOutList);
-
-        this.draggableList.selectedInputList = itemOutList;
+        this.displayRadioBoxMod = false;
+        this.displayTextAreaBoxMod = false;
+        this.displayTextBoxMod = false;
     }
+
     showModBox(name, show): void {
         switch (name) {
             case 'CheckBox':
@@ -611,5 +510,49 @@ export class DetailsComponent {
                 this.displayTextAreaBoxMod = show;
                 break;
         }
+    }
+
+    saveForm() {
+        let formSchemaData: IFormSchema = new FormSchema('', false, []);
+
+        formSchemaData.id = this.formSchemaId;
+        formSchemaData.name = this.formName;
+        formSchemaData.fields = this.draggableList.selectedInputList;
+        formSchemaData.formSchemaCategoryIds.push(this.selectedFormSchemaCategory);
+        formSchemaData.formSchemaEntityEvents.push({
+            entityEventId: this.selectedEntityEvent
+        });
+
+        formSchemaData.fields.map(item => {
+            if (item.checkBoxData) {
+
+            }
+
+            if (item.radioBoxData) {
+
+            }
+
+            if (item.selectBoxData) {
+                item.data = item.selectBoxData.split("\n").map(x => {
+                    return {name:x, value:x};
+                });
+                console.log("selectBoxData --------", item.data);
+            }
+        })
+
+        console.log("Form to sent ---------", formSchemaData);
+        /*this.formSchemaService.postUpdate(formSchemaData)
+            .subscribe(res => {
+                console.log("Form Schema Create post return Res--------", res);
+                if(res.isSuccess) {
+                    this.msgs.push({severity:'success', summary: 'Form has been saved. ', detail: 'We are redirecting you to Form Builders home page to look at the forms list.'});
+                    this.displaySaveFormMessage = true;
+                    setTimeout(()=> {
+                        this.displaySaveFormMessage = false;
+                        this.router.navigate(['/admin/formBuilders']);
+                    }, 5000);
+                }
+            });*/
+        console.log('formschema Create called');
     }
 }

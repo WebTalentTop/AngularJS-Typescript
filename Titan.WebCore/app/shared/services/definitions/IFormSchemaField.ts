@@ -14,6 +14,7 @@ export interface IFormSchemaField{
     checkBoxData?:any;
     radioBoxData?:any;
     selectBoxData?:any;
+    displaySelectBoxData?:any[];
     formSchemaFieldDataTypeId:string;
     formSchemaFieldDataTypeData?:IFormSchemaFieldDataTypeData[];
 }

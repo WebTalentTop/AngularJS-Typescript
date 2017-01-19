@@ -194,6 +194,7 @@
     <!-- End Of Droppable Section -->
 </div>
 
+<!--region Dragg elements-->
 <!-- Inital Element Add -->
 <p-dialog header="Textbox Information" [(visible)]="displayTextBox" modal="modal" width="900" responsive="true">
 
@@ -212,7 +213,7 @@
         </div>
           <div class="ui-g-12">
             <div class="ui-g-5"><b>What is the allowable maximum length of the value</b></div>
-            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [max]="20"></p-spinner></div>
+            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="5" [max]="100"></p-spinner></div>
         </div>
     </div><br />
     <footer>
@@ -241,7 +242,7 @@
         </div>
         <div class="ui-g-12">
             <div class="ui-g-5"><b>What is the allowable maximum length of the value</b></div>
-            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="0" [step]="25" [max]="2000"></p-spinner></div>
+            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="formInputData.maxLength" [min]="5" [step]="25" [max]="2000"></p-spinner></div>
         </div>
     </div><br />
     <footer>
@@ -251,7 +252,6 @@
         </div>
     </footer>
 </p-dialog>
-
 
 <p-dialog header="NumberBox Information" modal="modal" width="900" responsive="true" [(visible)]="displayNumberBox">
     <div class="ui-g ui-fluid form-group">
@@ -365,6 +365,7 @@
 </p-dialog>
 
 <!-- Closing Initial Element Add -->
+<!--endregion-->
 
 <p-dialog header="Save Form Message" [(visible)]="displaySaveFormMessage" responsive="true">
     <div class="ui-g-fluid">
@@ -383,26 +384,26 @@
     <div class="ui-g ui-fluid form-group">
         <div class="ui-g-12">
             <div class="ui-g-5"><b>Name of this object</b></div>
-            <div class="ui-g-7"><input pInputText name="name" type="text" [(ngModel)]="selectedInputList.name"></div>
+            <div class="ui-g-7"><input pInputText name="name" type="text" [(ngModel)]="selectedFormInputData.name"></div>
         </div>
         <div class="ui-g-12">
             <div class="ui-g-5"><b>Textbox placeholder text</b></div>
-            <div class="ui-g-7"><input pInputText type="text" name="label" [(ngModel)]="selectedInputList.label"></div>
+            <div class="ui-g-7"><input pInputText type="text" name="label" [(ngModel)]="selectedFormInputData.label"></div>
         </div>
         <div class="ui-g-12">
-            <div class="ui-g-5"><p-checkbox binary="true" [(ngModel)]="selectedInputList.isRequired"
+            <div class="ui-g-5"><p-checkbox binary="true" [(ngModel)]="selectedFormInputData.isRequired"
                         label="Is this TextBox Required Field"></p-checkbox></div>
         </div>
         <div class="ui-g-12">
             <div class="ui-g-5"><b>What is the allowable maximum length of the value</b></div>
-            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="selectedInputList.maxLength" [min]="0" [max]="20"></p-spinner></div>
+            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="selectedFormInputData.maxLength" [min]="5" [max]="100"></p-spinner></div>
         </div>
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayTextBoxMod=false" label="Cancel"></button>
+            <button pButton type="button" icon="ui-icon-close" (click)="displayTextBoxMod=false" label="Cancel"></button>
             <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItemTextBoxMod(item)">
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()">
             </button>
         </div>
     </footer>
@@ -435,7 +436,7 @@
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="ui-icon-close" (click)="displayCheckBoxMod=false" label="Cancel"></button>
             <button pButton type="button" icon="ui-icon-save" (click)="saveCheckBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItemCheckBoxMod(item)"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
         </div>
     </footer>
 </p-dialog>
@@ -467,7 +468,7 @@
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="ui-icon-close" (click)="displayRadioBoxMod=false" label="Cancel"></button>
             <button pButton type="button" icon="ui-icon-save" (click)="saveRadioBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItemRadioBoxMod(item)"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
         </div>
     </footer>
 </p-dialog>
@@ -498,7 +499,7 @@
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="ui-icon-close" (click)="displaySelectBoxMod=false" label="Cancel"></button>
             <button pButton type="button" icon="ui-icon-save" (click)="saveSelectBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItemSelectBoxMod(item)"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
         </div>
     </footer>
 </p-dialog>
@@ -523,7 +524,7 @@
         </div>
         <div class="ui-g-12">
             <div class="ui-g-5"><b>What is the allowable maximum length of the value</b></div>
-            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="selectedFormInputData.maxLength" [min]="0" [step]="25"
+            <div class="ui-g-7"><p-spinner size="30" [(ngModel)]="selectedFormInputData.maxLength" [min]="5" [step]="25"
                        [max]="2000"></p-spinner></div>
         </div>
     </div>
@@ -531,7 +532,7 @@
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="ui-icon-close" (click)="displayTextAreaBoxMod=false" label="Cancel"></button>
             <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItemTextBoxMod(item)">
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()">
             </button>
         </div>
     </footer>
