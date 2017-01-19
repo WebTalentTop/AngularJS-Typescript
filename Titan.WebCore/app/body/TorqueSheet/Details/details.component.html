@@ -68,3 +68,30 @@
         </div>
     </div>
 </div>
+
+<p-dialog header="Send Email" [(visible)]="displayApproverEmail" modal="modal" showEffect="fade" width="700">
+    <form #sendApproverEmailForm>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2"><b>To:</b></div>
+            <div class="ui-grid-col-10">
+                <p-autoComplete [(ngModel)]="filteredSelectedApprovers" [suggestions]="filteredApprovers"
+                                (completeMethod)="filterApprovers($event)" styleClass="wid100" name="approverTo"
+                                [minLength]="1" placeholder="Search by Name" field="displayName" id="autoCompleteApprover" [multiple]="true">
+                </p-autoComplete>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2"><b>Subject:</b></div>
+            <div class="ui-grid-col-10">
+                <p-editor name="subjectEditor" [(ngModel)]="subject" [style]="{'height':'320px'}"></p-editor>
+            </div>
+        </div>
+    </form>
+    <br />
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="onSendEmailCancel()" label="Cancel"></button>
+            <button type="button" pButton icon="ui-icon-save" (click)="onSendEmail()" label="Send Email Request"></button>
+        </div>
+    </footer>
+</p-dialog>

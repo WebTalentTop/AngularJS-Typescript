@@ -20,5 +20,6 @@ export class UserApiUrl {
    public static getTitanRoles: string = titanApiUrl + 'titanRole/GetAll';
    public static getDepartments: string = titanApiUrl + 'department/GetAllDepartments';
    public static getUsers: string = titanApiUrl + 'titanUser/GetAll';
+   public static filterUserByName: string = titanApiUrl + 'titanUser/FilterUsersByName?filterString=';
    public static RemoveTenantMapping: string = titanApiUrl + 'titanUser/RemoveTenantMapping';
 }
