@@ -3,47 +3,33 @@
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
-                <h3> Add Torque Sheet </h3>
-                <p-panel>
-                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                Torque Sheet Name *:
-                            </div>
-                            <div class="ui-grid-col-8">
-                                <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'auto'}"
-                                            name="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
-                                </p-dropdown>
-                            </div>
-                            <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.required">
-                                Torque Sheet Name field is required
-                            </div>
+                <h2> Create New Torque Sheet </h2><br />
+                <p-panel header="Torque Sheet">
+                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" *ngIf="torqueSheetDetails">
+                        <div class="ui-grid-row ">
+                          <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Torque Sheet Name *:</p>
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'100%'}"
+                                  name="newTorqueSheetNameId" required #newTorqueSheetNameRef required >
+                              </p-dropdown>
+                          </div>
+                          <div class="ui-g-12 ui-md-6" style="text-align:right"><br /><br />
+                            <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
+                          </div>
                         </div>
                         <div class="hidden" style="display:none">
                             <input type="file" name="image" id="fileSelector" #fileSelector (change)="onPictureSelect()"/>
                         </div>
-                        <button type="button" class="btn btn-default btn-toolbar localize-tooltip" id="addpicture" (click)="onInsertPictueClick()"
-                                title="Insert Picture">
-                            <span class="fa fa-picture-o fa-2x">Insert Pic.</span>
-                        </button>
+                        <br />
                         <div class="ui-grid-row">
-                            <div id="torqueSheetSpreadContainer" style="width:95%; height:500px; border: 1px solid gray">
+                            <div id="torqueSheetSpreadContainer" style="width:100%; height:500px; border: 1px solid gray">
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Add">  </button>
-                            </div>
-                            <div class="ui-grid-col-6">
-                            </div>
-                            <div class="ui-grid-col-4">
-                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
-                            </div>
-                        </div>
-                    </div>
+                    <footer>
+                        <button id="cancel" pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" routerLink="/torquesheet">  </button>
+                        <button id="add" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" [disabled]="!tfForm.form.valid"></button>
+                    </footer><br />
                 </p-panel>
                 <br />
                 <br />

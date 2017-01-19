@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" name="serialNumber" pInputText [(ngModel)]="model.serialNumber" style="width:100%">
+                                    <input type="text" name="serialNumber" id="serialNumber" pInputText [(ngModel)]="model.serialNumber" style="width:100%">
                                     <label>Serial #</label>
                                 </div>
                             </div>
@@ -33,8 +33,9 @@
                             <!-- Begin Equipment Type # -->
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
-                                    <p style="color:#777">Equipment Type :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="model.equipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" appendTo="body"  [autoWidth]="false">
+                                    <p style="color:#777">Equipment Type :  <span >*</span></p>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" filter="filter"
+                                    [(ngModel)]="model.equipmentTypeId" required (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" id="equipmentTypes" appendTo="body"  [autoWidth]="false">
                                         <!--<template let-item>
                                             <div class="ui-helper-clearfix">
 
@@ -50,7 +51,8 @@
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Test Facility :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="model.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities">
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" filter="filter"
+                                    [(ngModel)]="model.testFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities">
                                     </p-dropdown>
                                 </div>
                             </div>
@@ -58,22 +60,23 @@
                             <!--Year Purchased-->
                             <div class="ui-grid-row " style="color:#777">
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
-                                    <p-calendar [(ngModel)]="model.purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
+                                    <p-calendar [(ngModel)]="model.purchaseDate" name="purchaseDate" id="purchaseDate" [showIcon]="true"></p-calendar>
                                     <label>Purchase Date :</label>
                                 </div>
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
-                                    <p-calendar [(ngModel)]="model.warrantyExpiration" name="warrantyExpiration" [showIcon]="true"></p-calendar>
+                                    <p-calendar [(ngModel)]="model.warrantyExpiration" name="warrantyExpiration" id="warrantyExpiration" [showIcon]="true"></p-calendar>
                                     <label>Warranty Until :</label>
                                 </div>
                             </div>
                             <!--End Year--><br />
                             <!--Calibration Frequency-->
+                            
                             <div class="ui-grid-row " style="color:#777">
                                 <div class="ui-g-12 ui-md-12">
-                                    <label>Calibration Frequency :</label>
+                                    <!--<label>Calibration Frequency :</label>-->
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
-                                    <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
+                                    <p-checkbox name="groupname" id="isMaintenance" value="isMaintenaceFrequencySelected"
                                                 label="Is calibration Required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
@@ -81,11 +84,12 @@
 
 
                                     <div class="md-inputfield">
+                                        <br />
                                         <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
                                     </div>
                                 </div>
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
-                                    <p-calendar  [(ngModel)]="model.lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true"></p-calendar>
+                                    <p-calendar  [(ngModel)]="model.lastCalibrationDate" name="lastCalibrationDate" id="lastCalibrationDate"[showIcon]="true"></p-calendar>
                                     <label style="color:#777">Last Calibration Date :</label>
                                 </div>
                             </div>
@@ -93,11 +97,11 @@
                             <!-- Price -->
                             <div class="ui-grid-row " style="color:#777">
                                 <div class="ui-g-12 ui-md-6 md-inputfield">
-                                    <input type="text" name="purchasePrice" pInputText [(ngModel)]="model.purchasePrice" style="width:100%">
+                                    <input type="text" name="purchasePrice" id="purchasePrice" pInputText [(ngModel)]="model.purchasePrice" style="width:100%">
                                     <label>Purchased Price</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" name="modelNumber" pInputText [(ngModel)]="model.modelNumber" style="width:100%">
+                                    <input type="text" name="modelNumber" id="modelNumber" pInputText [(ngModel)]="model.modelNumber" style="width:100%">
                                     <label>Model</label>
                                 </div>
                             </div>
@@ -110,7 +114,7 @@
                                     <label style="color:#777">Description</label>
                                 </div>
                                 <div class="ui-g-12 ui-md-12 md-inputfield">
-                                    <p-editor [(ngModel)]="model.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                    <p-editor [(ngModel)]="model.description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                         <header>
                                             <select class="ql-size">
                                                 <option value="small"></option>
@@ -131,7 +135,7 @@
                             <footer>
                                 <p>* indicates required field</p>
 
-                                <button pButton type="submit" icon="ui-icon-save" label="Save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid"  class="green-btn"></button>
+                                <button pButton type="submit" icon="ui-icon-save" label="Save" id="save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid"  class="green-btn"></button>
                             </footer>
                         </p-panel>
                     </form>
@@ -148,11 +152,11 @@
 
                       <!-- Begin Dialog - Assign User Role -->
 
-                      <p-dialog header="Add Manufacturer" [(visible)]="displayAssignManufacturerDialog" modal="modal"
+                      <p-dialog header="Create New Manufacturer" [(visible)]="displayAssignManufacturerDialog" modal="modal"
                                 showEffect="fade" responsive="true">
 
                           <p>
-                              Please add Manufacturer details
+                              Please enter manufacturer details
                           </p>
 
 
@@ -160,10 +164,17 @@
 
                           <div class="ui-grid-row">
                               <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" style="width:100%">
-                                  <label>Name</label>
+                                  <input type="text" 
+                                    [(ngModel)]="manufacturerName" pInputText
+                                    #manufacturerNameRef="ngModel"
+                                    minlength="3" class="form-control"
+                                    (focus)="manufacturerNameRef.focus=true" name="manufacturerName" style="width:100%">
+                                    <label>Name <span >*</span></label>
+                                                                  
+                                  <!--<input type="text" pInputText name="manufacturerName" [(ngModel)]="manufacturerName" required style="width:100%">
+                                  <label>Name <span>*</span></label>-->
                               </div>
-                          </div><br/>
+                          </div><br />
 
                           <div class="ui-grid-row ">
 
@@ -176,28 +187,31 @@
                                   <label>Address Line2</label>
                               </div>
                           </div><br />
+
+                          <div class="ui-grid-row ">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerCity" [(ngModel)]="manufacturerCity" style="width:100%">
+                                  <label>City</label>
+                              </div>
+                          <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerState" [(ngModel)]="manufacturerState" style="width:100%">
+                                  <label>State</label>
+                              </div>
+                               </div><br />
+
                           <div class="ui-grid-row ">
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerPostal" [(ngModel)]="manufacturerPostal" style="width:100%">
                                   <label>Postal</label>
                               </div>
                               <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerCity" [(ngModel)]="manufacturerCity" style="width:100%">
-                                  <label>City</label>
-                              </div>
-                          </div><br />
-                          <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerState" [(ngModel)]="manufacturerState" style="width:100%">
-                                  <label>State</label>
-                              </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerWebsite" [(ngModel)]="manufacturerWebsite" style="width:100%">
                                   <label>Website</label>
                               </div>
-                          </div><br />
+                              </div><br />
                           <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
+
+                           <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerPhone" [(ngModel)]="manufacturerPhone" style="width:100%">
                                   <label>Phone</label>
                               </div>
@@ -213,18 +227,14 @@
                               </div>
                           </div><br />
 
-
-
+                          <div class="ui-grid-row">
+                                      <p>* indicates required field</p>
+                           </div>
 
 
                           <footer>
+                               
                               <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-
-                                  <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
-                                  <button type="button" pButton icon="ui-icon-add"
-                                          (click)="displayClear()" label="Add New"></button>
-
                                   <button type="button" pButton icon="ui-icon-close"
                                           (click)="displayAssignManufacturerDialog=false" label="Cancel"></button>
                                   <button type="button" pButton icon="ui-icon-save" (click)="onAddManufacturer()"
@@ -249,9 +259,18 @@
                           <br/>
                           <div class="ui-grid-row">
                               <p style="color:#777">Select Manufacturer :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" [(ngModel)]="selectedEquipmentManufacturerId"  (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="equipmentManufacturers" filter="filter"
+                              [(ngModel)]="selectedEquipmentManufacturerId"  (onChange)="onEquipmentManufacturerChange($event)" name="equipmentManufacturers">
                               </p-dropdown>
-                          </div><br/><br/>
+                          </div><br /><br />
+                          
+                          <div class="ui-grid-row">
+                          <div class="md-inputfield ui-g-6 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerName"  [(ngModel)]="manufacturerName" style="width:100%">
+                                  <label>Name</label>
+                              </div>
+                          </div><br />
+                          
                           <div class="ui-grid-row ">
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerAddressLine1" [(ngModel)]="manufacturerAddressLine1"  style="width:100%">
@@ -263,41 +282,20 @@
                               </div>
                           </div><br />
                           <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerPhone"  [(ngModel)]="manufacturerPhone" style="width:100%">
-                                  <label>Phone</label>
+                               <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerCity"  [(ngModel)]="manufacturerCity" style="width:100%">
+                                  <label>City</label>
                               </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerFax"  [(ngModel)]="manufacturerFax" style="width:100%">
-                                  <label>Fax</label>
-                              </div>
-                          </div><br />
-                          <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerEmail"  [(ngModel)]="manufacturerEmail" style="width:100%">
-                                  <label>Email</label>
-                              </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerName"  [(ngModel)]="manufacturerName" style="width:100%">
-                                  <label>Name</label>
+                               <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerState"  [(ngModel)]="manufacturerState" style="width:100%">
+                                  <label>State</label>
                               </div>
                           </div><br />
+
                           <div class="ui-grid-row ">
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerPostal" [(ngModel)]="manufacturerPostal"  style="width:100%">
                                   <label>Postal</label>
-                              </div>
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerCity"  [(ngModel)]="manufacturerCity" style="width:100%">
-                                  <label>City</label>
-                              </div>
-                          </div><br />
-
-
-                          <div class="ui-grid-row ">
-                              <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="manufacturerState"  [(ngModel)]="manufacturerState" style="width:100%">
-                                  <label>State</label>
                               </div>
                               <div class="md-inputfield ui-g-12 ui-md-6">
                                   <input type="text" pInputText name="manufacturerWebsite"  [(ngModel)]="manufacturerWebsite" style="width:100%">
@@ -305,6 +303,23 @@
                               </div>
                           </div><br />
 
+                          <div class="ui-grid-row ">
+                              <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerPhone"  [(ngModel)]="manufacturerPhone" style="width:100%">
+                                  <label>Phone</label>
+                              </div>
+                               <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerFax"  [(ngModel)]="manufacturerFax" style="width:100%">
+                                  <label>Fax</label>
+                              </div>
+                          </div><br />
+
+                           <div class="ui-grid-row ">
+                           <div class="md-inputfield ui-g-12 ui-md-6">
+                                  <input type="text" pInputText name="manufacturerEmail"  [(ngModel)]="manufacturerEmail" style="width:100%">
+                                  <label>Email</label>
+                              </div>
+                           </div><br />
                       </p-panel>
 
                       <!-- End Panel - Test Facility Users -->
@@ -315,7 +330,7 @@
 
       </p-tabPanel>
 
-        <p-tabPanel header="Schedule" id="schedule">
+        <!--<p-tabPanel header="Schedule" id="schedule">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -337,16 +352,17 @@
                         <div class="panel-heading">Usage </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div onclick="col-sm-12">
+                                <div onclick="col-sm-12">-->
                                     <!--   <img src="../../images/Equipment_Schedule.jpg" alt=""/>-->
-                                </div>
+                                <!--</div>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-        </p-tabPanel>
+        </p-tabPanel>-->
+        
         <p-tabPanel header="Calibration History" id="calibrationhistory">
             <div class="row">
                 <div class="col-sm-12">

@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProcedureService } from '../../../shared/services/procedure.service'
+import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
@@ -24,7 +24,7 @@ enum procedureDependentItemType {
 export class DetailsComponent {
     public procedure: any;
     public testTypes: any;
-    public testModes: Array<any> = new Array();
+    public testAllModes: Array<any> = new Array();
     public selectedTestRequirements: Array<any> = new Array();
     public filteredTestRequirements: Array<any> = new Array();
     public filteredSelectedTestRequirements: Array<any> = new Array();
@@ -39,6 +39,7 @@ export class DetailsComponent {
         private procedureService: ProcedureService,
         private testtypeService: TestTypeService,
         private testmodeService: TestModeService,
+        private testmodeservice: TestModeService,
         private router: Router,
         private route: ActivatedRoute,
         private testrequirementService: TestRequirementService,
@@ -53,11 +54,7 @@ export class DetailsComponent {
 
     ngOnInit() {
         this.getTestType();
-        var testMode = {
-            label: "Select Test Type to Populate",
-            value: null
-        };
-        this.testModes.push(testMode);
+        this.getTestModes();
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.procedureService.getById(params['id']).subscribe(res => {
@@ -230,7 +227,27 @@ export class DetailsComponent {
             }
         });
     }
-
+     getTestModes() {
+        //    userRoles
+        this.testmodeservice.getAllTestModes().subscribe(response => {
+            this.testAllModes = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "Select Test Mode",
+                    value: null
+                });
+                for (let template of response.result) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.testAllModes = resultMap;
+            }
+        });
+    }
     isUpButtonVisible(step)
     {
         if (this.selectedSteps != undefined && this.selectedSteps.length > 1 && step.id != this.selectedSteps[0].id)
@@ -245,7 +262,7 @@ export class DetailsComponent {
     }
 
     onTestTypeChange() {
-        this.testModes = new Array();
+        this.testAllModes = new Array();
         //this.testModes
         this.testtypeService.getById(this.procedure.testTypeId).subscribe(response => {
             if (response != null) {
@@ -263,14 +280,14 @@ export class DetailsComponent {
                         resultMap.push(temp);
                     }
                     //resultMap.concat(response.result.selectedTestModesList);
-                    this.testModes = resultMap;
+                    this.testAllModes = resultMap;
                 }
                 else {
-                    var testMode = [{
+                    var testAllModes = [{
                         label: "No Modes available",
                         value: null
                     }];
-                    this.testModes = testMode;
+                    this.testAllModes = testAllModes;
                 }
             }
         });

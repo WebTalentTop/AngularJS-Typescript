@@ -1,72 +1,66 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <div class="card card-w-title">
+            <h2>Edit Torque Sheet</h2><br />
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                <p-panel header="Edit Torque Sheet">
+                <p-panel header="Torque Sheet">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
-                        <span [class]="latestVersionStyle">{{latestVersionText}}</span>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                Torque Sheet Name *:
+                        
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                                <span [class]="latestVersionStyle">{{latestVersionText}}</span>
                             </div>
-                            <div class="ui-grid-col-3">
-                                <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'auto'}"
-                                            name="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
+                            <div class="ui-g-12 ui-md-6" style="text-align:right">
+                                <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
+                              </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                              <p style="color:#777">Torque Sheet Name *:</p>
+                              <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" 
+                                            name="newTorqueSheetNameId" required #newTorqueSheetNameRef 
+                                            [style]="{'width':'100%','color':'#777'}">
                                 </p-dropdown>
                             </div>
-                            <div class="ui-grid-col-2" *ngIf="newTorqueSheetNameRef.errors?.required">
-                                Torque Sheet Name field is required
-                            </div>
-
-                            <div class="ui-grid-col-2">
-                                Torque Sheet Status:
-                            </div>
-                            <div class="ui-grid-col-3">
-                                {{torqueSheetDetails.torqueSheetStatus}}
-                            </div>
-                        </div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                Version:
-                            </div>
-                            <div class="ui-grid-col-3">
-                                {{torqueSheetDetails.version}}
-                            </div>
-
-                            <div class="ui-grid-col-2" *ngIf="torqueSheetDetails.otherVersions">
-                                Other Versions:
-                            </div>
-                            <div class="ui-grid-col-3" *ngIf="torqueSheetDetails.otherVersions">
-                                <p-dropdown [options]="torqueSheetDetails.otherVersions" [style]="{'width':'auto'}" [(ngModel)]="otherVersionId" 
-                                            name="otherVersion" (onChange)="onVersionChange()">
+                            <div class="ui-g-12 ui-md-6" *ngIf="torqueSheetDetails.otherVersions">
+                              <p style="color:#777">Other Versions :</p>
+                              <p-dropdown [options]="torqueSheetDetails.otherVersions" [(ngModel)]="otherVersionId" 
+                                            name="otherVersion" (onChange)="onVersionChange()"
+                                            [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
                         </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Torque Sheet Status : {{torqueSheetDetails.torqueSheetStatus}}</p>
+     
+                            </div>
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Version : {{torqueSheetDetails.version}}</p>
+                            </div>
+                           
+                        </div><br />
                         <div class="hidden" style="display:none">
                             <input type="file" name="image" id="fileSelector" #fileSelector (change)="onPictureSelect()" />
                         </div>
-                        <button type="button" class="btn btn-default btn-toolbar localize-tooltip" id="addpicture" (click)="onInsertPictueClick()"
-                                title="Insert Picture">
-                            <span class="fa fa-picture-o fa-2x">Insert Pic.</span>
-                        </button>
                         <div class="ui-grid-row">
-                            <div id="torqueSheetSpreadContainer" style="width:95%; height:500px; border: 1px solid gray">
+                            <div id="torqueSheetSpreadContainer" style="width:100%; height:500px; border: 1px solid gray">
                             </div>
                         </div>
-                    </div>
+                    </div><br />
                     <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
-                    <div class="ui-grid-row" *ngIf="torqueSheetDetails">
+                    <div class="ui-grid-row" *ngIf="torqueSheetDetails" style="text-align:right">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save" *ngIf="torqueSheetDetails.isSaveVersionVisible">  </button>
-                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
-                                <button id="submit" pButton type="button" label="Submit For Approval" (click)="onSubmitForApproval()" *ngIf="torqueSheetDetails.isSubmitForApprovalVisible">  </button>
-                                <button id="approve" pButton type="button" label="Approve" (click)="onApprove()" *ngIf="torqueSheetDetails.isApproveVersionVisible">  </button>
-                                <button id="reject" pButton type="button" label="Reject" (click)="onReject()" *ngIf="torqueSheetDetails.isRejectVersionVisible">  </button>
-                                <button id="createNewVersion" pButton type="button" label="Create New Version" (click)="onCreateNewVersion()" *ngIf="torqueSheetDetails.isRequestForNewVersionVisible">  </button>
+                                <button id="add" pButton type="submit" class="green-btn" icon="ui-icon-save" [disabled]="!tfForm.form.valid" label="Save" *ngIf="torqueSheetDetails.isSaveVersionVisible">  </button>
+                                <button id="cancel" pButton type="button"  class="blue-grey-btn" icon="ui-icon-close"  label="Cancel" (click)="onCancel()">  </button>
+                                <button id="submit" pButton type="button"  class="blue-grey-btn" icon="ui-icon-publish"  label="Submit For Approval" (click)="onSubmitForApproval()" *ngIf="torqueSheetDetails.isSubmitForApprovalVisible">  </button>
+                                <button id="approve" pButton type="button"  class="blue-grey-btn"  icon="ui-icon-check" label="Approve" (click)="onApprove()" *ngIf="torqueSheetDetails.isApproveVersionVisible">  </button>
+                                <button id="reject" pButton type="button"  class="blue-grey-btn"  icon="ui-icon-eject" label="Reject" (click)="onReject()" *ngIf="torqueSheetDetails.isRejectVersionVisible">  </button>
+                                <button id="createNewVersion" pButton type="button" class="blue-grey-btn" icon="ui-icon-close"   label="Create New Version" (click)="onCreateNewVersion()" *ngIf="torqueSheetDetails.isRequestForNewVersionVisible">  </button>
                             </div>
                         </div>
-                    </div>
+                    </div><br />
                 </p-panel>
                 <br />
                 <br />

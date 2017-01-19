@@ -5,7 +5,7 @@ import { DataTableModule, MessagesModule, GrowlModule,BreadcrumbModule } from 'p
 import { RouterModule } from "@angular/router";
 import { GridModule} from '../../../../shared/UIComponents/GridComponent/grid.module';
 import { BreadCrumbsService } from '../../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { TestStatusService } from '../../../../shared/services/testStatus.service';
+import { TestStatusService } from '../../../../shared/services/Containers/TestStatusService/testStatus.service';
 
 import testStatusRoutes from "./testStatus.routes";
 

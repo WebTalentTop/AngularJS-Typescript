@@ -1,117 +1,72 @@
-<div class="ui-g">
-    <div class="ui-g-12">
-        <!--<h1> {{title}}</h1>
-    <p-tabView>-->
-        <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-
-                <h3> Add Step </h3>
-                <p-panel>
-                    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                    <div class="ui-grid-row">
+                            <div class="ui-g-4">
                                 Step Name *
                             </div>
-                            <div class="ui-grid-col-6">
-                                <input type="text" name="stepName" pInputText [(ngModel)]="stepDetails.name" placeholder="Please enter Step Name" class="form-control"
+                            <div class="ui-g-8">
+                                <input type="text" name="stepName"  id="stepName" pInputText [(ngModel)]="stepDetails.name" placeholder="Please enter Step Name" class="form-control" style="width:100%"
                                     required #stepNameRef="ngModel"/>
                             </div>
-                            <div class="ui-grid-col-4" *ngIf="stepNameRef.errors?.required">
-                                Step Name field is required
-                            </div>
-                        </div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-g-4">
                                 Test Stage
                             </div>
-                            <div class="ui-grid-col-6">
-                                <p-dropdown [options]="testStages" [(ngModel)]="stepDetails.testStageId" name="testStage" [style]="{'width':'150px'}">
+                            <div class="ui-g-8">
+                                <p-dropdown [options]="testStages" [(ngModel)]="stepDetails.testStageId" name="testStage"  id="testStage" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
-                            <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
-                                Test Stage field is required
-                            </div>
-                        </div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-g-4">
                                 Step Type
                             </div>
-                            <div class="ui-grid-col-6">
-                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepTypeId"  (onChange)="onStepTypeChange()" name="stepType">
+                            <div class="ui-g-8">
+                                <p-dropdown #stepTypeRef="ngModel" [options]="stepTypes" [(ngModel)]="stepDetails.stepTypeId"  (onChange)="onStepTypeChange()" name="stepType"  id="stepType" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
-                            <div class="ui-grid-col-4" *ngIf="stepTypeRef.errors?.required">
-                                Step Type field is required
-                            </div>
-                        </div>
                     </div>
                     <div class="ui-grid-row" *ngIf="stepTypeDetailList">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-g-4">
                                 {{stepTypeDetailLabelText}}
                             </div>
-                            <div class="ui-grid-col-6">
-                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail"></p-multiSelect>                                
+                            <div class="ui-g-8">
+                                <p-multiSelect [options]="stepTypeDetailList" [(ngModel)]="stepDetails.stepTypeDetailIds" name="stepTypeDetail" id="stepTypeDetail"></p-multiSelect>                                
                             </div>
-                            <div class="ui-grid-col-4"></div>
-                        </div>
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-g-4">
                                 Repeat
                             </div>
-                            <div class="ui-grid-col-6">
-                                <p-radioButton name="repeat" value="true" [(ngModel)]="stepDetails.repeatStep" label="Yes" (onClick)="onRepeatChange(true)"></p-radioButton>
-                                <p-radioButton name="repeat" value="false" [(ngModel)]="stepDetails.repeatStep" label="No" (onClick)="onRepeatChange(false)"></p-radioButton>                                
+                            <div class="ui-g-8">
+                                 <div class="ui-g-3"><p-radioButton name="repeat"  id="repeatyes" value="true" [(ngModel)]="stepDetails.repeatStep" label="Yes" (onClick)="onRepeatChange(true)"></p-radioButton></div>
+                                <div class="ui-g-3"><p-radioButton name="repeat"  id="repeatno" value="false" [(ngModel)]="stepDetails.repeatStep" label="No" (onClick)="onRepeatChange(false)"></p-radioButton></div>                            
                             </div>
-                            <div class="ui-grid-col-4"></div>
-                        </div>
                     </div>
                     <div class="ui-grid-row" *ngIf="showRepeatDetails">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
+                            <div class="ui-g-4">
                                 Step Frequency
                             </div>
-                            <div class="ui-grid-col-6">
-                                <p-dropdown [options]="stepFrequencies" [(ngModel)]="stepDetails.stepFrequencyId"  (onChange)="onStepFrequencyChange()" name="stepFrequency">
+                            <div class="ui-g-8">
+                                <p-dropdown [options]="stepFrequencies" [(ngModel)]="stepDetails.stepFrequencyId"  (onChange)="onStepFrequencyChange()" name="stepFrequency"  id="stepFrequency" [style]="{'width':'100%'}">
                                 </p-dropdown>
                             </div>
-                            <div class="ui-grid-col-4"></div>
-                        </div>
                     </div>
                     <div class="ui-grid-row" *ngIf="showRepeatDetails && showTestOrCycle">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2"> 
+                            <div class="ui-g-4"> 
                                 Test % / # of Cycles
                             </div>
-                            <div class="ui-grid-col-6">
-                                <input type="text" name="testOrCycle" pInputText [(ngModel)]="stepDetails.cycleOrTestPercentage" placeholeder="Please enter Test % / # of Cycles"
+                            <div class="ui-g-8">
+                                <input type="text" name="testOrCycle"   id="testOrCycle" pInputText [(ngModel)]="stepDetails.cycleOrTestPercentage" placeholeder="Please enter Test % / # of Cycles"
                                     class="form-control"/>
                             </div>
-                            <div class="ui-grid-col-4"></div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Add">  </button>
-                            </div>
-                            <div class="ui-grid-col-6">
-                            </div>
-                            <div class="ui-grid-col-4">
-                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
-                            </div>
-                        </div>
-                    </div>
-                </p-panel>
-                <br />
-                <br />
+                    </div><br />
+                     <footer>
+                                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                    <button type="button" pButton icon="ui-icon-close" id="cancel"
+                                            (click)="onCancel()" label="Cancel"></button>
+                                    <button type="button" pButton icon="ui-icon-save"  id="add" [disabled]="!tfForm.form.valid"
+                                            label="Add"></button>
+                                </div>
+                    </footer>
             </form>
-        </div>
-    </div>
-</div>

@@ -25,7 +25,7 @@ export class TenantComponent {
     taskId: any;
     added: any;
     pendingTasks: any;
-    allUsers: any;
+    tenants: any;
     msgs: Message[] = [];
     constructor(private service: TestFacilityService, private userservice: UserService, private route: ActivatedRoute, private router: Router) {
         //this.route.queryParams.subscribe(params => {
@@ -43,9 +43,9 @@ export class TenantComponent {
     ngOnInit() {
         let resData: any;
         let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-        this.userservice.getUsersByTenantId(tenantId)
+        this.userservice.getTenants()
             .subscribe(res => {
-                    this.allUsers = res.result;
+                    this.tenants = res.$values;
             });
 
     }

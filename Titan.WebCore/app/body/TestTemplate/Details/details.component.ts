@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service'
 import { TestTypeService } from '../../../shared/services/testType.service'
 import { TestModeService } from '../../../shared/services/testMode.service'
-import { ProcedureService } from '../../../shared/services/procedure.service'
+import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';

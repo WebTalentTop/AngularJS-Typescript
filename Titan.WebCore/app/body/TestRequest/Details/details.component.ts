@@ -5,7 +5,7 @@ import { TestFacilityService } from '../../../shared/services/Containers/TestFac
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
-import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
 import { TestRequestService } from '../../../shared/services/Containers/TestRequestService/testRequest.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
@@ -14,7 +14,7 @@ import { TestTypeService } from '../../../shared/services/testType.service';
 import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 
-import { ProcedureService } from '../../../shared/services/procedure.service'
+import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

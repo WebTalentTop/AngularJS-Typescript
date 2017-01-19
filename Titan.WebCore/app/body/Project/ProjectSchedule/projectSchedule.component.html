@@ -1,58 +1,58 @@
-<p-dialog header="Select build levels" [(visible)]="displaySelectBuildLevelDialog"
-          modal="modal"
-          showEffect="fade" responsive="true">
-          <div class="ui-g">
-              <div class="ui-g-12">
-                  <div class="ui-g-3" *ngFor="let item of buildLevels">
-                      <p-checkbox
-                              name="buildLevels"
-                              value="{{item.id}}"
-                              label="{{item.name}}"
-                              (onChange)="addToProject($event, item)"
-                              [(ngModel)]="selectedNewBuildLevels">
-                      </p-checkbox>
-                  </div>
-              </div>
-          </div>
-          <br/>
-          <footer>
-              <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                  <button type="button" pButton icon="ui-icon-close" id="buildLevelCancel"
-                          (click)="displaySelectBuildLevelDialog=false" label="Cancel"></button>
-                  <button type="button" pButton icon="ui-icon-save"  id="buildLevelSave"
-                          label="Add Build Levels"></button>
-              </div>
-          </footer>
-</p-dialog>
-<div class="ui-grid-row">
-<button pButton type="submit" label="Select Build Levels" icon="ui-icon-pageview" (click)="displaySelectBuildLevelDialog=true"></button>
-</div><br />
-<div class="table" *ngIf="isBuildLevelData">
-    <div class="row header blue">
-        <div class="cell">
-            Mile Stone
-        </div>
-        <div class="cell" *ngFor="let item of buildLevels">
-            <span style="width:75px;padding:1px;">{{item.name}}</span>
+<div class="card card-w-title">
+    <h1>Select build levels</h1>
+    <div class="ui-g">
+
+        <div class="ui-g-12">
+            <div class="ui-g-2" *ngFor="let item of buildLevels">
+                <p-checkbox
+                        name="buildLevels"
+                        value="{{item.id}}"
+                        label="{{item.name}}"
+                        (onChange)="addToProject($event, item)"
+                        [(ngModel)]="selectedNewBuildLevels">
+                </p-checkbox>
+            </div>
         </div>
     </div>
-    <div class="row" *ngFor="let row of mileStoneBuildLevel; let ii = index;">
-        <div class="cell">{{ mileStones[ii].name}}</div>
-        <div class="cell" *ngFor="let col of row">
-            <div *ngIf="col.enabled">
-                Start Date: <p-calendar [(ngModel)]="col.plannedStartDate" dateFormat="mm/dd/yy"></p-calendar><br/>
-                End Date: <p-calendar [(ngModel)]="col.plannedEndDate" dateFormat="mm/dd/yy"></p-calendar>
+</div>
+<div *ngIf="isBuildLevelData">
+    <div class="table">
+        <div class="row header blue">
+            <div class="cell" *ngFor="let item of buildLevelsColHeaders">
+                <span style="width:75px;padding:1px;">{{item.name}}</span>
             </div>
+        </div>
+        <div class="row" *ngFor="let row of mileStoneBuildLevel; let ii = index;">
+            <div class="cell">{{ mileStones[ii].name}}</div>
+            <template ngFor let-item [ngForOf]="row">
+                <div class="cell" *ngIf="item.enabled">
+                    SD {{ item.plannedStartDate | json }}
+                    ED {{ item.plannedEndDate | json }}
+                    BLID{{item.buildLevelId | json }}
+                    MSID {{item.mileStoneId}}
+                    Start Date:
+                    <input [style.border]="item.startDateErrorColor" (ngModelChange)="validateStartDate($event,item)" type="date" [(ngModel)]="item.plannedStartDate">
+                    <br>
+                    End Date:
+                    <input [style.border]="item.endDateErrorColor" (ngModelChange)="validateEndDate($event,item)" type="date" [(ngModel)]="item.plannedEndDate">
+                </div>
+            </template>
+
         </div>
     </div>
 </div>
 <div class="ui-grid-row" style="text-align:right" *ngIf="isBuildLevelData">
     <button
-        type="text"
-        pButton
-        label="Save"
-        icon="ui-icon-save"
-        class="green-btn"
-        (click)="saveGrid($event)">
+            type="text"
+            pButton
+            [disabled]="formIsValid"
+            label="Save"
+            icon="fa-plus"
+            iconPos="right"
+            class="indigo-btn"
+            (click)="saveGrid($event)">
     </button>
+</div>
+<div class="ui-g-12">
+    <p-growl [value]="msgs" life="3000"></p-growl>
 </div>

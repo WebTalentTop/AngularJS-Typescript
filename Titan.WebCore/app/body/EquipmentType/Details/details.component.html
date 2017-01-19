@@ -36,6 +36,7 @@
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <div class="md-inputfield">
+                                    <br />
                                     <div id="selector"></div>
                                 </div>
                                 <!--<input type="text" pInputText name="frequency" [(ngModel)]="model.frequency" style="width:100%">-->
@@ -45,7 +46,7 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
-                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
+                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
                                 </select>
                                 <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
@@ -58,7 +59,7 @@
                                 <label style="color:#777">Description</label>
                               </div>
                               <div class="ui-g-12 ui-md-12 md-inputfield">
-                                  <p-editor [(ngModel)]="model.description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <p-editor [(ngModel)]="model.description" name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                       <header>
                                           <select class="ql-size">
                                               <option value="small"></option>
@@ -79,17 +80,14 @@
                       </div>
                       <footer>
                          <p>* indicates required field</p>
-                          <button pButton type="submit" label="Save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
+                          <button pButton type="submit" label="Save" id="save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
 
                       </footer><br />
                   </p-panel><br />
-                  <p-panel>
+                  <!--<p-panel>
                       <header class="with-controls">
                           <p class="ui-panel-title">Calibration Forms</p>
-                          <!--<p class="controls">
-                            <button type="button" pButton icon="fa-plus" style="float:left"
-                                                           (click)="showDialogToAddForm()" label="Add Calibration Form"></button>
-                          </p>-->
+                         
                       </header>
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
@@ -97,8 +95,7 @@
                                 <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
                                 </select>
-                                        <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
-                                        </p-dropdown>-->
+                                      
                             </div>
                             <br/>
                         </div>
@@ -123,13 +120,13 @@
                                   </div>
                               </footer>
                           </p-dialog>
-                 </p-panel><br />
+                 </p-panel><br />-->
                   <p-panel>
                        <header class="with-controls">
                            <p class="ui-panel-title">Equipment SubTypes</p>
                            <p class="controls">
                              <button type="button" pButton icon="fa-plus" style="float:left"
-                                             (click)="showDialogToAdd()" label="Add SubType"  class="blue-grey-btn" ></button>
+                                             (click)="showDialogToAdd()" label="Create SubType" id="createsubtype"  class="blue-grey-btn" ></button>
                            </p>
                        </header>
                        <div class="body">
@@ -144,12 +141,15 @@
                                  </footer>-->
                              </p-dataTable>
                              <br />
-                             <p-dialog header="SubType Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
+                             <p-dialog header="Create New SubType" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
+                          <p>
+                              Please enter SubType details
+                          </p>
                                  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="EquipmentSubType">
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="name">Name<span >*</span></label></div>
                                          <div class="ui-grid-col-8">
-                                              <input pInputText name="name"
+                                              <input pInputText name="subtypename" id="subtypename"
                                     [(ngModel)]="EquipmentSubType.name" required pInputText
                                     #equipmentSubTypeNameRef="ngModel"
                                     minlength="3" class="form-control" required row="20"
@@ -161,7 +161,7 @@
                                      </div><br />
                                      <div class="ui-grid-row">
                                          <div class="ui-grid-col-4"><label for="description">Description</label></div>
-                                         <div class="ui-grid-col-8"><input pInputText name="description" [(ngModel)]="EquipmentSubType.description" #equipmentSubTypedescriptionRef="ngModel"
+                                         <div class="ui-grid-col-8"><input pInputText name="subtypedescription" id="subtypedescription" [(ngModel)]="EquipmentSubType.description" #equipmentSubTypedescriptionRef="ngModel"
                                              /></div>
                                      </div><br />
                                      <div class="ui-grid-row">
@@ -169,7 +169,7 @@
                                          <div class="ui-grid-col-8">
                                              <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
                                              </p-dropdown>-->
-                                             <select [(ngModel)]="selectedCalibration" class="form-control" name="calibrationform" width="300" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
+                                             <select [(ngModel)]="selectedCalibration" class="form-control" name="selectcalibrationform" width="300"  id="selectcalibrationform" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
                                                  <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
                                              </select>
                                         </div>
@@ -189,7 +189,8 @@
                                  <footer>
                                      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                          <!--<button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>-->
-                                         <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+                                         <button type="button" pButton icon="ui-icon-close"(click)="displayDialog=false" label="Cancel" id="subtypecancel"></button>
+                                         <button type="button" pButton icon="ui-icon-save" (click)="save()" label="Add" id="subtypeadd"></button>
                                      </div>
                                  </footer>
                              </p-dialog>

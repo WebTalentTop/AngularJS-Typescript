@@ -2,89 +2,71 @@
     <div class="card card-w-title">
         <form #procedureForm="ngForm" (ngSubmit)="onSubmit()">
 
-            <h2> Add Test Procedure</h2>
+            <h2> Create New Test Procedure</h2>
             <br />
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="procedure">
-                    <!--<div class="ui-grid-row body">-->
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Name *:
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <input type="text" name="procedureName" pInputText #procedureNameRef="ngModel" [(ngModel)]="procedure.name" maxlength="255"
-                                placeholder="Name" class="form-control" required />
-                        </div>
-                        <div class="ui-grid-col-4" *ngIf="procedureNameRef.errors?.required">
-                            Name field is required
-                        </div>
+            <p-panel header="Details">
+              <div class="body">
+                  <div class="ui-grid-row">
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="text" pInputText name="procedureName" id="procedureName" #procedureNameRef="ngModel" [(ngModel)]="procedure.name"
+                            style="width:100%" minlength="3" maxlength="255"
+                              class="form-control" required >
+                          <label>Name *</label>
+                      </div>
+                  </div>
+                  <div class="ui-grid-row ">
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Test Type *:</p>
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [(ngModel)]="procedure.testTypeId" [options]="testTypes"
+                            (onChange)="onTestTypeChange()" name="testType"  id="testType"  required >
+                        </p-dropdown>
                     </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Description:
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control" name="procedureDescription" row="20" maxlength="2000"
-                                      #procedureDescriptionRef="ngModel" [(ngModel)]="procedure.description"></textarea>
-                        </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p style="color:#777">Test Mode *:</p>
+                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [(ngModel)]="procedure.testModeId"
+                        [options]="testAllModes" name="testMode" id="testMode" required>
+                        </p-dropdown>
                     </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Test Type:
-                        </div>
-                        <div class="ui-grid-col-10">
-                            <p-dropdown [options]="testTypes" [(ngModel)]="procedure.testTypeId" [style]="{'width':'auto'}" 
-                                (onChange)="onTestTypeChange()" name="testType" required>
-                            </p-dropdown>
-                        </div>
-                    </div>
+                  </div><br /><br />
+                  <div class="ui-grid-row">
+                      <div class="md-inputfield ui-g-12 ui-md-6">
+                          <input type="number" style="width:100%" name="estimatedTime" id="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
+                              max="999">
+                          <label>Estimated Time :</label>
+                      </div>
+                  </div><br />
+                  <div class="ui-grid-row">
+                      <p>Description</p>
+                      <div class="md-inputfield">
 
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Test Mode:
-                        </div>
-                        <div class="ui-grid-col-10">
-                            <p-dropdown [options]="testModes" [(ngModel)]="procedure.testModeId" name="testMode" required>
-                            </p-dropdown>
-                        </div>
-                    </div>
+                          <p-editor [(ngModel)]="procedure.description" name="description" id="description"
+                                    [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                              <header>
+                                  <select class="ql-size">
+                                      <option value="small"></option>
+                                      <!-- Note a missing, thus falsy value, is used to reset to default -->
+                                      <option selected></option>
+                                      <option value="large"></option>
+                                      <option value="huge"></option>
+                                  </select>
+                                  <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                      </span>
+                              </header>
+                          </p-editor>
 
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Estimated Time:
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <input type="number" name="estimatedTime" pInputText #estimatedTimeRef="ngModel" [(ngModel)]="procedure.estimatedTime"
-                                max="999" placeholder="Estimated Time" class="form-control" />
-                        </div>
-                        <!--<div class="ui-grid-col-4" *ngIf="procedureNameRef.errors?.required">
-                        Template Name field is required
-                    </div>-->
-                    </div>
-                </div>
 
-                <div class="ui-grid-row">
-                    <br />
-                    <div class="ui-grid-row body">
-                        <div class="ui-grid-col-3"> </div>
-                        <div class="ui-grid-col-3">
-                            <button pButton type="submit" label="Add" [disabled]="!procedureForm.form.valid">  </button>
-                        </div>
-                        <div class="ui-grid-col-4">
-                            <button pButton label="Cancel" routerLink="/procedure">  </button>
-                        </div>
-                    </div>
+                      </div>
+                  </div>
 
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-3">
-                        </div>
-                        <div class="ui-grid-col-6">
-                        </div>
-
-                    </div>
-                    <div class="ui-grid-col-4"></div>
-                </div>
-                <!--</div>-->
+              </div>
+              <footer>
+                  <p>* indicates required field</p>
+                  <button pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" id="cancel" routerLink="/procedure">  </button>
+                  <button pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" id="add" [disabled]="!procedureForm.form.valid"></button>
+              </footer><br />
             </p-panel>
         </form>
     </div>

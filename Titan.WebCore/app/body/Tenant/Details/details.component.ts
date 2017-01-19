@@ -1,4 +1,5 @@
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { TenantService } from '../../../shared/services/tenant.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
@@ -55,12 +56,17 @@ export class DetailsComponent {
     selectedFunctionGroupId: any;
     functionGroups: any;
     displayFunctionGroupDialog: boolean = false;
+    displayAddUserDialog: boolean = false;
     selectedTimeZoneId: any;
     selectedTitanRoleId: any;
     selectedDepartmentId: any;
     departments: any;
     timeZones: any;
+    selectedUserId: any;
+    users: any;
     titanRoles: any;
+    tenantProfile: any = { name: '', hostAddress: ''};
+    tenantUsers: any;
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
@@ -70,6 +76,7 @@ export class DetailsComponent {
    formData: any;
    taskId: any;
    userId: any;
+   allUsers: any;
    tenantId: any;
    userFunctionGroups: any;
    functionGroupsPerUserList: any;
@@ -104,12 +111,13 @@ export class DetailsComponent {
         private dataService: TestRequestSensorService,
         private equipmenttypeservice: EquipmentTypeService,
         private userservice: UserService,
+        private tenantservice: TenantService,
         private router: Router
 
     ){
         this.route.params.subscribe(params => {
-         //   this.id = params['id'];
-            this.userId = params['id'];
+            //   this.id = params['id'];
+            this.tenantId = params['id'];
         });
          // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
@@ -122,57 +130,57 @@ export class DetailsComponent {
        console.log('-------targetid-------',event.originalEvent.target.innerText);
    }
    ngOnInit() {
+        //this.userprofileservice.getById().subscribe(tenresult => {
+            //    this.tenantId = tenresult.result;
+            //});
        this.getFunctionGroups();
-       this.getDepartments();
-       this.getTimeZones();
-       this.getTitanRoles()
+       this.getUsers();
+       //this.getDepartments();
+       //this.getTimeZones();
+       //this.getTitanRoles()
        //get the departmentId through taskId
        //get sensors by department and entityId
-       this.userservice.getUserDetailsById(this.userId)
-           .subscribe(userresult => {
-               this.userProfile = userresult.result;
-
-              //this.userProfile.firstName = userresult.result.firstName;
-             // this.userProfile.lastName = userresult.result.lastName;
-               let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res => {
-
-                 //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
-                //   console.log('--------filtered-------', filterfuntiongroups);
-                   this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
-                  // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
+       this.tenantservice.getById(this.tenantId)
+           .subscribe(tenantresult => {
+               this.tenantProfile = tenantresult.result;
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
+                   }                 
                });
-
+               this.userservice.getUsersByTenantId(this.tenantId)
+                   .subscribe(res => {
+                       this.tenantUsers = res.result.members.$values;
+                   });
 
            });
-
-   //    this.getHourEntryByEntityIdentifierId();
-   //    this.getDownTimeReasons();
-   //    //this.dataService.GetProjectId(this.id)
-   //    //    .subscribe(res => {
-   //    //        this.projectId = res.$values;
-
-   //    //        //this.formConfiguration = res.formConfiguration;
-   //    //        //this.formObject = res.formObject;
-   //    //        //this.model = res.formObject;
-   //    //        //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //    //        //console.log("----- Result of formObject -----", this.model);
-   //    //    });
-   //     this.dataService.GetTrackingListByEntityId(this.id)
-   //         .subscribe(res =>
-   //         {
-   //             this.TrackingList = res.$values;
-
-   //             //this.formConfiguration = res.formConfiguration;
-   //             //this.formObject = res.formObject;
-   //             //this.model = res.formObject;
-   //             //console.log("----- Result of formConfiguration -----", this.formConfiguration.fields.$values);
-   //             //console.log("----- Result of formObject -----", this.model);
-   //         });
-
    }
 
-
+   onUserChange(event) {
+       this.selectedUserId = event.value;
+   }
+   getUsers() {
+       //    userRoles
+       this.userservice.getUsers().subscribe(response => {
+           this.users = new Array();
+           if (response != null) {
+               var resultMap = new Array();
+               resultMap.push({
+                   label: "--Select--",
+                   value: null
+               });
+               for (let template of response.$values) {
+                   var temp = {
+                       label: template.firstName,
+                       value: template.id
+                   }
+                   resultMap.push(temp);
+               }
+               this.users = resultMap;
+           }
+           console.log(response);
+       });
+   }
 
    onSensorChange(event) {
        console.log('------event------------', event)
@@ -195,25 +203,20 @@ export class DetailsComponent {
    }
    onAddFunctionGroup()
    {
-       let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
        this.displayFunctionGroupDialog = false;
-       let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
-       let userFunctionGroupModel = {
+      // let tenantFunctionGroupModel = {
 
-           userId: this.userId,
-           functionGroupId: this.selectedFunctionGroupId,
-           functionGroupName: functionGroupName,
-           tenantId: tenantId
-       };
-       this.userservice.postAddFunctionGroupToUser(userFunctionGroupModel).subscribe(res => {
+       let Tenant = { Id: this.tenantId };
+       //  };
+       this.tenantservice.postAddFunctionGroupToTenant(Tenant, this.selectedFunctionGroupId).subscribe(res => {
            if (res.isSuccess) {
               // this.selectedFunctionGroupId = null;
 
-               this.userservice.GetAllUserFunctionGroupMappingByTenant(tenantId).subscribe(res=>{
-                   if(res.result != null)
-                   {
-                       this.functionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
                    }
+
 
                });
 
@@ -223,22 +226,62 @@ export class DetailsComponent {
    }
    onRemoveFunctionGroupMap(functionGroup)
    {
-       this.userservice.RemoveFunctionGroup(functionGroup).subscribe(res => { });
+       let Tenant = { Id: this.tenantId };
+       this.tenantservice.RemoveFunctionGroupTenantMap(Tenant, functionGroup.id).subscribe(res => {
+
+           if (res.isSuccess) {
+               // this.selectedFunctionGroupId = null;
+
+               this.tenantservice.GetTenantFunctionGroupsByTenant(this.tenantId).subscribe(res => {
+                   if (res.isSuccess) {
+                       this.userFunctionGroups = res.result;
+                   }
+
+
+               });
+
+           }
+       });
 
    }
-   //onDownTimeReasonChange(event) {
-   //    console.log('------event------------', event)
-   //    this.selectedDownTimeReasonId = (event.value);
-   //    //   this.EquipmentSubType.calibrationform = (event);
 
-   //}
+   onAddUser()
+   {
+       this.displayAddUserDialog = false;
+       let userTenantModel = {
 
-   //onHourEntryChange(event) {
-   //    console.log('------event------------', event)
-   //    this.selectedTimeEntryTypeId = (event.value);
-   //    //   this.EquipmentSubType.calibrationform = (event);
+           userId: this.selectedUserId,
+           tenantId: this.tenantId
+       };
+       this.userservice.CreateUserTenantAccess(userTenantModel).subscribe(res => {
+           if (res.isSuccess) {
+               // this.selectedFunctionGroupId = null;
+               this.userservice.getUsersByTenantId(this.tenantId)
+                   .subscribe(res => {
+                       this.tenantUsers = res.result.members.$values;
+                   });
 
-   //}
+
+           }
+       });
+   }
+   onDeleteUserTenantMap(UserInfo)
+   {
+      
+       let userTenantModel = {
+
+           userId: UserInfo.userId,
+           tenantId: this.tenantId
+       };
+       this.userservice.RemoveTenantMapping(userTenantModel).subscribe(res => {
+
+           this.userservice.getUsersByTenantId(this.tenantId)
+               .subscribe(res => {
+                   this.tenantUsers = res.result.members.$values;
+               });
+
+       });
+   }
    getFunctionGroups() {
        //    userRoles
        this.userservice.getAllFunctionGroups().subscribe(response => {
@@ -388,9 +431,6 @@ export class DetailsComponent {
            emailAddress: formRef.emailAddress,
            defaultTimeZoneId: this.selectedTimeZoneId,
            departmentId: this.selectedDepartmentId
-
-
-
        };
        this.userservice.postUpdate(userFormData).subscribe(res => {
            if (res.isSuccess)

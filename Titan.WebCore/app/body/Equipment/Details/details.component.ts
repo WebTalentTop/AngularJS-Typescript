@@ -294,9 +294,9 @@ export class DetailsComponent {
      
        if (this.manufacturerName == null || this.manufacturerName == "") {
            this.msgs = [];
-           this.msgs.push({ severity: 'error', summary: 'Please enter Manufacturer Name', detail: '' });
+           this.msgs.push({ severity: 'warn', summary: 'Please enter Manufacturer Name', detail: '' });
            return null;
-       }
+       } 
      
 
        let equipmentmanufacturermodel= {
@@ -314,7 +314,7 @@ export class DetailsComponent {
                city: this.manufacturerCity,
                state: this.manufacturerState,
                postalCode: this.manufacturerPostal,
-           }     
+           } 
 
        };
 
@@ -335,7 +335,11 @@ export class DetailsComponent {
                //this.manufacturerCity = res.result.equipmentManufacturerDetails.PhoneNumber;
                //this.manufacturerState = res.result.equipmentManufacturerDetails.PhoneNumber;
            }
+           this.msgs = [];
+           this.msgs.push({ severity: 'success', summary: 'Created ', detail: '' });
+           
        });
+       
 
    }
    onEquipmentManufacturerChange(event) {
@@ -500,7 +504,7 @@ export class DetailsComponent {
 
        });
        this.msgs = [];
-       this.msgs.push({ severity: 'info', summary: 'saved', detail: '' });
+       this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
 
    }
 

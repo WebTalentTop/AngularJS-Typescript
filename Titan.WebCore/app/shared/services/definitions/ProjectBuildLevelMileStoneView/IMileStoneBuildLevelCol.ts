@@ -6,11 +6,17 @@ import {IProjectBuildLevelMap} from "../ProjectBuildLevelMapView/IProjectBuildLe
  */
 export interface IMileStoneBuildLevelCol {
     id:string;
+    projectBuildLevelId:string;
     buildLevelId:string;
     buildLevelMap:IProjectBuildLevelMap;
+    mileStoneId: string;
     mileStone:IMileStone;
     plannedStartDate?:string;
     plannedEndDate?:string;
+    startDateErrorColor?:string;
+    endDateErrorColor?:string;
+    isDatesValid?:boolean;
+    validDateMessage?:string;
     actualStartDate?:string;
     actualEndDate?:string;
     userCreatedById?:string;

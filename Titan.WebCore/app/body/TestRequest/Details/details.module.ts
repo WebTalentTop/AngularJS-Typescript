@@ -4,17 +4,19 @@ import { DetailsComponent } from "./details.component";
 import { FormsModule} from '@angular/forms';
 import { TimeEntryService } from '../../../shared/services/timeEntry.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testfacility.service';
-import { ProcedureService } from '../../../shared/services/procedure.service'
+import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 //import { EquipmentTypeService } from '../../../shared/services/equipmentType.service';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestVerificationMethodService } from '../../../shared/services/testverificationMethod.service';
-import { TestStatusService } from '../../../shared/services/teststatus.service';
+import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
 import { TestRoleService } from '../../../shared/services/testRole.service';
 
 import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
 
+
 import { TestRequestService } from '../../../shared/services/Containers/TestRequestService/testRequest.service';
+
 
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';

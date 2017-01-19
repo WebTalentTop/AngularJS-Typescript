@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TenantComponent } from "./tenant.component";
-
+import { TenantService } from '../../shared/services/tenant.service';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, PanelModule, MessagesModule, ButtonModule, DropdownModule } from 'primeng/primeng';
 
@@ -14,8 +14,8 @@ import tenantRoutes from "./tenant.routes";
 @NgModule({
 
 
-    imports: [DialogModule, EditorModule, SharedModule, CommonModule, RouterModule, DataTableModule, PanelModule, ButtonModule,  InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, tenantRoutes],
-    providers:[ TestFacilityService,UserService],
+    imports: [DialogModule, EditorModule, SharedModule, CommonModule, RouterModule, DataTableModule, PanelModule, ButtonModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, tenantRoutes],
+    providers: [TestFacilityService, TenantService, UserService],
 
     declarations: [TenantComponent]
 })

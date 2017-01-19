@@ -40,6 +40,16 @@ export class UserService {
             //});
             ;
     }
+    
+    GetUserFunctionGroupsByUser(userId): Observable<any> {
+        return this.http.get(`${UserApiUrl.GetUserFunctionGroupsByUser}/${userId}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+    }
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${UserApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
@@ -53,6 +63,15 @@ export class UserService {
 
     getUserDetailsById(id): Observable<any> {
         return this.http.get(`${UserApiUrl.getUserDetailsById}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+    }
+    GetTenantMembershipsByUser(id): Observable<any> {
+        return this.http.get(`${UserApiUrl.GetTenantMembershipsByUser}/${id}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -85,6 +104,12 @@ export class UserService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getTenants(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getTenants}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getTimeZones(): Observable<any> {
         return this.http.get(`${UserApiUrl.getTimeZones}`, { headers: this.headers })
             .map(this.getJson);
@@ -103,9 +128,25 @@ export class UserService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-    RemoveFunctionGroup(filterBody): Observable<any> {
+    getUsers(): Observable<any> {
+        return this.http.get(`${UserApiUrl.getUsers}`, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    RemoveFunctionGroupUserMap(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.RemoveFunctionGroup}`, filterBody, { headers: this.headers })
+        return this.http.post(`${UserApiUrl.RemoveFunctionGroupUserMap}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    RemoveTenantMapping(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${UserApiUrl.RemoveTenantMapping}`, filterBody, { headers: this.headers })
             // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -118,6 +159,16 @@ export class UserService {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${UserApiUrl.postAddFunctionGroupToUser}`, filterBody, { headers: this.headers })
            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    CreateUserTenantAccess(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${UserApiUrl.CreateUserTenantAccess}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)

@@ -1,4 +1,4 @@
-import { ProcedureService } from './../../shared/services/procedure.service';
+import { ProcedureService } from './../../shared/services/Containers/ProcedureService/procedure.service';
 import { LoggerService } from '../../shared/services/logger/logger.service';
 import { LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';

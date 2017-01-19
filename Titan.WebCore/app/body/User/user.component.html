@@ -7,7 +7,7 @@
           <header class="with-controls">
               <p class="ui-panel-title">Users</p>
               <p class="controls">
-                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" icon="ui-icon-add" label="Add New User"></button>
+                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Assign User"></button>
               </p>
           </header>
           <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
@@ -15,7 +15,7 @@
               <p-column header="First Name" sortable="true">
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
-               <a routerLink="details/{{userrow.id}}">{{userrow.firstName}}</a>
+               <a routerLink="details/{{userrow.userId}}">{{userrow.firstName}}</a>
                       </template>
              </p-column>
               <p-column header="Last Name" field="lastName" sortable="true">
@@ -28,7 +28,7 @@
 
                   </template>-->
               </p-column>
-              <p-column header="Department" field="lastName" sortable="true">
+              <p-column header="Department" field="departmentName" sortable="true">
                   <!--<template let-userrow="rowData" pTemplate type="body">
 
                     </template>-->

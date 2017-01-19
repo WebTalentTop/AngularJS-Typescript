@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { TestStatusApiUrl} from './apiUrlConst/TestStatusApiUrls';
+import { TestStatusApiUrl} from '../../apiUrlConst/TestStatus/TestStatusApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';

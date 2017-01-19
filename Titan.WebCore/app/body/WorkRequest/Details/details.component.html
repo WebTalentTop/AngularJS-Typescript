@@ -81,7 +81,7 @@
                                                             Module #:
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="moduleNo" [(ngModel)]="selectedTestRequestSensor.moduleNo"
+                                                            <input type="text" name="moduleNo"  id="moduleNo" [(ngModel)]="selectedTestRequestSensor.moduleNo"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
@@ -92,7 +92,7 @@
                                                             Slot #:
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="slotNo" [(ngModel)]="selectedTestRequestSensor.slotNo"
+                                                            <input type="text" name="slotNo" id="slotNo" [(ngModel)]="selectedTestRequestSensor.slotNo"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
@@ -103,7 +103,7 @@
                                                             Up/Down *
                                                         </div>
                                                         <div class="ui-grid-col-6">
-                                                            <input type="text" name="upDown" [(ngModel)]="selectedTestRequestSensor.upDown"
+                                                            <input type="text" name="upDown" id="upDown" [(ngModel)]="selectedTestRequestSensor.upDown"
                                                                    placeholder="Test Number"
                                                                    class="form-control">
                                                         </div>
@@ -137,10 +137,10 @@
 
                                                     <footer>
                                                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                                            <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
+                                                            <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" id="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                                             <!--<label class="checkbox"><input type="checkbox" name="keep" binary="true" > Keep Open</label>-->
-                                                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel"></button>
-                                                            <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Ok"></button>
+                                                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel" id="cancel"></button>
+                                                            <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Add" id="add"></button>
                                                         </div>
                                                     </footer>
 

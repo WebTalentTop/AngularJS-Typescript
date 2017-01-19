@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ITitanCalibrationSelectItem } from '../../../shared/services/definitions/ITitanCalibrationSelectItem';
 
-import { CheckboxModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, Message, CalendarModule } from 'primeng/primeng';
+import { CheckboxModule, DataTableModule,GrowlModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, Message, CalendarModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
 
 import { Router } from '@angular/router';
@@ -297,6 +297,10 @@ export class AddComponent {
              }
 
         };
+
+       this.msgs = [];
+       this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
+        
 
         this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {

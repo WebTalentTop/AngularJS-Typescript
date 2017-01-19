@@ -1,5 +1,6 @@
 <div class="ui-g">
     <div class="ui-g-12">
+        
         <!--<h1> {{title}}</h1>
     <p-tabView>-->
         <div class="card card-w-title">
@@ -16,7 +17,7 @@
                               <label>Name <span >*</span></label>
                           </div>
                           <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText name="serial" [(ngModel)]="serialNumber" style="width:100%">
+                              <input type="text" pInputText name="serial" id="serial" [(ngModel)]="serialNumber" style="width:100%">
                            <label>Serial #</label>
                           </div>
                       </div>
@@ -24,13 +25,15 @@
                       <!-- Begin Equipment Type # -->
                       <div class="ui-grid-row ">
                         <div class="ui-g-12 ui-md-6">
-                            <p style="color:#777">Equipment Type :</p>
-                            <p-dropdown  [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" [(ngModel)]="selectedEquipmentTypeId" (onChange)="onEquipmentTypeChange($event)" name="equipmentTypes" >
+                            <p style="color:#777">Equipment Type : <span >*</span></p>
+                            <p-dropdown class="form-control" [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" (onChange)="onEquipmentTypeChange($event)" 
+                            name="equipmentTypes" id="equipmentTypes" filter="filter" [(ngModel)]="selectedEquipmentTypeId" required>
                             </p-dropdown>
                         </div>
                         <div class="ui-g-12 ui-md-6">
                             <p style="color:#777">Test Facility :</p>
-                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" (onChange)="onTestFacilityChange($event)" name="testFacilities">
+                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" 
+                            (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities" filter="filter">
                             </p-dropdown>
                         </div>
                       </div>
@@ -38,11 +41,11 @@
                       <!--Year Purchased-->
                       <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" [showIcon]="true"></p-calendar>
+                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" id="purchaseDate" [showIcon]="true"></p-calendar>
                             <label>Purchase Date :</label>
                           </div>
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" [showIcon]="true" ></p-calendar>
+                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" id="warrantyExpiration" [showIcon]="true" ></p-calendar>
                             <label>Warranty Until :</label>
                           </div>
                       </div>
@@ -73,11 +76,11 @@
                       <!-- Price -->
                       <div class="ui-grid-row " style="color:#777">
                           <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <input type="text" pInputText name="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
+                            <input type="text" pInputText name="purchasePrice" id="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
                             <label>Purchased Price</label>
                           </div>
                           <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText name="model" [(ngModel)]="model" style="width:100%">
+                              <input type="text" pInputText name="model" id="model" [(ngModel)]="model" style="width:100%">
                               <label>Model</label>
                           </div>
                       </div>
@@ -90,7 +93,7 @@
                             <label style="color:#777">Description</label>
                           </div>
                           <div class="ui-g-12 ui-md-12 md-inputfield">
-                              <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                              <p-editor [(ngModel)]="description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                   <header>
                                       <select class="ql-size">
                                           <option value="small"></option>
@@ -112,8 +115,8 @@
                   </div>
                   <footer>
                       <p>* indicates required field</p>
-                      <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/equipment" class="blue-grey-btn"></button>
-                      <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid"  class="green-btn"></button>
+                      <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" routerLink="/equipment" class="blue-grey-btn"></button>
+                      <button pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid"  class="green-btn"></button>
                   </footer>
                 </p-panel><br />
 

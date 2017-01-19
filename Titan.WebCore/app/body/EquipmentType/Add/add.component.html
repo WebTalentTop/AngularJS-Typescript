@@ -23,7 +23,7 @@
                                 <label style="color:#777">Description</label>
                               </div>
                               <div class="ui-g-12 ui-md-12 md-inputfield">
-                                  <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <p-editor [(ngModel)]="description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                       <header>
                                           <select class="ql-size">
                                               <option value="small"></option>
@@ -44,8 +44,8 @@
                       </div>
                     <footer>
                         <p>* indicates required field</p>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/equipmenttype"></button>
-                        <button pButton type="submit" icon="ui-icon-save" label="Add" [disabled]="!tfForm.valid" class="green-btn"></button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" class="blue-grey-btn" routerLink="/equipmenttype"></button>
+                        <button pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid" class="green-btn"></button>
                     </footer>
                   </p-panel>
                 </form>
