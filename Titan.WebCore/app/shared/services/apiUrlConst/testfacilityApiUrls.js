@@ -1,0 +1,44 @@
+"use strict";
+var titanApiUrl_1 = require('./titanApiUrl');
+var localizationApiUrl_1 = require('./localizationApiUrl');
+var gridApiUrls_1 = require('./gridApiUrls');
+var TestFacilityApiUrl = (function () {
+    function TestFacilityApiUrl() {
+    }
+    TestFacilityApiUrl.gridApiUrl = gridApiUrls_1.GridApiUrl.testFacilityGridUrl;
+    TestFacilityApiUrl.postCreatedUrl = titanApiUrl_1.titanApiUrl + 'testFacility/post';
+    TestFacilityApiUrl.postUpdateUrl = titanApiUrl_1.titanApiUrl + 'testFacility/update';
+    TestFacilityApiUrl.getByIdUrl = titanApiUrl_1.titanApiUrl + 'testFacility/get';
+    TestFacilityApiUrl.getAllUrl = titanApiUrl_1.titanApiUrl + 'testFacility/GetByTenantId';
+    TestFacilityApiUrl.getAvailableAllUrl = titanApiUrl_1.titanApiUrl + 'testFacility/GetAvailableTestFacilitiesForEquipments';
+    TestFacilityApiUrl.getEquipmentDetailsByIdUrl = titanApiUrl_1.titanApiUrl + 'testFacility/GetTestFacilityEquipments';
+    TestFacilityApiUrl.getTenants = titanApiUrl_1.titanApiUrl + 'testFacility/GetTenantsByTestFacilityId';
+    TestFacilityApiUrl.getLogComments = titanApiUrl_1.titanApiUrl + 'testFacility/GetTestFacilityLogCommentByTestFacilityId';
+    TestFacilityApiUrl.DeleteUserRoleMap = titanApiUrl_1.titanApiUrl + 'testFacility/DeleteUserRoleMap';
+    TestFacilityApiUrl.DeleteTestFacilityUrl = titanApiUrl_1.titanApiUrl + 'testFacility/Delete';
+    TestFacilityApiUrl.DeleteEquipmentMap = titanApiUrl_1.titanApiUrl + 'testFacility/DeleteEquipmentMap';
+    TestFacilityApiUrl.DeleteTenantMap = titanApiUrl_1.titanApiUrl + 'testFacility/DeleteTenantMap';
+    TestFacilityApiUrl.getfilesByIdUrl = titanApiUrl_1.titanApiUrl + 'testFacilityAttachment/file';
+    TestFacilityApiUrl.getNotifications = titanApiUrl_1.titanApiUrl + 'testFacility/CheckNotifications';
+    TestFacilityApiUrl.getRoles = titanApiUrl_1.titanApiUrl + 'testFacility/GetRoles';
+    TestFacilityApiUrl.getFilteredEvents = titanApiUrl_1.titanApiUrl + 'testFacility/GetFilteredEvents';
+    TestFacilityApiUrl.filterUserNames = titanApiUrl_1.titanApiUrl + 'testFacility/FilterByUserNames';
+    TestFacilityApiUrl.PostAddUserRolesUrl = titanApiUrl_1.titanApiUrl + 'testFacility/PostUserRoles';
+    TestFacilityApiUrl.PostAddDepartmentMapUrl = titanApiUrl_1.titanApiUrl + 'testFacility/PostDepartments';
+    TestFacilityApiUrl.getDepartments = titanApiUrl_1.titanApiUrl + 'tenant';
+    TestFacilityApiUrl.getEquipments = titanApiUrl_1.titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility';
+    TestFacilityApiUrl.getOperatingHours = titanApiUrl_1.titanApiUrl + 'operatingHours';
+    TestFacilityApiUrl.getCategories = titanApiUrl_1.titanApiUrl + 'category';
+    TestFacilityApiUrl.getMaintenanceFrequencies = titanApiUrl_1.titanApiUrl + 'maintenanceFrequency';
+    TestFacilityApiUrl.PostAddEquipmentMapUrl = titanApiUrl_1.titanApiUrl + 'testFacility/PostEquipments';
+    TestFacilityApiUrl.PostLogCommentsUrl = titanApiUrl_1.titanApiUrl + 'testFacility/PostLogComments';
+    TestFacilityApiUrl.PostMoveEquipmentToFacilityUrl = titanApiUrl_1.titanApiUrl + 'TestFacility/MoveEquipmentToFacility';
+    TestFacilityApiUrl.getDetailsTabLocJs = localizationApiUrl_1.localizationApiUrl;
+    TestFacilityApiUrl.postReserveUrl = titanApiUrl_1.titanApiUrl + 'testFacility/reserve/';
+    TestFacilityApiUrl.postFreeUrl = titanApiUrl_1.titanApiUrl + 'testFacility/Free/';
+    TestFacilityApiUrl.postMoveTestUrl = titanApiUrl_1.titanApiUrl + 'testFacility/MoveTest/';
+    TestFacilityApiUrl.getEquipmentToAddUrl = titanApiUrl_1.titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility/';
+    TestFacilityApiUrl.postSplitTestFacilityEvent = titanApiUrl_1.titanApiUrl + 'testFacility/Split/';
+    return TestFacilityApiUrl;
+}());
+exports.TestFacilityApiUrl = TestFacilityApiUrl;

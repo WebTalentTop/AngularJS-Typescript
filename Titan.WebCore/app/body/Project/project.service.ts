@@ -7,6 +7,8 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import {BaseService} from './../../shared/services/base.service'
+import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
+import {UserProfileService} from "../../shared/services/userProfile.service";
 
 @Injectable()
 export class ProjectService extends BaseService{
@@ -25,13 +27,15 @@ export class ProjectService extends BaseService{
     private getBuildLevelsUrl: string = this.urlToUse + 'project/GetProjectBuildLevels?projectId=';
     private postImportUrl: string = this.urlToUse + 'importexport/importproject';
     private getImportUrl: string = this.urlToUse + 'importexport/downloadTemplate';
-    constructor(private http:Http) { super();}
+    currentUserProfile: IUserProfile;
 
+    constructor(private http: Http, private titanUserProfileService: UserProfileService) {
+        super();
 
-
-
-
-
+        let user:IUserProfile = this.titanUserProfileService.getCurrentUserProfile();
+        this.currentUserProfile = user;
+        this.headers.append("TenantId", this.currentUserProfile.defaultTenantId);
+    }
     getProjectDetails(id): Observable<any> {
         return this.http.get(this.getProjectDetailsUrl + id)
             .map(super.getJson);

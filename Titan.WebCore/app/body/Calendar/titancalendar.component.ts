@@ -1,8 +1,8 @@
 import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
 import {RefToNg} from '../../shared/services/definitions/RefToNg';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
-import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
+import {BuildLevelService} from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
+import {TestStatusService} from '../../shared/services/teststatus.service';
 import {TestRoleService} from '../../shared/services/testRole.service';
 import {ProjectService} from '../../shared/services/Containers/ProjectService/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';
@@ -48,6 +48,7 @@ import {ICalendarDurationOptions} from "../../shared/services/definitions/ICalen
 import {TenantService} from '../../shared/services/tenant.service';
 import {ITenantViewModel} from "../../shared/services/definitions/tenantDefinitions/ITenantViewModel";
 import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.service";
+import {UserProfileService} from "../../shared/services/userProfile.service";
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 
@@ -170,6 +171,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     calendarHeader: string = 'Ajay';
     scheduleStartTime: number;
     scheduleEndTime: number;
+    calendarDisplayMode: string = 'timeline';
 
     showTimeDuringAssignOperation: boolean = false;
     draggedResourceId: string = '';
@@ -189,17 +191,28 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private testRequestService: TestRequestService,
                 private titanService: TitanService,
                 private calendarService: CalendarService,
-                private titanUserProfileService: TitanUserProfileService,
+                private titanUserProfileService: UserProfileService,
                 private testFacilityRoleService: TestFacilityRoleService,
                 private tenantUserService: TenantService) {
-        this.titanUserProfileService.getCurrentUserProfile()
-            .subscribe(res => {
-                this.currentUser = res.result;
-            })
+
+        this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
+
+
     }
 
 // endregion constructor
     initCalendarOptions() {
+
+        //region Year
+        let year = <ICalendarDurationOptions>{};
+        year.durationItem = {label: 'Year', value: 'Year'};
+        year.defaultSlotWidth = {label: 'Week', value: {weeks: 1}};
+        year.slotOptions = [];
+        year.slotOptions.push({label: 'Month', value: {months: 1}});
+        year.slotOptions.push({label: 'week', value: {weeks: 1}});
+        year.slotOptions.push({label: 'day', value: {days: 1}});
+        this.calendarDurationOptions.push(year);
+        //endregion Year
 
         //region quarter
         let quarter = <ICalendarDurationOptions>{};
@@ -247,7 +260,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.allSlotOptions.push('YEAR');
 
 
-        this.selectedDurationOption = month.durationItem;
+        this.selectedDurationOption = month.durationItem.value;
         this.slotDurations = [];
         for (let item of this.calendarDurationOptions) {
             this.durationOptions.push(item.durationItem);
@@ -303,12 +316,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         let slotOptions = self.allSlotOptions;
         let slotDurationInMinutes = moment.duration(self.selectedSlotDurationValue).asMinutes();
         var tt = this.tooltip;
-        let tfEventSource: any =  {
+        let tfEventSource: any = {
             id: 'testFacilityEventSource',
-
             events: function (start, end, timezone, callback) {
-                let slotOption = self.allSlotOptions.indexOf(self.selectedSlotDurationValue)
-                self.calendarHeader = $.fullCalendar.formatRange(moment(start), moment(end), 'MMM D YYYY');
+
                 $.ajax({
                     url: titanApiUrl + 'TestFacility/Schedule',
                     type: 'POST',
@@ -336,7 +347,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 });
             }
         }
-        let tfUserSource:any = {
+        let tfUserSource: any = {
             id: 'testFacilityUserSource',
             events: function (start, end, timezone, callback) {
                 $.ajax({
@@ -387,7 +398,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             //     right: 'month timeline3weeks'
             // },
             defaultDate: DEFAULTDATE,
-            defaultView: 'timelineTitanDefault',
+            defaultView: 'timelineMonth',
             buttonText: {
                 today: 'today',
                 month: 'month',
@@ -398,11 +409,44 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 timelineTitanDefault: 'Timeline'
             },
             views: {
-                timelineTitanDefault: {
-
-                    duration: {months: 1},
-                    type: 'timeline'
+                calendarDay: {
+                    type: 'basicDay',
+                    duration: {days: 1}
                 },
+                calendarWeek: {
+                    type: 'basicWeek',
+                    duration: {days: 1}
+                },
+                calendarMonth: {
+                    type: 'month',
+                    duration: {months: 1}
+                },
+                calendarQuarter: {
+                    type: 'month',
+                    duration: {months: 3}
+                },
+                timelineDay: {
+                    type: 'timelineDay',
+                    duration: {days: 1}
+                },
+                timelineWeek: {
+                    type: 'timelineWeek',
+                    duration: {days: 1}
+                },
+                timelineMonth: {
+                    type: 'timelineMonth',
+                    duration: {months: 1}
+                },
+                timelineQuarter: {
+                    type: 'timelineMonth',
+                    duration: {months: 3}
+                },
+                timelineYear: {
+                    type: 'timelineMonth',
+                    duration: {years: 1}
+                },
+                day: {},
+                week: {},
                 timeline3weeks: {
                     type: 'timeline',
                     duration: {months: 1},
@@ -446,7 +490,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             eventSources: [
                 tfEventSource
                 , tfUserSource
-                ],
+            ],
             eventRender: function (event, element) {
                 // The id is the testFacilityScheduleId
                 element.attr("eventId", event.id);
@@ -465,6 +509,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             eventAfterAllRender: function (view) {
                 // alert($('.fc-center h2').html());
                 //$('.fc-center h2').hide();
+                self.calendarHeader = $('#calendar').fullCalendar('getView').title;
                 $('.fc-header-toolbar').hide();
                 $("span.fc-time").hide();
             },
@@ -474,6 +519,14 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             },
             eventDragStart: function (event, jsEvent, ui, view) {
                 self.draggedResourceId = event.resourceId;
+            },
+            loading: function (isLoading, view) {
+                if (isLoading) {// isLoading gives boolean value
+                    console.log("----loading----");
+                    //show your loader here
+                } else {
+                    console.log("----done----");
+                }
             },
             eventDrop: function (event, delta, revertFunc) {
                 self.selectedEventId = event.id;//testFacilityScheduleId
@@ -981,7 +1034,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 for (let template of response) {
                     var temp = {
                         label: template.name,
-                        value: {id: template.id, calendarDisplayColor:template.calendarDisplayColor}
+                        value: {id: template.id, calendarDisplayColor: template.calendarDisplayColor}
                     }
                     resultMap.push(temp);
                 }
@@ -1039,8 +1092,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
 
     updateCalendarSettings(event) {
+
+        /*
+         *  Either in CalendarMode or Timeline Mode
+         *  Depending upon the selected duration and Mode - Pick up the view
+         * */
         let schedulerOptions: any = {};
         let viewStardDate: any = $('#calendar').fullCalendar('getView').start.format();
+        let selectedView = $('#calendar').fullCalendar('getView');
+        let selectedViewName = selectedView.name;
         schedulerOptions.weekends = (this.selectedHideWeekendValue === 'true');
         schedulerOptions.firstDay = this.selectedFirstDayValue;
         schedulerOptions.minTime = this.startWorkHoursValue;
@@ -1066,9 +1126,16 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
         //this.selectedSlotDurationValue = this.slotDurations[]
         schedulerOptions.slotDuration = this.selectedSlotDurationValue;
-        $('#calendar').fullCalendar('option', schedulerOptions);
-        $('#calendar').fullCalendar('changeView', 'timeline3weeks');
+        let updatedViewName = this.calendarDisplayMode + this.selectedDurationOption;
+        //$('#calendar').fullCalendar('option', schedulerOptions);
+        if (selectedViewName !== updatedViewName) {
+            $('#calendar').fullCalendar('changeView', updatedViewName);
+        }
+        selectedView = $('#calendar').fullCalendar('getView');
+        this.calendarHeader = selectedView.title;
+        console.log("title is", this.calendarHeader)
         $('#calendar').fullCalendar('refetchEvents');
+        this.displayCalendarSetting = false;
     }
 
     jsonEqual(a, b) {
@@ -1137,7 +1204,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         //this.assignUserSchedule.entityId = this.selectedTestRequestId;
         //this.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
         // since we are storing the deleted items in a separate array, join them before sending.
-        debugger;
+
         this.assignUserSchedule.schedules = this.testOperatorsForBlock.concat(this.deletedTestOperatorsForBlock);
         this.assignUserSchedule.defaultStartMinutesPastMidnight = this.scheduleStartTime;
         this.assignUserSchedule.defaultEndMinutesPastMidnight = this.scheduleEndTime;

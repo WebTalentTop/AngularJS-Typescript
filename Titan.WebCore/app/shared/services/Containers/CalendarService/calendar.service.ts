@@ -27,7 +27,7 @@ export class CalendarService {
     currentUserProfile: IUserProfile;
 
     constructor(private http: Http, private userProfileService: UserProfileService) {
-        debugger;
+
         //this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
         let user: Promise<IUserProfile> | any = this.userProfileService.getCurrentUserProfile();
         this.currentUserProfile = user;

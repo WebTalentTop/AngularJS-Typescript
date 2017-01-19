@@ -27,18 +27,24 @@ export class UserProfileService {
 
 
     getCurrentUserProfile(): Promise<IUserProfile> | any {
-        if(this.userProfile){
+
+        if (this.userProfile) {
             return this.userProfile;
         }
-        return new Promise((resolve, reject) => {
-            this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers: this.headers})
-                .map(this.getJson)
-                .subscribe(res => {
-                    this.userProfile = res.result;
-                    console.log("User ifno", this.userProfile);
-                    return resolve(this.userProfile);
-                });
-        });
+
+        var self = this;
+        var request = new XMLHttpRequest();
+
+        request.open('GET', `${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, false);
+        request.send(null);
+
+        if (request.status === 200) {
+            console.log(request.responseText);
+            let data: any = JSON.parse(request.responseText);
+            self.userProfile = data.result;
+        }
+
+        return self.userProfile;
     }
 
     private getJson(response: Response) {
