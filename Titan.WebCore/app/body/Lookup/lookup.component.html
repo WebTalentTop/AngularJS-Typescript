@@ -1,0 +1,576 @@
+<div class="ui-g">
+<div class="ui-g-12">
+    <p-breadcrumb [model]="items"></p-breadcrumb>
+    <br />
+    <div class="card card-w-title"> 
+        <div class="ui-grid-row">         
+            <p-accordion>
+                <p-accordionTab header="Project">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/buildLevel']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Build Level</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/market']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Market</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/milestone']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Milestone</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/milestoneCategory']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">MilestoneCategory</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/milestoneStatus']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">MilestoneStatus</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/milestoneType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">MilestoneType</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/platform']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">PlatForm</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/projectRole']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">ProjectRole</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/projectStatus']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">ProjectStatus</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/grade']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Grade</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/modelName']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Model Name</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/modelYear']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Model Year</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Test Template">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/requirementItemType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">RequirementItemType</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/stepFrequency']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">StepFrequency</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/step']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Step</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/stepType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">StepType</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testMode']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestMode</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testRequirement']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestRequirement</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestType</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testVerificationMethod']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestVerificationMethod</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Test Request">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/titanRole']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestRole</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testStatus']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestStatus</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/downTimeReason']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">DownTimeReason</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testActivity']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Test Activity</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/priority']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Priority</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/judgement']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Judgement</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/testStage']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TestStage</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Test Facility">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/maintenanceFrequency']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Maintenance Frequency</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/operatingHours']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Operating Hours</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Vehicle">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/vehicleType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Vehicle Type</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/engineCode']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Engine Code</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Equipment">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/sensorType']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Sensor Type</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/units']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Units</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Roles and Permission">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/access']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Access</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/accessGroup']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">AccessGroup</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/permission']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Permission</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/role']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Role</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/titanRole']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">TITAN Role</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+                <p-accordionTab header="Employee">
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <a [routerLink]="['/admin/vehicle/shift']">
+                            <div class="ui-g card colorbox colorbox-2">
+                                <div class="ui-g-3">
+                                    <i class="material-icons">search</i>
+                                </div>
+                                <div class="ui-g-9">
+                                    <span class="colorbox-name"></span>
+                                    <span class="colorbox-count">Shift</span>
+                                    <span class="colorbox-name"></span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                </p-accordionTab>
+            </p-accordion>
+           
+            
+        </div>
+    </div>
+</div>
+</div>
