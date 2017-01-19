@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import {Component, SimpleChanges, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import { DataTable, LazyLoadEvent, MessagesModule, Message, DropdownModule, Dropdown, ConfirmationService} from 'primeng/primeng';
 import { TitanSpinnerComponent } from '../SpinnerComponent/spinner.component';
 import { ModuleService } from '../../../shared/services/module.service';
@@ -6,24 +6,28 @@ import { ModuleTypeService } from '../../../shared/services/moduleType.service';
 import { ModuleItemService } from '../../../shared/services/moduleItem.service';
 import { ModuleItemTypeEnum } from '../../../shared/Enum/module-item-type.enum';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
-import { IModule } from '../../../shared/services/definitions/IModule';
+import { IModule, IModuleItem } from '../../../shared/services/definitions/IModule';
 
 
 @Component({
     selector: 'module-component',
     templateUrl: 'app/shared/UIComponents/ModuleComponent/module.component.html'
 })
-export class ModuleComponent {
+export class ModuleComponent{// implements OnChanges{
     @Input()
     title: string = "Add Module";
     @Input()
     parentWillSaveModule: boolean = false;
     @Input()
     moduleTypeId: string = "";
-    
+    @Input()
+    isAddModule: boolean = true;
     titanApiUrl: any = titanApiUrl;
     @Input()
     public addEditModuleText: string = "Add Module";
+    @Input()
+    public moduleDetails: IModule;
+
     @Output() onAddModuleComplete: EventEmitter<any> = new EventEmitter<any>();
     @Output() onCancelModuleComplete: EventEmitter<any> = new EventEmitter<any>();
     public isAddNewItemRowVisible: boolean;
@@ -31,14 +35,31 @@ export class ModuleComponent {
     moduleItemTypes: any;
     selectedCategory: any;
     navigateToDetails = new EventEmitter();
-    moduleDetails: IModule;
 
+    
+    isEditItemRowVisible: boolean;
+    editModuleItem: IModuleItem;
     constructor(private moduleService: ModuleService, private confirmationService: ConfirmationService, private moduleItemService: ModuleItemService){}
     ngOnInit() { 
-        this.moduleDetails = <IModule>{};
-        //this.moduleDetails.modu
-        this.getModuleItemTypes();
-        //this.getModules();
+        if (this.moduleDetails == undefined)
+            this.moduleDetails = <IModule>{};
+        //this.getModuleItemTypes();
+        this.getModuleItems();
+    }
+
+    //ngOnChanges(changes: SimpleChanges) {
+    //    // changes.prop contains the old and the new value...
+    //}
+
+    getModuleItems() {
+        if (!JSON.parse(this.isAddModule.toString())) {
+            this.moduleItemService.getModuleItemsByModuleId(this.moduleDetails.id).subscribe(response => {
+                this.moduleItemTypes = new Array();
+                if (response != null) {
+                    this.moduleDetails.moduleItems = response.result;
+                }
+            });
+        }
     }
 
     onAddNewItem() {
@@ -50,6 +71,41 @@ export class ModuleComponent {
             this.moduleDetails.moduleItems = new Array();
         this.moduleDetails.moduleItems.push(moduleItem);
         this.isAddNewItemRowVisible = false;
+    }
+
+    onEditModuleItem(moduleItem) {
+        this.editModuleItem = moduleItem;
+        this.isEditItemRowVisible = true;
+    }
+
+    isUpButtonVisible(moduleItem) {
+        if (this.moduleDetails.moduleItems != undefined && this.moduleDetails.moduleItems.length > 1 && moduleItem.id != this.moduleDetails.moduleItems[0].id)
+            return true;
+        return false;
+    }
+
+    isDownButtonVisible(moduleItem) {
+        if (this.moduleDetails.moduleItems != undefined && this.moduleDetails.moduleItems.length > 1 && moduleItem.id != this.moduleDetails.moduleItems[this.moduleDetails.moduleItems.length - 1].id)
+            return true;
+        return false;
+    }
+
+    onMoveModuleItemUp(moduleItem) {
+        var oldIndex = this.moduleDetails.moduleItems.indexOf(moduleItem);
+        this.moduleDetails.moduleItems.splice(oldIndex - 1, 0, this.moduleDetails.moduleItems.splice(oldIndex, 1)[0]);
+        this.updateProcedureModuleItemDisplayOrder();
+    }
+
+    onMoveModuleItemDown(moduleItem) {
+        var oldIndex = this.moduleDetails.moduleItems.indexOf(moduleItem);
+        this.moduleDetails.moduleItems.splice(oldIndex + 1, 0, this.moduleDetails.moduleItems.splice(oldIndex, 1)[0])
+        this.updateProcedureModuleItemDisplayOrder();
+    }
+
+    updateProcedureModuleItemDisplayOrder() {
+        this.moduleItemService.putModuleModuleItemDisplayOrder(this.moduleDetails.moduleItems, this.moduleDetails.id).subscribe(filteredList => {
+            this.moduleDetails.moduleItems = filteredList.result;
+        });
     }
 
     onCancelAddItemComplete(event) {
@@ -98,18 +154,18 @@ export class ModuleComponent {
             this.moduleService.postAdd(this.moduleDetails).subscribe(response => {
                 if (response.isSuccess) {
                     this.moduleDetails.id = response.result;
-                    //var moduleModuleTypeMap = {
-                    //    moduleId: response.result,
-                    //    moduleTypeId: this.moduleTypeId
-                    //};
+                    var moduleModuleTypeMap = {
+                        moduleId: response.result,
+                        moduleTypeId: this.moduleTypeId
+                    };
                     this.onAddModuleComplete.emit(this.moduleDetails);
                     this.moduleDetails = <IModule>{};
-                    //this.moduleService.postModuleModuleTypeMap(moduleModuleTypeMap).subscribe(response => {
-                    //    if (response.isSuccess) {
-                    //        this.onAddModuleComplete.emit(this.moduleDetails);
-                    //        this.moduleDetails = <IModule>{};
-                    //    }
-                    //});
+                    this.moduleService.postModuleModuleTypeMap(moduleModuleTypeMap).subscribe(response => {
+                        if (response.isSuccess) {
+                            this.onAddModuleComplete.emit(this.moduleDetails);
+                            this.moduleDetails = <IModule>{};
+                        }
+                    });
                 }
             });
         } else {

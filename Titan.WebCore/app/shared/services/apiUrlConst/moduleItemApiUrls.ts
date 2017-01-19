@@ -7,6 +7,8 @@ export class ModuleItemApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'ModuleItem/put';
     public static getByIdUrl: string = titanApiUrl + 'ModuleItem/get';
     public static getModuleItemTypesUrl: string = titanApiUrl + 'ModuleItem/GetModuleItemTypes';
-
+    public static getModuleItemsByModuleIdUrl: string = titanApiUrl + 'ModuleItem/GetModuleItemsByModuleId?moduleId=';
+    public static putModuleModuleItemDisplayOrderUrl: string = titanApiUrl + 'ModuleItem/UpdateModuleModuleItemDisplayOrder?moduleId=';
+    
     //public static filterByModuleTypeUrl: string = titanApiUrl + 'ModuleItem/filterByModuleType?ModuleItemTypeId=';
 }

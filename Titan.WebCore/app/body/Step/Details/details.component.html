@@ -95,16 +95,20 @@
                             <div class="ui-grid-col-4"></div>
                         </div>
                     </div>
-                    <div class="ui-grid-row" *ngIf="isModuleDivVisible">
+                    <div class="ui-grid-row" >
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-10">&nbsp;
-                            </div>
                             <div class="ui-grid-col-2">
+                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save">  </button>
+                            </div>
+                            <div class="ui-grid-col-4">
+                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
+                            </div>
+                            <div class="ui-grid-col-6" *ngIf="isModuleDivVisible">
                                 <button id="addModule" pButton type="button" *ngIf="!isAddModuleVisible" label="{{addStepTypeDetailLabelText}}" (click)="onAddModule()">  </button>
                             </div>
-                            <div class="ui-grid-row">
+                            <div class="ui-grid-row" *ngIf="isModuleDivVisible">
                                 <div class="ui-grid-col-12">
-                                    <module-component *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                                    <module-component [moduleTypeId]="stepDetails.stepTypeId" *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
                                 </div>
                             </div>
                         </div>
@@ -120,29 +124,10 @@
                                     <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
                                 </template>
                             </p-column>-->
-                            <template let-step pTemplate="rowexpansion">
-                                <!--<div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
-                                    <div class="ui-grid-row" *ngIf="step.repeatStep">
-                                        <div class="ui-grid-col-2">Step Frequency: </div>
-                                        <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
-                                        <div class="ui-grid-col-2">Test % / # of Cycles: </div>
-                                        <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
-                                    </div>
-                                </div>-->
+                            <template let-item pTemplate="rowexpansion">
+                                <module-component [moduleDetails]="item" title="Edit Module" isAddModule="false" addEditModuleText="Save Module" [moduleTypeId]="stepDetails.stepTypeId" (onAddModuleComplete)="onEditModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
                             </template>
                         </p-dataTable>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">
-                                <button id="add" pButton type="submit" [disabled]="!tfForm.form.valid" label="Save">  </button>
-                            </div>
-                            <div class="ui-grid-col-6">
-                            </div>
-                            <div class="ui-grid-col-4">
-                                <button id="cancel" pButton type="button" label="Cancel" (click)="onCancel()">  </button>
-                            </div>
-                        </div>
                     </div>
                 </p-panel>
             </form>

@@ -55,13 +55,39 @@
                 <p-panel header="Module Items">
                     <p-dataTable [value]="moduleItemDetails.moduleItemOptions">
                         <p-column field="name" header="Name"></p-column>
+                        <p-column>
+                            <template pTemplate type="header">
+                                Action
+                            </template>
+                            <template let-moduleItemOption="rowData" pTemplate type="body">
+                                <button type="button" pButton (click)="onEditModuleItemOption(moduleItemOption)" icon="fa-edit"></button>
+                                <button type="button" pButton (click)="onDeleteModuleItemOption(moduleItemOption)" icon="fa-trash" class="red-btn"></button>
+                            </template>
+                        </p-column>
                     </p-dataTable>
                 </p-panel>
             </div>
         </div>
     </div>
     <br />
-    
+    <p-dialog header="Edit Module Item Option" [(visible)]="isEditItemOptionVisible" width="900" height="300" [style]="{'overflow-y':'auto'}">
+        <div class="ui-grid-row" *ngIf="editOption">
+            <div class="ui-grid-col-2">
+                Module Item Option*
+            </div>
+            <div class="ui-grid-col-6">
+                <input type="text" name="moduleItemEditOption" pInputText [(ngModel)]="editOption.name" placeholder="Please enter Item Option" class="form-control"
+                       required #moduleItemOptionEditRef="ngModel" />
+            </div>
+            <div class="ui-grid-col-2" [hidden]="!moduleItemOptionEditRef.errors?.required">
+                Module Item Option field is required
+            </div>
+            <div class="ui-grid-col-2">
+                <button pButton type="button" label="Save" (click)="onEditItemOptionComplete()">  </button>
+                <button pButton type="button" label="Cancel" (click)="onEditItemOptionCancelComplete()">  </button>
+            </div>
+        </div>
+    </p-dialog>
     <div class="ui-grid-row">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2">

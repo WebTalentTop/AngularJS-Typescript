@@ -12,12 +12,13 @@ import { RouterModule } from '@angular/router';
 import { ModuleService } from '../../../shared/services/module.service';
 import { ModuleTypeService } from '../../../shared/services/moduleType.service';
 import { ModuleItemService } from '../../../shared/services/moduleItem.service';
+import { ModuleItemOptionService } from '../../../shared/services/moduleItemOption.service';
 
 @NgModule({
     imports: [CommonModule, TitanSpinnerModule, DataTableModule, FormsModule, PanelModule, RouterModule, GrowlModule, FileUploadModule, DropdownModule,
         ConfirmDialogModule, CheckboxModule, DialogModule], 
     declarations: [ModuleComponent, ModuleItemComponent],
-    providers: [ModuleService, ConfirmationService, ModuleTypeService, ModuleItemService],
+    providers: [ModuleService, ConfirmationService, ModuleTypeService, ModuleItemService, ModuleItemOptionService],
     exports: [ModuleComponent, CommonModule, ModuleItemComponent]    
 })
 export class ModuleModule{}

@@ -1,6 +1,6 @@
 import { ProjectService } from './../../shared/services/Containers/ProjectService/project.service';
 import { LoggerService } from '../../shared/services/logger/logger.service';
-import { LazyLoadEvent } from 'primeng/primeng';
+import { LazyLoadEvent, Message } from 'primeng/primeng';
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
