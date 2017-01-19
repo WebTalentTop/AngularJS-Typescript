@@ -5,7 +5,7 @@
               <p>Please select one or more excel file attachments.</p>
               <p-growl [value]="msgs"></p-growl>
 
-              <p-fileUpload name="myfile[]" url="{{titanApiUrl}}/importexport/importproject"
+              <p-fileUpload name="myfile[]" url="{{titanApiUrl}}importexport/importproject"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" multiple="multiple" (onUpload)="onUpload($event)">
 
             </p-fileUpload>
