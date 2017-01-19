@@ -152,19 +152,19 @@
                                    [placeholder]="item.label"/>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'CheckBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-checkbox name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-checkbox>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'RadioBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12" *ngFor="let ck of item.formSchemaFieldDataTypeData">
                                 <p-radioButton name="{{item.name}}" label="{{ck}}" value="{{ck}}"></p-radioButton>
                             </div>
                         </div>
                         <div *ngIf="checkFieldDataType(item.formSchemaFieldDataTypeId).name === 'SelectBox'">
-                            <label>{{item.label}}</label><br/>
+                            <label>{{item.name}}</label><br/>
                             <div class="ui-g-12">
                                 <p-dropdown [options]="sampleSelectBoxItems"
                                             [(ngModel)]="selectedSelectItem"></p-dropdown>
