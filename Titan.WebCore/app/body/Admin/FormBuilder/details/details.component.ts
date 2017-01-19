@@ -541,7 +541,7 @@ export class DetailsComponent {
         })
 
         console.log("Form to sent ---------", formSchemaData);
-        /*this.formSchemaService.postUpdate(formSchemaData)
+        this.formSchemaService.postUpdate(formSchemaData)
             .subscribe(res => {
                 console.log("Form Schema Create post return Res--------", res);
                 if(res.isSuccess) {
@@ -552,7 +552,7 @@ export class DetailsComponent {
                         this.router.navigate(['/admin/formBuilders']);
                     }, 5000);
                 }
-            });*/
+            });
         console.log('formschema Create called');
     }
 }
