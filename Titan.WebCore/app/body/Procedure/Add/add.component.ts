@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ProcedureService } from '../../../shared/services/procedure.service'
+import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 import { TestTypeService } from '../../../shared/services/testtype.service'
 import { TestModeService } from '../../../shared/services/testmode.service'
 import { Validators } from '@angular/forms';
