@@ -134,6 +134,14 @@ export class UserService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
+    filterUserByName(filterString: string): Observable<any> {
+        return this.http.get(`${UserApiUrl.filterUserByName}` + filterString, { headers: this.headers })
+            .map(this.getJson);
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     RemoveFunctionGroupUserMap(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${UserApiUrl.RemoveFunctionGroupUserMap}`, filterBody, { headers: this.headers })

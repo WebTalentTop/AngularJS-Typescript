@@ -358,7 +358,7 @@ export class AddComponent {
        //});
 
    }
-   onSubmit(formRef) {
+   onTestRequestSubmit(formRef) {
        //formRef.isDeleted = false;
        let formData: any = {
            //newly added columns
@@ -427,20 +427,38 @@ export class AddComponent {
 
        //  xhr.withCredentials = true;
      //  xhr.send(null);
-       this.dataService.postAdd(formData,this.comment).subscribe(res => {
+       this.dataService.postAdd(formData).subscribe(res => {
            console.log("-------- Test Sensor Adding new result ----- ", res);
            if (res.isSuccess) {
                var testRequestSensorId = res.result.id;
+               let formCommentData: any = {
+
+           Comment: this.comment,
+
+           TestRequestSensorId: testRequestSensorId,
+
+
+
+           IsDeleted: 'false'
+
+               };
+               this.dataService.postCommentAdd(formCommentData).subscribe(commentresult => {
+                   if (commentresult.isSuccess)
+                   {
+                       this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(result => {
+                           console.log('sent');
+                           //  this.router.navigate(["/testrequest/details/", this.id]);
+                           // make a call with id and update the datatable
+                           this.dataService.GetAllTestRequestSensors(this.entityId, this.departmentId)
+                               .subscribe(res => {
+                                   this.sensorRequests = res.result;
+                               });
+                       });          
+                   }
+                   
+               });
            //    console.log("", res.object.id); 
-               this.dataService.makeFileRequest('http://localhost:9998/api/testRequestSensor/post/uploadfile', [], this.uploadedFiles, testRequestSensorId).subscribe(result => {
-                   console.log('sent');
-                 //  this.router.navigate(["/testrequest/details/", this.id]);
-                   // make a call with id and update the datatable
-                   this.dataService.GetAllTestRequestSensors(this.entityId, this.departmentId)
-                       .subscribe(res => {
-                           this.sensorRequests = res.result;                         
-                       });
-               });             
+               
            }
        });
        //var fd = new FormData();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { ModuleItemApiUrl } from './apiUrlConst/ModuleItemApiUrls';
+import { ModuleItemOptionApiUrl } from './apiUrlConst/ModuleItemOptionApiUrls';
 import { BaseService } from './base.service'
 
 import 'rxjs/Rx';
@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class ModuleItemService extends BaseService {
+export class ModuleItemOptionService extends BaseService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
         // 'Access-Control-Allow-Origin': '*'
@@ -29,7 +29,7 @@ export class ModuleItemService extends BaseService {
     }
 
     //postGridData(): Observable<any> {
-    //    return this.http.post(`${ModuleItemApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+    //    return this.http.post(`${ModuleItemOptionApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
     //        .map(this.getJson);
     //    //this.checkErrors)
     //    //.catch(err => Observable.throw(err))
@@ -37,7 +37,7 @@ export class ModuleItemService extends BaseService {
     //}
     //postGridDataFilter(filterBody): Observable<any> {
     //    console.log("-------- Post Customers FilterBody --------", filterBody);
-    //    return this.http.post(`${ModuleItemApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
+    //    return this.http.post(`${ModuleItemOptionApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
     //        .map(this.getJson);
     //    //this.checkErrors)
     //    //.catch(err => Observable.throw(err))
@@ -46,7 +46,7 @@ export class ModuleItemService extends BaseService {
 
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${ModuleItemApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${ModuleItemOptionApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
 
         //this.checkErrors)
@@ -56,43 +56,22 @@ export class ModuleItemService extends BaseService {
 
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${ModuleItemApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${ModuleItemOptionApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
         //.map(this.checkErrors);
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${ModuleItemApiUrl.getByIdUrl}` + id, { headers: this.headers })
+        return this.http.get(`${ModuleItemOptionApiUrl.getByIdUrl}` + id, { headers: this.headers })
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
 
-    //filterByProcedureId(moduleItemTypeId, filterString): Observable<any> {
-    //    return this.http.get(`${ModuleItemApiUrl.filterByModuleItemTypeUrl}` + moduleItemTypeId + '&filterString=' + filterString, { headers: this.headers })
-    //        .map(this.getJson);
-    //}
-
-    getModuleItemTypes(): Observable<any> {
-        return this.http.get(`${ModuleItemApiUrl.getModuleItemTypesUrl}`, { headers: this.headers })
-            .map(this.getJson)
-            ;
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-    getModuleItemsByModuleId(moduleId: string): Observable<any> {
-        return this.http.get(`${ModuleItemApiUrl.getModuleItemsByModuleIdUrl}` + moduleId, { headers: this.headers })
-            .map(this.getJson)
-            ;
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
-    }
-
-    putModuleModuleItemDisplayOrder(filterBody, moduleId): Observable<any> {
-        return this.http.put(`${ModuleItemApiUrl.putModuleModuleItemDisplayOrderUrl}` + moduleId, filterBody, { headers: this.headers })
+    postDelete(filterBody): Observable<any> {
+        return this.http.put(`${ModuleItemOptionApiUrl.deleteUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
+        //.map(this.checkErrors);
     }
-    
 }
