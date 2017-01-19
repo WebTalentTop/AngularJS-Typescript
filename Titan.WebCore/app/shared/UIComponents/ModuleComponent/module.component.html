@@ -53,7 +53,10 @@
             </div>
         </div>
         <p-dialog header="Add Module Item" [(visible)]="isAddNewItemRowVisible" width="900" height="600" [style]="{'overflow-y':'auto'}">
-            <module-item-component (onAddComplete)="onAddItemComplete($event)" (onCancelComplete)="onCancelAddItemComplete($event)"></module-item-component>
+            <module-item-component [isAddModule]="isAddModule" (onAddComplete)="onAddItemComplete($event)" (onCancelComplete)="onCancelAddItemComplete($event)"></module-item-component>
+        </p-dialog>
+        <p-dialog header="Edit Module Item" [(visible)]="isEditItemRowVisible" width="900" height="600" [style]="{'overflow-y':'auto'}">
+            <module-item-component [moduleItemDetails]="editModuleItem" title="Edit Module Item" isAdd="false" saveButtonLabel="Save Module Item" (onAddComplete)="onEditItemComplete($event)" (onCancelComplete)="onCancelEditItemComplete($event)"></module-item-component>
         </p-dialog>
         <!--<div class="ui-grid-row" *ngIf="isAddNewItemRowVisible">
             <div class="ui-grid-col-12">
@@ -73,8 +76,8 @@
                             Action
                         </template>
                         <template let-moduleItem="rowData" pTemplate type="body">
-                            <button type="button" pButton (click)="onEdit(moduleItem)" icon="fa-edit"></button>
-                            <button type="button" pButton (click)="onDelete(moduleItem)" icon="fa-trash" class="red-btn"></button>
+                            <button type="button" pButton (click)="onEditModuleItem(moduleItem)" icon="fa-edit"></button>
+                            <button type="button" pButton (click)="onDeleteModuleItem(moduleItem)" icon="fa-trash" class="red-btn"></button>
                             <button type="button" pButton (click)="onMoveModuleItemUp(moduleItem)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(moduleItem)" title="Move Up" class="blue-grey-btn"></button>
                             <button type="button" pButton (click)="onMoveModuleItemDown(moduleItem)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(moduleItem)" title="Mode Down" class="blue-grey-btn"></button>
                         </template>

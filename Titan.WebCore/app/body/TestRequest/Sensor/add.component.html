@@ -80,7 +80,22 @@
                             <label style="color:#777">Comments :</label>
                           </div>
                           <div class="ui-g-12 ui-md-12 md-inputfield">
-                              <!--Editor Section-->
+                              <p-editor [(ngModel)]="comment" name="comment" id="comment" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                  <header>
+                                      <select class="ql-size">
+                                          <option value="small"></option>
+
+                                          <option selected></option>
+                                          <option value="large"></option>
+                                          <option value="huge"></option>
+                                      </select>
+                                      <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                      </span>
+                                  </header>
+                              </p-editor>
 
                           </div>
                       </div>

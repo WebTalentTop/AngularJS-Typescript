@@ -2,6 +2,7 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
+import { UserService } from '../../../shared/services/user.service';
 import { ITorqueSheet } from '../../../shared/services/definitions/ITorqueSheet';
 import { ConfirmationService } from 'primeng/primeng';
 
@@ -14,6 +15,11 @@ export class DetailsComponent {
     torqueSheetDetails: ITorqueSheet;
     landingFrom: string;
     identifierId: string;
+    public selectedApprovers: Array<any> = new Array();
+    public filteredApprovers: Array<any> = new Array();
+    public filteredSelectedApprovers: Array<any> = new Array();
+    public displayApproverEmail: boolean;
+    public subject: string;
     public torqueSheetNames: any;
     public spreadInstance: any;
     public isViewInitialized: boolean;
@@ -40,7 +46,7 @@ export class DetailsComponent {
     //@Input() fromTorqueBookId: string;
     //@Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
     //@Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
-    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService) {
+    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService, private userService: UserService) {
         //this.torqueSheetDetails = <ITorqueSheet>{};
         this.route.params.subscribe(params => {
             //this.torqueSheetDetails.id = params['id'];
@@ -50,6 +56,13 @@ export class DetailsComponent {
             //this.getTorqueBooksTorqueSheetNames(params['torqueBookId']);
             this.landingFrom = params['landingFrom'];
             this.identifierId = params['identifierId'];
+        });
+    }
+
+    filterApprovers(event) {
+        this.userService.filterUserByName(event.query).subscribe(filteredList => {
+            if (filteredList.isSuccess)
+                this.filteredApprovers = filteredList.result;
         });
     }
 
@@ -242,11 +255,20 @@ export class DetailsComponent {
     }
 
     onSubmitForApproval() {
-        this.saveTorqueSheet("Submit");
+        this.displayApproverEmail = true;
     }
 
     onApprove() {
         this.saveTorqueSheet("Approve");
+    }
+
+    onSendEmailCancel() {
+        this.displayApproverEmail = false;
+    }
+
+    onSendEmail() {
+        this.displayApproverEmail = false;
+        this.saveTorqueSheet("Submit");
     }
 
     onReject() {

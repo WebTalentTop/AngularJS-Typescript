@@ -70,8 +70,8 @@ export class TestRequestSensorService {
         //.map(this.getJson);
     }
 
-    postAdd(filterBody,comment): Observable<any> {
-        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}/${comment}`, filterBody, { headers: this.headers })
+    postAdd(filterBody): Observable<any> {
+        return this.http.post(`${TestReqestSensorApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             //.map(this.getJson)
             //.map(this.checkErrors)
             //.catch(err => Observable.throw(err))

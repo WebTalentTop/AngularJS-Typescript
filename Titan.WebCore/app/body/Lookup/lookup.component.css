@@ -68,21 +68,11 @@ div span {
     padding-top: 15%;
     box-sizing: border-box;
 }
-.colorbox-count{
-    line-height:1;
-    font-weight: normal !important;
-    font-size:26px !important;
-}
 a{
     color:inherit;
 }
-.colorbox{
-    width:86%;
-    margin-left:7%;
-}
-.colorbox-5 div:first-child {
-    background-color: #AD1457;
-}
-.colorbox-5 div:last-child {
-    background-color: #E91E63;
+.colorbox-count{
+    line-height:1;
+    font-weight: normal !important;
+    font-size:22px !important;
 }

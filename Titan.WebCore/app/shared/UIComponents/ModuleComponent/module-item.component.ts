@@ -2,6 +2,7 @@
 import { DataTable, LazyLoadEvent, MessagesModule, Message, DropdownModule, Dropdown, ConfirmationService } from 'primeng/primeng';
 import { IModuleItem, IMultiSelectViewData, IModuleItemOption } from '../../../shared/services/definitions/IModule';
 import { ModuleItemService } from '../../../shared/services/moduleItem.service';
+import { ModuleItemOptionService } from '../../../shared/services/moduleItemOption.service';
 import { ModuleItemTypeEnum } from '../../../shared/Enum/module-item-type.enum';
 
 @Component({
@@ -14,6 +15,8 @@ export class ModuleItemComponent {
     @Input()
     isAdd: boolean = true;
     @Input()
+    isAddModule: boolean = true;
+    @Input()
     saveButtonLabel: string = "Add Module Item";
     public selectedItemType: IMultiSelectViewData;
     @Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
@@ -23,12 +26,61 @@ export class ModuleItemComponent {
     @Input()
     public moduleItemDetails: IModuleItem;
     public moduleItemTypes: IMultiSelectViewData[];
-
-    constructor(private moduleItemService: ModuleItemService) { }
+    public editOption: IModuleItemOption;
+    public isEditItemOptionVisible: boolean;
+    constructor(private moduleItemService: ModuleItemService, private moduleItemOptionService: ModuleItemOptionService) { }
 
     ngOnInit() { 
         this.moduleItemDetails = <IModuleItem>{};
         this.getModuleItemTypes();
+    }
+
+    onEditModuleItemOption(itemOption) {
+        this.editOption = itemOption;
+        this.isEditItemOptionVisible = true;
+    }
+
+    onEditItemOptionCancelComplete() {
+        this.isEditItemOptionVisible = true;
+    }
+
+    onDeleteModuleItemOption(itemOption) {
+        if (this.isAddModule) {
+            var index = this.moduleItemDetails.moduleItemOptions.indexOf(itemOption, 0);
+            if (index > -1) {
+                this.moduleItemDetails.moduleItemOptions.splice(index, 1);
+            }
+        } else {
+            var obj = { value: itemOption.id };
+            this.moduleItemOptionService.postDelete(obj).subscribe(response => {
+                if (response.isSuccess) {
+                    var index = this.moduleItemDetails.moduleItemOptions.indexOf(itemOption, 0);
+                    if (index > -1) {
+                        this.moduleItemDetails.moduleItemOptions.splice(index, 1);
+                    }
+                }
+            });
+        }
+        
+    }
+
+    onEditItemOptionComplete() {
+        if (this.editOption.name != undefined && this.editOption.name.trim() != "") {
+            if (this.isAddModule) {
+                this.isEditItemOptionVisible = true;
+                //this.moduleItemDetails.moduleItemOptions.push(option);
+                //this.optionName = "";
+            } else {
+                this.moduleItemOptionService.postUpdate(this.editOption).subscribe(response => {
+                    if (response.isSuccess) {
+                        this.isEditItemOptionVisible = true;
+                        //option.id = response.result;
+                        //this.moduleItemDetails.moduleItemOptions.push(option);
+                        //this.optionName = "";
+                    }
+                });
+            }
+        }
     }
 
     onAddItemOptionComplete() {
@@ -37,8 +89,18 @@ export class ModuleItemComponent {
         if (this.optionName != undefined && this.optionName.trim() != "") {
             var option = <IModuleItemOption>{};
             option.name = this.optionName;
-            this.moduleItemDetails.moduleItemOptions.push(option);
-            this.optionName = "";
+            if (this.isAddModule) {
+                this.moduleItemDetails.moduleItemOptions.push(option);
+                this.optionName = "";
+            } else {
+                this.moduleItemOptionService.postAdd(option).subscribe(response => {
+                    if (response.isSuccess) {
+                        option.id = response.result;
+                        this.moduleItemDetails.moduleItemOptions.push(option);
+                        this.optionName = "";
+                    }
+                });
+            }
         }
     }
 
