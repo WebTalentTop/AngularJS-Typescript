@@ -380,7 +380,7 @@ export class DetailsComponent {
 
        //  xhr.withCredentials = true;
      //  xhr.send(null);
-       this.dataService.postAdd(formData,this.comment).subscribe(res => {
+       this.dataService.postAdd(formData).subscribe(res => {
            console.log("-------- Test Sensor Adding new result ----- ", res);
            if (res.isSuccess) {
                var testRequestSensorId = res.result.id;

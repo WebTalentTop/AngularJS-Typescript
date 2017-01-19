@@ -13,7 +13,7 @@ export class TestReqestSensorApiUrl {
     public static postTasksAddUrl: string = titanApiUrl + 'workRequest/CreateTasks';
     public static postTasksCompleteUrl: string = titanApiUrl + 'task/TaskComplete';
     public static postEmailAllUserDepartmentsUrl: string = titanApiUrl + 'workRequest/post';
-    public static postCommentCreatedUrl: string = titanApiUrl + 'testRequestSensor/post/uploadfile';
+    public static postCommentCreatedUrl: string = titanApiUrl + 'testRequestSensorComment/post';
     public static postUpdateUrl: string = titanApiUrl + 'testRequestSensor/put';
     public static postCommentUpdateUrl: string = titanApiUrl + 'testRequestSensorComment/put';
     public static getByIdUrl: string = titanApiUrl + 'testRequestSensor/get';

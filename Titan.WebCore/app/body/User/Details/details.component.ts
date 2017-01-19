@@ -133,8 +133,8 @@ export class DetailsComponent {
        //get sensors by department and entityId
        this.userservice.getUserDetailsById(this.userId)
            .subscribe(userresult => {
-               this.userProfile = userresult.result;             
-            
+               this.userProfile = userresult.result;
+               this.selectedDepartmentId = userresult.result.departmentId;
                this.userservice.GetUserFunctionGroupsByUser(this.userId).subscribe(res => {
                    if (res.isSuccess) {
                        this.userFunctionGroups = res.result;
