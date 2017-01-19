@@ -6,7 +6,7 @@ import { TestTypeService} from './../../../shared/services/testType.service';
 import { TestModeService } from './../../../shared/services/testMode.service';
 import { TestTemplateService} from './../../../shared/services/Containers/TestTemplateService/testTemplate.service';
 import { TestRequirementService} from './../../../shared/services/testrequirement.service';
-import { ProcedureService } from './../../../shared/services/procedure.service';
+import { ProcedureService } from './../../../shared/services/Containers/ProcedureService/procedure.service';
 
 import { EditorModule, SharedModule,  DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
     AutoCompleteModule, ConfirmDialogModule,ConfirmationService  } from 'primeng/primeng';
