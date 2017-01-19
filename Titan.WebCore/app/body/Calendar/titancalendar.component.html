@@ -1,4 +1,4 @@
-﻿<div class="ui-g-12" style="border:1px red solid">
+﻿<div class="ui-g-12">
     <div class="ui-g-3">
         <div class="ui-toolbar-group-left">
             <button pButton type="button" icon="fa-chevron-circle-left" (click)="moveCalendar('backward')"></button>
@@ -7,10 +7,14 @@
         </div>
     </div>
     <div class="ui-g-6">
-        <div class="ui-toolbar-group-left"><h2> <label [innerHTML]="calendarHeader"> </label></h2></div>
+        <div class="ui-toolbar-group-left"><h2><label [innerHTML]="calendarHeader"> </label></h2></div>
     </div>
     <div class="ui-g-3">
         <div class="ui-toolbar-group-right">
+            <button pButton type="button" icon="fa-bar-chart" *ngIf="calendarDisplayMode==='calendar'"
+                    (click)="toggleTimelineView('timeline')"></button>
+            <button pButton type="button" icon="fa-calendar" *ngIf="calendarDisplayMode==='timeline'"
+                    (click)="toggleTimelineView('calendar')"></button>
             <button pButton type="button" icon="fa-search" (click)="showSearchOptions()"></button>
             <button pButton type="button" icon="fa-cogs" (click)="showCalendarSettings()"></button>
         </div>
@@ -18,7 +22,7 @@
 </div>
 
 
-<div class="ui-g-12" style="border:1px red solid">
+<div class="ui-g-12">
     <div id="calendar" style="margin:0px;">
     </div>
 </div>
@@ -27,7 +31,7 @@
     <div *ngFor="let item of testStatus" style="display: inline-block; margin-right:5px">
         <i class="fa fa-square" aria-hidden="true"
            [ngStyle]="{'background-color': item.value.calendarDisplayColor, 'height':'10px', 'width':'10px', 'margin-right':'2px' }"></i>
-        	{{item.label}}
+        {{item.label}}
 
 
     </div>
@@ -109,96 +113,97 @@
 <p-dialog header="Calendar Settings" [(visible)]="displayCalendarSetting"
           modal="modal" showEffect="fade"
           [minWidth]="800" [responsive]="true">
-    <form #calendarSettingsForm (ngSubmit)="updateCalendarSettings(calendarSettingsForm.value)">
-    <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-            View Duration
-        </div>
-
-        <div class="ui-grid-col-6">
-            <p-dropdown [options]="durationOptions" name="selectedDurationOption"
-                        [(ngModel)]="selectedDurationOption"
-                        [style]="{'width':'auto'}"
-            >
-            </p-dropdown>
-        </div>
-    </div>
-    <div class="ui-grid-row">
-
-
-        <div class="ui-grid-col-6">
+    <form #calendarSettingsForm (ngSubmit)="updateCalendarSettings(false)">
+        <div class="ui-grid-row">
             <div class="ui-grid-col-6">
-                Slots Width
+                View Duration
+            </div>
+
+            <div class="ui-grid-col-6">
+                <p-dropdown [options]="durationOptions" name="selectedDurationOption"
+                            [(ngModel)]="selectedDurationOption"
+                            [style]="{'width':'auto'}"
+                            (onChange)="updateSlotDuration($event)"
+                >
+                </p-dropdown>
             </div>
         </div>
-        <div class="ui-grid-col-6">
-            <p-dropdown [options]="slotDurations"
-                        name="selectedSlotDurationValue"
-                        [(ngModel)]="selectedSlotDurationValue"
-                         [style]="{'width':'auto'}">
-            </p-dropdown>
+        <div class="ui-grid-row">
+
+
+            <div class="ui-grid-col-6">
+                <div class="ui-grid-col-6">
+                    Slots Width
+                </div>
+            </div>
+            <div class="ui-grid-col-6">
+                <p-dropdown [options]="slotDurations"
+                            name="selectedSlotDurationValue"
+                            [(ngModel)]="selectedSlotDurationValue"
+                            [style]="{'width':'auto'}">
+                </p-dropdown>
+            </div>
+
+
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+                Show Weekends
+            </div>
+
+            <div class="ui-grid-col-6">
+                <p-radioButton name="selectedHideWeekendValue" label="Yes" value="true"
+                               [(ngModel)]="selectedHideWeekendValue">
+
+                </p-radioButton>
+                <p-radioButton name="selectedHideWeekendValue" label="No" value="false"
+                               [(ngModel)]="selectedHideWeekendValue"
+                ></p-radioButton>
+            </div>
+
+        </div>
+        <div class="ui-grid-row">
+
+            <div class="ui-grid-col-6">
+                First Day of the week
+            </div>
+
+            <div class="ui-grid-col-6">
+                <p-dropdown [options]="daysofweek"
+                            name="selectedFirstDayValue"
+                            [(ngModel)]="selectedFirstDayValue"
+                            [style]="{'width':'auto'}"></p-dropdown>
+            </div>
+
         </div>
 
+        <div class="ui-grid-row">
 
-    </div>
-    <div class="ui-grid-row">
-        <div class="ui-grid-col-6">
-            Show Weekends
+            <div class="ui-grid-col-6">
+                Start of the day
+            </div>
+
+            <div class="ui-grid-col-6">
+                <p-calendar [(ngModel)]="startWorkHoursValue" [timeOnly]="true" name="startWorkHoursValue"></p-calendar>
+            </div>
+
         </div>
 
-        <div class="ui-grid-col-6">
-            <p-radioButton name="selectedHideWeekendValue" label="Yes" value="true"
-                           [(ngModel)]="selectedHideWeekendValue">
+        <div class="ui-grid-row">
 
-            </p-radioButton>
-            <p-radioButton name="selectedHideWeekendValue" label="No" value="false"
-                           [(ngModel)]="selectedHideWeekendValue"
-                           ></p-radioButton>
+            <div class="ui-grid-col-6">
+                End of the day
+            </div>
+
+            <div class="ui-grid-col-6">
+                <p-calendar [(ngModel)]="endWorkHoursValue" [timeOnly]="true" name="endWorkHoursValue"></p-calendar>
+            </div>
+
         </div>
-
-    </div>
-    <div class="ui-grid-row">
-
-        <div class="ui-grid-col-6">
-            First Day of the week
+        <div class="ui-grid-row">
+            <button type="submit">Apply</button>
+            <!--<button type="button" (click)="calendarSettingsForm.reset()">Cancel</button>-->
         </div>
-
-        <div class="ui-grid-col-6">
-            <p-dropdown [options]="daysofweek"
-                        name="selectedFirstDayValue"
-                        [(ngModel)]="selectedFirstDayValue"
-                        [style]="{'width':'auto'}"></p-dropdown>
-        </div>
-
-    </div>
-
-    <div class="ui-grid-row">
-
-        <div class="ui-grid-col-6">
-            Start of the day
-        </div>
-
-        <div class="ui-grid-col-6">
-            <p-calendar [(ngModel)]="startWorkHoursValue" [timeOnly]="true"  name="startWorkHoursValue"></p-calendar>
-        </div>
-
-    </div>
-
-    <div class="ui-grid-row">
-
-        <div class="ui-grid-col-6">
-            End of the day
-        </div>
-
-        <div class="ui-grid-col-6">
-            <p-calendar [(ngModel)]="endWorkHoursValue" [timeOnly]="true" name="endWorkHoursValue"></p-calendar>
-        </div>
-
-    </div>
-    <div class="ui-grid-row">
-        <button type="submit">Apply</button>
-        <!--<button type="button" (click)="calendarSettingsForm.reset()">Cancel</button>-->
-    </div>
 
     </form>
 </p-dialog>

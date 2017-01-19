@@ -2,7 +2,7 @@ import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
 import {RefToNg} from '../../shared/services/definitions/RefToNg';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import {BuildLevelService} from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import {TestStatusService} from '../../shared/services/teststatus.service';
+import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
 import {TestRoleService} from '../../shared/services/testRole.service';
 import {ProjectService} from '../../shared/services/Containers/ProjectService/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';
@@ -168,7 +168,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     durationOptions: SelectItem[] = [];
     selectedDurationOption: SelectItem;
     allSlotOptions = [];
-    calendarHeader: string = 'Ajay';
+    calendarHeader: string = '';
     scheduleStartTime: number;
     scheduleEndTime: number;
     calendarDisplayMode: string = 'timeline';
@@ -176,6 +176,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     showTimeDuringAssignOperation: boolean = false;
     draggedResourceId: string = '';
     facilityChanged: boolean = false;
+    tfEventSource: any ={};
+    tfUserSource: any ={};
 //endregion fields
 
 // region constructor
@@ -244,7 +246,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         day.durationItem = {label: 'Day', value: 'Day'};
         day.defaultSlotWidth = {label: 'hour', value: {hours: 1}};
         day.slotOptions = [];
-        day.slotOptions.push({label: 'day', value: {days: 1}});
+        //day.slotOptions.push({label: 'day', value: {days: 1}});
         day.slotOptions.push({label: 'Shift', value: {hours: 8}});
         day.slotOptions.push({label: 'hour', value: {hours: 1}});
         day.slotOptions.push({label: 'half-hour', value: {minutes: 30}});
@@ -264,7 +266,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.slotDurations = [];
         for (let item of this.calendarDurationOptions) {
             this.durationOptions.push(item.durationItem);
-            if (item.durationItem.value === this.selectedDurationOption.value) {
+            if (item.durationItem.value === this.selectedDurationOption) {
                 this.slotDurations = item.slotOptions;
             }
         }
@@ -316,7 +318,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         let slotOptions = self.allSlotOptions;
         let slotDurationInMinutes = moment.duration(self.selectedSlotDurationValue).asMinutes();
         var tt = this.tooltip;
-        let tfEventSource: any = {
+        self.tfEventSource = {
             id: 'testFacilityEventSource',
             events: function (start, end, timezone, callback) {
 
@@ -347,7 +349,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 });
             }
         }
-        let tfUserSource: any = {
+        self.tfUserSource  = {
             id: 'testFacilityUserSource',
             events: function (start, end, timezone, callback) {
                 $.ajax({
@@ -442,7 +444,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                     duration: {months: 3}
                 },
                 timelineYear: {
-                    type: 'timelineMonth',
+                    type: 'timelineYear',
                     duration: {years: 1}
                 },
                 day: {},
@@ -488,8 +490,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             },
 
             eventSources: [
-                tfEventSource
-                , tfUserSource
+                self.tfEventSource
+                , self.tfUserSource
             ],
             eventRender: function (event, element) {
                 // The id is the testFacilityScheduleId
@@ -1090,9 +1092,14 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         });
     }
 
+    updateSlotDuration(event)
+    {
+        let item : any = this.calendarDurationOptions.filter(x=> x.durationItem.value === this.selectedDurationOption);
+        console.log("updateSlotDuration", item ,this.selectedDurationOption );
+        this.slotDurations = item[0].slotOptions;
+    }
 
-    updateCalendarSettings(event) {
-
+    updateCalendarSettings(updateSourceList) {
         /*
          *  Either in CalendarMode or Timeline Mode
          *  Depending upon the selected duration and Mode - Pick up the view
@@ -1123,18 +1130,29 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         if (!optionExist) {
             this.selectedSlotDurationValue = this.slotDurations[0].value;
         }
-
-        //this.selectedSlotDurationValue = this.slotDurations[]
         schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         let updatedViewName = this.calendarDisplayMode + this.selectedDurationOption;
-        //$('#calendar').fullCalendar('option', schedulerOptions);
+        $('#calendar').fullCalendar('option', schedulerOptions);
         if (selectedViewName !== updatedViewName) {
             $('#calendar').fullCalendar('changeView', updatedViewName);
         }
         selectedView = $('#calendar').fullCalendar('getView');
         this.calendarHeader = selectedView.title;
-        console.log("title is", this.calendarHeader)
-        $('#calendar').fullCalendar('refetchEvents');
+
+
+        /*
+        *  When toggling, there is no need to refetch all event sources
+        * */
+        if (updateSourceList)
+        {
+            if (this.calendarDisplayMode ==='calendar'){
+                $('#calendar').fullCalendar( 'removeEventSource', this.tfUserSource );
+            } else {
+                $('#calendar').fullCalendar( 'addEventSource', this.tfUserSource );
+            }
+        } else {
+            $('#calendar').fullCalendar('refetchEvents');
+        }
         this.displayCalendarSetting = false;
     }
 
@@ -1440,7 +1458,12 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     initializeTimeOptions(selfRef) {
 
     }
+    //TODO: NEED TO OPTIMIZE
+    toggleTimelineView(displayModeName){
+      this.calendarDisplayMode = displayModeName;
 
+      this.updateCalendarSettings(true);
+    }
     initTimeOptions() {
         if (this.timeOptions.length == 0) {
             this.timeOptions.push({value: '', label: "Select"});
