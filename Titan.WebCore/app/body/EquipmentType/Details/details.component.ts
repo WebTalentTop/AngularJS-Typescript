@@ -15,16 +15,18 @@ import {
     PanelModule,
     FileUploadModule,
     Message,
-    GrowlModule
+    GrowlModule,
+    MenuItem
 } from 'primeng/primeng';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IEquipmentSubtype} from '../../../shared/services/definitions/IEquipmentSubtype';
 import {ICalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
 
 import {LoggerService} from "../../../shared/services/logger/logger.service";
 import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
 import {FormSchemaCategoryService} from "../../../shared/services/formSchemaCategory.service";
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
@@ -49,7 +51,7 @@ export class DetailsComponent implements OnInit {
     details: string;
     id: string;
     cronInitialized: boolean = false;
-    msgs: Message[];
+    msgs: Message[] = [];
     entityType: string = '';
     entityId: string = '';
     filepath: string = "TestFacility";
@@ -59,6 +61,7 @@ export class DetailsComponent implements OnInit {
     selectedMaintenanceFrequency: any;
     cities: SelectItem[];
     selectedcity: any;
+    added: any;
     selectedSubTypeMaintenanceFrequency: any;
     selectedstring: string = null;
     model: any = {
@@ -75,16 +78,29 @@ export class DetailsComponent implements OnInit {
         //userModifiedById: ''
     };
 
-
     uploadedFiles: any[] = [];
 
-    constructor(private route: ActivatedRoute,
-
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private route: ActivatedRoute,
         private dataService: EquipmentTypeService,
         private entityIdentifierService: EntityIdentifierService,
         private formSchemaCategoryService: FormSchemaCategoryService,
       
         private ls: LoggerService) {
+            this.route.queryParams.subscribe(params => {
+
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let equipmentTypeDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EquipmentTypeDetailsPage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = equipmentTypeDetailsBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
         this.ls.setShow(true);
   
 
@@ -162,7 +178,8 @@ export class DetailsComponent implements OnInit {
 
     handleChange(event) {
     }
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
     ngOnInit() {
 
         this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)

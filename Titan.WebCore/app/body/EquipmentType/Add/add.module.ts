@@ -7,14 +7,15 @@ import { ProjectService } from '../../../shared/services/Containers/ProjectServi
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTypeService } from '../../../shared/services/testType.service';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-import { EditorModule, SharedModule, DataTableModule, TabViewModule,  ButtonModule,DialogModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule  } from 'primeng/primeng';
+import { EditorModule, SharedModule, DataTableModule, TabViewModule,BreadcrumbModule,  ButtonModule,DialogModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule  } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import AddRoutes from "./add.routes";
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @NgModule({
-    imports: [EditorModule, SharedModule, CommonModule, RouterModule, FormsModule,DialogModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, AddRoutes],
+    imports: [EditorModule, SharedModule, CommonModule, RouterModule,BreadcrumbModule, FormsModule,DialogModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, GrowlModule, AddRoutes],
     providers: [EquipmentTypeService, BuildLevelService, ProjectService, TestModeService,
-        TestTypeService],
+        TestTypeService, BreadCrumbsService],
     declarations: [AddComponent]
 })
 

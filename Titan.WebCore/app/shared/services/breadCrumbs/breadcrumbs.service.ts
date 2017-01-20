@@ -39,6 +39,10 @@ export class BreadCrumbsService {
 
         //Admin EquipmentType Page
         this.equipmentTypePage();
+        //Admin EquipmentType Add
+        this.equipmentTypeAddPage();
+        //Admin EquipmentType Details
+        this.equipmentTypeDetailsPage();
 
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
@@ -486,9 +490,40 @@ export class BreadCrumbsService {
     }
 
     private equipmentTypePageBCItems() {
-        let menuItem = { label: 'EquipmentType', routerLink: ['/equipmenttype'] };
+        let menuItem = { label: 'Equipment Type', routerLink: ['/equipmenttype'] };
         return menuItem;
     }
+
+    private equipmentTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypeAddPageBCItems() {
+        let menuItem = { label: 'EquipmentType Add', routerLink: ['/equipmenttype'] };
+        return menuItem;
+    }
+
+    private equipmentTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypeDetailsPageBCItems() {
+        let menuItem = { label: 'EquipmentType Details', routerLink: ['/equipmenttype'] };
+        return menuItem;
+    }
+
 
     // Admin Vehicle Home Page Bread Crumbs
     private adminVehicleHomePage() {
