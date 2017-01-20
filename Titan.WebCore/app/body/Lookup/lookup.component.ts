@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
     templateUrl: 'app/body/Lookup/lookup.component.html'
 })
 export class LookupComponent {
-    title = "Lookup";
-
-
+    title = "Lookups";
+    private items:MenuItem[];
     constructor(private service: LookupService) {
 
     }
 
     ngOnInit() {
-       
+       this.items=[];
+       this.items.push({label:'Home'});
     }
 
 }
