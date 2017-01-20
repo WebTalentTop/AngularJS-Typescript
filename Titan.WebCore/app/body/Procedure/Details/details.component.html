@@ -125,7 +125,7 @@
                 <p-dialog header="Add Step" [(visible)]="displayAddStep" width="600">
                     <add-step [isDisplayComponentInPopUp]="true" (onAddComplete)="onAddStepComplete($event)" (onCancelComplete)="onCancelStepComplete($event)"></add-step>
                 </p-dialog>
-                <p-dialog header="Edit Step" [(visible)]="displayEditStep" width="700" height="500">
+                <p-dialog header="Edit Step" [(visible)]="displayEditStep" width="700">
                     <details-step [isDisplayComponentInPopUp]="true" [stepId]="editStepId" (onEditComplete)="onEditStepComplete($event)" (onCancelComplete)="onEditCancelStepComplete($event)"></details-step>
                 </p-dialog>
                 <p-panel>
