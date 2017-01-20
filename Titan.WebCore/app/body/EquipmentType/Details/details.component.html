@@ -20,7 +20,7 @@
 
                           <!--</ul>-->
                       </div>
-                  </div><br/>
+                  </div><br />
 
                   <p-panel header="Basic Information">
                     <header>
@@ -34,15 +34,28 @@
                                        minlength="3" class="form-control" required row="20" style="width:100%">
                                 <label>Name <span >*</span></label>
                             </div>
-                            <div class="md-inputfield ui-g-12 ui-md-6">
+                            <div class="ui-g-12 ui-md-6">
+                                    <p-checkbox name="groupname" id="isMaintenance" value="isMaintenaceFrequencySelected"
+                                                label="Is calibration Required?"
+                                                [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
+                                                (onChange)="showHideCronPicker()">
+                                    </p-checkbox>
+
+
+                                    <div class="md-inputfield">
+                                        <br />
+                                        <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
+                                    </div>
+                                </div>
+                            <!--<div class="md-inputfield ui-g-12 ui-md-6">
                                 <div class="md-inputfield">
                                     <br />
                                     <div id="selector"></div>
                                 </div>
-                                <!--<input type="text" pInputText name="frequency" [(ngModel)]="model.frequency" style="width:100%">-->
                              <label>Frequency</label>
-                            </div>
+                            </div>-->
                           </div><br />
+
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
