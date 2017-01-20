@@ -37,6 +37,9 @@ export class BreadCrumbsService {
         //Admin Test Facilities Details
         this.testFacilitiesDetailsPage();
 
+        //Admin EquipmentType Page
+        this.equipmentTypePage();
+
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
@@ -469,6 +472,21 @@ export class BreadCrumbsService {
 
     private testFacilitiesDetailsPageBCItems() {
         let menuItem = { label: 'Test Facilities Details', routerLink: ['/testFacilities'] };
+        return menuItem;
+    }
+
+     // EquipmentType Page Bread Crumbs
+    private equipmentTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypePageBCItems() {
+        let menuItem = { label: 'EquipmentType', routerLink: ['/equipmenttype'] };
         return menuItem;
     }
 

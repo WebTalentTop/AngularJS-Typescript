@@ -22,7 +22,13 @@ export class TestFacilitiesComponent {
     added: any;
     msgs: Message[] = [];
 
-    constructor(private breadCrumbsService: BreadCrumbsService, private testFacilityService: TestFacilityService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private testFacilityService: TestFacilityService, 
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private logger: LoggerService) 
+        {
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import {DropdownModule} from 'primeng/primeng';
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'equipment-type',
@@ -18,15 +19,31 @@ export class EquipmentTypeComponent {
     cols = [];
     gridFilter = {};
     idField:string;
+    added: any;
     linkFieldId:string;
     msgs: Message[] = [];
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private service: EquipmentTypeService,
+        private route: ActivatedRoute, 
         private router:Router) {
+            this.route.queryParams.subscribe(params => {
+
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let equipmentTypeBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EquipmentTypeHomePage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = equipmentTypeBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
 
     }
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
     ngOnInit() {
         let resData:any;
         this.service.postGridData()
