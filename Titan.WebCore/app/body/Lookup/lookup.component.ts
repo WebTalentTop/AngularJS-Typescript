@@ -1,6 +1,7 @@
 import { LookupService } from './../../shared/services/lookup.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/primeng';
 
 @Component({
     selector: 'lookup',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 })
 export class LookupComponent {
     title = "Lookups";
-    private items:MenuItem[];
+    private items :MenuItem[];
     constructor(private service: LookupService) {
 
     }
