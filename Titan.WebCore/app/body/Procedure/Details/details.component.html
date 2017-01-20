@@ -136,7 +136,7 @@
                                             icon="ui-icon-person-add" label="Add New Step" class="blue-grey-btn" id="stepadd" ></button>
                                 </p>
                     </header>
-                    <p-dataTable [value]="selectedSteps" expandableRows="true">
+                    <p-dataTable [value]="selectedSteps" expandableRows="true" [paginator]="true" [rows]="15">
                         <p-column expander="true" styleClass="col-icon" [style]="{'width':'45px'}"></p-column>
                         <p-column field="name" header="Name"></p-column>
                         <p-column field="stepTypeName" header="Step Type"></p-column>

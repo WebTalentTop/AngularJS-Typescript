@@ -1,4 +1,15 @@
-﻿.material-icon
+﻿.ui-g .custom-font .ui-accordion .ui-accordion-header{
+    font-size:2em !important;
+}
+.ui-accordion-header{
+    font-size: 2em !important;
+    background-color:#424242;
+}
+body .ui-accordion .ui-accordion-header{
+    font-size: 2em !important;
+    background-color:#424242;
+}
+.material-icon
 {
     align-content: center;
     width: 100%;
@@ -72,21 +83,16 @@ a{
     color:inherit;
 }
 .colorbox{
-    width:80%;
-    margin-left:10%;
+    width:90%;
+    margin-left:5%;
 }
 .colorbox i {
     font-size:30px !important;
 }
-.color_container .ui-g-3
-{
-    padding:.1em !important;
-}
-.ui-accordion-content {
-    line-height: 1em !important;
-}
 .colorbox-count{
     line-height:1;
     font-weight: normal !important;
-    font-size:18px !important;
+    font-size:15px !important;
+    padding-top:5px;
+    padding-bottom:5px;
 }
