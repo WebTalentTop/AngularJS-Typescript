@@ -136,52 +136,33 @@
                                             icon="ui-icon-person-add" label="Add New Step" class="blue-grey-btn" id="stepadd" ></button>
                                 </p>
                     </header>
-                    <p-dataTable [value]="selectedSteps" expandableRows="true" [paginator]="true" rows="15">
-                            <p-column expander="true" [style]="{'width':'30px'}" styleClass="col-icon"></p-column>
-                            <p-column field="name" header="Name" sortable="true"></p-column>
-                            <p-column field="stepTypeName" header="Step Type" sortable="true"></p-column>
-                            <p-column field="repeatStep" header="Repeat?" sortable="true"></p-column>
-                            <p-column>
-                                <template pTemplate type="header">
-                                    Action
-                                </template>
-                                <template let-step="rowData" pTemplate type="body">
-                                    <button type="button" pButton (click)="onDelete(step)" icon="ui-icon-remove-circle" class="red-btn" label="Delete"></button>
-                                    <button type="button" pButton (click)="onEditStep(step)" icon="ui-icon-edit"  class="blue-grey-btn" label="Edit"></button>
-                                    <button type="button" pButton (click)="onMoveProcedureUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up" class="blue-grey-btn" class="blue-grey-btn"></button>
-                                    <button type="button" pButton (click)="onMoveProcedureDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down" class="blue-grey-btn"></button>
-                                </template>
-                            </p-column>
+                    <p-dataTable [value]="selectedSteps" expandableRows="true">
+                        <p-column expander="true" styleClass="col-icon" [style]="{'width':'45px'}"></p-column>
+                        <p-column field="name" header="Name"></p-column>
+                        <p-column field="stepTypeName" header="Step Type"></p-column>
+                        <!--<p-column field="repeatStep" header="Repeat?"></p-column>-->
+                        <p-column field="repeatStep" header="Repeat?">
+                            <template let-col let-step="rowData" pTemplate="body">
+                                <span>{{(step.repeatStep ? 'Yes' : 'No')}}</span>
+                            </template>
+                        </p-column>
+                        <p-column styleClass="col-button" header="Action">
+                            <template let-step="rowData" pTemplate="body">
+                                <button type="button" pButton (click)="onDelete(step, 2)" icon="ui-icon-close" class="red-btn" label="Delete"></button>
+                                <button type="button" pButton (click)="onEditStep(step)" icon="ui-icon-edit" class="blue-grey-btn" label="Edit"></button>
+                                <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up"  class="blue-grey-btn" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
+                                <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down"  class="blue-grey-btn"  *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
+                            </template>
+                        </p-column>
                         <template let-step pTemplate="rowexpansion">
-                            <p-dataTable [value]="selectedSteps" expandableRows="true">
-                                <p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>
-                                <p-column field="name" header="Name"></p-column>
-                                <p-column field="stepTypeName" header="Step Type"></p-column>
-                                <!--<p-column field="repeatStep" header="Repeat?"></p-column>-->
-                                <p-column field="repeatStep" header="Repeat?">
-                                    <template let-col let-step="rowData" pTemplate="body">
-                                        <span>{{(step.repeatStep ? 'Yes' : 'No')}}</span>
-                                    </template>
-                                </p-column>
-                                <p-column styleClass="col-button" header="Action">
-                                    <template let-step="rowData" pTemplate="body">
-                                        <button type="button" pButton (click)="onDelete(step, 2)" icon="ui-icon-remove-circle" class="red-btn" label="Delete"></button>
-                                        <button type="button" pButton (click)="onEditStep(step)" icon="ui-icon-edit"  class="blue-grey-btn" label="Edit"></button>
-                                        <button type="button" pButton (click)="onMoveStepUp(step)" icon="fa-arrow-up" *ngIf="isUpButtonVisible(step)" title="Move Up"></button>
-                                        <button type="button" pButton (click)="onMoveStepDown(step)" icon="fa-arrow-down" *ngIf="isDownButtonVisible(step)" title="Mode Down"></button>
-                                    </template>
-                                </p-column>
-                                <template let-step pTemplate="rowexpansion">
-                                    <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
-                                        <div class="ui-grid-row" *ngIf="step.repeatStep">
-                                            <div class="ui-grid-col-2">Step Frequency: </div>
-                                            <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
-                                            <div class="ui-grid-col-2">Test % / # of Cycles: </div>
-                                            <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </p-dataTable>
+                            <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                                <div class="ui-grid-row" *ngIf="step.repeatStep">
+                                    <div class="ui-grid-col-2">Step Frequency: </div>
+                                    <div class="ui-grid-col-2">{{step.stepFrequencyName}}</div>
+                                    <div class="ui-grid-col-2">Test % / # of Cycles: </div>
+                                    <div class="ui-grid-col-2">{{step.cycleOrTestPercentage}}</div>
+                                </div>
+                            </div>
                         </template>
                     </p-dataTable>
                 </p-panel>   

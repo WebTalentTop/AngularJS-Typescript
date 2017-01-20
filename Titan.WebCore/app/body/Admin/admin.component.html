@@ -2,7 +2,8 @@
 <div class="ui-g-12">
     <p-breadcrumb [model]="items"></p-breadcrumb>
     <br />
-    <div class="card card-w-title"> <br />
+    <div class="card card-w-title">    
+        <h1>Admin</h1>
         <div class="ui-g">  
             <div class="ui-g-12">       
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
@@ -46,6 +47,7 @@
             </div>
             <div class="ui-g-12">
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <a [routerLink]="['/admin/formBuilders']">
                     <div class="ui-g card colorbox colorbox-4">
                         <div class="ui-g-3">
                             <i class="material-icons">web</i>
@@ -56,6 +58,7 @@
                             <span class="colorbox-name"></span>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                     <div class="ui-g card colorbox colorbox-5">
