@@ -80,6 +80,10 @@ export class TestFacilityService {
     getById(id): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
+            .catch(err => {
+                return Observable.throw({isSuccess: false, result: null, error: err});
+            })
+            .map(res => res);
             ;
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
