@@ -109,7 +109,7 @@ export class TeamInformationComponent {
         //this.spreadInstance = null;
     }
 
-    onAddUserRole() {
+ /*   onAddUserRole() {
 
         if (!this.IsKeepOpen)
             this.displayAssignUserRolesDialog = false;
@@ -172,7 +172,7 @@ export class TeamInformationComponent {
 
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
-    }
+    }*/
     onAddTorqueSheetTemplateCancel() {
         this.closeTemplateWindow();
     }
