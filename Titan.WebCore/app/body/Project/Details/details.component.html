@@ -20,7 +20,32 @@
 
                     <div class="ui-grid-col-4" *ngIf="CodeRef.errors?.minlength"> * </div>
                 </div><br /><br />
+              
 
+                <div class="ui-grid-row">
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-dropdown [options]="markets" (onChange)="onMarketChange($event)" name="categories" id="categories"
+                                     [style]="{'width':'100%'}"></p-dropdown>
+                        <label>Market :</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-dropdown [options]="grades" (onChange)="onGradeChange($event)" name="categories" id="categories"
+                                     [style]="{'width':'100%'}"></p-dropdown>
+                        <label>Grade :</label>
+                    </div>
+                </div><br /><br />
+                <div class="ui-grid-row">
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-dropdown [options]="modelYears" (onChange)="onModelYearChange($event)" name="categories" id="categories"
+                                    [style]="{'width':'100%'}"></p-dropdown>
+                        <label>Model Year :</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-dropdown [options]="modelNames" (onChange)="onModelNameChange($event)" name="categories" id="categories"
+                                     [style]="{'width':'100%'}"></p-dropdown>
+                        <label>Model Name :</label>
+                    </div>
+                </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="ui-g-12 ui-md-6 md-inputfield">
                     <p-calendar [(ngModel)]="ProjectDetails.plannedStartDate" name="plannedStartDate" [showIcon]="true" #PlannedStartDateRef></p-calendar>
@@ -30,6 +55,16 @@
                     <p-calendar [(ngModel)]="ProjectDetails.plannedEndDate" name="PlannedEndDate" [showIcon]="true" #PlannedEndDateRef></p-calendar>
                     <label>Planned End Date :</label>
                   </div>
+                </div><br /><br />
+                <div class="ui-grid-row">
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-calendar [(ngModel)]="ProjectDetails.actualStartDate" name="actualStartDate" [showIcon]="true" #ActualStartDateRef></p-calendar>
+                        <label>Actual Start Date :</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 md-inputfield">
+                        <p-calendar [(ngModel)]="ProjectDetails.actualEndDate" name="ActualEndDate" [showIcon]="true" #ActualEndDateRef></p-calendar>
+                        <label>Actual End Date :</label>
+                    </div>
                 </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="md-inputfield ui-g-12 ui-md-6">

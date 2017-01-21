@@ -298,14 +298,18 @@ export class AddComponent {
 
         };
 
-       this.msgs = [];
-       this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
-        
+      
 
         this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {
 
                 this.router.navigate(['equipment/details/', res.result.id]);
+            }
+            else
+            {
+                this.msgs = [];
+                this.msgs.push({ severity: 'error', summary: res.message, detail: 'Equipment Already exists' });
+
             }
         });
     }

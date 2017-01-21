@@ -24,7 +24,13 @@ export class ModelYearService {
     constructor(private http: Http) {
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
-
+    getAllModelYear(): Observable<any> {
+        return this.http.get(`${ModelYearApiUrl.getAllModelYears}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postGridData(): Observable<any> {
         return this.http.post(`${ModelYearApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);

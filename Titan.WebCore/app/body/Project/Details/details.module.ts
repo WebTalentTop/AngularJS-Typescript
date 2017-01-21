@@ -3,15 +3,20 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { ProjectService} from './../../../shared/services/Containers/ProjectService/project.service';
-
-import { EditorModule, SharedModule, DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+import { MarketService } from '../../../shared/services/market.service'
+import { ModelYearService } from '../../../shared/services/modelYear.service'
+import { ModelNameService } from '../../../shared/services/modelName.service'
+import { GradeService } from '../../../shared/services/grade.service'
+import { ProjectRoleService } from '../../../shared/services/projectRole.service'
+import { UserService } from '../../../shared/services/user.service'
+import { EditorModule, SharedModule, DataTableModule, ButtonModule, InputTextareaModule,  InputTextModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
     imports: [EditorModule, SharedModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule,
         ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
-    providers: [ProjectService],
+    providers: [ProjectService, MarketService, ModelYearService, ModelNameService, GradeService, ProjectRoleService, UserService],
     declarations: [DetailsComponent],
     exports: [DetailsComponent]
 })

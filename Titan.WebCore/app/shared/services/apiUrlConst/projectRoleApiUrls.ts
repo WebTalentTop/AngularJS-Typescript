@@ -6,4 +6,6 @@ export class ProjectRoleApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'projectRole/post';
     public static postUpdateUrl: string = titanApiUrl + 'projectRole/put';
     public static getByIdUrl: string = titanApiUrl + 'projectRole/get';
+    public static getAllProjectRoles: string = titanApiUrl + 'projectRole';
+    
 }

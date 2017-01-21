@@ -24,7 +24,13 @@ export class MarketService {
     constructor(private http: Http) {
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
-
+    getAllMarkets(): Observable<any> {
+        return this.http.get(`${MarketApiUrl.getAllMarkets}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postGridData(): Observable<any> {
         return this.http.post(`${MarketApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);

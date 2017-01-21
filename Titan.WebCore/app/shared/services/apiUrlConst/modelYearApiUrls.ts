@@ -6,4 +6,5 @@ export class ModelYearApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'modelYear/post';
     public static postUpdateUrl: string = titanApiUrl + 'modelYear/put';
     public static getByIdUrl: string = titanApiUrl + 'modelYear/get';
+    public static getAllModelYears: string = titanApiUrl + 'modelYear/GetAllModelYears';
 }

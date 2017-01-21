@@ -9,4 +9,5 @@ export class GradeApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'grade/post';
     public static postUpdateUrl: string = titanApiUrl + 'grade/put';
     public static getByIdUrl: string = titanApiUrl + 'grade/get';
+    public static getAllGrades: string = titanApiUrl + 'grade/GetAllGrades';
 }
