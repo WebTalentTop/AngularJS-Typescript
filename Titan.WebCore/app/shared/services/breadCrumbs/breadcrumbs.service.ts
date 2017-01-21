@@ -37,13 +37,6 @@ export class BreadCrumbsService {
         //Admin Test Facilities Details
         this.testFacilitiesDetailsPage();
 
-        //Admin EquipmentType Page
-        this.equipmentTypePage();
-        //Admin EquipmentType Add
-        this.equipmentTypeAddPage();
-        //Admin EquipmentType Details
-        this.equipmentTypeDetailsPage();
-
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
