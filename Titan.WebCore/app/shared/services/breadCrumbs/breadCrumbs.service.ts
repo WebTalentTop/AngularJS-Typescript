@@ -27,18 +27,35 @@ export class BreadCrumbsService {
         //Admin Form Builder Details
         this.adminFormBuilderDetailsFormPage();
 
-        //Admin Calendar Page
+        //Calendar Page
         this.calendarPage();
 
-        //Admin TestFacilities Page
+        //TestFacilities Page
         this.testFacilitiesPage();
-        //Admin Test Facilities Add
+        //Test Facilities Add
         this.testFacilitiesAddPage();
-        //Admin Test Facilities Details
+        //Test Facilities Details
         this.testFacilitiesDetailsPage();
+
+        //Equipment Page
+        this.equipmentPage();
+        //Equipment Add
+        this.equipmentAddPage();
+        //Equipment Details
+        this.equipmentDetailsPage();
+
+        //EquipmentType Page
+        this.equipmentTypePage();
+        //EquipmentType Add
+        this.equipmentTypeAddPage();
+        //EquipmentType Details
+        this.equipmentTypeDetailsPage();
 
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
+
+        // // Lookups Page
+        // this.lookupsPage();
 
         // Admin Shift Page
         this.adminShiftPage();
@@ -355,6 +372,25 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
+
+    // // Lookups Page Bread Crumbs
+    // private lookupsPage() {
+    //     let menuItems = [];
+    //     menuItems.push(this.homeBreadCrumbItem());
+    //     // menuItems.push(this.adminHomePageBCItems());
+
+    //     let bcInfoItems: IBreadCrumbsInfo;
+    //     bcInfoItems = { pageName: 'lookupsHomePage', items: menuItems };
+
+    //     this.addToBreadCrumbs(bcInfoItems);
+    // }
+
+    // private lookupsPageBCItems() {
+    //     let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
+
+    //     return menuItem;
+    // }
+
     // Admin Form Builder Home Page
     private adminFormBuilderPage() {
         let menuItems = [];
@@ -472,6 +508,98 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+    // EquipmentType Page Bread Crumbs
+    private equipmentTypePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypePageBCItems() {
+        let menuItem = { label: 'Equipment Type', routerLink: ['/equipmenttype'] };
+        return menuItem;
+    }
+
+    private equipmentTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypeAddPageBCItems() {
+        let menuItem = { label: 'EquipmentType Add', routerLink: ['/equipmenttype'] };
+        return menuItem;
+    }
+
+    private equipmentTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentTypeDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentTypeDetailsPageBCItems() {
+        let menuItem = { label: 'EquipmentType Details', routerLink: ['/equipmenttype'] };
+        return menuItem;
+    }
+
+
+    // Equipment Page Bread Crumbs
+    private equipmentPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentPageBCItems() {
+        let menuItem = { label: 'Equipment', routerLink: ['/equipment'] };
+        return menuItem;
+    }
+
+    private equipmentAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentAddPageBCItems() {
+        let menuItem = { label: 'Equipment Add', routerLink: ['/equipment'] };
+        return menuItem;
+    }
+
+    private equipmentDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.equipmentPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EquipmentDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private equipmentDetailsPageBCItems() {
+        let menuItem = { label: 'Equipment Details', routerLink: ['/equipment'] };
+        return menuItem;
+    }
+
+
     // Admin Vehicle Home Page Bread Crumbs
     private adminVehicleHomePage() {
         let menuItems = [];
@@ -490,7 +618,8 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
-    
+
+
     // Admin Shift Bread Crumbs
     private adminShiftPage() {
         let menuItems = [];
@@ -512,7 +641,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminVehicleHomePageBCItems());
         menuItems.push(this.adminShiftPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -531,7 +660,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        // menuItems.push(this.adminVehicleHomePageBCItems());
         menuItems.push(this.adminShiftPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -784,7 +913,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-        private adminMarketAddPage() {
+    private adminMarketAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
