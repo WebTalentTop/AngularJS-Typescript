@@ -1,29 +1,49 @@
 import { EquipmentService } from '../../shared/services/Containers/EquipmentService/equipment.service';
 import { LoggerService } from './../../shared/services/logger/logger.service';
-import { LazyLoadEvent, Message, MessagesModule,MenuItem } from 'primeng/primeng';
+import { LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params} from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router'
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 @Component({
     selector: 'equipment',
-      templateUrl: 'app/body/Equipment/equipment.component.html'
+    templateUrl: 'app/body/Equipment/equipment.component.html'
 })
 export class EquipmentComponent {
     // title = "Equipment";
     gridData = [];
-    confInfo:any = {};
+    confInfo: any = {};
     cols = [];
     gridFilter = {};
-    idField:string;
-    linkFieldId:string;
+    added: any;
+    idField: string;
+    linkFieldId: string;
     msgs: Message[] = [];
 
-    constructor(private service: EquipmentService, private router:Router) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: EquipmentService,
+        private route: ActivatedRoute,
+        private router: Router) {
+        this.route.queryParams.subscribe(params => {
 
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let equipmentBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EquipmentHomePage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = equipmentBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
     }
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     ngOnInit() {
-        let resData:any;
+        let resData: any;
         this.service.postGridData()
             .subscribe(res => {
                 resData = res;
@@ -34,8 +54,8 @@ export class EquipmentComponent {
             });
     }
 
-      navigateDetails(id:string){
+    navigateDetails(id: string) {
         this.router.navigate(['equipment/details', id]);
     }
-      
+
 }
