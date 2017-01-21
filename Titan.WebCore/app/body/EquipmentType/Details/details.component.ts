@@ -28,6 +28,8 @@ import {EntityIdentifierService} from "../../../shared/services/entityIdentifier
 import {FormSchemaCategoryService} from "../../../shared/services/formSchemaCategory.service";
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
+import { Observable } from 'rxjs/Observable';
+
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 declare var useGentleSelect: false;
@@ -37,7 +39,9 @@ declare var useGentleSelect: false;
     templateUrl: 'app/body/equipmenttype/Details/details.component.html'
 })
 export class DetailsComponent implements OnInit {
+    //region Class Variables
     entityIdentifierName: string = "Equipment";
+    entityIdentifierModel:any = {};
     //useGentleSelect:boolean = false;
     displayDialog: boolean;
     EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '','', '', '');
@@ -47,6 +51,9 @@ export class DetailsComponent implements OnInit {
     IsSubType: boolean;
     EquipmentsubTypes: IEquipmentSubtype[] = [];
     CalibrationForms: ICalibrationForm[] = [];
+
+    formSchemaGridMF:any;
+
     username: string;
     details: string;
     id: string;
@@ -79,6 +86,8 @@ export class DetailsComponent implements OnInit {
     };
 
     uploadedFiles: any[] = [];
+
+        //endregion
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
@@ -181,34 +190,49 @@ export class DetailsComponent implements OnInit {
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
     ngOnInit() {
+        let entityIdentifierServiceCall = this.entityIdentifierService.getByNameForForms(this.entityIdentifierName);
+        let dataServiceCall = this.dataService.getById(this.id);
 
-        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
-            .subscribe(res => {
-                this.ls.logConsole("EntityIdentifier Data By Name ----------", res);
+        Observable.forkJoin([entityIdentifierServiceCall, dataServiceCall])
+            .subscribe(results => {
+                let entityIdentifierResult = results[0];
+                let dataServiceGetByIdResult = results[1];
 
-            })
+                this.ls.logConsole("EntityIdentifier Data By Name ----------", entityIdentifierResult);
+                this.entityIdentifierModelSet(entityIdentifierResult.result);
 
-        this.dataService.getById(this.id)
-            .subscribe(res => {
-                //this.formConfiguration = res.formConfiguration;
-                //this.formObject = res.formObject;
-                this.model = res;
-                this.model.id = res.id;
-                this.model.parentId = res.parentId;
-                this.model.name = res.name;
-                this.model.description = res.description;
-                this.model.frequency = res.frequency;
-                this.frequencyInit(this.model.frequency);
-                // this.onCronInit();
-                this.dataService.getSubTypesById(this.model.id)
-                    .subscribe(result => {
-                        this.EquipmentsubTypes = result.$values;
-                    });
+                this.dataServiceGetById(dataServiceGetByIdResult);
             });
-
         //   this.EquipmentSubType = { name:'', description: '', calibrationform: '', frequency: ''}
     }
 
+    entityIdentifierModelSet(model) {
+        this.entityIdentifierModel = model;
+        this.getEquiptmentForms(this.entityIdentifierModel.id);
+    }
+
+    dataServiceGetById(res) {
+        this.model = res;
+        this.model.id = res.id;
+        this.model.parentId = res.parentId;
+        this.model.name = res.name;
+        this.model.description = res.description;
+        this.model.frequency = res.frequency;
+        this.frequencyInit(this.model.frequency);
+        // this.onCronInit();
+        this.dataService.getSubTypesById(this.model.id)
+            .subscribe(result => {
+                this.EquipmentsubTypes = result.$values;
+            });
+    }
+
+    getEquiptmentForms(entityIdentifierId) {
+        this.formSchemaCategoryService
+            .getByEntityIdentifierId(entityIdentifierId)
+            .subscribe(res => {
+                this.ls.logConsole("FormSchemaService for forms -----", res);
+            })
+    }
 
     onEdit() {
 
