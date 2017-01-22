@@ -1,63 +1,32 @@
 <div class="ui-g-12">
-<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+    <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Build Level </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Build Level </h2>
+        <p-panel header="Basic Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Build Level Name * :
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  #buildLevelDetailsNameRef="ngModel" [(ngModel)]="name"
+                                       minlength="3"  required style="width:100%">
+                                <label>Build Level Name <span >*</span></label>
                     </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Build Level Name" minlength="3" #buildLevelDetailsNameRef="ngModel"
-                            class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="buildLevelDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
-                        </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="buildLevelDetailsNameRef.errors?.minlength">
-                            MinLength-3
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Build Level Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #buildLevelDetailsDescriptionRef="ngModel"
-                            placeholder="Build Level Description" row="50" maxlength="250" class="form-control" required />
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="buildLevelDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/buildLevel">  </button>
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="description" id="description"  [(ngModel)]="description" #buildLevelDetailsDescriptionRef="ngModel"
+                                       minlength="3"  required style="width:100%">
+                                <label>Build Level Description <span >*</span></label>
                     </div>
                 </div>
             </div>
             <br />
+            <footer>
+               <button id="cancel" pButton type="button" label="Cancel" icon="ui-icon-close" routerLink="/admin/vehicle/buildLevel" class="blue-grey-btn">  </button>
+               <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Add" class="green-btn">  </button>
+
+            </footer>
             <br />
+
         </p-panel>
     </form>
+    </div>
 </div>
