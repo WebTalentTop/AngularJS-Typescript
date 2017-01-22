@@ -51,6 +51,13 @@ export class BreadCrumbsService {
         //EquipmentType Details
         this.equipmentTypeDetailsPage();
 
+        //TestTemplate Page
+        this.testTemplatePage();
+        //TestTemplate Add
+        this.testTemplateAddPage();
+        //TestTemplate Details
+        this.testTemplateDetailsPage();
+
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
@@ -596,6 +603,52 @@ export class BreadCrumbsService {
 
     private equipmentDetailsPageBCItems() {
         let menuItem = { label: 'Equipment Details', routerLink: ['/equipment'] };
+        return menuItem;
+    }
+
+
+    // TestTemplate Page Bread Crumbs
+    private testTemplatePage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestTemplateHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private testTemplatePageBCItems() {
+        let menuItem = { label: 'TestTemplate', routerLink: ['/testTemplate'] };
+        return menuItem;
+    }
+
+    private testTemplateAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.testTemplatePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestTemplateAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private testTemplateAddPageBCItems() {
+        let menuItem = { label: 'TestTemplate Add', routerLink: ['/testTemplate'] };
+        return menuItem;
+    }
+
+    private testTemplateDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.testTemplatePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestTemplateDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private testTemplateDetailsPageBCItems() {
+        let menuItem = { label: 'TestTemplate Details', routerLink: ['/testTemplate'] };
         return menuItem;
     }
 
