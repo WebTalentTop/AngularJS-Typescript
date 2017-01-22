@@ -11,5 +11,8 @@ export interface ITestFacilityUserScheduleDbViewModel {
     entityIdentifierId:string;
     defaultStartMinutesPastMidnight : number;
     defaultEndMinutesPastMidnight: number;
+    eventStatusId:string;
     schedules:ITitanUserScheduleViewModel[];
+    isTimeBlockScheduled : boolean;
+
 }

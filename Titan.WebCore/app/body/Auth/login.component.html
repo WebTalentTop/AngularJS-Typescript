@@ -1,13 +1,29 @@
-<h1>You need select a default tenant that you are allowed from!</h1>
-<div class="ui-g dashboard">
-    <div class="ui-g-12 ui-md-6 ui-lg-3" *ngFor="let item of tenantListItems; let i = index">
-        <div class="ui-g card colorbox colorbox-{{i+1}}" (click)="setDefaultTenantId(item)">
-            <div class="ui-g-4">
-                <i class="material-icons">check_circle</i>
-            </div>
-            <div class="ui-g-8">
-                <span class="colorbox-name">{{item.label}}</span>
+<div class="exception-body error-page" *ngIf="tenantListItems.length ===0">
+    <div class="exception-type">
+          <img src="../../resources/layout/images/error.svg">
+    </div>
+
+    <div class="card exception-panel">
+        <i class="material-icons">&#xE000;</i>
+        <h1>Access Denied</h1>
+        <div class="exception-detail">Please contact TITAN Administrator.</div>
+
+    </div>
+</div>
+
+<div *ngIf="tenantListItems.length > 0">
+    <h1>You need select a default tenant that you are allowed from!</h1>
+    <div class="ui-g dashboard">
+        <div class="ui-g-12 ui-md-6 ui-lg-3" *ngFor="let item of tenantListItems; let i = index">
+            <div class="ui-g card colorbox colorbox-{{i+1}}" (click)="setDefaultTenantId(item)">
+                <div class="ui-g-4">
+                    <i class="material-icons">check_circle</i>
+                </div>
+                <div class="ui-g-8">
+                    <span class="colorbox-name">{{item.label}}</span>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
