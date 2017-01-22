@@ -48,19 +48,21 @@ export class FormInstanceComponent {
     }
 
     ngOnInit() {
-        //this.ls.logConsole("Input selectedInputList ---------", this.selectedInputList);
-        //this.ls.logConsole("Input entityIdentifierId ----------", this.entityIdentifierId);
-        //this.ls.logConsole("Input EntityId --------------------", this.entityId);
-        //this.ls.logConsole("Input formName --------------------", this.formName);
-        //this.ls.logConsole("Input formSchemaVersionId: --------", this.formSchemaVersionId);
+        /*this.ls.logConsole("Input selectedInputList ---------", this.selectedInputList);
+        this.ls.logConsole("Input entityIdentifierId ----------", this.entityIdentifierId);
+        this.ls.logConsole("Input EntityId --------------------", this.entityId);
+        this.ls.logConsole("Input formName --------------------", this.formName);
+        this.ls.logConsole("Input formSchemaVersionId: --------", this.formSchemaVersionId);
 
-        //this.ls.logConsole("formInstanceUpdateView----", this.formInstanceUpdateView);
-        //this.ls.logConsole("FormInstanceUpdateData----", this.formInstanceUpdateData);
-        let formInstanceFieldDatas = this.formInstanceUpdateData.fieldData.$values;
+        this.ls.logConsole("formInstanceUpdateView----", this.formInstanceUpdateView);
+        this.ls.logConsole("FormInstanceUpdateData----", this.formInstanceUpdateData);*/
+        //let formInstanceFieldDatas = this.formInstanceUpdateData.fieldData.$values;
         //this.ls.logConsole("FormInstanceFieldDatas ---------", formInstanceFieldDatas);
+        let formInstanceFieldDatas: any;
         if (this.formInstanceUpdateView) {
             console.log("FormInstanceUpdateData -------", this.formInstanceUpdateData.fieldData.$values);
             console.log("FormInstance selectedInputList ----", this.selectedInputList);
+            formInstanceFieldDatas = this.formInstanceUpdateData.fieldData.$values;
             //this.selectedInputList = this.formInstanceUpdateData.fieldData.$values;
         }
         if (this.selectedInputList.length > 0) {
@@ -100,7 +102,7 @@ export class FormInstanceComponent {
                     newFormFieldItem.selectBoxValue = [];
                     newFormFieldItem.data = [];
                     newFormFieldItem.data = values;
-                    newFormFieldItem.formSchemaFieldDataTypeData = values.map(x => { return {label:x, value: x}});
+                    newFormFieldItem.formSchemaFieldDataTypeData = values.map(x => { return {label:x.name, value: x.name}});
                 }
 
                 this.formFieldDataItemList.push(newFormFieldItem);

@@ -25,7 +25,7 @@ export class FormPreviewComponent {
 
     constructor(private formFieldDataTypeService: FormSchemaFieldDataTypeService,
                 private ls: LoggerService) {
-
+        this.ls.setShow(true);
     }
 
     ngOnInit() {
@@ -39,6 +39,14 @@ export class FormPreviewComponent {
             let item:IFormSchemaField = x;
             item.data = x.data.$values;
             item.formSchemaFieldDataTypeData = item.data.map(t => t.value);
+
+            let itemInfo:any = x;
+
+            if (itemInfo.fieldDataType.name === "SelectBox") {
+                item.displaySelectBoxData = item.formSchemaFieldDataTypeData.map(fieldItem => {
+                    return {label: fieldItem, value: fieldItem};
+                })
+            }
 
             this.ls.logConsole("Field Item info ----", item);
         })
