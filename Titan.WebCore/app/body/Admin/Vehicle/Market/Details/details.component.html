@@ -1,72 +1,58 @@
 ﻿<div class="ui-g-12">
-    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1>Edit Market </h1>
-
+        <h2>Edit Market </h2>
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-            <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-            <br/>
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <p-panel header="Details">
+                <div class="body">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Market Name * :
+                       <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  [(ngModel)]="MarketDetails.name" #marketDetailsNameRef="ngModel"
+                                       minlength="3"  required style="width:100%">
+                                <label>Market Name<span >*</span></label>
                         </div>
-                        <div class="ui-grid-col-4">
-
-                            <input type="text" pInputText name="name" [(ngModel)]="MarketDetails.name" #marketDetailsNameRef="ngModel"
-                                placeholder="Market Name" minlength="3" class="form-control" required row="20" />
-                        </div>
-                        <div class="ui-grid-col-4">
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Market Name
-                            </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.minlength">
-                                MinLength-3
-                            </div>
-
-                        </div>
-                    </div>
-
+                    </div><br />
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                           Market Description * :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control" required name="description" row="50" maxlength="250" #marketDetailsDescriptionRef="ngModel"
-                                [(ngModel)]="MarketDetails.description"></textarea>
-                        </div>
-                        <div class="ui-grid-col-4">
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter Market Description
+                            <div class="ui-g-2">
+                                IsActive :
                             </div>
-                         <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsDescriptionRef.errors?.maxlength">
-                                MaxLength-250
+                            <div class="ui-g-6">
+                                <p-toggleButton [(ngModel)]="MarketDetails.isDeleted" name="isDeleted" #marketDetailsisDeletedRef="ngModel"
+                                    [style]="{'width':'50px'}" class="blue-grey-btn"></p-toggleButton>
                             </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            IsActive :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="MarketDetails.isDeleted" name="isDeleted" #marketDetailsisDeletedRef="ngModel"
-                                [style]="{'width':'50px'}"></p-toggleButton>
-                        </div>
-                    </div>
+                    </div><br />
+                    <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Market Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #marketDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="MarketDetails.description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
                         </div>
-                        <div class="ui-grid-col">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>
-                         <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/market" [style]="{'width':'20px'}">  </button>
-                        </div>
-                    </div>
-                </div>
+                        
+                    </div>    
+                    <footer>
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/market" class="blue-grey-btn" icon="ui-icon-close">  </button>
+                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" label="Save" class="green-btn">  </button>
+                    </footer>
+                    <br />
             </p-panel>
         </form>
     </div>
