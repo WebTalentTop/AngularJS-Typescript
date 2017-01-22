@@ -1,10 +1,12 @@
 
-<div class="ui-grid-row">
-    <div class="ui-g-6"><h1 style="line-height:5px;font-weight: normal;">Build Level Milestone Map</h1></div>
-    <div class="ui-g-6" style="text-align: right">
-    <button pButton type="button" icon="ui-icon-add" label="Select Build Levels" (click)="displayBuildlevel=true"></button>
-    </div>
-</div>
+<p-panel>
+<header class="with-controls">
+    <p class="ui-panel-title">Build Level Milestone Map</p>
+    <p class="controls">
+    <button pButton type="button" icon="ui-icon-search" label="Select Build Levels" class="blue-grey-btn" (click)="displayBuildlevel=true"></button>
+    </p>
+</header>
+
 
 <p-dialog header="Select Build Levels" [(visible)]="displayBuildlevel" modal="modal" width="900" responsive="true">
     <div class="ui-g">
