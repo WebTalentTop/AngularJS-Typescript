@@ -12,6 +12,7 @@ export class TorqueBookComponent {
     public displayAddTorqueBook:boolean;
     public displayAddTorqueSheet:boolean;
     public BuildLevels:any;
+    public justBuildLevels:any;
     public buildLevelIdForAddingTorqueBook: string;
     public buildLevelElmForAddingTorqueBook: any;
     public torqueBookIdForAddingTorqueSheet: string;
@@ -41,10 +42,21 @@ export class TorqueBookComponent {
         this.route.params.forEach((params: Params) => {
             this.projectId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
+            this.getBuildLevels();
+        });
+    }
 
-             this.service.getBuildLevels(this.projectId).subscribe(a => {
-                 this.BuildLevels = a.$values;
-            });
+    getBuildLevels() {
+        this.service.getBuildLevels(this.projectId).subscribe(a => {
+            if(a.isSuccess && a.result != undefined){
+                this.BuildLevels = a.result.buildLevels;
+                this.justBuildLevels = new Array();
+                this.justBuildLevels.push({label:"Select Build Level", value:null});
+                for(var bl of a.result.justBuildLevels)
+                {
+                    this.justBuildLevels.push({label:bl.name, value:bl.id});
+                }                //this.JustBuildLevels = a.result.justBuildLevels;
+            }
         });
     }
 
@@ -83,10 +95,10 @@ export class TorqueBookComponent {
     }
 
     onAdd(rowType, id, event){
-        if(rowType == "BuildLevel")
+       /* if(rowType == "BuildLevel")
             this.onAddTorqueBook(id, event);
         else if(rowType == "TorqueBook")
-            this.onAddTorqueSheet(id, event);
+            this.onAddTorqueSheet(id, event);*/
     }
 
     onAddTemplate(data, event, displayTorqueSheetTemplateSelection) {
@@ -118,6 +130,10 @@ export class TorqueBookComponent {
 
     onEditTorqueSheet(data, event) {
         this.router.navigate(["/torquesheet/details/", data.id, data.torqueBookId, "Project", this.projectId, "LatestVersion"]);
+    }
+
+    onNewEditTorqueSheet(data, isLatestVersion:boolean) {
+        this.router.navigate(["/torquesheet/details/", isLatestVersion ? data.lastApprovedTorqueSheetId : data.currentDraftVersionTorqueSheetId, data.torqueBookId, "Project", this.projectId, "CurrentVersion"]);
     }
 
     onAddTorqueSheetTemplateConfirmation() {
@@ -158,14 +174,29 @@ export class TorqueBookComponent {
         }, 200);
     }
 
-    onAddTorqueBook(buildLevelId, event){
+    /*onAddTorqueBook(buildLevelId, event){
         this.buildLevelIdForAddingTorqueBook = buildLevelId;
         this.buildLevelElmForAddingTorqueBook = event.srcElement;
         this.displayAddTorqueBook = true;
+    }*/
+
+    onAddTorqueBook(){
+        //this.buildLevelIdForAddingTorqueBook = buildLevelId;
+        //this.buildLevelElmForAddingTorqueBook = event.srcElement;
+        this.displayAddTorqueBook = true;
     }
 
-    onAddTorqueSheet(torqueBookId, event){
+    /*onAddTorqueSheet(torqueBookId, event){
         this.torqueBookIdForAddingTorqueSheet = torqueBookId;
+        this.router.navigate(["/torquesheet/add/", this.torqueBookIdForAddingTorqueSheet, "Project", this.projectId]);
+
+        //this.torqueBookElmForAddingTorqueSheet = event.srcElement;
+        //this.getTorqueBooksTorqueSheetNames(torqueBookId);
+        //this.displayAddTorqueSheet = true;
+    }*/
+
+    onAddTorqueSheet(){
+        //this.torqueBookIdForAddingTorqueSheet = torqueBookId;
         this.router.navigate(["/torquesheet/add/", this.torqueBookIdForAddingTorqueSheet, "Project", this.projectId]);
 
         //this.torqueBookElmForAddingTorqueSheet = event.srcElement;
@@ -199,7 +230,8 @@ export class TorqueBookComponent {
                 name: this.newTorqueBookName}; 
             var tempId = this.buildLevelIdForAddingTorqueBook;
             this.service.postTorqueBook(postData).subscribe(res => {
-                var container = $(this.buildLevelElmForAddingTorqueBook).closest("div.ui-treetable-row");
+                this.getBuildLevels();
+                /*var container = $(this.buildLevelElmForAddingTorqueBook).closest("div.ui-treetable-row");
                 var expandImg = $("span.ui-treetable-toggler.fa-caret-right", container);
                 if(expandImg != null && expandImg.length > 0)
                     expandImg.trigger("click"); 
@@ -211,7 +243,7 @@ export class TorqueBookComponent {
                             }
                         }
                     });
-                }
+                }*/
                 this.onAddTorqueBookCancel();
             });
         //}
@@ -224,7 +256,7 @@ export class TorqueBookComponent {
             var tempId = this.torqueBookIdForAddingTorqueSheet;
             var container = $(this.torqueBookElmForAddingTorqueSheet).closest("div.ui-treetable-row");
             
-            this.torqueSheetService.postTorqueSheet(postData).subscribe(res => {
+            this.torqueSheetService.postTorqueSheet(postData, false).subscribe(res => {
                 var expandImg = $("span.ui-treetable-toggler.fa-caret-right", container);
                 if(expandImg != null && expandImg.length > 0)
                     expandImg.trigger("click");

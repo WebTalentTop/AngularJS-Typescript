@@ -55,7 +55,7 @@ export class DetailsComponent {
             //this.torqueSheetDetails.torqueBookId = params['torqueBookId'];
             //this.getTorqueBooksTorqueSheetNames(params['torqueBookId']);
             this.landingFrom = params['landingFrom'];
-            this.identifierId = params['identifierId'];
+            this.identifierId = params['identifierId']; 
         });
     }
 
