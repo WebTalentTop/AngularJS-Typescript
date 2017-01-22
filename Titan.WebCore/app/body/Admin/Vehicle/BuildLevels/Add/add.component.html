@@ -11,12 +11,31 @@
                                        minlength="3"  required style="width:100%">
                                 <label>Build Level Name <span >*</span></label>
                     </div>
-                    <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="description" id="description"  [(ngModel)]="description" #buildLevelDetailsDescriptionRef="ngModel"
-                                       minlength="3"  required style="width:100%">
-                                <label>Build Level Description <span >*</span></label>
-                    </div>
-                </div>
+                </div><br />
+                <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Build Level Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #buildLevelDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
+
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
+                        </div>
             </div>
             <br />
             <footer>

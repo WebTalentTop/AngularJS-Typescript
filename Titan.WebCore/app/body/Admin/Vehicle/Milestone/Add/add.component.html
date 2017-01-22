@@ -1,10 +1,10 @@
 <div class="ui-g-12">
-
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+   <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Milestone </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Milestone </h2>
+        <p-panel  header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
                         Milestone Name * :
