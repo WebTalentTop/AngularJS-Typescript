@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { TitanUserProfileApiUrls} from "./apiUrlConst/titanUserProfile.ApiUrls";
 import {IUserProfile} from "./definitions/IUserProfile";
+import {UserProfileService} from "./userProfile.service";
 
 @Injectable()
 export class TitanUserProfileService {
@@ -16,13 +17,10 @@ export class TitanUserProfileService {
 
     currentUser:IUserProfile;
 
-    constructor(private http: Http) {
-
-    }
-
-    getCurrentUserProfile():Observable<any> {
-        return this.http.get(`${TitanUserProfileApiUrls.getCurrentUserProfileUrl}`, {headers:this.headers})
-            .map(this.getJson);
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
 
     getById(): Observable<any> {

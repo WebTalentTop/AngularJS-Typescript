@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {IUserProfile} from "./definitions/IUserProfile";
 
 export class BaseService {
     headers: Headers = new Headers({
@@ -19,6 +20,7 @@ export class BaseService {
     };
 
     constructor() {}
+    currentUser: IUserProfile;
 
     public Headers():Headers{
         return this.headers;

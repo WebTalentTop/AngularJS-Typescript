@@ -6,6 +6,8 @@ import { MilestoneApiUrl} from '../../apiUrlConst/MileStone/mileStoneApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {IUserProfile} from "../../definitions/IUserProfile";
+import {UserProfileService} from "../../userProfile.service";
 
 @Injectable()
 export class MilestoneService {
@@ -21,8 +23,12 @@ export class MilestoneService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    currentUser: IUserProfile;
+
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
 
     postGridData(): Observable<any> {
