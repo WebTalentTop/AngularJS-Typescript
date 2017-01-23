@@ -27,6 +27,10 @@ export class ProjectService extends BaseService{
         this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
     }
 
+    postAddMarket(projectId, marketId): Observable<any> {
+        return this.http.post(`${ProjectApiUrl.postAddMarketMapUrl}/${projectId}/${marketId}`, null, { headers: this.headers })
+            .map(this.getJson);
+    }
     getProjectDetails(id): Observable<any> {
         return this.http.get(`${ProjectApiUrl.getProjectDetailsUrl}` + id)
             .map(super.getJson);

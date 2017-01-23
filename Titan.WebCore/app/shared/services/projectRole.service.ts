@@ -31,6 +31,10 @@ export class ProjectRoleService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    postAddUserNames(filterBody, projectId, projectRoleId): Observable<any> {
+        return this.http.post(`${ProjectRoleApiUrl.PostAddUserRolesUrl}/${projectId}/${projectRoleId}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
+    }
     postGridData(): Observable<any> {
         return this.http.post(`${ProjectRoleApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);
@@ -65,6 +69,20 @@ export class ProjectRoleService {
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
             .map(this.getJson);
+    }
+    getByIdusing(id): Observable<any> {
+        return this.http.get(`${ProjectRoleApiUrl.getRolesByProjectIdUrl}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
     }
 
     getById(id): Observable<any> {
