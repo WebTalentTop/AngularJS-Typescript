@@ -11,6 +11,7 @@ export interface IFormSchemaField{
     maxLength:number;
     data?:any[];
     order?:number;
+    fieldDataType?:any;
     checkBoxData?:any;
     radioBoxData?:any;
     selectBoxData?:any;

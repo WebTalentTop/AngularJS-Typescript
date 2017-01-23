@@ -44,6 +44,7 @@ import {
     ITestFacilitySplitEventViewModel,
     ITestFacilityScheduleViewModel
 } from "../../shared/services/definitions/Scheduler/ITestFacilitySplitEventDbViewModel";
+import {UserProfileService} from "../../shared/services/userProfile.service";
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 
@@ -169,8 +170,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private testRequestService: TestRequestService,
                 private titanService: TitanService,
                 private calendarService: CalendarService,
-                private titanUserProfileService: TitanUserProfileService) {
-        this.titanUserProfileService.getCurrentUserProfile()
+                private userProfileService: UserProfileService) {
+        this.userProfileService.getCurrentUserProfile()
             .subscribe(res => {
                 this.currentUser = res.result;
             })
