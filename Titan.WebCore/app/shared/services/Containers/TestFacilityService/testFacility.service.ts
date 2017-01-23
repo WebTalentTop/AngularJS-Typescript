@@ -6,6 +6,8 @@ import { TestFacilityApiUrl } from '../../apiUrlConst/TestFacility/testFacilityA
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {UserProfileService} from "../../userProfile.service";
+import {IUserProfile} from "../../definitions/IUserProfile";
 
 @Injectable()
 export class TestFacilityService {
@@ -22,13 +24,14 @@ export class TestFacilityService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
-        /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
-        this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
-        this.headers.append('Content-Type', 'application/json');*/
-        this.headers.append('Accept', 'application/json');
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    currentUser: IUserProfile;
+
+    constructor(private http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
+
     postReserve(viewmodel): Observable<any> {
         return this.http.post(`${TestFacilityApiUrl.postReserveUrl}`, viewmodel, { headers: this.headers })
             .map(this.getJson);
@@ -80,6 +83,10 @@ export class TestFacilityService {
     getById(id): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)
+            .catch(err => {
+                return Observable.throw({isSuccess: false, result: null, error: err});
+            })
+            .map(res => res);
             ;
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);

@@ -7,15 +7,42 @@
                 <p-panel header="Torque Sheet">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" *ngIf="torqueSheetDetails">
                         <div class="ui-grid-row ">
-                          <div class="ui-g-12 ui-md-6">
-                              <p style="color:#777">Torque Sheet Name *:</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'100%'}"
-                                  name="newTorqueSheetNameId" required #newTorqueSheetNameRef required >
-                              </p-dropdown>
-                          </div>
-                          <div class="ui-g-12 ui-md-6" style="text-align:right"><br /><br />
-                            <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
-                          </div>
+                            <div class="ui-grid-col-4"><b for="name">Build Level*:</b></div>
+                            <div class="ui-grid-col-8">
+                                <p-dropdown [options]="justBuildLevels" [(ngModel)]="buildLevelIdForAddingTorqueBook"
+                                            name="buildLevels" required #justBuildLevelsRef (onChange)="onBuildLevelChange()"
+                                            [style]="{'width':'100%','color':'#777'}">
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="justBuildLevelsRef.errors?.required">
+                                Build Level field is required
+                            </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                            <div class="ui-grid-col-4"><b for="name">Torque Book*:</b></div>
+                            <div class="ui-grid-col-8">
+                                <p-dropdown [options]="torqueBooks" [(ngModel)]="torqueSheetDetails.torqueBookId"
+                                            name="torqueBooks" required #torqueBooksRef (onChange)="onTorqueBookChange()"
+                                            [style]="{'width':'100%','color':'#777'}">
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-grid-col-4" *ngIf="torqueBooksRef.errors?.required">
+                                Torque Book field is required
+                            </div>
+                        </div>
+                        <div class="ui-grid-row ">
+                              <div class="ui-g-12 ui-md-6">
+                                  <p style="color:#777">Torque Sheet Name *:</p>
+                                  <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" [style]="{'width':'100%'}"
+                                      name="newTorqueSheetNameId" required #newTorqueSheetNameRef required >
+                                  </p-dropdown>
+                                  <div class="ui-grid-col-4" *ngIf="newTorqueSheetNameRef.errors?.required">
+                                      Torque Sheet Name field is required
+                                  </div>
+                              </div>
+                              <div class="ui-g-12 ui-md-4" style="text-align:right"><br /><br />
+                                <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
+                              </div>
                         </div>
                         <div class="hidden" style="display:none">
                             <input type="file" name="image" id="fileSelector" #fileSelector (change)="onPictureSelect()"/>
@@ -27,8 +54,9 @@
                         </div>
                     </div>
                     <footer>
-                        <button id="cancel" pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" routerLink="/torquesheet">  </button>
+                        <button id="cancel" pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" (click)="onCancel()">  </button>
                         <button id="add" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" [disabled]="!tfForm.form.valid"></button>
+                        <button id="addAndSubmit" pButton type="button" class="green-btn" icon="ui-icon-save" label="Add & Submit For Approval" [disabled]="!tfForm.form.valid" (click)="onAddAndSubmit()"></button>
                     </footer><br />
                 </p-panel>
                 <br />

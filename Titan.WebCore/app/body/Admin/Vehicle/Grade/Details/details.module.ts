@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { GradeService} from '../../../../../shared/services/grade.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule, ToggleButtonModule, InputTextModule, PanelModule, DropdownModule, CalendarModule, GrowlModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule, ToggleButtonModule, InputTextModule, PanelModule, DropdownModule, CalendarModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, ToggleButtonModule, InputTextModule, PanelModule,
+    imports: [EditorModule, SharedModule, BreadcrumbModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, ToggleButtonModule, InputTextModule, PanelModule,
         ButtonModule, DropdownModule, CalendarModule, GrowlModule, detailsRoutes],
     providers: [GradeService],
     declarations: [DetailsComponent],

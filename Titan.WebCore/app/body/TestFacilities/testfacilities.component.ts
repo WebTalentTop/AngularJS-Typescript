@@ -1,10 +1,10 @@
-﻿import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
-import { LoggerService } from './../../shared/services/logger/logger.service';
-import { LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router'
-import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
-import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
+﻿import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
+import {LoggerService} from './../../shared/services/logger/logger.service';
+import {LazyLoadEvent, Message, MessagesModule, MenuItem} from 'primeng/primeng';
+import {Component} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router'
+import {GridComponent} from '../../shared/UIComponents/GridComponent/grid.component';
+import {BreadCrumbsService} from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 
 @Component({
@@ -22,33 +22,33 @@ export class TestFacilitiesComponent {
     added: any;
     msgs: Message[] = [];
 
-    constructor(
-        private breadCrumbsService: BreadCrumbsService,
-        private testFacilityService: TestFacilityService, 
-        private route: ActivatedRoute, 
-        private router: Router, 
-        private logger: LoggerService) 
-        {
-        this.route.queryParams.subscribe(params => {
+    constructor(private breadCrumbsService: BreadCrumbsService,
+                private testFacilityService: TestFacilityService,
+                private route: ActivatedRoute,
+                private router: Router,
+                private logger: LoggerService) {
+            this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();
             let testFacilitiesBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'TestFacilitiesHomePage')[0];
+            filter.pageName === 'TestFacilitiesHomePage')[0];
 
             this.breadcrumbs = [];
             this.breadcrumbs = testFacilitiesBreadCrumb.items;
 
-            this.breadcrumbsHome = { routerLink: ['/'] };
+            this.breadcrumbsHome = {routerLink: ['/']};
         });
 
         if (this.added == 1) {
             this.msgs = [];
-            this.msgs.push({ severity: 'Success', summary: 'Success', detail: '' });
+            this.msgs.push({severity: 'Success', summary: 'Success', detail: ''});
         }
     }
+
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
+
     ngOnInit() {
         let resData: any;
         this.testFacilityService.postGridData()

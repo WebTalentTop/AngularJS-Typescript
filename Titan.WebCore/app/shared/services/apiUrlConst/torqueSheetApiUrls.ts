@@ -7,7 +7,7 @@ export class TorqueSheetApiUrl {
     public static putTorqueSheetTemplateUrl: string = titanApiUrl + 'TorqueSheetTemplate/Put';
     public static putTorqueSheetUrl: string = titanApiUrl + 'TorqueSheet/Put?status=';
     public static postNewTorqueSheetVersionUrl: string = titanApiUrl + 'TorqueSheet/CreateNewVersion';
-    public static postTorqueSheetUrl: string = titanApiUrl + 'TorqueSheet/Post';
+    public static postTorqueSheetUrl: string = titanApiUrl + 'TorqueSheet/Post?submitForApproval=';
     public static getTorqueSheetsByTorqueBookIdUrl: string = titanApiUrl + 'TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
     public static getTorqueBooksTorqueSheetNamesUrl: string = titanApiUrl + 'TorqueSheetName/GetAll?torqueBookId=';
 }

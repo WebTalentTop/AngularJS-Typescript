@@ -5,15 +5,24 @@
     <form #fiForm="ngForm" (ngSubmit)="collectForm(fiForm)">
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-12 ui-md-4" *ngFor="let formInput of formFieldDataItemList">
+                <div *ngIf="formInput.formSchemaFieldDataTypeName === 'SelectBox'">
+                    <label>{{formInput.name}}</label>
+                    <div class="ui-g-12">
+                        <p-dropdown
+                                name="{{formInput.name}}"
+                                [options]="formInput.formSchemaFieldDataTypeData"
+                                    [(ngModel)]="formInput.selectBoxValue"></p-dropdown>
+                    </div>
+                </div>
                 <div *ngIf="formInput.formSchemaFieldDataTypeName === 'CheckBox'">
-                    <label>{{formInput.label}}</label>
+                    <label>{{formInput.name}}</label>
                     <div class="ui-g-12" *ngFor="let ck of formInput.formSchemaFieldDataTypeData">
                         <p-checkbox name="{{formInput.name}}" label="{{ck}}" value="{{ck}}"
                                     [(ngModel)]="formInput.checkBoxValue"></p-checkbox>
                     </div>
                 </div>
                 <div *ngIf="formInput.formSchemaFieldDataTypeName === 'RadioBox'">
-                    <label>{{formInput.label}}</label>
+                    <label>{{formInput.name}}</label>
                     <div class="ui-g-12" *ngFor="let ck of formInput.formSchemaFieldDataTypeData">
                         <p-radioButton
                                 name="{{formInput.name}}"

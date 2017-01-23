@@ -61,9 +61,10 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
-                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
+                                <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem"></p-dropdown>
+                               <!-- <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
-                                </select>
+                                </select>-->
                                 <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
             </p-dropdown>-->
                             </div>
@@ -180,13 +181,14 @@
                                              /></div>
                                      </div><br />
                                      <div class="ui-grid-row">
-                                         <div class="ui-grid-col-4"><label for="calibrationform">Calibration Form</label></div>
+                                         <div class="ui-grid-col-4"><label for="calibrationForm">Calibration Form</label></div>
                                          <div class="ui-grid-col-8">
                                              <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
                                              </p-dropdown>-->
-                                             <select [(ngModel)]="selectedCalibration" class="form-control" name="selectcalibrationform" width="300"  id="selectcalibrationform" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
+                                             <p-dropdown [options]="calibrationSubTypeFormItems" id="calibrationForm" name="calibrationForm" [(ngModel)]="selectedSubTypeFormItem"></p-dropdown>
+                                             <!--<select [(ngModel)]="selectedCalibration" class="form-control" name="selectcalibrationform" width="300"  id="selectcalibrationform" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
                                                  <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
-                                             </select>
+                                             </select>-->
                                         </div>
                                       </div><br />        <!-- <div class="ui-grid-col-8"><input pInputText name="calibrationform" [(ngModel)]="EquipmentSubType.calibrationform" #equipmentSubTypecalibrationformRef="ngModel"
                                              /></div>-->

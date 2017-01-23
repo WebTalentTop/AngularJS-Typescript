@@ -1,123 +1,123 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        
-        <!--<h1> {{title}}</h1>
-    <p-tabView>-->
+        <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+        <br />
+
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                 <p-messages [value]="msgs"></p-messages>
                 <h2> Create New Equipment </h2>
                 <p-panel header="Basic Information">
-                  <div class="body">
-                      <!-- Begin Name -->
-                      <div class="ui-grid-row">
-                          <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
-                                     minlength="3" class="form-control" required row="20" style="width:100%">
-                              <label>Name <span >*</span></label>
-                          </div>
-                          <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText name="serialNumber" id="serial" [(ngModel)]="serialNumber" style="width:100%">
-                           <label>Serial #</label>
-                          </div>
-                      </div>
-                      <!-- End Serial# -->
-                      <!-- Begin Equipment Type # -->
-                      <div class="ui-grid-row ">
-                        <div class="ui-g-12 ui-md-6">
-                            <p style="color:#777">Equipment Type : <span >*</span></p>
-                            <p-dropdown class="form-control" [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" (onChange)="onEquipmentTypeChange($event)" 
-                            name="equipmentTypes" id="equipmentTypes" filter="filter" [(ngModel)]="selectedEquipmentTypeId" required>
-                            </p-dropdown>
+                    <div class="body">
+                        <!-- Begin Name -->
+                        <div class="ui-grid-row">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
+                                       minlength="3" class="form-control" required row="20" style="width:100%">
+                                <label>Name <span>*</span></label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="serial" id="serial" [(ngModel)]="serialNumber" style="width:100%">
+                                <label>Serial #</label>
+                            </div>
                         </div>
-                        <div class="ui-g-12 ui-md-6">
-                            <p style="color:#777">Test Facility :</p>
-                            <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId" 
-                            (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities" filter="filter">
-                            </p-dropdown>
+                        <!-- End Serial# -->
+                        <!-- Begin Equipment Type # -->
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Equipment Type : <span>*</span></p>
+                                <p-dropdown class="form-control" [style]="{'width':'100%','color':'#777'}" [options]="equipmentTypes" (onChange)="onEquipmentTypeChange($event)"
+                                            name="equipmentTypes" id="equipmentTypes" filter="filter" [(ngModel)]="selectedEquipmentTypeId" required>
+                                </p-dropdown>
+                            </div>
+                            <div class="ui-g-12 ui-md-6">
+                                <p style="color:#777">Test Facility :</p>
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testFacilities" [(ngModel)]="selectedTestFacilityId"
+                                            (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities" filter="filter">
+                                </p-dropdown>
+                            </div>
                         </div>
-                      </div>
-                      <!-- End Equipment Type --><br /><br />
-                      <!--Year Purchased-->
-                      <div class="ui-grid-row " style="color:#777">
-                          <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" id="purchaseDate" [showIcon]="true"></p-calendar>
-                            <label>Purchase Date :</label>
-                          </div>
-                          <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" id="warrantyExpiration" [showIcon]="true" ></p-calendar>
-                            <label>Warranty Until :</label>
-                          </div>
-                      </div>
-                      <!--End Year--><br />
-                      <!--Calibration Frequency-->
-                      <!--<div class="ui-grid-row " style="color:#777">
-                          <div class="ui-g-12 ui-md-12" >
-                           <label>Calibration Frequency :</label>
-                         </div>
-                          <div class="ui-g-12 ui-md-6" >
-                              <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
-                                          label="Maintenance Frequency"
-                                          [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
-                                          (onChange)="showHideCronPicker()">
-                              </p-checkbox>
+                        <!-- End Equipment Type --><br /><br />
+                        <!--Year Purchased-->
+                        <div class="ui-grid-row " style="color:#777">
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                                <p-calendar [(ngModel)]="purchaseDate" name="purchaseDate" id="purchaseDate" [showIcon]="true"></p-calendar>
+                                <label>Purchase Date :</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                                <p-calendar [(ngModel)]="warrantyExpiration" name="warrantyExpiration" id="warrantyExpiration" [showIcon]="true"></p-calendar>
+                                <label>Warranty Until :</label>
+                            </div>
+                        </div>
+                        <!--End Year--><br />
+                        <!--Calibration Frequency-->
+                        <!--<div class="ui-grid-row " style="color:#777">
+                            <div class="ui-g-12 ui-md-12" >
+                             <label>Calibration Frequency :</label>
+                           </div>
+                            <div class="ui-g-12 ui-md-6" >
+                                <p-checkbox name="groupname" value="isMaintenaceFrequencySelected"
+                                            label="Maintenance Frequency"
+                                            [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
+                                            (onChange)="showHideCronPicker()">
+                                </p-checkbox>
 
 
-                              <div class="md-inputfield">
-                                  <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
-                              </div>
-                          </div>
-                          <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <p-calendar [(ngModel)]="lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
-                            <label style="color:#777">Last Calibration Date :</label>
-                          </div>
-                      </div>-->
-                      <!--Calibration Frequency--><br /><br />
-                      <!-- Price -->
-                      <div class="ui-grid-row " style="color:#777">
-                          <div class="ui-g-12 ui-md-6 md-inputfield">
-                            <input type="text" pInputText name="purchasePrice" id="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
-                            <label>Purchased Price</label>
-                          </div>
-                          <div class="md-inputfield ui-g-12 ui-md-6">
-                              <input type="text" pInputText name="modelNumber" id="model" [(ngModel)]="modelNumber" style="width:100%">
-                              <label>Model</label>
-                          </div>
-                      </div>
-                      <!-- Price -->
-                      <br />
-                      <!--Calibration Frequency-->
-                      <!--Begin Description-->
-                      <div class="ui-grid-row " >
-                          <div class="ui-g-12 ui-md-12" >
-                            <label style="color:#777">Description</label>
-                          </div>
-                          <div class="ui-g-12 ui-md-12 md-inputfield">
-                              <p-editor [(ngModel)]="description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
-                                  <header>
-                                      <select class="ql-size">
-                                          <option value="small"></option>
+                                <div class="md-inputfield">
+                                    <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                              <p-calendar [(ngModel)]="lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
+                              <label style="color:#777">Last Calibration Date :</label>
+                            </div>
+                        </div>-->
+                        <!--Calibration Frequency--><br /><br />
+                        <!-- Price -->
+                        <div class="ui-grid-row " style="color:#777">
+                            <div class="ui-g-12 ui-md-6 md-inputfield">
+                                <input type="text" pInputText name="purchasePrice" id="purchasePrice" [(ngModel)]="purchasePrice" style="width:100%">
+                                <label>Purchased Price</label>
+                            </div>
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="model" id="model" [(ngModel)]="model" style="width:100%">
+                                <label>Model</label>
+                            </div>
+                        </div>
+                        <!-- Price -->
+                        <br />
+                        <!--Calibration Frequency-->
+                        <!--Begin Description-->
+                        <div class="ui-grid-row ">
+                            <div class="ui-g-12 ui-md-12">
+                                <label style="color:#777">Description</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor [(ngModel)]="description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-                                          <option selected></option>
-                                          <option value="large"></option>
-                                          <option value="huge"></option>
-                                      </select>
-                                      <span class="ql-formats">
-                                          <button class="ql-bold"></button>
-                                          <button class="ql-italic"></button>
-                                          <button class="ql-underline"></button>
-                                      </span>
-                                  </header>
-                              </p-editor>
-                          </div>
-                      </div>
-                      <!--End Description-->
-                  </div>
-                  <footer>
-                      <p>* indicates required field</p>
-                      <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" routerLink="/equipment" class="blue-grey-btn"></button>
-                      <button pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid"  class="green-btn"></button>
-                  </footer>
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
+                        </div>
+                        <!--End Description-->
+                    </div>
+                    <footer>
+                        <p>* indicates required field</p>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" routerLink="/equipment" class="blue-grey-btn"></button>
+                        <button pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid" class="green-btn"></button>
+                    </footer>
                 </p-panel><br />
 
                 <br />
