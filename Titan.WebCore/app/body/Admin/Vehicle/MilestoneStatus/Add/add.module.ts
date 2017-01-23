@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { MilestoneStatusService} from '../../../../../shared/services/milestoneStatus.service';
 import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule,BreadcrumbModule } from 'primeng/primeng';
+import { BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
