@@ -1,9 +1,36 @@
 <!--<h1>Torque Book</h1>-->
 <div class="ui-g-12" *ngIf="BuildLevels">
     <div class="ui-grid-row">
+        <button type="button" pButton label="Add Torque Book" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueBook()"></button>
+        <button type="button" pButton label="Add Torque Sheet" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueSheet()" ></button>
         <!--<div class="ui-grid-col-2"></div>-->
         <div class="ui-grid-row">
-            <p-treeTable [value]="BuildLevels"
+            <p-dataTable [value]="BuildLevels">
+                <!--<p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>-->
+                <p-column field="name" header="Name"></p-column>
+                <p-column field="description" header="Description"></p-column>
+                <p-column field="torqueBookName" header="Torque Book"></p-column>
+                <p-column field="torqueSheetName" header="Torque Sheet"></p-column>
+                <p-column field="currentDraftVersionTorqueSheetStatus" header="Torque Sheet Status"></p-column>
+                <p-column>
+                    <template pTemplate type="header">
+                        Current TS Version
+                    </template>
+                    <template let-moduleItem="rowData" pTemplate type="body">
+                        <button type="button" pButton (click)="onNewEditTorqueSheet(moduleItem)" icon="fa-edit" [label]="moduleItem.currentDraftVersion" *ngIf="moduleItem.currentDraftVersion"></button>
+                    </template>
+                </p-column>
+                <p-column>
+                    <template pTemplate type="header">
+                        Last TS Approved Version
+                    </template>
+                    <template let-moduleItem="rowData" pTemplate type="body">
+                        <button type="button" pButton (click)="onNewEditTorqueSheet(moduleItem)" icon="fa-edit" [label]="moduleItem.lastApprovedVersion" *ngIf="moduleItem.lastApprovedVersion"></button>
+                    </template>
+                </p-column>
+            </p-dataTable>
+             
+            <!--<p-treeTable [value]="BuildLevels"
                          (onNodeExpand)="nodeExpand($event)">
                 <header>Torque Book</header>
                 <p-column field="name" header="Build Level"></p-column>
@@ -13,11 +40,11 @@
                         <button type="button" *ngIf="canAdd(node.data.rowType)" pButton [label]="getLabel(node.data.rowType)" icon="ui-icon-add" class="blue-grey-btn" (click)="onAdd(node.data.rowType, node.data.id, $event)"></button>
                         <button type="button" *ngIf="canEditTorqueSheet(node.data)" pButton label="Edit TS"
                             (click)="onEditTorqueSheet(node.data, $event)" icon="ui-icon-edit" class="blue-grey-btn"></button>
-                        <!--<button type="button" *ngIf="canEditTemplate(node.data)" pButton label="Edit Template"
-                                (click)="onAddTemplate(node.data, $event, false)"></button>-->
+                        &lt;!&ndash;<button type="button" *ngIf="canEditTemplate(node.data)" pButton label="Edit Template"
+                                (click)="onAddTemplate(node.data, $event, false)"></button>&ndash;&gt;
                     </template>
                 </p-column>
-            </p-treeTable>
+            </p-treeTable>-->
             <!--<button pButton type="<sub></sub>mit" label="Add" icon="ui-icon-plus" iconPos="left"
                 (click)="onAddTorqueBook()"></button>-->
             <!--[disabled]="!projectForm.valid"-->
@@ -28,7 +55,19 @@
 
 <p-dialog header="Add Torque Book" [(visible)]="displayAddTorqueBook" modal="modal" showEffect="fade" width="500">
     <form #torqueBookForm>
-      <div class="ui-grid-row">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><b for="name">Build Level *:</b></div>
+            <div class="ui-grid-col-8">
+                <p-dropdown [options]="justBuildLevels" [(ngModel)]="buildLevelIdForAddingTorqueBook"
+                            name="buildLevels" required #justBuildLevelsRef
+                            [style]="{'width':'100%','color':'#777'}">
+                </p-dropdown>
+            </div>
+            <div class="ui-grid-col-4" *ngIf="justBuildLevelsRef.errors?.required">
+                Build Level field is required
+            </div>
+        </div>
+        <div class="ui-grid-row">
               <div class="ui-grid-col-4"><b for="name">Torque Book Name *:</b></div>
               <div class="ui-grid-col-8">
                 <input type="text" pInputText
@@ -39,13 +78,13 @@
                      maxlength="255"
                      class="form-control" required style="width:100%"/></div>
                  <div class="ui-grid-col-4" *ngIf="newTorqueBookNameRef.errors?.required">
-                     {{newTorqueBookNameRef.errors | json}} this field is required
+                     Torque Book Name field is required
                  </div>
 
                  <div class="ui-grid-col-4" *ngIf="newTorqueBookNameRef.errors?.maxlength">
-                     Maximum length reached {{newTorqueBookNameRef.errors?.minlength.requiredLength}}.
+                     Maximum length reached {{newTorqueBookNameRef.errors?.maxlength.requiredLength}}.
                  </div>
-      </div>
+        </div>
     </form>
     <br />
     <footer>

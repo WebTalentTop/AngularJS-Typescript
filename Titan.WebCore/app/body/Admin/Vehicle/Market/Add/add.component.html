@@ -1,63 +1,50 @@
 <div class="ui-g-12">
-<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+    <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Market </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Market </h2>
+        <p-panel header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Market Name * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Market Name" minlength="3" #marketDetailsNameRef="ngModel"
-                            class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="marketDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
-                        </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="marketDetailsNameRef.errors?.minlength">
-                            MinLength-3
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Market Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="description" name="description" pInputText [(ngModel)]="description" #marketDetailsDescriptionRef="ngModel"
-                            placeholder="Market Description" class="form-control" required />
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="marketDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/market">  </button>
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  #marketDetailsNameRef="ngModel" [(ngModel)]="name"
+                                       minlength="3"  required style="width:100%">
+                                <label>Market Name <span >*</span></label>
                     </div>
                 </div>
             </div>
             <br />
+            <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Market Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #marketDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
+
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
+                    </div>
+            <footer>
+                <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/market" icon="ui-icon-close" class="blue-grey-btn">  </button>
+                <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Add" class="green-btn">  </button>
+                        
+            </footer>
             <br />
         </p-panel>
     </form>
+    </div>
 </div>

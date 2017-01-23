@@ -32,8 +32,8 @@ export class TorquesheetService extends BaseService{
         //.map(this.getJson);
     }
 
-    postTorqueSheet(torqueSheetBody): Observable<any> {
-        return this.http.post(`${TorqueSheetApiUrl.postTorqueSheetUrl}`, torqueSheetBody)
+    postTorqueSheet(torqueSheetBody, submitForApproval:boolean): Observable<any> {
+        return this.http.post(`${TorqueSheetApiUrl.postTorqueSheetUrl}` + submitForApproval.toString(), torqueSheetBody)
             .map(super.getJson)
         //.chec
         // .catch(err => Observable.throw(err))
