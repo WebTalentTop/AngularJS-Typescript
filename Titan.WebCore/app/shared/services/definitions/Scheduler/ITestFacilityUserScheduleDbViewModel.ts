@@ -14,5 +14,8 @@ export interface ITestFacilityUserScheduleDbViewModel {
     eventStatusId:string;
     schedules:ITitanUserScheduleViewModel[];
     isTimeBlockScheduled : boolean;
+    // The minDate and maxDate are used for validation
+    minDate:Date;
+    maxDate:Date;
 
 }

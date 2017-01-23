@@ -384,17 +384,16 @@
           [closeOnEscape]="false"
           [closable]="false">
     <form #tfMoveForm="ngForm" (ngSubmit)="onSubmitMoveTestFacilitySchedule(tfMoveForm.value)">
-        <div class="ui-g-12">
-           <p-messages [value]="changeFacilityMessage" [closable]="false">
+        <p-messages [value]="changeFacilityMessage" [closable]="false">
+        </p-messages>
+        <div class="ui-g">
 
-           </p-messages>
-
-            <div class="ui-g-12 ui-md-6 ui-sm-4">
+            <div class="ui-g-12 ui-md-6 ui-sm-6">
 
                 <label>
                     <span class="text">Start </span> <br/>
                     <p-calendar [(ngModel)]="moveTestScheduleStartDate"
-                                showTime="showTime"
+                                [showTime]="showTimeDuringAssignOperation"
                                 hourFormat="12"
                                 [icon]="fa-calendar" required
                                 name="moveTestScheduleStartDate"
@@ -409,15 +408,18 @@
 
                 <label>
                     <span class="text">End</span> <br/>
-                    <p-calendar [(ngModel)]="moveTestScheduleEndDate" showTime="showTime" hourFormat="12"
+                    <p-calendar [(ngModel)]="moveTestScheduleEndDate"
+                                [showTime]="showTimeDuringAssignOperation" hourFormat="12"
                                 [icon]="fa-calendar"
                                 required name="moveTestScheduleEndDate"
                                 [minDate]="moveTestScheduleStartDate"
-                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                [selectOtherMonths]="true"
+                                [showOtherMonths]="true"
                                 (onSelect)="validateScheduleDates($event, moveTestScheduleStartDate,moveTestScheduleEndDate)"></p-calendar>
                 </label>
 
             </div>
+
             <div class="ui-g-12 ui-md-6 ui-sm-4" *ngIf="!facilityChanged">
 
 
@@ -429,15 +431,22 @@
 
 
             </div>
-            <div class="ui-g-12 ui-md-12 ui-sm-12">
-                <button type="button" pButton icon="ui-icon-cancel" label="Cancel" (click)="cancelMove($event)"
-                ></button>
-                <button type="submit" pButton icon="ui-icon-arrow-forward" label="Move"
-                        [disabled]='!tfMoveForm.valid'></button>
 
-            </div>
         </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-g-12 ui-md-12 ui-sm-12">
+                    <button type="button" pButton icon="ui-icon-cancel" label="Cancel" (click)="cancelMove($event)"
+                    ></button>
+                    <button type="submit" pButton icon="ui-icon-arrow-forward" label="Move"
+                            [disabled]='!tfMoveForm.valid'></button>
+
+                </div>
+            </div>
+        </footer>
     </form>
+
+
 </p-dialog>
 
 <p-dialog [(header)]="assignResourceHeader" [(visible)]="displayAssignDialog"
@@ -449,17 +458,43 @@
           [closable]="!(assignResourceForm.dirty)">
 
     <form #assignResourceForm="ngForm" (ngSubmit)="saveAssignResourcesChanges(assignResourceForm)">
-        <div class="ui-g form-group">
-            <div class="ui-g-12 ui-md-3 ui-sm-4">
-                <span class="text">Status</span> <br/>
-                <p-dropdown name="testFacilityEventStatusId"
-                            [(ngModel)]="assignUserSchedule.eventStatusId"
-                            [options]="testFacilityEventStatusList"
-                            [style]="{'width':'100%'}"></p-dropdown>
+
+        <!-- SCHEDULE OPTIONS -->
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-3">
+                <label>
+
+                    <span class="md-inputfield">
+                    <p-calendar [(ngModel)]="assignUserSchedule.startDate" hourFormat="12"
+                                [icon]="fa-calendar" required
+                                name="testFacilitycheduleStartDate"
+                                [selectOtherMonths]="true"
+                                [showOtherMonths]="true"
+                                (onSelect)="validateSchedule($event, assignUserSchedule.startDate,assignUserSchedule.endDate)"
+                    >
+                    </p-calendar>
+                        <label class="text">Start </label>
+                    </span>
+                </label>
+
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <span class="md-inputfield">
+                    <p-calendar [(ngModel)]="assignUserSchedule.endDate" hourFormat="12"
+                                [icon]="fa-calendar"
+                                name="testFacilitycheduleEndDate"
+                                [selectOtherMonths]="true"
+                                (onSelect)="validateSchedule($event, assignUserSchedule.startDate,assignUserSchedule.endDate)"
+                                [minDate]="assignUserSchedule.startDate">
+                    </p-calendar>
+                    <label>End</label>
+                </span>
 
             </div>
             <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
-                <span class="text"> Daily Start Time</span> <br/>
+
+                <span class="md-inputfield">
                 <p-dropdown [options]="timeOptions"
                             [(ngModel)]="assignUserSchedule.defaultStartMinutesPastMidnight"
                             name="scheduleStartTime"
@@ -469,10 +504,11 @@
                             (onChange)="testFacilityTimeChanged()"
                             [required]="true">
                 </p-dropdown>
+                    <label class="text"> Daily Start Time</label>
+                </span>
             </div>
             <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
-                <span class="text"> Daily End Time</span> <br/>
-
+                <span class="md-inputfield">
                 <p-dropdown [options]="timeOptions"
                             [(ngModel)]="assignUserSchedule.defaultEndMinutesPastMidnight"
                             name="scheduleEndTime"
@@ -483,69 +519,91 @@
                             [required]="true"
                 >
                 </p-dropdown>
+                    <label class="text"> Daily End Time</label>
+                </span>
             </div>
-            
-            <div class="ui-g-12 ui-md-6 ui-sm-4">
-                <button type="button" pButton icon="ui-icon-person-add" (click)="addEmptyRowOperatorBlock()"
-                        label="Add User"></button>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-3">
+
+                <p>Facility Status </p>
+                <p-dropdown name="testFacilityEventStatusId"
+                            [(ngModel)]="assignUserSchedule.eventStatusId"
+                            [options]="testFacilityEventStatusList"
+                            [style]="{'width':'100%'}">
+
+                </p-dropdown>
+
+
             </div>
 
         </div>
-        <div id="" style="overflow:auto; height:400px;">
-            <div class="ui-g-12">
-                <!--scrollHeight="200px" scrollable="true"-->
-                <p-dataTable [value]="testOperatorsForBlock">
-                    <header>Schedule Operators</header>
-                    <p-column hidden="true" field="titanUserScheduleId"></p-column>
 
-                    <p-column field="titanUserId" [sortable]="false" header="Operator">
+        <!-- DATA TABLE FOR OERATORS -->
+        <div class="ui-g">
+            <div id="" style="overflow:auto; height:400px;">
+                <div class="ui-g-12">
+                    <!--scrollHeight="200px" scrollable="true"-->
+                    <p-dataTable [value]="testOperatorsForBlock">
+                        <header style="height:30px;">
+                            <div style="float:right">
+                                <button type="button" pButton icon="ui-icon-person-add"
+                                        (click)="addEmptyRowOperatorBlock()"
+                                        label="Add User"></button>
+                            </div>
 
-                        <template pTemplate="body" let-item="rowData" let-i="rowIndex">
-                            <p-dropdown [options]="titanUsersListForFacility"
-                                        [(ngModel)]="item.titanUserId"
-                                        name="testOperatorsForBlock[{{i}}].titanUserId"
-                                        appendTo="body"
-                                        [style]="{'width':'100%'}"
-                                        (onChange)="testOperatorsForBlockChange(item, i)"
-                                        [required]="true"
-                            >
+                        </header>
+                        <p-column hidden="true" field="titanUserScheduleId"></p-column>
 
-                            </p-dropdown>
-                        </template>
-                    </p-column>
-                    <!--<p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>-->
-                    <p-column field="startDate" [sortable]="true" header="Start">
+                        <p-column field="titanUserId" [sortable]="false" header="Operator">
 
-                        <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                            <p-calendar [(ngModel)]="item.startDate" appendTo="body"
-                                        [selectOtherMonths]="true" [showOtherMonths]="true"
-                                        [minDate]="selectedBlockStartDate"
-                                        [maxDate]="selectedBlockEndDate"
-                                        (onSelect)="testOperatorsForBlockChange(item,i)"
-                                        name="testOperatorsForBlock[{{i}}].startDate"
-                                        [required]="true">
-                            </p-calendar>
-                            <p-dropdown [options]="filteredTimeOptions" *ngIf="showTimeDuringAssignOperation"
-                                        [(ngModel)]="item.defaultStartMinutesPastMidnight"
-                                        name="testOperatorsForBlock[{{i}}].defaultStartMinutesPastMidnight"
-                                        appendTo="body"
-                                        [style]="{'width':'100%'}"
-                                        (onChange)="testOperatorsForBlockChange(item, i)"
-                                        [required]="true"
-                            >
-                            </p-dropdown>
-                        </template>
-                    </p-column>
-                    <p-column field="endDate" [sortable]="true" header="End">
+                            <template pTemplate="body" let-item="rowData" let-i="rowIndex">
+                                <p-dropdown [options]="titanUsersListForFacility"
+                                            [(ngModel)]="item.titanUserId"
+                                            name="testOperatorsForBlock[{{i}}].titanUserId"
+                                            appendTo="body"
+                                            [style]="{'width':'100%'}"
+                                            (onChange)="testOperatorsForBlockChange(item, i)"
+                                            [required]="true"
+                                >
 
-                        <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                                </p-dropdown>
+                            </template>
+                        </p-column>
+                        <!--<p-column field="testFacilityName" header="Test Facility" sortable="true"></p-column>-->
+                        <p-column field="startDate" [sortable]="true" header="Start">
+
+                            <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                                <p-calendar [(ngModel)]="item.startDate" appendTo="body"
+                                            [selectOtherMonths]="true" [showOtherMonths]="true"
+                                            [minDate]="assignUserSchedule.startDate"
+                                            [maxDate]="assignUserSchedule.endDate"
+                                            (onSelect)="testOperatorsForBlockChange(item,i)"
+                                            name="testOperatorsForBlock[{{i}}].startDate"
+                                            [required]="true">
+                                </p-calendar>
+                                <p-dropdown [options]="filteredTimeOptions" *ngIf="showTimeDuringAssignOperation"
+                                            [(ngModel)]="item.defaultStartMinutesPastMidnight"
+                                            name="testOperatorsForBlock[{{i}}].defaultStartMinutesPastMidnight"
+                                            appendTo="body"
+                                            [style]="{'width':'100%'}"
+                                            (onChange)="testOperatorsForBlockChange(item, i)"
+                                            [required]="true"
+                                >
+                                </p-dropdown>
+                            </template>
+                        </p-column>
+                        <p-column field="endDate" [sortable]="true" header="End">
+
+                            <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+                            <span class="md-inputfield">
                             <p-calendar [(ngModel)]="item.endDate" appendTo="body"
                                         [selectOtherMonths]="true" [showOtherMonths]="true"
                                         [minDate]="item.startDate"
-                                        [maxDate]="selectedBlockEndDate"
+                                        [maxDate]="assignUserSchedule.endDate"
                                         (onSelect)="testOperatorsForBlockChange(item,i)"
                                         name="testOperatorsForBlock[{{i}}].endDate"
-                                        [required]="true">
+                                        required>
 
                             </p-calendar>
                             <p-dropdown [options]="filteredTimeOptions" *ngIf="showTimeDuringAssignOperation"
@@ -558,25 +616,28 @@
                                         [required]="true"
                             >
                             </p-dropdown>
-                            <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
+                            </span>
+                                <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
 
-                            <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
-                            <!--[selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body" [maxDate]="selectedBlockEndDate"-->
-                            <!--[icon]="fa-calendar"></p-calendar>-->
-                        </template>
-                    </p-column>
-                    <p-column styleClass="col-button">
+                                <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
+                                <!--[selectOtherMonths]="true" [showOtherMonths]="true" appendTo="body" [maxDate]="selectedBlockEndDate"-->
+                                <!--[icon]="fa-calendar"></p-calendar>-->
+                            </template>
+                        </p-column>
+                        <p-column styleClass="col-button">
 
-                        <template let-operatorBlock="rowData" pTemplate="body" let-i="rowIndex">
-                            <button type="button" pButton (click)="removeOperator(i,operatorBlock)"
-                                    icon="ui-icon-remove"></button>
+                            <template let-operatorBlock="rowData" pTemplate="body" let-i="rowIndex">
+                                <button type="button" pButton (click)="removeOperator(i,operatorBlock)"
+                                        icon="ui-icon-remove"></button>
 
-                        </template>
-                    </p-column>
-                </p-dataTable>
+                            </template>
+                        </p-column>
+                    </p-dataTable>
 
+                </div>
             </div>
         </div>
+        <!-- FOOTER -->
         <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 
@@ -587,90 +648,97 @@
             </div>
 
         </footer>
+
     </form>
 </p-dialog>
 
 <p-dialog header="Split Timeblock" [(visible)]="displaySplitDialog" showEffect="fade" [minWidth]="800">
-    <div class="ui-helper-clearfix">
-        <!--<button type="button" pButton icon="ui-icon-person-add" style="float:left" (click)="addEmptyRowOperatorBlock()"-->
-        <!--label="Add User"></button>-->
-        <button type="button" pButton icon="ui-icon-save" style="float:left"
-                (click)="saveSplitEventChanges($event)"
-                label="Save Changes"></button>
+    <form #splitEventForm="ngForm" (ngSubmit)="saveSplitEventChanges(assignResourceForm)">
 
-    </div>
-    <div class="ui-g-12">
-        <h3>Existing Event</h3>
-        <div class="ui-g-12 ui-md-4">
-            <label>
-                <span class="text">Start </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.startDate" hourFormat="12"
-                            [icon]="fa-calendar" required
-                            name="splitTestFacilityEventExistingScheduleStartDate"
-                            [selectOtherMonths]="true" [showOtherMonths]="true"
-                            (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
-                            disabled="true">
+        <div class="ui-g form-group">
+            <h3>Existing Event</h3>
+            <div class="ui-g-12 ui-md-4">
+                <label>
+                    <span class="text">Start </span> <br/>
+                    <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.startDate" hourFormat="12"
+                                [icon]="fa-calendar" required
+                                name="splitTestFacilityEventExistingScheduleStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
+                                disabled="true">
 
-                </p-calendar>
-            </label>
+                    </p-calendar>
+                </label>
 
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <label>
+                    <span class="text">End </span> <br/>
+                    <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.endDate" hourFormat="12"
+                                [icon]="fa-calendar"
+
+                                name="splitTestFacilityEventExistingScheduleEndDate"
+                                [selectOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
+                                [minDate]="splitTestFacilityEvent.existingSchedule.startDate"
+                                [maxDate]="splitTestFacilityEvent.newSchedule.endDate">
+                    </p-calendar>
+                </label>
+            </div>
         </div>
-        <div class="ui-g-12 ui-md-4">
-            <label>
-                <span class="text">End </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.existingSchedule.endDate" hourFormat="12"
-                            [icon]="fa-calendar" required
-                            name="splitTestFacilityEventExistingScheduleEndDate"
-                            [selectOtherMonths]="true" [showOtherMonths]="true"
-                            (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
-                            [minDate]="splitTestFacilityEvent.existingSchedule.startDate"
-                            [maxDate]="splitTestFacilityEvent.newSchedule.endDate">
 
-                </p-calendar>
-            </label>
+        <div class="ui-g-12">
+            <h3>Split Event</h3>
+            <div class="ui-g-12 ui-md-4">
+                <span class="text"> Facility Name</span> <br/>
+                <!--<span [ngClass]="{'error': testFacilityNameRef.dirty && testFacilityNameRef.errors?.required}">*</span>-->
+                <p-dropdown [options]="testFacilities"
+                            [(ngModel)]="splitTestFacilityEvent.newSchedule.testFacilityId"
+                            [required]="true"
+                            name="testFacilityName1" [style]="{'width':'100%'}"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <label>
+                    <span class="text">Start </span> <br/>
+                    <p-calendar [(ngModel)]="splitTestFacilityEvent.newSchedule.startDate" hourFormat="12"
+                                [icon]="fa-calendar"
+                                [required]="true"
+                                name="splitTestFacilityNewScheduleStartDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
+                                [minDate]="splitTestFacilityEvent.existingSchedule.endDate"
+                                [maxDate]="splitTestFacilityEvent.newSchedule.endDate">
+
+                    </p-calendar>
+                </label>
+
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <label>
+                    <span class="text">End </span> <br/>
+                    <p-calendar [(ngModel)]="splitTestFacilityEvent.newSchedule.endDate" hourFormat="12"
+                                [icon]="fa-calendar"
+                                [required]="true"
+                                name="splitTestFacilityNewScheduleEndDate"
+                                [selectOtherMonths]="true" [showOtherMonths]="true"
+                                (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
+                                disabled="true">
+
+                    </p-calendar>
+                </label>
+            </div>
         </div>
-    </div>
+        <footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 
-    <div class="ui-g-12">
-        <h3>Split Event</h3>
-        <div class="ui-g-12 ui-md-4">
-            <span class="text"> Facility Name</span> <br/>
-            <!--<span [ngClass]="{'error': testFacilityNameRef.dirty && testFacilityNameRef.errors?.required}">*</span>-->
-            <p-dropdown [options]="testFacilities"
-                        [(ngModel)]="splitTestFacilityEvent.newSchedule.testFacilityId"
-                        required
-                        name="testFacilityName1" [style]="{'width':'100%'}"></p-dropdown>
-        </div>
-        <div class="ui-g-12 ui-md-4">
-            <label>
-                <span class="text">Start </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.newSchedule.startDate" hourFormat="12"
-                            [icon]="fa-calendar" required
-                            name="splitTestFacilityEventExistingScheduleStartDate"
-                            [selectOtherMonths]="true" [showOtherMonths]="true"
-                            (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
-                            [minDate]="splitTestFacilityEvent.existingSchedule.endDate"
-                            [maxDate]="splitTestFacilityEvent.newSchedule.endDate">
+                <button type="submit" pButton icon="ui-icon-save" [disabled]="!splitEventForm.valid"
+                        label="Save Changes"></button>
+                <button type="button" pButton icon="ui-icon-close" (click)="displaySplitDialog = false;"
+                        label="Cancel"></button>
+            </div>
 
-                </p-calendar>
-            </label>
-
-        </div>
-        <div class="ui-g-12 ui-md-4">
-            <label>
-                <span class="text">End </span> <br/>
-                <p-calendar [(ngModel)]="splitTestFacilityEvent.newSchedule.endDate" hourFormat="12"
-                            [icon]="fa-calendar" required
-                            name="splitTestFacilityEventExistingScheduleEndDate"
-                            [selectOtherMonths]="true" [showOtherMonths]="true"
-                            (onSelect)="validateScheduleDates($event, splitTestFacilityEvent.existingSchedule.startDate,splitTestFacilityEvent.existingSchedule.endDate)"
-                            disabled="true">
-
-                </p-calendar>
-            </label>
-        </div>
-    </div>
-
+        </footer>
+    </form>
 </p-dialog>
 
 <p-dialog header="Schedule Test" [(visible)]="displayScheduleDialog" showEffect="fade" [minWidth]="800">

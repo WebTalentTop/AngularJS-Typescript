@@ -203,7 +203,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private testFacilityRoleService: TestFacilityRoleService,
                 private tenantUserService: TenantService) {
 
-        this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
+                this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
 
 
     }
@@ -631,7 +631,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.tenantUserService.getById('FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D').subscribe(res => {
             this.currentTenant = res;
             if (this.currentTenant.defaultTestReservationIntervalTypeId == 2) {
-                this.showTimeDuringAssignOperation = true;
+                this.showTimeDuringAssignOperation = false;
                 this.scheduleStartTime = 0;
                 this.scheduleEndTime = 1440;
             }
@@ -663,10 +663,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         selfRef.assignUserSchedule.updateTestFacilitySchedule = true;
         selfRef.assignUserSchedule.entityId = entityId;
         if (action === 'resize') {
-            selfRef.assignResourceHeader = "Event resized - Assign resources " + selfRef.assignBlockTestFacilityName + " from " +
+            selfRef.assignResourceHeader =  selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMM D YYYY');
         } else {
-            selfRef.assignResourceHeader = "Assign resources" + selfRef.assignBlockTestFacilityName + " from " +
+            selfRef.assignResourceHeader =  selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
         }
 
@@ -735,6 +735,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         selfRef.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
                         selfRef.displayAssignDialog = true;
                         selfRef.isTimeBlockScheduled = blockevent.isTimeBlockScheduled;
+                        selfRef.assignUserSchedule.minDate = blockevent.startDate;
+                        selfRef.assignUserSchedule.maxDate = blockevent.endDate;
 
                         selfRef.assignUserSchedule.eventStatusId = blockevent.testFacilityEventStatusId;
                         selfRef.assignUserSchedule.defaultStartMinutesPastMidnight = blockevent.defaultStartMinutesPastMidnight;
@@ -882,7 +884,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 }
             },
             items: {
-                "Schedule": {
+               /* "Schedule": {
                     name: "Schedule",
                     icon: "fa fa-clock",
                     disabled: function (key, opt) {
@@ -897,7 +899,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
                     }
 
-                },
+                },*/
                 "AssignResources": {
                     name: "Assign Resources",
                     icon: "edit"
@@ -1295,6 +1297,26 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         console.log("--onFacilityScheduleCalendarDateBlur--", event);
     }
 
+    /**
+     * This function is used to check the start and end dates for all users and test facility
+     * @param event
+     * @param startDate
+     * @param endDate
+     */
+    validateSchedule(event, startDate, endDate) {
+        // if (startDate > endDate) {
+        //     this.assignUserSchedule.endDate = this.blankDate;
+        // }
+        // Now ensure that the operators schedule is between startdate and enddate
+        // for(let item of this.testOperatorsForBlock){
+        //     if (item.startDate < startDate){
+        //         item.startDate = this.blankDate;
+        //     }
+        //     if (item.endDate > endDate || item.endDate < item.startDate){
+        //         item.endDate = this.blankDate;
+        //     }
+        // }
+    }
     validateScheduleDates(event, startDate, endDate) {
         console.log("start--", startDate);
         console.log("end--", endDate)
