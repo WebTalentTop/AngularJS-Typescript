@@ -214,6 +214,7 @@ export class DetailsComponent {
         this.switchDropDialog(this.draggedItem.name);
 
         let innertext = event.path[0].innerText;
+        this.formInputData.fieldDataType = this.draggedItem;
         this.formInputData.formSchemaFieldDataTypeId = this.draggedItem.id;
         //this.formInputData.name = this.draggedItem.name;
         console.log("inner Text is --------", innertext);
@@ -302,6 +303,24 @@ export class DetailsComponent {
         console.log("SelectedInputList ----------", this.selectedInputList);
     }
 
+    saveRadioBoxData() {
+        this.formInputData.order = this.orderNumber++;
+        this.formInputData.formSchemaFieldDataTypeData = this.formInputData.radioBoxData.split("\n");
+        this.formInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {name:x, value: x}})
+
+        let copyData = Object.assign({}, this.formInputData);
+        this.draggableList.selectedInputList.push(copyData);
+        this.formInputData.name = '';
+        this.formInputData.label = '';
+        this.formInputData.maxLength = 0;
+        this.formInputData.isRequired = false;
+        this.formInputData.order = 0;
+        this.formInputData.radioBoxData = '';
+        console.log('FormInputData in CheckBoxData ---------', this.formInputData);
+        console.log("copyData ---------", copyData);
+        console.log("SelectedInputList ----------", this.selectedInputList);
+    }
+
     saveCheckBoxData() {
         this.formInputData.order = this.orderNumber++;
         this.formInputData.formSchemaFieldDataTypeData = this.formInputData.checkBoxData.split("\n");
@@ -336,24 +355,6 @@ export class DetailsComponent {
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
         this.formInputData.selectBoxData = '';
-        console.log('FormInputData in CheckBoxData ---------', this.formInputData);
-        console.log("copyData ---------", copyData);
-        console.log("SelectedInputList ----------", this.selectedInputList);
-    }
-
-    saveRadioBoxData() {
-        this.formInputData.order = this.orderNumber++;
-        this.formInputData.formSchemaFieldDataTypeData = this.formInputData.radioBoxData.split("\n");
-        this.formInputData.data = this.formInputData.formSchemaFieldDataTypeData.map(x => {return {name:x, value: x}})
-
-        let copyData = Object.assign({}, this.formInputData);
-        this.draggableList.selectedInputList.push(copyData);
-        this.formInputData.name = '';
-        this.formInputData.label = '';
-        this.formInputData.maxLength = 0;
-        this.formInputData.isRequired = false;
-        this.formInputData.order = 0;
-        this.formInputData.radioBoxData = '';
         console.log('FormInputData in CheckBoxData ---------', this.formInputData);
         console.log("copyData ---------", copyData);
         console.log("SelectedInputList ----------", this.selectedInputList);
@@ -537,11 +538,15 @@ export class DetailsComponent {
             }
 
             if (item.checkBoxData) {
-
+                item.data = item.checkBoxData.split("\n").map(x => {
+                    return {name:x, value:x};
+                });
             }
 
             if (item.radioBoxData) {
-
+                item.data = item.radioBoxData.split("\n").map(x => {
+                    return {name:x, value:x};
+                });
             }
 
             if (item.selectBoxData) {
@@ -553,7 +558,7 @@ export class DetailsComponent {
         })
 
         console.log("Form to sent ---------", formSchemaData);
-        /*this.formSchemaService.postUpdate(formSchemaData)
+        this.formSchemaService.postUpdate(formSchemaData)
             .subscribe(res => {
                 console.log("Form Schema Create post return Res--------", res);
                 if(res.isSuccess) {
@@ -564,7 +569,7 @@ export class DetailsComponent {
                         this.router.navigate(['/admin/formBuilders']);
                     }, 5000);
                 }
-            });*/
+            });
         console.log('formschema Create called');
     }
 }
