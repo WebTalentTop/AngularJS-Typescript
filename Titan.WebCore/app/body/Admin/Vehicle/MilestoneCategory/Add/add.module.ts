@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { MilestoneCategoryService} from '../../../../../shared/services/milestoneCategory.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule , BreadcrumbModule} from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, ButtonModule,DropdownModule, addRoutes],
+    imports: [BreadcrumbModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, ButtonModule,DropdownModule, addRoutes],
     providers: [MilestoneCategoryService],
     declarations: [AddComponent]
 })
+
 
 export default class AddModule{}
