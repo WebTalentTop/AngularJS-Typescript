@@ -376,7 +376,6 @@
     <button type="button" pButton icon="ui-icon-calendar" label="close"></button>
 </p-dialog>
 
-
 <p-dialog [(header)]="moveToTestFacilityHeader" [(visible)]="displayMoveDialog"
           showEffect="fade"
           [minWidth]="800"
@@ -455,8 +454,9 @@
           [draggable]="true"
           (onBeforeHide)="onBeforeDialogHide($event)"
           [closeOnEscape]="false"
-          [closable]="!(assignResourceForm.dirty)">
-
+          [closable]="false"
+>
+    <!-- [closable]="!(assignResourceForm.dirty)"-->
     <form #assignResourceForm="ngForm" (ngSubmit)="saveAssignResourcesChanges(assignResourceForm)">
 
         <!-- SCHEDULE OPTIONS -->
@@ -492,9 +492,24 @@
                 </span>
 
             </div>
+            <div class="ui-g-12 ui-md-3">
+                <span>
+                <p-dropdown name="testFacilityEventStatusId"
+                            [(ngModel)]="assignUserSchedule.eventStatusId"
+                            [options]="testFacilityEventStatusList"
+                            [style]="{'width':'100%'}">
+
+                </p-dropdown>
+                <label class="text"
+                       style="position: absolute;top:-5px;color:#5180ce; font-size: 12px;"> Facility Status</label>
+                    </span>
+            </div>
+
+        </div>
+        <div class="ui-g">
             <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
 
-                <span class="md-inputfield">
+
                 <p-dropdown [options]="timeOptions"
                             [(ngModel)]="assignUserSchedule.defaultStartMinutesPastMidnight"
                             name="scheduleStartTime"
@@ -504,11 +519,13 @@
                             (onChange)="testFacilityTimeChanged()"
                             [required]="true">
                 </p-dropdown>
-                    <label class="text"> Daily Start Time</label>
-                </span>
+              <!--  <label class="text" style="position: absolute;top:-5px;color:#5180ce; font-size: 12px;"> Daily Start
+                    Time</label>-->
+
+
             </div>
             <div class="ui-g-12 ui-md-3 ui-sm-4" *ngIf="showTimeDuringAssignOperation">
-                <span class="md-inputfield">
+
                 <p-dropdown [options]="timeOptions"
                             [(ngModel)]="assignUserSchedule.defaultEndMinutesPastMidnight"
                             name="scheduleEndTime"
@@ -519,23 +536,11 @@
                             [required]="true"
                 >
                 </p-dropdown>
-                    <label class="text"> Daily End Time</label>
-                </span>
-            </div>
-        </div>
-        <div class="ui-g">
-            <div class="ui-g-12 ui-md-3">
-
-                <p>Facility Status </p>
-                <p-dropdown name="testFacilityEventStatusId"
-                            [(ngModel)]="assignUserSchedule.eventStatusId"
-                            [options]="testFacilityEventStatusList"
-                            [style]="{'width':'100%'}">
-
-                </p-dropdown>
-
+                <!--<label class="text" style="position: absolute;top:-5px;color:#5180ce; font-size: 12px;"> Daily End
+                    Time</label>-->
 
             </div>
+
 
         </div>
 
@@ -596,7 +601,7 @@
                         <p-column field="endDate" [sortable]="true" header="End">
 
                             <template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
-                            <span class="md-inputfield">
+
                             <p-calendar [(ngModel)]="item.endDate" appendTo="body"
                                         [selectOtherMonths]="true" [showOtherMonths]="true"
                                         [minDate]="item.startDate"
@@ -616,7 +621,7 @@
                                         [required]="true"
                             >
                             </p-dropdown>
-                            </span>
+
                                 <!--<p-calendar [(ngModel)]="date1" showTime="false"-->
 
                                 <!--name="operatorEnd" [minDate]="testOperatorsForBlock[i].startDate"-->
@@ -653,7 +658,7 @@
 </p-dialog>
 
 <p-dialog header="Split Timeblock" [(visible)]="displaySplitDialog" showEffect="fade" [minWidth]="800">
-    <form #splitEventForm="ngForm" (ngSubmit)="saveSplitEventChanges(assignResourceForm)">
+    <form #splitEventForm="ngForm" (ngSubmit)="saveSplitEventChanges(splitEventForm)">
 
         <div class="ui-g form-group">
             <h3>Existing Event</h3>

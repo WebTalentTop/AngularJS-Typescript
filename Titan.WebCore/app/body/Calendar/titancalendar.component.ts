@@ -49,6 +49,7 @@ import {TenantService} from '../../shared/services/tenant.service';
 import {ITenantViewModel} from "../../shared/services/definitions/tenantDefinitions/ITenantViewModel";
 import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.service";
 import {UserProfileService} from "../../shared/services/userProfile.service";
+import {Observable} from "rxjs/Observable";
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 
@@ -183,7 +184,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     isTimeBlockScheduled: boolean = false;
     testFacilityEventStatusList: SelectItem[] = [];
     timeBlockEventStatusId: string = '';
-    changeFacilityMessage:Message[];
+    changeFacilityMessage: Message[];
 //endregion fields
 
 // region constructor
@@ -203,7 +204,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private testFacilityRoleService: TestFacilityRoleService,
                 private tenantUserService: TenantService) {
 
-                this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
+        this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
 
 
     }
@@ -335,7 +336,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         startdate: start.utc().format(),
                         enddate: end.utc().format(),
                         projectCodeIdList: [],
-                        timezone: tz,
+                        timezone: 'local',//tz,
                         slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
 
 
@@ -365,7 +366,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         startdate: start.utc().format(),
                         enddate: end.utc().format(),
                         projectCodeIdList: [],
-                        timezone: tz,
+                        timezone: 'local',
                         slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
 
                     },
@@ -385,7 +386,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             }
         }
         let scheduleConfig: any = {
-            timezone: this.defaultCalendarSetting.defaultTimeZone,
+            timezone: 'local',//this.defaultCalendarSetting.defaultTimeZone,
             schedulerLicenseKey: '0799804275-fcs-1480895270',
             height: 650,
             theme: true,
@@ -553,14 +554,23 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 if (self.facilityChanged) {
                     self.moveToTestFacilityHeader = 'Change Test Facility to ' + $("#calendar").fullCalendar('getResourceById', event.resourceId).title;
                     self.changeFacilityMessage = [];
-                    self.changeFacilityMessage.push({severity:'warn', summary:'Test Facility Change', detail:'Are you sure?' });
-                    self.changeFacilityMessage.push({ detail:'Operators will be removed and events status will be set to requested' });
-
+                    self.changeFacilityMessage.push({
+                        severity: 'warn',
+                        summary: 'Test Facility Change',
+                        detail: 'Are you sure?'
+                    });
+                    self.changeFacilityMessage.push({detail: 'Operators will be removed and events status will be set to requested'});
+                    self.displayMoveDialog = true;
                 } else {
                     self.changeFacilityMessage = null;
                     self.moveToTestFacilityHeader = self.moveToTestFacilityName;
+                    let entityId = $(this).attr("entityId");
+                    let id = $(this).attr("eventId");
+                    var blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
+                    self.initTimeBlockDetailsDialogData(blockevent, entityId, 'AssignResources', delta);
+                    // Need to work on the revert Function
                 }
-                self.displayMoveDialog = true;
+
                 self.moveRevertFunction = revertFunc;
                 self.moveTestFacilityEvent = <ITestFacilityMoveEventDbViewModel>{};
                 self.moveTestFacilityEvent.testFacilityScheduleId = event.id;
@@ -629,11 +639,13 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
          }
          * */
         this.tenantUserService.getById('FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D').subscribe(res => {
-            this.currentTenant = res;
+            this.currentTenant = res.result;
+
             if (this.currentTenant.defaultTestReservationIntervalTypeId == 2) {
-                this.showTimeDuringAssignOperation = false;
+                this.showTimeDuringAssignOperation = true;
+            }else if (this.currentTenant.defaultTestReservationIntervalTypeId == 1) {
                 this.scheduleStartTime = 0;
-                this.scheduleEndTime = 1440;
+                this.scheduleEndTime = 1439;
             }
         });
         this.moveTestFacilityEvent = <ITestFacilityMoveEventDbViewModel>{};
@@ -656,17 +668,17 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     //endregion toolbar
 
     populateUpdateTestFacilityAndUserSchedule(selfRef, entityId, eventId, resourceId, action) {
-
+        debugger;
         selfRef.assignUserSchedule.startDate = $("#calendar").fullCalendar('clientEvents', eventId)[0].start.toDate();
         selfRef.assignUserSchedule.endDate = $("#calendar").fullCalendar('clientEvents', eventId)[0].end.toDate();
         selfRef.assignUserSchedule.testFacilityScheduleId = eventId;
         selfRef.assignUserSchedule.updateTestFacilitySchedule = true;
         selfRef.assignUserSchedule.entityId = entityId;
         if (action === 'resize') {
-            selfRef.assignResourceHeader =  selfRef.assignBlockTestFacilityName + " from " +
+            selfRef.assignResourceHeader = selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMM D YYYY');
         } else {
-            selfRef.assignResourceHeader =  selfRef.assignBlockTestFacilityName + " from " +
+            selfRef.assignResourceHeader = selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
         }
 
@@ -732,102 +744,32 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
                 switch (key) {
                     case "AssignResources": {
-                        selfRef.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
-                        selfRef.displayAssignDialog = true;
-                        selfRef.isTimeBlockScheduled = blockevent.isTimeBlockScheduled;
-                        selfRef.assignUserSchedule.minDate = blockevent.startDate;
-                        selfRef.assignUserSchedule.maxDate = blockevent.endDate;
 
-                        selfRef.assignUserSchedule.eventStatusId = blockevent.testFacilityEventStatusId;
-                        selfRef.assignUserSchedule.defaultStartMinutesPastMidnight = blockevent.defaultStartMinutesPastMidnight;
-                        selfRef.assignUserSchedule.defaultEndMinutesPastMidnight = blockevent.defaultEndMinutesPastMidnight;
-                        selfRef.getAvailableTimeBlocksForOperators();
-                        selfRef.selectedTestRequestId = entityId;
-                        selfRef.selectedEventId = id;
-                        selfRef.selectedResourceId = $(this).attr("resourceId");
-                        selfRef.assignBlockTestFacilityName = $("#calendar").fullCalendar('getResourceById', selfRef.selectedResourceId).title;
+                        selfRef.initTimeBlockDetailsDialogData(blockevent, entityId, 'AssignResources', 0);
 
-                        selfRef.plannedStartDate = $(this).attr("plannedStart");
-                        selfRef.plannedEndDate = $(this).attr("plannedEnd");
+                        /*  selfRef.testRequestService.getTestFacilityScheduleById(selfRef.assignUserSchedule.entityId)
+                         .subscribe(res => {
+                         let items = res.result.map(x => {
+                         let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;
+                         return r;
+                         });
+                         selfRef.scheduledTestFacilities = items;
 
-                        // Taking the simplistic approach now/
-                        selfRef.selectedBlockStartDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
-                        selfRef.selectedBlockEndDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
-                        selfRef.assignResourceHeader = "Assign resources to " + selfRef.assignBlockTestFacilityName + " from " +
-                            $.fullCalendar.formatRange(moment(selfRef.selectedBlockStartDate), moment(selfRef.selectedBlockEndDate), 'MMMM D YYYY');
-
-
-                        selfRef.assignUserSchedule.startDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
-                        selfRef.assignUserSchedule.endDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
-                        selfRef.assignUserSchedule.testFacilityScheduleId = id;
-                        selfRef.assignUserSchedule.updateTestFacilitySchedule = false;
-                        selfRef.assignUserSchedule.entityId = entityId;
-                        selfRef.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
-
-                        selfRef.dueDate = $(this).attr("dueDate");
-                        selfRef.testName = $(this).attr("eventName");
-                        selfRef.displayEventDialogHeader = `${selfRef.testName}`;
-                        selfRef.testRequestService.getUserScheduleById(selfRef.selectedEventId, "testfacilityscheduleid").subscribe(res => {
-                            console.log("----GetUserScheduleById", res);
-                            let items = res.result.map(x => {
-                                let r: {
-                                    testFacilityId,
-                                    userDisplayName,
-                                    startDate,
-                                    endDate,
-                                    userId,
-                                    testUserScheduleId,
-                                    testfacilityName,
-                                    action
-                                } = x;
-
-                                r.startDate = moment(r.startDate).toDate();
-                                r.endDate = moment(r.endDate).toDate();
-                                r.action = 'pristine';
-                                return r;
-                            });
-                            selfRef.testOperatorsForBlock = items;
-                        });
-                        selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
-                            let values = filteredList.$values;
-                            selfRef.titanUsersListForTenant = filteredList.$values.map(x => {
-                                let r: any = {};
-                                r.label = x.displayName;
-                                r.value = x.id;
-                                return r;
-                            });
-                            let item = {
-                                label: 'Select user',
-                                value: ''
-                            };
-                            selfRef.titanUsersListForTenant.splice(0, 0, item);
-                        });
-                        selfRef.testRequestService.getTestFacilityScheduleById(selfRef.assignUserSchedule.entityId)
-                            .subscribe(res => {
-                            let items = res.result.map(x => {
-                                let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;
-                                return r;
-                            });
-                            selfRef.scheduledTestFacilities = items;
-
-                        });
-                        let facilityUsers = selfRef.testFacilityRoleService.getByTestFacilityId(blockevent.resourceId)
-                            .subscribe(res=>{
-                                let items = res.map(x =>{
-                                    let r:any = {};
-                                    r.label= x.name;
-                                    r.value= x.titanUserId
-                                    return r;
-                                });
-                                selfRef.titanUsersListForFacility = items;
-                                selfRef.titanUsersListForFacility.splice(0, 0, {
-                                    label: 'Select user',
-                                    value: ''
-                                });
-                            }   );
-
-
-
+                         });
+                         selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
+                         let values = filteredList.$values;
+                         selfRef.titanUsersListForTenant = filteredList.$values.map(x => {
+                         let r: any = {};
+                         r.label = x.displayName;
+                         r.value = x.id;
+                         return r;
+                         });
+                         let item = {
+                         label: 'Select user',
+                         value: ''
+                         };
+                         selfRef.titanUsersListForTenant.splice(0, 0, item);
+                         });*/
                         //selfRef.titanUsersListForFacility = facilityUsers;
                         // selfRef.testRequestService.getUserScheduleById(selfRef.assignUserSchedule.entityId, "testrequestid").subscribe(res => {
                         // let items = res.result.map(x => {
@@ -884,22 +826,22 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 }
             },
             items: {
-               /* "Schedule": {
-                    name: "Schedule",
-                    icon: "fa fa-clock",
-                    disabled: function (key, opt) {
+                /* "Schedule": {
+                 name: "Schedule",
+                 icon: "fa fa-clock",
+                 disabled: function (key, opt) {
 
-                        let id = $(this).attr("eventId");
-                        let blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
-                        return blockevent.disableScheduleOption;
-                        // if (blockevent.status ==="Scheduled"){
-                        //     return true;
-                        // }
-                        //this.titanService.getScheduledTestStatusId
+                 let id = $(this).attr("eventId");
+                 let blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
+                 return blockevent.disableScheduleOption;
+                 // if (blockevent.status ==="Scheduled"){
+                 //     return true;
+                 // }
+                 //this.titanService.getScheduledTestStatusId
 
-                    }
+                 }
 
-                },*/
+                 },*/
                 "AssignResources": {
                     name: "Assign Resources",
                     icon: "edit"
@@ -921,6 +863,102 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         });
         // var combo = $("<select><option>A</option></select>").attr("id", "slot").attr("name", "slot");
         // $(".fc-left .fc-button-group").append(combo);
+    }
+
+    private initTimeBlockDetailsDialogData(blockevent: any, entityId: string, action: string, delta: number) {
+        this.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+        this.displayAssignDialog = true;
+        this.isTimeBlockScheduled = blockevent.isTimeBlockScheduled;
+        this.assignUserSchedule.minDate = blockevent.startDate;
+        this.assignUserSchedule.maxDate = blockevent.endDate;
+        this.assignUserSchedule.eventStatusId = blockevent.testFacilityEventStatusId;
+        this.assignUserSchedule.defaultStartMinutesPastMidnight = blockevent.defaultStartMinutesPastMidnight;
+        this.assignUserSchedule.defaultEndMinutesPastMidnight = blockevent.defaultEndMinutesPastMidnight;
+        this.getAvailableTimeBlocksForOperators();
+        this.selectedTestRequestId = entityId;
+        this.selectedEventId = blockevent.id;
+        this.selectedResourceId = blockevent.resourceId;
+        this.assignBlockTestFacilityName = $("#calendar").fullCalendar('getResourceById', this.selectedResourceId).title;
+
+        this.plannedStartDate = blockevent.startDate;
+        this.plannedEndDate = blockevent.endDate;
+
+        // Taking the simplistic approach now/
+        //this.selectedBlockStartDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
+        //this.selectedBlockEndDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
+
+        this.selectedBlockStartDate = blockevent.start.toDate();
+        this.selectedBlockEndDate = blockevent.end.toDate();
+
+
+        this.assignResourceHeader = "Assign resources to " + this.assignBlockTestFacilityName + " from " +
+            $.fullCalendar.formatRange(moment(this.selectedBlockStartDate), moment(this.selectedBlockEndDate), 'MMMM D YYYY');
+
+        debugger;
+        this.assignUserSchedule.startDate = blockevent.start.toDate();
+        this.assignUserSchedule.endDate = blockevent.end.toDate();
+        this.assignUserSchedule.testFacilityScheduleId = blockevent.id;
+        this.assignUserSchedule.updateTestFacilitySchedule = false;
+        this.assignUserSchedule.entityId = entityId;
+        this.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
+
+        this.dueDate = blockevent.dueDate;
+        this.testName = blockevent.title;
+        this.displayEventDialogHeader = `${this.testName}`;
+
+        let userScheduleCall = this.testRequestService.getUserScheduleById(this.selectedEventId, "testfacilityscheduleid");
+        let facilityUsersCall = this.testFacilityRoleService.getByTestFacilityId(blockevent.resourceId);
+
+        Observable.forkJoin([userScheduleCall, facilityUsersCall]).subscribe(results => {
+            let userScheduleData = results[0];
+            let facilityUserData = results[1];
+            this.initUserSchedule(userScheduleData, delta);
+            this.initFacilityUserList(facilityUserData);
+
+        });
+    }
+
+    /**
+     * This is callback for handling facility user list
+     * @param res
+     */
+    private initFacilityUserList(res) {
+        let items = res.map(x => {
+            let r: any = {};
+            r.label = x.name;
+            r.value = x.titanUserId
+            return r;
+        });
+        this.titanUsersListForFacility = items;
+        this.titanUsersListForFacility.splice(0, 0, {
+            label: 'Select user',
+            value: ''
+        });
+    }
+
+
+    private initUserSchedule(res, delta) {
+
+        let items = res.result.map(x => {
+            let r: {
+                testFacilityId,
+                userDisplayName,
+                startDate,
+                endDate,
+                userId,
+                testUserScheduleId,
+                testfacilityName,
+                action,
+                minDate,
+                maxDate
+            } = x;
+            r.startDate = moment(r.startDate).add(delta, 'minutes').toDate();
+            r.endDate = moment(r.endDate).add(delta, 'minutes').toDate();
+            //r.minDate = this.assignUserSchedule.minDate;
+            r.action = delta === 0 ? 'pristine' : 'modify';
+            return r;
+        });
+        this.testOperatorsForBlock = items;
     }
 
 
@@ -1263,6 +1301,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         // since we are storing the deleted items in a separate array, join them before sending.
         debugger;
         this.assignUserSchedule.schedules = this.testOperatorsForBlock.concat(this.deletedTestOperatorsForBlock);
+        if (this.currentTenant.defaultTestReservationIntervalTypeId ===1){
+            this.assignUserSchedule.defaultEndMinutesPastMidnight = 1439;
+            this.assignUserSchedule.defaultStartMinutesPastMidnight = 0;
+            for(let i of this.assignUserSchedule.schedules){
+                 i.defaultEndMinutesPastMidnight = 1439;
+                 i.defaultStartMinutesPastMidnight = 0;
+
+            }
+        }
         //postdata.entityId ='A';
         //console.log('Modified Users', this.testOperatorsForBlock.filter(x => x.action !== 'pristine'));
         this.testRequestService.postAssignUser(this.assignUserSchedule).subscribe(res => {
@@ -1270,6 +1317,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             if (res.result !== null && res.result) {
                 this.msgs.push({severity: 'success', detail: 'Schedules updated successfully.', summary: 'Success'});
                 this.displayAssignDialog = false;
+                this.testOperatorsForBlock = [];
                 $("#calendar").fullCalendar('refetchEvents')
             } else {
                 this.msgs.push({
@@ -1289,8 +1337,6 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     onFacilityScheduleCalendarDateSelection(event) {
-        console.log("start--", this.selectedTitanUserScheduleStartDate);
-        console.log("end--", this.selectedTitanUserScheduleEndDate)
         if (this.selectedTitanUserScheduleStartDate > this.selectedTitanUserScheduleEndDate) {
             this.selectedTitanUserScheduleEndDate = this.blankDate;
         }
@@ -1298,25 +1344,27 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     /**
-     * This function is used to check the start and end dates for all users and test facility
+     * This function is used to check the start and end dates for all users and test facility.
+     * Blanks the dates that are not in range.
      * @param event
      * @param startDate
      * @param endDate
      */
     validateSchedule(event, startDate, endDate) {
-        // if (startDate > endDate) {
-        //     this.assignUserSchedule.endDate = this.blankDate;
-        // }
-        // Now ensure that the operators schedule is between startdate and enddate
-        // for(let item of this.testOperatorsForBlock){
-        //     if (item.startDate < startDate){
-        //         item.startDate = this.blankDate;
-        //     }
-        //     if (item.endDate > endDate || item.endDate < item.startDate){
-        //         item.endDate = this.blankDate;
-        //     }
-        // }
+        if (startDate > endDate) {
+            this.assignUserSchedule.endDate = this.blankDate;
+        }
+        //Now ensure that the operators schedule is between startdate and enddate
+        for (let item of this.testOperatorsForBlock) {
+            if (item.startDate < startDate) {
+                item.startDate = this.blankDate;
+            }
+            if (item.endDate > endDate || item.endDate < item.startDate) {
+                item.endDate = this.blankDate;
+            }
+        }
     }
+
     validateScheduleDates(event, startDate, endDate) {
         console.log("start--", startDate);
         console.log("end--", endDate)
@@ -1432,6 +1480,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         return selectedItems;
     }
 
+    /**
+     * This method filters the time slots availbel for the operators to pick
+     * based on the default daily start and end time of test facility
+     */
     getAvailableTimeBlocksForOperators() {
         this.filteredTimeOptions = this.timeOptions
             .filter(x => x.value >= this.assignUserSchedule.defaultStartMinutesPastMidnight
@@ -1514,6 +1566,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     cancelMove(event) {
         console.log("--invoking revert function")
         this.moveRevertFunction();
+        this.moveRevertFunction = null;
         this.displayMoveDialog = false;
     }
 
@@ -1521,11 +1574,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     //#region Split
     saveSplitEventChanges(uiEvent) {
-
-        console.log("Hello", "saveSplitEventChanges")
         this.displaySplitDialog = false;
+        debugger;
         this.testfacilityservice.postSplitTestFacilityEvent(this.splitTestFacilityEvent).subscribe(res => {
-            console.log("Hello", res)
+            console.log("Splitting event completed", res);
+            this.splitTestFacilityEvent = <ITestFacilitySplitEventViewModel>{};
+            this.splitTestFacilityEvent.existingSchedule = <ITitanUserScheduleViewModel>{};
+            this.splitTestFacilityEvent.newSchedule = <ITitanUserScheduleViewModel>{};
+
+            $('#calendar').fullCalendar('refetchEvents');
 
         });
     }
@@ -1615,7 +1672,17 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     closeAssignResourceDialog() {
         this.displayAssignDialog = false;
+        this.testOperatorsForBlock = [];
+        this.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+        if (this.moveRevertFunction != null) {
+            this.moveRevertFunction();
+            this.moveRevertFunction = null;
+        }
         //this.moveRevertFunction();
+    }
+
+    validateOperatorDates(item) {
+
     }
 }
 
