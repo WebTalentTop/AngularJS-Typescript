@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { OperatingHoursService} from '../../../../../shared/services/operatingHours.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule } from 'primeng/primeng';
+import { DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, PanelModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule, ButtonModule,DropdownModule, addRoutes],
+    imports: [CommonModule, FormsModule, DataTableModule, InputTextareaModule, CalendarModule, InputTextModule, PanelModule, ButtonModule, DropdownModule, addRoutes],
     providers: [OperatingHoursService],
     declarations: [AddComponent]
 })

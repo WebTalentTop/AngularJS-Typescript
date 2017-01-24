@@ -121,16 +121,9 @@ export class DetailsComponent {
    {
 
    }
-   ngOnInit() {
-       this.getEquipmentManufacturers();
-       this.getEquipmentTypes();
-       this.getTestFacilities();
-       this.GetLogCommentsByEquipmentId();
 
 
-    handleChange(event) {
-
-    }
+   
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
     ngOnInit() {
