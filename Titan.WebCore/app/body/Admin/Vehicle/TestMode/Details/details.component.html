@@ -1,38 +1,24 @@
 ﻿<div class="ui-g-12">
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1>Edit TestMode </h1>
-
+        <h2>Edit TestMode </h2>
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
             <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-            <br/>
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <p-panel  header="Details">
+                <div class="body">
+                    <div class="ui-grid-row">
+                       <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  [(ngModel)]="testTypeDetails.name" #testModeDetailsNameRef="ngModel"
+                                       minlength="3"  required style="width:100%">
+                                <label>Test Mode Name <span >*</span></label>
+                        </div>
+                    </div><br />
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
-                            TestMode Name * :
-                        </div>
-                        <div class="ui-grid-col-4">
-                            <!--[(ngModel)]="testModeDetails.name" #testModeDetailsNameRef="ngModel"-->
-                            <input type="text" pInputText name="name" [(ngModel)]="testTypeDetails.name"  #testModeDetailsNameRef="ngModel"
-                                placeholder="TestMode Name" minlength="3" class="form-control" required row="20" />
-                        </div>
-                        <!--<div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter TestMode Name
-                            </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsNameRef.errors?.minlength">
-                                MinLength-3
-                            </div>
-
-                        </div>-->
-                        <div class="ui-grid-col-4">
-                            <div class="ui-grid-row">
-                                <div class="ui-grid-col-2">
                                     Select Test Type:
-                                </div>
-                                <div class="ui-grid-col-6">
+                        </div>
+                        <div class="ui-grid-col-6">
                                  
                                     <!--<p-multiSelect [options]="testTypeDetails" [(ngModel)]="selectedTestTypes" #testTypeList="ngModel"  name="testType"></p-multiSelect>-->
                                     <p-pickList [source]="allTestTypes" [target]="selectedTestTypes">
@@ -44,45 +30,37 @@
                                         </template>
                                     </p-pickList>
                                 </div>
-                              
-                                <div class="ui-grid-col-4"></div>
+                    </div><br />
+                    <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Description *</label>
                             </div>
-                        </div>
-                      
-                    </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #testModeDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="testTypeDetails.description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Description * :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <!--[(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"-->
-                            <!--<textarea type="text" pInputTextArea class="form-control col-sm-12" [(ngModel)]="testTypeDetails.description"  #testModeDetailsDescriptionRef="ngModel"  required name="description"  row="50" maxlength="250"
-                                ></textarea>-->
-                            <p-editor name="description" [(ngModel)]="testTypeDetails.description" [style]="{'height':'320px'}"></p-editor>
-                        </div>
-                        <!--<div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter TestMode Description
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
                             </div>
-                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testModeDetailsDescriptionRef.errors?.maxlength">
-                                MaxLength-250
-                            </div>
-                        </div>-->
-                    </div>
-                   
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
                         </div>
-                        <div class="ui-grid-col">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testMode" [style]="{'width':'20px'}">  </button>
-                        </div>
-                    </div>
-                </div>
+                    </div><br />
+                
+                    <footer>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testMode" class="blue-grey-btn" icon="ui-icon-close">  </button>
+                        <button id="save" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Save" class="green-btn">  </button>
+                </footer><br />
             </p-panel>
         </form>
     </div>

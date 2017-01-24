@@ -1,53 +1,20 @@
 ﻿<div class="ui-g-12">
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1>Edit TestActivity </h1>
-
+        <h2>Edit TestActivity </h2>
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
             <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-            <br/>
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <p-panel  header="Details">
+                <div class="body">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            TestActivity Name * :
+                       <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  [(ngModel)]="TestActivityDetails.name" #testActivityDetailsNameRef="ngModel"
+                                       minlength="3"  required style="width:100%">
+                                <label>Test Activity Name <span >*</span></label>
                         </div>
-                        <div class="ui-grid-col-4">
-
-                            <input type="text" pInputText name="name" [(ngModel)]="TestActivityDetails.name" #testActivityDetailsNameRef="ngModel"
-                                placeholder="TestActivity Name" minlength="3" class="form-control" required row="20" />
-                        </div>
-                        <div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testActivityDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter TestActivity Name
-                            </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testActivityDetailsNameRef.errors?.minlength">
-                                MinLength-3
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Description * :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <textarea type="text" pInputTextArea class="form-control col-sm-12" required name="description" row="50" maxlength="250"
-                                #testActivityDetailsDescriptionRef="ngModel" [(ngModel)]="TestActivityDetails.description"></textarea>
-                        </div>
-                        <div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testActivityDetailsDescriptionRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter TestActivity Description
-                            </div>
-                             <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testActivityDetailsDescriptionRef.errors?.maxlength">
-                                MaxLength-250
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
+                    </div><br />
+                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                             IsActive :
                         </div>
@@ -55,18 +22,38 @@
                             <p-toggleButton [(ngModel)]="TestActivityDetails.isDeleted" name="isDeleted" #testActivityDetailsisDeletedRef="ngModel"
                                 [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
+                    </div><br />
+                    <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #testActivityDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="TestActivityDetails.description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
+
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
                         </div>
-                        <div class="ui-grid-col">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testActivity" [style]="{'width':'20px'}">  </button>
-                        </div>
-                    </div>
-                </div>
+                    </div><br />    
+                    
+                   
+                    <footer>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testActivity" class="blue-grey-btn" icon="ui-icon-close">  </button>
+                        <button id="save" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Save" class="green-btn">  </button>
+                </footer><br />
             </p-panel>
         </form>
     </div>
