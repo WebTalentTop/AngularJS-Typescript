@@ -1,34 +1,20 @@
 ﻿<div class="ui-g-12">
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1>Edit TestRequirement </h1>
+        <h2>Edit TestRequirement </h2>
 
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
             <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-            <br/>
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <p-panel header="Details">
+                <div class="body">
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            TestRequirement Title * :
+                       <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="title" id="title"  [(ngModel)]="TestRequirementDetails.title" #testRequirementDetailsTitleRef="ngModel"
+                                       minlength="3"  required style="width:100%">
+                                <label>Test Requirement Title <span >*</span></label>
                         </div>
-                        <div class="ui-grid-col-4">
-
-                            <input type="text" pInputText name="title" [(ngModel)]="TestRequirementDetails.title" #testRequirementDetailsTitleRef="ngModel"
-                                placeholder="Required" minlength="3" class="form-control" required row="20" />
-                        </div>
-                        <div class="ui-grid-col-4">
-
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRequirementDetailsTitleRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter TestRequirement Title
-                            </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="testRequirementDetailsTitleRef.errors?.minlength">
-                                MinLength-3
-                            </div>
-
-                        </div>
-                    </div>
-
+                    </div><br />
                    <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
                             IsActive :
@@ -38,17 +24,11 @@
                                 [style]="{'width':'50px'}"></p-toggleButton>
                         </div>
                     </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testRequirement" [style]="{'width':'20px'}">  </button>
-                        </div>
-                    </div>
-                </div>
+                    </div><br />
+                    <footer>
+                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/testRequirement"  class="blue-grey-btn" icon="ui-icon-close">  </button>
+                        <button id="save" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Save" class="green-btn">  </button>
+                </footer><br />
             </p-panel>
         </form>
     </div>

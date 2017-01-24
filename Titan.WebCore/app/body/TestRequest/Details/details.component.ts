@@ -497,7 +497,7 @@ export class DetailsComponent implements AfterViewInit {
     }
     getTestStatus() {
         //    userRoles
-        this.teststatusservice.getTestStatus().subscribe(response => {
+        this.teststatusservice.getAll().subscribe(response => {
             this.testStatus = new Array();
             if (response != null) {
                 var resultMap = new Array();
