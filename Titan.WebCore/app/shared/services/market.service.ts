@@ -6,6 +6,8 @@ import { MarketApiUrl} from './apiUrlConst/MarketApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {UserProfileService} from "./userProfile.service";
+import {IUserProfile} from "./definitions/IUserProfile";
 
 @Injectable()
 export class MarketService {
@@ -20,11 +22,20 @@ export class MarketService {
         "PageSize": 15,
         "IsPaging": true
     };
+    private currentUser: IUserProfile;
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
-
+    getAllMarkets(): Observable<any> {
+        return this.http.get(`${MarketApiUrl.getAllMarkets}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postGridData(): Observable<any> {
         return this.http.post(`${MarketApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
             .map(this.getJson);

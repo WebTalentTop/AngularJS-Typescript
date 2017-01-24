@@ -5,14 +5,14 @@ import { AddComponent } from "./add.component";
 import { TestTypeService} from '../../../shared/services/testType.service';
 import { TestModeService } from '../../../shared/services/testMode.service';
 import { TestTemplateService} from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
-
-import { EditorModule, SharedModule, PanelModule, DataTableModule, ButtonModule, InputTextareaModule,InputTextModule, DropdownModule } from 'primeng/primeng';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import { EditorModule, SharedModule, PanelModule, DataTableModule, BreadcrumbModule,ButtonModule, InputTextareaModule,InputTextModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [EditorModule, SharedModule, PanelModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, ButtonModule,DropdownModule, addRoutes],
-    providers: [TestTemplateService, TestTypeService, TestModeService ],
+    imports: [EditorModule, SharedModule, PanelModule, CommonModule, FormsModule, BreadcrumbModule,DataTableModule, InputTextareaModule, InputTextModule, ButtonModule,DropdownModule, addRoutes],
+    providers: [TestTemplateService, TestTypeService, TestModeService, BreadCrumbsService ],
     declarations: [AddComponent]
 })
 

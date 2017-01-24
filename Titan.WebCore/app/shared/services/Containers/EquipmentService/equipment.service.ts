@@ -6,6 +6,8 @@ import { EquipmentApiUrl } from '../../apiUrlConst/Equipment/EquipmentApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {IUserProfile} from "../../definitions/IUserProfile";
+import {UserProfileService} from "../../userProfile.service";
 
 @Injectable()
 export class EquipmentService {
@@ -21,8 +23,12 @@ export class EquipmentService {
         "IsPaging": true
     };
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    currentUser: IUserProfile;
+
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
 
     postGridData(): Observable<any> {
@@ -98,7 +104,13 @@ export class EquipmentService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getEquipmentBarCodeImage(id,code): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getEquipmentBarCodeImage}/${id}/${code}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getManufaturerDetailsById(id): Observable<any> {
         return this.http.get(`${EquipmentApiUrl.getManufacturerDetailsByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)

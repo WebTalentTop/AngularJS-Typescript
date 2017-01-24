@@ -6,9 +6,10 @@ import { TestModeService } from '../../../shared/services/testMode.service'
 import { ProcedureService } from '../../../shared/services/Containers/ProcedureService/procedure.service'
 import { TestRequirementService } from '../../../shared/services/testrequirement.service'
 import { Validators } from '@angular/forms';
-import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,MenuItem, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Router } from '@angular/router'
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'details-testTemplate',
@@ -24,7 +25,10 @@ export class DetailsComponent {
     public selectedTestRequirements: Array<any> = new Array();
     public filteredTestRequirements: Array<any> = new Array();
     public filteredSelectedTestRequirements: Array<any> = new Array();
+    entityId: string = this.id;
+    id: string;
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private testTemplateService: TestTemplateService,
         private testtypeService: TestTypeService,
         private testmodeService: TestModeService,
@@ -34,8 +38,21 @@ export class DetailsComponent {
         private testRequirementService: TestRequirementService,
         private confirmationService: ConfirmationService
     ) {
+        this.route.params.subscribe(params => this.id = params['id']);
+        this.entityId = this.id;
 
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let testTemplateDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestTemplateDetailsPage'
+            )[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = testTemplateDetailsBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
     }
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     ngOnInit() {
         //this.getTestType();

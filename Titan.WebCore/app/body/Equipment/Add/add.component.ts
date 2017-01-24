@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { ITitanCalibrationSelectItem } from '../../../shared/services/definitions/ITitanCalibrationSelectItem';
 
-import { CheckboxModule, DataTableModule,GrowlModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, Message, CalendarModule } from 'primeng/primeng';
+import { CheckboxModule, DataTableModule, GrowlModule, TabViewModule, MenuItem, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, Message, CalendarModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
-
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { EquipmentService } from '../../../shared/services/Containers/EquipmentService/equipment.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+
 declare var cron: any;
 @Component({
     selector: 'add-equipment',
@@ -16,13 +18,14 @@ declare var cron: any;
 })
 
 export class AddComponent {
-   // name:string;
-    addressLine1:string;
-    addressLine2:string;
-    city:string;
-    state:string;
+    // name:string;
+    addressLine1: string;
+    addressLine2: string;
+    city: string;
+    state: string;
     postalCode: string;
     name: any;
+    added: any;
     equipmentTypeId: any;
     serialNumber: any;
     purchaseDate: any;
@@ -36,7 +39,7 @@ export class AddComponent {
     selectedEquipmentManufacturerId: any;
     calibrationFrequencyCronExpression: any;
     selectedMaintenanceFrequency: any;
-    isMaintenaceFrequencySelected: boolean ;
+    isMaintenaceFrequencySelected: boolean;
     equipmentTypes: ITitanCalibrationSelectItem[];
     selectedEquipmentTypeId: any;
     testFacilities: any;
@@ -45,6 +48,8 @@ export class AddComponent {
     isCronControlInitialized: boolean = false;
     manufacturerPhone: any;
     msgs: Message[] = [];
+    id: string;
+    entityId: string = this.id;
     manufacturerWebsite: any;
     manufacturerEmail: any;
 
@@ -57,26 +62,47 @@ export class AddComponent {
     IsNewManufacturer: boolean;
     manufacturerId: any;
     testFacility = {
-                    name:'',
-                    address:{
-                        addressLine1:'',
-                        addressLine2:'',
-                        city:'',
-                        state:'',
-                        postalCode:'',
-                    }};
+        name: '',
+        address: {
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            state: '',
+            postalCode: '',
+        }
+    };
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private service: EquipmentService, private testfacilityservice: TestFacilityService, private router: Router) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: EquipmentService,
+        private route: ActivatedRoute,
+        private testfacilityservice: TestFacilityService,
+        private router: Router
+    ) {
+        this.route.queryParams.subscribe(params => this.id = params['id']); {
+            this.entityId = this.id;
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let equipmentAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EquipmentAddPage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = equipmentAddBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+
+        }
     }
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
         this.getTestFacilities();
-      //  this.frequencyInit();
+        //  this.frequencyInit();
         // $("#selector").cron({
         //
         //     initial: "* * * * *",
@@ -100,8 +126,7 @@ export class AddComponent {
         }
         this.selectedEquipmentManufacturerId = (event.value);
         // get all manufacturer information
-        this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res =>
-        {
+        this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res => {
             this.manufacturerPhone = res.result.phoneNumber;
             this.manufacturerFax = res.result.faxNumber;
             this.manufacturerWebsite = res.result.website;
@@ -112,9 +137,9 @@ export class AddComponent {
             this.manufacturerPostal = res.result.postal;
             this.manufacturerCity = res.result.city;
             this.manufacturerState = res.result.state;
-         
+
         });
-      
+
     }
     //frequencyInit() {
     //    if (this.calibrationFrequencyCronExpression != null) {
@@ -234,8 +259,7 @@ export class AddComponent {
             }
         });
     }
-    AddManufacturer()
-    {
+    AddManufacturer() {
         this.IsNewManufacturer = true;
         this.manufacturerName = '';
         this.manufacturerPhone = '';
@@ -266,15 +290,14 @@ export class AddComponent {
         if (!this.IsNewManufacturer) {
             this.manufacturerId = this.selectedEquipmentManufacturerId;
         }
-        else
-        {
+        else {
             this.manufacturerId = '';
         }
         let model = {
             Name: formRef.name,
             ModelNumber: formRef.modelNumber,
-           // LastCalibrationDate: formRef.lastCalibrationDate,
-           // CalibrationFrequencyCronExpression: cronexp,
+            // LastCalibrationDate: formRef.lastCalibrationDate,
+            // CalibrationFrequencyCronExpression: cronexp,
             EquipmentTypeId: this.selectedEquipmentTypeId,
             SerialNumber: formRef.serialNumber,
             PurchaseDate: formRef.purchaseDate,
@@ -283,24 +306,24 @@ export class AddComponent {
             PurchasePrice: formRef.purchasePrice,
             TestFacilityId: this.selectedTestFacilityId,
             EquipmentManufacturerId: this.manufacturerId,
-             ManufacturerName: this.manufacturerName,
-             ManufacturerPhone: this.manufacturerPhone,
-             ManufacturerFax: this.manufacturerFax,
-             ManufacturerWebsite: this.manufacturerWebsite,
-             ManufacturerEmail: this.manufacturerEmail,
-             ManufacturerAddress: {
-                 addressLine1: this.manufacturerAddressLine1,
-                 addressLine2: this.manufacturerAddressLine2,
-                 city: this.manufacturerCity,
-                 state: this.manufacturerState,
-                 postalCode: this.manufacturerPostal,
-             }
+            ManufacturerName: this.manufacturerName,
+            ManufacturerPhone: this.manufacturerPhone,
+            ManufacturerFax: this.manufacturerFax,
+            ManufacturerWebsite: this.manufacturerWebsite,
+            ManufacturerEmail: this.manufacturerEmail,
+            ManufacturerAddress: {
+                addressLine1: this.manufacturerAddressLine1,
+                addressLine2: this.manufacturerAddressLine2,
+                city: this.manufacturerCity,
+                state: this.manufacturerState,
+                postalCode: this.manufacturerPostal,
+            }
 
         };
 
-       this.msgs = [];
-       this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
-        
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
+
 
         this.service.postAdd(model).subscribe(res => {
             if (res.isSuccess) {

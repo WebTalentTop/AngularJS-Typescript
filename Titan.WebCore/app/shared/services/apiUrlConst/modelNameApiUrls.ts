@@ -6,4 +6,5 @@ export class ModelNameApiUrl {
     public static postCreatedUrl: string = titanApiUrl + 'modelName/post';
     public static postUpdateUrl: string = titanApiUrl + 'modelName/put';
     public static getByIdUrl: string = titanApiUrl + 'modelName/get';
+    public static getAllModelNames: string = titanApiUrl + 'modelName/GetAllModelNames';
 }

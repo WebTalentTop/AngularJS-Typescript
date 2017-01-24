@@ -6,6 +6,8 @@ import { ProjectRoleApiUrl} from './apiUrlConst/ProjectRoleApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {UserProfileService} from "./userProfile.service";
+import {IUserProfile} from "./definitions/IUserProfile";
 
 @Injectable()
 export class ProjectRoleService {
@@ -20,9 +22,25 @@ export class ProjectRoleService {
         "PageSize": 15,
         "IsPaging": true
     };
+    private currentUser: IUserProfile;
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
+    }
+
+    getAllProjectRoles(): Observable<any> {
+        return this.http.get(`${ProjectRoleApiUrl.getAllProjectRoles}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
+    postAddUserNames(filterBody, projectId, projectRoleId): Observable<any> {
+        return this.http.post(`${ProjectRoleApiUrl.PostAddUserRolesUrl}/${projectId}/${projectRoleId}`, filterBody, { headers: this.headers })
+            .map(this.getJson);
     }
 
     postGridData(): Observable<any> {
@@ -59,6 +77,20 @@ export class ProjectRoleService {
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
             .map(this.getJson);
+    }
+    getByIdusing(id): Observable<any> {
+        return this.http.get(`${ProjectRoleApiUrl.getRolesByProjectIdUrl}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            .map(data => {
+                console.log('---------getbyusing testdata---------', data);
+                return data.$values
+            });
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
     }
 
     getById(id): Observable<any> {

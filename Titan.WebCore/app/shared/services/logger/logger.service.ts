@@ -10,7 +10,7 @@ export class LoggerService{
     show:boolean = true;
 
     public logConsole(message, data?) {
-        this.log(message)
+        this.log(message, data)
     }
 
     private log(message, data?) {

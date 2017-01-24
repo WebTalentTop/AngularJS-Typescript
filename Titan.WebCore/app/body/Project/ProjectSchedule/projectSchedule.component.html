@@ -1,9 +1,17 @@
-<div class="card card-w-title">
-    <h1>Select build levels</h1>
-    <div class="ui-g">
 
+<p-panel>
+<header class="with-controls">
+    <p class="ui-panel-title">Build Level Milestone Map</p>
+    <p class="controls">
+    <button pButton type="button" icon="ui-icon-search" label="Select Build Levels" class="blue-grey-btn" (click)="displayBuildlevel=true"></button>
+    </p>
+</header>
+
+
+<p-dialog header="Select Build Levels" [(visible)]="displayBuildlevel" modal="modal" width="900" responsive="true">
+    <div class="ui-g">
         <div class="ui-g-12">
-            <div class="ui-g-2" *ngFor="let item of buildLevels">
+            <div class="ui-g-4" *ngFor="let item of buildLevels">
                 <p-checkbox
                         name="buildLevels"
                         value="{{item.id}}"
@@ -13,28 +21,28 @@
                 </p-checkbox>
             </div>
         </div>
-    </div>
-</div>
-<div *ngIf="isBuildLevelData">
-    <div class="table">
-        <div class="row header blue">
-            <div class="cell" *ngFor="let item of buildLevelsColHeaders">
-                <span style="width:75px;padding:1px;">{{item.name}}</span>
-            </div>
-        </div>
-        <div class="row" *ngFor="let row of mileStoneBuildLevel; let ii = index;">
-            <div class="cell">{{ mileStones[ii].name}}</div>
+    </div><br />
+</p-dialog>
+<div *ngIf="isBuildLevelData" class="tb_container">
+    <table class="table">
+        <tr class="row header blue">
+            <th class="cell" *ngFor="let item of buildLevelsColHeaders" style="background: #2980b9;">
+                <span>{{item.name}}</span>
+            </th>
+        </tr>
+        <tr class="row" *ngFor="let row of mileStoneBuildLevel; let ii = index;">
+            <td class="cell">{{ mileStones[ii].name}}</td>
             <template ngFor let-item [ngForOf]="row">
-                <div class="cell" *ngIf="item.enabled">
+                <td class="cell" *ngIf="item.enabled">
                     <label>Start Date:</label>
-                    <input [style.border]="item.startDateErrorColor" (ngModelChange)="validateStartDate($event,item)" type="date" [(ngModel)]="item.plannedStartDate">
+                    <input [style.border]="item.startDateErrorColor" (ngModelChange)="validateStartDate($event,item)" type="date" [(ngModel)]="item.plannedStartDate"><br />
                     <label>End Date:</label>
                     <input [style.border]="item.endDateErrorColor" (ngModelChange)="validateEndDate($event,item)" type="date" [(ngModel)]="item.plannedEndDate">
-                </div>
+                </td>
             </template>
 
-        </div>
-    </div>
+        </tr>
+    </table>
 </div>
 <div class="ui-grid-row" style="text-align:right" *ngIf="isBuildLevelData">
     <button
@@ -42,9 +50,8 @@
             pButton
             [disabled]="formIsValid"
             label="Save"
-            icon="fa-plus"
-            iconPos="right"
-            class="indigo-btn"
+            icon="ui-icon-save"
+            class="green-btn"
             (click)="saveGrid($event)">
     </button>
 </div>

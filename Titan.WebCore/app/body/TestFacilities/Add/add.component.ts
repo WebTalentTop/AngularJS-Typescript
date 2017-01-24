@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, 
         Message, GrowlModule, MessagesModule, DropdownModule, MenuItem } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 
@@ -14,11 +14,14 @@ import { TestFacilityService } from '../../../shared/services/Containers/TestFac
 
 export class AddComponent {
     name:string;
+    id: string;
+    entityId: string = this.id;
     addressLine1:string;
     addressLine2:string;
     city:string;
     state:string;
-    postalCode:string;
+    postalCode: string;
+    added: any;
     notificationMsgs: Message[] = [];
     testFacility = {
                         name:'', description: '', lastMaintenanceDate: '',
@@ -32,15 +35,15 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private breadCrumbsService: BreadCrumbsService,
-                private service: TestFacilityService, 
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: TestFacilityService,
+        private route: ActivatedRoute, 
                 private router: Router) {
 
-    }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
+        this.route.queryParams.subscribe(params => this.id = params['id']);{
+        this.entityId = this.id;
 
-    ngOnInit() {
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
             filter.pageName === 'TestFacilitiesAddPage'
@@ -50,6 +53,13 @@ export class AddComponent {
 
 
         this.breadcrumbsHome = { routerLink: ['/'] };
+    }
+                }
+
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
+    ngOnInit() {
+       
     }
     onSubmit(formRef) {
         formRef.isDeleted = false;

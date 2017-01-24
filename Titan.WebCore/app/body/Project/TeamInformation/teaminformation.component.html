@@ -13,7 +13,7 @@
 
     <div class="ui-grid-row">
 
-        <p-dataTable [value]="TestFacilityRoles" [rows]="20" [paginator]="true"
+        <p-dataTable [value]="projectUserRoles" [rows]="20" [paginator]="true"
                      [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
             <p-column field="name" header="Name" sortable="true" [filter]="true"
                       filterPlaceholder="Search"></p-column>
@@ -59,7 +59,7 @@
               <!-- Note: p-dropdown includes a "label" element, so it should not be wrapped in another one. -->
               <span class="pseudo-label">Role</span>
 
-              <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)"
+              <p-dropdown [options]="projectRoles" (onChange)="onProjectRoleChange($event)"
                           name="userRole" [autoWidth]="false"></p-dropdown>
 
           </div>

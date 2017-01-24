@@ -1,46 +1,30 @@
-import {TestFacilityService} from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
-import {LoggerService} from '../../../shared/services/logger/logger.service';
-import {titanApiUrl} from '../../../shared/services/apiurlconst/titanapiurl';
-import {TestTemplateService} from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
-import {EntityIdentifierService} from '../../../shared/services/entityIdentifier.service';
-import {FormSchemaCategoryService} from '../../../shared/services/formSchemaCategory.service';
-import {FormSchemaService} from '../../../shared/services/formSchema.service';
-import {FormInstanceService} from '../../../shared/services/formInstance.service';
-import {IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
-
-import {BuildLevelService} from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
-import {TestStatusService} from '../../../shared/services/Containers/TestStatusService/testStatus.service';
-import {TestRoleService} from '../../../shared/services/testRole.service';
-import {ProjectService} from '../../../shared/services/Containers/ProjectService/project.service';
-import {TestModeService} from '../../../shared/services/testMode.service';
-import {TestTypeService} from '../../../shared/services/testType.service';
-import {TestFacilityRoleService} from '../../../shared/services/testFacilityRole.service';
-import {IFormSchemaCategory} from '../../../shared/services/definitions/IFormSchemaCateogry';
-import {ITestFacilityRole} from '../../../shared/services/definitions/ITestFacilityRole';
-import {TestFacilityAttachmentService} from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
-import {ITestFacilityAttachment} from '../../../shared/services/definitions/ITestFacilityAttachment';
-import {ITestFacilityEquipment} from '../../../shared/services/definitions/ITestFacilityEquipment';
-import {
-    DataTable,
-    Header,
-    Footer,
-    TabViewModule,
-    LazyLoadEvent,
-    ButtonModule,
-    InputTextareaModule,
-    InputTextModule,
-    PanelModule,
-    FileUploadModule,
-    MessagesModule,
-    Message,
-    GrowlModule,
-    MenuItem
-} from 'primeng/primeng';
-import {Component, AfterViewInit, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Router} from '@angular/router';
-import {SelectItem, ConfirmationService} from 'primeng/primeng';
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
+import { LoggerService } from '../../../shared/services/logger/logger.service';
+import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
+import { TestTemplateService } from '../../../shared/services/Containers/TestTemplateService/testTemplate.service';
+import { EntityIdentifierService } from '../../../shared/services/entityIdentifier.service';
+import { FormSchemaCategoryService } from '../../../shared/services/formSchemaCategory.service';
+import { FormSchemaService } from '../../../shared/services/formSchema.service';
+import { FormInstanceService } from '../../../shared/services/formInstance.service';
+import { IFormSchema, FormSchema, IFormSchemaGridMF} from '../../../shared/services/definitions/IFormSchema';
+import { BuildLevelService } from '../../../shared/services/Containers/BuildLevelService/buildLevel.service';
+import { TestStatusService } from '../../../shared/services/Containers/TestStatusService/testStatus.service';
+import { TestRoleService } from '../../../shared/services/testRole.service';
+import { ProjectService } from '../../../shared/services/Containers/ProjectService/project.service';
+import { TestModeService } from '../../../shared/services/testMode.service';
+import { TestTypeService } from '../../../shared/services/testType.service';
+import { TestFacilityRoleService } from '../../../shared/services/testFacilityRole.service';
+import { IFormSchemaCategory } from '../../../shared/services/definitions/IFormSchemaCateogry';
+import { ITestFacilityRole } from '../../../shared/services/definitions/ITestFacilityRole';
+import { TestFacilityAttachmentService } from '../../../shared/services/Containers/TestFacilityAttachmentService/testFacilityAttachment.service';
+import { ITestFacilityAttachment } from '../../../shared/services/definitions/ITestFacilityAttachment';
+import { ITestFacilityEquipment } from '../../../shared/services/definitions/ITestFacilityEquipment';
+import { DataTable,Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { SelectItem, ConfirmationService } from 'primeng/primeng';
 import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelectItem";
 
 import {BreadCrumbsService} from '../../../shared/services/breadCrumbs/breadCrumbs.service';

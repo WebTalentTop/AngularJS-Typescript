@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
-
+import { ProjectService } from './../../../shared/services/Containers/ProjectService/project.service'
 import { ButtonModule, InputTextareaModule,InputTextModule, PanelModule, DropdownModule
      } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
@@ -24,7 +24,7 @@ import addRoutes from "./add.routes";
         //MultiSelectModule,
         addRoutes
         ],
-    providers: [TorquesheetService],
+    providers: [TorquesheetService, ProjectService],
     declarations: [AddComponent],
     exports:[AddComponent]
 })

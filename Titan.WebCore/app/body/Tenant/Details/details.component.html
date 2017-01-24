@@ -143,6 +143,9 @@
                    <a routerLink="details/{{userrow.id}}">{{userrow.firstName}} {{userrow.lastName}}</a>
                           </template>
                  </p-column>
+                  <p-column header="Last Logged On" field="lastLoggedIn" sortable="true">
+                     
+                  </p-column>
                   <p-column header="Action">
                       <template let-UserInfo="rowData" pTemplate type="body">
                           <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" label="Delete" (click)="onDeleteUserTenantMap(UserInfo)"></button>

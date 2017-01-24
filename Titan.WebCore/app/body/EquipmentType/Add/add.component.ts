@@ -1,11 +1,12 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-import { DataTable, TabViewModule, DialogModule, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
+import { DataTable, TabViewModule, DialogModule, MenuItem, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipmentSubtype';
 import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -16,8 +17,8 @@ import { Router } from '@angular/router';
 export class AddComponent implements OnInit {
 
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '','', '');
-    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '','');
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '', '');
+    CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
     IsSubType: boolean;
@@ -26,10 +27,11 @@ export class AddComponent implements OnInit {
     username: string;
     details: string;
     id: string;
+    added: any;
     description: any;
     msgs: Message[];
     entityType: string = '';
-    entityId: string = '';
+    entityId: string = this.id;
     displayDialogForm: boolean;
     emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
@@ -39,10 +41,10 @@ export class AddComponent implements OnInit {
     selectedstring: string = null;
     model: any = {
         id: '',
-       // isdeleted: '0',
+        // isdeleted: '0',
         parentId: '',
         description: '',
-         name: ''
+        name: ''
         //createdOn: '',
         //modifiedOn: '',
         //userCreatedById: '',
@@ -54,11 +56,24 @@ export class AddComponent implements OnInit {
     uploadedFiles: any[] = [];
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private dataService: EquipmentTypeService,
         private router: Router
 
     ) {
+        this.route.queryParams.subscribe(params => this.id = params['id']); {
+            this.entityId = this.id;
+
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let equipmentTypeAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EquipmentTypeAddPage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = equipmentTypeAddBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        }
 
         this.CalibrationForms = [];
         this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi', calibrationFrequencyCronExpression: '' });
@@ -75,8 +90,11 @@ export class AddComponent implements OnInit {
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
     }
+
     handleChange(event) {
     }
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
         //this.dataService.getById(this.id)
         //    .subscribe(res => {
@@ -141,10 +159,10 @@ export class AddComponent implements OnInit {
 
 
         this.EquipmentsubTypes.forEach((subtype: any) => {
-           // if (subtype.isdeleted =='' )
-                this.dataService.postAdd(subtype)
-                    .subscribe(res1 => {
-                    });
+            // if (subtype.isdeleted =='' )
+            this.dataService.postAdd(subtype)
+                .subscribe(res1 => {
+                });
 
         });
 
@@ -160,14 +178,14 @@ export class AddComponent implements OnInit {
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '','', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', '', this.id);
         this.displayDialog = true;
         // this.IsSubType= true;
     }
     showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
-        this.CalibrationForm = new PrimeCalibrationForm('', '', '','');
+        this.CalibrationForm = new PrimeCalibrationForm('', '', '', '');
         //this.IsSubType= false;
     }
     ok() {
@@ -236,11 +254,11 @@ export class AddComponent implements OnInit {
 
 class PrimeEquipmentSubType implements IEquipmentSubtype {
 
-    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency,public frequencyDescription, public parentId) {
+    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public frequencyDescription, public parentId) {
     }
 }
 class PrimeCalibrationForm implements ICalibrationForm {
 
-    constructor(public id, public name, public description,public calibrationFrequencyCronExpression) {
+    constructor(public id, public name, public description, public calibrationFrequencyCronExpression) {
     }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by ZeroInfinity on 1/7/2017.
  */
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     Route,
     Router,
@@ -12,19 +12,20 @@ import {
 }       from '@angular/router';
 import {LoggerService} from "../logger/logger.service";
 import {IUserProfile} from "../definitions/IUserProfile";
+import {TitanUserProfileService} from "../titanUserProfile.service";
 import {Observable} from "rxjs";
 import {UserProfileService} from "../userProfile.service";
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate {
+    extraNav:NavigationExtras;
     currentUser: IUserProfile;
-    extraNav: NavigationExtras;
-
-    constructor(private router: Router,
-                private userProfile: UserProfileService,
-                private ls: LoggerService) {
+    constructor(
+        private router: Router,
+        private userProfile: UserProfileService,
+        private ls: LoggerService) {
         this.ls.setShow(false);
-        this.ls.logConsole("AuthGuard constructor", "");
+        this.ls.logConsole("AuthGuard constructor","");
     }
 
     canLoad(route: Route): boolean {
@@ -45,8 +46,12 @@ export class AuthGuard implements CanLoad, CanActivate {
             return this.isActive(user, state);
         }
     }
-
     isActive(data, state) {
+        if (!data) {
+            this.router
+                .navigate(['login', data.id], this.extraNav);
+            return false;
+        }
         if (data.defaultTenantId) {
             return true;
         }
@@ -63,6 +68,4 @@ export class AuthGuard implements CanLoad, CanActivate {
         }
 
     }
-
-
 }

@@ -14,7 +14,7 @@ import {UserProfileService} from "../../shared/services/userProfile.service";
 export class ProjectService extends BaseService{
   private localUrl = 'http://localhost:9998/api';
   private preprodUrl = 'http://titanapi-preprod.12thwonder.com/api/';
-  private urlToUse = this.preprodUrl;
+  private urlToUse = this.localUrl;
 
     private getProjectDetailsUrl: string = this.urlToUse + 'project/Get?id=';
     private getTorqueBooksByBuildLevelIdUrl: string = this.urlToUse + 'TorqueBook/GetTorqueBooksByBuildLevel?projectId=';

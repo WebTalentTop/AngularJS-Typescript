@@ -1,46 +1,26 @@
 <div class="ui-g-12">
-
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+   <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Milestone </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Milestone </h2>
+        <p-panel  header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Milestone Name * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Milestone Name" minlength="3" #milestoneDetailsNameRef="ngModel"
-                            class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="milestoneDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
+                        <div class="md-inputfield ui-g-12 ui-md-6">
+                                    <input type="text" pInputText name="name" id="name"  #marketDetailsNameRef="ngModel" [(ngModel)]="name"
+                                           minlength="3"  required style="width:100%">
+                                    <label>Market Name <span >*</span></label>
                         </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneDetailsNameRef.errors?.minlength">
-                            MinLength-3
-                        </div>
-                    </div>
                 </div>
-            </div>
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/milestone">  </button>
-                    </div>
-                </div>
-            </div>
-            <br />
+             </div>
+             <br />
+            <footer>
+                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/milestone" icon="ui-icon-close" class="blue-grey-btn">  </button>
+                    <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Add" class="green-btn">  </button>
+                        
+            </footer>
             <br />
         </p-panel>
     </form>
+    </div>
 </div>
