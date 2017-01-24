@@ -1,3 +1,6 @@
+.fc-header-toolbar {
+  display: none !important; }
+
 body .ui-fileupload .ui-fileupload-buttonbar .ui-button:nth-child(2) {
   background-color: #E91E63; }
 
@@ -148,6 +151,15 @@ body .ui-fileupload .ui-fileupload-buttonbar .ui-button:nth-child(2) {
 
 .fa-arrow-up:before {
   content: "arrow_upward"; }
+
+.fa-refresh:before {
+  content: "refresh"; }
+
+.fa-cogs:before {
+  content: "settings"; }
+
+.fa-bar-chart:before {
+  content: "dehaze"; }
 
 .ui-icon-carat-2-n-s:before {
   content: "sort"; }

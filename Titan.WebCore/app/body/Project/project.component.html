@@ -20,7 +20,7 @@
       </p-dialog>
         <header>
             <h1>Project</h1>
-            <button pButton type="button" icon="ui-icon-file-download" label="Download Template For Import" [routerLink]="{{titanApiUrl}}/ImportExport/downloadtemplate"></button>
+            <button pButton type="button" icon="ui-icon-file-download" label="Download Template For Import" (click)="downloadAttachment()"></button>
             <button pButton type="button" icon="ui-icon-file-download" label="Import From Excel" (click)="displayExcelDialog=true"></button>
             <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Project"></button>
 
