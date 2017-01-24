@@ -1,12 +1,12 @@
 import {titanApiUrl} from '../../shared/services/apiurlconst/titanapiurl';
+import {RefToNg} from '../../shared/services/definitions/RefToNg';
 import {TestFacilityService} from '../../shared/services/Containers/TestFacilityService/testFacility.service';
-import { BuildLevelService } from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
+import {BuildLevelService} from '../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import {TestStatusService} from '../../shared/services/Containers/TestStatusService/testStatus.service';
 import {TestRoleService} from '../../shared/services/testRole.service';
-import { ProjectService } from '../../shared/services/Containers/ProjectService/project.service';
+import {ProjectService} from '../../shared/services/Containers/ProjectService/project.service';
 import {TestModeService} from '../../shared/services/testMode.service';
 import {TestTypeService} from '../../shared/services/testType.service';
-import {TitanUserService} from '../../shared/services/titanuser.service';
 import {TitanUserProfileService} from '../../shared/services/titanUserProfile.service';
 import {CalendarService} from '../../shared/services/Containers/CalendarService/calendar.service';
 import {TestRequestService} from '../../shared/services/Containers/TestRequestService/testRequest.service';
@@ -44,14 +44,20 @@ import {
     ITestFacilitySplitEventViewModel,
     ITestFacilityScheduleViewModel
 } from "../../shared/services/definitions/Scheduler/ITestFacilitySplitEventDbViewModel";
+import {ICalendarDurationOptions} from "../../shared/services/definitions/ICalendarSlotOptions";
+import {TenantService} from '../../shared/services/tenant.service';
+import {ITenantViewModel} from "../../shared/services/definitions/tenantDefinitions/ITenantViewModel";
+import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.service";
 import {UserProfileService} from "../../shared/services/userProfile.service";
+import {Observable} from "rxjs/Observable";
 declare var $: JQueryStatic;
 declare var fullcalendardef: FullCalendar.Calendar;
 
-
 @Component({
     selector: 'calendar',
-    templateUrl: 'app/body/calendar/titancalendar.component.html'
+    styleUrls: ['app/body/Calendar/titancalendar.component.css'],
+    templateUrl: 'app/body/Calendar/titancalendar.component.html'
+
 })
 
 export class TitanCalendarComponent implements AfterViewInit, OnInit {
@@ -61,8 +67,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     assignUserSchedule: ITestFacilityUserScheduleDbViewModel;
     moveTestFacilityEvent: ITestFacilityMoveEventDbViewModel;
     splitTestFacilityEvent: ITestFacilitySplitEventViewModel;
-
+    calendarDurationOptions: ICalendarDurationOptions[] = [];
     displaySplitDialog: boolean = false;
+    displayScheduleDialog: boolean = false;
+    displayCalendarSearchDialog: boolean = false;
+    currentTenant: ITenantViewModel;
     testRoles: any;
     buildLevels: any;
     projectCodes: any;
@@ -132,7 +141,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     dueDate: string = '';
     testDuration: string = '';
     titanUsersListForTenant: SelectItem[] = [];
-
+    titanUsersListForFacility: SelectItem[] = [];
+    timeOptions: SelectItem[] = [];
+    filteredTimeOptions: SelectItem[] = [];
     // For assigning operators/technicians
     selectedOperatorUserNames: any[] = [];
     filteredOperatorUserNames: any[] = [];
@@ -155,6 +166,25 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     testOperators: any[] = [];
     msgs: Message[] = [];
+    scheduleDefaultStartTime: string = '';
+    scheduleDefaultEndTime: string = '';
+    durationOptions: SelectItem[] = [];
+    selectedDurationOption: SelectItem;
+    allSlotOptions = [];
+    calendarHeader: string = '';
+    scheduleStartTime: number;
+    scheduleEndTime: number;
+    calendarDisplayMode: string = 'timeline';
+
+    showTimeDuringAssignOperation: boolean = false;
+    draggedResourceId: string = '';
+    facilityChanged: boolean = false;
+    tfEventSource: any = {};
+    tfUserSource: any = {};
+    isTimeBlockScheduled: boolean = false;
+    testFacilityEventStatusList: SelectItem[] = [];
+    timeBlockEventStatusId: string = '';
+    changeFacilityMessage: Message[];
 //endregion fields
 
 // region constructor
@@ -170,15 +200,85 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private testRequestService: TestRequestService,
                 private titanService: TitanService,
                 private calendarService: CalendarService,
-                private userProfileService: UserProfileService) {
-        this.userProfileService.getCurrentUserProfile()
-            .subscribe(res => {
-                this.currentUser = res.result;
-            })
+                private titanUserProfileService: UserProfileService,
+                private testFacilityRoleService: TestFacilityRoleService,
+                private tenantUserService: TenantService) {
+
+        this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
+
+
     }
 
 // endregion constructor
     initCalendarOptions() {
+
+        //region Year
+        let year = <ICalendarDurationOptions>{};
+        year.durationItem = {label: 'Year', value: 'Year'};
+        year.defaultSlotWidth = {label: 'Week', value: {weeks: 1}};
+        year.slotOptions = [];
+        year.slotOptions.push({label: 'Month', value: {months: 1}});
+        year.slotOptions.push({label: 'week', value: {weeks: 1}});
+        year.slotOptions.push({label: 'day', value: {days: 1}});
+        this.calendarDurationOptions.push(year);
+        //endregion Year
+
+        //region quarter
+        let quarter = <ICalendarDurationOptions>{};
+        quarter.durationItem = {label: 'Quarter', value: 'Quarter'};
+
+        quarter.defaultSlotWidth = {label: 'Week', value: {weeks: 1}};
+        quarter.slotOptions = [];
+        quarter.slotOptions.push({label: 'Month', value: {months: 1}});
+        quarter.slotOptions.push({label: 'week', value: {weeks: 1}});
+        quarter.slotOptions.push({label: 'day', value: {days: 1}});
+        this.calendarDurationOptions.push(quarter);
+        //endregion quarter
+
+        //region month
+        let month = <ICalendarDurationOptions>{};
+        month.durationItem = {label: 'Month', value: 'Month'};
+        month.defaultSlotWidth = {label: 'day', value: {days: 1}};
+        month.slotOptions = [];
+        month.slotOptions.push({label: 'Week', value: {weeks: 1}});
+        month.slotOptions.push({label: 'day', value: {days: 1}});
+        month.slotOptions.push({label: 'Shift', value: {hours: 8}});
+        month.slotOptions.push({label: 'hour', value: {hours: 1}});
+        month.slotOptions.push({label: 'half-hour', value: {minutes: 30}});
+        this.calendarDurationOptions.push(month);
+        //endregion month
+
+        //region day
+        let day = <ICalendarDurationOptions>{};
+        day.durationItem = {label: 'Day', value: 'Day'};
+        day.defaultSlotWidth = {label: 'hour', value: {hours: 1}};
+        day.slotOptions = [];
+        //day.slotOptions.push({label: 'day', value: {days: 1}});
+        day.slotOptions.push({label: 'Shift', value: {hours: 8}});
+        day.slotOptions.push({label: 'hour', value: {hours: 1}});
+        day.slotOptions.push({label: 'half-hour', value: {minutes: 30}});
+        this.calendarDurationOptions.push(day);
+        //endregion day
+
+        this.allSlotOptions.push('HALF-HOUR');
+        this.allSlotOptions.push('HOUR');
+        this.allSlotOptions.push('SHIFT');
+        this.allSlotOptions.push('DAY');
+        this.allSlotOptions.push('WEEK');
+        this.allSlotOptions.push('MONTH');
+        this.allSlotOptions.push('YEAR');
+
+
+        this.selectedDurationOption = month.durationItem.value;
+        this.slotDurations = [];
+        for (let item of this.calendarDurationOptions) {
+            this.durationOptions.push(item.durationItem);
+            if (item.durationItem.value === this.selectedDurationOption) {
+                this.slotDurations = item.slotOptions;
+            }
+        }
+
+
         this.daysofweek = [];
         this.daysofweek.push({label: 'Sunday', value: {id: 1, name: '0', code: 'SUN'}});
         this.daysofweek.push({label: 'Monday', value: {id: 2, name: '1', code: 'NY'}});
@@ -188,12 +288,14 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.daysofweek.push({label: 'Friday', value: {id: 6, name: '5', code: 'NY'}});
         this.daysofweek.push({label: 'Saturday', value: {id: 7, name: '6', code: 'NY'}});
 
-        this.slotDurations = [];
+
         //this.slotDurations.push({ label: 'Month', value: { id: 1, name: '30.00.', code: 'SUN' } });
-        this.slotDurations.push({label: 'Week', value: {weeks: 1}});
-        this.slotDurations.push({label: 'Day', value: {days: 1}});
-        this.slotDurations.push({label: 'Shift', value: {hours: 8}});
-        //this.slotDurations.push({label: 'Hour', value: {hours: 1}});
+        // this.slotDurations.push({label: 'Month', value: {months: 1}});
+        // this.slotDurations.push({label: 'Week', value: {weeks: 1}});
+        // this.slotDurations.push({label: 'Day', value: {days: 1}});
+        // this.slotDurations.push({label: 'Shift', value: {hours: 8}});
+        // this.slotDurations.push({label: 'Hour', value: {hours: 1}});
+        // this.slotDurations.push({label: 'HalfHour', value: {minutes: 30}});
         //TODO: Make Slots Dynamic. 30 mins and 15 mins should show up in week and day mode only
         //this.slotDurations.push({label: '30 minutes', value:  '00:30:00'});
         //this.slotDurations.push({label: '15 minutes', value:  '00:15:00'});
@@ -214,15 +316,79 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
         let tz = this.titanService.getDefaultTimeZone;
         var self = this;
+
         let todayDate = moment().startOf('day');
         let YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
         let TODAY = todayDate.format('YYYY-MM-DD');
         let TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
-        let DEFAULTDATE = todayDate.clone().add(-7, 'day').format('YYYY-MM-DD');
-
+        let DEFAULTDATE = todayDate.clone().add(-5, 'day').format('YYYY-MM-DD');
+        let slotOptions = self.allSlotOptions;
+        let slotDurationInMinutes = moment.duration(self.selectedSlotDurationValue).asMinutes();
         var tt = this.tooltip;
+        self.tfEventSource = {
+            id: 'testFacilityEventSource',
+            events: function (start, end, timezone, callback) {
+
+                $.ajax({
+                    url: titanApiUrl + 'TestFacility/Schedule',
+                    type: 'POST',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
+                    data: {
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
+                        projectCodeIdList: [],
+                        timezone: 'local',//tz,
+                        slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
+
+
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }
+        }
+        self.tfUserSource = {
+            id: 'testFacilityUserSource',
+            events: function (start, end, timezone, callback) {
+                $.ajax({
+                    url: titanApiUrl + 'TitanUser/Schedule',
+                    type: 'POST',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
+                    data: {
+                        startdate: start.utc().format(),
+                        enddate: end.utc().format(),
+                        projectCodeIdList: [],
+                        timezone: 'local',
+                        slotDurationInMinutes: moment.duration(self.selectedSlotDurationValue).asMinutes()
+
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    },
+                    success: function (result) {
+                        var events = [];
+                        $.each(result.calendarEvents.$values, function (index, item) {
+                            events.push(item);
+                            console.log('------item------------', item)
+                        });
+                        console.log('------Event Source callback------------', events)
+                        callback(events);
+                    }
+                });
+            }
+        }
         let scheduleConfig: any = {
-            timezone: this.defaultCalendarSetting.defaultTimeZone,
+            timezone: 'local',//this.defaultCalendarSetting.defaultTimeZone,
             schedulerLicenseKey: '0799804275-fcs-1480895270',
             height: 650,
             theme: true,
@@ -234,31 +400,64 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 refresh: 'circle-triangle-w'
             },
             header: {
-                left: 'settings,prev,next today',
-                center: 'title',
-                right: 'month timeline3weeks'
+                center: 'title'
             },
-            customButtons: {
-                settings: {
-                    text: 'room',
-                    click: function () {
-                        self.displayCalendarSetting = true;
 
-                    },
-                    themeIcon: 'refresh'
-                }
-            },
+            //     {
+            //     left: 'settings,prev,next today',
+            //     center: 'title',
+            //     right: 'month timeline3weeks'
+            // },
             defaultDate: DEFAULTDATE,
-            defaultView: 'timeline3weeks',
+            defaultView: 'timelineMonth',
             buttonText: {
                 today: 'today',
                 month: 'month',
                 week: 'week',
                 day: 'day',
                 list: 'list',
-                timeline3weeks: 'Schedule'
+                timeline3weeks: 'Schedule',
+                timelineTitanDefault: 'Timeline'
             },
             views: {
+                calendarDay: {
+                    type: 'basicDay',
+                    duration: {days: 1}
+                },
+                calendarWeek: {
+                    type: 'basicWeek',
+                    duration: {days: 1}
+                },
+                calendarMonth: {
+                    type: 'month',
+                    duration: {months: 1}
+                },
+                calendarQuarter: {
+                    type: 'month',
+                    duration: {months: 3}
+                },
+                timelineDay: {
+                    type: 'timelineDay',
+                    duration: {days: 1}
+                },
+                timelineWeek: {
+                    type: 'timelineWeek',
+                    duration: {days: 1}
+                },
+                timelineMonth: {
+                    type: 'timelineMonth',
+                    duration: {months: 1}
+                },
+                timelineQuarter: {
+                    type: 'timelineMonth',
+                    duration: {months: 3}
+                },
+                timelineYear: {
+                    type: 'timelineYear',
+                    duration: {years: 1}
+                },
+                day: {},
+                week: {},
                 timeline3weeks: {
                     type: 'timeline',
                     duration: {months: 1},
@@ -278,6 +477,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 console.log("----Resources Loading ------");
                 $.ajax({
                     url: titanApiUrl + 'Calendar/ResourcesForTimelineView',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
                     data: {
                         includeTestFaciity: true,
                         includeProject: false,
@@ -299,62 +499,10 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
             },
 
-            eventSources: [{
-                id: 'testFacilityEventSource',
-                events: function (start, end, timezone, callback) {
-                    $.ajax({
-                        url: titanApiUrl + 'TestFacility/Schedule',
-                        type: 'POST',
-                        data: {
-                            startdate: start.utc().format(),
-                            enddate: end.utc().format(),
-                            projectCodeIdList: [],
-                            timezone: tz
-
-                        },
-                        error: function () {
-                            alert('there was an error while fetching events!');
-                        },
-                        success: function (result) {
-                            var events = [];
-                            $.each(result.calendarEvents.$values, function (index, item) {
-                                events.push(item);
-                                console.log('------item------------', item)
-                            });
-                            console.log('------Event Source callback------------', events)
-                            callback(events);
-                        }
-                    });
-                }
-            }
-            ,{
-                    id: 'testFacilityUserSource',
-                    events: function (start, end, timezone, callback) {
-                        $.ajax({
-                            url: titanApiUrl + 'TitanUser/Schedule',
-                            type: 'POST',
-                            data: {
-                                startdate: start.utc().format(),
-                                enddate: end.utc().format(),
-                                projectCodeIdList: [],
-                                timezone: tz
-
-                            },
-                            error: function () {
-                                alert('there was an error while fetching events!');
-                            },
-                            success: function (result) {
-                                var events = [];
-                                $.each(result.calendarEvents.$values, function (index, item) {
-                                    events.push(item);
-                                    console.log('------item------------', item)
-                                });
-                                console.log('------Event Source callback------------', events)
-                                callback(events);
-                            }
-                        });
-                    }
-                }],
+            eventSources: [
+                self.tfEventSource
+                , self.tfUserSource
+            ],
             eventRender: function (event, element) {
                 // The id is the testFacilityScheduleId
                 element.attr("eventId", event.id);
@@ -370,13 +518,27 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 //    content: event.description
                 //});
             },
-            eventAfterAllRender: function(){
-                    $("span.fc-time").hide();
+            eventAfterAllRender: function (view) {
+                // alert($('.fc-center h2').html());
+                //$('.fc-center h2').hide();
+                self.calendarHeader = $('#calendar').fullCalendar('getView').title;
+                $('.fc-header-toolbar').hide();
+                $("span.fc-time").hide();
             },
             eventClick: function (calEvent, jsEvent, view) {
-                //self.displayEventDialog = true;
                 console.log("---click is blocked--");
                 return false;
+            },
+            eventDragStart: function (event, jsEvent, ui, view) {
+                self.draggedResourceId = event.resourceId;
+            },
+            loading: function (isLoading, view) {
+                if (isLoading) {// isLoading gives boolean value
+                    console.log("----loading----");
+                    //show your loader here
+                } else {
+                    console.log("----done----");
+                }
             },
             eventDrop: function (event, delta, revertFunc) {
                 self.selectedEventId = event.id;//testFacilityScheduleId
@@ -386,8 +548,32 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 self.moveTestScheduleStartDate = event.start.toDate();
                 self.moveTestScheduleEndDate = event.end.toDate();
 
+                /*
+                 *  There are two options here.
+                 *  1. Move the date in the same test facility
+                 *  2. Change the test facility
+                 * */
+                self.facilityChanged = self.draggedResourceId !== event.resourceId;
+                if (self.facilityChanged) {
+                    self.moveToTestFacilityHeader = 'Change Test Facility to ' + $("#calendar").fullCalendar('getResourceById', event.resourceId).title;
+                    self.changeFacilityMessage = [];
+                    self.changeFacilityMessage.push({
+                        severity: 'warn',
+                        summary: 'Test Facility Change',
+                        detail: 'Are you sure?'
+                    });
+                    self.changeFacilityMessage.push({detail: 'Operators will be removed and events status will be set to requested'});
+                    self.displayMoveDialog = true;
+                } else {
+                    self.changeFacilityMessage = null;
+                    self.moveToTestFacilityHeader = self.moveToTestFacilityName;
+                    let entityId = $(this).attr("entityId");
+                    let id = $(this).attr("eventId");
+                    var blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
+                    self.initTimeBlockDetailsDialogData(blockevent, entityId, 'AssignResources', delta);
+                    // Need to work on the revert Function
+                }
 
-                self.displayMoveDialog = true;
                 self.moveRevertFunction = revertFunc;
                 self.moveTestFacilityEvent = <ITestFacilityMoveEventDbViewModel>{};
                 self.moveTestFacilityEvent.testFacilityScheduleId = event.id;
@@ -395,12 +581,11 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 self.moveTestFacilityEvent.startDate = event.start.toDate();
                 self.moveTestFacilityEvent.endDate = event.end.toDate();
                 self.moveTestFacilityEvent.deltaInMinutes = delta.asMinutes();
-
             },
             eventResize: function (event, delta, revertFunc) {
                 console.log("The delta is ", delta.asMinutes());
                 self.displayAssignDialog = true;
-                self.populateUpdateTestFacilityAndUserSchedule(self, event.entityId, event.id, 'resize');
+                self.populateUpdateTestFacilityAndUserSchedule(self, event.entityId, event.id, event.resourceId, 'resize');
                 self.assignUserSchedule.updateTestFacilitySchedule = true;
                 self.moveRevertFunction = revertFunc;
                 //Need to Make the calls/
@@ -424,6 +609,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
+
+        RefToNg.ngRef = this;
+        console.log("RefToNg", RefToNg.ngRef);
         this.getTestFacilities();
         this.getTestModes();
         this.getTestTypes();
@@ -431,29 +619,69 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         this.getTestStatus();
         this.getProjectCodes();
         this.getTestRoles();
-        this.initSchedule();
         this.initCalendarOptions();
+        this.initSchedule();
+        this.initTimeOptions();
+        //this.showTimeDuringAssignOperation = true;
+        this.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+        this.testfacilityservice.getTestFacilityEventStatus().subscribe(res => {
 
+            this.testFacilityEventStatusList = res.result.map(x => {
+                    return {label: x.name, value: x.id}
+                }
+            );
+
+        });
+        //this. currentUser =this.titanUserProfileService.currentUser;
+        /*
+         * public enum TestReservationTypes
+         {
+         Shift, // Sets the time equal to the default shift
+         Day,  // Make the test take the entire day
+         UserDefinedTime // explictly user defined time.
+         }
+         * */
+        this.tenantUserService.getById('FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D').subscribe(res => {
+            this.currentTenant = res.result;
+
+            if (this.currentTenant.defaultTestReservationIntervalTypeId == 2) {
+                this.showTimeDuringAssignOperation = true;
+            }else if (this.currentTenant.defaultTestReservationIntervalTypeId == 1) {
+                this.scheduleStartTime = 0;
+                this.scheduleEndTime = 1439;
+            }
+        });
         this.moveTestFacilityEvent = <ITestFacilityMoveEventDbViewModel>{};
-        this.splitTestFacilityEvent = <ITestFacilitySplitEventViewModel>{}
+        this.splitTestFacilityEvent = <ITestFacilitySplitEventViewModel>{};
         this.splitTestFacilityEvent.existingSchedule = <ITitanUserScheduleViewModel>{};
         this.splitTestFacilityEvent.newSchedule = <ITitanUserScheduleViewModel>{};
 
         //this.splitTestFacilityEvent.existingSchedule.startDate = new Date();
     }
 
-    populateUpdateTestFacilityAndUserSchedule(selfRef, entityId, eventId, action) {
-        selfRef.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+    //region toolbar
+    showSearchOptions() {
+        this.displayCalendarSearchDialog = true;
+    }
+
+    showCalendarSettings() {
+        this.displayCalendarSetting = true;
+    }
+
+    //endregion toolbar
+
+    populateUpdateTestFacilityAndUserSchedule(selfRef, entityId, eventId, resourceId, action) {
+        debugger;
         selfRef.assignUserSchedule.startDate = $("#calendar").fullCalendar('clientEvents', eventId)[0].start.toDate();
         selfRef.assignUserSchedule.endDate = $("#calendar").fullCalendar('clientEvents', eventId)[0].end.toDate();
         selfRef.assignUserSchedule.testFacilityScheduleId = eventId;
-        selfRef.assignUserSchedule.updateTestFacilitySchedule = false;
+        selfRef.assignUserSchedule.updateTestFacilitySchedule = true;
         selfRef.assignUserSchedule.entityId = entityId;
         if (action === 'resize') {
-            selfRef.assignResourceHeader = "Event resized - Assign resources " + selfRef.assignBlockTestFacilityName + " from " +
-                $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
+            selfRef.assignResourceHeader = selfRef.assignBlockTestFacilityName + " from " +
+                $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMM D YYYY');
         } else {
-            selfRef.assignResourceHeader = "Assign resources" + selfRef.assignBlockTestFacilityName + " from " +
+            selfRef.assignResourceHeader = selfRef.assignBlockTestFacilityName + " from " +
                 $.fullCalendar.formatRange(moment(selfRef.assignUserSchedule.startDate), moment(selfRef.assignUserSchedule.endDate), 'MMMM D YYYY');
         }
 
@@ -479,6 +707,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             });
             selfRef.testOperatorsForBlock = items;
         });
+
         selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
             let values = filteredList.$values;
             selfRef.titanUsersListForTenant = filteredList.$values.map(x => {
@@ -510,84 +739,41 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         $.contextMenu({
             selector: '.showContextMenu',
             callback: function (key, options) {
+                console.log(options);
                 var m = "clicked: " + key;
                 let entityId = $(this).attr("entityId");
                 let id = $(this).attr("eventId");
-                 switch (key) {
+                var blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
+
+                switch (key) {
                     case "AssignResources": {
 
-                        // selfRef.displayEventDialog = true;
-                        selfRef.displayAssignDialog = true;
+                        selfRef.initTimeBlockDetailsDialogData(blockevent, entityId, 'AssignResources', 0);
 
-                        selfRef.selectedTestRequestId = entityId;
-                        selfRef.selectedEventId = id;
-                        selfRef.selectedResourceId = $(this).attr("resourceId");
-                        selfRef.assignBlockTestFacilityName = $("#calendar").fullCalendar('getResourceById', selfRef.selectedResourceId).title;
+                        /*  selfRef.testRequestService.getTestFacilityScheduleById(selfRef.assignUserSchedule.entityId)
+                         .subscribe(res => {
+                         let items = res.result.map(x => {
+                         let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;
+                         return r;
+                         });
+                         selfRef.scheduledTestFacilities = items;
 
-                        selfRef.plannedStartDate = $(this).attr("plannedStart");
-                        selfRef.plannedEndDate = $(this).attr("plannedEnd");
-
-                        // Taking the simplistic approach now/
-                        selfRef.selectedBlockStartDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
-                        selfRef.selectedBlockEndDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
-                        selfRef.assignResourceHeader = "Assign resources to " + selfRef.assignBlockTestFacilityName + " from " +
-                            $.fullCalendar.formatRange(moment(selfRef.selectedBlockStartDate), moment(selfRef.selectedBlockEndDate), 'MMMM D YYYY');
-
-                        selfRef.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
-                        selfRef.assignUserSchedule.startDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
-                        selfRef.assignUserSchedule.endDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
-                        selfRef.assignUserSchedule.testFacilityScheduleId = id;
-                        selfRef.assignUserSchedule.updateTestFacilitySchedule = false;
-                        selfRef.assignUserSchedule.entityId = entityId;
-                        selfRef.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
-
-                        selfRef.dueDate = $(this).attr("dueDate");
-                        selfRef.testName = $(this).attr("eventName");
-                        selfRef.displayEventDialogHeader = `${selfRef.testName}`;
-                        selfRef.testRequestService.getUserScheduleById(selfRef.selectedEventId, "testfacilityscheduleid").subscribe(res => {
-                            console.log("----GetUserScheduleById", res);
-                            let items = res.result.map(x => {
-                                let r: {
-                                    testFacilityId,
-                                    userDisplayName,
-                                    startDate,
-                                    endDate,
-                                    userId,
-                                    testUserScheduleId,
-                                    testfacilityName,
-                                    action
-                                } = x;
-
-                                r.startDate = moment(r.startDate).toDate();
-                                r.endDate = moment(r.endDate).toDate();
-                                r.action = 'pristine';
-                                return r;
-                            });
-                            selfRef.testOperatorsForBlock = items;
-                        });
-                        selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
-                            let values = filteredList.$values;
-                            selfRef.titanUsersListForTenant = filteredList.$values.map(x => {
-                                let r: any = {};
-                                r.label = x.displayName;
-                                r.value = x.id;
-                                return r;
-                            });
-                            let item = {
-                                label: 'Select user',
-                                value: ''
-                            };
-                            selfRef.titanUsersListForTenant.splice(0, 0, item);
-                        });
-                        selfRef.testRequestService.getTestFacilityScheduleById(selfRef.assignUserSchedule.entityId).subscribe(res => {
-                            let items = res.result.map(x => {
-                                let r: {testFacilityScheduleId, testFacilityId, startDate, endDate, name} = x;
-                                return r;
-                            });
-                            selfRef.scheduledTestFacilities = items;
-
-                        });
-
+                         });
+                         selfRef.testfacilityservice.filterByUserNames("t").subscribe(filteredList => {
+                         let values = filteredList.$values;
+                         selfRef.titanUsersListForTenant = filteredList.$values.map(x => {
+                         let r: any = {};
+                         r.label = x.displayName;
+                         r.value = x.id;
+                         return r;
+                         });
+                         let item = {
+                         label: 'Select user',
+                         value: ''
+                         };
+                         selfRef.titanUsersListForTenant.splice(0, 0, item);
+                         });*/
+                        //selfRef.titanUsersListForFacility = facilityUsers;
                         // selfRef.testRequestService.getUserScheduleById(selfRef.assignUserSchedule.entityId, "testrequestid").subscribe(res => {
                         // let items = res.result.map(x => {
                         //         let r: {testFacilityId, userDisplayName, startDate, endDate, userId, testUserScheduleId, testfacilityName} = x;
@@ -615,26 +801,167 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                         selfRef.splitTestFacilityEvent.existingSchedule.id = id;
                         break;
                     }
+                    case "Schedule": {
 
+                        let viewModel: any = {};
+                        viewModel.testRequestId = entityId;
+                        viewModel.testFacilityScheduleId = id;
+                        viewModel.StatusName = 'Scheduled';
+                        selfRef.testRequestService.postScheduleTest(viewModel).subscribe(res => {
+                            if (res.result !== null && res.result) {
+                                this.msgs.push({
+                                    severity: 'success',
+                                    detail: 'Time scheduled successfully.',
+                                    summary: 'Success'
+                                });
+                            } else {
+                                this.msgs.push({
+                                    severity: 'error',
+                                    detail: 'Test could not be scheduled. Please try again.If problem persists, contact Administrator.',
+                                    summary: 'Error'
+                                });
+                            }
+                        });
+
+                        break;
+                    }
 
                 }
             },
             items: {
-                "Schedule" :{name:"Schedule", icon:"fa fa-clock"},
-                "AssignResources": {name: "Assign Resources", icon: "edit"}
-                , "Split": {name: "Split", icon: "cut"}
-                , "Details": {name: "Details", icon: "fa fa-beer"}
-                , "Delete": {name: "Delete", icon: "delete"}
-                //,"sep1": "---------"
-                // ,"quit": {
-                //     name: "Quit", icon: function () {
-                //         return 'context-menu-icon context-menu-icon-quit';
-                //     }
-                // }
+                /* "Schedule": {
+                 name: "Schedule",
+                 icon: "fa fa-clock",
+                 disabled: function (key, opt) {
+
+                 let id = $(this).attr("eventId");
+                 let blockevent: any = $("#calendar").fullCalendar('clientEvents', id)[0];
+                 return blockevent.disableScheduleOption;
+                 // if (blockevent.status ==="Scheduled"){
+                 //     return true;
+                 // }
+                 //this.titanService.getScheduledTestStatusId
+
+                 }
+
+                 },*/
+                "AssignResources": {
+                    name: "Assign Resources",
+                    icon: "edit"
+                }
+                , "Split": {
+                    name: "Split",
+                    icon: "cut"
+                }
+                , "Details": {
+                    name: "Details",
+                    icon: "fa fa-beer"
+                }
+                , "Delete": {
+                    name: "Delete",
+                    icon: "delete"
+                }
+
             }
         });
         // var combo = $("<select><option>A</option></select>").attr("id", "slot").attr("name", "slot");
         // $(".fc-left .fc-button-group").append(combo);
+    }
+
+    private initTimeBlockDetailsDialogData(blockevent: any, entityId: string, action: string, delta: number) {
+        this.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+        this.displayAssignDialog = true;
+        this.isTimeBlockScheduled = blockevent.isTimeBlockScheduled;
+        this.assignUserSchedule.minDate = blockevent.startDate;
+        this.assignUserSchedule.maxDate = blockevent.endDate;
+        this.assignUserSchedule.eventStatusId = blockevent.testFacilityEventStatusId;
+        this.assignUserSchedule.defaultStartMinutesPastMidnight = blockevent.defaultStartMinutesPastMidnight;
+        this.assignUserSchedule.defaultEndMinutesPastMidnight = blockevent.defaultEndMinutesPastMidnight;
+        this.getAvailableTimeBlocksForOperators();
+        this.selectedTestRequestId = entityId;
+        this.selectedEventId = blockevent.id;
+        this.selectedResourceId = blockevent.resourceId;
+        this.assignBlockTestFacilityName = $("#calendar").fullCalendar('getResourceById', this.selectedResourceId).title;
+
+        this.plannedStartDate = blockevent.startDate;
+        this.plannedEndDate = blockevent.endDate;
+
+        // Taking the simplistic approach now/
+        //this.selectedBlockStartDate = $("#calendar").fullCalendar('clientEvents', id)[0].start.toDate();
+        //this.selectedBlockEndDate = $("#calendar").fullCalendar('clientEvents', id)[0].end.toDate();
+
+        this.selectedBlockStartDate = blockevent.start.toDate();
+        this.selectedBlockEndDate = blockevent.end.toDate();
+
+
+        this.assignResourceHeader = "Assign resources to " + this.assignBlockTestFacilityName + " from " +
+            $.fullCalendar.formatRange(moment(this.selectedBlockStartDate), moment(this.selectedBlockEndDate), 'MMMM D YYYY');
+
+        debugger;
+        this.assignUserSchedule.startDate = blockevent.start.toDate();
+        this.assignUserSchedule.endDate = blockevent.end.toDate();
+        this.assignUserSchedule.testFacilityScheduleId = blockevent.id;
+        this.assignUserSchedule.updateTestFacilitySchedule = false;
+        this.assignUserSchedule.entityId = entityId;
+        this.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
+
+        this.dueDate = blockevent.dueDate;
+        this.testName = blockevent.title;
+        this.displayEventDialogHeader = `${this.testName}`;
+
+        let userScheduleCall = this.testRequestService.getUserScheduleById(this.selectedEventId, "testfacilityscheduleid");
+        let facilityUsersCall = this.testFacilityRoleService.getByTestFacilityId(blockevent.resourceId);
+
+        Observable.forkJoin([userScheduleCall, facilityUsersCall]).subscribe(results => {
+            let userScheduleData = results[0];
+            let facilityUserData = results[1];
+            this.initUserSchedule(userScheduleData, delta);
+            this.initFacilityUserList(facilityUserData);
+
+        });
+    }
+
+    /**
+     * This is callback for handling facility user list
+     * @param res
+     */
+    private initFacilityUserList(res) {
+        let items = res.map(x => {
+            let r: any = {};
+            r.label = x.name;
+            r.value = x.titanUserId
+            return r;
+        });
+        this.titanUsersListForFacility = items;
+        this.titanUsersListForFacility.splice(0, 0, {
+            label: 'Select user',
+            value: ''
+        });
+    }
+
+
+    private initUserSchedule(res, delta) {
+
+        let items = res.result.map(x => {
+            let r: {
+                testFacilityId,
+                userDisplayName,
+                startDate,
+                endDate,
+                userId,
+                testUserScheduleId,
+                testfacilityName,
+                action,
+                minDate,
+                maxDate
+            } = x;
+            r.startDate = moment(r.startDate).add(delta, 'minutes').toDate();
+            r.endDate = moment(r.endDate).add(delta, 'minutes').toDate();
+            //r.minDate = this.assignUserSchedule.minDate;
+            r.action = delta === 0 ? 'pristine' : 'modify';
+            return r;
+        });
+        this.testOperatorsForBlock = items;
     }
 
 
@@ -783,19 +1110,15 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     getTestStatus() {
         //    userRoles
-        this.teststatusservice.getTestStatus().subscribe(response => {
-            this.testStatus = new Array();
+        this.teststatusservice.getAll().subscribe(response => {
+            this.testStatus = [];
 
             if (response != null) {
-                var resultMap = new Array();
-                //resultMap.push({
-                //    label: "Select Test Status",
-                //    value: null
-                //});
+                var resultMap = [];
                 for (let template of response) {
                     var temp = {
                         label: template.name,
-                        value: template.id
+                        value: {id: template.id, calendarDisplayColor: template.calendarDisplayColor}
                     }
                     resultMap.push(temp);
                 }
@@ -808,9 +1131,9 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     getProjectCodes() {
         //    userRoles
         this.projectservice.getProjectCodes().subscribe(response => {
-            this.projectCodes = new Array();
+            this.projectCodes = [];
             if (response != null) {
-                var resultMap = new Array();
+                var resultMap = [];
                 //resultMap.push({
                 //    label: "Select Project Code",
                 //    value: null
@@ -851,17 +1174,70 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         });
     }
 
+    updateSlotDuration(event) {
+        let item: any = this.calendarDurationOptions.filter(x => x.durationItem.value === this.selectedDurationOption);
+        console.log("updateSlotDuration", item, this.selectedDurationOption);
+        this.slotDurations = item[0].slotOptions;
+    }
 
-    updateCalendarSettings(event) {
+    updateCalendarSettings(updateSourceList) {
+        /*
+         *  Either in CalendarMode or Timeline Mode
+         *  Depending upon the selected duration and Mode - Pick up the view
+         * */
         let schedulerOptions: any = {};
         let viewStardDate: any = $('#calendar').fullCalendar('getView').start.format();
+        let selectedView = $('#calendar').fullCalendar('getView');
+        let selectedViewName = selectedView.name;
         schedulerOptions.weekends = (this.selectedHideWeekendValue === 'true');
         schedulerOptions.firstDay = this.selectedFirstDayValue;
         schedulerOptions.minTime = this.startWorkHoursValue;
         schedulerOptions.maxTime = this.endWorkHoursValue;
-        schedulerOptions.slotDuration = this.selectedSlotDurationValue;
         console.log(this.selectedSlotDurationValue, schedulerOptions);
+        for (let item of this.calendarDurationOptions) {
+            if (item.durationItem.value === this.selectedDurationOption) {
+                this.slotDurations = item.slotOptions;
+                break;
+            }
+        }
+        let optionExist: boolean = false;
+        for (let opt of this.slotDurations) {
+            if (this.jsonEqual(opt.value, this.selectedSlotDurationValue)) {
+                optionExist = true;
+                this.selectedSlotDurationValue = opt.value;
+                break;
+            }
+        }
+        if (!optionExist) {
+            this.selectedSlotDurationValue = this.slotDurations[0].value;
+        }
+        schedulerOptions.slotDuration = this.selectedSlotDurationValue;
+        let updatedViewName = this.calendarDisplayMode + this.selectedDurationOption;
         $('#calendar').fullCalendar('option', schedulerOptions);
+        if (selectedViewName !== updatedViewName) {
+            $('#calendar').fullCalendar('changeView', updatedViewName);
+        }
+        selectedView = $('#calendar').fullCalendar('getView');
+        this.calendarHeader = selectedView.title;
+
+
+        /*
+         *  When toggling, there is no need to refetch all event sources
+         * */
+        if (updateSourceList) {
+            if (this.calendarDisplayMode === 'calendar') {
+                $('#calendar').fullCalendar('removeEventSource', this.tfUserSource);
+            } else {
+                $('#calendar').fullCalendar('addEventSource', this.tfUserSource);
+            }
+        } else {
+            $('#calendar').fullCalendar('refetchEvents');
+        }
+        this.displayCalendarSetting = false;
+    }
+
+    jsonEqual(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
     }
 
     filterCalendarEvents(event) {
@@ -874,9 +1250,6 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         let testFacilityEventSource = $("#calendar").fullCalendar('getEventSourceById', 'testFacilityEventSource');
         $("#calendar").fullCalendar('removeEventSource', testFacilityEventSource)
         $("#calendar").fullCalendar('removeEventSource', {id: 'testFacilityEventSource'});
-        console.log("-- Clearing the events");
-
-        debugger;
         var payload = {
             startdate: '12-1-2016',
             enddate: '12-12-2017',
@@ -896,6 +1269,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             events: function (start, end, timezone, callback) {
                 $.ajax({
                     url: titanApiUrl + 'TestFacility/Schedule',
+                    headers: {userId: this.currentUser.id, tenantId: this.currentUser.defaultTenantId },
                     type: 'POST',
                     data: payload,
                     error: function () {
@@ -923,21 +1297,32 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     //#region Assign Resources Region
 
-    saveAssignResourcesChanges() {
+    saveAssignResourcesChanges(formRef) {
         // Validate
-
+        //console.log("FORMREF", formRef);
         //this.assignUserSchedule.entityId = this.selectedTestRequestId;
         //this.assignUserSchedule.entityIdentifierId = TitanConstants.TestRequestEntityIdentifierId;
         // since we are storing the deleted items in a separate array, join them before sending.
+        debugger;
         this.assignUserSchedule.schedules = this.testOperatorsForBlock.concat(this.deletedTestOperatorsForBlock);
+        if (this.currentTenant.defaultTestReservationIntervalTypeId ===1){
+            this.assignUserSchedule.defaultEndMinutesPastMidnight = 1439;
+            this.assignUserSchedule.defaultStartMinutesPastMidnight = 0;
+            for(let i of this.assignUserSchedule.schedules){
+                 i.defaultEndMinutesPastMidnight = 1439;
+                 i.defaultStartMinutesPastMidnight = 0;
 
+            }
+        }
         //postdata.entityId ='A';
-        console.log('Modified Users', this.testOperatorsForBlock.filter(x => x.action !== 'pristine'));
+        //console.log('Modified Users', this.testOperatorsForBlock.filter(x => x.action !== 'pristine'));
         this.testRequestService.postAssignUser(this.assignUserSchedule).subscribe(res => {
             // console.log("Response after **" res);
             if (res.result !== null && res.result) {
                 this.msgs.push({severity: 'success', detail: 'Schedules updated successfully.', summary: 'Success'});
                 this.displayAssignDialog = false;
+                this.testOperatorsForBlock = [];
+                $("#calendar").fullCalendar('refetchEvents')
             } else {
                 this.msgs.push({
                     severity: 'error',
@@ -947,8 +1332,6 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             }
 
         });
-
-        console.log("---Operators List", this.testOperatorsForBlock);
     }
 
     filterOperatorUserNames(event) {
@@ -958,12 +1341,32 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     onFacilityScheduleCalendarDateSelection(event) {
-        console.log("start--", this.selectedTitanUserScheduleStartDate);
-        console.log("end--", this.selectedTitanUserScheduleEndDate)
         if (this.selectedTitanUserScheduleStartDate > this.selectedTitanUserScheduleEndDate) {
             this.selectedTitanUserScheduleEndDate = this.blankDate;
         }
         console.log("--onFacilityScheduleCalendarDateBlur--", event);
+    }
+
+    /**
+     * This function is used to check the start and end dates for all users and test facility.
+     * Blanks the dates that are not in range.
+     * @param event
+     * @param startDate
+     * @param endDate
+     */
+    validateSchedule(event, startDate, endDate) {
+        if (startDate > endDate) {
+            this.assignUserSchedule.endDate = this.blankDate;
+        }
+        //Now ensure that the operators schedule is between startdate and enddate
+        for (let item of this.testOperatorsForBlock) {
+            if (item.startDate < startDate) {
+                item.startDate = this.blankDate;
+            }
+            if (item.endDate > endDate || item.endDate < item.startDate) {
+                item.endDate = this.blankDate;
+            }
+        }
     }
 
     validateScheduleDates(event, startDate, endDate) {
@@ -987,7 +1390,8 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             startDate: this.selectedTitanUserScheduleStartDate,
             endDate: this.selectedTitanUserScheduleEndDate,
             entityId: this.assignUserSchedule.entityId,
-            testFacility: this.selectedFacilityForOperator
+            testFacility: this.selectedFacilityForOperator,
+
         };
         this.testRequestService.postAssignUser(item).subscribe(res => {
             console.log("Here is the response from AssignUser", res);
@@ -999,18 +1403,24 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     }
 
     addEmptyRowOperatorBlock() {
+
         let item = <ITitanUserScheduleViewModel>{};
         item.startDate = this.selectedBlockStartDate;
         item.endDate = this.selectedBlockEndDate;
         item.action = "new";
-
+        item.defaultStartMinutesPastMidnight = this.scheduleStartTime;
+        item.defaultEndMinutesPastMidnight = this.scheduleEndTime;
         item.entityId = this.selectedTestRequestId;
         item.id = '';
         item.scheduleEventTypeId = TitanConstants.TestRequestScheduleEventTypeId;
         item.testFacilityId = this.selectedResourceId;
         item.shiftId = TitanConstants.DefaultShiftId;
         item.testFacilityScheduleId = this.selectedEventId;
-        this.testOperatorsForBlock.splice(0, 0, item);
+        item.titanUserId = '';
+        //item.userDisplayName ='';
+        this.testOperatorsForBlock.push(item);
+        //this.testOperatorsForBlock.splice(0, 0, item);
+
 
     }
 
@@ -1074,13 +1484,50 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
         return selectedItems;
     }
 
+    /**
+     * This method filters the time slots availbel for the operators to pick
+     * based on the default daily start and end time of test facility
+     */
+    getAvailableTimeBlocksForOperators() {
+        this.filteredTimeOptions = this.timeOptions
+            .filter(x => x.value >= this.assignUserSchedule.defaultStartMinutesPastMidnight
+            && x.value <= this.assignUserSchedule.defaultEndMinutesPastMidnight);
+        console.log(this.filteredTimeOptions);
+        let emptyOption: SelectItem = {
+            label: 'Select time',
+            value: ''
+        };
+
+        this.filteredTimeOptions.splice(0, 0, emptyOption);
+    }
+
+    testFacilityTimeChanged() {
+        if (this.assignUserSchedule.defaultStartMinutesPastMidnight > this.assignUserSchedule.defaultEndMinutesPastMidnight) {
+            this.assignUserSchedule.defaultEndMinutesPastMidnight = null;
+        }
+        debugger;
+        this.getAvailableTimeBlocksForOperators();
+    }
 
     testOperatorsForBlockChange(rowData, index) {
         console.log("testOperatorsForBlockChange", rowData, index);
+
         // For newly added items, we dont have to change the status from new
         if (this.testOperatorsForBlock[index].action !== 'new') {
             this.testOperatorsForBlock[index].action = 'modify';
         }
+        if (rowData.startDate > rowData.endDate) {
+            rowData.endDate = this.blankDate;
+        }
+        if (rowData.defaultStartMinutesPastMidnight > rowData.defaultEndMinutesPastMidnight) {
+            rowData.defaultEndMinutesPastMidnight = '';
+        }
+        this.testOperatorsForBlock[index].defaultStartMinutesPastMidnight = rowData.defaultStartMinutesPastMidnight;
+        this.testOperatorsForBlock[index].defaultEndMinutesPastMidnight = rowData.defaultEndMinutesPastMidnight;
+
+        //this.validateScheduleDates('', rowData.startDate,rowData.endDate);
+        console.log(rowData.startDate, rowData.endDate);
+
     }
 
     removeOperator(index, operatorBlock) {
@@ -1123,6 +1570,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     cancelMove(event) {
         console.log("--invoking revert function")
         this.moveRevertFunction();
+        this.moveRevertFunction = null;
         this.displayMoveDialog = false;
     }
 
@@ -1130,14 +1578,119 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
 
     //#region Split
     saveSplitEventChanges(uiEvent) {
-        debugger;
-        console.log("Hello", "saveSplitEventChanges")
         this.displaySplitDialog = false;
-        this.testfacilityservice.postSplitTestFacilityEvent(this.splitTestFacilityEvent).subscribe(res=>{
-            console.log("Hello", res)
+        debugger;
+        this.testfacilityservice.postSplitTestFacilityEvent(this.splitTestFacilityEvent).subscribe(res => {
+            console.log("Splitting event completed", res);
+            this.splitTestFacilityEvent = <ITestFacilitySplitEventViewModel>{};
+            this.splitTestFacilityEvent.existingSchedule = <ITitanUserScheduleViewModel>{};
+            this.splitTestFacilityEvent.newSchedule = <ITitanUserScheduleViewModel>{};
+
+            $('#calendar').fullCalendar('refetchEvents');
 
         });
     }
 
     //#endregion split
+    //region MISC
+    initializeTimeOptions(selfRef) {
+
+    }
+
+    //TODO: NEED TO OPTIMIZE
+    toggleTimelineView(displayModeName) {
+        this.calendarDisplayMode = displayModeName;
+
+        this.updateCalendarSettings(true);
+    }
+
+    initTimeOptions() {
+        if (this.timeOptions.length == 0) {
+            this.timeOptions.push({value: '', label: "Select"});
+            this.timeOptions.push({value: 0, label: "00:00 PM"});
+            this.timeOptions.push({value: 30, label: "12:30 AM"});
+            this.timeOptions.push({value: 60, label: "1:00 AM"});
+            this.timeOptions.push({value: 90, label: "1:30 AM"});
+            this.timeOptions.push({value: 120, label: "2:00 AM"});
+            this.timeOptions.push({value: 150, label: "2:30 AM"});
+            this.timeOptions.push({value: 180, label: "3:00 AM"});
+            this.timeOptions.push({value: 210, label: "3:30 AM"});
+            this.timeOptions.push({value: 240, label: "4:00 AM"});
+            this.timeOptions.push({value: 270, label: "4:30 AM"});
+            this.timeOptions.push({value: 300, label: "5:00 AM"});
+            this.timeOptions.push({value: 330, label: "5:30 AM"});
+            this.timeOptions.push({value: 360, label: "6:00 AM"});
+            this.timeOptions.push({value: 390, label: "6:30 AM"});
+            this.timeOptions.push({value: 420, label: "7:00 AM"});
+            this.timeOptions.push({value: 450, label: "7:30 AM"});
+            this.timeOptions.push({value: 480, label: "8:00 AM"});
+            this.timeOptions.push({value: 510, label: "8:30 AM"});
+            this.timeOptions.push({value: 540, label: "9:00 AM"});
+            this.timeOptions.push({value: 570, label: "9:30 AM"});
+            this.timeOptions.push({value: 600, label: "10:00 AM"});
+            this.timeOptions.push({value: 630, label: "10:30 AM"});
+            this.timeOptions.push({value: 660, label: "11:00 AM"});
+            this.timeOptions.push({value: 690, label: "11:30 AM"});
+            this.timeOptions.push({value: 720, label: "12:00 PM"});
+            this.timeOptions.push({value: 750, label: "12:30 PM"});
+            this.timeOptions.push({value: 780, label: "1:00 PM"});
+            this.timeOptions.push({value: 810, label: "1:30 PM"});
+            this.timeOptions.push({value: 840, label: "2:00 PM"});
+            this.timeOptions.push({value: 870, label: "2:30 PM"});
+            this.timeOptions.push({value: 900, label: "3:00 PM"});
+            this.timeOptions.push({value: 930, label: "3:30 PM"});
+            this.timeOptions.push({value: 960, label: "4:00 PM"});
+            this.timeOptions.push({value: 990, label: "4:30 PM"});
+            this.timeOptions.push({value: 1020, label: "5:00 PM"});
+            this.timeOptions.push({value: 1050, label: "5:30 PM"});
+            this.timeOptions.push({value: 1080, label: "6:00 PM"});
+            this.timeOptions.push({value: 1110, label: "6:30 PM"});
+            this.timeOptions.push({value: 1140, label: "7:00 PM"});
+            this.timeOptions.push({value: 1170, label: "7:30 PM"});
+            this.timeOptions.push({value: 1200, label: "8:00 PM"});
+            this.timeOptions.push({value: 1230, label: "8:30 PM"});
+            this.timeOptions.push({value: 1260, label: "9:00 PM"});
+            this.timeOptions.push({value: 1290, label: "9:30 PM"});
+            this.timeOptions.push({value: 1320, label: "10:00 PM"});
+            this.timeOptions.push({value: 1350, label: "10:30 PM"});
+            this.timeOptions.push({value: 1380, label: "11:00 PM"});
+            this.timeOptions.push({value: 1410, label: "11:30 PM"});
+        }
+    }
+
+    //endregion
+    moveCalendar(direction) {
+        if (direction === 'forward') {
+            $("#calendar").fullCalendar('next')
+        } else {
+            $("#calendar").fullCalendar('prev')
+        }
+    }
+
+    onBeforeDialogHide(event) {
+        console.log("Just before the dialog is closing");
+        event.preventDefault();
+        return false;
+
+    }
+
+    closeAssignResourceDialog() {
+        this.displayAssignDialog = false;
+        this.testOperatorsForBlock = [];
+        this.assignUserSchedule = <ITestFacilityUserScheduleDbViewModel>{};
+        if (this.moveRevertFunction != null) {
+            this.moveRevertFunction();
+            this.moveRevertFunction = null;
+        }
+        //this.moveRevertFunction();
+    }
+
+    validateOperatorDates(item) {
+
+    }
 }
+
+//region Deleted Code
+// //selfRef.displayScheduleDialog = true;
+
+//endregion

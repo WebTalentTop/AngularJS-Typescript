@@ -473,7 +473,7 @@
             </p-tabPanel>
 
             <p-tabPanel header="Schedule" id="schedule" headerStyleClass="schedule">
-                <div class="card card-w-title ui-grid-row">
+                <div class="ui-grid-row">
 
 
                         <div class="ui-g-12 ui-md-6 ui-lg-3">
@@ -492,9 +492,11 @@
                                 </div>
                                 <div class="ui-g-6">
                                     <p-multiSelect [options]="testFacilities" (onChange)="onTestFacilityChange($event)"
+                                                   [(ngModel)]="selectedTestFacilities"
                                                    name="testFacilities" id="testFacilities" [style]="{'width':'100%'}">
                                     </p-multiSelect>
                                 </div>
+
                         </div>
                         <div class="ui-g-12 ui-md-6 ui-lg-3">
                                 <div class="ui-g-6">

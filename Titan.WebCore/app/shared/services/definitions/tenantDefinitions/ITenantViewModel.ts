@@ -9,4 +9,5 @@ export interface ITenantViewModel {
     defaultTimeZone?:string;
     lookUpKey?:string;
     defaultLocale?:string;
+    defaultTestReservationIntervalTypeId: number;
 }
