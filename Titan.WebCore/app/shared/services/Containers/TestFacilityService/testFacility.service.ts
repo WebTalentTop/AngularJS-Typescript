@@ -26,7 +26,7 @@ export class TestFacilityService {
 
     currentUser: IUserProfile;
 
-    constructor(private http, private userProfileService: UserProfileService) {
+    constructor(private http: Http, private userProfileService: UserProfileService) {
         this.currentUser = this.userProfileService.getCurrentUserProfile();
         this.headers.append("TenantId", this.currentUser.defaultTenantId);
         this.headers.append("UserId", this.currentUser.id);
@@ -90,7 +90,7 @@ export class TestFacilityService {
                 return Observable.throw({isSuccess: false, result: null, error: err});
             })
             .map(res => res);
-            ;
+        ;
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
@@ -358,10 +358,12 @@ export class TestFacilityService {
             });
         //.map(this.getJson);
     }
-    getTestFacilityEventStatus():Observable<any>{
+
+    getTestFacilityEventStatus(): Observable<any> {
         return this.http.get(`${TestFacilityApiUrl.getTestFacilityEventStatusUrl}`, {headers: this.headers})
             .map(this.getJson)
     }
+
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();
