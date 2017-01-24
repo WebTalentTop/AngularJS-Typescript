@@ -10,6 +10,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import {TitanUserApiUrl} from "./apiUrlConst/titanUserApiUrls";
+import {LoggerService} from "./logger/logger.service";
 
 @Injectable()
 export class UserProfileService {
@@ -20,8 +21,9 @@ export class UserProfileService {
 
     userProfile: IUserProfile;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private ls: LoggerService) {
         this.getCurrentUserProfile();
+        this.ls.setShow(true);
 
     }
 
@@ -42,6 +44,10 @@ export class UserProfileService {
             console.log(request.responseText);
             let data: any = JSON.parse(request.responseText);
             self.userProfile = data.result;
+        }
+        if (request.status >= 500) {
+            this.ls.logConsole("Something went wrong in the server. Please check with your administrator.");
+            return {error: true, message: "Server error 500", statusCode: 500}
         }
 
         return self.userProfile;
