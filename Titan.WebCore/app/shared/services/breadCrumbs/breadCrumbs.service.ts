@@ -143,10 +143,10 @@ export class BreadCrumbsService {
 
         //Admin Milestone Page
         this.adminMilestonePage();
-        // // Admin Milestone Add Page
-        // this.adminMilestoneAddPage();
-        // // Admin Milestone Details Page
-        // this.adminMilestoneDetailsPage();
+        // Admin Milestone Add Page
+        this.adminMilestoneAddPage();
+        // Admin Milestone Details Page
+        this.adminMilestoneDetailsPage();
 
         //Admin MilestoneCategory Page
         this.adminMilestoneCategoryPage();
@@ -1218,7 +1218,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestonePageBCItems() {
-        let menuItem = { label: 'Milestone', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Milestone', routerLink: ['/admin/vehicle/milestone'] };
+        return menuItem;
+    }
+
+    private adminMilestoneAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestonePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneAddPageBCItems() {
+        let menuItem = { label: 'Add Milestone', routerLink: ['/admin/vehicle/milestone'] };
+        return menuItem;
+    }
+
+    private adminMilestoneDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestonePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneDetailsPageBCItems() {
+        let menuItem = { label: 'Milestone Details', routerLink: ['/admin/vehicle/milestone'] };
+
         return menuItem;
     }
 
