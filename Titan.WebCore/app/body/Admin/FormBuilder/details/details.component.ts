@@ -19,11 +19,17 @@ import {SelectItem} from 'primeng/primeng';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Message} from "primeng/primeng";
 import { Observable} from 'rxjs/Observable';
+import {
+    IFormSchemaUpdateModel,
+    IFields, FormSchemaUpdateModel, Fields
+} from "../../../../shared/services/definitions/formDefinitions/IFormSchemaUpdateModel";
+import {LoggerService} from "../../../../shared/services/logger/logger.service";
 
 @Component({
     selector: 'addform',
     templateUrl: 'app/body/Admin/FormBuilder/details/details.component.html'
 })
+
 export class DetailsComponent {
     //region local variables for the class
     title: string = "Edit Form";
@@ -106,14 +112,13 @@ export class DetailsComponent {
                 private entityEventService: EntityEventService,
                 private formSchemaService: FormSchemaService,
                 private formSchemaCategoryService: FormSchemaCategoryService,
-                private formFieldDataTypeService: FormSchemaFieldDataTypeService) {
-
+                private formFieldDataTypeService: FormSchemaFieldDataTypeService,
+                private ls: LoggerService) {
+        this.ls.setShow(true);
         this.activatedRoute.params.subscribe(params => {
             this.formSchemaId = params['id'];
-            console.log("FormSchemaId from Params ----------", this.formSchemaId);
-
+            this.ls.logConsole("FormSchemaId from Params ----------", this.formSchemaId);
         })
-
     }
 
     ngOnInit() {
@@ -152,20 +157,20 @@ export class DetailsComponent {
         this.formSchemaCategoryList = [];
         this.formSchemaCategoryList.push({label: 'Select Category', value: null});
         this.formSchemaCategoryList = this.formSchemaCategoryList.concat(listFormSchemaCaterory);
-        console.log("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
-        console.log("ListFormSchemaCategory -----------", listFormSchemaCaterory);
+        this.ls.logConsole("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
+        this.ls.logConsole("ListFormSchemaCategory -----------", listFormSchemaCaterory);
         //listFormSchemaCaterory.forEach(x=> this.formSchemaCategoryList.push(x))
     }
 
     initializeFormFieldDataTypeService() {
-        console.log("FormFieldDataTypeList itself -----------", this.formFieldDataTypeList);
+        this.ls.logConsole("FormFieldDataTypeList itself -----------", this.formFieldDataTypeList);
         this.draggableList.formFieldDataTypeList = this.formFieldDataTypeList;
     }
 
     initializeFormSchemaById(data) {
         let result = data;
         let fields = result.fields.$values;
-        console.log("Fields first ------", fields);
+        this.ls.logConsole("Fields first ------", fields);
         let entityEventId = result.formSchemaEntityEvents.$values[0].entityEventId;
         this.selectedEntityEvent = entityEventId;
         let formSchemaVersionId = result.formSchemaVersion.id;
@@ -174,9 +179,9 @@ export class DetailsComponent {
         this.formName = result.name;
         this.draggableList.selectedInputList = fields.map(m => {
             let fieldDataTypes = m.data.$values;
-            console.log("fieldDataTypes ------", fieldDataTypes);
+            this.ls.logConsole("fieldDataTypes ------", fieldDataTypes);
             let formSchemaField: IFormSchemaField = m;
-            console.log("Data Values from the server -----", m.data.$values);
+            this.ls.logConsole("Data Values from the server -----", m.data.$values);
             formSchemaField.data = m.data.$values.map(x => { return {name: x.value, value: x.value}});
             formSchemaField.formSchemaFieldDataTypeData = formSchemaField.data.map(d => d.name);
 
@@ -194,7 +199,7 @@ export class DetailsComponent {
 
         });
 
-        //console.log("DraggableList.selectedInputList -----", this.draggableList.selectedInputList);
+        //this.ls.logConsole("DraggableList.selectedInputList -----", this.draggableList.selectedInputList);
         this.selectedFormSchemaCategory = formSchemaCategoriesToSelect.id;
 
         if (formSchemaCategoriesToSelect.id) {
@@ -210,40 +215,40 @@ export class DetailsComponent {
     }
 
     drop(event) {
-        //console.log("Drop dragged item in the -------", this.draggedItem);
+        //this.ls.logConsole("Drop dragged item in the -------", this.draggedItem);
         this.switchDropDialog(this.draggedItem.name);
 
         let innertext = event.path[0].innerText;
         this.formInputData.fieldDataType = this.draggedItem;
         this.formInputData.formSchemaFieldDataTypeId = this.draggedItem.id;
         //this.formInputData.name = this.draggedItem.name;
-        console.log("inner Text is --------", innertext);
+        this.ls.logConsole("inner Text is --------", innertext);
     }
 
     private switchDropDialog(name: string) {
         switch (name) {
             case "TextBox":
-                console.log("Dragged is Input");
+                this.ls.logConsole("Dragged is Input");
                 this.displayTextBox = true;
                 break;
             case "NumberBox":
-                console.log("Dragged is Number");
+                this.ls.logConsole("Dragged is Number");
                 this.displayNumberBox = true;
                 break;
             case "RadioBox":
-                console.log("Dragged is Radio");
+                this.ls.logConsole("Dragged is Radio");
                 this.displayRadioBox = true;
                 break;
             case "CheckBox":
-                console.log("Dragged is Check");
+                this.ls.logConsole("Dragged is Check");
                 this.displayCheckBox = true;
                 break;
             case "SelectBox":
-                console.log("Dragged is Select");
+                this.ls.logConsole("Dragged is Select");
                 this.displaySelectBox = true;
                 break;
             case "TextAreaBox":
-                console.log("Dragged is Radio");
+                this.ls.logConsole("Dragged is Radio");
                 this.displayTextAreaBox = true;
                 break;
         }
@@ -298,9 +303,9 @@ export class DetailsComponent {
         this.formInputData.maxLength = 0;
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
-        console.log('FormInputData ---------', this.formInputData);
-        console.log("copyData ---------", copyData);
-        console.log("SelectedInputList ----------", this.selectedInputList);
+        this.ls.logConsole('FormInputData ---------', this.formInputData);
+        this.ls.logConsole("copyData ---------", copyData);
+        this.ls.logConsole("SelectedInputList ----------", this.selectedInputList);
     }
 
     saveRadioBoxData() {
@@ -316,9 +321,9 @@ export class DetailsComponent {
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
         this.formInputData.radioBoxData = '';
-        console.log('FormInputData in CheckBoxData ---------', this.formInputData);
-        console.log("copyData ---------", copyData);
-        console.log("SelectedInputList ----------", this.selectedInputList);
+        this.ls.logConsole('FormInputData in CheckBoxData ---------', this.formInputData);
+        this.ls.logConsole("copyData ---------", copyData);
+        this.ls.logConsole("SelectedInputList ----------", this.selectedInputList);
     }
 
     saveCheckBoxData() {
@@ -333,9 +338,9 @@ export class DetailsComponent {
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
         this.formInputData.checkBoxData = '';
-        console.log('FormInputData in CheckBoxData ---------', this.formInputData);
-        console.log("copyData ---------", copyData);
-        console.log("SelectedInputList ----------", this.selectedInputList);
+        this.ls.logConsole('FormInputData in CheckBoxData ---------', this.formInputData);
+        this.ls.logConsole("copyData ---------", copyData);
+        this.ls.logConsole("SelectedInputList ----------", this.selectedInputList);
     }
 
     saveSelectBoxData() {
@@ -355,9 +360,9 @@ export class DetailsComponent {
         this.formInputData.isRequired = false;
         this.formInputData.order = 0;
         this.formInputData.selectBoxData = '';
-        console.log('FormInputData in CheckBoxData ---------', this.formInputData);
-        console.log("copyData ---------", copyData);
-        console.log("SelectedInputList ----------", this.selectedInputList);
+        this.ls.logConsole('FormInputData in CheckBoxData ---------', this.formInputData);
+        this.ls.logConsole("copyData ---------", copyData);
+        this.ls.logConsole("SelectedInputList ----------", this.selectedInputList);
     }
 
     onFormSchemaCategoryChange(event) {
@@ -366,7 +371,7 @@ export class DetailsComponent {
 
     entityEventListDropDown(item){
         let entityIdentifierId: any = this.formSchemaCategoryList.filter(category => category.value === item)[0].entityIdentifierId;
-        console.log("EntityIdentifier --------", entityIdentifierId);
+        this.ls.logConsole("EntityIdentifier --------", entityIdentifierId);
         this.entityEventService.getFindByEntityIdentifierId(entityIdentifierId)
             .subscribe(res => {
                 this.entityEvents = res.result.map(item => {
@@ -375,15 +380,15 @@ export class DetailsComponent {
                 this.entityEventsList = [];
                 this.entityEventsList.push({label: 'Select Entity Event', value: null});
                 this.entityEvents.forEach(item => this.entityEventsList.push(item));
-                console.log("EntityEventsList -----", this.entityEventsList);
+                this.ls.logConsole("EntityEventsList -----", this.entityEventsList);
             });
     }
 
     // Popup Windows for editing form
     showOverlayPopInfo($event, item, i) {
-        console.log("Event In ShowOverlayPopInfo -----", $event);
-        console.log("ShowOverlayInfo ------", item);
-        console.log("ShowOverlay Index-------", i);
+        this.ls.logConsole("Event In ShowOverlayPopInfo -----", $event);
+        this.ls.logConsole("ShowOverlayInfo ------", item);
+        this.ls.logConsole("ShowOverlay Index-------", i);
         let name = this.checkFieldDataType(item.formSchemaFieldDataTypeId).name;
         this.showModBox(name, true);
 
@@ -426,14 +431,14 @@ export class DetailsComponent {
         if (name === 'CheckBox') {
             this.updateCheckBoxData();
         }
-        console.log("SelectedFormInputData ----------", this.selectedFormInputData);
+        this.ls.logConsole("SelectedFormInputData ----------", this.selectedFormInputData);
     }
 
     saveTextBoxMod() {
         let name = this.checkFieldDataType(this.selectedFormInputData.formSchemaFieldDataTypeId).name;
 
         this.showModBox(name, false);
-        console.log("TextBox?AreaFormInputData ----------", this.selectedFormInputData);
+        this.ls.logConsole("TextBox?AreaFormInputData ----------", this.selectedFormInputData);
     }
 
     saveRadioBoxMod() {
@@ -453,7 +458,7 @@ export class DetailsComponent {
         if (name === 'RadioBox') {
             this.updateRadioBoxData();
         }
-        console.log("SelectedFormInputData ----------", this.selectedFormInputData);
+        this.ls.logConsole("SelectedFormInputData ----------", this.selectedFormInputData);
     }
 
     saveSelectBoxMod() {
@@ -473,7 +478,7 @@ export class DetailsComponent {
         if (name === 'SelectBox') {
             this.updateSelectBoxData();
         }
-        console.log("SelectedFormInputData ----------", this.selectedFormInputData);
+        this.ls.logConsole("SelectedFormInputData ----------", this.selectedFormInputData);
     }
 
     removeItemMod() {
@@ -553,14 +558,47 @@ export class DetailsComponent {
                 item.data = item.selectBoxData.split("\n").map(x => {
                     return {name:x, value:x};
                 });
-                console.log("selectBoxData --------", item.data);
+                this.ls.logConsole("selectBoxData --------", item.data);
             }
-        })
+        });
 
-        console.log("Form to sent ---------", formSchemaData);
-        this.formSchemaService.postUpdate(formSchemaData)
+        let formSchemaUpdateForm: IFormSchemaUpdateModel = new FormSchemaUpdateModel("","",[]);
+        formSchemaUpdateForm.name = formSchemaData.name;
+        formSchemaUpdateForm.id = this.formSchemaId;
+        formSchemaUpdateForm.fields = formSchemaData.fields.map(item => {
+            let fields:IFields = new Fields('','', false);
+            fields.name = item.name;
+            fields.label = item.label;
+            fields.isRequired = item.isRequired;
+            fields.maxLength = item.maxLength;
+            fields.formSchemaFieldDataTypeId = item.formSchemaFieldDataTypeId;
+            let fieldDataType: any = item;
+
+            if (item.checkBoxData) {
+                fields.data = item.checkBoxData.split("\n").map(x => {
+                    return {name:x, value:x};
+                });
+            }
+
+            if (item.radioBoxData) {
+                fields.data = item.radioBoxData.split("\n").map(x => {
+                    return {name:x, value:x};
+                });
+            }
+
+            if (item.selectBoxData) {
+                fields.data = item.selectBoxData.split("\n").map(x => {
+                    return {name: x, value: x};
+                });
+            }
+                return JSON.parse(JSON.stringify(fields));
+        });
+
+        this.ls.logConsole("Form to sent ---------", formSchemaData);
+        this.ls.logConsole("FormSchemaUpdateModel -------", formSchemaUpdateForm);
+        this.formSchemaService.postUpdate(formSchemaUpdateForm)
             .subscribe(res => {
-                console.log("Form Schema Create post return Res--------", res);
+                this.ls.logConsole("Form Schema Create post return Res--------", res);
                 if(res.isSuccess) {
                     this.msgs.push({severity:'success', summary: 'Form has been saved. ', detail: 'We are redirecting you to Form Builders home page to look at the forms list.'});
                     this.displaySaveFormMessage = true;
@@ -570,6 +608,6 @@ export class DetailsComponent {
                     }, 5000);
                 }
             });
-        console.log('formschema Create called');
+        this.ls.logConsole('formschema Create called');
     }
 }
