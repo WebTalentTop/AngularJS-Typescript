@@ -332,6 +332,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 $.ajax({
                     url: titanApiUrl + 'TestFacility/Schedule',
                     type: 'POST',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
                     data: {
                         startdate: start.utc().format(),
                         enddate: end.utc().format(),
@@ -362,6 +363,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 $.ajax({
                     url: titanApiUrl + 'TitanUser/Schedule',
                     type: 'POST',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
                     data: {
                         startdate: start.utc().format(),
                         enddate: end.utc().format(),
@@ -475,6 +477,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 console.log("----Resources Loading ------");
                 $.ajax({
                     url: titanApiUrl + 'Calendar/ResourcesForTimelineView',
+                    headers: {userId: self.currentUser.id, tenantId: self.currentUser.defaultTenantId },
                     data: {
                         includeTestFaciity: true,
                         includeProject: false,
@@ -1266,6 +1269,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
             events: function (start, end, timezone, callback) {
                 $.ajax({
                     url: titanApiUrl + 'TestFacility/Schedule',
+                    headers: {userId: this.currentUser.id, tenantId: this.currentUser.defaultTenantId },
                     type: 'POST',
                     data: payload,
                     error: function () {
