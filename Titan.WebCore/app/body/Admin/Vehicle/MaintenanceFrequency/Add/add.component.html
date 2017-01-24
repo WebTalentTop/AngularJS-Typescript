@@ -1,47 +1,17 @@
 <div class="ui-g-12">
-
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+    <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Maintenance Frequency </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Maintenance Frequency </h2>
+        <p-panel header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        MaintenanceFrequency Number*:
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="number" id="number"  #maintenanceFrequencyDetailsNumberRef="ngModel" [(ngModel)]="number"
+                                       minlength="3"  required style="width:100%">
+                                <label>Maintenance Frequency Number <span >*</span></label>
                     </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="number" name="number" pInputText [(ngModel)]="number" placeholder="Maintenance Frequency Number" minlength="3" #maintenanceFrequencyDetailsNumberRef="ngModel"
-                            class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="maintenanceFrequencyDetailsNumberRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
-                        </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="maintenanceFrequencyDetailsNumberRef.errors?.minlength">
-                            MinLength-3
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #maintenanceFrequencyDetailsDescriptionRef="ngModel"
-                            placeholder="Description" class="form-control  col-sm-12" required ></textarea>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="maintenanceFrequencyDetailsDescriptionRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
-                        </div>
-                    </div>
-                </div>
+                </div><br />
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-2">
                         Range * :
@@ -63,23 +33,39 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
+                </div><br />
+                <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #maintenanceFrequencyDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/maintenanceFrequency">  </button>
-                    </div>
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
                 </div>
             </div>
             <br />
+             <footer>
+                <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/maintenanceFrequency"  class="blue-grey-btn"  icon="ui-icon-close">  </button>
+                <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Add" class="green-btn">  </button>
+            </footer>
             <br />
         </p-panel>
     </form>
+</div>
 </div>

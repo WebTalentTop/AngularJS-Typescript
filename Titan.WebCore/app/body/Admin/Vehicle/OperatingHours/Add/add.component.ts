@@ -13,7 +13,8 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 export class AddComponent {
     username: string;
     description:string;
-
+    startTime: any;
+    endTime: any;
     constructor(private service: OperatingHoursService, private router: Router, private route: ActivatedRoute) {
 
     }
@@ -27,9 +28,11 @@ export class AddComponent {
         //console.log(this.description);
         //formRef.locale = "en-us";
         //formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+        let formData: any = {name: '', startTime: '', endTime:'', frequency: '' ,isDeleted: false};
         formData.name = formRef.name;
-        formData.description = formRef.description;
+        formData.frequency = formRef.frequency;
+        formData.startTime = formRef.startTime;
+        formData.endTime = formRef.endTime;
         formData.locale = "en-us";
         let added: any="true";
         console.log(formData);

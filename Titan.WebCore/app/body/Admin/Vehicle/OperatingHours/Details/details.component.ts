@@ -59,7 +59,7 @@ export class DetailsComponent {
 
             this.service.getById(this.OperatingHoursId).subscribe(OperatingHoursDetails => {
                 this.OperatingHoursDetails = OperatingHoursDetails.result;
-              
+                //this.OperatingHoursDetails.startTime = new Date(this.OperatingHoursDetails.startTime);
                 console.log(this.OperatingHoursDetails);
             });
         });
