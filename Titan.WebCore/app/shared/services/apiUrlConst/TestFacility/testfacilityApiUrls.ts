@@ -38,4 +38,6 @@ export class TestFacilityApiUrl {
     public static postMoveTestUrl: string = titanApiUrl + 'testFacility/MoveTest/';
     public static getEquipmentToAddUrl:string = titanApiUrl + 'testFacility/GetAvailableEquipmentsForTestFacility/';
     public static postSplitTestFacilityEvent: string = titanApiUrl + 'testFacility/Split/';
+    public static getTestFacilityEventStatusUrl:string =titanApiUrl + 'testFacilityEventStatus/GetAll';
+
 }

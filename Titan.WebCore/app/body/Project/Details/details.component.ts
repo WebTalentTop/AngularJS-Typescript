@@ -66,6 +66,7 @@ export class DetailsComponent {
     onMarketChange(event) {
         this.selectedMarketId = event.value;
     }
+    
     getMarkets() {
         //    userRoles
         this.marketService.getAllMarkets().subscribe(response => {

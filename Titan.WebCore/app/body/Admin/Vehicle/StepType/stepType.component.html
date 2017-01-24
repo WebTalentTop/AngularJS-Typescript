@@ -1,12 +1,12 @@
 
 <div class="ui-g-12">
-    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1> Step Type </h1>
-
+        <header>
+          <h1> Step Type </h1>
+          <button pButton type="button" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Add New Step Type"></button>
+        </header>
         <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Step Type</a>
-            <div class="ui-messages-success">
                 <p-messages [value]="msgs"></p-messages>
             </div>
             <grid-data [gridData]="gridData"

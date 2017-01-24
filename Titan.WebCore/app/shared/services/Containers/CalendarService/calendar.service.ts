@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { CalendarApiUrl} from '../../apiUrlConst/Calendar/CalendarApiUrls';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {CalendarApiUrl} from '../../apiUrlConst/Calendar/CalendarApiUrls';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -24,6 +24,7 @@ export class CalendarService {
     };
 
     currentUser: IUserProfile;
+
     constructor(private http: Http, private userProfileService: UserProfileService) {
         this.currentUser = this.userProfileService.getCurrentUserProfile();
         this.headers.append("TenantId", this.currentUser.defaultTenantId);
@@ -31,15 +32,16 @@ export class CalendarService {
     }
 
     postGridData(): Observable<any> {
-        return this.http.post(`${CalendarApiUrl.gridApiUrl}`, this.body, { headers: this.headers })
+        return this.http.post(`${CalendarApiUrl.gridApiUrl}`, this.body, {headers: this.headers})
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${CalendarApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${CalendarApiUrl.gridApiUrl}`, filterBody, {headers: this.headers})
             .map(this.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -48,7 +50,7 @@ export class CalendarService {
 
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${CalendarApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${CalendarApiUrl.postCreatedUrl}`, filterBody, {headers: this.headers})
             .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -59,7 +61,7 @@ export class CalendarService {
 
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${CalendarApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+        return this.http.put(`${CalendarApiUrl.postUpdateUrl}`, filterBody, {headers: this.headers})
             .map(this.getJson)
             .map(this.checkErrors)
             .catch(err => Observable.throw(err))
@@ -67,7 +69,7 @@ export class CalendarService {
     }
 
     getById(id): Observable<any> {
-        return this.http.get(`${CalendarApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
+        return this.http.get(`${CalendarApiUrl.getByIdUrl}/${id}`, {headers: this.headers})
             .map(this.getJson)
             ;
         //.catch(err => Observable.throw(err))
@@ -90,8 +92,9 @@ export class CalendarService {
             throw error;
         }
     }
-    getDefaultSettings(tenantId){
-        return this.http.get(`${CalendarApiUrl.getCalendarSettingsByTenantIdUrl}${tenantId}`, { headers: this.headers })
+
+    getDefaultSettings(tenantId) {
+        return this.http.get(`${CalendarApiUrl.getCalendarSettingsByTenantIdUrl}${tenantId}`, {headers: this.headers})
             .map(this.getJson)
             ;
     }
