@@ -92,6 +92,8 @@ export class DetailsComponent {
     };
     msgs: Message[];
     uploadedFiles: any[] = [];
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
@@ -121,18 +123,7 @@ export class DetailsComponent {
    {
 
    }
-   ngOnInit() {
-       this.getEquipmentManufacturers();
-       this.getEquipmentTypes();
-       this.getTestFacilities();
-       this.GetLogCommentsByEquipmentId();
 
-
-    handleChange(event) {
-
-    }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.getEquipmentManufacturers();
         this.getEquipmentTypes();
