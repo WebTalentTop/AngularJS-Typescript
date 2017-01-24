@@ -61,6 +61,16 @@ export class FunctionGroupService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    postAddFunctionGroup(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${FunctionGroupApiUrl.postFunctionGroupCreatedUrl}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postAssignUserFunctionGroup(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${FunctionGroupApiUrl.postAssignUserFunctionGroup}`, filterBody, { headers: this.headers })

@@ -2,12 +2,12 @@
     <div class="card card-w-title">
       <h1>Tenant</h1>
         <p-panel>
-          <header class="with-controls">
-              <p class="ui-panel-title">Tenant List</p>
-              <p class="controls">
-                <button pButton type="button" class="blue-grey-btn" icon="ui-icon-add" label="Add New Tenant" (click)="displayTenantDialog=true"></button>
-              </p>
-          </header>
+            <header class="with-controls">
+                <p class="ui-panel-title">Users</p>
+                <p class="controls">
+                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Assign Tenant"></button>
+                </p>
+            </header>
           <p-dataTable [value]="tenants" [paginator]="true" rows="15" [responsive]="true">
 
               <p-column header="Tenant Name" sortable="true">

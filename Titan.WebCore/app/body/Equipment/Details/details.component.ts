@@ -11,6 +11,7 @@ declare var cron: any;
 declare var useGentleSelect: any;
 @Component({
     selector: 'details-equipment',
+    styleUrls: ['app/body/Equipment/Details/image.component.css'], 
     templateUrl: 'app/body/Equipment/Details/details.component.html'
 })
 export class DetailsComponent {
@@ -59,6 +60,7 @@ export class DetailsComponent {
     manufacturerCity: any = '';
     IsNewManufacturer: boolean;
     comment: any;
+    equipmentCodeName: any = 'CODE128';
     added: any;
     manufacturerId: any;
     model: any = {
@@ -182,9 +184,9 @@ export class DetailsComponent {
                 }
 
                 this.service.getEquipmentBarCodeImage(this.id, "").subscribe(res => {
-                    if (res.result.isSuccess)
+                    if (res)
                     {
-                        this.image = res.result.barcodeImage;
+                        this.image = res;
                     }
 
                 });

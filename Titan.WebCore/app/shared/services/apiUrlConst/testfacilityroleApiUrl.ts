@@ -6,5 +6,5 @@ export class TestFacilityRoleApiUrl {
   //public static postCreatedUrl: string = titanApiUrl + 'testFacilityRole';
   //public static postUpdateUrl: string = titanApiUrl + 'testFacilityRole';
     public static getByIdUrl: string = titanApiUrl + 'testFacilityRole';
-    public static getRolesByTestFacilityIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityUserRoleByTestFacilityId';
+    public static getTestFacilityUsersByTestFacilityIdUrl: string = titanApiUrl + 'testFacility/GetTestFacilityUserRoleByTestFacilityId';
 }

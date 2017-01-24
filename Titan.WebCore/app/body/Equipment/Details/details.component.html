@@ -3,7 +3,9 @@
   <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
         <br />
         <div class="card card-w-title">
-        <h1>Equipment Details</h1>
+        <h1>Equipment Details</h1>   
+            <img src="data:image/jpeg;base64,{{image}}" alt="Barcode">
+           <a href="#" target="_blank"><i class="fa ui-icon-edit"></i>New window</a>
 <p-tabView  (onChange)="handleChange($event)">
 
         <p-tabPanel header="Information" id='details'>
@@ -19,7 +21,8 @@
 
                         <p-panel header="Information">
                             <br />
-                            <img [src]="image" />
+                            <!--<img [src]="image" />-->
+                            <!--<input type="file" name="image" id="fileSelector" #fileSelector/>-->
                             <div class="ui-grid-row">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" id="name"

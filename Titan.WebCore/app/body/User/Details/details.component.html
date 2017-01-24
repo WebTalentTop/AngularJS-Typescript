@@ -218,10 +218,15 @@
                             <p-column field="tenantName" header="Tenant Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
                             <p-column field="isInheritedPermission" header="Inherited Permission" sortable="true"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
-                            <p-column header="Action">
+                            <p-column header="Action">                                
                                 <template let-UserTenant="rowData" pTemplate type="body">
+                                    <div *ngIf="UserTenant.isInheritedPermission=='direct'">
                                     <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveUserTenantMap(UserTenant)" label="Delete"></button>
-                                </template>
+                                    </div>
+                                    <div *ngIf="UserTenant.isInheritedPermission=='group'">
+                                      You need to delete the function group in order to delete this tenant.
+                                    </div>
+                               </template>>
                             </p-column>
                         </p-dataTable>
 

@@ -9,7 +9,7 @@ import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
 
 @NgModule({
-    imports: [BreadcrumbModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule,BreadcrumbModule ,ButtonModule,DropdownModule, addRoutes],
+    imports: [BreadcrumbModule, CommonModule, FormsModule, DataTableModule, InputTextareaModule, InputTextModule, PanelModule,ButtonModule,DropdownModule, addRoutes],
     providers: [MilestoneStatusService,BreadCrumbsService],
     declarations: [AddComponent]
 })

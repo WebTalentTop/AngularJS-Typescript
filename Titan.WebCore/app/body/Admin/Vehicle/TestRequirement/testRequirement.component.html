@@ -1,12 +1,13 @@
 
 <div class="ui-g-12">
-    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1> Test Requirement </h1>
-
+        <header>
+          <h1> Test Requirement </h1>
+          <button pButton type="button" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Add New Test Requirement"></button>
+        </header>
         <div class="ui-grid-row">
-            <a routerLink="add"><i class="fa ui-icon-add"></i>Add New Test Requirement</a>
-            <div class="ui-messages-success">
+              <div class="ui-messages-success">
                 <p-messages [value]="msgs"></p-messages>
             </div>
             <grid-data [gridData]="gridData"

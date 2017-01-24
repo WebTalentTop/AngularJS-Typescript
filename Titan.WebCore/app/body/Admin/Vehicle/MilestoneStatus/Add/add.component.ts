@@ -15,7 +15,11 @@ export class AddComponent {
     username: string;
     description:string;
     added: any;
-    constructor(private breadCrumbsService: BreadCrumbsService,private service: MilestoneStatusService, private router: Router, private route: ActivatedRoute) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: MilestoneStatusService, 
+        private router: Router, 
+        private route: ActivatedRoute) {
 
     }
     breadcrumbs: MenuItem[];

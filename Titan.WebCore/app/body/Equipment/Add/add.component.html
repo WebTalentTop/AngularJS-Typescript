@@ -7,6 +7,8 @@
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                 <p-messages [value]="msgs"></p-messages>
                 <h2> Create New Equipment </h2>
+              
+
                 <p-panel header="Basic Information">
                     <div class="body">
                         <!-- Begin Name -->
@@ -68,7 +70,8 @@
                                 </div>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true" [style]="{'width':'160px'}"></p-calendar>
+                              <p-calendar [(ngModel)]="lastCalibrationDate" name="lastCalibrationDate" [showIcon]="true" [style]="
+<a href="add.component.html">add.component.html</a>{'width':'160px'}"></p-calendar>
                               <label style="color:#777">Last Calibration Date :</label>
                             </div>
                         </div>-->
