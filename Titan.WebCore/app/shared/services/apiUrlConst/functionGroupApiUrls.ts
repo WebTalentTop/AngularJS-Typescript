@@ -9,6 +9,8 @@ export class FunctionGroupApiUrl {
     public static getTenantUserFunctionGroupsById: string = titanApiUrl + 'functionGroup/GetFunctionGroupUsersTenantsByFunctionGroup';
     public static CreateUserTenantAccess: string = titanApiUrl + 'titanUser/AddUserTenantMapping';
     public static postCreatedUrl: string = titanApiUrl + 'titanUser/post';
+    public static postFunctionGroupCreatedUrl: string = titanApiUrl + 'functionGroup/post';
+    
     public static postUpdateUrl: string = titanApiUrl + 'titanUser/update';
     public static GetTenantMembershipsByUser: string = titanApiUrl + 'titanUser/GetTenantMembershipsByUser';
     public static getUsersByTenantId: string = titanApiUrl + 'titanUser/GetAllUserMembershipsByTenant';

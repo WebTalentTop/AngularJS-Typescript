@@ -4,14 +4,14 @@
 <br/>
         <div class="card card-w-title">
 
-            <h2>Create New User</h2>
+            <h2>Create New Tenant</h2>
 
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
                 <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
                 <!-- Begin Panel - Test Facility Name and Location -->
 
-                <p-panel header="Function Group">
+                <p-panel header="User Information">
 
                     <div class="body">
 
@@ -19,8 +19,6 @@
 
                       
                         <br /><br />
-                     
-
                         <div class="ui-grid-row">
 
                             <div class="ui-g-12 ui-md-6">
@@ -32,18 +30,20 @@
                             </div>
                         </div><br /><br />
 
-                        <div class="ui-grid-row">
+                        <!--<div class="ui-grid-row">
 
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Users :</p>
-                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" [(ngModel)]="selectedDepartmentId" (onChange)="onDepartmentChange($event)" name="departments" id="departments" [autoWidth]="false"></p-dropdown>
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="users" [(ngModel)]="selectedUserId" (onChange)="onUserChange($event)" name="departments" id="departments" [autoWidth]="false"></p-dropdown>
                             </div>
-                        </div><br /><br />
+                        </div><br /><br />-->
+
+
                     </div>
 
                     <footer>
                         <p>* indicates required field</p>
-                        <button pButton type="button" icon="ui-icon-close" class="blue-grey-btn" label="Cancel" id="cancel" routerLink="/functiongroup"></button>
+                        <button pButton type="button" icon="ui-icon-close" class="blue-grey-btn" label="Cancel" id="cancel" routerLink="/tenant"></button>
                         <button pButton type="submit" icon="ui-icon-save" class="green-btn" label="Add" id="add" [disabled]="!tfForm.valid"></button>
                     </footer>
                     <br />

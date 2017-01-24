@@ -21,6 +21,7 @@ export class ProjectComponent {
     gridFilter = {};
     idField:string ;
     msgs: Message[];
+    titanApiUrl: titanApiUrl;
     uploadedFiles: any[] = [];
     constructor(
         private service: ProjectService,

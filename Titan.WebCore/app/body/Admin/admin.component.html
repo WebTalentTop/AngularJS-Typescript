@@ -7,28 +7,46 @@
         <div class="ui-g">  
             <div class="ui-g-12">       
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
-                    <div class="ui-g card colorbox colorbox-1">
-                        <div class="ui-g-3">
-                            <i class="material-icons">group</i>
+                    <a [routerLink]="['/user']">
+                        <div class="ui-g card colorbox colorbox-1">
+                            <div class="ui-g-3">
+                                <i class="material-icons">group</i>
+                            </div>
+                            <div class="ui-g-9" [routerLink]="['/user']">
+                                <span class="colorbox-name"></span>
+                                <span class="colorbox-count">User Management</span>
+                                <span class="colorbox-name"></span>
+                            </div>
                         </div>
-                        <div class="ui-g-9">
-                            <span class="colorbox-name"></span>
-                            <span class="colorbox-count">User Management</span>
-                            <span class="colorbox-name"></span>
+                        </a>
+                   </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <a [routerLink]="['/functionGroup']">
+                        <div class="ui-g card colorbox colorbox-1">
+                            <div class="ui-g-3">
+                                <i class="material-icons">group</i>
+                            </div>
+                            <div class="ui-g-9" [routerLink]="['/functionGroup']">
+                                <span class="colorbox-name"></span>
+                                <span class="colorbox-count">Function Groups</span>
+                                <span class="colorbox-name"></span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
-                    <div class="ui-g card colorbox colorbox-5">
-                        <div class="ui-g-3">
-                            <i class="material-icons">home</i>
+                    <a [routerLink]="['/tenant']">
+                        <div class="ui-g card colorbox colorbox-5">
+                            <div class="ui-g-3">
+                                <i class="material-icons">home</i>
+                            </div>
+                            <div class="ui-g-9" [routerLink]="['/tenant']">
+                                <span class="colorbox-name"></span>
+                                <span class="colorbox-count">Tenant</span>
+                                <span class="colorbox-name"></span>
+                            </div>
                         </div>
-                        <div class="ui-g-9">
-                            <span class="colorbox-name"></span>
-                            <span class="colorbox-count">Tenant</span>
-                            <span class="colorbox-name"></span>
-                        </div>
-                    </div>
+                        </a>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                  <a [routerLink]="['/lookup']">

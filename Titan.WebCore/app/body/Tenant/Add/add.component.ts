@@ -5,13 +5,12 @@ import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { TitanUserProfileService } from '../../../shared/services/titanUserProfile.service';
-import { FunctionGroupService } from '../../../shared/services/functionGroup.service';
-import { DepartmentService } from '../../../shared/services/department.service';
+import { TenantService } from '../../../shared/services/tenant.service';
 import { UserService } from '../../../shared/services/user.service';
 @Component({
-    selector: 'add-functiongroup',
+    selector: 'add-tenant',
    // styleUrls: ['app/body/User/Add/add.component.css'], 
-    templateUrl: 'app/body/FunctionGroup/Add/add.component.html'
+    templateUrl: 'app/body/Tenant/Add/add.component.html'
 })
 
 export class AddComponent {
@@ -20,9 +19,9 @@ export class AddComponent {
     emailAddress:string;
     phoneNumber:string;
     userName: string;
-    selectedDepartmentId: any;
+    selectedUserId: any;
     tenantId: any;
-    departments: any;
+    users: any;
     displayName:string;
     notificationMsgs: Message[] = [];
     testFacility = {
@@ -36,13 +35,12 @@ export class AddComponent {
                     }};
     //constructor(private dataService: PlatformService) {
     //        }
-    
+
     constructor(private breadCrumbsService: BreadCrumbsService,
 
         private userservice: UserService,
         private userprofileservice: TitanUserProfileService,
-        private functiongroupservice: FunctionGroupService,
-        private departmentservice: DepartmentService,
+        private tenantservice: TenantService,
                 private router: Router) {
 
     }
@@ -56,7 +54,7 @@ export class AddComponent {
             //this.userprofileservice.getById().subscribe(tenresult => {
             //    this.tenantId = tenresult.result;
             //});
-            this.getDepartments();
+            this.getUsers();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
             filter.pageName === 'TestFacilitiesAddPage'
@@ -68,13 +66,13 @@ export class AddComponent {
         this.breadcrumbsHome = { routerLink: ['/'] };
 
         }
-    onDepartmentChange(event) {
-        this.selectedDepartmentId = event.value;
+    onUserChange(event) {
+        this.selectedUserId = event.value;
     }
-    getDepartments() {
+    getUsers() {
         //    userRoles
-        this.departmentservice.getDepartments().subscribe(response => {
-            this.departments = new Array();
+        this.userservice.getUsers().subscribe(response => {
+            this.users = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -83,29 +81,34 @@ export class AddComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name,
+                        label: template.firstName,
                         value: template.id
                     }
                     resultMap.push(temp);
                 }
-                this.departments = resultMap;
+                this.users = resultMap;
             }
             console.log(response);
         });
     }
     onSubmit(formRef) {
-       
-      //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
-        let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
-        let functionGroupModel = {
+
+        //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
+        // let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+        let tenantModel = {
 
             Name: formRef.name,
-            DepartmentId: this.selectedDepartmentId
+          
+    HostAddress : '',
+    FavIconUrl: '',
+    DefaultTimeZone: '',
+    LookupKey: '',
+    DefaultLocale: ''
         };
-        this.functiongroupservice.postAddFunctionGroup(functionGroupModel).subscribe(res => {
+        this.tenantservice.postAdd(tenantModel).subscribe(res => {
             if (res.isSuccess) {
 
-                this.router.navigate(['functionGroup/details/', res.result.id]);
+                this.router.navigate(['tenant/details/', res.result.id]);
             }
         });
         //this.userservice.postAdd(formData).subscribe(res => { 

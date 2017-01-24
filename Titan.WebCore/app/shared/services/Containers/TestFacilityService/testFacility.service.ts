@@ -26,7 +26,7 @@ export class TestFacilityService {
 
     currentUser: IUserProfile;
 
-    constructor(private http, private userProfileService: UserProfileService) {
+    constructor(private http: Http, private userProfileService: UserProfileService) {
         this.currentUser = this.userProfileService.getCurrentUserProfile();
         this.headers.append("TenantId", this.currentUser.defaultTenantId);
         this.headers.append("UserId", this.currentUser.id);
