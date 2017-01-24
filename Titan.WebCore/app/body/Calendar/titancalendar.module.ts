@@ -15,7 +15,7 @@ import { TestRequestService } from '../../shared/services/Containers/TestRequest
 
 
 import {
-    DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule,
+    DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CheckboxModule,
     FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, FieldsetModule, AccordionModule, ToolbarModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
@@ -36,7 +36,7 @@ import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.se
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
         InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
         DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule,
-        ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, RadioButtonModule],
+        ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, CheckboxModule],
 
     providers: [TestFacilityService,  ProjectService, TestRoleService, TestStatusService, TestModeService, BuildLevelService,
         TestTypeService, TestRequestService, TitanService, CalendarService, TenantService, TestFacilityRoleService

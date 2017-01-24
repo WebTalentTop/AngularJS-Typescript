@@ -540,9 +540,9 @@ export class DetailsComponent implements AfterViewInit {
     getUserRoles() {
         //    userRoles
         this.testFacilityService.getRoles().subscribe(response => {
-            this.userRoles = new Array();
+            this.userRoles = [];
             if (response != null) {
-                var resultMap = new Array();
+                var resultMap =[];
                 resultMap.push({
                     label: "Select User Role",
                     value: null

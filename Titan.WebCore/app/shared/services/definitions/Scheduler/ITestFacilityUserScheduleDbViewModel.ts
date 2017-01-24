@@ -11,5 +11,11 @@ export interface ITestFacilityUserScheduleDbViewModel {
     entityIdentifierId:string;
     defaultStartMinutesPastMidnight : number;
     defaultEndMinutesPastMidnight: number;
+    eventStatusId:string;
     schedules:ITitanUserScheduleViewModel[];
+    isTimeBlockScheduled : boolean;
+    // The minDate and maxDate are used for validation
+    minDate:Date;
+    maxDate:Date;
+
 }
