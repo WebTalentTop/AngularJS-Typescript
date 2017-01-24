@@ -1,53 +1,35 @@
 ﻿<div class="ui-g-12">
+  <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
-        <h1>Edit Milestone Category </h1>
-
+        <h2>Edit Milestone Category </h2>
         <p-growl [value]="msgs"></p-growl>
         <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
             <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-            <br/>
-            <p-panel>
-                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            Milestone Category Name * :
+            <p-panel  header="Details">
+                <div class="body">
+                        <div class="ui-grid-row">
+                               <div class="md-inputfield ui-g-12 ui-md-6">
+                                        <input type="text" pInputText name="name" id="name"  [(ngModel)]="MilestoneCategoryDetails.name" #milestoneCategoryDetailsNameRef="ngModel"
+                                               minlength="3"  required style="width:100%">
+                                        <label>Milestone Category Name<span >*</span></label>
+                                </div>
+                        </div><br />
+                         <div class="ui-grid-row">
+                                <div class="ui-grid-col-2">
+                                    IsActive :
+                                </div>
+                                <div class="ui-grid-col-6">
+                                    <p-toggleButton [(ngModel)]="MilestoneCategoryDetails.isDeleted" name="isDeleted" #milestoneCategoryDetailsisDeletedRef="ngModel"
+                                        [style]="{'width':'50px'}"></p-toggleButton>
+                                </div>
                         </div>
-                        <div class="ui-grid-col-4">
-
-                            <input type="text" pInputText name="name" [(ngModel)]="MilestoneCategoryDetails.name" #milestoneCategoryDetailsNameRef="ngModel"
-                                placeholder="MilestoneCategory Name" minlength="3" class="form-control" required row="20" />
-                        </div>
-                        <div class="ui-grid-col-4">
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneCategoryDetailsNameRef.errors?.required">
-                                <i class="fa fa-close"></i> Please enter MilestoneCategory Name
-                            </div>
-                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="milestoneCategoryDetailsNameRef.errors?.minlength">
-                                MinLength-3
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            IsActive :
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <p-toggleButton [(ngModel)]="MilestoneCategoryDetails.isDeleted" name="isDeleted" #milestoneCategoryDetailsisDeletedRef="ngModel"
-                                [style]="{'width':'50px'}"></p-toggleButton>
-                        </div>
-                    </div>
-
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="edit" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-edit" label="Save">  </button>
-                        </div>
-                        <div class="ui-grid-col">
-                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/milestoneCategory" [style]="{'width':'20px'}">  </button>
-                        </div>
-                    </div>
-                </div>
+                    </div><br />
+                    <footer>
+                            <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/milestoneCategory" class="blue-grey-btn" icon="ui-icon-close">  </button>
+                            <button id="save" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Save" class="green-btn">  </button>
+                       
+                    </footer>
+                    <br />
             </p-panel>
         </form>
     </div>

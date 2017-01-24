@@ -33,6 +33,7 @@ export class DetailsComponent {
     displayCommentDialog: boolean = false;
     selectedMaintenanceFrequency: any;
     id: string;
+    image: any;
     equipmentId: any;
     entityType: string = "TestFacility";
     entityId: string = this.id;
@@ -115,6 +116,18 @@ export class DetailsComponent {
         this.equipmentId = this.id;
         this.model.id = this.id;
     }
+
+   handleChange(event)
+   {
+
+   }
+   ngOnInit() {
+       this.getEquipmentManufacturers();
+       this.getEquipmentTypes();
+       this.getTestFacilities();
+       this.GetLogCommentsByEquipmentId();
+
+
     handleChange(event) {
 
     }
@@ -125,6 +138,7 @@ export class DetailsComponent {
         this.getEquipmentTypes();
         this.getTestFacilities();
         this.GetLogCommentsByEquipmentId();
+
         this.service.getById(this.id)
             .subscribe(res => {
                 this.model = res.result;
@@ -175,23 +189,15 @@ export class DetailsComponent {
                 else {
                     this.selectedEquipmentManufacturerId = null;
                 }
-                //this.formConfiguration = res.formConfiguration;
-                //this.formObject = res.formObject;
 
-                //$("#selector").cron({
+                this.service.getEquipmentBarCodeImage(this.id, "").subscribe(res => {
+                    if (res.result.isSuccess)
+                    {
+                        this.image = res.result.barcodeImage;
+                    }
 
-                //    initial: "* * * * *",
-                //    onChange: function () {
+                });
 
-                //        this.selectedCalibrationFrequency = $(this).cron("value");
-                //        // $('#selector-val').text($(this).cron("value"));
-                //    },
-                //    effectOpts: {
-                //        openEffect: "fade",
-                //        openSpeed: "slow"
-                //    },
-                //     useGentleSelect: true
-                //})
             });
 
 

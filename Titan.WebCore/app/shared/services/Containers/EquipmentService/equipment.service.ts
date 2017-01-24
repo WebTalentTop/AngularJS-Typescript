@@ -104,7 +104,13 @@ export class EquipmentService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-
+    getEquipmentBarCodeImage(id,code): Observable<any> {
+        return this.http.get(`${EquipmentApiUrl.getEquipmentBarCodeImage}/${id}/${code}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     getManufaturerDetailsById(id): Observable<any> {
         return this.http.get(`${EquipmentApiUrl.getManufacturerDetailsByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)

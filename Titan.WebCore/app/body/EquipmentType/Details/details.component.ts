@@ -65,11 +65,15 @@ export class DetailsComponent implements OnInit {
     entityId: string = '';
     filepath: string = "TestFacility";
     displayDialogForm: boolean;
+    isMaintenaceFrequencySelected: boolean;
+    isSubTypeMaintenanceFrequencySelected: boolean;
     emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
     selectedMaintenanceFrequency: any;
     cities: SelectItem[];
     selectedcity: any;
+    isCronControlInitialized: boolean;
+    isSubTypeCronControlInitialized: boolean;
     added: any;
     selectedSubTypeMaintenanceFrequency: any;
     selectedstring: string = null;
@@ -272,43 +276,20 @@ export class DetailsComponent implements OnInit {
             //userModifiedById: ''
         };
 
-
-        //   this.EquipmentsubTypes.forEach((subtype: any) => {
-        // if (subtype.isdeleted =='' )
-        //this.dataService.postAdd(subtype)
-        //    .subscribe(res1 => {
-
-        //      this.EquipmentsubTypes.forEach((subtype: any) => {
-        //          this.dataService.postAdd(subtype)
-        //            .subscribe(res1 => {
-
-        //  this.EquipmentsubTypes.forEach((subtype: any) => {
-        //     this.dataService.postUpdate(subtype)
-        //       .subscribe(res2 => {
-
         this.dataService.postUpdate(modelbody)
             .subscribe(res => {
-
                 if (res.isSuccess) {
                     this.msgs = [];
-                    this.msgs.push({severity: 'success', summary: 'saved', detail: ''});
-
-
+                    this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
                 }
             });
 
-        //    });
-        // });
-        // });
 
-        // });
 
-        //});
-        //  });
+      
+
     }
-
-
-    //frequencyInit() {
+            //frequencyInit() {
     //    let options = {
     //        initial: this.selectedMaintenanceFrequency,
     //        onChange: function() {
@@ -316,34 +297,68 @@ export class DetailsComponent implements OnInit {
     //        }
     //    };
 
+    showHideCronPicker() {
+        console.log("--inside cronpicker show hide");
+
+
+        if (this.isMaintenaceFrequencySelected) {
+            if (!this.isCronControlInitialized) {
+                $("#selector").cron({
+
+                    initial: this.selectedMaintenanceFrequency,
+                    onChange: function () {
+                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                    }, useGentleSelect: false
+                });
+            }
+        } else {
+            // Hide the cron
+        }
+    }
+
+    showSubTypeHideCronPicker() {
+        console.log("--inside cronpicker show hide");
+
+        if (this.isSubTypeMaintenanceFrequencySelected) {
+            if (!this.isSubTypeCronControlInitialized) {
+                $("#selector").cron({
+
+                    initial: this.selectedMaintenanceFrequency,
+                    onChange: function () {
+                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                    }, useGentleSelect: false
+                });
+            }
+        } else {
+            // Hide the cron
+        }
+    }
+
+
 
     frequencyInit(cronExp) {
         var angularRef = this;
         if (cronExp != null && cronExp != "") {
             this.selectedMaintenanceFrequency = cronExp;
-        }
-        else {
 
+            this.isMaintenaceFrequencySelected = true;
+            $("#selector").cron({
+
+                initial: this.selectedMaintenanceFrequency,
+                onChange: function () {
+                    angularRef.selectedMaintenanceFrequency = $(this).cron("value");
+                }, useGentleSelect: false
+            });
+        }
+        else
+        {
+            this.isMaintenaceFrequencySelected = false;
             this.selectedMaintenanceFrequency = "0 0 1 1 *";
         }
-        $("#selector").cron({
 
-            initial: this.selectedMaintenanceFrequency,
-            onChange: function () {
-                angularRef.selectedMaintenanceFrequency = $(this).cron("value");
-            }, useGentleSelect: false
-        });
-
-
-        //else {
-        //    this.selectedMaintenanceFrequency = "0 0 1 1 *";
-        //    $("#selector").cron({
-
-        //        initial: this.selectedMaintenanceFrequency,
-        //        onChange: function () {
-        //            this.selectedMaintenanceFrequency = $(this).cron("value");
-        //        }, useGentleSelect: false
-        //    });
+       
+       
+       
         //}
 
 
@@ -356,46 +371,6 @@ export class DetailsComponent implements OnInit {
         this.displayDialog = true;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
 
-        /*  if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "" && !this.cronInitialized) {
-         this.cronInitialized = true;
-         // if (this.model.frequency != null && this.model.frequency != "") {
-         //$("#cronselector").cron({
-         //    initial: this.EquipmentSubType.frequency,
-         //    onChange: function () {
-         //        this.EquipmentSubType.frequency = $(this).cron("value");
-         //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-         //    }, useGentleSelect: false
-         //});
-         }
-
-
-
-
-         else {
-         if (this.model.frequency != null && this.model.frequency != "" && !this.cronInitialized) {
-         this.cronInitialized = true;
-         //$("#cronselector").cron({
-         //    initial: this.model.frequency,
-         //    onChange: function () {
-         //        this.EquipmentSubType.frequency = $(this).cron("value");
-         //        this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-         //    }, useGentleSelect: false
-         //});
-         } else {
-         this.cronInitialized = true;
-         this.onCronAdd();
-         // $("#add").add("")
-         $("#cronselector").cron({
-
-         initial: this.selectedSubTypeMaintenanceFrequency,
-         //onChange: function () {
-         //    //this.EquipmentSubType.frequency = $(this).cron("value");
-         //    this.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-         //}//, useGentleSelect: false
-         });
-         }
-         }*/
-        // this.IsSubType= true;
 
         this.onCronInit(this.EquipmentSubType.frequency);
 
@@ -423,8 +398,16 @@ export class DetailsComponent implements OnInit {
     save() {
         //   this.EquipmentSubType = EquipmentSubType.name;
         if (this.newsubType) {
+
+            if (this.isSubTypeMaintenanceFrequencySelected) {
+                this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
+            }
+            else
+            { this.EquipmentSubType.frequency = null; }
+
             this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             this.EquipmentSubType.calibrationform = this.selectedSubTypeFormItem;
+
             this.EquipmentsubTypes.push(this.EquipmentSubType);
             this.dataService.postAdd(this.EquipmentSubType).subscribe(res => {
                 if (res.isSuccess) {
@@ -493,24 +476,27 @@ export class DetailsComponent implements OnInit {
         //$("#cronselector").remove();
         //let cronContainer = $("<div id='cronselector'></div>");
         //$("#cronSelectorPlaceHolder").append(cronContainer);
-        debugger;
+    
         if (cronExpression !== null && cronExpression !== "") {
+            this.isSubTypeMaintenanceFrequencySelected = true;
             this.selectedSubTypeMaintenanceFrequency = cronExpression;
+            $("#cronselector").cron({
+                initial: this.selectedSubTypeMaintenanceFrequency,
+                onChange: function () {
+                    selfRef.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
+                },
+                useGentleSelect: false
+            });
 
         }
         else {
+            this.isSubTypeMaintenanceFrequencySelected = false;
             this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
 
         }
 
         //$("#cronselector").remove();
-        $("#cronselector").cron({
-            initial: this.selectedSubTypeMaintenanceFrequency,
-            onChange: function () {
-                selfRef.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-            },
-            useGentleSelect: false
-        });
+       
 
     }
 

@@ -1,31 +1,36 @@
 <div class="ui-g">
     <div class="ui-g-12">
-        <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+  <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
         <br />
-
         <div class="card card-w-title">
-            <h1>Equipment Details</h1>
-            <p-tabView (onChange)="handleChange($event)">
+        <h1>Equipment Details</h1>
+<p-tabView  (onChange)="handleChange($event)">
 
-                <p-tabPanel header="Information" id='details'>
+        <p-tabPanel header="Information" id='details'>
 
-                    <p-growl [value]="msgs"></p-growl>
+            <p-growl [value]="msgs"></p-growl>
+            <!--<div class="row">
+                <img [src]="http://localhost:9998/equipment/GetEquipmentBarcode/CODE128" />
+                <a href="http://localhost:9998/equipment/GetEquipmentBarcode/CODE128"></a>
+            </div>-->
 
-                    <div class="subsection">
-                        <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
+                <div class="subsection">
+                    <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
 
-                            <p-panel header="Information">
-                                <br />
-                                <div class="ui-grid-row">
-                                    <div class="md-inputfield ui-g-12 ui-md-6">
-                                        <input type="text" id="name"
-                                               [(ngModel)]="model.name" required pInputText
-                                               #equipmentNameRef="ngModel"
-                                               minlength="3" class="form-control" required row="20"
-                                               (focus)="equipmentNameRef.focus=true" name="name" style="width:100%">
-                                        <!--[(ngModel)]="model.name" required pInputText name="name" style="width:100%">-->
-                                        <label>Name <span>*</span></label>
-                                    </div>
+                        <p-panel header="Information">
+                            <br />
+                            <img [src]="image" />
+                            <div class="ui-grid-row">
+                                <div class="md-inputfield ui-g-12 ui-md-6">
+                                    <input type="text" id="name"
+                                    [(ngModel)]="model.name" required pInputText
+                                    #equipmentNameRef="ngModel"
+                                    minlength="3" class="form-control" required row="20"
+                                    (focus)="equipmentNameRef.focus=true" name="name" style="width:100%">
+                                    <!--[(ngModel)]="model.name" required pInputText name="name" style="width:100%">-->
+                                    <label>Name <span >*</span></label>
+                                </div>
+
 
                                     <div class="md-inputfield ui-g-12 ui-md-6">
                                         <input type="text" name="serialNumber" id="serialNumber" pInputText [(ngModel)]="model.serialNumber" style="width:100%">
