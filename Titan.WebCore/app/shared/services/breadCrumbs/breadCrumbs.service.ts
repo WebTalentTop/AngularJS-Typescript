@@ -276,10 +276,10 @@ export class BreadCrumbsService {
 
         //Admin RequirementItemType Page
         this.adminRequirementItemTypePage();
-        // // Admin RequirementItemType Add Page
-        // this.adminRequirementItemTypeAddPage();
-        // // Admin RequirementItemType Details Page
-        // this.adminRequirementItemTypeDetailsPage();
+        // Admin RequirementItemType Add Page
+        this.adminRequirementItemTypeAddPage();
+        // Admin RequirementItemType Details Page
+        this.adminRequirementItemTypeDetailsPage();
 
         //Admin SensorType Page
         this.adminSensorTypePage();
@@ -1865,7 +1865,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'RequirementItemTypeHomePage', items: menuItems };
@@ -1873,7 +1872,45 @@ export class BreadCrumbsService {
     }
 
     private adminRequirementItemTypeBCItems() {
-        let menuItem = { label: 'RequirementItemType', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Requirement Item Type', routerLink: ['/admin/vehicle/requirementItemType'] };
+        return menuItem;
+    }
+
+    private adminRequirementItemTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRequirementItemTypeBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RequirementItemTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminRequirementItemTypeAddPageBCItems() {
+        let menuItem = { label: 'Add RequirementItemType', routerLink: ['/admin/vehicle/requirementItemType'] };
+        return menuItem;
+    }
+
+    private adminRequirementItemTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRequirementItemTypeBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RequirementItemTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRequirementItemTypeDetailsPageBCItems() {
+        let menuItem = { label: 'RequirementItemType Details', routerLink: ['/admin/vehicle/requirementItemType'] };
+
         return menuItem;
     }
 
@@ -1883,7 +1920,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'SensorTypeHomePage', items: menuItems };
