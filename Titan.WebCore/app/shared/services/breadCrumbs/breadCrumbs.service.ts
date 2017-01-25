@@ -297,10 +297,10 @@ export class BreadCrumbsService {
 
         //Admin TestMode Page
         this.adminTestModePage();
-        // // Admin TestMode Add Page
-        // this.adminTestModeAddPage();
-        // // Admin TestMode Details Page
-        // this.adminTestModeDetailsPage();
+        // Admin TestMode Add Page
+        this.adminTestModeAddPage();
+        // Admin TestMode Details Page
+        this.adminTestModeDetailsPage();
 
         //Admin StepType Page
         this.adminStepTypePage();
@@ -438,23 +438,6 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
-
-    // //Lookups Home Page Bread Crumbs
-    // private lookupsBreadCrumbAdd() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     menuItems.push(this.adminHomePageBCItems());
-
-    //     let lookupsHomePage = { pageName: 'Lookups', items: menuItems };
-
-    //     this.addToBreadCrumbs(lookupsHomePage);
-    // }
-
-    // private lookupsHomePageBCItems() {
-    //     let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
-
-    //     return menuItem;
-    // }
 
     // Lookups Home Page Bread Crumbs
     private lookupsBreadCrumbAdd() {
@@ -1992,15 +1975,52 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestModeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminTestModeBCItems() {
-        let menuItem = { label: 'TestMode', routerLink: ['/admin/'] };
+    private adminTestModePageBCItems() {
+        let menuItem = { label: 'Test Mode', routerLink:  ['/admin/vehicle/testMode'] };
+        return menuItem;
+    }
+
+    private adminTestModeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestModePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestModeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestModeAddPageBCItems() {
+        let menuItem = { label: 'Add TestMode', routerLink: ['/admin/vehicle/testMode'] };
+        return menuItem;
+    }
+
+    private adminTestModeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestModePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestModeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestModeDetailsPageBCItems() {
+        let menuItem = { label: 'TestMode Details', routerLink: ['/admin/vehicle/testMode'] };
+
         return menuItem;
     }
 

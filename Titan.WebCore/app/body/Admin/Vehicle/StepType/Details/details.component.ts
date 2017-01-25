@@ -42,6 +42,7 @@ export class DetailsComponent {
     
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
+    
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
