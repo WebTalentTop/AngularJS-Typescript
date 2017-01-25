@@ -1,63 +1,49 @@
 <div class="ui-g-12">
-
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+    <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add SensorType </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add SensorType </h2>
+        <p-panel header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        SensorType Name * :
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  #sensorTypeDetailsNameRef="ngModel" [(ngModel)]="name"
+                                       minlength="3"  required style="width:100%">
+                                <label>Sensor Type Name <span >*</span></label>
                     </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="SensorType Name" minlength="3" #sensorTypeDetailsNameRef="ngModel"
-                            class="form-control" required />
-                    </div>
+                </div><br />
+                <div class="ui-grid-row " >
+                            <div class="ui-g-12 ui-md-12" >
+                              <label style="color:#777">Sensor Type Description *</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 md-inputfield">
+                                <p-editor  name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #sensorTypeDetailsDescriptionRef="ngModel"
+                                [(ngModel)]="description" required>
+                                    <header>
+                                        <select class="ql-size">
+                                            <option value="small"></option>
 
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="sensorTypeDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
-                        </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="sensorTypeDetailsNameRef.errors?.minlength">
-                            MinLength-3
-
-                        </div>
-
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                        </span>
+                                    </header>
+                                </p-editor>
+                            </div>
                     </div>
                 </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        SensorType Description * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <textarea type="textarea" id="description" name="description" pInputText [(ngModel)]="description" #sensorTypeDetailsDescriptionRef="ngModel"
-                            placeholder="SensorType Description" class="form-control  col-sm-12" required ></textarea>
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <div class="ui-grid-col-4" *ngIf="sensorTypeDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>                                                    
-                            *-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/sensorType">  </button>
-                    </div>
-                </div>
-            </div>
-            <br />
+                <br />
+                <footer>
+                    <button id="cancel" pButton type="button" label="Cancel" routerLink="/admin/vehicle/sensorType"  class="blue-grey-btn"  icon="ui-icon-close">  </button>
+                    <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-save" label="Add" class="green-btn">  </button>
+            </footer>
             <br />
         </p-panel>
     </form>
+</div>
 </div>
