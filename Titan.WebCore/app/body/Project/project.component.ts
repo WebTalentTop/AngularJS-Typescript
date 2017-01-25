@@ -7,6 +7,7 @@ import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import { TitanUserProfileService } from '../../shared/services/titanUserProfile.service';
 import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
+import {UserProfileService} from "../../shared/services/userProfile.service";
 @Component({
     selector: 'project',
     templateUrl: 'app/body/Project/project.component.html'
@@ -14,23 +15,21 @@ import {IUserProfile} from "../../shared/services/definitions/IUserProfile";
 
 export class ProjectComponent {
     // title = "Project";
-    currentUser:IUserProfile;
+    currentUser: IUserProfile;
     gridData = [];
     confInfo: any = {};
     cols = [];
     gridFilter = {};
-    idField:string ;
+	idField: string;
     msgs: Message[];
+  
     uploadedFiles: any[] = [];
-    constructor(
-        private service: ProjectService,
-        private router:Router,
-        private logger: LoggerService,
-        private titanUserProfileService:TitanUserProfileService) {
-            // this.titanUserProfileService.getCurrentUserProfile()
-            //     .subscribe(res => {
-            //         this.currentUser = res.result;
-            //     })
+    constructor(private service: ProjectService,
+                private router: Router,
+                private logger: LoggerService,
+                private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.userProfile;
+        console.log(this.currentUser);
     }
 
     ngOnInit() {
@@ -46,12 +45,16 @@ export class ProjectComponent {
 
 
     }
-    navigateDetails(id:string){
+    downloadAttachment(attachment) {
+
+        window.open(titanApiUrl + '/ImportExport/downloadtemplate');
+    }
+    navigateDetails(id: string) {
         this.router.navigate(['project/detailsmain', id]);
     }
     onUpload(event) {
-                this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+          this.msgs = [];
+          this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
 
       }
 }

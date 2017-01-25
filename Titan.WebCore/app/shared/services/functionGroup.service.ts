@@ -7,6 +7,8 @@ import { FunctionGroupApiUrl } from './apiUrlConst/FunctionGroupApiUrls';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {UserProfileService} from "./userProfile.service";
+import {IUserProfile} from "./definitions/IUserProfile";
 
 @Injectable()
 export class FunctionGroupService {
@@ -22,13 +24,12 @@ export class FunctionGroupService {
         "PageSize": 15,
         "IsPaging": true
     };
+    private currentUser: IUserProfile;
 
-    constructor(private http: Http) {
-        /*this.headers.append('Access-Control-Allow-Origin', 'http://localhost:62603');
-        this.headers.append('Access-Control-Allow-Methods', 'GE, PUT, POST, OPTIONS');
-        this.headers.append('Content-Type', 'application/json');*/
-        this.headers.append('Accept', 'application/json');
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
 
     getUsersByTenantId(id): Observable<any> {
@@ -53,6 +54,16 @@ export class FunctionGroupService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${FunctionGroupApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postAddFunctionGroup(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${FunctionGroupApiUrl.postFunctionGroupCreatedUrl}`, filterBody, { headers: this.headers })
             //  .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 

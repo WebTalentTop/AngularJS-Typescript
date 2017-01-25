@@ -14,7 +14,7 @@ import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/b
 export class AddComponent {
     username: string;
     description:string;
-      added: any;
+    added: any;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,

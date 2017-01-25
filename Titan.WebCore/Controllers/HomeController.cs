@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Titan.WebCore.Models;
 
@@ -35,7 +36,10 @@ namespace Titan.WebCore.Controllers
         {
             using (var client = new HttpClient())
             {
-                var response = await client.GetStringAsync(_appSettings.ApiUrl + "3BDC1617-D620-65D0-26EF-000E1090A386");
+                var name = User.Identity.Name;
+                var split = name.Split('\\');
+                var username = split[1];
+                var response = await client.GetStringAsync(_appSettings.ApiUrl + username);
                 return response;
                 // The response object is a string that looks like this:
                 // "{ message: 'Hello world!' }"

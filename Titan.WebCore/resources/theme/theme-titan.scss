@@ -5,7 +5,14 @@ $accentColor: #FFC107;
 $accentDarkColor: #FF8F00;
 $accentLightColor: #FFE082;
 $accentTextColor: #212121;
+
 $uploadBtnColor:#E91E63;
+.fc-header-toolbar{
+  display: none !important;
+}
 body .ui-fileupload .ui-fileupload-buttonbar .ui-button:nth-child(2) {
   background-color: $uploadBtnColor; }
 @import '../sass/theme/_theme';
+
+
+

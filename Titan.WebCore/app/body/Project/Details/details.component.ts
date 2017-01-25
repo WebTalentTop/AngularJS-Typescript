@@ -66,6 +66,7 @@ export class DetailsComponent {
     onMarketChange(event) {
         this.selectedMarketId = event.value;
     }
+    
     getMarkets() {
         //    userRoles
         this.marketService.getAllMarkets().subscribe(response => {
@@ -165,7 +166,11 @@ export class DetailsComponent {
     }
   
     onSubmit(){
-        this.service.putProjectDetails(this.ProjectDetails).subscribe(ProjectDetails => {console.log(ProjectDetails);  
+        this.service.putProjectDetails(this.ProjectDetails).subscribe(ProjectDetails => {
+            console.log(ProjectDetails);
+            this.service.postAddMarket(this.projectId, this.selectedMarketId).subscribe(res => {
+                console.log(res);
+            });
             });
     }
 }

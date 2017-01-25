@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TorquesheetService } from './../../../shared/services/torquesheet.service'
 import { ProjectRoleService } from '../../../shared/services/projectRole.service'
 import { UserService } from '../../../shared/services/user.service'
+import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 declare var $: JQueryStatic;
 
 @Component({
@@ -24,6 +25,7 @@ export class TeamInformationComponent {
     filteredUserNames: Array<any> = new Array();
     filteredSelectedUserNames: Array<any> = new Array();
     public projectId: string;
+    public projectUserRoles: any;
     public spreadInstance: any;
     public TemplateName: string;
     public selectedProjectRoleId: any;
@@ -34,10 +36,15 @@ export class TeamInformationComponent {
         private router: Router,
         private service: TorquesheetService,
         private projectRoleService: ProjectRoleService,
-        private userService: UserService) { }
+        private userService: UserService,
+        private testfacilityservice: TestFacilityService) { }
 
 
     ngOnInit() {
+        this.route.params.forEach((params: Params) => {
+            this.projectId = params['id']; // (+) converts string 'id' to a number
+           
+        });
         this.getProjectRoles();
         this.getProjectUsers();
     }
@@ -108,8 +115,12 @@ export class TeamInformationComponent {
         });
         //this.spreadInstance = null;
     }
-
- /*   onAddUserRole() {
+    filterUserNames(event) {
+        this.testfacilityservice.filterByUserNames(event.query).subscribe(filteredList => {
+            this.filteredUserNames = filteredList.$values;
+        });
+    }
+   onAddUserRole() {
 
         if (!this.IsKeepOpen)
             this.displayAssignUserRolesDialog = false;
@@ -163,16 +174,16 @@ export class TeamInformationComponent {
             this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
             this.selectedProjectRoleId = null;
-            this.testfacilityroleservice.getByIdusing(this.projectId)
+            this.projectRoleService.getByIdusing(this.projectId)
                 .subscribe(TestFacilityRoles => {
-                    this.TestFacilityRoles = TestFacilityRoles;
+                    this.projectUserRoles = TestFacilityRoles;
                     this.selectedProjectRoleId = null;
                 });
         });
 
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
-    }*/
+    }
     onAddTorqueSheetTemplateCancel() {
         this.closeTemplateWindow();
     }

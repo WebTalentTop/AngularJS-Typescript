@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import {DropdownModule} from 'primeng/primeng';
 import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
+import {ITitanSelectItem} from "../../shared/services/definitions/ITitanSelectItem";
 
 @Component({
     selector: 'equipment-type',
@@ -23,6 +24,7 @@ export class EquipmentTypeComponent {
     linkFieldId:string;
     msgs: Message[] = [];
 
+
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: EquipmentTypeService,
@@ -32,11 +34,11 @@ export class EquipmentTypeComponent {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();
-            let equipmentTypeBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'EquipmentTypeHomePage')[0];
+            //let equipmentTypeBreadCrumb = breadC.filter(filter =>
+            //    filter.pageName === 'EquipmentTypeHomePage')[0];
 
             this.breadcrumbs = [];
-            this.breadcrumbs = equipmentTypeBreadCrumb.items;
+            //this.breadcrumbs = equipmentTypeBreadCrumb.items;
 
             this.breadcrumbsHome = { routerLink: ['/'] };
         });

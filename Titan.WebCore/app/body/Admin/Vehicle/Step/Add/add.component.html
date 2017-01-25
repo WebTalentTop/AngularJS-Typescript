@@ -1,48 +1,25 @@
 <div class="ui-g-12">
-
+<p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
+    <div class="card card-w-title">
     <form #platformForm="ngForm" (ngSubmit)="onSubmit(platformForm.value)">
-        <h3> Add Step </h3>
-        <br />
-        <p-panel>
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <h2> Add Step </h2>
+        <p-panel header="Information">
+            <div class="body">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        Step Name * :
-                    </div>
-                    <div class="ui-grid-col-6">
-                        <input type="text" id="name" name="name" pInputText [(ngModel)]="name" placeholder="Step Name" minlength="3" #stepDetailsNameRef="ngModel"
-                            class="form-control" required />
-                    </div>
-
-                    <div class="ui-grid-col-4">
-
-                        <div class="ui-grid-col-4" *ngIf="stepDetailsNameRef.errors?.required">
-                            <!--<i class="fa fa-close"></i>-->
-
-                        </div>
-                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="stepDetailsNameRef.errors?.minlength">
-                            MinLength-3
-
-                        </div>
-
+                    <div class="md-inputfield ui-g-12 ui-md-6">
+                                <input type="text" pInputText name="name" id="name"  #stepDetailsNameRef="ngModel" [(ngModel)]="name"
+                                       minlength="3"  required style="width:100%">
+                                <label>Step Name <span >*</span></label>
                     </div>
                 </div>
-            </div>
+            </div><br />
 
-            <div class="ui-grid-row">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <button id="add" pButton type="submit" [disabled]="!platformForm.valid" icon="ui-icon-add" label="Add">  </button>
-                    </div>
-                    <div class="ui-grid-col-6">
-                    </div>
-                    <div class="ui-grid-col-4">
-                        <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/step">  </button>
-                    </div>
-                </div>
-            </div>
-            <br />
+            <footer>
+                <button id="cancel" pButton type="button" label="Cancel" routerLink="/vehicle/step"  class="blue-grey-btn"  icon="ui-icon-close">  </button>
+                <button id="add" pButton type="submit" [disabled]="!platformForm.valid"  icon="ui-icon-save" label="Add" class="green-btn">  </button>
+            </footer>
             <br />
         </p-panel>
     </form>
+</div>
 </div>

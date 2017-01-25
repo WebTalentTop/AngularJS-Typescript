@@ -11,7 +11,7 @@ export class EquipmentApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'equipment/put';
     public static getByIdUrl: string = titanApiUrl + 'equipment';
     public static getManufacturerDetailsByIdUrl: string = titanApiUrl + 'equipmentManufacturer';
-    
+    public static getEquipmentBarCodeImage: string = titanApiUrl + 'equipment/GetEquipmentBarcode';
     public static getAllUrl: string = titanApiUrl + 'equipmentManufacturer';
     public static getAllEquipmentTypesUrl: string = titanApiUrl + 'Equipmenttype/GetAllEquipmentTypes';
    

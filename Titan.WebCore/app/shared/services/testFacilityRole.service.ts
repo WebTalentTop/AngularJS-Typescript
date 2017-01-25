@@ -8,6 +8,8 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
+import {UserProfileService} from "./userProfile.service";
+import {IUserProfile} from "./definitions/IUserProfile";
 
 @Injectable()
 export class TestFacilityRoleService {
@@ -22,24 +24,20 @@ export class TestFacilityRoleService {
         "PageSize": 15,
         "IsPaging": true
     };
+    private currentUser: IUserProfile;
 
-    constructor(private http: Http) {
-        this.headers.append("TenantId", "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D");
+    constructor(private http: Http, private userProfileService: UserProfileService) {
+        this.currentUser = this.userProfileService.getCurrentUserProfile();
+        this.headers.append("TenantId", this.currentUser.defaultTenantId);
+        this.headers.append("UserId", this.currentUser.id);
     }
 
-    getByIdusing(id): Observable<ITestFacilityRole[]> {
-        return this.http.get(`${TestFacilityRoleApiUrl.getRolesByTestFacilityIdUrl}/${id}`, { headers: this.headers })
-            
-      //     .toPromise()
-        //  .then(res => <ITestFacilityRole[]> res.json().data)
-         // .then(data => { return data; });
+    getByTestFacilityId(id): Observable<ITestFacilityRole[]> {
+        return this.http.get(`${TestFacilityRoleApiUrl.getTestFacilityUsersByTestFacilityIdUrl}/${id}`, { headers: this.headers })
          .map(this.getJson)
          .map(data=> {
-             console.log('---------getbyusing testdata---------',data); 
              return data.$values
             });
-        //.catch(err => Observable.throw(err))
-        //.map(this.getJson);
     }
 
    
