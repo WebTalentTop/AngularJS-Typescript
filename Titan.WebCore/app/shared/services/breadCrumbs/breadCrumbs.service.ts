@@ -129,17 +129,17 @@ export class BreadCrumbsService {
 
         //Admin ProjectStatus Page
         this.adminProjectStatusPage();
-        // // Admin ProjectStatus Add Page
-        // this.adminProjectStatusAddPage();
-        // // Admin ProjectStatus Details Page
-        // this.adminProjectStatusDetailsPage();
+        // Admin ProjectStatus Add Page
+        this.adminProjectStatusAddPage();
+        // Admin ProjectStatus Details Page
+        this.adminProjectStatusDetailsPage();
 
         //Admin ProjectRole Page
         this.adminProjectRolePage();
-        // // Admin ProjectRole Add Page
-        // this.adminProjectRoleAddPage();
-        // // Admin ProjectRole Details Page
-        // this.adminProjectRoleDetailsPage();
+        // Admin ProjectRole Add Page
+        this.adminProjectRoleAddPage();
+        // Admin ProjectRole Details Page
+        this.adminProjectRoleDetailsPage();
 
         //Admin Milestone Page
         this.adminMilestonePage();
@@ -157,10 +157,10 @@ export class BreadCrumbsService {
 
         //Admin MilestoneType Page
         this.adminMilestoneTypePage();
-        // // Admin MilestoneType Add Page
-        // this.adminMilestoneTypeAddPage();
-        // // Admin MilestoneType Details Page
-        // this.adminMilestoneTypeDetailsPage();
+        // Admin MilestoneType Add Page
+        this.adminMilestoneTypeAddPage();
+        // Admin MilestoneType Details Page
+        this.adminMilestoneTypeDetailsPage();
 
         //Admin Grade Page
         this.adminGradePage();
@@ -1183,7 +1183,45 @@ export class BreadCrumbsService {
     }
 
     private adminProjectStatusPageBCItems() {
-        let menuItem = { label: 'ProjectStatus', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Project Status', routerLink: ['/admin/vehicle/projectStatus'] };
+        return menuItem;
+    }
+
+    private adminProjectStatusAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminProjectStatusAddPageBCItems() {
+        let menuItem = { label: 'Add ProjectStatus', routerLink: ['/admin/vehicle/projectStatus'] };
+        return menuItem;
+    }
+
+    private adminProjectStatusDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectStatusDetailsPageBCItems() {
+        let menuItem = { label: 'ProjectStatus Details', routerLink:['/admin/vehicle/projectStatus'] };
+
         return menuItem;
     }
 
@@ -1200,7 +1238,45 @@ export class BreadCrumbsService {
     }
 
     private adminProjectRolePageBCItems() {
-        let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Project Role', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminProjectRoleAddPageBCItems() {
+        let menuItem = { label: 'Add ProjectRole', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectRoleDetailsPageBCItems() {
+        let menuItem = { label: 'ProjectRole Details', routerLink:['/admin/vehicle/projectRole'] };
+
         return menuItem;
     }
 
@@ -1272,7 +1348,7 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneCategoryPageBCItems() {
-        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/vehicle/milestoneCategory'] };
+        let menuItem = { label: 'Milestone Category', routerLink: ['/admin/vehicle/milestoneCategory'] };
         return menuItem;
     }
 
@@ -1320,7 +1396,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneTypeHomePage', items: menuItems };
@@ -1328,7 +1403,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneTypePageBCItems() {
-        let menuItem = { label: 'MilestoneType', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Milestone Type', routerLink: ['/admin/vehicle/milestoneType'] };
+        return menuItem;
+    }
+
+    private adminMilestoneTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneTypeAddPageBCItems() {
+        let menuItem = { label: 'Add MilestoneType', routerLink: ['/admin/vehicle/milestoneType'] };
+        return menuItem;
+    }
+
+    private adminMilestoneTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneTypeDetailsPageBCItems() {
+        let menuItem = { label: 'MilestoneType Details', routerLink:['/admin/vehicle/milestoneType'] };
+
         return menuItem;
     }
 
