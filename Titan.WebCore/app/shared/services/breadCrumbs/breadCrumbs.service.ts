@@ -171,10 +171,10 @@ export class BreadCrumbsService {
 
         //Admin ModelName Page
         this.adminModelNamePage();
-        // // Admin ModelName Add Page
-        // this.adminModelNameAddPage();
-        // // Admin ModelName Details Page
-        // this.adminModelNameDetailsPage();
+        // Admin ModelName Add Page
+        this.adminModelNameAddPage();
+        // Admin ModelName Details Page
+        this.adminModelNameDetailsPage();
 
         //Admin ModelYear Page
         this.adminModelYearPage();
@@ -1478,7 +1478,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-private adminGradeAddPage() {
+    private adminGradeAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -1522,15 +1522,52 @@ private adminGradeAddPage() {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
-
+        
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ModelNameHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
     private adminModelNamePageBCItems() {
-        let menuItem = { label: 'ModelName', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Model Name', routerLink: ['/admin/vehicle/modelName'] };
+        return menuItem;
+    }
+
+     private adminModelNameAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminModelNamePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelNameAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminModelNameAddPageBCItems() {
+        let menuItem = { label: 'Add ModelName', routerLink: ['/admin/vehicle/modelName'] };
+        return menuItem;
+    }
+
+    private adminModelNameDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminModelNamePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelNameDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminModelNameDetailsPageBCItems() {
+        let menuItem = { label: 'ModelName Details', routerLink:['/admin/vehicle/modelName'] };
+
         return menuItem;
     }
 
