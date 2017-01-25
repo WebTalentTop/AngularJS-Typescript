@@ -164,10 +164,10 @@ export class BreadCrumbsService {
 
         //Admin Grade Page
         this.adminGradePage();
-        // // Admin Grade Add Page
-        // this.adminGradeAddPage();
-        // // Admin Grade Details Page
-        // this.adminGradeDetailsPage();
+        // Admin Grade Add Page
+        this.adminGradeAddPage();
+        // Admin Grade Details Page
+        this.adminGradeDetailsPage();
 
         //Admin ModelName Page
         this.adminModelNamePage();
@@ -439,20 +439,36 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    //Lookups Home Page Bread Crumbs
+    // //Lookups Home Page Bread Crumbs
+    // private lookupsBreadCrumbAdd() {
+    //     let menuItems = [];
+    //     menuItems.push(this.homeBreadCrumbItem());
+    //     menuItems.push(this.adminHomePageBCItems());
+
+    //     let lookupsHomePage = { pageName: 'Lookups', items: menuItems };
+
+    //     this.addToBreadCrumbs(lookupsHomePage);
+    // }
+
+    // private lookupsHomePageBCItems() {
+    //     let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
+
+    //     return menuItem;
+    // }
+
+    // Lookups Home Page Bread Crumbs
     private lookupsBreadCrumbAdd() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
 
-        let lookupsHomePage = { pageName: 'Lookups', items: menuItems };
-
-        this.addToBreadCrumbs(lookupsHomePage);
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'Lookups', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
     }
 
     private lookupsHomePageBCItems() {
         let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
-
         return menuItem;
     }
 
@@ -1451,7 +1467,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'GradeHomePage', items: menuItems };
@@ -1459,7 +1474,45 @@ export class BreadCrumbsService {
     }
 
     private adminGradePageBCItems() {
-        let menuItem = { label: 'Grade', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Grade', routerLink: ['/admin/vehicle/grade'] };
+        return menuItem;
+    }
+
+private adminGradeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminGradePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'GradeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminGradeAddPageBCItems() {
+        let menuItem = { label: 'Add Grade', routerLink: ['/admin/vehicle/grade'] };
+        return menuItem;
+    }
+
+    private adminGradeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminGradePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'GradeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminGradeDetailsPageBCItems() {
+        let menuItem = { label: 'Grade Details', routerLink:['/admin/vehicle/grade'] };
+
         return menuItem;
     }
 
