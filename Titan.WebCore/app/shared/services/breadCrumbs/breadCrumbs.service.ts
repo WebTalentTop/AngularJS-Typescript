@@ -61,8 +61,8 @@ export class BreadCrumbsService {
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
-        // // Lookups Page
-        // this.lookupsPage();
+        // Lookups Home Page
+        this.lookupsBreadCrumbAdd();
 
         // Admin Shift Page
         this.adminShiftPage();
@@ -136,31 +136,31 @@ export class BreadCrumbsService {
 
         //Admin ProjectRole Page
         this.adminProjectRolePage();
-        // // Admin ProjectRole Add Page
-        // this.adminProjectRoleAddPage();
-        // // Admin ProjectRole Details Page
-        // this.adminProjectRoleDetailsPage();
+        // Admin ProjectRole Add Page
+        this.adminProjectRoleAddPage();
+        // Admin ProjectRole Details Page
+        this.adminProjectRoleDetailsPage();
 
         //Admin Milestone Page
         this.adminMilestonePage();
-        // // Admin Milestone Add Page
-        // this.adminMilestoneAddPage();
-        // // Admin Milestone Details Page
-        // this.adminMilestoneDetailsPage();
+        // Admin Milestone Add Page
+        this.adminMilestoneAddPage();
+        // Admin Milestone Details Page
+        this.adminMilestoneDetailsPage();
 
         //Admin MilestoneCategory Page
         this.adminMilestoneCategoryPage();
-        // // Admin MilestoneCategory Add Page
-        // this.adminMilestoneCategoryAddPage();
-        // // Admin MilestoneCategory Details Page
-        // this.adminMilestoneCategoryDetailsPage();
+        // Admin MilestoneCategory Add Page
+        this.adminMilestoneCategoryAddPage();
+        // Admin MilestoneCategory Details Page
+        this.adminMilestoneCategoryDetailsPage();
 
         //Admin MilestoneType Page
         this.adminMilestoneTypePage();
-        // // Admin MilestoneType Add Page
-        // this.adminMilestoneTypeAddPage();
-        // // Admin MilestoneType Details Page
-        // this.adminMilestoneTypeDetailsPage();
+        // Admin MilestoneType Add Page
+        this.adminMilestoneTypeAddPage();
+        // Admin MilestoneType Details Page
+        this.adminMilestoneTypeDetailsPage();
 
         //Admin Grade Page
         this.adminGradePage();
@@ -380,23 +380,6 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-    // // Lookups Page Bread Crumbs
-    // private lookupsPage() {
-    //     let menuItems = [];
-    //     menuItems.push(this.homeBreadCrumbItem());
-    //     // menuItems.push(this.adminHomePageBCItems());
-
-    //     let bcInfoItems: IBreadCrumbsInfo;
-    //     bcInfoItems = { pageName: 'lookupsHomePage', items: menuItems };
-
-    //     this.addToBreadCrumbs(bcInfoItems);
-    // }
-
-    // private lookupsPageBCItems() {
-    //     let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
-
-    //     return menuItem;
-    // }
 
     // Admin Form Builder Home Page
     private adminFormBuilderPage() {
@@ -414,6 +397,7 @@ export class BreadCrumbsService {
         let menuItem = { label: 'Form Builder', routerLink: 'app/body/Admin/formBuilders' };
         return menuItem;
     }
+
     // Admin Form Builder Add Bread Crumbs
     private adminFormBuilderAddFormPage() {
         let menuItems = [];
@@ -454,6 +438,24 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
+
+    //Lookups Home Page Bread Crumbs
+    private lookupsBreadCrumbAdd() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+
+        let lookupsHomePage = { pageName: 'Lookups', items: menuItems };
+
+        this.addToBreadCrumbs(lookupsHomePage);
+    }
+
+    private lookupsHomePageBCItems() {
+        let menuItem = { label: 'Lookups', routerLink: ['/lookup'] };
+
+        return menuItem;
+    }
+
 
     // Calendar Page Bread Crumbs
     private calendarPage() {
@@ -678,7 +680,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ShiftHomePage', items: menuItems };
@@ -694,7 +696,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        // menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminShiftPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -705,7 +707,7 @@ export class BreadCrumbsService {
     }
 
     private adminShiftAddPageBCItems() {
-        let menuItem = { label: 'Add Shift', routerLink: ['/admin/vehicle/shift'] };
+        let menuItem = { label: 'Add Shift', routerLink:   ['/admin/vehicle/shift'] };
         return menuItem;
     }
 
@@ -713,8 +715,9 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        // menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminShiftPageBCItems());
+        
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ShiftDetailsPage', items: menuItems };
@@ -723,8 +726,7 @@ export class BreadCrumbsService {
     }
 
     private adminShiftDetailsPageBCItems() {
-        let menuItem = { label: 'Shift Details', routerLink: ['/admin/vehicle/shift'] };
-
+        let menuItem = { label: 'Shift Details', routerLink:  ['/admin/vehicle/shift'] };
         return menuItem;
     }
 
@@ -733,8 +735,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'HolidayHomePage', items: menuItems };
@@ -750,7 +751,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -769,7 +770,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -789,7 +790,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'StepHomePage', items: menuItems };
@@ -844,7 +845,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'UnitsHomePage', items: menuItems };
@@ -860,7 +861,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminUnitsPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -879,7 +880,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminUnitsPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -899,7 +900,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'BuildLevelsHomePage', items: menuItems };
@@ -915,7 +916,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminBuildLevelsPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -934,7 +935,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminBuildLevelsPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -954,7 +955,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MarketHomePage', items: menuItems };
@@ -970,7 +971,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminMarketPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -989,7 +990,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminMarketPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1009,7 +1010,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'PlatformHomePage', items: menuItems };
@@ -1025,7 +1026,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminPlatformPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1044,7 +1045,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminPlatformPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1064,7 +1065,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TitanRoleHomePage', items: menuItems };
@@ -1080,7 +1081,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminTitanRolePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1099,7 +1100,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminTitanRolePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1119,7 +1120,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneStatusHomePage', items: menuItems };
@@ -1135,7 +1136,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminMilestoneStatusPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1154,7 +1155,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         menuItems.push(this.adminMilestoneStatusPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1174,8 +1175,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ProjectStatusHomePage', items: menuItems };
@@ -1192,8 +1192,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ProjectRoleHomePage', items: menuItems };
@@ -1201,7 +1200,45 @@ export class BreadCrumbsService {
     }
 
     private adminProjectRolePageBCItems() {
-        let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Project Role', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminProjectRoleAddPageBCItems() {
+        let menuItem = { label: 'Add ProjectRole', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectRoleDetailsPageBCItems() {
+        let menuItem = { label: 'ProjectRole Details', routerLink:['/admin/vehicle/projectRole'] };
+
         return menuItem;
     }
 
@@ -1210,8 +1247,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneHomePage', items: menuItems };
@@ -1219,7 +1255,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestonePageBCItems() {
-        let menuItem = { label: 'Milestone', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Milestone', routerLink: ['/admin/vehicle/milestone'] };
+        return menuItem;
+    }
+
+    private adminMilestoneAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestonePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneAddPageBCItems() {
+        let menuItem = { label: 'Add Milestone', routerLink: ['/admin/vehicle/milestone'] };
+        return menuItem;
+    }
+
+    private adminMilestoneDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestonePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneDetailsPageBCItems() {
+        let menuItem = { label: 'Milestone Details', routerLink: ['/admin/vehicle/milestone'] };
+
         return menuItem;
     }
 
@@ -1228,8 +1302,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneCategoryHomePage', items: menuItems };
@@ -1237,7 +1310,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneCategoryPageBCItems() {
-        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Milestone Category', routerLink: ['/admin/vehicle/milestoneCategory'] };
+        return menuItem;
+    }
+
+        private adminMilestoneCategoryAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneCategoryPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneCategoryAddPageBCItems() {
+        let menuItem = { label: 'Add MilestoneCategory', routerLink: ['/admin/vehicle/milestoneCategory'] };
+        return menuItem;
+    }
+
+    private adminMilestoneCategoryDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneCategoryPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneCategoryDetailsPageBCItems() {
+        let menuItem = { label: 'MilestoneCategory Details', routerLink: ['/admin/vehicle/milestoneCategory'] };
+
         return menuItem;
     }
 
@@ -1246,8 +1357,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneTypeHomePage', items: menuItems };
@@ -1255,7 +1365,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneTypePageBCItems() {
-        let menuItem = { label: 'MilestoneType', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Milestone Type', routerLink: ['/admin/vehicle/milestoneType'] };
+        return menuItem;
+    }
+
+    private adminMilestoneTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneTypeAddPageBCItems() {
+        let menuItem = { label: 'Add MilestoneType', routerLink: ['/admin/vehicle/milestoneType'] };
+        return menuItem;
+    }
+
+    private adminMilestoneTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneTypeDetailsPageBCItems() {
+        let menuItem = { label: 'MilestoneType Details', routerLink:['/admin/vehicle/milestoneType'] };
+
         return menuItem;
     }
 
@@ -1264,7 +1412,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1282,7 +1430,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1300,7 +1448,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1318,7 +1466,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1336,7 +1484,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1354,7 +1502,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1372,7 +1520,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1390,7 +1538,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1408,7 +1556,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1426,7 +1574,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1444,7 +1592,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1462,7 +1610,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1480,7 +1628,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1498,7 +1646,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1516,7 +1664,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1534,7 +1682,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1552,7 +1700,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1570,7 +1718,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1588,7 +1736,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1606,7 +1754,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1624,7 +1772,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1642,7 +1790,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1660,7 +1808,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1678,7 +1826,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1696,7 +1844,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -1714,7 +1862,7 @@ export class BreadCrumbsService {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
-        menuItems.push(this.adminVehicleHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
         // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
