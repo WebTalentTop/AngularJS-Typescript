@@ -136,10 +136,10 @@ export class BreadCrumbsService {
 
         //Admin ProjectRole Page
         this.adminProjectRolePage();
-        // // Admin ProjectRole Add Page
-        // this.adminProjectRoleAddPage();
-        // // Admin ProjectRole Details Page
-        // this.adminProjectRoleDetailsPage();
+        // Admin ProjectRole Add Page
+        this.adminProjectRoleAddPage();
+        // Admin ProjectRole Details Page
+        this.adminProjectRoleDetailsPage();
 
         //Admin Milestone Page
         this.adminMilestonePage();
@@ -1200,7 +1200,45 @@ export class BreadCrumbsService {
     }
 
     private adminProjectRolePageBCItems() {
-        let menuItem = { label: 'ProjectRole', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Project Role', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminProjectRoleAddPageBCItems() {
+        let menuItem = { label: 'Add ProjectRole', routerLink: ['/admin/vehicle/projectRole'] };
+        return menuItem;
+    }
+
+    private adminProjectRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectRoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectRoleDetailsPageBCItems() {
+        let menuItem = { label: 'ProjectRole Details', routerLink:['/admin/vehicle/projectRole'] };
+
         return menuItem;
     }
 
