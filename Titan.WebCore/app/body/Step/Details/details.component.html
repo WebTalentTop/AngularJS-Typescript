@@ -62,7 +62,7 @@
                             </div>
                     </div><br />
                     <p-dataTable [value]="stepModules" expandableRows="true">
-                            <p-column expander="true" styleClass="col-icon" [style]="{'width':'22px'}"></p-column>
+                            <p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>
                             <p-column field="name" header="Name"></p-column>
                             <p-column field="description" header="Description"></p-column>
                             <!--<p-column styleClass="col-button" header="Action">
@@ -84,7 +84,7 @@
                     </p-dialog>
                     <div class="ui-grid-row" *ngIf="isModuleDivVisible">
                                 <div class="ui-grid-col-12">
-                                    <module-component [moduleTypeId]="stepDetails.stepTypeId" *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
+                                    <module-component [moduleTypeId]="stepModuleTypeId" *ngIf="isAddModuleVisible" (onAddModuleComplete)="onAddModuleComplete($event)" (onCancelModuleComplete)="onCancelModuleComplete($event)"></module-component>
                                 </div>
                     </div>
                     <div class="ui-grid-row">

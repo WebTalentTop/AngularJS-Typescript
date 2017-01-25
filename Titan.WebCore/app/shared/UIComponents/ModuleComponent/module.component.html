@@ -53,10 +53,10 @@
             </div>
         </div>
         <p-dialog header="Add Module Item" [(visible)]="isAddNewItemRowVisible" width="900" height="600" [style]="{'overflow-y':'auto'}">
-            <module-item-component [isAddModule]="isAddModule" (onAddComplete)="onAddItemComplete($event)" (onCancelComplete)="onCancelAddItemComplete($event)"></module-item-component>
+            <module-item-component [moduleId]="moduleId" [isAddModule]="isAddModule" (onAddComplete)="onAddItemComplete($event)" (onCancelComplete)="onCancelAddItemComplete($event)"></module-item-component>
         </p-dialog>
         <p-dialog header="Edit Module Item" [(visible)]="isEditItemRowVisible" width="900" height="600" [style]="{'overflow-y':'auto'}">
-            <module-item-component [moduleItemDetails]="editModuleItem" title="Edit Module Item" isAdd="false" saveButtonLabel="Save Module Item" (onAddComplete)="onEditItemComplete($event)" (onCancelComplete)="onCancelEditItemComplete($event)"></module-item-component>
+            <module-item-component [moduleId]="moduleId" [moduleItemDetails]="editModuleItem" title="Edit Module Item" isAdd="false" [isAddModule]="isAddModuleFunc()" saveButtonLabel="Save Module Item" (onAddComplete)="onEditItemComplete($event)" (onCancelComplete)="onCancelEditItemComplete($event)"></module-item-component>
         </p-dialog>
         <!--<div class="ui-grid-row" *ngIf="isAddNewItemRowVisible">
             <div class="ui-grid-col-12">
@@ -97,7 +97,7 @@
         <div class="ui-grid-row">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-2">
-                    <button id="add" pButton type="button" [disabled]="!moduleCompForm.form.valid" label="{{title}}" (click)="onAddModule()">  </button>
+                    <button id="add" pButton type="button" [disabled]="!moduleCompForm.form.valid" label="{{addEditModuleText}}" (click)="onAddModule()">  </button>
                 </div>
                 <div class="ui-grid-col-6">
                 </div>
