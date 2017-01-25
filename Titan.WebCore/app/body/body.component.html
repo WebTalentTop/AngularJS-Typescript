@@ -32,6 +32,19 @@
         </div>
     </div>-->
 <div class="ui-g-12">
+    <div *ngIf="showBetaMessage"
+         class="ui-g card colorbox colorbox-2"
+         style="-ms-transform:rotate(3deg);
+                -webkit-transform: rotate(3deg);
+                transform: rotate(3deg);
+                width:250px;
+                position: absolute;
+                z-index:100;
+                margin-top:-50px;
+                right:0">
+        <div class="ui-g-12">
+            <span class="colorbox-name">{{betaMessage}}</span></div>
+    </div>
     <router-outlet></router-outlet>
 </div>
 </div>
