@@ -45,6 +45,7 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
     public TestModeId: string;
+ 
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
 
@@ -55,7 +56,6 @@ export class DetailsComponent {
         private service: TestModeService
     )
     { }
-
 
     ngOnInit() {
         this.selectedTestTypes = [];

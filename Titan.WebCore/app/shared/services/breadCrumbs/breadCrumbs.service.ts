@@ -318,10 +318,10 @@ export class BreadCrumbsService {
 
         //Admin TestRequirement Page
         this.adminTestRequirementPage();
-        // // Admin TestRequirement Add Page
-        // this.adminTestRequirementAddPage();
-        // // Admin TestRequirement Details Page
-        // this.adminTestRequirementDetailsPage();
+        // Admin TestRequirement Add Page
+        this.adminTestRequirementAddPage();
+        // Admin TestRequirement Details Page
+        this.adminTestRequirementDetailsPage();
 
         //Admin TestVerificationMethod Page
         this.adminTestVerificationMethodPage();
@@ -2103,15 +2103,52 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestRequirementHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminTestRequirementBCItems() {
-        let menuItem = { label: 'TestRequirement', routerLink: ['/admin/'] };
+    private adminTestRequirementPageBCItems() {
+        let menuItem = { label: 'Test Requirement', routerLink: ['/admin/vehicle/testRequirement'] };
+        return menuItem;
+    }
+
+    private adminTestRequirementAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestRequirementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequirementAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestRequirementAddPageBCItems() {
+        let menuItem = { label: 'Add TestRequirement', routerLink: ['/admin/vehicle/testRequirement'] };
+        return menuItem;
+    }
+
+    private adminTestRequirementDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestRequirementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequirementDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRequirementDetailsPageBCItems() {
+        let menuItem = { label: 'TestRequirement Details', routerLink: ['/admin/vehicle/testRequirement'] };
+
         return menuItem;
     }
 
