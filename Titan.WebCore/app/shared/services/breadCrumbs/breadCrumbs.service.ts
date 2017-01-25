@@ -150,10 +150,10 @@ export class BreadCrumbsService {
 
         //Admin MilestoneCategory Page
         this.adminMilestoneCategoryPage();
-        // // Admin MilestoneCategory Add Page
-        // this.adminMilestoneCategoryAddPage();
-        // // Admin MilestoneCategory Details Page
-        // this.adminMilestoneCategoryDetailsPage();
+        // Admin MilestoneCategory Add Page
+        this.adminMilestoneCategoryAddPage();
+        // Admin MilestoneCategory Details Page
+        this.adminMilestoneCategoryDetailsPage();
 
         //Admin MilestoneType Page
         this.adminMilestoneTypePage();
@@ -1210,7 +1210,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneHomePage', items: menuItems };
@@ -1266,7 +1265,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'MilestoneCategoryHomePage', items: menuItems };
@@ -1274,7 +1272,45 @@ export class BreadCrumbsService {
     }
 
     private adminMilestoneCategoryPageBCItems() {
-        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/'] };
+        let menuItem = { label: 'MilestoneCategory', routerLink: ['/admin/vehicle/milestoneCategory'] };
+        return menuItem;
+    }
+
+        private adminMilestoneCategoryAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneCategoryPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminMilestoneCategoryAddPageBCItems() {
+        let menuItem = { label: 'Add MilestoneCategory', routerLink: ['/admin/vehicle/milestoneCategory'] };
+        return menuItem;
+    }
+
+    private adminMilestoneCategoryDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminMilestoneCategoryPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'MilestoneCategoryDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminMilestoneCategoryDetailsPageBCItems() {
+        let menuItem = { label: 'MilestoneCategory Details', routerLink: ['/admin/vehicle/milestoneCategory'] };
+
         return menuItem;
     }
 
