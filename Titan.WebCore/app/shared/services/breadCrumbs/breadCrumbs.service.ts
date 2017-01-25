@@ -304,10 +304,10 @@ export class BreadCrumbsService {
 
         //Admin StepType Page
         this.adminStepTypePage();
-        // // Admin StepType Add Page
-        // this.adminStepTypeAddPage();
-        // // Admin StepType Details Page
-        // this.adminStepTypeDetailsPage();
+        // Admin StepType Add Page
+        this.adminStepTypeAddPage();
+        // Admin StepType Details Page
+        this.adminStepTypeDetailsPage();
 
         //Admin TestType Page
         this.adminTestTypePage();
@@ -2010,15 +2010,52 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'StepTypeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminStepTypeBCItems() {
-        let menuItem = { label: 'StepType', routerLink: ['/admin/'] };
+    private adminStepTypePageBCItems() {
+        let menuItem = { label: 'Step Type', routerLink: ['/admin/vehicle/stepType'] };
+        return menuItem;
+    }
+
+    private adminStepTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminStepTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminStepTypeAddPageBCItems() {
+        let menuItem = { label: 'Add StepType', routerLink: ['/admin/vehicle/stepType'] };
+        return menuItem;
+    }
+
+    private adminStepTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminStepTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepTypeDetailsPageBCItems() {
+        let menuItem = { label: 'StepType Details', routerLink: ['/admin/vehicle/stepType'] };
+
         return menuItem;
     }
 
