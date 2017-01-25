@@ -1,7 +1,8 @@
 ﻿
 import { RouterModule } from "@angular/router";
-import {AuthGuard} from "../shared/services/auth/authGuard";
-import {LoginComponent} from "./Auth/login.component";
+import { AuthGuard } from "../shared/services/auth/authGuard";
+import { LoginComponent } from "./Auth/login.component";
+import { ErrorComponent } from "./Error/error.component";
 
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
     { path: 'admin', canActivate: [AuthGuard], loadChildren: 'app/body/admin/admin.module' },
     { path: 'calendar', canActivate: [AuthGuard], loadChildren: 'app/body/calendar/titancalendar.module' },
     { path: 'lookup', canActivate: [AuthGuard], loadChildren: 'app/body/lookup/lookup.module' },
+    { path: 'userManagement', canActivate: [AuthGuard], loadChildren: 'app/body/UserManagement/userManagement.module' },
     { path: 'problemtracking', canActivate: [AuthGuard], loadChildren: 'app/body/ProblemTracking/problemtracking.module' },
     { path: 'workrequest', canActivate: [AuthGuard], loadChildren: 'app/body/WorkRequest/workrequest.module' },
     //{ path: 'testcatalog', canActivate: [AuthGuard], loadChildren: 'app/body/TestCatalog/testcatalog.module' },
@@ -28,7 +30,9 @@ const routes = [
     { path: 'torquesheet', canActivate: [AuthGuard], loadChildren: 'app/body/TorqueSheet/torque-sheet.module' },
     { path: 'testTemplate', canActivate: [AuthGuard], loadChildren: 'app/body/TestTemplate/testTemplate.module' },
     { path: 'login/:id', component: LoginComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'error/:statusCode', component: ErrorComponent },
+    { path: 'error', component: ErrorComponent }
     //, canActivate:[AuthGuard], },
 ];
 

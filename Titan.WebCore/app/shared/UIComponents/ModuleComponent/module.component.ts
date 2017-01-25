@@ -36,6 +36,10 @@ export class ModuleComponent{// implements OnChanges{
     selectedCategory: any;
     navigateToDetails = new EventEmitter();
 
+    public get moduleId() {
+        return this.moduleDetails != null ? this.moduleDetails.id : null;
+    }
+
     
     isEditItemRowVisible: boolean;
     editModuleItem: IModuleItem;
@@ -62,6 +66,10 @@ export class ModuleComponent{// implements OnChanges{
         }
     }
 
+    isAddModuleFunc() {
+        return this.editModuleItem != null && this.editModuleItem.id == undefined;
+    }
+
     onAddNewItem() {
         this.isAddNewItemRowVisible = true;
     }
@@ -74,8 +82,14 @@ export class ModuleComponent{// implements OnChanges{
     }
 
     onEditModuleItem(moduleItem) {
+        if (moduleItem.moduleItemOptions != undefined && moduleItem.moduleItemOptions.$values != undefined)
+            moduleItem.moduleItemOptions = moduleItem.moduleItemOptions.$values;
         this.editModuleItem = moduleItem;
         this.isEditItemRowVisible = true;
+    }
+
+    onDeleteModuleItem(moduleItem) {
+
     }
 
     isUpButtonVisible(moduleItem) {
@@ -113,11 +127,12 @@ export class ModuleComponent{// implements OnChanges{
     }
 
     onEditItemComplete(moduleItem) {
-
+        this.isEditItemRowVisible = false;
     }
 
     onCancelEditItemComplete(event) {
         //this.isAddNewItemRowVisible = false;
+        this.isEditItemRowVisible = false;
     }
 
     onCategoryChange(event) {
@@ -158,8 +173,6 @@ export class ModuleComponent{// implements OnChanges{
                         moduleId: response.result,
                         moduleTypeId: this.moduleTypeId
                     };
-                    this.onAddModuleComplete.emit(this.moduleDetails);
-                    this.moduleDetails = <IModule>{};
                     this.moduleService.postModuleModuleTypeMap(moduleModuleTypeMap).subscribe(response => {
                         if (response.isSuccess) {
                             this.onAddModuleComplete.emit(this.moduleDetails);

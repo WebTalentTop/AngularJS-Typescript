@@ -19,7 +19,8 @@ export class EquipmentComponent {
     idField: string;
     linkFieldId: string;
     msgs: Message[] = [];
-    equipmentId: any ='49FD25EF-BB89-4FD9-A9DA-008C2CE8D151';
+    equipmentId: any = '49FD25EF-BB89-4FD9-A9DA-008C2CE8D151';
+    equipmentCodeName: any = 'CODE128';
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: EquipmentService,

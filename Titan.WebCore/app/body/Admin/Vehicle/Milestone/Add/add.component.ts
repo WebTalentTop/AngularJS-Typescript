@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { MilestoneService } from '../../../../../shared/services/Containers/MileStoneService/mileStone.service';
 import { Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
@@ -13,13 +14,35 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 export class AddComponent {
     username: string;
     description:string;
+    added: any;
 
-    constructor(private service: MilestoneService, private router: Router, private route: ActivatedRoute) {
+    constructor( 
+    private breadCrumbsService: BreadCrumbsService,
+    private service: MilestoneService, 
+    private router: Router, 
+    private route: ActivatedRoute) {
 
     }
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     ngOnInit() {
+        this.route.queryParams.subscribe(params => {
 
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let milestoneAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'MilestoneAddPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("milestoneAddBreadCrumb ---------", milestoneAddBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = milestoneAddBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+     }); 
     }
     onSubmit(formRef) {
         //console.log(formRef);
@@ -36,7 +59,6 @@ export class AddComponent {
         this.service.postAdd(formData).subscribe(res => {
             console.log('--------------res result------------', +res)
 
-            // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
                 this.router.navigate(["/admin/vehicle/milestone"], { queryParams: { page: 1 } });

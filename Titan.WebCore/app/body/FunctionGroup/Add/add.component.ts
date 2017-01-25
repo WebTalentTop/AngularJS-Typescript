@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { TitanUserProfileService } from '../../../shared/services/titanUserProfile.service';
 import { FunctionGroupService } from '../../../shared/services/functionGroup.service';
+import { DepartmentService } from '../../../shared/services/department.service';
 import { UserService } from '../../../shared/services/user.service';
 @Component({
-    selector: 'add-user',
+    selector: 'add-functiongroup',
    // styleUrls: ['app/body/User/Add/add.component.css'], 
     templateUrl: 'app/body/FunctionGroup/Add/add.component.html'
 })
@@ -19,9 +20,9 @@ export class AddComponent {
     emailAddress:string;
     phoneNumber:string;
     userName: string;
-    selectedUserId: any;
+    selectedDepartmentId: any;
     tenantId: any;
-    users: any;
+    departments: any;
     displayName:string;
     notificationMsgs: Message[] = [];
     testFacility = {
@@ -41,7 +42,7 @@ export class AddComponent {
         private userservice: UserService,
         private userprofileservice: TitanUserProfileService,
         private functiongroupservice: FunctionGroupService,
-
+        private departmentservice: DepartmentService,
                 private router: Router) {
 
     }
@@ -55,7 +56,7 @@ export class AddComponent {
             //this.userprofileservice.getById().subscribe(tenresult => {
             //    this.tenantId = tenresult.result;
             //});
-            this.getUsers();
+            this.getDepartments();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
         let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
             filter.pageName === 'TestFacilitiesAddPage'
@@ -67,13 +68,13 @@ export class AddComponent {
         this.breadcrumbsHome = { routerLink: ['/'] };
 
         }
-    onUserChange(event) {
-        this.selectedUserId = event.value;
+    onDepartmentChange(event) {
+        this.selectedDepartmentId = event.value;
     }
-    getUsers() {
+    getDepartments() {
         //    userRoles
-        this.userservice.getUsers().subscribe(response => {
-            this.users = new Array();
+        this.departmentservice.getDepartments().subscribe(response => {
+            this.departments = new Array();
             if (response != null) {
                 var resultMap = new Array();
                 resultMap.push({
@@ -82,12 +83,12 @@ export class AddComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.firstName,
+                        label: template.name,
                         value: template.id
                     }
                     resultMap.push(temp);
                 }
-                this.users = resultMap;
+                this.departments = resultMap;
             }
             console.log(response);
         });
@@ -98,12 +99,13 @@ export class AddComponent {
         let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
         let functionGroupModel = {
 
-            Name: formRef.name
+            Name: formRef.name,
+            DepartmentId: this.selectedDepartmentId
         };
-        this.functiongroupservice.postAdd(functionGroupModel).subscribe(res => {
+        this.functiongroupservice.postAddFunctionGroup(functionGroupModel).subscribe(res => {
             if (res.isSuccess) {
 
-                this.router.navigate(['functiongroup/details/', this.selectedUserId]);
+                this.router.navigate(['functionGroup/details/', res.result.id]);
             }
         });
         //this.userservice.postAdd(formData).subscribe(res => { 

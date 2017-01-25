@@ -22,6 +22,7 @@ export class ProjectComponent {
     gridFilter = {};
 	idField: string;
     msgs: Message[];
+  
     uploadedFiles: any[] = [];
     constructor(private service: ProjectService,
                 private router: Router,
@@ -44,7 +45,10 @@ export class ProjectComponent {
 
 
     }
+    downloadAttachment(attachment) {
 
+        window.open(titanApiUrl + '/ImportExport/downloadtemplate');
+    }
     navigateDetails(id: string) {
         this.router.navigate(['project/detailsmain', id]);
     }

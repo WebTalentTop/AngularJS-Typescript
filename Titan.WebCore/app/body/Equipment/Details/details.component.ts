@@ -11,6 +11,7 @@ declare var cron: any;
 declare var useGentleSelect: any;
 @Component({
     selector: 'details-equipment',
+    styleUrls: ['app/body/Equipment/Details/image.component.css'], 
     templateUrl: 'app/body/Equipment/Details/details.component.html'
 })
 export class DetailsComponent {
@@ -59,6 +60,7 @@ export class DetailsComponent {
     manufacturerCity: any = '';
     IsNewManufacturer: boolean;
     comment: any;
+    equipmentCodeName: any = 'CODE128';
     added: any;
     manufacturerId: any;
     model: any = {
@@ -182,9 +184,9 @@ export class DetailsComponent {
                 }
 
                 this.service.getEquipmentBarCodeImage(this.id, "").subscribe(res => {
-                    if (res.result.isSuccess)
+                    if (res)
                     {
-                        this.image = res.result.barcodeImage;
+                        this.image = res;
                     }
 
                 });
@@ -217,6 +219,17 @@ export class DetailsComponent {
             this.isMaintenaceFrequencySelected = false;
         }
 
+    }
+    printBarCode()
+    {
+      //  var barcode = window.open("http://localhost:9998/api/Equipment/GetEquipmentBarcodeTemplate/" + this.id, "_blank", "menubar=0,resizable=0,width=200,height=200");
+        var barcode = window.open("", "", "width=200,height=200");
+
+        barcode.document.write("<html><body><img src=data:image/jpeg;base64," + this.image + "></body></html>");
+        barcode.document.close();
+        barcode.focus();
+        barcode.print();
+        barcode.close();
     }
     showHideCronPicker() {
         console.log("--inside cronpicker show hide");
@@ -446,7 +459,7 @@ export class DetailsComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name + "(" + template.frequency + ")",
+                        label: template.name + "(" + template.frequencyDescription + ")",
                         value: template.id,
                         frequency: template.frequency
                     }

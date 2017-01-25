@@ -2,12 +2,12 @@
     <div class="card card-w-title">
       <h1>Tenant</h1>
         <p-panel>
-          <header class="with-controls">
-              <p class="ui-panel-title">Function Group List</p>
-              <p class="controls">
-                <button pButton type="button" class="blue-grey-btn" icon="ui-icon-add" label="Add New Function Group" (click)="displayTenantDialog=true"></button>
-              </p>
-          </header>
+            <header class="with-controls">
+                <p class="ui-panel-title">Users</p>
+                <p class="controls">
+                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Assign User"></button>
+                </p>
+            </header>
           <p-dataTable [value]="functionGroups" [paginator]="true" rows="15" [responsive]="true">
 
               <p-column header="Function Group Name" sortable="true">

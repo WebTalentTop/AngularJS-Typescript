@@ -25,10 +25,11 @@ import {Route} from "@angular/router";
 import {AuthGuard} from "../shared/services/auth/authGuard";
 import {LoginComponent} from "./Auth/login.component";
 import {TitanUserService} from "../shared/services/titanuser.service";
+import {ErrorComponent} from "./Error/error.component";
 
 @NgModule({
     imports: [CommonModule, HttpModule, FormsModule, DropdownModule, appRoutes],//ProjectModule,DepartmentModule,AdminModule,CalendarModule,LookupModule, EquipmentModule, appRoutes],
-    declarations: [BodyComponent, LoginComponent],
+    declarations: [BodyComponent, LoginComponent, ErrorComponent],
     providers: [AuthGuard, TitanUserService ,LoggerService],
     exports: [BodyComponent]//,
     //bootstrap: [AppComponent]

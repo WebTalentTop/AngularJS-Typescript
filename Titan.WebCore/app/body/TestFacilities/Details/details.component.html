@@ -220,7 +220,7 @@
                                 <span class="pseudo-label">Role</span>
 
                                 <p-dropdown [options]="userRoles" (onChange)="onUserRoleChange($event)"
-                                            name="userRole" id="userRole"  [autoWidth]="false"></p-dropdown>
+                                            name="userRole" [(ngModel)]="selectedRole" id="userRole"  [autoWidth]="false"></p-dropdown>
 
                             </div>
 
@@ -299,7 +299,7 @@
                                 <span class="pseudo-label">Departments</span>
 
                                 <p-dropdown [options]="departments" (onChange)="onDepartmentChange($event)"
-                                            name="departments" [autoWidth]="false" id="departments" ></p-dropdown>
+                                            name="departments" [(ngModel)]="selectedDepartment" [autoWidth]="false" id="departments" ></p-dropdown>
 
                             </div>
 

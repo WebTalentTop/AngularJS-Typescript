@@ -197,7 +197,8 @@ export class TorqueBookComponent {
 
     onAddTorqueSheet(){
         //this.torqueBookIdForAddingTorqueSheet = torqueBookId;
-        this.router.navigate(["/torquesheet/add/", this.torqueBookIdForAddingTorqueSheet, "Project", this.projectId]);
+        //this.router.navigate(["/torquesheet/add/", this.torqueBookIdForAddingTorqueSheet, "Project", this.projectId]);
+        this.router.navigate(["/torquesheet/add/", "Project", this.projectId]);
 
         //this.torqueBookElmForAddingTorqueSheet = event.srcElement;
         //this.getTorqueBooksTorqueSheetNames(torqueBookId);

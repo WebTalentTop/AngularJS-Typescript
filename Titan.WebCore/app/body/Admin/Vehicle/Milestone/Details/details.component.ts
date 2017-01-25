@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MilestoneService } from '../../../../../shared/services/Containers/MileStoneService/mileStone.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'milestone-detail',
@@ -34,7 +35,6 @@ export class DetailsComponent {
 
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
@@ -42,13 +42,15 @@ export class DetailsComponent {
     public MilestoneId: string;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: MilestoneService
     )
     { }
 
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
@@ -56,12 +58,26 @@ export class DetailsComponent {
             this.MilestoneId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let milestoneDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'MilestoneDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("milestoneDetailsBreadCrumb ---------", milestoneDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = milestoneDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
+
             this.service.getById(this.MilestoneId).subscribe(MilestoneDetails => {
                 this.MilestoneDetails = MilestoneDetails.result;
               
                 console.log(this.MilestoneDetails);
             });
-        });
     }
 
 

@@ -75,8 +75,8 @@ export class ModuleItemOptionService extends BaseService {
         //.map(this.getJson);
     }
 
-    postDelete(filterBody): Observable<any> {
-        return this.http.put(`${ModuleItemOptionApiUrl.deleteUrl}`, filterBody, { headers: this.headers })
+    postDelete(id): Observable<any> {
+        return this.http.put(`${ModuleItemOptionApiUrl.deleteUrl}` + id, null, { headers: this.headers })
             .map(this.getJson);
         //.map(this.checkErrors);
     }
