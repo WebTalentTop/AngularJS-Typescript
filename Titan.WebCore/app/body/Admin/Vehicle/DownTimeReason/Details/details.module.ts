@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { DownTimeReasonService} from '../../../../../shared/services/downTimeReason.service';
 
-import { DataTableModule, ButtonModule, InputTextareaModule, ToggleButtonModule,InputTextModule,GrowlModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule, ToggleButtonModule,InputTextModule,GrowlModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DataTableModule,ToggleButtonModule, InputTextareaModule,GrowlModule, InputTextModule, PanelModule, 
+    imports: [EditorModule, SharedModule, BreadcrumbModule, CommonModule, FormsModule, DataTableModule,ToggleButtonModule, InputTextareaModule,GrowlModule, InputTextModule, PanelModule, 
         ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
     providers: [DownTimeReasonService],
     declarations: [DetailsComponent],
