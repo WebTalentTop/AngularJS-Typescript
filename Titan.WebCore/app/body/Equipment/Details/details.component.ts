@@ -220,6 +220,17 @@ export class DetailsComponent {
         }
 
     }
+    printBarCode()
+    {
+      //  var barcode = window.open("http://localhost:9998/api/Equipment/GetEquipmentBarcodeTemplate/" + this.id, "_blank", "menubar=0,resizable=0,width=200,height=200");
+        var barcode = window.open("", "", "width=200,height=200");
+
+        barcode.document.write("<html><body><img src=data:image/jpeg;base64," + this.image + "></body></html>");
+        barcode.document.close();
+        barcode.focus();
+        barcode.print();
+        barcode.close();
+    }
     showHideCronPicker() {
         console.log("--inside cronpicker show hide");
         if (this.isMaintenaceFrequencySelected) {
@@ -448,7 +459,7 @@ export class DetailsComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name + "(" + template.frequency + ")",
+                        label: template.name + "(" + template.frequencyDescription + ")",
                         value: template.id,
                         frequency: template.frequency
                     }
