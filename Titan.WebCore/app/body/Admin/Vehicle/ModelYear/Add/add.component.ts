@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { ModelYearService } from '../../../../../shared/services/modelYear.service';
 import { Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
@@ -14,12 +15,34 @@ export class AddComponent {
     username: string;
     description:string;
 
-    constructor(private service: ModelYearService, private router: Router, private route: ActivatedRoute) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: ModelYearService, 
+        private router: Router, 
+        private route: ActivatedRoute) {
 
     }
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     ngOnInit() {
+        this.route.queryParams.subscribe(params => {
 
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let modelYearAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'ModelYearAddPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("modelYearAddBreadCrumb ---------", modelYearAddBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = modelYearAddBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+     }); 
     }
     onSubmit(formRef) {
         //console.log(formRef);
