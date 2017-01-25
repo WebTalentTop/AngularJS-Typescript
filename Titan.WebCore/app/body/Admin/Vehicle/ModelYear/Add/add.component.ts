@@ -12,8 +12,8 @@ import {BreadCrumbsService} from '../../../../../shared/services/breadCrumbs/bre
 
 export class AddComponent {
     username: string;
-    description: string;
-    added: string;
+    description:string;
+    added: any;
 
     constructor(private breadCrumbsService: BreadCrumbsService,
                 private service: ModelYearService,
@@ -52,7 +52,7 @@ export class AddComponent {
         formData.description = formRef.description;
         formData.locale = "en-us";
         let added: any = "true";
-        console.log(formData);
+        
         this.service.postAdd(formData).subscribe(res => {
                 if (res.isSuccess) {
                     this.router.navigate(["/admin/vehicle/modelYear"], {queryParams: {page: 1}});
