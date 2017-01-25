@@ -129,10 +129,10 @@ export class BreadCrumbsService {
 
         //Admin ProjectStatus Page
         this.adminProjectStatusPage();
-        // // Admin ProjectStatus Add Page
-        // this.adminProjectStatusAddPage();
-        // // Admin ProjectStatus Details Page
-        // this.adminProjectStatusDetailsPage();
+        // Admin ProjectStatus Add Page
+        this.adminProjectStatusAddPage();
+        // Admin ProjectStatus Details Page
+        this.adminProjectStatusDetailsPage();
 
         //Admin ProjectRole Page
         this.adminProjectRolePage();
@@ -1183,7 +1183,45 @@ export class BreadCrumbsService {
     }
 
     private adminProjectStatusPageBCItems() {
-        let menuItem = { label: 'ProjectStatus', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Project Status', routerLink: ['/admin/vehicle/projectStatus'] };
+        return menuItem;
+    }
+
+    private adminProjectStatusAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminProjectStatusAddPageBCItems() {
+        let menuItem = { label: 'Add ProjectStatus', routerLink: ['/admin/vehicle/projectStatus'] };
+        return menuItem;
+    }
+
+    private adminProjectStatusDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminProjectStatusPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectStatusDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminProjectStatusDetailsPageBCItems() {
+        let menuItem = { label: 'ProjectStatus Details', routerLink:['/admin/vehicle/projectStatus'] };
+
         return menuItem;
     }
 
