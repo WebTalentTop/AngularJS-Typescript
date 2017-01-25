@@ -178,10 +178,10 @@ export class BreadCrumbsService {
 
         //Admin ModelYear Page
         this.adminModelYearPage();
-        // // Admin ModelYear Add Page
-        // this.adminModelYearAddPage();
-        // // Admin ModelYear Details Page
-        // this.adminModelYearDetailsPage();
+        // Admin ModelYear Add Page
+        this.adminModelYearAddPage();
+        // Admin ModelYear Details Page
+        this.adminModelYearDetailsPage();
 
         //Admin Access Page
         this.adminAccessPage();
@@ -1577,7 +1577,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'ModelYearHomePage', items: menuItems };
@@ -1585,10 +1584,47 @@ export class BreadCrumbsService {
     }
 
     private adminModelYearPageBCItems() {
-        let menuItem = { label: 'ModelYear', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Model Year', routerLink: ['/admin/vehicle/modelYear'] };
         return menuItem;
     }
 
+ private adminModelYearAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminModelYearPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelYearAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminModelYearAddPageBCItems() {
+        let menuItem = { label: 'Add ModelYear', routerLink: ['/admin/vehicle/modelYear'] };
+        return menuItem;
+    }
+
+    private adminModelYearDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminModelYearPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ModelYearDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminModelYearDetailsPageBCItems() {
+        let menuItem = { label: 'ModelYear Details', routerLink:['/admin/vehicle/modelYear'] };
+
+        return menuItem;
+    }
     // Admin Access Bread Crumbs
     private adminAccessPage() {
         let menuItems = [];
