@@ -39,6 +39,9 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
     public ModelYearId: string;
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
@@ -47,8 +50,6 @@ export class DetailsComponent {
         private service: ModelYearService
     )
     { }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));

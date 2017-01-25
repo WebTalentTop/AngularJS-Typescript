@@ -16,6 +16,8 @@ export class AddComponent {
     description:string;
     added: any;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: StepFrequencyService, 
@@ -24,8 +26,6 @@ export class AddComponent {
 
     }
 
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
 

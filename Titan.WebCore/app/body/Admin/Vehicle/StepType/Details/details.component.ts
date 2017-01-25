@@ -39,7 +39,9 @@ export class DetailsComponent {
     uploadedFiles: any[] = [];
 
     public StepTypeId: string;
-
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
@@ -47,8 +49,6 @@ export class DetailsComponent {
         private service: StepTypeService
     )
     { }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
