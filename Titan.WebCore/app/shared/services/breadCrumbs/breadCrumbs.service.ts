@@ -290,10 +290,10 @@ export class BreadCrumbsService {
 
         //Admin StepFrequency Page
         this.adminStepFrequencyPage();
-        // // Admin StepFrequency Add Page
-        // this.adminStepFrequencyAddPage();
-        // // Admin StepFrequency Details Page
-        // this.adminStepFrequencyDetailsPage();
+        // Admin StepFrequency Add Page
+        this.adminStepFrequencyAddPage();
+        // Admin StepFrequency Details Page
+        this.adminStepFrequencyDetailsPage();
 
         //Admin TestMode Page
         this.adminTestModePage();
@@ -1871,7 +1871,7 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminRequirementItemTypeBCItems() {
+    private adminRequirementItemTypePageBCItems() {
         let menuItem = { label: 'Requirement Item Type', routerLink: ['/admin/vehicle/requirementItemType'] };
         return menuItem;
     }
@@ -1881,7 +1881,7 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        menuItems.push(this.adminRequirementItemTypeBCItems());
+        menuItems.push(this.adminRequirementItemTypePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'RequirementItemTypeAddPage', items: menuItems };
@@ -1900,7 +1900,7 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        menuItems.push(this.adminRequirementItemTypeBCItems());
+        menuItems.push(this.adminRequirementItemTypePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'RequirementItemTypeDetailsPage', items: menuItems };
@@ -1937,15 +1937,52 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'StepFrequencyHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminStepFrequencyBCItems() {
-        let menuItem = { label: 'StepFrequency', routerLink: ['/admin/'] };
+    private adminStepFrequencyPageBCItems() {
+        let menuItem = { label: 'Step Frequency', routerLink:  ['/admin/vehicle/stepFrequency'] };
+        return menuItem;
+    }
+
+    private adminStepFrequencyAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminStepFrequencyPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepFrequencyAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminStepFrequencyAddPageBCItems() {
+        let menuItem = { label: 'Add StepFrequency', routerLink: ['/admin/vehicle/stepFrequency'] };
+        return menuItem;
+    }
+
+    private adminStepFrequencyDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminStepFrequencyPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'StepFrequencyDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminStepFrequencyDetailsPageBCItems() {
+        let menuItem = { label: 'StepFrequency Details', routerLink: ['/admin/vehicle/stepFrequency'] };
+
         return menuItem;
     }
 
