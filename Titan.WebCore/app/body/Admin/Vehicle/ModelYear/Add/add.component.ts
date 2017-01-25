@@ -1,10 +1,9 @@
-import { Component} from '@angular/core';
-import { ModelYearService } from '../../../../../shared/services/modelYear.service';
-import { Validators } from '@angular/forms';
-import { SelectItem, MenuItem } from 'primeng/primeng';
-import { Router, Params, ActivatedRoute } from '@angular/router';
-import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
-//import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
+import {Component} from '@angular/core';
+import {ModelYearService} from '../../../../../shared/services/modelYear.service';
+import {Validators} from '@angular/forms';
+import {SelectItem, MenuItem} from 'primeng/primeng';
+import {Router, Params, ActivatedRoute} from '@angular/router';
+import {BreadCrumbsService} from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'add-modelYear',
@@ -13,15 +12,16 @@ import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/b
 
 export class AddComponent {
     username: string;
-    description:string;
+    description: string;
+    added: string;
 
-    constructor(
-        private breadCrumbsService: BreadCrumbsService,
-        private service: ModelYearService, 
-        private router: Router, 
-        private route: ActivatedRoute) {
+    constructor(private breadCrumbsService: BreadCrumbsService,
+                private service: ModelYearService,
+                private router: Router,
+                private route: ActivatedRoute) {
 
     }
+
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
 
@@ -41,35 +41,26 @@ export class AddComponent {
 
             console.log("breadcurmbs ------", this.breadcrumbs);
 
-            this.breadcrumbsHome = { routerLink: ['/'] };
-     }); 
+            this.breadcrumbsHome = {routerLink: ['/']};
+        });
     }
+
     onSubmit(formRef) {
-        //console.log(formRef);
-        //console.log(this.username);
-        //console.log(this.description);
-        //formRef.locale = "en-us";
-        //formRef.isDeleted = false;
-        let formData: any = {name: '', description: '', locale:'', isDeleted: false};
+
+        let formData: any = {name: '', description: '', locale: '', isDeleted: false};
         formData.name = formRef.name;
         formData.description = formRef.description;
         formData.locale = "en-us";
-        let added: any="true";
+        let added: any = "true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
-            console.log('--------------res result------------', +res)
+                if (res.isSuccess) {
+                    this.router.navigate(["/admin/vehicle/modelYear"], {queryParams: {page: 1}});
 
-            // this.router.navigate(["/vehicle/projectStatus/", res]);
-            if (res.isSuccess) {
-                //this.router.navigate([], {q})
-                this.router.navigate(["/admin/vehicle/modelYear"], { queryParams: { page: 1 } });
-               
+                }
+
             }
-           
-        }
-            );
-     
-                  // );
-       
+        );
+
     }
 }
