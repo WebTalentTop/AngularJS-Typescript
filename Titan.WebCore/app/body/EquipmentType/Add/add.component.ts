@@ -33,6 +33,7 @@ export class AddComponent implements OnInit {
     entityType: string = '';
     entityId: string = this.id;
     displayDialogForm: boolean;
+    notificationMsgs: Message[] = [];
     emptyguid: any = "00000000-0000-0000-0000-000000000000";
     selectedCalibration: string = '';
 
@@ -141,6 +142,12 @@ export class AddComponent implements OnInit {
             if (res.isSuccess) {
 
                 this.router.navigate(['equipmenttype/details/', res.result.id]);
+            }
+            else {
+                this.notificationMsgs = [];
+                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'Equipment Type name exists.' });
+
+
             }
         });
     }

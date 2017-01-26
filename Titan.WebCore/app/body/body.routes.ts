@@ -16,7 +16,7 @@ const routes = [
     { path: 'admin', canActivate: [AuthGuard], loadChildren: 'app/body/admin/admin.module' },
     { path: 'calendar', canActivate: [AuthGuard], loadChildren: 'app/body/calendar/titancalendar.module' },
     { path: 'lookup', canActivate: [AuthGuard], loadChildren: 'app/body/lookup/lookup.module' },
-    { path: 'userManagement', canActivate: [AuthGuard], loadChildren: 'app/body/UserManagement/userManagement.module' },
+    { path: 'catalog', canActivate: [AuthGuard], loadChildren: 'app/body/Catalog/catalog.module' },
     { path: 'problemtracking', canActivate: [AuthGuard], loadChildren: 'app/body/ProblemTracking/problemtracking.module' },
     { path: 'workrequest', canActivate: [AuthGuard], loadChildren: 'app/body/WorkRequest/workrequest.module' },
     //{ path: 'testcatalog', canActivate: [AuthGuard], loadChildren: 'app/body/TestCatalog/testcatalog.module' },
