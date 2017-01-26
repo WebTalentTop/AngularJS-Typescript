@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TestTypeService } from '../../../../../shared/services/testType.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'testType-detail',
@@ -40,7 +41,11 @@ export class DetailsComponent {
 
     public TestTypeId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: TestTypeService
@@ -55,11 +60,25 @@ export class DetailsComponent {
             this.TestTypeId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testTypeDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestTypeDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("testTypeDetailsBreadCrumb ---------", testTypeDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = testTypeDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
             this.service.getById(this.TestTypeId).subscribe(TestTypeDetails => {
                 this.TestTypeDetails = TestTypeDetails.result;
               
                 console.log(this.TestTypeDetails);
-            });
         });
     }
 
