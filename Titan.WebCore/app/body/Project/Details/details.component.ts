@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { DataTable, SelectItem, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
 import { MarketService } from '../../../shared/services/market.service'
 import { ModelYearService } from '../../../shared/services/modelYear.service'
 import { ModelNameService } from '../../../shared/services/modelName.service'
 import { GradeService } from '../../../shared/services/grade.service'
-
+import { PlatformService } from '../../../shared/services/platform.service'
 import { ProjectService } from './../../../shared/services/Containers/ProjectService/project.service';
 
 @Component({    
@@ -19,11 +19,13 @@ export class DetailsComponent {
     public selectedModelYearId: any;
     public selectedModelNameId: any;
     public selectedGradeId: any;
+    public selectedPlatformId: any;
    
-    markets: any;
+    markets: SelectItem[];
     modelYears: any;
     modelNames: any;
     grades: any;
+    platforms: any;
    
     public ProjectDetails:any;
     public projectId:string; 
@@ -34,7 +36,8 @@ export class DetailsComponent {
         private gradeService: GradeService,
         private marketService: MarketService,
         private modelNameService: ModelNameService,
-        private modelYearService: ModelYearService
+        private modelYearService: ModelYearService,
+        private platformservice: PlatformService
       
 
 
@@ -51,15 +54,30 @@ export class DetailsComponent {
             this.getModelYears();
             this.getModelNames();
             this.getGrades();
-           
+            this.getPlatforms();
             this.service.getProjectDetails(this.projectId).subscribe(ProjectDetails => {
                 this.ProjectDetails = ProjectDetails.result;
                 this.ProjectDetails.plannedStartDate = new Date(this.ProjectDetails.plannedStartDate);
                 this.ProjectDetails.plannedEndDate = new Date(this.ProjectDetails.plannedEndDate);
                 this.ProjectDetails.actualStartDate = new Date(this.ProjectDetails.actualStartDate);
                 this.ProjectDetails.actualEndDate = new Date(this.ProjectDetails.actualEndDate);
+                this.selectedGradeId = this.ProjectDetails.gradeId;
+                this.selectedModelYearId = this.ProjectDetails.modelYearId;
+                this.selectedModelNameId = this.ProjectDetails.modelNameId;
+                this.selectedPlatformId = this.ProjectDetails.platformId;
+                this.ProjectDetails.id = this.projectId;
+               
+                this.service.getMarketListById(this.projectId).subscribe(projectMarkets => {
+                    // if (projectMarkets.$values.) {
+                   // string[] sc = new string[];
+                   // this.selectedMarketId.forEach(s)
+                 //   let stringArray = new Array<string>();
+                   // stringArray = projectMarkets.$values;
+                    //stringArray.forEach(s=>s.)
+                    this.selectedMarketId = projectMarkets.$values;
+                   // }
+                });
 
-                this.ProjectDetails.id = this.projectId;    
             });
         });
     }
@@ -73,10 +91,10 @@ export class DetailsComponent {
             this.markets = new Array();
             if (response != null) {
                 var resultMap = new Array();
-                resultMap.push({
-                    label: "--Select--",
-                    value: null
-                });
+                //resultMap.push({
+                //    label: "--Select--",
+                //    value: null
+                //});
                 for (let template of response.$values) {
                     var temp = {
                         label: template.name,
@@ -110,6 +128,31 @@ export class DetailsComponent {
                     resultMap.push(temp);
                 }
                 this.modelYears = resultMap;
+            }
+            console.log(response);
+        });
+    }
+    onPlatformChange(event) {
+        this.selectedPlatformId = event.value;
+    }
+    getPlatforms() {
+        //    userRoles
+        this.platformservice.getAllPlatforms().subscribe(response => {
+            this.platforms = new Array();
+            if (response != null) {
+                var resultMap = new Array();
+                resultMap.push({
+                    label: "--Select--",
+                    value: null
+                });
+                for (let template of response.$values) {
+                    var temp = {
+                        label: template.name,
+                        value: template.id
+                    }
+                    resultMap.push(temp);
+                }
+                this.platforms = resultMap;
             }
             console.log(response);
         });
@@ -165,7 +208,12 @@ export class DetailsComponent {
         });
     }
   
-    onSubmit(){
+    onSubmit() {
+
+        this.ProjectDetails.gradeId = this.selectedGradeId;
+        this.ProjectDetails.modelYearId = this.selectedModelYearId;
+        this.ProjectDetails.modelNameId = this.selectedModelNameId;
+        this.ProjectDetails.platformId = this.selectedPlatformId;
         this.service.putProjectDetails(this.ProjectDetails).subscribe(ProjectDetails => {
             console.log(ProjectDetails);
             this.service.postAddMarket(this.projectId, this.selectedMarketId).subscribe(res => {

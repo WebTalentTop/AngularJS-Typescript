@@ -33,7 +33,7 @@ export class ProjectService extends BaseService{
     }
 
     postAddMarket(projectId, marketId): Observable<any> {
-        return this.http.post(`${ProjectApiUrl.postAddMarketMapUrl}/${projectId}/${marketId}`, null, { headers: this.headers })
+        return this.http.post(`${ProjectApiUrl.postAddMarketMapUrl}/${projectId}`, marketId, { headers: this.headers })
             .map(this.getJson);
     }
     getProjectDetails(id): Observable<any> {
@@ -43,7 +43,20 @@ export class ProjectService extends BaseService{
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
-    
+    getMarketListById(id): Observable<any> {
+        return this.http.get(`${ProjectApiUrl.getMarketListById}/${id}`, { headers: this.headers })
+
+            //     .toPromise()
+            //  .then(res => <ITestFacilityRole[]> res.json().data)
+            // .then(data => { return data; });
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log('---------getbyusing testdata---------', data);
+            //    return data.$values
+            //});
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     putProjectDetails(filterBody): Observable<any> {
         return this.http.put(`${ProjectApiUrl.putProjectDetailsUrl}`, filterBody)
             .map(super.getJson)
