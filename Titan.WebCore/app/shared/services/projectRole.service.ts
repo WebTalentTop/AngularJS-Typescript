@@ -37,7 +37,12 @@ export class ProjectRoleService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    DeleteUserRoleMap(id): Observable<any> {
+        return this.http.post(`${ProjectRoleApiUrl.DeleteUserRoleMap}/${id}`, { headers: this.headers })
 
+            .map(this.getJson)
+         
+    }
     postAddUserNames(filterBody, projectId, projectRoleId): Observable<any> {
         return this.http.post(`${ProjectRoleApiUrl.PostAddUserRolesUrl}/${projectId}/${projectRoleId}`, filterBody, { headers: this.headers })
             .map(this.getJson);
@@ -85,10 +90,10 @@ export class ProjectRoleService {
             //  .then(res => <ITestFacilityRole[]> res.json().data)
             // .then(data => { return data; });
             .map(this.getJson)
-            .map(data => {
-                console.log('---------getbyusing testdata---------', data);
-                return data.$values
-            });
+            //.map(data => {
+            //    console.log('---------getbyusing testdata---------', data);
+            //    return data.$values
+            //});
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }

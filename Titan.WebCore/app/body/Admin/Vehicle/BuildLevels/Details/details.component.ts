@@ -34,7 +34,9 @@ export class DetailsComponent {
         modifiedOn: ''
     };
 
-
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
+        
     msgs: Message[];
     uploadedFiles: any[] = [];
 
@@ -50,8 +52,6 @@ export class DetailsComponent {
     )
     { }
 
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));

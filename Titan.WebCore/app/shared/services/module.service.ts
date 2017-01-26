@@ -84,7 +84,7 @@ export class ModuleService extends BaseService {
     }
 
     postModuleModuleTypeMap(filterBody): Observable<any> {
-        return this.http.put(`${ModuleApiUrl.postModuleModuleTypeMapUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${ModuleApiUrl.postModuleModuleTypeMapUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson);
     }
 }

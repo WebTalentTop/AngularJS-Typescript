@@ -6,6 +6,7 @@
              <h2>Create EquipmentType</h2>
 
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
+                    <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
                   <p-panel header="Basic Information">
                     <div class="body">
                         <!-- Begin Name -->

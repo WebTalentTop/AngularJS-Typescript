@@ -54,6 +54,9 @@ export class DetailsComponent {
     public isTorqueSheetNameVisible: boolean = false;
     public isModuleDivVisible: boolean = false;
     public stepModules: IModule[];
+    public get stepModuleTypeId() {
+        return this.stepDetails.stepType != null ? this.stepDetails.stepType.moduleTypeId : null;
+    }
     @Input() isDisplayComponentInPopUp: boolean;
     @Input() private set stepId(id: string) {
         this.id = id;

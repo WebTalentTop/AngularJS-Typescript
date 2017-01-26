@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { AddComponent } from "./add.component";
 import { TestModeService} from '../../../../../shared/services/testMode.service';
-
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule, InputTextModule, MultiSelectModule, PickListModule, EditorModule, SharedModule, PanelModule, GrowlModule, DropdownModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
@@ -28,7 +28,7 @@ import addRoutes from "./add.routes";
         DropdownModule,
         addRoutes
     ],
-    providers: [TestModeService],
+    providers: [TestModeService, BreadCrumbsService],
     declarations: [AddComponent]
 })
 

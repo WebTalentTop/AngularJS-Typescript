@@ -18,11 +18,18 @@ export class StepFrequencyComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor( private breadCrumbsService: BreadCrumbsService,private service: StepFrequencyService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
+    constructor( 
+        private breadCrumbsService: BreadCrumbsService,
+        private service: StepFrequencyService, 
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private logger: LoggerService) {
 
     }
-     breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {

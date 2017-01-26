@@ -21,6 +21,20 @@
                         </a>
                    </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <a [routerLink]="['/catalog']">
+                        <div class="ui-g card colorbox colorbox-1">
+                            <div class="ui-g-3">
+                                <i class="material-icons">group</i>
+                            </div>
+                            <div class="ui-g-9" [routerLink]="['/catalog']">
+                                <span class="colorbox-name"></span>
+                                <span class="colorbox-count">Catalogs</span>
+                                <span class="colorbox-name"></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
                     <a [routerLink]="['/functionGroup']">
                         <div class="ui-g card colorbox colorbox-1">
                             <div class="ui-g-3">

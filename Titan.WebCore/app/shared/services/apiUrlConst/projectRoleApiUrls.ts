@@ -9,6 +9,8 @@ export class ProjectRoleApiUrl {
     public static getAllProjectRoles: string = titanApiUrl + 'projectRole';
     public static PostAddUserRolesUrl: string = titanApiUrl + 'projectRole/PostUserRoles';
     public static getRolesByProjectIdUrl: string = titanApiUrl + 'projectRole/GetProjectUserRoleByProjectId';
+    public static DeleteUserRoleMap: string = titanApiUrl + 'project/DeleteProjectUserRoleMap';
+    
     
 
     

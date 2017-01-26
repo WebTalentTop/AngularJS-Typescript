@@ -37,8 +37,10 @@ export class DetailsComponent {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-    //public MilestoneStatusDetails: any;
     public MilestoneStatusId: string;
+    
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
@@ -47,8 +49,6 @@ export class DetailsComponent {
         private service: MilestoneStatusService
     )
     { }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));

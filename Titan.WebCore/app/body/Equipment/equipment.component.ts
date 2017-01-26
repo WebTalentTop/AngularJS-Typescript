@@ -21,6 +21,9 @@ export class EquipmentComponent {
     msgs: Message[] = [];
     equipmentId: any = '49FD25EF-BB89-4FD9-A9DA-008C2CE8D151';
     equipmentCodeName: any = 'CODE128';
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: EquipmentService,
@@ -39,10 +42,7 @@ export class EquipmentComponent {
             this.breadcrumbsHome = { routerLink: ['/'] };
         });
     }
-
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
-
+    
     ngOnInit() {
         let resData: any;
         this.service.postGridData()

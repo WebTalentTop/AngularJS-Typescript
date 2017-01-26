@@ -295,6 +295,9 @@ gulp.task('htmlwatch', function () {
     gulp.watch(root_path.app + "**/*.html", ['html']);
 });
 
+gulp.task('tsCompileWatch', function () {
+    gulp.watch(root_path.app + "**/*.ts", ['tsCompile']);
+});
 
 gulp.task("sourceMap", function () {
     gulp.src(root_path.app + "**/*.map", { base: root_path.app })

@@ -47,6 +47,11 @@ export class TeamInformationComponent {
         });
         this.getProjectRoles();
         this.getProjectUsers();
+        this.projectRoleService.getByIdusing(this.projectId).subscribe(projectuserRoles => {
+          //  if (projectuserRoles.result.isSuccess) {
+                this.projectUserRoles = projectuserRoles.$values;
+           // }
+        });
     }
     onProjectRoleChange(event) {
         this.selectedProjectRoleId = event.value;
@@ -171,19 +176,32 @@ export class TeamInformationComponent {
         //    testRequirementList: selectedTestRequirementIds
         //}
         this.projectRoleService.postAddUserNames(selectedUserNames, this.projectId, this.selectedProjectRoleId).subscribe(filteredList => {
-            this.selectedUserNames = filteredList.$values;
+           // this.selectedUserNames = filteredList.$values;
             this.filteredSelectedUserNames = null;
             this.selectedProjectRoleId = null;
-            this.projectRoleService.getByIdusing(this.projectId)
-                .subscribe(TestFacilityRoles => {
-                    this.projectUserRoles = TestFacilityRoles;
-                    this.selectedProjectRoleId = null;
-                });
+            this.projectRoleService.getByIdusing(this.projectId).subscribe(projectuserRoles => {
+                //  if (projectuserRoles.result.isSuccess) {
+                this.projectUserRoles = projectuserRoles.$values;
+                // }
+            });
         });
 
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'User Added', detail: '' });
     }
+   onDeleteUserRoleMap(id)
+   {
+       this.projectRoleService.DeleteUserRoleMap(id).subscribe(res => {
+           if (res.isSuccess)
+           {
+               this.projectRoleService.getByIdusing(this.projectId).subscribe(projectuserRoles => {
+                   //  if (projectuserRoles.result.isSuccess) {
+                   this.projectUserRoles = projectuserRoles.$values;
+                   // }
+               });
+           }
+       });
+   }
     onAddTorqueSheetTemplateCancel() {
         this.closeTemplateWindow();
     }

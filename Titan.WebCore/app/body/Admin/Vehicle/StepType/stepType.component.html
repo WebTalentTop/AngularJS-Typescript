@@ -1,4 +1,3 @@
-
 <div class="ui-g-12">
     <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb><br />
     <div class="card card-w-title">
@@ -7,6 +6,7 @@
           <button pButton type="button" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Add New Step Type"></button>
         </header>
         <div class="ui-grid-row">
+            <div class="ui-messages-success">
                 <p-messages [value]="msgs"></p-messages>
             </div>
             <grid-data [gridData]="gridData"
@@ -17,4 +17,4 @@
                        [title]="title"></grid-data>
         </div>
     </div>
-</div>
+    </div>

@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { TestModeService } from '../../../../../shared/services/testMode.service';
 import { Validators } from '@angular/forms';
-import { SelectItem, Message } from 'primeng/primeng';
+import { SelectItem, Message, MenuItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
@@ -20,7 +21,15 @@ export class AddComponent {
     msgs: Message[] = [];
     selectedTestTypes: any[];
     allTestTypes: any[];
-    constructor(private service: TestModeService, private router: Router, private route: ActivatedRoute) {
+    added: any;
+
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: TestModeService, 
+        private router: Router, 
+        private route: ActivatedRoute) {
 
     }
 
@@ -42,6 +51,23 @@ export class AddComponent {
             //    }
             //    this.testTypeDetails = resultMap;
             //}
+            this.route.queryParams.subscribe(params => {
+
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testModeAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestModeAddPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("testModeAddBreadCrumb ---------", testModeAddBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = testModeAddBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+     }); 
 
         });
 

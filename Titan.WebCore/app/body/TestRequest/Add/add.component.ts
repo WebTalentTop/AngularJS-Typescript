@@ -666,7 +666,7 @@ export class AddComponent implements AfterViewInit {
                                 this.testrequestsensorserice.postTasksAdd(taskbody).subscribe(taskresult => {
 
                                     if (taskresult.isSuccess) {
-                                        this.router.navigate(['testrequest/details/', this.testRequestEntityId]);
+                                        this.router.navigate(['testRequest/details/', this.testRequestEntityId]);
 
                                     }
 
@@ -707,7 +707,7 @@ export class AddComponent implements AfterViewInit {
 
                             if (taskresult.isSuccess)
                             {
-                                this.router.navigate(['testrequest/details/', this.testRequestEntityId]);
+                                this.router.navigate(['testRequest/details/', this.testRequestEntityId]);
 
                             }
 
@@ -716,7 +716,7 @@ export class AddComponent implements AfterViewInit {
                 });
             }
             if (res.isSuccess && !this.IsThermoCouple && !this.IsPartsList)
-             this.router.navigate(['testrequest/details/', res.result.id]);
+             this.router.navigate(['testRequest/details/', res.result.id]);
 
      });
 
@@ -724,7 +724,7 @@ export class AddComponent implements AfterViewInit {
     }
 
     navigateDetails(id: string) {
-        this.router.navigate(['testrequest/sensor/details/', id]);
+        this.router.navigate(['testRequest/sensor/details/', id]);
     }
 
 
