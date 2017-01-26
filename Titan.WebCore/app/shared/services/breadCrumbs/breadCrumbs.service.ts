@@ -241,10 +241,10 @@ export class BreadCrumbsService {
 
         //Admin DownTimeReason Page
         this.adminDownTimeReasonPage();
-        // // Admin DownTimeReason Add Page
-        // this.adminDownTimeReasonAddPage();
-        // // Admin DownTimeReason Details Page
-        // this.adminDownTimeReasonDetailsPage();
+        // Admin DownTimeReason Add Page
+        this.adminDownTimeReasonAddPage();
+        // Admin DownTimeReason Details Page
+        this.adminDownTimeReasonDetailsPage();
 
         //Admin TestActivity Page
         this.adminTestActivityPage();
@@ -1832,7 +1832,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'DownTimeReasonHomePage', items: menuItems };
@@ -1840,7 +1839,45 @@ export class BreadCrumbsService {
     }
 
     private adminDownTimeReasonPageBCItems() {
-        let menuItem = { label: 'DownTimeReason', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Down Time Reason', routerLink: ['/admin/vehicle/downTimeReason'] };
+        return menuItem;
+    }
+
+    private adminDownTimeReasonAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminDownTimeReasonPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'DownTimeReasonAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminDownTimeReasonAddPageBCItems() {
+        let menuItem = { label: 'Add DownTimeReason', routerLink: ['/admin/vehicle/downTimeReason'] };
+        return menuItem;
+    }
+
+    private adminDownTimeReasonDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminDownTimeReasonPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'DownTimeReasonDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminDownTimeReasonDetailsPageBCItems() {
+        let menuItem = { label: 'DownTimeReason Details', routerLink:['/admin/vehicle/downTimeReason'] };
+
         return menuItem;
     }
 

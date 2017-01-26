@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from "./details.component";
 import { DownTimeReasonService} from '../../../../../shared/services/downTimeReason.service';
-
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { EditorModule, SharedModule, BreadcrumbModule, DataTableModule, ButtonModule, InputTextareaModule, ToggleButtonModule,InputTextModule,GrowlModule, PanelModule, DropdownModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
@@ -11,7 +11,7 @@ import detailsRoutes from "./details.routes";
 @NgModule({
     imports: [EditorModule, SharedModule, BreadcrumbModule, CommonModule, FormsModule, DataTableModule,ToggleButtonModule, InputTextareaModule,GrowlModule, InputTextModule, PanelModule, 
         ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
-    providers: [DownTimeReasonService],
+    providers: [DownTimeReasonService, BreadCrumbsService],
     declarations: [DetailsComponent],
     exports: [DetailsComponent]
 })
