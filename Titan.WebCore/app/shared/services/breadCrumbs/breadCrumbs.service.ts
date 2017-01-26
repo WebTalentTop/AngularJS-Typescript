@@ -255,10 +255,10 @@ export class BreadCrumbsService {
 
         //Admin Priority Page
         this.adminPriorityPage();
-        // // Admin Priority Add Page
-        // this.adminPriorityAddPage();
-        // // Admin Priority Details Page
-        // this.adminPriorityDetailsPage();
+        // Admin Priority Add Page
+        this.adminPriorityAddPage();
+        // Admin Priority Details Page
+        this.adminPriorityDetailsPage();
 
         //Admin Judgement Page
         this.adminJudgementPage();
@@ -1943,7 +1943,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'PriorityHomePage', items: menuItems };
@@ -1951,7 +1950,45 @@ export class BreadCrumbsService {
     }
 
     private adminPriorityPageBCItems() {
-        let menuItem = { label: 'Priority', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Priority', routerLink:['/admin/vehicle/priority'] };
+        return menuItem;
+    }
+
+     private adminPriorityAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPriorityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminPriorityAddPageBCItems() {
+        let menuItem = { label: 'Add Priority', routerLink: ['/admin/vehicle/priority'] };
+        return menuItem;
+    }
+
+    private adminPriorityDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPriorityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPriorityDetailsPageBCItems() {
+        let menuItem = { label: 'Priority Details', routerLink:['/admin/vehicle/priority'] };
+
         return menuItem;
     }
 
