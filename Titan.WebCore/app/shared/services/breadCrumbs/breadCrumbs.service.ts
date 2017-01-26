@@ -234,10 +234,10 @@ export class BreadCrumbsService {
 
         //Admin TestRole Page
         this.adminTestRolePage();
-        // // Admin TestRole Add Page
-        // this.adminTestRoleAddPage();
-        // // Admin TestRole Details Page
-        // this.adminTestRoleDetailsPage();
+        // Admin TestRole Add Page
+        this.adminTestRoleAddPage();
+        // Admin TestRole Details Page
+        this.adminTestRoleDetailsPage();
 
         //Admin DownTimeReason Page
         this.adminDownTimeReasonPage();
@@ -1740,7 +1740,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestRoleHomePage', items: menuItems };
@@ -1748,7 +1747,45 @@ export class BreadCrumbsService {
     }
 
     private adminTestRolePageBCItems() {
-        let menuItem = { label: 'Test Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Role', routerLink:['/admin/vehicle/testRole'] };
+        return menuItem;
+    }
+
+    private adminTestRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestRoleAddPageBCItems() {
+        let menuItem = { label: 'Add TestRole', routerLink: ['/admin/vehicle/testRole'] };
+        return menuItem;
+    }
+
+    private adminTestRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestRoleDetailsPageBCItems() {
+        let menuItem = { label: 'TestRole Details', routerLink:['/admin/vehicle/testRole'] };
+
         return menuItem;
     }
 

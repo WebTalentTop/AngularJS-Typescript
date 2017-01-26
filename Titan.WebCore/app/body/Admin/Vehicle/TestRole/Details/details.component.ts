@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TestRoleService } from '../../../../../shared/services/testRole.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'testRole-detail',
@@ -31,23 +32,24 @@ export class DetailsComponent {
         userModifiedById: '',
         createdOn: '',
         modifiedOn: ''
-
     };
 
 
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
     public TestRoleId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: TestRoleService
     )
     { }
-
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
@@ -56,11 +58,25 @@ export class DetailsComponent {
             this.TestRoleId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testRoleDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestRoleDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("testRoleDetailsBreadCrumb ---------", testRoleDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = testRoleDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
             this.service.getById(this.TestRoleId).subscribe(TestRoleDetails => {
                 this.TestRoleDetails = TestRoleDetails.result;
               
                 console.log(this.TestRoleDetails);
-            });
         });
     }
 
