@@ -31,6 +31,8 @@ import {BreadCrumbsService} from '../../../shared/services/breadCrumbs/breadCrum
 import {Observable} from 'rxjs/Observable';
 import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelectItem";
 import {EntityEventService} from "../../../shared/services/entityEvent.service";
+import {IFormSchemaCategoryCalibrationForms} from "../../../shared/services/definitions/formDefinitions/IFormSchemaCategoryCalibrationForms";
+import {IEquipmentTypeFormMap} from "../../../shared/services/definitions/EquipmentType/IEquipmentTypeFormMap";
 
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
@@ -92,6 +94,7 @@ export class DetailsComponent implements OnInit {
     };
 
     uploadedFiles: any[] = [];
+    calibrationFormsList: IFormSchemaCategoryCalibrationForms[] = [];
     calibrationFormItems: ITitanSelectItem[] = [];
     calibrationSubTypeFormItems: ITitanSelectItem[] = [];
     selectedFormItem: any;
@@ -237,27 +240,21 @@ export class DetailsComponent implements OnInit {
     }
 
     getEquiptmentForms(entityIdentifierId) {
-        this.entityEventService.getFindByEntityIdentifierId(entityIdentifierId)
+        this.formSchemaCategoryService.getCalibrationFormsByEntityIdentifierId(entityIdentifierId)
             .subscribe(res => {
-                this.ls.logConsole("FormSchemaService for forms -----", res);
+                this.ls.logConsole("FormSchemaCategory By EntityIdentifierId List", res);
                 this.calibrationFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
                 this.calibrationSubTypeFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
-                res.result.map(item => {
-                    this.calibrationFormItems.push({label:item.name, value:item.id, entityIdentifierId:item.entityIdentifierId});
-                    this.calibrationSubTypeFormItems.push({label:item.name, value:item.id, entityIdentifierId:item.entityIdentifierId});
-                });
+
+                if (res.isSuccess) {
+                    this.calibrationFormsList = res.result;
+                    res.result.map(item => {
+                        let newItem = {label:item.name, value: item.id, entityIdentifierId: item.entityIdentifierId};
+                        this.calibrationFormItems.push(newItem);
+                        this.calibrationSubTypeFormItems.push(newItem);
+                    });
+                }
             });
-        /*this.formSchemaCategoryService
-            .getByEntityIdentifierId(entityIdentifierId)
-            .subscribe(res => {
-                this.ls.logConsole("FormSchemaService for forms -----", res);
-                this.calibrationFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
-                this.calibrationSubTypeFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
-                res.result.map(item => {
-                    this.calibrationFormItems.push({label:item.name, value:item.id, entityIdentifierId:item.entityIdentifierId});
-                    this.calibrationSubTypeFormItems.push({label:item.name, value:item.id, entityIdentifierId:item.entityIdentifierId});
-                });
-            });*/
     }
 
     onEdit() {
@@ -269,33 +266,33 @@ export class DetailsComponent implements OnInit {
             description: this.model.description,
             name: this.model.name,
             frequency: this.selectedMaintenanceFrequency
-            //createdOn: '',
-            //modifiedOn: '',
-            //userCreatedById: '',
-            //userInChargedId: '',
-            //userModifiedById: ''
         };
-
         this.dataService.postUpdate(modelbody)
             .subscribe(res => {
                 if (res.isSuccess) {
+                    this.ls.logConsole("ModelBody ------", res);
+
+                    if (this.selectedFormItem) {
+                        let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
+                            .filter(filter => filter.id === this.selectedFormItem)[0];
+                        let calibrationFormMap: IEquipmentTypeFormMap = {
+                            equipmentTypeId: this.model.id,
+                            formSchemaCategoryId: selectedCalibrationFormInfo.id,
+                            formSchemaId: selectedCalibrationFormInfo.formSchemaId,
+                            entityEventId: selectedCalibrationFormInfo.entityEventId,
+                            entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
+                            isDeleted: false
+                        };
+                        this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
+                            .subscribe(resFormMap => {
+                                this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
+                            });
+                    }
                     this.msgs = [];
                     this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
                 }
             });
-
-
-
-      
-
     }
-            //frequencyInit() {
-    //    let options = {
-    //        initial: this.selectedMaintenanceFrequency,
-    //        onChange: function() {
-    //            this.selectedMaintenanceFrequency = $(this).cron("value");
-    //        }
-    //    };
 
     showHideCronPicker() {
         console.log("--inside cronpicker show hide");
@@ -355,13 +352,6 @@ export class DetailsComponent implements OnInit {
             this.isMaintenaceFrequencySelected = false;
             this.selectedMaintenanceFrequency = "0 0 1 1 *";
         }
-
-       
-       
-       
-        //}
-
-
     }
 
     showDialogToAdd() {
@@ -371,16 +361,13 @@ export class DetailsComponent implements OnInit {
         this.displayDialog = true;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
 
-
         this.onCronInit(this.EquipmentSubType.frequency);
-
     }
 
     showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
         this.CalibrationForm = new PrimeCalibrationForm('', '', '', '');
-        //this.IsSubType= false;
     }
 
     ok() {
@@ -411,11 +398,31 @@ export class DetailsComponent implements OnInit {
             this.EquipmentsubTypes.push(this.EquipmentSubType);
             this.dataService.postAdd(this.EquipmentSubType).subscribe(res => {
                 if (res.isSuccess) {
+                    if (this.selectedSubTypeFormItem) {
+                        let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
+                            .filter(filter => filter.id === this.selectedSubTypeFormItem)[0];
+                        let calibrationFormMap: IEquipmentTypeFormMap = {
+                            equipmentTypeId: this.model.id,
+                            equipmentSubTypeId: res.result.id,
+                            formSchemaCategoryId: selectedCalibrationFormInfo.id,
+                            formSchemaId: selectedCalibrationFormInfo.formSchemaId,
+                            entityEventId: selectedCalibrationFormInfo.entityEventId,
+                            entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
+                            isDeleted: false
+                        };
+                        this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
+                            .subscribe(resFormMap => {
+                                this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
+                            });
+
                     this.dataService.getSubTypesById(this.model.id)
                         .subscribe(result => {
                             this.EquipmentsubTypes = result.$values;
+                            this.EquipmentsubTypes[this.EquipmentsubTypes.length-1].calibrationform = selectedCalibrationFormInfo.name;
 
                         });
+                    }
+                    this.selectedSubTypeFormItem ={};
                     this.msgs = [];
                     this.msgs.push({severity: 'success', summary: 'Added', detail: ''});
 
@@ -540,6 +547,11 @@ export class DetailsComponent implements OnInit {
 
     findSelectedCarIndex(): number {
         return this.EquipmentsubTypes.indexOf(this.selectedsubType);
+    }
+
+    cancelDialog() {
+        this.displayDialog = false;
+        this.selectedSubTypeFormItem = {};
     }
 }
 

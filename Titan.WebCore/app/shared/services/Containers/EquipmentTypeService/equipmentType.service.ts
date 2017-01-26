@@ -70,6 +70,13 @@ export class EquipmentTypeService {
          .map(this.getJson);
     }
 
+    postSaveCalibrationFormsMap(calibrationFormMapData): Observable<any> {
+        return this.http.post(`${EquipmentTypeApiUrl.postSaveCalibrationFormsMapUrl}`,
+            calibrationFormMapData,
+            {headers: this.headers})
+            .map(this.getJson);
+    }
+
     getById(id): Observable<any> {
         return this.http.get(`${EquipmentTypeApiUrl.getByIdUrl}/${id}`, { headers: this.headers })
             .map(this.getJson)

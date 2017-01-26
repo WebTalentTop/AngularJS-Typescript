@@ -81,7 +81,12 @@ export class FormSchemaCategoryService {
             .map(this.getJson);
     }
 
-    GetByEntitySubTypeId(id): Observable<any> {
+    getCalibrationFormsByEntityIdentifierId(id): Observable<any> {
+        return this.http.get(`${FormSchemaCategoryApiUrl.getCalibrationFormsByEntityIdentifierIdUrl}/${id}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
+    getByEntitySubTypeId(id): Observable<any> {
         return this.http.get(`${FormSchemaCategoryApiUrl.getByEntitySubTypeId}${id}`, {headers: this.headers})
             .map(this.getJson);
     }
