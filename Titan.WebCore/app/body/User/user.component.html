@@ -7,7 +7,7 @@
           <header class="with-controls">
               <p class="ui-panel-title">Users</p>
               <p class="controls">
-                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Assign User"></button>
+                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" name="add" icon="ui-icon-add" label="Assign User"></button>
               </p>
           </header>
           <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
