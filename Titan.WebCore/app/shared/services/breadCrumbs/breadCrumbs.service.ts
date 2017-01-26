@@ -248,10 +248,10 @@ export class BreadCrumbsService {
 
         //Admin TestActivity Page
         this.adminTestActivityPage();
-        // // Admin TestActivity Add Page
-        // this.adminTestActivityAddPage();
-        // // Admin TestActivity Details Page
-        // this.adminTestActivityDetailsPage();
+        // Admin TestActivity Add Page
+        this.adminTestActivityAddPage();
+        // Admin TestActivity Details Page
+        this.adminTestActivityDetailsPage();
 
         //Admin Priority Page
         this.adminPriorityPage();
@@ -1887,7 +1887,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestActivityHomePage', items: menuItems };
@@ -1895,7 +1894,46 @@ export class BreadCrumbsService {
     }
 
     private adminTestActivityPageBCItems() {
-        let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Activity',routerLink:['/admin/vehicle/testActivity'] };
+
+        return menuItem;
+    }
+
+    private adminTestActivityAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestActivityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestActivityAddPageBCItems() {
+        let menuItem = { label: 'Add TestActivity', routerLink: ['/admin/vehicle/testActivity'] };
+        return menuItem;
+    }
+
+    private adminTestActivityDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestActivityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestActivityDetailsPageBCItems() {
+        let menuItem = { label: 'TestActivity Details', routerLink:['/admin/vehicle/testActivity'] };
+
         return menuItem;
     }
 

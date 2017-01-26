@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TestActivityService } from '../../../../../shared/services/testActivity.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'testActivity-detail',
@@ -18,7 +19,7 @@ export class DetailsComponent {
     entityType: string = "TestActivity";
     entityId: string = this.id;
     filepath: string = "TestActivity";
-    testActivity = { name: '' };   
+    testActivity = { name: '' };
     formConfiguration: any;
     formObject: any;
 
@@ -34,20 +35,21 @@ export class DetailsComponent {
 
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
     public TestActivityId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: TestActivityService
     )
     { }
-
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
@@ -56,11 +58,25 @@ export class DetailsComponent {
             this.TestActivityId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
-            this.service.getById(this.TestActivityId).subscribe(TestActivityDetails => {
-                this.TestActivityDetails = TestActivityDetails.result;
-              
-                console.log(this.TestActivityDetails);
-            });
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testActivityDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TestActivityDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("testActivityDetailsBreadCrumb ---------", testActivityDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = testActivityDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
+        this.service.getById(this.TestActivityId).subscribe(TestActivityDetails => {
+            this.TestActivityDetails = TestActivityDetails.result;
+
+            console.log(this.TestActivityDetails);
         });
     }
 
@@ -69,7 +85,7 @@ export class DetailsComponent {
 
         this.service.postUpdate(this.TestActivityDetails).subscribe(TestActivityDetails => {
         });
-         this.msgs = [];
-         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }
