@@ -262,10 +262,10 @@ export class BreadCrumbsService {
 
         //Admin Judgement Page
         this.adminJudgementPage();
-        // // Admin Judgement Add Page
-        // this.adminJudgementAddPage();
-        // // Admin Judgement Details Page
-        // this.adminJudgementDetailsPage();
+        // Admin Judgement Add Page
+        this.adminJudgementAddPage();
+        // Admin Judgement Details Page
+        this.adminJudgementDetailsPage();
 
         //Admin TestStage Page
         this.adminTestStagePage();
@@ -1998,7 +1998,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'JudgementHomePage', items: menuItems };
@@ -2006,7 +2005,45 @@ export class BreadCrumbsService {
     }
 
     private adminJudgementPageBCItems() {
-        let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Judgement', routerLink: ['/admin/vehicle/judgement'] };
+        return menuItem;
+    }
+
+    private adminJudgementAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminJudgementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminJudgementAddPageBCItems() {
+        let menuItem = { label: 'Add Judgement', routerLink: ['/admin/vehicle/judgement'] };
+        return menuItem;
+    }
+
+    private adminJudgementDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminJudgementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminJudgementDetailsPageBCItems() {
+        let menuItem = { label: 'Judgement Details', routerLink:['/admin/vehicle/judgement'] };
+
         return menuItem;
     }
 
