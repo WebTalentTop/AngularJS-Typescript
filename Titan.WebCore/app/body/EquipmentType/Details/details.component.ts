@@ -398,8 +398,16 @@ export class DetailsComponent implements OnInit {
             this.EquipmentsubTypes.push(this.EquipmentSubType);
             this.dataService.postAdd(this.EquipmentSubType).subscribe(res => {
                 if (res.isSuccess) {
+                    let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = {
+                        id:'',
+                    name:'',
+                    entityIdentifierId:'',
+                    formSchemaId:'',
+                    entityEventId:'',
+                    isDeleted:false
+                    };
                     if (this.selectedSubTypeFormItem) {
-                        let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
+                        selectedCalibrationFormInfo = this.calibrationFormsList
                             .filter(filter => filter.id === this.selectedSubTypeFormItem)[0];
                         let calibrationFormMap: IEquipmentTypeFormMap = {
                             equipmentTypeId: this.model.id,
@@ -414,14 +422,13 @@ export class DetailsComponent implements OnInit {
                             .subscribe(resFormMap => {
                                 this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
                             });
+                    }
 
                     this.dataService.getSubTypesById(this.model.id)
                         .subscribe(result => {
                             this.EquipmentsubTypes = result.$values;
-                            this.EquipmentsubTypes[this.EquipmentsubTypes.length-1].calibrationform = selectedCalibrationFormInfo.name;
 
                         });
-                    }
                     this.selectedSubTypeFormItem ={};
                     this.msgs = [];
                     this.msgs.push({severity: 'success', summary: 'Added', detail: ''});
