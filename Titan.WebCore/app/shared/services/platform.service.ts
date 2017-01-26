@@ -37,6 +37,13 @@ export class PlatformService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    getAllPlatforms(): Observable<any> {
+        return this.http.get(`${PlatformApiUrl.getAllPlatforms}`, { headers: this.headers })
+            .map(this.getJson)
+            ;
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
     postGridDataFilter(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${PlatformApiUrl.gridApiUrl}`, filterBody, { headers: this.headers })
