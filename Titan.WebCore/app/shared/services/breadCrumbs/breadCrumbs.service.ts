@@ -269,10 +269,10 @@ export class BreadCrumbsService {
 
         //Admin TestStage Page
         this.adminTestStagePage();
-        // // Admin TestStage Add Page
-        // this.adminTestStageAddPage();
-        // // Admin TestStage Details Page
-        // this.adminTestStageDetailsPage();
+        // Admin TestStage Add Page
+        this.adminTestStageAddPage();
+        // Admin TestStage Details Page
+        this.adminTestStageDetailsPage();
 
         //Admin RequirementItemType Page
         this.adminRequirementItemTypePage();
@@ -2053,7 +2053,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestStageHomePage', items: menuItems };
@@ -2061,7 +2060,45 @@ export class BreadCrumbsService {
     }
 
     private adminTestStagePageBCItems() {
-        let menuItem = { label: 'TestStage', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Stage', routerLink: ['/admin/vehicle/testStage'] };
+        return menuItem;
+    }
+
+    private adminTestStageAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestStagePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestStageAddPageBCItems() {
+        let menuItem = { label: 'Add TestStage', routerLink: ['/admin/vehicle/testStage'] };
+        return menuItem;
+    }
+
+    private adminTestStageDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestStagePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStageDetailsPageBCItems() {
+        let menuItem = { label: 'TestStage Details', routerLink:['/admin/vehicle/testStage'] };
+
         return menuItem;
     }
 
