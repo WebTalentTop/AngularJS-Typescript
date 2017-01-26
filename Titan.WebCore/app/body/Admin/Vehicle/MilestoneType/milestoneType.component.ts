@@ -18,12 +18,19 @@ export class MilestoneTypeComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private breadCrumbsService: BreadCrumbsService, private service: MilestoneTypeService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
-
-    }
     
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
+    
+    constructor(
+        private breadCrumbsService: BreadCrumbsService, 
+        private service: MilestoneTypeService, 
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private logger: LoggerService) {
+
+    }
+    
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {

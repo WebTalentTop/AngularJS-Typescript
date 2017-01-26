@@ -1,8 +1,16 @@
 <!--<h1>Torque Book</h1>-->
 <div class="ui-g-12" *ngIf="BuildLevels">
     <div class="ui-grid-row">
-        <button type="button" pButton label="Add Torque Book" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueBook()"></button>
-        <button type="button" pButton label="Add Torque Sheet" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueSheet()" ></button>
+    <p-panel>
+
+    <header class="with-controls">
+        <p class="ui-panel-title">Torque Book</p>
+        <p class="controls">
+            <button type="button" pButton label="Create Torque Book" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueBook()"></button>
+            <button type="button" pButton label="Create Torque Sheet" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueSheet()" ></button>
+        </p>
+    </header>
+        
         <!--<div class="ui-grid-col-2"></div>-->
         <div class="ui-grid-row">
             <p-dataTable [value]="BuildLevels">
@@ -50,13 +58,14 @@
             <!--[disabled]="!projectForm.valid"-->
         </div>
         <!--<div class="ui-grid-col-4"></div>-->
+        </p-panel>
     </div>
 </div>
 
-<p-dialog header="Add Torque Book" [(visible)]="displayAddTorqueBook" modal="modal" showEffect="fade" width="500">
+<p-dialog header="Create Torque Book" [(visible)]="displayAddTorqueBook" modal="modal" showEffect="fade" width="500">
     <form #torqueBookForm>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><b for="name">Build Level *:</b></div>
+            <div class="ui-grid-col-4"><b for="name">Build Level</b></div>
             <div class="ui-grid-col-8">
                 <p-dropdown [options]="justBuildLevels" [(ngModel)]="buildLevelIdForAddingTorqueBook"
                             name="buildLevels" required #justBuildLevelsRef
@@ -66,9 +75,9 @@
             <div class="ui-grid-col-4" *ngIf="justBuildLevelsRef.errors?.required">
                 Build Level field is required
             </div>
-        </div>
+        </div><br />
         <div class="ui-grid-row">
-              <div class="ui-grid-col-4"><b for="name">Torque Book Name *:</b></div>
+              <div class="ui-grid-col-4"><b for="name">Torque Book Name</b></div>
               <div class="ui-grid-col-8">
                 <input type="text" pInputText
                      [(ngModel)]="newTorqueBookName"

@@ -37,8 +37,10 @@ export class DetailsComponent {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
     public MilestoneCategoryId: string;
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
@@ -47,8 +49,6 @@ export class DetailsComponent {
         private service: MilestoneCategoryService
     )
     { }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {

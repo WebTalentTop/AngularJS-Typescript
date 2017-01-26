@@ -36,8 +36,8 @@ namespace Titan.WebCore.Controllers
         {
             using (var client = new HttpClient())
             {
-                var name = WindowsIdentity.GetCurrent();
-                var split = name.Name.Split('\\');
+                var name = User.Identity.Name;
+                var split = name.Split('\\');
                 var username = split[1];
                 var response = await client.GetStringAsync(_appSettings.ApiUrl + username);
                 return response;

@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DownTimeReasonService } from '../../../../../shared/services/downTimeReason.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'downTimeReason-detail',
@@ -34,15 +35,16 @@ export class DetailsComponent {
         modifiedOn: ''
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public DownTimeReasonDetails: any;
     public DownTimeReasonId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: DownTimeReasonService    )
@@ -55,12 +57,26 @@ export class DetailsComponent {
 
             this.DownTimeReasonId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
+            
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let downTimeReasonDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'DownTimeReasonDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("downTimeReasonDetailsBreadCrumb ---------", downTimeReasonDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = downTimeReasonDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
 
             this.service.getById(this.DownTimeReasonId).subscribe(DownTimeReasonDetails => {
                 this.DownTimeReasonDetails = DownTimeReasonDetails.result;
                 this.DownTimeReasonDetails.id = this.DownTimeReasonId;
                 console.log(this.DownTimeReasonDetails);
-            });
         });
     }
 

@@ -33,13 +33,15 @@ export class DetailsComponent {
         modifiedOn: ''
 
     };
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
+
     //public MarketDetails: any;
     public MarketId: string;
-
+    
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
@@ -47,8 +49,7 @@ export class DetailsComponent {
         private service: MarketService
     )
     { }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
+
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));

@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProjectStatusService } from '../../../../../shared/services/projectStatus.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'projectStatus-detail',
@@ -18,7 +19,7 @@ export class DetailsComponent {
     entityType: string = "ProjectStatus";
     entityId: string = this.id;
     filepath: string = "ProjectStatus";
-    projectStatus = { name: '' };   
+    projectStatus = { name: '' };
     formConfiguration: any;
     formObject: any;
 
@@ -38,17 +39,18 @@ export class DetailsComponent {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public ProjectStatusDetails: any;
     public ProjectStatusId: string;
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: ProjectStatusService
     )
     { }
-
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
@@ -57,11 +59,25 @@ export class DetailsComponent {
             this.ProjectStatusId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
-            this.service.getById(this.ProjectStatusId).subscribe(ProjectStatusDetails => {
-                this.ProjectStatusDetails = ProjectStatusDetails.result;
-              
-                console.log(this.ProjectStatusDetails);
-            });
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let projectStatusDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'ProjectStatusDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("projectStatusDetailsBreadCrumb ---------", projectStatusDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = projectStatusDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
+        this.service.getById(this.ProjectStatusId).subscribe(ProjectStatusDetails => {
+            this.ProjectStatusDetails = ProjectStatusDetails.result;
+
+            console.log(this.ProjectStatusDetails);
         });
     }
 
@@ -69,9 +85,9 @@ export class DetailsComponent {
     onSubmit(formRef) {
 
         this.service.postUpdate(this.ProjectStatusDetails).subscribe(ProjectStatusDetails => {
-           // console.log(ProjectStatusDetails);
+            // console.log(ProjectStatusDetails);
         });
-         this.msgs = [];
-         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

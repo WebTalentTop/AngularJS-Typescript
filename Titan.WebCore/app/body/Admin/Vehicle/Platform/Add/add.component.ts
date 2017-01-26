@@ -16,11 +16,15 @@ export class AddComponent {
     description:string;
     added: any;
     
-    constructor(private breadCrumbsService: BreadCrumbsService,private service: PlatformService, private router: Router, private route: ActivatedRoute) {
-
-    }
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: PlatformService, 
+        private router: Router, 
+        private route: ActivatedRoute) {
+
+    }
     ngOnInit() {
             this.route.queryParams.subscribe(params => {
 

@@ -1,4 +1,3 @@
-
 ﻿import { titanApiUrl } from '../titanApiUrl'
 import { GridApiUrl } from '../gridApiUrls';
 
@@ -15,8 +14,7 @@ export class TestReqestApiUrl {
     public static getProcedures: string = titanApiUrl + 'procedure/GetAll';
     public static GetAllTestRequestPartsList: string = titanApiUrl + 'partsList';
     public static postAddPartsList: string = titanApiUrl + 'partsList';
-
-    public static getTestTemplateProceduresByTestRequestId: string = titanApiUrl + 'testrequest/GetAllTemplateProcedureListByTestRequestId';
+    public static getTestTemplateProceduresByTestRequestId: string = titanApiUrl + 'testRequest/GetAllTemplateProcedureListByTestRequestId';
  
 
     

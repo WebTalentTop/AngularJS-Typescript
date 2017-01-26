@@ -18,6 +18,10 @@ export class ModelYearComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+    
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: ModelYearService, 
@@ -28,8 +32,6 @@ export class ModelYearComponent {
 
     }
     
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
     ngOnInit() {
     
         this.route.queryParams.subscribe(params => {

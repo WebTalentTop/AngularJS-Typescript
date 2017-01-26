@@ -895,7 +895,7 @@ export class DetailsComponent implements AfterViewInit {
 
     }
     navigateDetails(id: string) {
-        this.router.navigate(['testrequest/sensor/details/', id]);
+        this.router.navigate(['testRequest/sensor/details/', id]);
     }
 
     onProcedureUpdate() {

@@ -11,7 +11,7 @@ import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumb
 })
 export class LookupComponent {
     title = "Lookups";
-    private items :MenuItem[];
+    private items :MenuItem[] = [];
     constructor(
         private breadCrumbService: BreadCrumbsService,
         private service: LookupService) 
@@ -23,8 +23,6 @@ export class LookupComponent {
     }
 
     ngOnInit() {
-       this.items=[];
-       this.items.push({label:'Home'});
     }
 
 }
