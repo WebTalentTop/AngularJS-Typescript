@@ -325,10 +325,10 @@ export class BreadCrumbsService {
 
         //Admin TestVerificationMethod Page
         this.adminTestVerificationMethodPage();
-        // // Admin TestVerificationMethod Add Page
-        // this.adminTestVerificationMethodAddPage();
-        // // Admin TestVerificationMethod Details Page
-        // this.adminTestVerificationMethodDetailsPage();
+        // Admin TestVerificationMethod Add Page
+        this.adminTestVerificationMethodAddPage();
+        // Admin TestVerificationMethod Details Page
+        this.adminTestVerificationMethodDetailsPage();
 
         //Admin VehicleType Page
         this.adminVehicleTypePage();
@@ -2195,15 +2195,52 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestVerificationMethodHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminTestVerificationMethodBCItems() {
-        let menuItem = { label: 'TestVerificationMethod', routerLink: ['/admin/'] };
+    private adminTestVerificationMethodPageBCItems() {
+        let menuItem = { label: 'Test Verification Method', routerLink: ['/admin/vehicle/testVerificationMethod'] };
+        return menuItem;
+    }
+
+private adminTestVerificationMethodAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestVerificationMethodPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestVerificationMethodAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestVerificationMethodAddPageBCItems() {
+        let menuItem = { label: 'Add TestVerificationMethod', routerLink: ['/admin/vehicle/testVerificationMethod'] };
+        return menuItem;
+    }
+
+    private adminTestVerificationMethodDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestVerificationMethodPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestVerificationMethodDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestVerificationMethodDetailsPageBCItems() {
+        let menuItem = { label: 'TestVerificationMethod Details', routerLink: ['/admin/vehicle/testVerificationMethod'] };
+
         return menuItem;
     }
 

@@ -51,8 +51,7 @@ export class DetailsComponent {
         private service: TestTypeService
     )
     { }
-
-
+    
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
