@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AccessService } from '../../../../../shared/services/access.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'access-detail',
@@ -34,19 +35,21 @@ export class DetailsComponent {
 
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
     public AccessId: string;
 
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: AccessService
     )
     { }
-
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
@@ -55,12 +58,25 @@ export class DetailsComponent {
             this.AccessId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let accessDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'AccessDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("accessDetailsBreadCrumb ---------", accessDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = accessDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
             this.service.getById(this.AccessId).subscribe(AccessDetails => {
                 this.AccessDetails = AccessDetails.result;
               
                 console.log(this.AccessDetails);
             });
-        });
     }
 
 
