@@ -7,7 +7,7 @@
         <p class="ui-panel-title">Project Team</p>
         <p class="controls">
             <button type="text" (click)="displayAssignUserRolesDialog=true" pButton
-                    class="blue-grey-btn" icon="ui-icon-person-add" label="Add User Roles&hellip;"></button>
+                    class="blue-grey-btn" icon="ui-icon-person-add" label="Add User Roles&hellip;" id="adduserRole" name="adduserRole"></button>
         </p>
     </header>
 
@@ -43,7 +43,7 @@
                   <p-autoComplete [(ngModel)]="filteredSelectedUserNames"
                                   [suggestions]="filteredUserNames"
                                   (completeMethod)="filterUserNames($event)"
-                                  name="username" [minLength]="1" placeholder="Search by Name/#"
+                                  name="username" id="username" [minLength]="1" placeholder="Search by Name/#"
                                   field="firstName" [multiple]="true">
                   </p-autoComplete>
 
@@ -60,7 +60,7 @@
               <span class="pseudo-label">Role</span>
 
               <p-dropdown [options]="projectRoles" (onChange)="onProjectRoleChange($event)" [(ngModel)]="selectedProjectRoleId"
-                          name="userRole" [autoWidth]="false"></p-dropdown>
+                          name="userRole" id="userRole" [autoWidth]="false"></p-dropdown>
 
           </div>
 
@@ -69,11 +69,11 @@
           <footer>
               <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                   <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                              [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
-                  <button type="button" pButton icon="ui-icon-close"
+                              [(ngModel)]="IsKeepOpen" binary="true" id="IsKeepOpen"></p-checkbox></div>
+                  <button type="button" pButton icon="ui-icon-close" id="userCancel" name="userCancel"
                           (click)="displayAssignUserRolesDialog=false" label="Cancel"></button>
                   <button type="button" pButton icon="ui-icon-save" (click)="onAddUserRole()"
-                          label="Add User Role"></button>
+                          label="Add User Role" id="userSave" name="userSave"></button>
               </div>
           </footer>
 </p-dialog>

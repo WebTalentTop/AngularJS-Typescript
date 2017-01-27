@@ -6,8 +6,8 @@
     <header class="with-controls">
         <p class="ui-panel-title">Torque Book</p>
         <p class="controls">
-            <button type="button" pButton label="Create Torque Book" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueBook()"></button>
-            <button type="button" pButton label="Create Torque Sheet" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueSheet()" ></button>
+            <button type="button" pButton label="Create Torque Book" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueBook()" id="create_torquebook" name="create_torquebook"></button>
+            <button type="button" pButton label="Create Torque Sheet" icon="ui-icon-add" class="blue-grey-btn" (click)="onAddTorqueSheet()" id="create_torquesheet" name="create_torquesheet"></button>
         </p>
     </header>
         
@@ -68,7 +68,7 @@
             <div class="ui-grid-col-4"><b for="name">Build Level</b></div>
             <div class="ui-grid-col-8">
                 <p-dropdown [options]="justBuildLevels" [(ngModel)]="buildLevelIdForAddingTorqueBook"
-                            name="buildLevels" required #justBuildLevelsRef
+                            name="buildLevels" id="buildLevels" required #justBuildLevelsRef
                             [style]="{'width':'100%','color':'#777'}">
                 </p-dropdown>
             </div>
@@ -81,7 +81,7 @@
               <div class="ui-grid-col-8">
                 <input type="text" pInputText
                      [(ngModel)]="newTorqueBookName"
-                     name="newTorqueBookName"
+                     name="newTorqueBookName" id="newTorqueBookName"
                      #newTorqueBookNameRef
                      placeholder="Required"
                      maxlength="255"
@@ -98,8 +98,10 @@
     <br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="onAddTorqueBookCancel()" label="Cancel"></button>
-            <button type="button" pButton icon="ui-icon-save" (click)="onAddTorqueBookConfirmation()" label="Add"></button>
+            <button type="button" pButton icon="fa-close" (click)="onAddTorqueBookCancel()" label="Cancel" 
+            id="torqueBookCancel" name="torqueBookCancel"></button>
+            <button type="button" pButton icon="ui-icon-save" (click)="onAddTorqueBookConfirmation()" label="Add"
+            id="torqueBookSave" name="torqueBookSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -112,7 +114,7 @@
             </div>
             <div class="ui-grid-col-8">
                 <p-dropdown [options]="torqueSheetNames" [(ngModel)]="newTorqueSheetNameId" [style]="{'width':'auto'}"
-                    name="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
+                    name="newTorqueSheetNameId" id="newTorqueSheetNameId" required #newTorqueSheetNameRef placeholder="Required">
                 </p-dropdown>
                 <!--<input type="text" pInputText
                        [(ngModel)]="newTorqueSheetName"
@@ -133,8 +135,10 @@
     </form>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetConfirmation()" label="Add"></button>
-            <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetCancel()" label="Cancel"></button>
+            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetConfirmation()" label="Add"
+            id="torqueSheetAdd" name="torqueSheetAdd"></button>
+            <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetCancel()" label="Cancel"
+            id="torqueSheetCancel" name="torqueSheetCancel"></button>
         </div>
     </footer>
 </p-dialog>
@@ -147,7 +151,7 @@
             Template *:
         </div>
         <div class="ui-grid-col-8">
-            <p-dropdown [options]="torquesheetTemplates" [(ngModel)]="selectedTemplate" name="selectedTemplate"
+            <p-dropdown [options]="torquesheetTemplates" [(ngModel)]="selectedTemplate" name="selectedTemplate" id="selectedTemplate"
                 (onChange)="onTemplateChange()" width="250px"></p-dropdown>
             <!--<select name="torqueSheetTemplate" [(ngModel)] ="selectedTemplate">
                 <option value="">Select Template</option>
@@ -161,8 +165,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Save"></button>
-            <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetTemplateCancel()" label="Cancel"></button>
+            <button id="templateSave" name="templateSave" type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Save"></button>
+            <button id="templateCancel" name="templateCancel" type="button" pButton icon="fa-close" (click)="onAddTorqueSheetTemplateCancel()" label="Cancel"></button>
         </div>
     </footer>
 </p-dialog>

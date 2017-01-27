@@ -11,18 +11,20 @@
             </p-fileUpload>
               <footer>
                   <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                      <button type="button" pButton icon="fa-close" id="importCancel"  (click)="displayExcelDialog=false"
+                      <button type="button" pButton icon="fa-close" id="importCancel" name="importCancel"  (click)="displayExcelDialog=false"
                               label="Cancel"></button>
-                      <button type="button" pButton icon="fa-check" id="importOk"
+                      <button type="button" pButton icon="fa-check" id="importOk" name="importOk"
                               label="OK"></button>
                   </div>
               </footer>
       </p-dialog>
         <header>
             <h1>Project</h1>
-            <button pButton type="button" icon="ui-icon-file-download" label="Download Template For Import" (click)="downloadAttachment()"></button>
-            <button pButton type="button" icon="ui-icon-file-upload" label="Import From Excel" (click)="displayExcelDialog=true"></button>
-            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Project"></button>
+            <button pButton type="button" icon="ui-icon-file-download" label="Download Template For Import" (click)="downloadAttachment()" id="download_template" name="download_template"></button>
+            <button pButton type="button" icon="ui-icon-file-upload" label="Import From Excel" 
+            (click)="displayExcelDialog=true" id="import_fromexcel" name="import_fromexcel"></button>
+            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Project"
+             id="add_newproject"  name="add_newproject"></button>
 
         </header>
         <div class="ui-grid-row">
