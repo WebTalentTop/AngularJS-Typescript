@@ -60,7 +60,7 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Role :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)"  name="titanRoles"  id="titanRoles" [autoWidth]="false"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)" [(ngModel)]="userProfile.roleId"  name="titanRoles"  id="titanRoles" [autoWidth]="false"></p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Time Zone :</p>

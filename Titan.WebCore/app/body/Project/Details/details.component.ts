@@ -20,7 +20,7 @@ export class DetailsComponent {
     public selectedModelNameId: any;
     public selectedGradeId: any;
     public selectedPlatformId: any;
-   
+    msgs: Message[] = [];
     markets: SelectItem[];
     modelYears: any;
     modelNames: any;
@@ -218,6 +218,12 @@ export class DetailsComponent {
             console.log(ProjectDetails);
             this.service.postAddMarket(this.projectId, this.selectedMarketId).subscribe(res => {
                 console.log(res);
+                if (res.isSuccess)
+                {
+                    this.msgs = [];
+                    this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+                }
+
             });
             });
     }
