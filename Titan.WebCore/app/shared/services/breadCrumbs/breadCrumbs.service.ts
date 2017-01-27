@@ -206,10 +206,10 @@ export class BreadCrumbsService {
 
         //Admin Role Page
         this.adminRolePage();
-        // // Admin Role Add Page
-        // this.adminRoleAddPage();
-        // // Admin Role Details Page
-        // this.adminRoleDetailsPage();
+        // Admin Role Add Page
+        this.adminRoleAddPage();
+        // Admin Role Details Page
+        this.adminRoleDetailsPage();
 
         //Admin MaintenanceFrequency Page
         this.adminMaintenanceFrequencyPage();
@@ -1783,7 +1783,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'RoleHomePage', items: menuItems };
@@ -1791,7 +1790,45 @@ export class BreadCrumbsService {
     }
 
     private adminRolePageBCItems() {
-        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Role', routerLink: ['/admin/vehicle/role'] };
+        return menuItem;
+    }
+
+    private adminRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminRoleAddPageBCItems() {
+        let menuItem = { label: 'Add Role', routerLink: ['/admin/vehicle/role'] };
+        return menuItem;
+    }
+
+    private adminRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRoleDetailsPageBCItems() {
+        let menuItem = { label: 'Role Details', routerLink: ['/admin/vehicle/role'] };
+
         return menuItem;
     }
 
