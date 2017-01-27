@@ -332,10 +332,10 @@ export class BreadCrumbsService {
 
         //Admin VehicleType Page
         this.adminVehicleTypePage();
-        // // Admin VehicleType Add Page
-        // this.adminVehicleTypeAddPage();
-        // // Admin VehicleType Details Page
-        // this.adminVehicleTypeDetailsPage();
+        // Admin VehicleType Add Page
+        this.adminVehicleTypeAddPage();
+        // Admin VehicleType Details Page
+        this.adminVehicleTypeDetailsPage();
 
         //Admin EngineCode Page
         this.adminEngineCodePage();
@@ -1003,6 +1003,7 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
+
 
     // Admin Platform Bread Crumbs
     private adminPlatformPage() {
@@ -2466,7 +2467,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-private adminTestVerificationMethodAddPage() {
+    private adminTestVerificationMethodAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -2510,15 +2511,52 @@ private adminTestVerificationMethodAddPage() {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'VehicleTypeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminVehicleTypeBCItems() {
-        let menuItem = { label: 'VehicleType', routerLink: ['/admin/'] };
+    private adminVehicleTypePageBCItems() {
+        let menuItem = { label: 'Vehicle Type', routerLink: ['/admin/vehicle/vehicleType'] };
+        return menuItem;
+    }
+
+     private adminVehicleTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminVehicleTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminVehicleTypeAddPageBCItems() {
+        let menuItem = { label: 'Add VehicleType', routerLink: ['/admin/vehicle/vehicleType'] };
+        return menuItem;
+    }
+
+    private adminVehicleTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminVehicleTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminVehicleTypeDetailsPageBCItems() {
+        let menuItem = { label: 'VehicleType Details', routerLink: ['/admin/vehicle/vehicleType'] };
+
         return menuItem;
     }
 
