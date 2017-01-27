@@ -37,6 +37,9 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+    
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private userservice: UserService,
@@ -44,8 +47,6 @@ export class AddComponent {
         private router: Router) {
 
     }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
 
         ngOnInit() {
             //this.userprofileservice.getCurrentUserProfile().subscribe(tenresult => {

@@ -3,13 +3,15 @@ import { TenantService } from '../../../shared/services/tenant.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule,  FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, 
+    InputTextModule, PanelModule,  FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, 
+    MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
-
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 import { SelectItem, ConfirmationService } from 'primeng/primeng';
 //import { UUID } from 'angular2-uuid'
 declare var $: JQueryStatic;
@@ -107,8 +109,11 @@ export class DetailsComponent {
 
    // msgs:Message[];
    // uploadedFiles: any[] = [];
+   breadcrumbs: MenuItem[];
+   breadcrumbsHome: MenuItem;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route:ActivatedRoute,
         private dataService: TestRequestSensorService,
         private equipmenttypeservice: EquipmentTypeService,
@@ -124,6 +129,16 @@ export class DetailsComponent {
          // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
          // this.fileData= this.fileInfo[];
+
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let tenantDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'TenantDetailsPage'
+            )[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = tenantDetailsBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
     }
    handleChange(event)
    {
