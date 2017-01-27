@@ -72,6 +72,7 @@ export class DetailsComponent {
 
             this.breadcrumbsHome = { routerLink: ['/'] };
             });
+            
             this.service.getById(this.AccessId).subscribe(AccessDetails => {
                 this.AccessDetails = AccessDetails.result;
               
