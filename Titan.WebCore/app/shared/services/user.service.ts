@@ -112,7 +112,7 @@ export class UserService {
         //.map(this.getJson);
     }
     getTimeZones(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getTimeZones}`, { headers: this.headers })
+        return this.http.get(`${UserApiUrl.getTimeZones}/${true}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);

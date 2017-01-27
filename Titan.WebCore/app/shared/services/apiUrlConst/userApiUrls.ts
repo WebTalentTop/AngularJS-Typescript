@@ -16,7 +16,7 @@ export class UserApiUrl {
     public static getAllFunctionGroups: string = titanApiUrl + 'functionGroup/GetAll';
     public static GetUserFunctionGroupsByUser: string = titanApiUrl + 'functionGroup/GetUserFunctionGroupsByUser';
     public static getTenants: string = titanApiUrl + 'tenant';
-   public static getTimeZones: string = titanApiUrl + 'titanTimeZone/GetAll';
+    public static getTimeZones: string = titanApiUrl + 'TimeZoneTb/GetSupportedTimeZones';
    public static getTitanRoles: string = titanApiUrl + 'titanRole/GetAll';
    public static getDepartments: string = titanApiUrl + 'department/GetAllDepartments';
    public static getUsers: string = titanApiUrl + 'titanUser/GetAll';
