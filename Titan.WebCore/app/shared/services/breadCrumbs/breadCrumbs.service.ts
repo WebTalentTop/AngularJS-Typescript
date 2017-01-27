@@ -283,10 +283,10 @@ export class BreadCrumbsService {
 
         //Admin SensorType Page
         this.adminSensorTypePage();
-        // // Admin SensorType Add Page
-        // this.adminSensorTypeAddPage();
-        // // Admin SensorType Details Page
-        // this.adminSensorTypeDetailsPage();
+        // Admin SensorType Add Page
+        this.adminSensorTypeAddPage();
+        // Admin SensorType Details Page
+        this.adminSensorTypeDetailsPage();
 
         //Admin StepFrequency Page
         this.adminStepFrequencyPage();
@@ -2170,10 +2170,49 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminSensorTypeBCItems() {
-        let menuItem = { label: 'SensorType', routerLink: ['/admin/'] };
+    private adminSensorTypePageBCItems() {
+        let menuItem = { label: 'Sensor Type', routerLink: ['/admin/vehicle/sensorType'] };
         return menuItem;
     }
+
+    private adminSensorTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminSensorTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminSensorTypeAddPageBCItems() {
+        let menuItem = { label: 'Add SensorType', routerLink: ['/admin/vehicle/sensorType'] };
+        return menuItem;
+    }
+
+    private adminSensorTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminSensorTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminSensorTypeDetailsPageBCItems() {
+        let menuItem = { label: 'SensorType Details', routerLink: ['/admin/vehicle/sensorType'] };
+
+        return menuItem;
+    }
+
 
     // Admin StepFrequency Bread Crumbs
     private adminStepFrequencyPage() {
