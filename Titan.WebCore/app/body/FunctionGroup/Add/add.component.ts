@@ -22,7 +22,7 @@ export class AddComponent {
     phoneNumber:string;
     userName: string;
     selectedDepartmentId: any;
-    currentUser: IUserProfile
+    currentUser: IUserProfile;
     tenantId: any;
     departments: any;
     displayName:string;
