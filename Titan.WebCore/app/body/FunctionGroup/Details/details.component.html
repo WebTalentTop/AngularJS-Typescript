@@ -22,7 +22,7 @@
 
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="name" [(ngModel)]="functionGroup.name"
+                                    <input type="text" style="width:100%" pInputText name="name" id="name" [(ngModel)]="functionGroup.name"
                                            minlength="3" class="form-control" required row="20">
                                     <label>Name *</label>
                                 </div>
@@ -37,8 +37,8 @@
 
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/tenant" class="blue-grey-btn"></button>
-                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save"></button>
+                            <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/tenant" class="blue-grey-btn" id="cancel" name="cancel"></button>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save" id="save" name="save"></button>
                         </footer><br />
 
                     </p-panel>
@@ -83,8 +83,8 @@
                               <p-checkbox name="groupname" value="IsKeepOpen" id="tenantIsKeepOpen" label="Keep Open"
                                           [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
                           </div>
-                          <button type="button" pButton icon="ui-icon-close" id="tenantCancel" (click)="displayTenantDialog=false" label="Cancel"></button>
-                          <button type="button" pButton icon="ui-icon-save" id="tenantAdd" (click)="onAddTenant()" label="Assign Tenant"></button>
+                          <button type="button" pButton icon="ui-icon-close" id="tenantCancel" name="tenantCancel" (click)="displayTenantDialog=false" label="Cancel"></button>
+                          <button type="button" pButton icon="ui-icon-save" id="tenantAdd" name="tenantAdd" (click)="onAddTenant()" label="Assign Tenant"></button>
                       </div>
                   </footer>
 
@@ -97,7 +97,7 @@
 
                   <header class="with-controls">
                       <p class="ui-panel-title"> Tenants </p>
-                      <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant" id="assignTenant"></button></p>
+                      <p class="controls"><button type="text" (click)="displayTenantDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Assign Tenant" id="assignTenant"  name="assignTenant"></button></p>
                   </header>
 
                   <div class="ui-grid-row">
@@ -136,14 +136,14 @@
 
                         <div class="ui-g-4"><b>Users :</b></div>
                         <div class="ui-g-8">
-                            <p-dropdown [options]="users" [style]="{'width':'100%'}" (onChange)="onUserChange($event)" name="users" [autoWidth]="false"></p-dropdown>
+                            <p-dropdown [options]="users" [style]="{'width':'100%'}" (onChange)="onUserChange($event)" name="users"  id="users" [autoWidth]="false"></p-dropdown>
                         </div>
                     </div>
                     <br /><br />
                     <footer>
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                            <button type="button" pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" label="Add User" (click)="onAddUser()"></button>
+                            <button type="button" id="userCancel" name="userCancel"  pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
+                            <button type="button" id="userAdd" name="userAdd" pButton icon="ui-icon-save" label="Add User" (click)="onAddUser()"></button>
                         </div>
                     </footer>
 
@@ -156,7 +156,7 @@
                     <header class="with-controls">
                         <p class="ui-panel-title">Users</p>
                         <p class="controls">
-                            <button pButton type="button" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User"></button>
+                            <button pButton type="button" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User" id="addUser" name="addUser"></button>
                         </p>
                     </header>
                     <p-dataTable [value]="functionGroupUsers" [paginator]="true" rows="15" [responsive]="true">
