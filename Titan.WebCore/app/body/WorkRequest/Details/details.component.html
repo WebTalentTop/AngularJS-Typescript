@@ -31,14 +31,14 @@
 
                                                     <p-column>
                                                             <template pTemplate type="header">
-                                                                <button type="button" pButton icon="fa-refresh"></button>
+                                                                <button type="button" pButton icon="fa-refresh" id="refresh" name="refresh"></button>
                                                             </template>
                                                             <template let-TestRequestSensor="rowData" pTemplate="body">
                                                                 <!--<p-fileUpload [name]="sensorpic" url="http://localhost:9998/api/file/SaveDocuments/{{entityType}}/{{TestRequestSensor.id}}/{{categoryId}}"
                                                                               multiple="multiple" accept="image/*" maxFileSize="1000000">
 
                                                                 </p-fileUpload>-->
-                                                                <button pButton type="button" icon="ui-icon-remove-circle" label="Upload" (click)="onUploadAttachments(TestRequestSensor)"></button>
+                                                                <button pButton type="button" icon="ui-icon-remove-circle" label="Upload" (click)="onUploadAttachments(TestRequestSensor)" id="upload" name="upload"></button>
                                                             </template>
 
 
@@ -139,8 +139,8 @@
                                                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                                             <div style='float:left;padding:0.85em'><p-checkbox name="groupname" value="IsKeepOpen" id="IsKeepOpen" label="Keep Open" [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox></div>
                                                             <!--<label class="checkbox"><input type="checkbox" name="keep" binary="true" > Keep Open</label>-->
-                                                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel" id="cancel"></button>
-                                                            <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Add" id="add"></button>
+                                                            <button type="button" pButton icon="ui-icon-close" (click)="displayAssignAttachmentsDialog=false" label="Cancel" id="cancel" name="cancel"></button>
+                                                            <button type="button" pButton icon="ui-icon-save" (click)="onOk()" label="Add" id="save" name="save"></button>
                                                         </div>
                                                     </footer>
 

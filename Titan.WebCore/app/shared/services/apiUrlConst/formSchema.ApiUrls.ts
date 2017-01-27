@@ -9,5 +9,6 @@ export class FormSchemaApiUrl {
     public static getByFormSchemaCategoryId: string = titanApiUrl + 'formSchema/getByFormSchemaCategoryId';
     public static getByFormSchemaCategoryIdCol: string = titanApiUrl + 'formSchema/getByFormSchemaCategoryIdCol';
     public static getFormSchemaGridUrl:string = titanApiUrl + 'formSchema/getFormSchemaGrid';
+    public static getAllFormsByFormSchemaCategoryIdUrl:string = titanApiUrl + 'formSchema/getAllFormsByFormSchemaCategoryId';
     public static getFormSchemaGridByEntityIdentifierIdUrl:string = titanApiUrl + 'formSchema/getFormSchemaGridByEntityIdentifierId';
 }

@@ -24,50 +24,6 @@ div span {
     padding: 7px;
 }
 
-.circle {
-    width: 95px;
-	height: 60px;
-	background: gainsboro;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
-    box-sizing: border-box;
-}
-.circle1 {
-    width: 95px;
-	height: 60px;
-	background: #82A3A9;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
-    box-sizing: border-box;
-}
-.circle2 {
-    width: 95px;
-	height: 60px;
-	background: darksalmon;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
-    box-sizing: border-box;
-}
-.circle3 {
-    width: 95px;
-	height: 60px;
-	background: wheat;
-	-moz-border-radius: 53px;
-	-webkit-border-radius: 53px;
-	border-radius: 53px;
-    box-sizing: border-box;
-}
-
-.circleTextWrap
-{
-    vertical-align: middle;
-    line-height: 80%;
-    padding-top: 15%;
-    box-sizing: border-box;
-}
 .colorbox-count{
     line-height:1;
     font-weight: normal !important;

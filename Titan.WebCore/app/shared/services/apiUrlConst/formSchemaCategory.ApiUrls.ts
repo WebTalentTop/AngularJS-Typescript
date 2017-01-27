@@ -11,5 +11,6 @@ export class FormSchemaCategoryApiUrl {
     //public static getByIdUrl: string = titanApiUrl + 'formSchemaCategory';
     public static getAllUrl: string = titanApiUrl + 'formSchemaCategory';
     public static getByEntityIdentifierId: string = titanApiUrl + 'formSchemaCategory/getByEntityIdentifierId';
+    public static getCalibrationFormsByEntityIdentifierIdUrl:string = titanApiUrl + 'formSchemaCategory/getCalibrationFormsByEntityIdentifierId';
     public static getByEntitySubTypeId: string = titanApiUrl + 'formSchemaCategory/getByEntitySubTypeId';
 }

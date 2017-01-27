@@ -58,8 +58,8 @@
                         </div>
                     </div>
                     <footer>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" class="blue-grey-btn" routerLink="/workrequest"></button>
-                        <button  pButton type="submit" icon="ui-icon-save" label="Add" id="add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()" class="green-btn">  </button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" id="cancel" name="cancel" class="blue-grey-btn" routerLink="/workrequest"></button>
+                        <button  pButton type="submit" icon="ui-icon-save" label="Add" id="save" name="save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()" class="green-btn">  </button>
                     </footer>
                   </p-panel>
               </form>

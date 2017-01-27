@@ -20,19 +20,17 @@
                         </div>
                         </a>
                    </div>
-                <div class="ui-g-12 ui-md-6 ui-lg-4">
-                    <a [routerLink]="['/catalog']">
-                        <div class="ui-g card colorbox colorbox-1">
-                            <div class="ui-g-3">
-                                <i class="material-icons">group</i>
-                            </div>
-                            <div class="ui-g-9" [routerLink]="['/catalog']">
-                                <span class="colorbox-name"></span>
-                                <span class="colorbox-count">Catalogs</span>
-                                <span class="colorbox-name"></span>
-                            </div>
+                 <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <div class="ui-g card colorbox colorbox-1">
+                        <div class="ui-g-3">
+                            <i class="material-icons">accessibility</i>
                         </div>
-                    </a>
+                        <div class="ui-g-9">
+                            <span class="colorbox-name"></span>
+                            <span class="colorbox-count">Roles and Permissions</span>
+                            <span class="colorbox-name"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                     <a [routerLink]="['/functionGroup']">
@@ -48,9 +46,11 @@
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="ui-g-12">
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                     <a [routerLink]="['/tenant']">
-                        <div class="ui-g card colorbox colorbox-5">
+                        <div class="ui-g card colorbox colorbox-2">
                             <div class="ui-g-3">
                                 <i class="material-icons">home</i>
                             </div>
@@ -64,11 +64,11 @@
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                  <a [routerLink]="['/lookup']">
-                    <div class="ui-g card colorbox colorbox-3">
+                    <div class="ui-g card colorbox colorbox-2">
                         <div class="ui-g-3">
                             <i class="material-icons">search</i>
                         </div>
-                        <div class="ui-g-9" [routerLink]="['/lookup']">
+                        <div class="ui-g-9">
                             <span class="colorbox-name"></span>
                             <span class="colorbox-count">Lookup</span>
                             <span class="colorbox-name"></span>
@@ -76,11 +76,9 @@
                     </div>
                   </a>
                 </div>
-            </div>
-            <div class="ui-g-12">
                 <div class="ui-g-12 ui-md-6 ui-lg-4">
                     <a [routerLink]="['/admin/formBuilders']">
-                    <div class="ui-g card colorbox colorbox-4">
+                    <div class="ui-g card colorbox colorbox-2">
                         <div class="ui-g-3">
                             <i class="material-icons">web</i>
                         </div>
@@ -92,17 +90,67 @@
                     </div>
                     </a>
                 </div>
-                <div class="ui-g-12 ui-md-6 ui-lg-4">
-                    <div class="ui-g card colorbox colorbox-2">
+            </div>
+
+             <div class="ui-g-12">
+                  <div class="ui-g-12 ui-md-6 ui-lg-4">
+                 <a [routerLink]="['/testTemplate']">
+                    <div class="ui-g card colorbox colorbox-5">
                         <div class="ui-g-3">
-                            <i class="material-icons">accessibility</i>
+                           <i class="fa ui-icon-folder-special"></i>
                         </div>
-                        <div class="ui-g-9">
+                        <div class="ui-g-9" [routerLink]="['/testTemplate']">
                             <span class="colorbox-name"></span>
-                            <span class="colorbox-count">Roles and Permissions</span>
+                            <span class="colorbox-count">Test Templates</span>
                             <span class="colorbox-name"></span>
                         </div>
                     </div>
+                  </a>
+                </div>
+                 <div class="ui-g-12 ui-md-6 ui-lg-4">
+                 <a [routerLink]="['/procedure']">
+                    <div class="ui-g card colorbox colorbox-5">
+                        <div class="ui-g-3">
+                           <i class="fa ui-icon-build"></i>
+                        </div>
+                        <div class="ui-g-9" [routerLink]="['/procedure']">
+                            <span class="colorbox-name"></span>
+                            <span class="colorbox-count">Test Procedure</span>
+                            <span class="colorbox-name"></span>
+                        </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <a [routerLink]="['/admin/formBuilders']">
+                    <div class="ui-g card colorbox colorbox-5">
+                        <div class="ui-g-3">
+                            <i class="material-icons">web</i>
+                        </div>
+                        <div class="ui-g-9">
+                            <span class="colorbox-name"></span>
+                            <span class="colorbox-count">Test Steps</span>
+                            <span class="colorbox-name"></span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui-g-12">
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                 <a [routerLink]="['/lookup']">
+                    <div class="ui-g card colorbox colorbox-3">
+                        <div class="ui-g-3">
+                            <i class="material-icons">search</i>
+                        </div>
+                        <div class="ui-g-9" [routerLink]="['/lookup']">
+                            <span class="colorbox-name"></span>
+                            <span class="colorbox-count">Catalog</span>
+                            <span class="colorbox-name"></span>
+                        </div>
+                    </div>
+                  </a>
                 </div>
             </div>
         </div>

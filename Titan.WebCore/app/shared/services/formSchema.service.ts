@@ -88,6 +88,11 @@ export class FormSchemaService {
             .map(this.getJson);
     }
 
+    getAllFormsByFormSchemaCategoryId(formSchemaCategoryId): Observable<any> {
+        return this.http.get(`${FormSchemaApiUrl.getAllFormsByFormSchemaCategoryIdUrl}/${formSchemaCategoryId}`, {headers: this.headers})
+            .map(this.getJson);
+    }
+
     getFormSchemaGridByEntityIdentifierId(entityIdentifierId): Observable<any> {
         return this.http.get(`${FormSchemaApiUrl.getFormSchemaGridByEntityIdentifierIdUrl}/${entityIdentifierId}/${this.pageNumber}/${this.pageSize}`, {headers: this.headers})
             .map(this.getJson);

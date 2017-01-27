@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PriorityService } from '../../../../../shared/services/priority.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'priority-detail',
@@ -18,7 +19,7 @@ export class DetailsComponent {
     entityType: string = "Priority";
     entityId: string = this.id;
     filepath: string = "Priority";
-    priority = { name: '' };   
+    priority = { name: '' };
     formConfiguration: any;
     formObject: any;
 
@@ -34,15 +35,15 @@ export class DetailsComponent {
 
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public ProjectStatusDetails: any;
     public PriorityId: string;
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: PriorityService
@@ -57,11 +58,25 @@ export class DetailsComponent {
             this.PriorityId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
-            this.service.getById(this.PriorityId).subscribe(PriorityDetails => {
-                this.PriorityDetails = PriorityDetails.result;
-              
-                console.log(this.PriorityDetails);
-            });
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let priorityDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'PriorityDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("priorityDetailsBreadCrumb ---------", priorityDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = priorityDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
+
+        this.service.getById(this.PriorityId).subscribe(PriorityDetails => {
+            this.PriorityDetails = PriorityDetails.result;
+
+            console.log(this.PriorityDetails);
         });
     }
 
@@ -70,7 +85,7 @@ export class DetailsComponent {
 
         this.service.postUpdate(this.PriorityDetails).subscribe(PriorityDetails => {
         });
-         this.msgs = [];
-         this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+        this.msgs = [];
+        this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
     }
 }

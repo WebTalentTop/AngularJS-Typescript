@@ -1,19 +1,22 @@
 import { VehicleService } from './../../shared/services/vehicle.service';
 import { DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { Component } from '@angular/core';
+import {BreadCrumbsService} from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'vehicle',
-    templateUrl: 'app/body/gridview.component.html'
+    templateUrl: 'app/body/Vehicle/vehicle.component.html'
 })
 export class VehicleComponent {
-    title = "Vehicle view";
+    title = "Vehicle";
     gridData = [];
     confInfo:any = {};
     cols = [];
     gridFilter = {};
 
-    constructor(private service: VehicleService) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: VehicleService) {
 
     }
 

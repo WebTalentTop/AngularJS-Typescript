@@ -42,6 +42,7 @@ declare var cron: any;
 })
 export class DetailsComponent implements AfterViewInit {
 
+    //region Class variables
     hasNextMaintenanceDate: boolean = false;
     isMaintenaceFrequencySelected: boolean = false;
     isCronControlInitialized: boolean = false;
@@ -179,6 +180,7 @@ export class DetailsComponent implements AfterViewInit {
         {loaded: false, method: this.loadAttachmentsTabViews},
         {loaded: false, method: this.loadLogsTabViews}
     ];
+    //endregion
 
     constructor(private breadCrumbsService: BreadCrumbsService,
                 private loggerService: LoggerService,

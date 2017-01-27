@@ -248,31 +248,31 @@ export class BreadCrumbsService {
 
         //Admin TestActivity Page
         this.adminTestActivityPage();
-        // // Admin TestActivity Add Page
-        // this.adminTestActivityAddPage();
-        // // Admin TestActivity Details Page
-        // this.adminTestActivityDetailsPage();
+        // Admin TestActivity Add Page
+        this.adminTestActivityAddPage();
+        // Admin TestActivity Details Page
+        this.adminTestActivityDetailsPage();
 
         //Admin Priority Page
         this.adminPriorityPage();
-        // // Admin Priority Add Page
-        // this.adminPriorityAddPage();
-        // // Admin Priority Details Page
-        // this.adminPriorityDetailsPage();
+        // Admin Priority Add Page
+        this.adminPriorityAddPage();
+        // Admin Priority Details Page
+        this.adminPriorityDetailsPage();
 
         //Admin Judgement Page
         this.adminJudgementPage();
-        // // Admin Judgement Add Page
-        // this.adminJudgementAddPage();
-        // // Admin Judgement Details Page
-        // this.adminJudgementDetailsPage();
+        // Admin Judgement Add Page
+        this.adminJudgementAddPage();
+        // Admin Judgement Details Page
+        this.adminJudgementDetailsPage();
 
         //Admin TestStage Page
         this.adminTestStagePage();
-        // // Admin TestStage Add Page
-        // this.adminTestStageAddPage();
-        // // Admin TestStage Details Page
-        // this.adminTestStageDetailsPage();
+        // Admin TestStage Add Page
+        this.adminTestStageAddPage();
+        // Admin TestStage Details Page
+        this.adminTestStageDetailsPage();
 
         //Admin RequirementItemType Page
         this.adminRequirementItemTypePage();
@@ -283,10 +283,10 @@ export class BreadCrumbsService {
 
         //Admin SensorType Page
         this.adminSensorTypePage();
-        // // Admin SensorType Add Page
-        // this.adminSensorTypeAddPage();
-        // // Admin SensorType Details Page
-        // this.adminSensorTypeDetailsPage();
+        // Admin SensorType Add Page
+        this.adminSensorTypeAddPage();
+        // Admin SensorType Details Page
+        this.adminSensorTypeDetailsPage();
 
         //Admin StepFrequency Page
         this.adminStepFrequencyPage();
@@ -332,17 +332,17 @@ export class BreadCrumbsService {
 
         //Admin VehicleType Page
         this.adminVehicleTypePage();
-        // // Admin VehicleType Add Page
-        // this.adminVehicleTypeAddPage();
-        // // Admin VehicleType Details Page
-        // this.adminVehicleTypeDetailsPage();
+        // Admin VehicleType Add Page
+        this.adminVehicleTypeAddPage();
+        // Admin VehicleType Details Page
+        this.adminVehicleTypeDetailsPage();
 
         //Admin EngineCode Page
         this.adminEngineCodePage();
-        // // Admin EngineCode Add Page
-        // this.adminEngineCodeAddPage();
-        // // Admin EngineCode Details Page
-        // this.adminEngineCodeDetailsPage();
+        // Admin EngineCode Add Page
+        this.adminEngineCodeAddPage();
+        // Admin EngineCode Details Page
+        this.adminEngineCodeDetailsPage();
 
     }
 
@@ -1003,6 +1003,7 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
+
 
     // Admin Platform Bread Crumbs
     private adminPlatformPage() {
@@ -1887,7 +1888,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestActivityHomePage', items: menuItems };
@@ -1895,7 +1895,46 @@ export class BreadCrumbsService {
     }
 
     private adminTestActivityPageBCItems() {
-        let menuItem = { label: 'TestActivity', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Activity',routerLink:['/admin/vehicle/testActivity'] };
+
+        return menuItem;
+    }
+
+    private adminTestActivityAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestActivityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestActivityAddPageBCItems() {
+        let menuItem = { label: 'Add TestActivity', routerLink: ['/admin/vehicle/testActivity'] };
+        return menuItem;
+    }
+
+    private adminTestActivityDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestActivityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestActivityDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestActivityDetailsPageBCItems() {
+        let menuItem = { label: 'TestActivity Details', routerLink:['/admin/vehicle/testActivity'] };
+
         return menuItem;
     }
 
@@ -1905,7 +1944,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'PriorityHomePage', items: menuItems };
@@ -1913,7 +1951,45 @@ export class BreadCrumbsService {
     }
 
     private adminPriorityPageBCItems() {
-        let menuItem = { label: 'Priority', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Priority', routerLink:['/admin/vehicle/priority'] };
+        return menuItem;
+    }
+
+     private adminPriorityAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPriorityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminPriorityAddPageBCItems() {
+        let menuItem = { label: 'Add Priority', routerLink: ['/admin/vehicle/priority'] };
+        return menuItem;
+    }
+
+    private adminPriorityDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPriorityPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PriorityDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPriorityDetailsPageBCItems() {
+        let menuItem = { label: 'Priority Details', routerLink:['/admin/vehicle/priority'] };
+
         return menuItem;
     }
 
@@ -1923,7 +1999,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'JudgementHomePage', items: menuItems };
@@ -1931,7 +2006,45 @@ export class BreadCrumbsService {
     }
 
     private adminJudgementPageBCItems() {
-        let menuItem = { label: 'Judgement', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Judgement', routerLink: ['/admin/vehicle/judgement'] };
+        return menuItem;
+    }
+
+    private adminJudgementAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminJudgementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminJudgementAddPageBCItems() {
+        let menuItem = { label: 'Add Judgement', routerLink: ['/admin/vehicle/judgement'] };
+        return menuItem;
+    }
+
+    private adminJudgementDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminJudgementPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'JudgementDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminJudgementDetailsPageBCItems() {
+        let menuItem = { label: 'Judgement Details', routerLink:['/admin/vehicle/judgement'] };
+
         return menuItem;
     }
 
@@ -1941,7 +2054,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestStageHomePage', items: menuItems };
@@ -1949,7 +2061,45 @@ export class BreadCrumbsService {
     }
 
     private adminTestStagePageBCItems() {
-        let menuItem = { label: 'TestStage', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Test Stage', routerLink: ['/admin/vehicle/testStage'] };
+        return menuItem;
+    }
+
+    private adminTestStageAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestStagePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminTestStageAddPageBCItems() {
+        let menuItem = { label: 'Add TestStage', routerLink: ['/admin/vehicle/testStage'] };
+        return menuItem;
+    }
+
+    private adminTestStageDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminTestStagePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestStageDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminTestStageDetailsPageBCItems() {
+        let menuItem = { label: 'TestStage Details', routerLink:['/admin/vehicle/testStage'] };
+
         return menuItem;
     }
 
@@ -2020,10 +2170,49 @@ export class BreadCrumbsService {
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminSensorTypeBCItems() {
-        let menuItem = { label: 'SensorType', routerLink: ['/admin/'] };
+    private adminSensorTypePageBCItems() {
+        let menuItem = { label: 'Sensor Type', routerLink: ['/admin/vehicle/sensorType'] };
         return menuItem;
     }
+
+    private adminSensorTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminSensorTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminSensorTypeAddPageBCItems() {
+        let menuItem = { label: 'Add SensorType', routerLink: ['/admin/vehicle/sensorType'] };
+        return menuItem;
+    }
+
+    private adminSensorTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminSensorTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'SensorTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminSensorTypeDetailsPageBCItems() {
+        let menuItem = { label: 'SensorType Details', routerLink: ['/admin/vehicle/sensorType'] };
+
+        return menuItem;
+    }
+
 
     // Admin StepFrequency Bread Crumbs
     private adminStepFrequencyPage() {
@@ -2317,7 +2506,7 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
-private adminTestVerificationMethodAddPage() {
+    private adminTestVerificationMethodAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
@@ -2361,15 +2550,52 @@ private adminTestVerificationMethodAddPage() {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'VehicleTypeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminVehicleTypeBCItems() {
-        let menuItem = { label: 'VehicleType', routerLink: ['/admin/'] };
+    private adminVehicleTypePageBCItems() {
+        let menuItem = { label: 'Vehicle Type', routerLink: ['/admin/vehicle/vehicleType'] };
+        return menuItem;
+    }
+
+     private adminVehicleTypeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminVehicleTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminVehicleTypeAddPageBCItems() {
+        let menuItem = { label: 'Add VehicleType', routerLink: ['/admin/vehicle/vehicleType'] };
+        return menuItem;
+    }
+
+    private adminVehicleTypeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminVehicleTypePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'VehicleTypeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminVehicleTypeDetailsPageBCItems() {
+        let menuItem = { label: 'VehicleType Details', routerLink: ['/admin/vehicle/vehicleType'] };
+
         return menuItem;
     }
 
@@ -2379,17 +2605,56 @@ private adminTestVerificationMethodAddPage() {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'EngineCodeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminEngineCodeBCItems() {
-        let menuItem = { label: 'EngineCode', routerLink: ['/admin/'] };
+    private adminEngineCodePageBCItems() {
+        let menuItem = { label: 'Engine Code', routerLink:  ['/admin/vehicle/engineCode'] };
         return menuItem;
     }
+
+    private adminEngineCodeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminEngineCodePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminEngineCodeAddPageBCItems() {
+        let menuItem = { label: 'Add EngineCode', routerLink: ['/admin/vehicle/engineCode'] };
+        return menuItem;
+    }
+
+    private adminEngineCodeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminEngineCodePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminEngineCodeDetailsPageBCItems() {
+        let menuItem = { label: 'EngineCode Details', routerLink: ['/admin/vehicle/engineCode'] };
+
+        return menuItem;
+    }
+
+
 
     public getBreadCrumbs() {
         return this.breadCrumbs;

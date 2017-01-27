@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EngineCodeService } from '../../../../../shared/services/engineCode.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'engineCode-detail',
@@ -38,18 +39,18 @@ export class DetailsComponent {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public EngineCodeDetails: any;
     public EngineCodeId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: EngineCodeService
     )
     { }
-
-
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.route.params.subscribe(params => console.log(params['id']));
@@ -57,11 +58,25 @@ export class DetailsComponent {
             this.EngineCodeId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let engineCodeDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'EngineCodeDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("engineCodeDetailsBreadCrumb ---------", engineCodeDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = engineCodeDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
+
             this.service.getById(this.EngineCodeId).subscribe(EngineCodeDetails => {
                 this.EngineCodeDetails = EngineCodeDetails.result;
               
                 console.log(this.EngineCodeDetails);
-            });
         });
     }
 
