@@ -174,7 +174,7 @@ export class DetailsComponent {
                     { this.model.calibrationFrequencyCronExpression = null; this.isMaintenaceFrequencySelected = false; }
                 }
                 else
-                { this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;}
+                { this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression; this.isMaintenaceFrequencySelected = true; }
                // 
                
                 this.frequencyInit();
