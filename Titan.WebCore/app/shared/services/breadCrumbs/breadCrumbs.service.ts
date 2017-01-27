@@ -199,10 +199,10 @@ export class BreadCrumbsService {
 
         //Admin Permission Page
         this.adminPermissionPage();
-        // // Admin Permission Add Page
-        // this.adminPermissionAddPage();
-        // // Admin Permission Details Page
-        // this.adminPermissionDetailsPage();
+        // Admin Permission Add Page
+        this.adminPermissionAddPage();
+        // Admin Permission Details Page
+        this.adminPermissionDetailsPage();
 
         //Admin Role Page
         this.adminRolePage();
@@ -1728,7 +1728,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'PermissionHomePage', items: menuItems };
@@ -1736,7 +1735,45 @@ export class BreadCrumbsService {
     }
 
     private adminPermissionPageBCItems() {
-        let menuItem = { label: 'Permission', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Permission',  routerLink:['/admin/vehicle/permission'] };
+        return menuItem;
+    }
+
+    private adminPermissionAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPermissionPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PermissionAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminPermissionAddPageBCItems() {
+        let menuItem = { label: 'Add Permission', routerLink: ['/admin/vehicle/permission'] };
+        return menuItem;
+    }
+
+    private adminPermissionDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPermissionPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PermissionDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPermissionDetailsPageBCItems() {
+        let menuItem = { label: 'Permission Details', routerLink:['/admin/vehicle/permission'] };
+
         return menuItem;
     }
 
