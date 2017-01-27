@@ -7,7 +7,7 @@
             <div class="body">
                 <div class="ui-grid-row">
                   <div class="md-inputfield ui-g-12 ui-md-6">
-                      <input type="text" pInputText name="name" [(ngModel)]="ProjectDetails.code" #CodeRef
+                      <input type="text" pInputText name="name" id="name" [(ngModel)]="ProjectDetails.code" #CodeRef
                              minlength="3"  maxlength="10" required style="width:100%">
                       <label>Project Code *</label>
                   </div>
@@ -25,7 +25,7 @@
                         <!--<p-dropdown [options]="markets" (onChange)="onMarketChange($event)" name="categories" id="categories"
                                      [style]="{'width':'100%'}"></p-dropdown>-->
                         <p style="color:#777">Market :</p>
-                        <p-multiSelect [style]="{'width':'100%','color':'#777'}" [options]="markets" [(ngModel)]="selectedMarketId" (onChange)="onMarketChange($event)" name="markets">
+                        <p-multiSelect [style]="{'width':'100%','color':'#777'}" [options]="markets" [(ngModel)]="selectedMarketId" (onChange)="onMarketChange($event)" name="markets" id="markets">
 
                         </p-multiSelect>
                         
@@ -53,27 +53,27 @@
                 </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="ui-g-12 ui-md-6 md-inputfield">
-                    <p-calendar [(ngModel)]="ProjectDetails.plannedStartDate" name="plannedStartDate" [showIcon]="true" #PlannedStartDateRef></p-calendar>
+                    <p-calendar [(ngModel)]="ProjectDetails.plannedStartDate" name="plannedStartDate" id="plannedStartDate" [showIcon]="true" #PlannedStartDateRef></p-calendar>
                     <label>Planned Start Date :</label>
                   </div>
                   <div class="ui-g-12 ui-md-6 md-inputfield">
-                    <p-calendar [(ngModel)]="ProjectDetails.plannedEndDate" name="PlannedEndDate" [showIcon]="true" #PlannedEndDateRef></p-calendar>
+                    <p-calendar [(ngModel)]="ProjectDetails.plannedEndDate" name="PlannedEndDate" id="PlannedEndDate" [showIcon]="true" #PlannedEndDateRef></p-calendar>
                     <label>Planned End Date :</label>
                   </div>
                 </div><br /><br />
                 <div class="ui-grid-row">
                     <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [(ngModel)]="ProjectDetails.actualStartDate" name="actualStartDate" [showIcon]="true" #ActualStartDateRef></p-calendar>
+                        <p-calendar [(ngModel)]="ProjectDetails.actualStartDate" name="actualStartDate" id="actualStartDate"  [showIcon]="true" #ActualStartDateRef></p-calendar>
                         <label>Actual Start Date :</label>
                     </div>
                     <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [(ngModel)]="ProjectDetails.actualEndDate" name="ActualEndDate" [showIcon]="true" #ActualEndDateRef></p-calendar>
+                        <p-calendar [(ngModel)]="ProjectDetails.actualEndDate" name="ActualEndDate" id="ActualEndDate" [showIcon]="true" #ActualEndDateRef></p-calendar>
                         <label>Actual End Date :</label>
                     </div>
                 </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="md-inputfield ui-g-12 ui-md-6">
-                      <input type="text" pInputText name="EstimatedCost" [(ngModel)]="ProjectDetails.estimatedCost" #EstimatedCostRef
+                      <input type="text" pInputText name="EstimatedCost" id="EstimatedCost" [(ngModel)]="ProjectDetails.estimatedCost" #EstimatedCostRef
                              style="width:100%">
                       <label>Estimated Cost</label>
                   </div>
@@ -84,7 +84,8 @@
                         <label style="color:#777">Description</label>
                       </div>
                       <div class="ui-g-12 ui-md-12 md-inputfield">
-                          <p-editor [(ngModel)]="ProjectDetails.description" #PlatformDescriptionRef name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                          <p-editor [(ngModel)]="ProjectDetails.description" #PlatformDescriptionRef name="description"
+                            id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                               <header>
                                   <select class="ql-size">
                                       <option value="small"></option>
@@ -106,7 +107,7 @@
                   </div>
                   <footer>
                         <button pButton type="submit" label="Save" icon="ui-icon-save" iconPos="left"
-                                (click)="onSubmit()" class="green-btn"></button>
+                                (click)="onSubmit()" class="green-btn" id="save" name="save"></button>
                         <!--[disabled]="!projectForm.valid"-->
                   </footer><br />
                 <!--<div style="text-align:center;margin-top:20px" *ngIf="submitted">
