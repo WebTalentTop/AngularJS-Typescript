@@ -33,6 +33,7 @@ import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelec
 import {EntityEventService} from "../../../shared/services/entityEvent.service";
 import {IFormSchemaCategoryCalibrationForms} from "../../../shared/services/definitions/formDefinitions/IFormSchemaCategoryCalibrationForms";
 import {IEquipmentTypeFormMap} from "../../../shared/services/definitions/EquipmentType/IEquipmentTypeFormMap";
+import {IEquipmentSubTypeFormMapSave} from "../../../shared/services/definitions/EquipmentType/IEquipmentSubTypeFormMapSave";
 
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
@@ -97,8 +98,8 @@ export class DetailsComponent implements OnInit {
     calibrationFormsList: IFormSchemaCategoryCalibrationForms[] = [];
     calibrationFormItems: ITitanSelectItem[] = [];
     calibrationSubTypeFormItems: ITitanSelectItem[] = [];
-    selectedFormItem: any;
-    selectedSubTypeFormItem: any;
+    selectedFormItem: string;
+    selectedSubTypeFormItem: string;
     //endregion
 
     constructor(private breadCrumbsService: BreadCrumbsService,
@@ -106,7 +107,7 @@ export class DetailsComponent implements OnInit {
                 private dataService: EquipmentTypeService,
                 private entityIdentifierService: EntityIdentifierService,
                 private formSchemaCategoryService: FormSchemaCategoryService,
-                private entityEventService:EntityEventService,
+                private entityEventService: EntityEventService,
                 private ls: LoggerService) {
         this.route.queryParams.subscribe(params => {
 
@@ -221,40 +222,62 @@ export class DetailsComponent implements OnInit {
 
     entityIdentifierModelSet(model) {
         this.entityIdentifierModel = model;
-        this.getEquiptmentForms(this.entityIdentifierModel.id);
+
     }
 
-    dataServiceGetById(res) {
-        this.model = res;
-        this.model.id = res.id;
-        this.model.parentId = res.parentId;
-        this.model.name = res.name;
-        this.model.description = res.description;
-        this.model.frequency = res.frequency;
-        this.frequencyInit(this.model.frequency);
-        // this.onCronInit();
-        this.dataService.getSubTypesById(this.model.id)
-            .subscribe(result => {
-                this.EquipmentsubTypes = result.$values;
+    dataServiceGetById(resFromPrev) {
+        //this.getEquiptmentForms(this.entityIdentifierModel.id);
+        this.formSchemaCategoryService.getCalibrationFormsByEntityIdentifierId(this.entityIdentifierModel.id)
+            .subscribe(res => {
+                this.ls.logConsole("FormSchemaCategory By EntityIdentifierId List", res);
+
+                if (res.isSuccess && res.result) {
+                    this.calibrationFormItems.push({label: 'Please select a Form', value: '', entityIdentifierId: ''});
+                    this.calibrationSubTypeFormItems.push({
+                        label: 'Please select a Form',
+                        value: '',
+                        entityIdentifierId: ''
+                    });
+
+                    this.calibrationFormsList = res.result;
+                    res.result.map(item => {
+                        let newItem = {
+                            label: item.name,
+                            value: item.id,
+                            entityIdentifierId: item.entityIdentifierId
+                        };
+                        this.calibrationFormItems.push(newItem);
+                        this.calibrationSubTypeFormItems.push(newItem);
+                    })
+                        .map(x =>{
+                            this.model = resFromPrev;
+                            this.model.id = resFromPrev.id;
+                            this.model.parentId = resFromPrev.parentId;
+                            this.model.name = resFromPrev.name;
+                            this.model.description = resFromPrev.description;
+                            this.model.frequency = resFromPrev.frequency;
+                            this.frequencyInit(this.model.frequency);
+
+                            let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
+                                .filter(filter => filter.name === resFromPrev.calibrationForm)[0];
+
+                            if (selectedCalibrationFormInfo) {
+                                this.selectedFormItem = selectedCalibrationFormInfo.id;
+                            }
+
+                            // this.onCronInit();
+                            this.dataService.getSubTypesById(this.model.id)
+                                .subscribe(result => {
+                                    this.EquipmentsubTypes = result.$values;
+                                });
+                        });
+                }
             });
+
     }
 
     getEquiptmentForms(entityIdentifierId) {
-        this.formSchemaCategoryService.getCalibrationFormsByEntityIdentifierId(entityIdentifierId)
-            .subscribe(res => {
-                this.ls.logConsole("FormSchemaCategory By EntityIdentifierId List", res);
-                this.calibrationFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
-                this.calibrationSubTypeFormItems.push({label:'Please select a Form', value:'', entityIdentifierId: ''});
 
-                if (res.isSuccess) {
-                    this.calibrationFormsList = res.result;
-                    res.result.map(item => {
-                        let newItem = {label:item.name, value: item.id, entityIdentifierId: item.entityIdentifierId};
-                        this.calibrationFormItems.push(newItem);
-                        this.calibrationSubTypeFormItems.push(newItem);
-                    });
-                }
-            });
     }
 
     onEdit() {
@@ -267,29 +290,38 @@ export class DetailsComponent implements OnInit {
             name: this.model.name,
             frequency: this.selectedMaintenanceFrequency
         };
-        this.dataService.postUpdate(modelbody)
+
+        let calibrationFormMap: IEquipmentTypeFormMap;
+        if (this.selectedFormItem) {
+            let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
+                .filter(filter => filter.id === this.selectedFormItem)[0];
+            calibrationFormMap = {
+                equipmentTypeId: this.model.id,
+                formSchemaCategoryId: selectedCalibrationFormInfo.id,
+                formSchemaId: selectedCalibrationFormInfo.formSchemaId,
+                entityEventId: selectedCalibrationFormInfo.entityEventId,
+                entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
+                isDeleted: false
+            };
+            /*this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
+             .subscribe(resFormMap => {
+             this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
+             });*/
+        }
+
+        let equipmentSave: IEquipmentSubTypeFormMapSave = {
+            equipmentType: modelbody,
+            formMapInfo: calibrationFormMap
+        };
+
+        this.dataService.postUpdate(equipmentSave)
             .subscribe(res => {
                 if (res.isSuccess) {
                     this.ls.logConsole("ModelBody ------", res);
 
-                    if (this.selectedFormItem) {
-                        let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
-                            .filter(filter => filter.id === this.selectedFormItem)[0];
-                        let calibrationFormMap: IEquipmentTypeFormMap = {
-                            equipmentTypeId: this.model.id,
-                            formSchemaCategoryId: selectedCalibrationFormInfo.id,
-                            formSchemaId: selectedCalibrationFormInfo.formSchemaId,
-                            entityEventId: selectedCalibrationFormInfo.entityEventId,
-                            entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
-                            isDeleted: false
-                        };
-                        this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
-                            .subscribe(resFormMap => {
-                                this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
-                            });
-                    }
+
                     this.msgs = [];
-                    this.msgs.push({ severity: 'success', summary: 'saved', detail: '' });
+                    this.msgs.push({severity: 'success', summary: 'saved', detail: ''});
                 }
             });
     }
@@ -332,7 +364,6 @@ export class DetailsComponent implements OnInit {
     }
 
 
-
     frequencyInit(cronExp) {
         var angularRef = this;
         if (cronExp != null && cronExp != "") {
@@ -347,8 +378,7 @@ export class DetailsComponent implements OnInit {
                 }, useGentleSelect: false
             });
         }
-        else
-        {
+        else {
             this.isMaintenaceFrequencySelected = false;
             this.selectedMaintenanceFrequency = "0 0 1 1 *";
         }
@@ -385,51 +415,64 @@ export class DetailsComponent implements OnInit {
     save() {
         //   this.EquipmentSubType = EquipmentSubType.name;
         if (this.newsubType) {
+            let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = {
+                id: '',
+                name: '',
+                entityIdentifierId: '',
+                formSchemaId: '',
+                entityEventId: '',
+                isDeleted: false
+            };
+            let calibrationFormMap: IEquipmentTypeFormMap = {
+                equipmentTypeId: '',
+                formSchemaCategoryId: '',
+                formSchemaId: '',
+                entityEventId: '',
+                entityIdentifierId: '',
+                isDeleted: false
+            }
+            if (this.selectedSubTypeFormItem){
+                selectedCalibrationFormInfo = this.calibrationFormsList
+                    .filter(filter => filter.id === this.selectedSubTypeFormItem)[0];
+                calibrationFormMap = {
+                    equipmentTypeId: this.model.id,
+                    formSchemaCategoryId: selectedCalibrationFormInfo.id,
+                    formSchemaId: selectedCalibrationFormInfo.formSchemaId,
+                    entityEventId: selectedCalibrationFormInfo.entityEventId,
+                    entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
+                    isDeleted: false
+                };
+                /* this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
+                 .subscribe(resFormMap => {
+                 this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
+                 });*/
+            }
 
             if (this.isSubTypeMaintenanceFrequencySelected) {
                 this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             }
-            else
-            { this.EquipmentSubType.frequency = null; }
+            else {
+                this.EquipmentSubType.frequency = null;
+            }
 
             this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
-            this.EquipmentSubType.calibrationform = this.selectedSubTypeFormItem;
+            this.EquipmentSubType.calibrationform = selectedCalibrationFormInfo.name;
 
             this.EquipmentsubTypes.push(this.EquipmentSubType);
-            this.dataService.postAdd(this.EquipmentSubType).subscribe(res => {
+            let equipmentSubTypeFormMabSave: IEquipmentSubTypeFormMapSave = {
+                equipmentType: this.EquipmentSubType,
+                formMapInfo: calibrationFormMap
+            }
+            this.dataService.postAdd(equipmentSubTypeFormMabSave).subscribe(res => {
                 if (res.isSuccess) {
-                    let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = {
-                        id:'',
-                    name:'',
-                    entityIdentifierId:'',
-                    formSchemaId:'',
-                    entityEventId:'',
-                    isDeleted:false
-                    };
-                    if (this.selectedSubTypeFormItem) {
-                        selectedCalibrationFormInfo = this.calibrationFormsList
-                            .filter(filter => filter.id === this.selectedSubTypeFormItem)[0];
-                        let calibrationFormMap: IEquipmentTypeFormMap = {
-                            equipmentTypeId: this.model.id,
-                            equipmentSubTypeId: res.result.id,
-                            formSchemaCategoryId: selectedCalibrationFormInfo.id,
-                            formSchemaId: selectedCalibrationFormInfo.formSchemaId,
-                            entityEventId: selectedCalibrationFormInfo.entityEventId,
-                            entityIdentifierId: selectedCalibrationFormInfo.entityIdentifierId,
-                            isDeleted: false
-                        };
-                        this.dataService.postSaveCalibrationFormsMap(calibrationFormMap)
-                            .subscribe(resFormMap => {
-                                this.ls.logConsole("CalibrationFormMapSave Result ------", resFormMap);
-                            });
-                    }
+
 
                     this.dataService.getSubTypesById(this.model.id)
                         .subscribe(result => {
                             this.EquipmentsubTypes = result.$values;
 
                         });
-                    this.selectedSubTypeFormItem ={};
+                    this.selectedSubTypeFormItem = '';
                     this.msgs = [];
                     this.msgs.push({severity: 'success', summary: 'Added', detail: ''});
 
@@ -490,7 +533,7 @@ export class DetailsComponent implements OnInit {
         //$("#cronselector").remove();
         //let cronContainer = $("<div id='cronselector'></div>");
         //$("#cronSelectorPlaceHolder").append(cronContainer);
-    
+
         if (cronExpression !== null && cronExpression !== "") {
             this.isSubTypeMaintenanceFrequencySelected = true;
             this.selectedSubTypeMaintenanceFrequency = cronExpression;
@@ -510,7 +553,7 @@ export class DetailsComponent implements OnInit {
         }
 
         //$("#cronselector").remove();
-       
+
 
     }
 
@@ -558,7 +601,7 @@ export class DetailsComponent implements OnInit {
 
     cancelDialog() {
         this.displayDialog = false;
-        this.selectedSubTypeFormItem = {};
+        this.selectedSubTypeFormItem = '';
     }
 }
 
