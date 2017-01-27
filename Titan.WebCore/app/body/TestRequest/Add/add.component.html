@@ -7,12 +7,12 @@
                     <div class="body">
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="name" [(ngModel)]="name"
+                                <input type="text" pInputText name="name" id="name" [(ngModel)]="name"
                                        minlength="3"  required style="width:100%">
                                 <label>Test Name <span >*</span></label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText [(ngModel)]="number" name="number"
+                                <input type="text" pInputText [(ngModel)]="number" name="number" id="number"
                                        class="form-control" style="width:100%">
 
                                 <label>Test Number</label>
@@ -21,44 +21,44 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Project Code :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" id="projectCodes" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Build Levels :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels" id="buildLevels">
                               </p-dropdown>
                           </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Vehicle :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" id="vehicle" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Facility :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities">
                               </p-dropdown>
                           </div>
                         </div><br /><br />
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="purpose" [(ngModel)]="purpose" style="width:100%">
+                                <input type="text" pInputText name="purpose" id="purpose" [(ngModel)]="purpose" style="width:100%">
                                 <label>Purpose</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="dueDate" name="dueDate" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="dueDate" name="dueDate" id="purpose" [showIcon]="true"></p-calendar>
                               <label>Due Date :</label>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" id="plannedStartDate"  [showIcon]="true"></p-calendar>
                               <label>Planned Start Date :</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" [showIcon]="true" ></p-calendar>
+                              <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" id="plannedEndDate" [showIcon]="true" ></p-calendar>
                               <label>Planned End Date :</label>
                             </div>
                         </div>
@@ -67,13 +67,13 @@
                               <p style="color:#777">Test Templates :</p>
 
                  
-                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" >
+                              <p-multiSelect   [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" id="testTemplates" >
 
                               </p-multiSelect>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Procedures :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures" id="procedures">
                               </p-dropdown>
                           </div>
                         </div><br /><br />
@@ -83,25 +83,26 @@
 
                             <div class="form-group col-sm-6 col-md-4">
                                 <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
-                                <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
+                                <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" id="departments" [style]="{'width':'auto'}">
                                 </p-multiSelect>
                             </div>
 
                             <footer>
                                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                     <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
-                                    <button type="button" pButton icon="fa-close" label="OK" (click)="OK()"></button>
-                                    <button type="button" pButton icon="fa-check" routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
+                                    <button type="button" pButton icon="fa-close" id="departmentcancel" name="departmentcancel" routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
+                                    <button type="button" pButton icon="fa-check" id="departmentok" name="departmentok" label="OK" (click)="OK()"></button>
+                                    
                                 </div>
                             </footer>
                         </p-dialog>
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6" >
-                                <p-checkbox name="groupname" value="IsThermoCouple" label="Does this Test require Sensor Type?" [(ngModel)]="IsThermoCouple" binary="true" (onChange)="confirm1()">
+                                <p-checkbox name="groupname" value="IsThermoCouple" label="Does this Test require Sensor Type?" [(ngModel)]="IsThermoCouple" id="IsThermoCouple" binary="true" (onChange)="confirm1()">
                                 </p-checkbox>
                             </div>
                             <div class="ui-g-12 ui-md-6" >
-                                <p-checkbox name="groupname" value="PartsList" label="Does this Test require Parts Type?" [(ngModel)]="IsPartsList" binary="true" (onChange)="confirmPartsDialog()">
+                                <p-checkbox name="groupname" value="PartsList" label="Does this Test require Parts Type?" [(ngModel)]="IsPartsList" id="IsPartsList" binary="true" (onChange)="confirmPartsDialog()">
                                 </p-checkbox>
                             </div>
                         </div><br /><br />
@@ -110,7 +111,7 @@
                               <label style="color:#777">Description</label>
                             </div>
                             <div class="ui-g-12 ui-md-12 md-inputfield">
-                                <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                <p-editor [(ngModel)]="description" name="description" id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                     <header>
                                         <select class="ql-size">
                                             <option value="small"></option>
@@ -130,8 +131,8 @@
                         </div>
                     </div>
                     <footer>
-                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testRequest"></button>
-                        <button id="create" pButton type="submit" icon="ui-icon-save"  class="green-btn" label="Add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+                        <button pButton type="button" icon="ui-icon-close" label="Cancel" class="blue-grey-btn" routerLink="/testRequest" id="cancel" name="cancel"></button>
+                        <button id="save" name="save" pButton type="submit" icon="ui-icon-save"  class="green-btn" label="Add" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
                     </footer>
                     <p-dialog header="Title" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true">
                         Test Request Info Details:
@@ -139,15 +140,16 @@
 
                         <div class="form-group col-sm-6 col-md-4">
                             <label class="control-label col-sm-12 pl0"> Choose Departments :</label>
-                            <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" [style]="{'width':'auto'}">
+                            <p-multiSelect [options]="departments" (onChange)="onDepartmentChange($event)" name="departments" id="departments" [style]="{'width':'auto'}">
                             </p-multiSelect>
                         </div>
 
                         <footer>
                             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                 <!--<a routerLink="add/{{id}}"><i class="fa ui-icon-add"></i>Add Thermo Couple Info</a>-->
-                                <button type="text" pButton icon="fa-close" label="OK" (click)="OK()"></button>
-                                <button type="button" pButton icon="fa-check" routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
+                                <button type="button" pButton icon="fa-close" id="departmentcancel" name="departmentcancel"  routerLink="/testRequest/details/{{entityId}}" label="CANCEL"></button>
+                                <button type="text" pButton icon="fa-check" label="OK" id="departmentok" name="departmentok"  (click)="OK()" ></button>
+                                
                             </div>
                         </footer>
                     </p-dialog>
