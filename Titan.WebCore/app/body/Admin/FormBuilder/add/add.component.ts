@@ -33,7 +33,7 @@ export class AddFormComponent {
     droppedFormFieldDataTypeList: IFormSchemaFieldDataType[] = [];
 
     formName: string;
-
+    hasAttachments:boolean = false;
     //region Adding Fields Dialog Display Variables
     displayTextBox: boolean = false;
     displayNumberBox: boolean = false;
