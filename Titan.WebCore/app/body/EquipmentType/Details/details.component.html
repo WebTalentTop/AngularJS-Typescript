@@ -61,7 +61,6 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
-                                <pre>{{selectedFormItem | json }}</pre>
                                 <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem"></p-dropdown>
                                <!-- <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
