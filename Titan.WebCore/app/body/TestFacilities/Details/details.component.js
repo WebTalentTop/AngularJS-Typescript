@@ -133,8 +133,7 @@ var DetailsComponent = (function () {
     };
     DetailsComponent.prototype.showHideCronPicker = function () {
         console.log("--inside cronpicker show hide");
-        debugger;
-        if (this.isMaintenaceFrequencySelected) {
+         if (this.isMaintenaceFrequencySelected) {
             if (!this.isCronControlInitialized) {
                 $("#selector").cron({
                     initial: this.selectedMaintenanceFrequency,

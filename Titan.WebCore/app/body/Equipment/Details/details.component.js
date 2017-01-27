@@ -282,7 +282,7 @@ var DetailsComponent = (function () {
         var _this = this;
         //    userRoles
         this.service.getEquipmentManufacturers().subscribe(function (response) {
-            debugger;
+
             _this.equipmentManufacturers = new Array();
             if (response != null) {
                 var resultMap = new Array();
