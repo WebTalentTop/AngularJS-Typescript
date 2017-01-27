@@ -1,4 +1,6 @@
 <div class="ui-g-12">
+      <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<br />
     <div class="card card-w-title">
               <h1>Tenant Details</h1>
 <p-tabView  (onChange)="handleChange($event)">
@@ -20,12 +22,12 @@
 
 
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="name" [(ngModel)]="tenantProfile.name"
+                                    <input type="text" style="width:100%" pInputText name="name"  id="name" [(ngModel)]="tenantProfile.name"
                                            minlength="3" class="form-control" required row="20">
                                     <label>Name *</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText name="url" [(ngModel)]="tenantProfile.hostAddress" class="form-control" required minlength="3" row="20">
+                                    <input type="text" style="width:100%" pInputText name="url" id="url" [(ngModel)]="tenantProfile.hostAddress" class="form-control" required minlength="3" row="20">
                                     <label>Url *</label>
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
@@ -35,8 +37,8 @@
 
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/tenant" class="blue-grey-btn"></button>
-                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save"></button>
+                            <button pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/tenant" class="blue-grey-btn" id="cancel" name="cancel"></button>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" class="green-btn" icon="ui-icon-save" id="save" name="save"></button>
                         </footer><br />
 
                     </p-panel>
@@ -65,7 +67,7 @@
 
                             <div class="ui-g-4"><b>Function Group :</b></div>
 
-                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" [(ngModel)]="selectedFunctionGroupId" (onChange)="onFunctionGroupChange($event)" name="functionGroups" [autoWidth]="false"></p-dropdown>
+                            <div class="ui-g-8"><p-dropdown [options]="functionGroups" [style]="{'width':'100%'}" [(ngModel)]="selectedFunctionGroupId" (onChange)="onFunctionGroupChange($event)" name="functionGroups" id="functionGroups" [autoWidth]="false"></p-dropdown>
                             </div>
                     </div>
 
@@ -87,10 +89,10 @@
                         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                             <div style='float:left;padding:0.85em'>
                               <p-checkbox name="groupname" value="IsKeepOpen" label="Keep Open"
-                                          [(ngModel)]="IsKeepOpen" binary="true"></p-checkbox>
+                                          [(ngModel)]="IsKeepOpen" id="IsKeepOpen" binary="true"></p-checkbox>
                             </div>
-                            <button type="button" pButton icon="ui-icon-close" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
-                            <button type="button" pButton icon="ui-icon-save" (click)="onAddFunctionGroup()" label="Add Function Group"></button>
+                            <button type="button" id="functionGroupCancel" name="functionGroupCancel" pButton icon="ui-icon-close" (click)="displayFunctionGroupDialog=false" label="Cancel"></button>
+                            <button type="button" id="functionGroupSave" name="functionGroupSave" pButton icon="ui-icon-save" (click)="onAddFunctionGroup()" label="Add Function Group"></button>
                         </div>
                     </footer>
 
@@ -103,7 +105,7 @@
 
                     <header class="with-controls">
                         <p class="ui-panel-title"> Function Groups </p>
-                        <p class="controls"><button type="text" (click)="displayFunctionGroupDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Add Function Group"></button></p>
+                        <p class="controls"><button id="addFunctionGroup" name="addFunctionGroup" type="text" (click)="displayFunctionGroupDialog=true" class="blue-grey-btn" pButton icon="ui-icon-person-add" label="Add Function Group"></button></p>
                     </header>
 
                     <div class="ui-grid-row">
@@ -133,7 +135,7 @@
               <header class="with-controls">
                   <p class="ui-panel-title">Users</p>
                   <p class="controls">
-                    <button pButton type="button" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User"></button>
+                    <button pButton type="button" id="addUser" name="addUser" class="blue-grey-btn" (click)="displayAddUserDialog=true" icon="ui-icon-add" label="Add User"></button>
                   </p>
               </header>
               <p-dataTable [value]="tenantUsers" [paginator]="true" rows="15" [responsive]="true">
@@ -162,14 +164,14 @@
 
                         <div class="ui-g-4"><b>Users :</b></div>
                         <div class="ui-g-8">
-                            <p-dropdown [options]="users" [style]="{'width':'100%'}" (onChange)="onUserChange($event)" name="users" [autoWidth]="false"></p-dropdown>
+                            <p-dropdown [options]="users" [style]="{'width':'100%'}" (onChange)="onUserChange($event)" name="users" id="users" [autoWidth]="false"></p-dropdown>
                         </div>
                 </div>
               <br /><br />
                 <footer>
                     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                        <button type="button" pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
-                        <button type="button" pButton icon="ui-icon-save" label="Add User" (click)="onAddUser()"></button>
+                        <button id="userCancel" name="userCancel" type="button" pButton icon="ui-icon-close" (click)="displayAddUserDialog=false" label="Cancel"></button>
+                        <button id="userAdd" name="userAdd"type="button" pButton icon="ui-icon-save" label="Add User" (click)="onAddUser()"></button>
                     </div>
                 </footer>
 

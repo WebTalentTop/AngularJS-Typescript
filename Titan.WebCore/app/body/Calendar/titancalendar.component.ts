@@ -18,6 +18,8 @@ import {
     ITitanUserScheduleViewModel
 }  from "../../shared/services/definitions/Scheduler/ITestFacilityAssignUsersViewModel";
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
+
 import {
     DataTable,
     TabViewModule,
@@ -88,6 +90,7 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     selectedProjectCodes: any[];
     displayCalendarSetting: boolean = false;
     date1: Date;
+    added: any;
     // Calendar Settings
     selectedHideWeekendValue: string = 'true';
     daysofweek: SelectItem[];
@@ -186,9 +189,13 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
     timeBlockEventStatusId: string = '';
     changeFacilityMessage: Message[];
 //endregion fields
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
 // region constructor
-    constructor(private route: ActivatedRoute,
+    constructor(
+                private breadCrumbsService: BreadCrumbsService,
+                private route: ActivatedRoute,
                 private router: Router,
                 private testfacilityservice: TestFacilityService,
                 private buildlevelservice: BuildLevelService,
@@ -203,6 +210,19 @@ export class TitanCalendarComponent implements AfterViewInit, OnInit {
                 private titanUserProfileService: UserProfileService,
                 private testFacilityRoleService: TestFacilityRoleService,
                 private tenantUserService: TenantService) {
+                    
+                    this.route.queryParams.subscribe(params => {
+
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let calendarBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'CalendarHomePage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = calendarBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+        });
 
         this.currentUser = this.titanUserProfileService.getCurrentUserProfile()
 

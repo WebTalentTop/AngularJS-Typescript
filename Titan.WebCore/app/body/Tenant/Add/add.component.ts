@@ -18,7 +18,7 @@ export class AddComponent {
     lastName:string;
     emailAddress:string;
     phoneNumber:string;
-    userName: string;
+    userName: string;   
     selectedUserId: any;
     tenantId: any;
     users: any;
@@ -35,17 +35,18 @@ export class AddComponent {
                     }};
     //constructor(private dataService: PlatformService) {
     //        }
+    
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
 
-    constructor(private breadCrumbsService: BreadCrumbsService,
-
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private userservice: UserService,
         private userprofileservice: TitanUserProfileService,
         private tenantservice: TenantService,
-                private router: Router) {
+        private router: Router) {
 
     }
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
 
         ngOnInit() {
             //this.userprofileservice.getCurrentUserProfile().subscribe(tenresult => {
@@ -55,17 +56,18 @@ export class AddComponent {
             //    this.tenantId = tenresult.result;
             //});
             this.getUsers();
+
         let breadC = this.breadCrumbsService.getBreadCrumbs();
-        let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
-            filter.pageName === 'TestFacilitiesAddPage'
+        let tenantAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'TenantAddPage'
         )[0];
         this.breadcrumbs = [];
-        this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
-
+        this.breadcrumbs = tenantAddBreadCrumb.items;
 
         this.breadcrumbsHome = { routerLink: ['/'] };
 
         }
+
     onUserChange(event) {
         this.selectedUserId = event.value;
     }

@@ -9,59 +9,59 @@
 
                         <header class="with-controls">
                             <p class="ui-panel-title">Add Thermo Couple Info</p>
-                            <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;"></button></p>
+                            <p class="controls"><button type="text" (click)="onCompleteTask()" pButton icon="ui-icon-person-save" label="Complete&hellip;" id="compltetask" name="compltetask"></button></p>
                         </header>
                         <div class="body">
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="partName" [(ngModel)]="partName"
+                                <input type="text" pInputText name="partName" id="partName" [(ngModel)]="partName"
                                        minlength="3"  required style="width:100%">
                                 <label>Part Name <span >*</span></label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText [(ngModel)]="partNumber" name="partNumber"
+                                <input type="text" pInputText [(ngModel)]="partNumber" name="partNumber" id="partNumber"
                                        minlength="3"  required style="width:100%">
                                 <label>Part Number <span >*</span></label>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText [(ngModel)]="departmentId" name="department" minlength="3"  required style="width:100%">
+                                <input type="text" pInputText [(ngModel)]="departmentId" name="department" id="department" minlength="3"  required style="width:100%">
                                 <label>Department <span >*</span></label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="departmentpic" [(ngModel)]="departmentpic" minlength="3"  required style="width:100%">
+                                <input type="text" pInputText name="departmentpic" id="departmentpic" [(ngModel)]="departmentpic" minlength="3"  required style="width:100%">
                                 <label>Department PIC <span >*</span></label>
                             </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Category :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="categories" [(ngModel)]="selectedCategoryId" (onChange)="onCategoryChange($event)" name="category" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="categories" [(ngModel)]="selectedCategoryId" (onChange)="onCategoryChange($event)" name="category"  id="category">
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Material :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="materials" [(ngModel)]="selectedMaterialId" (onChange)="onMaterialChange($event)" name="material">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="materials" [(ngModel)]="selectedMaterialId" (onChange)="onMaterialChange($event)" name="material"  id="material">
                               </p-dropdown>
                           </div>
                         </div><br /><br />
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="steadyRequirement" [(ngModel)]="steadyRequirement"
+                                <input type="text" pInputText name="steadyRequirement"  id="steadyRequirement" [(ngModel)]="steadyRequirement"
                                        minlength="3"  required style="width:100%">
                                 <label>Steady state Requirement <span >*</span></label>
                             </div>
                             <div class="md-inputfield ui-g-12 ui-md-6">
                                 <input type="text" pInputText [(ngModel)]="periodicRequirement" name="periodicRequirement"
-                                       minlength="3"  required style="width:100%">
+                                       id="periodicRequirement" minlength="3"  required style="width:100%">
                                 <label>Periodic Requirement <span >*</span></label>
                             </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Select Sensor :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="Sensors" (onChange)="onSensorChange($event)" name="sensor" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="Sensors" (onChange)="onSensorChange($event)" name="sensor"  id="sensor">
                               </p-dropdown>
                           </div>
                         </div>
@@ -101,8 +101,8 @@
                       </div>
                     </div>
                     <footer>
-                        <button id="cancel" pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testRequest/details/{{entityId}}">  </button>
-                        <button id="add" pButton type="submit" icon="ui-icon-save" label="Add"></button>
+                        <button id="cancel" name="cancel" pButton type="button" icon="ui-icon-close" label="Cancel" routerLink="/testRequest/details/{{entityId}}">  </button>
+                        <button id="save" name="save" pButton type="submit" icon="ui-icon-save" label="Add"></button>
                     </footer>
                   </p-panel><br />
                   <p-panel header="Thermo Couple Info List">

@@ -18,7 +18,7 @@
                             <header class="with-controls">
                                     <p class="ui-panel-title">Information</p>
                                     <p class="controls">
-                                        <button pButton type="button" id="barcode" icon="ui-icon-print" label="Print BarCode" (click)="printBarCode()"></button>
+                                        <button pButton type="button" id="barcode" name="barcode" icon="ui-icon-print" label="Print BarCode" (click)="printBarCode()"></button>
                                     </p>
                                 </header>
                             <div class="body">
@@ -148,7 +148,7 @@
                                 <footer>
                                     <p>* indicates required field</p>
 
-                                    <button pButton type="submit" icon="ui-icon-save" label="Save" id="save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid" class="green-btn"></button>
+                                    <button pButton type="submit" icon="ui-icon-save" label="Save" id="save" name="save" (click)="onEquipmentSave()" [disabled]="!tfForm.valid" class="green-btn"></button>
                                 </footer>
                             </p-panel>
                         </form>

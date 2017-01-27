@@ -1,8 +1,8 @@
 ﻿<!--<button (click)="onAddTorqueSheetTemplate()">Add Template</button>
 <button (click)="onViewTorqueSheetTemplate()">View Template</button>-->
 
-<button pButton type="submit" label="Add Template" icon="ui-icon-add" iconPos="left" (click)="onAddTorqueSheetTemplate()"></button>
-<button pButton type="submit" label="View Template" icon="ui-icon-pageview" iconPos="left" (click)="onViewTorqueSheetTemplate()"></button>
+<button pButton type="submit" label="Add Template" id="addTemplate" name="addTemplate" icon="ui-icon-add" iconPos="left" (click)="onAddTorqueSheetTemplate()"></button>
+<button pButton type="submit" label="View Template" id="viewTemplate" name="viewTemplate" icon="ui-icon-pageview" iconPos="left" (click)="onViewTorqueSheetTemplate()"></button>
 
 <p-dialog header="Add Torque Sheet Template" [(visible)]="displayAddTorqueSheetTemplate" modal="modal" showEffect="fade"
     width="800">
@@ -12,7 +12,7 @@
                 Template Name *:
             </div>
             <div class="ui-grid-col-6">
-                <input type="text" pInputText [(ngModel)]="TemplateName" name="CTemplateNameode" #TemplateNameRef placeholder="Required"
+                <input type="text" pInputText [(ngModel)]="TemplateName" name="CTemplateNameode" id="CTemplateNameode" #TemplateNameRef placeholder="Required"
                     maxlength="255" class="form-control" required />
             </div>
             <div class="ui-grid-col-4" *ngIf="TemplateNameRef.errors?.required"> * </div>
@@ -22,8 +22,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="onAddTorqueSheetTemplateCancel()" label="Cancel"></button>
-            <button type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Add"></button>
+            <button id="sheetTemplateCancel" name="sheetTemplateCancel" type="button" pButton icon="fa-close" (click)="onAddTorqueSheetTemplateCancel()" label="Cancel"></button>
+            <button id="sheetTemplateAdd" name="sheetTemplateAdd" type="button" pButton icon="fa-check" (click)="onAddTorqueSheetTemplateConfirmation()" label="Add"></button>
         </div>
     </footer>
 </p-dialog>
