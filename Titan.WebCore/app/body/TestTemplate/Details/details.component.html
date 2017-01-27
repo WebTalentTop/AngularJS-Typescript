@@ -14,7 +14,7 @@
 
                           <div class="ui-grid-row">
                               <div class="md-inputfield ui-g-12 ui-md-6">
-                                  <input type="text" pInputText name="testTemplateName" #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name"
+                                  <input type="text" pInputText name="testTemplateName" id="testTemplateName" #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name"
                                          minlength="3"  required style="width:100%">
                                   <label>Test Template Name <span >*</span></label>
                               </div>
@@ -24,7 +24,7 @@
                               <p>Description <span >*</span></p>
                               <div class="md-inputfield">
 
-                                  <p-editor [(ngModel)]="testTemplate.description" name="testTemplateDescription" required
+                                  <p-editor [(ngModel)]="testTemplate.description" name="testTemplateDescription" id="testTemplateDescription" required
                                             [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description">
                                       <header>
                                           <select class="ql-size">
@@ -80,7 +80,7 @@
                         </div>
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="submit" icon="ui-icon-save" class="green-btn"  label="Save" [disabled]="!testTemplateForm.form.valid"></button>
+                            <button pButton type="submit" id="save" name="save" icon="ui-icon-save" class="green-btn"  label="Save" [disabled]="!testTemplateForm.form.valid"></button>
                         </footer>
                         <br />
                         <!--</div>-->
@@ -97,11 +97,11 @@
                         <div class="ui-g-2">
                             <p-autoComplete [(ngModel)]="filteredSelectedTestRequirements" [suggestions]="filteredTestRequirements"
                                             (completeMethod)="filterTestRequirements($event)" styleClass="wid100"
-                                            [minLength]="1" placeholder="Search by Reference" field="referenceNumber" [multiple]="true">
+                                            [minLength]="1" placeholder="Search by Reference" field="referenceNumber" [multiple]="true" id="searchByRef">
                             </p-autoComplete>
                         </div>
                         <div class="ui-g-2" style='text-align:right'>
-                            <button  pButton type="submit" icon="ui-icon-add" (click)="onAddTestRequirement()" label="Add Requirement"></button>
+                            <button  pButton type="submit" icon="ui-icon-add" id="addrequirement" name="addrequirement" (click)="onAddTestRequirement()" label="Add Requirement"></button>
                         </div>
                     </div>
                 </div>
@@ -130,12 +130,12 @@
                     </div>
                     <div class="ui-g-2">
                         <p-autoComplete [(ngModel)]="filteredSelectedProcedures" [suggestions]="filteredProcedures" (completeMethod)="filterProcedures($event)"
-                            styleClass="wid100" [minLength]="1" placeholder="Search by Name" field="name" [multiple]="true">
+                            styleClass="wid100" [minLength]="1" placeholder="Search by Name" field="name" [multiple]="true" id="searchByProcedureName">
                         </p-autoComplete>
                     </div>
 
                     <div class="ui-g-2" style='text-align:right'>
-                        <button pButton type="submit" icon="ui-icon-add" label="Add Procedure" (click)="onAddProcedure()"> </button>
+                        <button id="addProcedure" name="addProcedure" pButton type="submit" icon="ui-icon-add" label="Add Procedure" (click)="onAddProcedure()"> </button>
                     </div>
                   </div>
                 </div>
