@@ -15,7 +15,7 @@ import { TestRequestService } from '../../shared/services/Containers/TestRequest
 
 
 import {
-    DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CheckboxModule,
+    BreadcrumbModule, DataTableModule, AutoCompleteModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, DropdownModule, CheckboxModule,
     FileUploadModule, DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule, FieldsetModule, AccordionModule, ToolbarModule
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
@@ -28,17 +28,18 @@ import {TitanService} from "../../shared/services/titan.service";
 import {CalendarService} from "../../shared/services/Containers/CalendarService/calendar.service";
 import {TenantService} from "../../shared/services/tenant.service";
 import {TestFacilityRoleService} from "../../shared/services/testFacilityRole.service";
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 
 
 @NgModule({
-    imports: [CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
+    imports: [BreadcrumbModule, CommonModule, calendarRoutes, RouterModule, AutoCompleteModule,
         MultiSelectModule, FormsModule, DataTableModule, TabViewModule, ButtonModule,
         InputTextareaModule, DropdownModule, InputTextModule, PanelModule, FileUploadModule,
         DialogModule, GrowlModule, RadioButtonModule, CalendarModule, TooltipModule, OverlayPanelModule,
         ContextMenuModule, FieldsetModule, AccordionModule, ToolbarModule, CheckboxModule],
 
-    providers: [TestFacilityService,  ProjectService, TestRoleService, TestStatusService, TestModeService, BuildLevelService,
+    providers: [BreadCrumbsService, TestFacilityService,  ProjectService, TestRoleService, TestStatusService, TestModeService, BuildLevelService,
         TestTypeService, TestRequestService, TitanService, CalendarService, TenantService, TestFacilityRoleService
     ],
     declarations: [TitanCalendarComponent]

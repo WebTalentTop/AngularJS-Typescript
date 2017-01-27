@@ -4,3 +4,12 @@ export interface ICalibrationForm {
     description;
     calibrationFrequencyCronExpression;
 }
+
+export class PrimeCalibrationForm implements ICalibrationForm {
+
+    constructor(public id,
+                public name,
+                public description,
+                public calibrationFrequencyCronExpression) {
+    }
+}
