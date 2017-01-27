@@ -5,8 +5,8 @@ import { TenantService } from '../../shared/services/tenant.service';
 import { UserProfileService } from '../../shared/services/userProfile.service';
 import { IUserProfile } from '../../shared/services/definitions/IUserProfile';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
-import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, PanelModule, MessagesModule, ButtonModule, DropdownModule } from 'primeng/primeng';
-
+import { BreadcrumbModule, DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, PanelModule, MessagesModule, ButtonModule, DropdownModule } from 'primeng/primeng';
+import { BreadCrumbsService } from '../../shared/services/breadCrumbs/breadCrumbs.service';
 import {DialogModule, EditorModule,SharedModule} from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
@@ -15,9 +15,10 @@ import functionGroupRoutes from "./functionGroup.routes";
 
 @NgModule({
 
-
-    imports: [DialogModule, EditorModule, SharedModule, CommonModule, RouterModule, DataTableModule, PanelModule, ButtonModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, functionGroupRoutes],
-    providers: [TestFacilityService, TenantService, UserProfileService, UserService],
+    imports: [BreadcrumbModule, DialogModule, EditorModule, SharedModule, CommonModule, RouterModule, 
+    DataTableModule, PanelModule, ButtonModule, InputTextModule, DropdownModule, MessagesModule, 
+    InputTextareaModule, TabViewModule, functionGroupRoutes],
+    providers: [BreadCrumbsService, TestFacilityService, TenantService, UserProfileService, UserService],
 
     declarations: [FunctionGroupComponent]
 })

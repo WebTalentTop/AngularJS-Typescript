@@ -65,6 +65,13 @@ export class BreadCrumbsService {
         //User Details Page
         this.userDetailsPage();
 
+        //FunctionGroup Page
+        this.functionGroupPage();
+        //FunctionGroup Add Page
+        this.functionGroupAddPage();
+        //FunctionGroup Details Page
+        this.functionGroupDetailsPage();
+
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
@@ -671,7 +678,7 @@ export class BreadCrumbsService {
     }
 
     private userPageBCItems() {
-        let menuItem = { label: 'User', routerLink: ['/user'] };
+        let menuItem = { label: 'Users', routerLink: ['/user'] };
         return menuItem;
     }
 
@@ -704,6 +711,52 @@ export class BreadCrumbsService {
         let menuItem = { label: 'User Details', routerLink: ['/user'] };
         return menuItem;
     }
+
+    // FunctionGroup Page Bread Crumbs
+    private functionGroupPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupPageBCItems() {
+        let menuItem = { label: 'Function Group', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
+    private functionGroupAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.functionGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupAddPageBCItems() {
+        let menuItem = { label: 'FunctionGroup Add', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
+    private functionGroupDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.functionGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupDetailsPageBCItems() {
+        let menuItem = { label: 'FunctionGroup Details', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
 
 
     // Admin Vehicle Home Page Bread Crumbs
