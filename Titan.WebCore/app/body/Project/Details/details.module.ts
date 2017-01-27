@@ -10,12 +10,12 @@ import { GradeService } from '../../../shared/services/grade.service'
 import { ProjectRoleService } from '../../../shared/services/projectRole.service'
 import { UserService } from '../../../shared/services/user.service'
 import { PlatformService } from '../../../shared/services/platform.service'
-import { EditorModule, SharedModule, DataTableModule, ButtonModule, InputTextareaModule, MultiSelectModule, InputTextModule, PanelModule, DropdownModule, GrowlModule, CalendarModule } from 'primeng/primeng';
+import { EditorModule, SharedModule, DataTableModule, ButtonModule, InputTextareaModule, MultiSelectModule, MessagesModule, InputTextModule, PanelModule, DropdownModule, GrowlModule, CalendarModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import detailsRoutes from "./details.routes";
 
 @NgModule({
-    imports: [EditorModule, SharedModule, CommonModule, FormsModule, DataTableModule, MultiSelectModule, InputTextareaModule, InputTextModule, PanelModule,
+    imports: [EditorModule, SharedModule, CommonModule, FormsModule, DataTableModule, MultiSelectModule, InputTextareaModule, MessagesModule, InputTextModule, PanelModule,
         ButtonModule, DropdownModule, CalendarModule, detailsRoutes],
     providers: [ProjectService, MarketService, ModelYearService, PlatformService, ModelNameService, GradeService, ProjectRoleService, UserService],
     declarations: [DetailsComponent],
