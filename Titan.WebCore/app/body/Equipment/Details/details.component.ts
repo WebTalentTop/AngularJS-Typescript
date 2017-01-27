@@ -144,6 +144,7 @@ export class DetailsComponent {
                 //  this.selectedEquipmentObj.frequency = "generic"; //res.result.calibrationFrequencyCronExpression;
 
                 this.model.equipmentTypeId = res.result.equipmentTypeId;
+                this.selectedEquipmentTypeId = res.result.equipmentTypeId;
                 if (res.result.purchaseDate == null)
                     this.model.purchaseDate = null;
                 else
@@ -159,8 +160,17 @@ export class DetailsComponent {
                 else
                     this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
 
+                let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === this.model.equipmentTypeId)[0].frequency;
+                if (frequencyvar != null && frequencyvar != "") {
+                    this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
+                    
+                    this.isMaintenaceFrequencySelected = true;
+                    // this.frequencyInit();
+                } else
+                { this.model.calibrationFrequencyCronExpression = null; this.isMaintenaceFrequencySelected = false;}
+               // this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;
+               
                 this.frequencyInit();
-                this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;
                 //if (res.testFacility.nextMaintenanceDate != null) {
                 //    this.hasNextMaintenanceDate = true;
                 //}
@@ -204,7 +214,7 @@ export class DetailsComponent {
     frequencyInit() {
         if (this.model.calibrationFrequencyCronExpression != null) {
             this.selectedMaintenanceFrequency = this.model.calibrationFrequencyCronExpression;
-//this.isMaintenaceFrequencySelected = true;
+            //this.isMaintenaceFrequencySelected = true;
             $("#selector").cron({
 
                 initial: this.selectedMaintenanceFrequency,
@@ -216,7 +226,7 @@ export class DetailsComponent {
         }
         else {
             this.selectedMaintenanceFrequency = "0 0 1 1 *";
-            this.isMaintenaceFrequencySelected = false;
+            //this.isMaintenaceFrequencySelected = false;
         }
 
     }
@@ -408,6 +418,10 @@ export class DetailsComponent {
             this.isMaintenaceFrequencySelected = true;
             this.frequencyInit();
         }
+        else
+        {
+            this.isMaintenaceFrequencySelected = false;
+        }
 
         // this.selectedCalibrationFrequency = event.
         //   this.EquipmentSubType.calibrationform = (event);
@@ -460,7 +474,7 @@ export class DetailsComponent {
                     }
                     this.equipmentTypes.push(temp);
                 }
-                this.equipmentTypes = this.equipmentTypes;
+                this.equipmentTypes = this.equipmentTypes;               
             }
         });
     }

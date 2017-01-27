@@ -3,7 +3,7 @@ import { TenantService } from '../../../shared/services/tenant.service';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule,  FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -61,12 +61,14 @@ export class DetailsComponent {
     selectedTitanRoleId: any;
     selectedDepartmentId: any;
     departments: any;
+    IsKeepOpen: any;
     timeZones: any;
     selectedUserId: any;
     users: any;
     titanRoles: any;
     tenantProfile: any = { name: '', hostAddress: ''};
     tenantUsers: any;
+    msgs: Message[] = [];
    // selectedDownTimeReasonId: any;
    // projectId: any;
    // selectedHourEntry: any ;
@@ -203,8 +205,11 @@ export class DetailsComponent {
    }
    onAddFunctionGroup()
    {
-       this.displayFunctionGroupDialog = false;
-      // let tenantFunctionGroupModel = {
+       if (!this.IsKeepOpen)
+           this.displayFunctionGroupDialog = false;
+       else
+           this.displayFunctionGroupDialog = true;
+    
 
        let Tenant = { Id: this.tenantId };
        //  };
@@ -433,9 +438,13 @@ export class DetailsComponent {
            departmentId: this.selectedDepartmentId
        };
        this.userservice.postUpdate(userFormData).subscribe(res => {
-           if (res.isSuccess)
-           {
-
+           if (res.isSuccess) {
+               this.msgs = [];
+               this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+           }
+           else {
+               this.msgs = [];
+               this.msgs.push({ severity: 'warn', summary: res.message, detail: 'Some thing went wrong.' });
            }
        });
 
