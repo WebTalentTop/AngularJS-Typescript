@@ -192,14 +192,13 @@ export class TeamInformationComponent {
    onDeleteUserRoleMap(id)
    {
        this.projectRoleService.DeleteUserRoleMap(id).subscribe(res => {
-           if (res.isSuccess)
-           {
+          
                this.projectRoleService.getByIdusing(this.projectId).subscribe(projectuserRoles => {
                    //  if (projectuserRoles.result.isSuccess) {
                    this.projectUserRoles = projectuserRoles.$values;
                    // }
                });
-           }
+           
        });
    }
     onAddTorqueSheetTemplateCancel() {

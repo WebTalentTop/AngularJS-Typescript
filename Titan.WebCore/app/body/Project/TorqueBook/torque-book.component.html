@@ -15,12 +15,12 @@
         <div class="ui-grid-row">
             <p-dataTable [value]="BuildLevels">
                 <!--<p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>-->
-                <p-column field="name" header="Name"></p-column>
-                <p-column field="description" header="Description"></p-column>
-                <p-column field="torqueBookName" header="Torque Book"></p-column>
-                <p-column field="torqueSheetName" header="Torque Sheet"></p-column>
-                <p-column field="currentDraftVersionTorqueSheetStatus" header="Torque Sheet Status"></p-column>
-                <p-column>
+                <p-column field="name" header="Name"  sortable="true" [filter]="true"></p-column>
+                <p-column field="description" header="Description"  sortable="true" [filter]="true"></p-column>
+                <p-column field="torqueBookName" header="Torque Book"  sortable="true" [filter]="true"></p-column>
+                <p-column field="torqueSheetName" header="Torque Sheet"  sortable="true" [filter]="true"></p-column>
+                <p-column field="currentDraftVersionTorqueSheetStatus" header="Torque Sheet Status"  sortable="true" [filter]="true"></p-column>
+                <p-column  sortable="true" [filter]="true">
                     <template pTemplate type="header">
                         Current TS Version
                     </template>
@@ -28,7 +28,7 @@
                         <button type="button" pButton (click)="onNewEditTorqueSheet(moduleItem)" icon="fa-edit" [label]="moduleItem.currentDraftVersion" *ngIf="moduleItem.currentDraftVersion"></button>
                     </template>
                 </p-column>
-                <p-column>
+                <p-column  sortable="true" [filter]="true">
                     <template pTemplate type="header">
                         Last TS Approved Version
                     </template>

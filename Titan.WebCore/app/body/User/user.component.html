@@ -2,14 +2,14 @@
     <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
     <br />
     <div class="card card-w-title">
-      <h2> Create New User</h2>
+      <h2>Users</h2>
       <br />
 
         <p-panel>
           <header class="with-controls">
-              <p class="ui-panel-title">Users</p>
+              <p class="ui-panel-title">List of users</p>
               <p class="controls">
-                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" name="add" icon="ui-icon-add" label="Assign User"></button>
+                <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" name="add" icon="ui-icon-add" label="Add User"></button>
               </p>
           </header>
           <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">

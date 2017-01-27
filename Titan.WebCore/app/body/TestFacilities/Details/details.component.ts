@@ -320,7 +320,6 @@ export class DetailsComponent implements AfterViewInit {
         me.getUserRoles();
         //me.getTestFacilities();
         me.testFacilities = [];
-        debugger;
         me.testFacilities.push({
             label: me.testFacility.name,
             value: me.testFacility.id

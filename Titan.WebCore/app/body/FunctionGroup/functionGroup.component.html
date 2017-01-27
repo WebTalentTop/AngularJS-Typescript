@@ -1,4 +1,6 @@
 <div class="ui-g-12">
+     <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+    <br />
     <div class="card card-w-title">
       <h1>Function Group</h1>
         <p-panel>
@@ -8,8 +10,9 @@
                     <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Create New Function Group"></button>
                 </p>
             </header>
-          <p-dataTable [value]="functionGroups" [paginator]="true" rows="15" [responsive]="true">
-
+          <p-dataTable [value]="functionGroups" [paginator]="true" rows="15" selectionMode="single" [responsive]="true">
+              
+             
               <p-column header="Function Group Name" sortable="true" [filter]="true"> 
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->

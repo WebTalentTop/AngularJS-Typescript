@@ -3,7 +3,8 @@ import { IUserProfile } from '../../../shared/services/definitions/IUserProfile'
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent,MenuItem, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule} from 'primeng/primeng';
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent,MenuItem, ButtonModule, InputTextareaModule, 
+InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule} from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';

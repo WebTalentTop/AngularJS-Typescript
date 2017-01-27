@@ -136,7 +136,7 @@
                 <!-- End Dialog - Assign User Role -->
                 <!-- Begin Panel - Test Facility Users -->
 
-                <p-panel>
+                <p-panel header="Function Group">
 
                     <!--<header class="with-controls">
                         <p class="ui-panel-title"> Function Groups </p>
@@ -180,15 +180,15 @@
 
                     <div class="input-row">
 
-                        <label>
+                            <div class="ui-g-4">
                             <b>Tenants :</b>
-
+                            </div>
                             <div class="ui-g-8">
                                 <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants"  id="tenants" [autoWidth]="false"></p-dropdown>
                             </div>
-                        </label>
+                        
 
-                    </div>
+                    </div><br />
 
                     <!-- End Users -->
                     <!-- Begin Role -->
@@ -224,7 +224,7 @@
 
                         <p-dataTable [value]="userTenants" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                             <p-column field="tenantName" header="Tenant Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="isInheritedPermission" header="Inherited Permission" sortable="true"></p-column>
+                            <p-column field="isInheritedPermission" header="User Permission" sortable="true"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">                                
                                 <template let-UserTenant="rowData" pTemplate type="body">
