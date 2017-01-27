@@ -13,7 +13,7 @@
 
                     <div class="ui-grid-row">
                         <div class="md-inputfield ui-g-12 ui-md-6">
-                            <input type="text" pInputText name="testTemplateName" #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name"
+                            <input type="text" pInputText name="testTemplateName" id="testTemplateName" #testTemplateNameRef="ngModel" [(ngModel)]="testTemplate.name"
                                    minlength="3"  required style="width:100%">
                             <label>Test Template Name <span >*</span></label>
                         </div>
@@ -23,7 +23,7 @@
                         <p>Description <span >*</span></p>
                         <div class="md-inputfield">
 
-                            <p-editor [(ngModel)]="testTemplate.description" name="testTemplateDescription" required
+                            <p-editor [(ngModel)]="testTemplate.description" name="testTemplateDescription" id="testTemplateDescription" required
                                       [style]="{'min-height':'160px'}" placeholder="Max 500 characters. " #testTemplateDescriptionRef="ngModel" [(ngModel)]="testTemplate.description">
                                 <header>
                                     <select class="ql-size">
@@ -77,8 +77,8 @@
                 </div>
                 <footer>
                     <p>* indicates required field</p>
-                    <button pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" routerLink="/testtemplate">  </button>
-                    <button id="create" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" [disabled]="!testTemplateForm.form.valid"></button>
+                    <button id="cancel" name="cancel" pButton label="Cancel" class="blue-grey-btn" icon="ui-icon-close" routerLink="/testtemplate">  </button>
+                    <button id="save" name="save" pButton type="submit" class="green-btn" icon="ui-icon-save" label="Add" [disabled]="!testTemplateForm.form.valid"></button>
                 </footer>
                 <br />
                 <!--</div>-->
