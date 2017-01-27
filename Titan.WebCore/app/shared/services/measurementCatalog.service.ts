@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { UserApiUrl } from './apiUrlConst/UserApiUrls';
+import { MeasurementCatalogApiUrl } from './apiUrlConst/MeasurementCatalogApiUrls';
 
 
 import 'rxjs/Rx';
@@ -11,7 +11,7 @@ import {UserProfileService} from "./userProfile.service";
 import {IUserProfile} from "./definitions/IUserProfile";
 
 @Injectable()
-export class UserService {
+export class MeasurementCatalogService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json'
         // 'Access-Control-Allow-Origin': '*'
@@ -32,8 +32,37 @@ export class UserService {
         this.headers.append("UserId", this.currentUser.id);
     }
 
-    getUsersByTenantId(id): Observable<any> {
-        return this.http.get(`${UserApiUrl.getUsersByTenantId}/${id}`, { headers: this.headers })
+    getAllMeasurementCatalogs(): Observable<any> {
+        return this.http.get(`${MeasurementCatalogApiUrl.getAllMeasurementCatalogs}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+    }
+    postAddInputDetailsById(filterBody, catalogId): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${MeasurementCatalogApiUrl.postAddInputDetailsById}/${catalogId}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    RemoveInputParameterCatalogMap(filterBody,id): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${MeasurementCatalogApiUrl.RemoveInputParameterCatalogMap}/${id}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getInputDetailsById(userId): Observable<any> {
+        return this.http.get(`${MeasurementCatalogApiUrl.getByIdUrl}/${userId}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -42,8 +71,8 @@ export class UserService {
             ;
     }
     
-    GetUserFunctionGroupsByUser(userId): Observable<any> {
-        return this.http.get(`${UserApiUrl.GetUserFunctionGroupsByUser}/${userId}`, { headers: this.headers })
+  /*  GetUserFunctionGroupsByUser(userId): Observable<any> {
+        return this.http.get(`${MeasurementCatalogApiUrl.GetUserFunctionGroupsByUser}/${userId}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -53,7 +82,7 @@ export class UserService {
     }
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
+        return this.http.post(`${MeasurementCatalogApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
             //  .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -61,9 +90,47 @@ export class UserService {
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
+    postAddFunctionGroup(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${MeasurementCatalogApiUrl.postFunctionGroupCreatedUrl}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
 
-    getUserDetailsById(id): Observable<any> {
-        return this.http.get(`${UserApiUrl.getUserDetailsById}/${id}`, { headers: this.headers })
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    postAssignUserFunctionGroup(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${MeasurementCatalogApiUrl.postAssignUserFunctionGroup}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    removeUserFunctionGroup(filterBody): Observable<any> {
+        console.log("-------- Post Customers FilterBody --------", filterBody);
+        return this.http.post(`${MeasurementCatalogApiUrl.removeUserFunctionGroup}`, filterBody, { headers: this.headers })
+            //  .map(this.getJson).catch(err => Observable.throw(err))
+            .map(this.getJson);
+
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+    getFunctionGroupDetailsById(id): Observable<any> {
+        return this.http.get(`${MeasurementCatalogApiUrl.getFunctionGroupDetailsById}/${id}`, { headers: this.headers })
+            .map(this.getJson)
+            //.map(data => {
+            //    console.log("Notification data --------", data);
+            //    return data.$values
+            //});
+            ;
+    }
+    getTenantUserFunctionGroupsById(id): Observable<any> {
+        return this.http.get(`${MeasurementCatalogApiUrl.getTenantUserFunctionGroupsById}/${id}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -72,7 +139,7 @@ export class UserService {
             ;
     }
     GetTenantMembershipsByUser(id): Observable<any> {
-        return this.http.get(`${UserApiUrl.GetTenantMembershipsByUser}/${id}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.GetTenantMembershipsByUser}/${id}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -81,7 +148,7 @@ export class UserService {
             ;
     }
     GetAllUserFunctionGroupMappingByTenant(id): Observable<any> {
-        return this.http.get(`${UserApiUrl.GetAllUserFunctionGroupMappingByTenant}/${id}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.GetAllUserFunctionGroupMappingByTenant}/${id}`, { headers: this.headers })
             .map(this.getJson)
             //.map(data => {
             //    console.log("Notification data --------", data);
@@ -91,8 +158,8 @@ export class UserService {
     }
     postUpdate(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.put(`${UserApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
-           // .map(this.getJson).catch(err => Observable.throw(err))
+        return this.http.put(`${MeasurementCatalogApiUrl.postUpdateUrl}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
@@ -100,44 +167,44 @@ export class UserService {
         //.map(this.getJson);
     }
     getAllFunctionGroups(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getAllFunctionGroups}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getAllFunctionGroups}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getTenants(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getTenants}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getTenants}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getTimeZones(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getTimeZones}/${true}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getTimeZones}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getTitanRoles(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getTitanRoles}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getTitanRoles}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getDepartments(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getDepartments}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getDepartments}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
     getUsers(): Observable<any> {
-        return this.http.get(`${UserApiUrl.getUsers}`, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.getUsers}`, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
     }
 
     filterUserByName(filterString: string): Observable<any> {
-        return this.http.get(`${UserApiUrl.filterUserByName}` + filterString, { headers: this.headers })
+        return this.http.get(`${MeasurementCatalogApiUrl.filterUserByName}` + filterString, { headers: this.headers })
             .map(this.getJson);
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
@@ -145,7 +212,7 @@ export class UserService {
 
     RemoveFunctionGroupUserMap(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.RemoveFunctionGroupUserMap}`, filterBody, { headers: this.headers })
+        return this.http.post(`${MeasurementCatalogApiUrl.RemoveFunctionGroupUserMap}`, filterBody, { headers: this.headers })
             // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -155,7 +222,7 @@ export class UserService {
     }
     RemoveTenantMapping(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.RemoveTenantMapping}`, filterBody, { headers: this.headers })
+        return this.http.post(`${MeasurementCatalogApiUrl.RemoveTenantMapping}`, filterBody, { headers: this.headers })
             // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
@@ -166,8 +233,8 @@ export class UserService {
 
     postAddFunctionGroupToUser(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.postAddFunctionGroupToUser}`, filterBody, { headers: this.headers })
-           // .map(this.getJson).catch(err => Observable.throw(err))
+        return this.http.post(`${MeasurementCatalogApiUrl.postAddFunctionGroupToUser}`, filterBody, { headers: this.headers })
+            // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
@@ -176,14 +243,14 @@ export class UserService {
     }
     CreateUserTenantAccess(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
-        return this.http.post(`${UserApiUrl.CreateUserTenantAccess}`, filterBody, { headers: this.headers })
+        return this.http.post(`${MeasurementCatalogApiUrl.CreateUserTenantAccess}`, filterBody, { headers: this.headers })
             // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
         //.map(this.getJson);
-    }
+    }*/
     private getJson(response: Response) {
         console.log("In Data Service response.json() call: ", response.json());
         return response.json();

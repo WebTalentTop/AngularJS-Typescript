@@ -11,7 +11,7 @@
                 <p-messages [value]="notificationMsgs" [closable]="false"></p-messages>
                 <!-- Begin Panel - Test Facility Name and Location -->
 
-                <p-panel header="User Information">
+                <p-panel header="Tenant Information">
 
                     <div class="body">
 
@@ -27,6 +27,14 @@
                                 <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
                                        minlength="3" class="form-control" required row="20" style="width:100%">
                                 <label>Name <span>*</span></label>
+                            </div>
+                        </div><br /><br />
+
+                        <div class="ui-grid-row">
+
+                            <div class="ui-g-12 ui-md-6" id="url" pInputText name="url" [(ngModel)]="url"
+                                       minlength="3" class="form-control" required row="20" style="width:100%">
+                                <label>Url <span>*</span></label>
                             </div>
                         </div><br /><br />
 

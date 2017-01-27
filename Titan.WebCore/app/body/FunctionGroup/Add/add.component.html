@@ -4,7 +4,7 @@
 <br/>
         <div class="card card-w-title">
 
-            <h2>Create New User</h2>
+            <h2>Create New Function Group</h2>
 
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
@@ -35,7 +35,7 @@
                         <div class="ui-grid-row">
 
                             <div class="ui-g-12 ui-md-6">
-                                <p style="color:#777">Users :</p>
+                                <p style="color:#777">Departments :</p>
                                 <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" [(ngModel)]="selectedDepartmentId" (onChange)="onDepartmentChange($event)" name="departments" id="departments" [autoWidth]="false"></p-dropdown>
                             </div>
                         </div><br /><br />

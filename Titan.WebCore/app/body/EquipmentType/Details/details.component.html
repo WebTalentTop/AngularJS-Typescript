@@ -61,6 +61,7 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
+                                <pre>{{selectedFormItem | json }}</pre>
                                 <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem"></p-dropdown>
                                <!-- <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
@@ -151,7 +152,7 @@
                                  [paginator]="true" rows="15" [responsive]="true">
                                  <p-column field="name" header="Equipment Sub Type Name" sortable="true"></p-column>
                                  <p-column field="description" header="Description" sortable="true"></p-column>
-                                 <p-column field="calibrationform" header="Calibration Form" sortable="true"></p-column>
+                                 <p-column field="calibrationForm" header="Calibration Form" sortable="true"></p-column>
                                  <p-column field="frequencyDescription" header="Frequency" sortable="true"></p-column>
                                  <!--<footer>
                                  </footer>-->

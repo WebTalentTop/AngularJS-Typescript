@@ -249,7 +249,7 @@ export class AddComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name + "(" + template.frequency + ")",
+                        label: template.name + "(" + template.frequencyDescription + ")",
                         value: template.id,
                         frequency: template.frequency
                     }
