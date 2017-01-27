@@ -3,7 +3,7 @@
 <header class="with-controls">
     <p class="ui-panel-title">Build Level Milestone Map</p>
     <p class="controls">
-    <button pButton type="button" icon="ui-icon-search" label="Select Build Levels" class="blue-grey-btn" (click)="displayBuildlevel=true"></button>
+    <button pButton type="button" icon="ui-icon-search" label="Select Build Levels" class="blue-grey-btn" (click)="displayBuildlevel=true" id="selectBuildLevel" name="selectBuildLevel"></button>
     </p>
 </header>
 
@@ -14,6 +14,7 @@
             <div class="ui-g-4" *ngFor="let item of buildLevels">
                 <p-checkbox
                         name="buildLevels"
+                        id="buildLevels"
                         value="{{item.id}}"
                         label="{{item.name}}"
                         (onChange)="addToProject($event, item)"
@@ -52,6 +53,8 @@
             label="Save"
             icon="ui-icon-save"
             class="green-btn"
+            id="saveGrid"
+            name="saveGrid"
             (click)="saveGrid($event)">
     </button>
 </div>

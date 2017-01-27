@@ -61,7 +61,7 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Calibration Forms :</p>
-                                <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem" [style]="{'width':'100%'}"></p-dropdown>
+                                <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem" [style]="{'width':'100%'}" id="calibrationFormItems"></p-dropdown>
                                <!-- <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
                                     <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
                                 </select>-->
@@ -96,7 +96,7 @@
                       </div>
                       <footer>
                          <p>* indicates required field</p>
-                          <button pButton type="submit" label="Save" id="save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
+                          <button pButton type="submit" label="Save" id="save" name="save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
 
                       </footer><br />
                   </p-panel><br />
@@ -142,7 +142,7 @@
                            <p class="ui-panel-title">Equipment SubTypes</p>
                            <p class="controls">
                              <button type="button" pButton icon="fa-plus" style="float:left"
-                                             (click)="showDialogToAdd()" label="Create SubType" id="createsubtype"  class="blue-grey-btn" ></button>
+                                             (click)="showDialogToAdd()" label="Create SubType" id="createsubtype" name="createsubtype" class="blue-grey-btn" ></button>
                            </p>
                        </header>
                        <div class="body">
@@ -214,8 +214,8 @@
                                  <footer>
                                      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
                                          <!--<button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>-->
-                                         <button type="button" pButton icon="ui-icon-close"(click)="cancelDialog()" label="Cancel" id="subtypecancel"></button>
-                                         <button type="button" pButton icon="ui-icon-save" (click)="save()" label="Add" id="subtypeadd"></button>
+                                         <button type="button" pButton icon="ui-icon-close"(click)="cancelDialog()" label="Cancel" id="subtypecancel" name="subtypecancel"></button>
+                                         <button type="button" pButton icon="ui-icon-save" (click)="save()" label="Add" id="subtypeadd" name="subtypeadd"></button>
                                      </div>
                                  </footer>
                              </p-dialog>
