@@ -339,10 +339,10 @@ export class BreadCrumbsService {
 
         //Admin EngineCode Page
         this.adminEngineCodePage();
-        // // Admin EngineCode Add Page
-        // this.adminEngineCodeAddPage();
-        // // Admin EngineCode Details Page
-        // this.adminEngineCodeDetailsPage();
+        // Admin EngineCode Add Page
+        this.adminEngineCodeAddPage();
+        // Admin EngineCode Details Page
+        this.adminEngineCodeDetailsPage();
 
     }
 
@@ -2566,17 +2566,56 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'EngineCodeHomePage', items: menuItems };
         this.addToBreadCrumbs(bcInfoItems);
     }
 
-    private adminEngineCodeBCItems() {
-        let menuItem = { label: 'EngineCode', routerLink: ['/admin/'] };
+    private adminEngineCodePageBCItems() {
+        let menuItem = { label: 'Engine Code', routerLink:  ['/admin/vehicle/engineCode'] };
         return menuItem;
     }
+
+    private adminEngineCodeAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminEngineCodePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminEngineCodeAddPageBCItems() {
+        let menuItem = { label: 'Add EngineCode', routerLink: ['/admin/vehicle/engineCode'] };
+        return menuItem;
+    }
+
+    private adminEngineCodeDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminEngineCodePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'EngineCodeDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminEngineCodeDetailsPageBCItems() {
+        let menuItem = { label: 'EngineCode Details', routerLink: ['/admin/vehicle/engineCode'] };
+
+        return menuItem;
+    }
+
+
 
     public getBreadCrumbs() {
         return this.breadCrumbs;
