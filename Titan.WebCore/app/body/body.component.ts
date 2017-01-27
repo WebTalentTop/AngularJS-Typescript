@@ -9,7 +9,7 @@ import {IUserProfile} from "../shared/services/definitions/IUserProfile";
 export class BodyComponent {
     currentUser:IUserProfile;
     showBetaMessage:boolean = true;
-    betaMessage:string = "Under development";
+    betaMessage:string = "Beta";
 
     constructor(){
     }
