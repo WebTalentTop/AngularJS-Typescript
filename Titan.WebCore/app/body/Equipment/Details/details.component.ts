@@ -454,7 +454,8 @@ export class DetailsComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: template.name + "(" + template.frequencyDescription + ")",
+                       // label: template.name + "(" + template.frequencyDescription + ")",
+                       label: template.name,
                         value: template.id,
                         frequency: template.frequency
                     }

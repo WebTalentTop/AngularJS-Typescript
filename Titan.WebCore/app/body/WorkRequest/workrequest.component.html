@@ -5,7 +5,7 @@
         <!--<div class="panel-heading">Sensor Info</div>-->
         <header>
             <h1>Work Request</h1>
-            <button pButton type="button" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Add New Work Request"></button>
+            <button pButton type="button" [routerLink]="['add']" icon="ui-icon-add" label="Add New Work Request" id="add" name="add"></button>
         </header>
         <div class="panel-body">
             <div class="row">
@@ -35,9 +35,9 @@
                                 <p-column header="Actions" field="actions" sortable="true">
                                     <template let-workrequestrow="rowData" pTemplate type="body">
                                         <!-- <a routerLink="details/{{workrequestrow.id}}/{{workrequestrow.entityId}}">View Details</a> -->
-                                        <button pButton type="button"  class="blue-grey-btn" [routerLink]="['details/'+workrequestrow.id+'/'+workrequestrow.entityId]" icon="ui-icon-add" label="View Details"></button>
+                                        <button pButton type="button"  class="blue-grey-btn" [routerLink]="['details/'+workrequestrow.id+'/'+workrequestrow.entityId]" icon="ui-icon-add" label="View Details" name="view_details" id="view_details"></button>
                                         <button pButton type="button" icon="ui-icon-remove-circle"  class="red-btn" label="Delete"
-                                                (click)="onDelete(workrequestrow)"></button>
+                                                (click)="onDelete(workrequestrow)" name="delete" id="delete"></button>
                                     </template>
                                 </p-column>
 

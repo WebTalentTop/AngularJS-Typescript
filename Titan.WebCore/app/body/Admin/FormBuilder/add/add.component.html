@@ -186,7 +186,7 @@
         <div class="ui-g ui-flued form-group">
             <div class="ui-g-12 ui-md-12" style="text-align:right">
                 <button type="button" (click)="saveForm()" pButton icon="fa ui-icon-save" icon="ui-icon-remove-circle" class="green-btn"
-                        label="Save"></button>
+                        label="Save" id="save" name="save"></button>
             </div>
         </div>
       </p-panel>
@@ -218,8 +218,8 @@
     </div><br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayTextBox=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayTextBox=false" label="Cancel" id="textboxCancel" name="textboxCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBox()" label="Save" id="textboxSave" name="textboxSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -247,8 +247,8 @@
     </div><br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayTextAreaBox=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveTextAreaBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayTextAreaBox=false" label="Cancel" id="textareaCancel" name="textareaCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveTextAreaBox()" label="Save" id="textareaSave" name="textareaSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -274,8 +274,8 @@
     </div><br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayNumberBox=false" label="Cancel"></button>
-            <button pButton type="text" icon="ui-icon-save" (click)="saveNumberBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayNumberBox=false" label="Cancel" id="numberboxCancel" name="numberboxCancel"></button>
+            <button pButton type="text" icon="ui-icon-save" (click)="saveNumberBox()" label="Save" id="numberboxSave" name="numberboxSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -302,8 +302,8 @@
     </div><br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayRadioBox=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveRadioBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayRadioBox=false" label="Cancel" id="radioCancel" name="radioCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveRadioBox()" label="Save" id="radioSave" name="radioSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -330,8 +330,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayCheckBox=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveCheckBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayCheckBox=false" label="Cancel" id="checkboxCancel" name="checkboxCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveCheckBox()" label="Save" id="checkboxSave" name="checkboxSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -358,8 +358,8 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displaySelectBox=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveSelectBox()" label="Save"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displaySelectBox=false" label="Cancel" id="selectboxCancel" name="selectboxCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveSelectBox()" label="Save" id="selectboxSave" name="selectboxSave"></button>
         </div>
     </footer>
 </p-dialog>
@@ -401,9 +401,9 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button pButton type="button" icon="ui-icon-close" (click)="displayTextBoxMod=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()">
+            <button pButton type="button" icon="ui-icon-close" (click)="displayTextBoxMod=false" label="Cancel" id="textboxCancel" name="textboxCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save" id="textboxSave" name="textBoxSave"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()" id="textboxRemove" name="textboxRemove">
             </button>
         </div>
     </footer>
@@ -434,9 +434,9 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayCheckBoxMod=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveCheckBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
+            <button  type="button" pButton icon="ui-icon-close" (click)="displayCheckBoxMod=false" label="Cancel" id="checkboxCancel" name="checkboxCancel"></button>
+            <button  pButton type="button" icon="ui-icon-save" (click)="saveCheckBoxMod()" label="Save" id="checkboxSave" name="checkboxSave"></button>
+            <button  pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()" id="checkboxRemove" name="checkboxRemove"></button>
         </div>
     </footer>
 </p-dialog>
@@ -466,9 +466,9 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayRadioBoxMod=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveRadioBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displayRadioBoxMod=false" label="Cancel" id="radiobuttonCancel" name="radiobuttonCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveRadioBoxMod()" label="Save" id="radiobuttonSave" name="radiobuttonSave"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()" id="radiobuttonRemove" name="radiobuttonRemove"></button>
         </div>
     </footer>
 </p-dialog>
@@ -497,9 +497,9 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displaySelectBoxMod=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveSelectBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="displaySelectBoxMod=false" label="Cancel" id="selectboxCancel" name="selectboxCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveSelectBoxMod()" label="Save" id="selectboxSave" name="selectboxSave"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()" id="selectboxRemove" name="selectboxRemove"></button>
         </div>
     </footer>
 </p-dialog>
@@ -530,9 +530,9 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="ui-icon-close" (click)="displayTextAreaBoxMod=false" label="Cancel"></button>
-            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save"></button>
-            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()">
+            <button type="button" pButton icon="ui-icon-close" (click)="displayTextAreaBoxMod=false" label="Cancel" id="textareaCancel" name="textareaCancel"></button>
+            <button pButton type="button" icon="ui-icon-save" (click)="saveTextBoxMod()" label="Save" id="textareaSave" name="textareaSave"></button>
+            <button pButton type="button" label="Remove" icon="ui-icon-delete" (click)="removeItem()" id="textareaRemove" name="textareaRemove">
             </button>
         </div>
     </footer>
