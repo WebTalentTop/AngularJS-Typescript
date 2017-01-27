@@ -1,43 +1,37 @@
 ﻿<div class="ui-g">
     <div class="ui-g-12">
         <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
-        <br />
+        <br/>
 
-      <div class="card card-w-title">
-        <h2>Equipment Type</h2>
-          <p-tabView (onChange)="handleChange($event)">
-            <p-tabPanel header="Information" id="info">
-                <p-growl [value]="msgs"></p-growl>
+        <div class="card card-w-title">
+            <h2>Equipment Type</h2>
+            <p-tabView (onChange)="handleChange($event)">
+                <p-tabPanel header="Information" id="info">
+                    <p-growl [value]="msgs"></p-growl>
 
-        <!--<div class="card card-w-title">-->
-        <!--<p-tabView (onChange)="handleChange($event)">-->
-             <!--<p-panel > -->
-                <!--<form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">-->
-                  <div class="row">
-                      <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
 
-                              <p-growl [value]="msgs"></p-growl>
-                          <!--<button pButton type="submit" label="Save" icon="ui-icon-edit" iconPos="left" (click)="onEdit()"></button>-->
-                          <!--<ul class="rightIconNav pull-right mb10">-->
+                            <p-growl [value]="msgs"></p-growl>
+                        </div>
+                    </div>
+                    <br/>
 
-                          <!--</ul>-->
-                      </div>
-                  </div><br />
+                    <p-panel header="Basic Information">
+                        <header>
 
-                  <p-panel header="Basic Information">
-                    <header>
-
-                    </header>
-                    <div class="body">
-                        <!-- Begin Name -->
-                        <div class="ui-grid-row">
-                            <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" id="name" pInputText name="name" [(ngModel)]="model.name"
-                                       minlength="3" class="form-control" required row="20" style="width:100%">
-                                <label>Name <span >*</span></label>
-                            </div>
-                            <div class="ui-g-12 ui-md-6">
-                                    <p-checkbox name="groupname" id="isMaintenance" value="isMaintenaceFrequencySelected"
+                        </header>
+                        <div class="body">
+                            <!-- Begin Name -->
+                            <div class="ui-grid-row">
+                                <div class="md-inputfield ui-g-12 ui-md-6">
+                                    <input type="text" id="name" pInputText name="name" [(ngModel)]="model.name"
+                                           minlength="3" class="form-control" required row="20" style="width:100%">
+                                    <label>Name <span>*</span></label>
+                                </div>
+                                <div class="ui-g-12 ui-md-6">
+                                    <p-checkbox name="groupname" id="isMaintenance"
+                                                value="isMaintenaceFrequencySelected"
                                                 label="Is calibration Required?"
                                                 [(ngModel)]="isMaintenaceFrequencySelected" binary="true"
                                                 (onChange)="showHideCronPicker()">
@@ -45,191 +39,161 @@
 
 
                                     <div class="md-inputfield">
-                                        <br />
+                                        <br/>
                                         <div id="selector" [hidden]="!isMaintenaceFrequencySelected"></div>
                                     </div>
                                 </div>
-                            <!--<div class="md-inputfield ui-g-12 ui-md-6">
-                                <div class="md-inputfield">
-                                    <br />
-                                    <div id="selector"></div>
-                                </div>
-                             <label>Frequency</label>
-                            </div>-->
-                          </div>
-
-                        <div class="ui-grid-row ">
-                            <div class="ui-g-12 ui-md-6">
-                                <p style="color:#777">Calibration Forms :</p>
-                                <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem" [style]="{'width':'100%'}"></p-dropdown>
-                               <!-- <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" id="calform" width="300" style="width: 300px">
-                                    <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
-                                </select>-->
-                                <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
-            </p-dropdown>-->
                             </div>
-                            <br />
-                        </div><br/>
-                          <div class="ui-grid-row " >
-                              <div class="ui-g-12 ui-md-12" >
-                                <label style="color:#777">Description</label>
-                              </div>
-                              <div class="ui-g-12 ui-md-12 md-inputfield">
-                                  <p-editor [(ngModel)]="model.description" name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
-                                      <header>
-                                          <select class="ql-size">
-                                              <option value="small"></option>
 
-                                              <option selected></option>
-                                              <option value="large"></option>
-                                              <option value="huge"></option>
-                                          </select>
-                                          <span class="ql-formats">
+                            <div class="ui-grid-row ">
+                                <div class="ui-g-12 ui-md-6">
+                                    <p style="color:#777">Calibration Forms :</p>
+                                    <p-dropdown [options]="calibrationFormItems" [(ngModel)]="selectedFormItem"
+                                                [style]="{'width':'100%'}"></p-dropdown>
+
+                                </div>
+                                <br/>
+                            </div>
+                            <br/>
+                            <div class="ui-grid-row ">
+                                <div class="ui-g-12 ui-md-12">
+                                    <label style="color:#777">Description</label>
+                                </div>
+                                <div class="ui-g-12 ui-md-12 md-inputfield">
+                                    <p-editor [(ngModel)]="model.description" name="description" id="description"
+                                              [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                        <header>
+                                            <select class="ql-size">
+                                                <option value="small"></option>
+
+                                                <option selected></option>
+                                                <option value="large"></option>
+                                                <option value="huge"></option>
+                                            </select>
+                                            <span class="ql-formats">
                                               <button class="ql-bold"></button>
                                               <button class="ql-italic"></button>
                                               <button class="ql-underline"></button>
                                           </span>
-                                      </header>
-                                  </p-editor>
-                              </div>
-                          </div>
-                      </div>
-                      <footer>
-                         <p>* indicates required field</p>
-                          <button pButton type="submit" label="Save" id="save" class="green-btn" icon="ui-icon-save" iconPos="left" (click)="onEdit()"></button>
-
-                      </footer><br />
-                  </p-panel><br />
-                  <!--<p-panel>
-                      <header class="with-controls">
-                          <p class="ui-panel-title">Calibration Forms</p>
-                         
-                      </header>
-                        <div class="ui-grid-row ">
-                            <div class="ui-g-12 ui-md-6">
-                                        <p style="color:#777">Calibration Forms :</p>
-                                <select [(ngModel)]="selectedCalibration" class="form-control" name="calform" width="300" style="width: 300px">
-                                    <option *ngFor="let x of CalibrationForms" [value]="x">{{x.name}}</option>
-                                </select>
-                                      
+                                        </header>
+                                    </p-editor>
+                                </div>
                             </div>
-                            <br/>
                         </div>
-                            <p-dialog header="Add New Calibration Form" [(visible)]="displayDialogForm" [responsive]="true" showEffect="fade" [modal]="true" width="400">
-                              <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="CalibrationForm" >
-                                  <div class="ui-grid-row">
-                                      <div class="ui-grid-col-4"><label for="name">Name</label></div>
-                                      <div class="ui-grid-col-8"><input pInputText name="name" [(ngModel)]="CalibrationForm.name"
-                                          /></div>
-                                  </div><br />
-                                  <div class="ui-grid-row">
-                                      <div class="ui-grid-col-4"><label for="description">Description</label></div>
-                                      <div class="ui-grid-col-8"><input pInputText name="description"  [(ngModel)]="CalibrationForm.description"
-                                          /></div>
-                                  </div>
+                        <footer>
+                            <p>* indicates required field</p>
+                            <button pButton type="submit" label="Save" id="save" class="green-btn" icon="ui-icon-save"
+                                    iconPos="left" (click)="onEdit()"></button>
 
-                              </div>
-                              <footer>
-                                  <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                      <button type="button" pButton icon="fa-close" (click)="cancel()" label="Cancel"></button>
-                                      <button type="button" pButton icon="fa-check" (click)="ok()" label="ok"></button>
-                                  </div>
-                              </footer>
-                          </p-dialog>
-                 </p-panel><br />-->
-                  <p-panel>
-                       <header class="with-controls">
-                           <p class="ui-panel-title">Equipment SubTypes</p>
-                           <p class="controls">
-                             <button type="button" pButton icon="fa-plus" style="float:left"
-                                             (click)="showDialogToAdd()" label="Create SubType" id="createsubtype"  class="blue-grey-btn" ></button>
-                           </p>
-                       </header>
-                       <div class="body">
-                             <div class="ui-grid-col-2"></div>
-                             <p-dataTable [value]="EquipmentsubTypes" selectionMode="single" [(selection)]="selectedsubType" (onRowSelect)="onRowSelect($event)"
-                                 [paginator]="true" rows="15" [responsive]="true">
-                                 <p-column field="name" header="Equipment Sub Type Name" sortable="true"></p-column>
-                                 <p-column field="description" header="Description" sortable="true"></p-column>
-                                 <p-column field="calibrationForm" header="Calibration Form" sortable="true"></p-column>
-                                 <p-column field="frequencyDescription" header="Frequency" sortable="true"></p-column>
-                                 <!--<footer>
-                                 </footer>-->
-                             </p-dataTable>
-                             <br />
-                             <p-dialog header="Create New SubType" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="500">
-                          <p>
-                              Please enter SubType details
-                          </p>
-                                 <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="EquipmentSubType">
-                                     <div class="ui-grid-row">
-                                         <div class="ui-grid-col-4"><label for="name">Name<span >*</span></label></div>
-                                         <div class="ui-grid-col-8">
-                                              <input pInputText name="subtypename" id="subtypename"
-                                    [(ngModel)]="EquipmentSubType.name" required pInputText
-                                    #equipmentSubTypeNameRef="ngModel"
-                                    minlength="3" class="form-control" required row="20"
-                                    (focus)="equipmentSubTypeNameRef.focus=true" name="name" style="width:100%">
+                        </footer>
+                        <br/>
+                    </p-panel>
+                    <br/>
+                    <p-panel>
+                        <header class="with-controls">
+                            <p class="ui-panel-title">Equipment SubTypes</p>
+                            <p class="controls">
+                                <button type="button" pButton icon="fa-plus" style="float:left"
+                                        (click)="showDialogToAdd()" label="Create SubType" id="createsubtype"
+                                        class="blue-grey-btn"></button>
+                            </p>
+                        </header>
+                        <div class="body">
+                            <div class="ui-grid-col-2"></div>
+                            <p-dataTable [value]="EquipmentsubTypes" selectionMode="single"
+                                         [(selection)]="selectedsubType" (onRowSelect)="onRowSelect($event)"
+                                         [paginator]="true" rows="15" [responsive]="true">
+                                <p-column field="name" header="Equipment Sub Type Name" sortable="true"></p-column>
+                                <p-column field="description" header="Description" sortable="true"></p-column>
+                                <p-column field="calibrationForm" header="Calibration Form" sortable="true"></p-column>
+                                <p-column field="frequencyDescription" header="Frequency" sortable="true"></p-column>
+                                <!--<footer>
+                                </footer>-->
+                            </p-dataTable>
+                            <br/>
+                            <p-dialog header="Create New SubType" [(visible)]="displayDialog" [responsive]="true"
+                                      showEffect="fade" [modal]="true" width="500">
+                                <p>
+                                    Please enter SubType details
+                                </p>
+                                <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="EquipmentSubType">
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-4"><label for="name">Name<span>*</span></label></div>
+                                        <div class="ui-grid-col-8">
+                                            <input pInputText name="subtypename" id="subtypename"
+                                                   [(ngModel)]="EquipmentSubType.name" required pInputText
+                                                   #equipmentSubTypeNameRef="ngModel"
+                                                   minlength="3" class="form-control" required row="20"
+                                                   (focus)="equipmentSubTypeNameRef.focus=true" name="name"
+                                                   style="width:100%">
 
-                                             <!--<input pInputText name="name" [(ngModel)]="EquipmentSubType.name"   #equipmentSubTypeNameRef="ngModel"
-                                             />-->
-                                             </div>
-                                     </div><br />
-                                     <div class="ui-grid-row">
-                                         <div class="ui-grid-col-4"><label for="description">Description</label></div>
-                                         <div class="ui-grid-col-8"><input pInputText name="subtypedescription" id="subtypedescription" [(ngModel)]="EquipmentSubType.description" #equipmentSubTypedescriptionRef="ngModel"
-                                             /></div>
-                                     </div><br />
-                                     <div class="ui-grid-row">
-                                         <div class="ui-grid-col-4"><label for="calibrationForm">Calibration Form</label></div>
-                                         <div class="ui-grid-col-8">
-                                             <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
-                                             </p-dropdown>-->
-                                             <p-dropdown [options]="calibrationSubTypeFormItems" id="calibrationForm" name="calibrationForm" [(ngModel)]="selectedSubTypeFormItem" [style]="{'width':'100%'}"></p-dropdown>
-                                             <!--<select [(ngModel)]="selectedCalibration" class="form-control" name="selectcalibrationform" width="300"  id="selectcalibrationform" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
-                                                 <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
-                                             </select>-->
+                                            <!--<input pInputText name="name" [(ngModel)]="EquipmentSubType.name"   #equipmentSubTypeNameRef="ngModel"
+                                            />-->
                                         </div>
-                                      </div><br />        <!-- <div class="ui-grid-col-8"><input pInputText name="calibrationform" [(ngModel)]="EquipmentSubType.calibrationform" #equipmentSubTypecalibrationformRef="ngModel"
+                                    </div>
+                                    <br/>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-4"><label for="description">Description</label></div>
+                                        <div class="ui-grid-col-8"><input pInputText name="subtypedescription"
+                                                                          id="subtypedescription"
+                                                                          [(ngModel)]="EquipmentSubType.description"
+                                                                          #equipmentSubTypedescriptionRef="ngModel"
+                                        /></div>
+                                    </div>
+                                    <br/>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-4"><label for="calibrationForm">Calibration Form</label>
+                                        </div>
+                                        <div class="ui-grid-col-8">
+                                            <!--<p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="CalibrationForms" [(ngModel)]="selectedCalibration" name="CalibrationForms" >
+                                            </p-dropdown>-->
+                                            <p-dropdown [options]="calibrationSubTypeFormItems" id="calibrationForm"
+                                                        name="calibrationForm" [(ngModel)]="selectedSubTypeFormItem"
+                                                        [style]="{'width':'100%'}"></p-dropdown>
+                                            <!--<select [(ngModel)]="selectedCalibration" class="form-control" name="selectcalibrationform" width="300"  id="selectcalibrationform" style="width: 300px" (ngModelChange)="onCalibrationFormChange($event)">
+                                                <option *ngFor="let x of CalibrationForms" [value]="x.name">{{x.name}} </option>
+                                            </select>-->
+                                        </div>
+                                    </div>
+                                    <br/>        <!-- <div class="ui-grid-col-8"><input pInputText name="calibrationform" [(ngModel)]="EquipmentSubType.calibrationform" #equipmentSubTypecalibrationformRef="ngModel"
                                              /></div>-->
-                                     <div class="ui-grid-row">
-                                         <div class="ui-grid-col-4"><label for="frequency">Frequency</label></div>
-                                         <div class="add">
-                                             <p-checkbox name="groupnameSubType" id="isSubTypeMaintenance" value="isSubTypeMaintenaceFrequencySelected"
-                                                         label="Is calibration Required?"
-                                                         [(ngModel)]="isSubTypeMaintenaceFrequencySelected" binary="true"
-                                                         (onChange)="showSubTypeHideCronPicker()">
-                                             </p-checkbox>
-                                             <!--<div class="new" id="cronSelectorPlaceHolder">-->
-                                             <div class="md-inputfield">
-                                                 <br />
-                                                 <div id="cronselector" [hidden]="!isSubTypeMaintenaceFrequencySelected"></div>
-                                             </div>
-                                             <!--</div>-->
-                                           <!--<input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"/>-->
-                                         </div>
-                                     </div>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-4"><label for="frequency">Frequency</label></div>
+                                        <div class="add">
+                                            <p-checkbox name="groupnameSubType" id="isSubTypeMaintenance"
+                                                        value="isSubTypeMaintenaceFrequencySelected"
+                                                        label="Is calibration Required?"
+                                                        [(ngModel)]="isSubTypeMaintenaceFrequencySelected" binary="true"
+                                                        (onChange)="showSubTypeHideCronPicker()">
+                                            </p-checkbox>
+                                            <!--<div class="new" id="cronSelectorPlaceHolder">-->
+                                            <div class="md-inputfield">
+                                                <br/>
+                                                <div id="cronselector"
+                                                     [hidden]="!isSubTypeMaintenaceFrequencySelected"></div>
+                                            </div>
+                                            <!--</div>-->
+                                            <!--<input pInputText name="frequency" [(ngModel)]="EquipmentSubType.frequency" #equipmentSubTypefrequencyRef="ngModel"/>-->
+                                        </div>
+                                    </div>
 
-                                 </div>
-                                 <footer>
-                                     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                                         <!--<button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>-->
-                                         <button type="button" pButton icon="ui-icon-close"(click)="cancelDialog()" label="Cancel" id="subtypecancel"></button>
-                                         <button type="button" pButton icon="ui-icon-save" (click)="save()" label="Add" id="subtypeadd"></button>
-                                     </div>
-                                 </footer>
-                             </p-dialog>
-                       </div>
-                 </p-panel>
+                                </div>
+                                <footer>
+                                    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                        <!--<button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>-->
+                                        <button type="button" pButton icon="ui-icon-close" (click)="cancelDialog()"
+                                                label="Cancel" id="subtypecancel"></button>
+                                        <button type="button" pButton icon="ui-icon-save" (click)="save()" label="Add"
+                                                id="subtypeadd"></button>
+                                    </div>
+                                </footer>
+                            </p-dialog>
+                        </div>
+                    </p-panel>
 
 
-         </p-tabPanel>
-      </p-tabView>
-
-                <!--</form>-->
-     <!--</p-panel>-->
-        <!--</p-tabView>-->
+                </p-tabPanel>
+            </p-tabView>
+        </div>
     </div>
-
-    </div>
-  </div>
+</div>

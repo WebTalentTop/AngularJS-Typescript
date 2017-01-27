@@ -20,8 +20,8 @@ import {
 } from 'primeng/primeng';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
-import {IEquipmentSubtype} from '../../../shared/services/definitions/IEquipmentSubtype';
-import {ICalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
+import {IEquipmentSubtype, PrimeEquipmentSubType} from '../../../shared/services/definitions/IEquipmentSubtype';
+import {ICalibrationForm, PrimeCalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
 
 import {LoggerService} from "../../../shared/services/logger/logger.service";
 import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
@@ -49,7 +49,7 @@ export class DetailsComponent implements OnInit {
     entityIdentifierModel: any = {};
     //useGentleSelect:boolean = false;
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '', '');
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType(false,'');
     CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
@@ -387,7 +387,7 @@ export class DetailsComponent implements OnInit {
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', '', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType(false, '');
         this.displayDialog = true;
         this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
 
@@ -457,6 +457,7 @@ export class DetailsComponent implements OnInit {
 
             this.EquipmentSubType.frequency = this.selectedSubTypeMaintenanceFrequency;
             this.EquipmentSubType.calibrationform = selectedCalibrationFormInfo.name;
+            this.EquipmentSubType.parentId = this.model.id;
 
             this.EquipmentsubTypes.push(this.EquipmentSubType);
             let equipmentSubTypeFormMabSave: IEquipmentSubTypeFormMapSave = {
@@ -465,7 +466,6 @@ export class DetailsComponent implements OnInit {
             }
             this.dataService.postAdd(equipmentSubTypeFormMabSave).subscribe(res => {
                 if (res.isSuccess) {
-
 
                     this.dataService.getSubTypesById(this.model.id)
                         .subscribe(result => {
@@ -498,7 +498,7 @@ export class DetailsComponent implements OnInit {
             });
 
         }
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', '', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType(false, '', this.id);
         //this.EquipmentSubType = null;
         this.displayDialog = false;
     }
@@ -588,10 +588,10 @@ export class DetailsComponent implements OnInit {
     }
 
     clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
-        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
-        for (let prop in sub) {
+        let newType: IEquipmentSubtype = JSON.parse(JSON.stringify(sub));// new PrimeEquipmentSubType(sub.isDeleted, sub.name, sub.id, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
+      /*  for (let prop in sub) {
             newType[prop] = sub[prop];
-        }
+        }*/
         return newType;
     }
 
@@ -602,16 +602,5 @@ export class DetailsComponent implements OnInit {
     cancelDialog() {
         this.displayDialog = false;
         this.selectedSubTypeFormItem = '';
-    }
-}
-
-class PrimeEquipmentSubType implements IEquipmentSubtype {
-
-    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public frequencyDescription, public parentId) {
-    }
-}
-class PrimeCalibrationForm implements ICalibrationForm {
-
-    constructor(public id, public name, public description, public calibrationFrequencyCronExpression) {
     }
 }

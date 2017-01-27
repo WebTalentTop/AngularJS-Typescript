@@ -1,15 +1,33 @@
 ﻿//import {bootstrap} from '@angular/platform-browser-dynamic';
 //import {AppComponent} from '../../../../app/app.component'
-import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-import { DataTable, TabViewModule, DialogModule, MenuItem, SelectItem, Dropdown, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule } from 'primeng/primeng';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IEquipmentSubtype } from '../../../shared/services/definitions/IEquipmentSubtype';
-import { ICalibrationForm } from '../../../shared/services/definitions/ICalibrationForm';
-import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import {EquipmentTypeService} from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
+import {
+    DataTable,
+    TabViewModule,
+    DialogModule,
+    MenuItem,
+    SelectItem,
+    Dropdown,
+    LazyLoadEvent,
+    ButtonModule,
+    InputTextareaModule,
+    InputTextModule,
+    PanelModule,
+    FileUploadModule,
+    Message,
+    GrowlModule
+} from 'primeng/primeng';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {IEquipmentSubtype, PrimeEquipmentSubType} from '../../../shared/services/definitions/IEquipmentSubtype';
+import {ICalibrationForm, PrimeCalibrationForm} from '../../../shared/services/definitions/ICalibrationForm';
+import {BreadCrumbsService} from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {IEquipmentTypeFormMap} from "../../../shared/services/definitions/EquipmentType/IEquipmentTypeFormMap";
+import {IEquipmentSubTypeFormMapSave} from "../../../shared/services/definitions/EquipmentType/IEquipmentSubTypeFormMapSave";
+import {LoggerService} from "../../../shared/services/logger/logger.service";
 @Component({
     selector: 'add-equipmenttype',
     templateUrl: 'app/body/equipmenttype/Add/add.component.html'
@@ -17,7 +35,7 @@ import { Router } from '@angular/router';
 export class AddComponent implements OnInit {
 
     displayDialog: boolean;
-    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType('', '', '', '', '', '', '', '');
+    EquipmentSubType: IEquipmentSubtype = new PrimeEquipmentSubType(false, '');
     CalibrationForm: ICalibrationForm = new PrimeCalibrationForm('', '', '', '');
     selectedsubType: IEquipmentSubtype;
     newsubType: boolean;
@@ -56,37 +74,73 @@ export class AddComponent implements OnInit {
 
     uploadedFiles: any[] = [];
 
-    constructor(
-        private breadCrumbsService: BreadCrumbsService,
-        private route: ActivatedRoute,
-        private dataService: EquipmentTypeService,
-        private router: Router
+    constructor(private breadCrumbsService: BreadCrumbsService,
+                private route: ActivatedRoute,
+                private dataService: EquipmentTypeService,
+                private router: Router,
+                private ls: LoggerService) {
+        this.ls.setShow(true);
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let equipmentTypeAddBreadCrumb = breadC.filter(filter =>
+        filter.pageName === 'EquipmentTypeAddPage')[0];
 
-    ) {
-        this.route.queryParams.subscribe(params => this.id = params['id']); {
-            this.entityId = this.id;
+        this.breadcrumbs = [];
+        this.breadcrumbs = equipmentTypeAddBreadCrumb.items;
 
-            let breadC = this.breadCrumbsService.getBreadCrumbs();
-            let equipmentTypeAddBreadCrumb = breadC.filter(filter =>
-                filter.pageName === 'EquipmentTypeAddPage')[0];
+        this.breadcrumbsHome = {routerLink: ['/']};
 
-            this.breadcrumbs = [];
-            this.breadcrumbs = equipmentTypeAddBreadCrumb.items;
-
-            this.breadcrumbsHome = { routerLink: ['/'] };
-        }
 
         this.CalibrationForms = [];
-        this.CalibrationForms.push({ id: '1', name: 'Audi', description: 'Audi', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '3', name: 'Fiat', description: 'Fiat', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '4', name: 'Ford', description: 'Ford', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '5', name: 'Honda', description: 'Honda', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '6', name: 'Jaguar', description: 'Jaguar', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '7', name: 'Mercedes', description: 'Mercedes', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '8', name: 'Renault', description: 'Renault', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: '' });
-        this.CalibrationForms.push({ id: '10', name: 'Volvo', description: 'Volvo', calibrationFrequencyCronExpression: '' });
+        this.CalibrationForms.push({
+            id: '1',
+            name: 'Audi',
+            description: 'Audi',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({id: '2', name: 'BMW', description: 'BMW', calibrationFrequencyCronExpression: ''});
+        this.CalibrationForms.push({
+            id: '3',
+            name: 'Fiat',
+            description: 'Fiat',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '4',
+            name: 'Ford',
+            description: 'Ford',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '5',
+            name: 'Honda',
+            description: 'Honda',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '6',
+            name: 'Jaguar',
+            description: 'Jaguar',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '7',
+            name: 'Mercedes',
+            description: 'Mercedes',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({
+            id: '8',
+            name: 'Renault',
+            description: 'Renault',
+            calibrationFrequencyCronExpression: ''
+        });
+        this.CalibrationForms.push({id: '9', name: 'VW', description: 'VW', calibrationFrequencyCronExpression: ''});
+        this.CalibrationForms.push({
+            id: '10',
+            name: 'Volvo',
+            description: 'Volvo',
+            calibrationFrequencyCronExpression: ''
+        });
         // this.selectedCalibration="BMW";
         this.route.params.subscribe(params => this.id = params['id']);
         this.model.id = this.id;
@@ -94,8 +148,10 @@ export class AddComponent implements OnInit {
 
     handleChange(event) {
     }
+
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
+
     ngOnInit() {
         //this.dataService.getById(this.id)
         //    .subscribe(res => {
@@ -114,38 +170,43 @@ export class AddComponent implements OnInit {
 
         //   this.EquipmentSubType = { name:'', description: '', calibrationform: '', frequency: ''}
     }
+
     onSubmit(formRef) {
 
 
         formRef.isDeleted = false;
-        //let cronexp: any;
-        //if (this.isMaintenaceFrequencySelected) {
-        //    cronexp = $('#selector').cron("value");
-        //}
-        //else {
-        //    cronexp = '';
-        //}
-        //if (!this.IsNewManufacturer) {
-        //    this.manufacturerId = this.selectedEquipmentManufacturerId;
-        //}
-        //else {
-        //    this.manufacturerId = '';
-        //}
-        let model = {
-            Name: formRef.name,
-            ParentId: null,
-            Description: formRef.description
 
+        let model: IEquipmentSubtype = {
+            name: formRef.name,
+            parentId: null,
+            description: formRef.description,
+            isDeleted: false
         };
-
-        this.dataService.postAdd(model).subscribe(res => {
+        let calibrationFormMap: IEquipmentTypeFormMap = {
+            equipmentTypeId: '',
+            formSchemaCategoryId: '',
+            formSchemaId: '',
+            entityEventId: '',
+            entityIdentifierId: '',
+            isDeleted: false
+        }
+        let equipmentSubTypeFormMabSave: IEquipmentSubTypeFormMapSave = {
+            equipmentType: model,
+            formMapInfo: calibrationFormMap
+        }
+        this.dataService.postAdd(equipmentSubTypeFormMabSave).subscribe(res => {
             if (res.isSuccess) {
-
-                this.router.navigate(['equipmenttype/details/', res.result.id]);
+                this.ls.logConsole("Success result set --------", res);
+                equipmentSubTypeFormMabSave = res.result;
+                this.router.navigate(['equipmenttype/details/', equipmentSubTypeFormMabSave.equipmentType.id]);
             }
             else {
                 this.notificationMsgs = [];
-                this.notificationMsgs.push({ severity: 'warn', summary: res.message, detail: 'Equipment Type name exists.' });
+                this.notificationMsgs.push({
+                    severity: 'warn',
+                    summary: res.message,
+                    detail: 'Equipment Type name exists.'
+                });
 
 
             }
@@ -185,25 +246,29 @@ export class AddComponent implements OnInit {
     showDialogToAdd() {
         this.newsubType = true;
         this.selectedCalibration = null;
-        this.EquipmentSubType = new PrimeEquipmentSubType('', '', '', '', '', '', '', this.id);
+        this.EquipmentSubType = new PrimeEquipmentSubType(false, '');
         this.displayDialog = true;
         // this.IsSubType= true;
     }
+
     showDialogToAddForm() {
         this.displayDialogForm = true;
         this.selectedCalibration = null;
         this.CalibrationForm = new PrimeCalibrationForm('', '', '', '');
         //this.IsSubType= false;
     }
+
     ok() {
         this.CalibrationForms.push(this.CalibrationForm);
         this.EquipmentSubType.calibrationform = this.CalibrationForm.name;
         this.selectedCalibration = this.CalibrationForm.name;
         this.displayDialogForm = false;
     }
+
     cancel() {
         this.displayDialogForm = false;
     }
+
     save() {
         //   this.EquipmentSubType = EquipmentSubType.name;
         if (this.newsubType)
@@ -215,6 +280,7 @@ export class AddComponent implements OnInit {
         this.EquipmentSubType = null;
         this.displayDialog = false;
     }
+
     onCalibrationFormChange(event) {
         //   this.selectedCalibration=(event.target.selectedOptions[0].innerText);
         // this.EquipmentSubType.calibrationform= (event.target.selectedOptions[0].innerText);
@@ -222,6 +288,7 @@ export class AddComponent implements OnInit {
         this.EquipmentSubType.calibrationform = (event);
 
     }
+
     delete() {
         this.EquipmentsubTypes.splice(this.findSelectedCarIndex(), 1);
 
@@ -247,7 +314,7 @@ export class AddComponent implements OnInit {
     }
 
     clonesubType(sub: IEquipmentSubtype): IEquipmentSubtype {
-        let newType = new PrimeEquipmentSubType(sub.id, sub.isdeleted, sub.name, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
+        let newType = new PrimeEquipmentSubType(sub.isDeleted,sub.name, sub.id, sub.description, sub.calibrationform, sub.frequency, sub.frequencyDescription, sub.parentId);
         for (let prop in sub) {
             newType[prop] = sub[prop];
         }
@@ -259,13 +326,3 @@ export class AddComponent implements OnInit {
     }
 }
 
-class PrimeEquipmentSubType implements IEquipmentSubtype {
-
-    constructor(public id, public isdeleted, public name, public description, public calibrationform, public frequency, public frequencyDescription, public parentId) {
-    }
-}
-class PrimeCalibrationForm implements ICalibrationForm {
-
-    constructor(public id, public name, public description, public calibrationFrequencyCronExpression) {
-    }
-}
