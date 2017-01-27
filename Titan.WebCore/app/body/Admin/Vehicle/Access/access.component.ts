@@ -17,7 +17,12 @@ export class AccessComponent {
     gridFilter = {};
     msgs: Message[] = [];
     added: any;
-    constructor(private breadCrumbsService: BreadCrumbsService,private service: AccessService, private route: ActivatedRoute, private router: Router, private logger: LoggerService) {
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: AccessService, 
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private logger: LoggerService) {
 
     }
     breadcrumbs: MenuItem[];
