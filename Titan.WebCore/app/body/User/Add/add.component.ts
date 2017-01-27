@@ -37,12 +37,11 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private breadCrumbsService: BreadCrumbsService,
-
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private userservice: UserService,
         private userprofileservice: UserProfileService,
-
-                private router: Router) {
+        private router: Router) {
 
     }
         breadcrumbs: MenuItem[];
@@ -57,12 +56,11 @@ export class AddComponent {
             //});
             this.getUsers();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
-        let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
-            filter.pageName === 'TestFacilitiesAddPage'
+        let userAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'UserAddPage'
         )[0];
         this.breadcrumbs = [];
-        this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
-
+        this.breadcrumbs = userAddBreadCrumb.items;
 
         this.breadcrumbsHome = { routerLink: ['/'] };
         this.currentUser = this.userprofileservice.getCurrentUserProfile();

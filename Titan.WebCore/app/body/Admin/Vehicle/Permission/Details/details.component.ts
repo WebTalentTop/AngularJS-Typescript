@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PermissionService } from '../../../../../shared/services/permission.service'
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule,  InputTextModule, PanelModule, FileUploadModule, Message } from 'primeng/primeng';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @Component({
     selector: 'permission-detail',
@@ -34,15 +35,16 @@ id: string;
       //  modifiedOn: ''
     };
 
-
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public PermissionDetails: any;
     public PermissionId: string;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+         private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private router: Router,
         private service: PermissionService    )
@@ -56,11 +58,25 @@ id: string;
             this.PermissionId = params['id']; // (+) converts string 'id' to a number
             //let locale = params['locale'];
 
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let permissionDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'PermissionDetailsPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("permissionDetailsBreadCrumb ---------", permissionDetailsBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = permissionDetailsBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+            });
+
             this.service.getById(this.PermissionId).subscribe(PermissionDetails => {
                 this.PermissionDetails = PermissionDetails.result;
                 this.PermissionDetails.id = this.PermissionId;
                 console.log(this.PermissionDetails);
-            });
         });
     }
 

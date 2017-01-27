@@ -1,4 +1,6 @@
 <div class="ui-g-12">
+        <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<br />
     <div class="card card-w-title">
                 <h3> User Details</h3>
 
@@ -134,7 +136,7 @@
                 <!-- End Dialog - Assign User Role -->
                 <!-- Begin Panel - Test Facility Users -->
 
-                <p-panel>
+                <p-panel header="Function Group">
 
                     <!--<header class="with-controls">
                         <p class="ui-panel-title"> Function Groups </p>
@@ -178,15 +180,15 @@
 
                     <div class="input-row">
 
-                        <label>
+                            <div class="ui-g-4">
                             <b>Tenants :</b>
-
+                            </div>
                             <div class="ui-g-8">
                                 <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants"  id="tenants" [autoWidth]="false"></p-dropdown>
                             </div>
-                        </label>
+                        
 
-                    </div>
+                    </div><br />
 
                     <!-- End Users -->
                     <!-- Begin Role -->

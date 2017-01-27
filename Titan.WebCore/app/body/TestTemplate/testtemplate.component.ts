@@ -20,6 +20,8 @@ export class TestTemplateComponent {
     linkFieldId:string;
      added: any;
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private service: TestTemplateService, 
@@ -40,8 +42,6 @@ export class TestTemplateComponent {
         });
 
     }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
 
     ngOnInit() {
         let resData:any;

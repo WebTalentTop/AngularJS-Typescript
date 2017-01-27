@@ -32,9 +32,9 @@ export class BreadCrumbsService {
 
         //TestFacilities Page
         this.testFacilitiesPage();
-        //Test Facilities Add
+        //Test Facilities Add Page
         this.testFacilitiesAddPage();
-        //Test Facilities Details
+        //Test Facilities Details Page
         this.testFacilitiesDetailsPage();
 
         //Equipment Page
@@ -53,10 +53,17 @@ export class BreadCrumbsService {
 
         //TestTemplate Page
         this.testTemplatePage();
-        //TestTemplate Add
+        //TestTemplate Add Page
         this.testTemplateAddPage();
         //TestTemplate Details
         this.testTemplateDetailsPage();
+
+        //User Page
+        this.userPage();
+        //User Add Page
+        this.userAddPage();
+        //User Details Page
+        this.userDetailsPage();
 
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
@@ -185,31 +192,31 @@ export class BreadCrumbsService {
 
         //Admin Access Page
         this.adminAccessPage();
-        // // Admin Access Add Page
-        // this.adminAccessAddPage();
-        // // Admin Access Details Page
-        // this.adminAccessDetailsPage();
+        // Admin Access Add Page
+        this.adminAccessAddPage();
+        // Admin Access Details Page
+        this.adminAccessDetailsPage();
 
         //Admin AccessGroup Page
         this.adminAccessGroupPage();
-        // // Admin AccessGroup Add Page
-        // this.adminAccessGroupAddPage();
-        // // Admin AccessGroup Details Page
-        // this.adminAccessGroupDetailsPage();
+        // Admin AccessGroup Add Page
+        this.adminAccessGroupAddPage();
+        // Admin AccessGroup Details Page
+        this.adminAccessGroupDetailsPage();
 
         //Admin Permission Page
         this.adminPermissionPage();
-        // // Admin Permission Add Page
-        // this.adminPermissionAddPage();
-        // // Admin Permission Details Page
-        // this.adminPermissionDetailsPage();
+        // Admin Permission Add Page
+        this.adminPermissionAddPage();
+        // Admin Permission Details Page
+        this.adminPermissionDetailsPage();
 
         //Admin Role Page
         this.adminRolePage();
-        // // Admin Role Add Page
-        // this.adminRoleAddPage();
-        // // Admin Role Details Page
-        // this.adminRoleDetailsPage();
+        // Admin Role Add Page
+        this.adminRoleAddPage();
+        // Admin Role Details Page
+        this.adminRoleDetailsPage();
 
         //Admin MaintenanceFrequency Page
         this.adminMaintenanceFrequencyPage();
@@ -653,6 +660,51 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+    // User Page Bread Crumbs
+    private userPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userPageBCItems() {
+        let menuItem = { label: 'User', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    private userAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.userPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userAddPageBCItems() {
+        let menuItem = { label: 'User Add', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    private userDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.userPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userDetailsPageBCItems() {
+        let menuItem = { label: 'User Details', routerLink: ['/user'] };
+        return menuItem;
+    }
+
 
     // Admin Vehicle Home Page Bread Crumbs
     private adminVehicleHomePage() {
@@ -1073,7 +1125,7 @@ export class BreadCrumbsService {
     }
 
     private adminTitanRolePageBCItems() {
-        let menuItem = { label: 'TitanRole', routerLink: ['/admin/vehicle/titanRole'] };
+        let menuItem = { label: 'Titan Role', routerLink: ['/admin/vehicle/titanRole'] };
         return menuItem;
     }
 
@@ -1609,13 +1661,13 @@ export class BreadCrumbsService {
 
         return menuItem;
     }
+
     // Admin Access Bread Crumbs
     private adminAccessPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'AccessHomePage', items: menuItems };
@@ -1623,9 +1675,48 @@ export class BreadCrumbsService {
     }
 
     private adminAccessPageBCItems() {
-        let menuItem = { label: 'Access', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Access', routerLink:['/admin/vehicle/access'] };
         return menuItem;
     }
+
+    private adminAccessAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminAccessPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminAccessAddPageBCItems() {
+        let menuItem = { label: 'Add Access', routerLink: ['/admin/vehicle/access'] };
+        return menuItem;
+    }
+
+    private adminAccessDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminAccessPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminAccessDetailsPageBCItems() {
+        let menuItem = { label: 'Access Details', routerLink:['/admin/vehicle/access'] };
+
+        return menuItem;
+    }
+
 
     // Admin AccessGroup Bread Crumbs
     private adminAccessGroupPage() {
@@ -1633,7 +1724,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'AccessGroupHomePage', items: menuItems };
@@ -1641,9 +1731,48 @@ export class BreadCrumbsService {
     }
 
     private adminAccessGroupPageBCItems() {
-        let menuItem = { label: 'AccessGroup', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Access Group', routerLink: ['/admin/vehicle/accessGroup'] };
         return menuItem;
     }
+
+     private adminAccessGroupAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminAccessGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessGroupAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminAccessGroupAddPageBCItems() {
+        let menuItem = { label: 'Add AccessGroup', routerLink: ['/admin/vehicle/accessGroup'] };
+        return menuItem;
+    }
+
+    private adminAccessGroupDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminAccessGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'AccessGroupDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminAccessGroupDetailsPageBCItems() {
+        let menuItem = { label: 'AccessGroup Details', routerLink:['/admin/vehicle/accessGroup'] };
+
+        return menuItem;
+    }
+
 
     // Admin Permission Bread Crumbs
     private adminPermissionPage() {
@@ -1651,7 +1780,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'PermissionHomePage', items: menuItems };
@@ -1659,7 +1787,45 @@ export class BreadCrumbsService {
     }
 
     private adminPermissionPageBCItems() {
-        let menuItem = { label: 'Permission', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Permission',  routerLink:['/admin/vehicle/permission'] };
+        return menuItem;
+    }
+
+    private adminPermissionAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPermissionPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PermissionAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminPermissionAddPageBCItems() {
+        let menuItem = { label: 'Add Permission', routerLink: ['/admin/vehicle/permission'] };
+        return menuItem;
+    }
+
+    private adminPermissionDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminPermissionPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'PermissionDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminPermissionDetailsPageBCItems() {
+        let menuItem = { label: 'Permission Details', routerLink:['/admin/vehicle/permission'] };
+
         return menuItem;
     }
 
@@ -1669,7 +1835,6 @@ export class BreadCrumbsService {
         menuItems.push(this.homeBreadCrumbItem());
         menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.lookupsHomePageBCItems());
-        // menuItems.push(this.adminHolidayPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'RoleHomePage', items: menuItems };
@@ -1677,7 +1842,45 @@ export class BreadCrumbsService {
     }
 
     private adminRolePageBCItems() {
-        let menuItem = { label: 'Role', routerLink: ['/admin/'] };
+        let menuItem = { label: 'Role', routerLink: ['/admin/vehicle/role'] };
+        return menuItem;
+    }
+
+    private adminRoleAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleAddPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+
+    }
+
+    private adminRoleAddPageBCItems() {
+        let menuItem = { label: 'Add Role', routerLink: ['/admin/vehicle/role'] };
+        return menuItem;
+    }
+
+    private adminRoleDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
+        menuItems.push(this.lookupsHomePageBCItems());
+        menuItems.push(this.adminRolePageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'RoleDetailsPage', items: menuItems };
+
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private adminRoleDetailsPageBCItems() {
+        let menuItem = { label: 'Role Details', routerLink: ['/admin/vehicle/role'] };
+
         return menuItem;
     }
 

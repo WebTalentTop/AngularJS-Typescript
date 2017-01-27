@@ -27,7 +27,7 @@
                         <label>{{item.name}}</label><br/>
                         <div class="ui-g-12">
                             <p-dropdown [options]="item.displaySelectBoxData"
-                                        [(ngModel)]="selectedSelectItem"></p-dropdown>
+                                        [(ngModel)]="selectedSelectItem" [style]="{'width':'100%'}"></p-dropdown>
                         </div>
                     </div>
                     <div *ngIf="item.fieldDataType.name === 'TextAreaBox'">

@@ -27,6 +27,9 @@ export class DetailsComponent {
     public filteredSelectedTestRequirements: Array<any> = new Array();
     entityId: string = this.id;
     id: string;
+
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private testTemplateService: TestTemplateService,
@@ -51,9 +54,7 @@ export class DetailsComponent {
 
             this.breadcrumbsHome = { routerLink: ['/'] };
     }
-    breadcrumbs: MenuItem[];
-    breadcrumbsHome: MenuItem;
-
+   
     ngOnInit() {
         //this.getTestType();
         //var testMode = {

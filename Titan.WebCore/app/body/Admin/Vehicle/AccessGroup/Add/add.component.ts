@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { AccessGroupService } from '../../../../../shared/services/accessGroup.service';
 import { Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
 
 @Component({
@@ -13,13 +14,37 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 export class AddComponent {
     username: string;
     description:string;
+     added: any;
 
-    constructor(private service: AccessGroupService, private router: Router, private route: ActivatedRoute) {
+     breadcrumbs: MenuItem[];
+     breadcrumbsHome: MenuItem;
+
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
+        private service: AccessGroupService, 
+        private router: Router, 
+        private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
+        this.route.queryParams.subscribe(params => {
 
+            this.added = params['page'];
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let accessGroupAddBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'AccessGroupAddPage'
+            )[0];
+
+            console.log("BreadC -----", breadC);
+            console.log("accessGroupAddBreadCrumb ---------", accessGroupAddBreadCrumb);
+            this.breadcrumbs = [];
+            this.breadcrumbs = accessGroupAddBreadCrumb.items;
+
+            console.log("breadcurmbs ------", this.breadcrumbs);
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
+     }); 
     }
     onSubmit(formRef) {
         //console.log(formRef);

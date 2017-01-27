@@ -2,8 +2,8 @@ import { UserProfileService } from '../../../shared/services/userProfile.service
 import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent,MenuItem, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule} from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -80,8 +80,10 @@ export class DetailsComponent {
 
    // msgs:Message[];
    // uploadedFiles: any[] = [];
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route:ActivatedRoute,
         private userProfileService: UserProfileService,       
         private userservice: UserService,
@@ -95,7 +97,18 @@ export class DetailsComponent {
          // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
          // this.fileData= this.fileInfo[];
+
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let userDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'UserDetailsPage'
+            )[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = userDetailsBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
     }
+    
    handleChange(event)
    {
 

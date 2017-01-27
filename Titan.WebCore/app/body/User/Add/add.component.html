@@ -1,10 +1,10 @@
 <div class="ui-g">
-
     <div class="ui-g-12">
-<br/>
+            <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<br />
         <div class="card card-w-title">
 
-            <h2>Create New User</h2>
+            <h2>Add User</h2>
 
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
 
@@ -35,7 +35,7 @@
                     <footer>
                         <p>* indicates required field</p>
                         <button pButton type="button" icon="ui-icon-close" class="blue-grey-btn" label="Cancel" id="cancel" name="cancel" routerLink="/user"></button>
-                        <button pButton type="submit" icon="ui-icon-save" class="green-btn" label="Add" id="save" name="save" [disabled]="!tfForm.valid"></button>
+                        <button pButton type="submit" icon="ui-icon-save" class="green-btn" label="Save" id="save" name="save" [disabled]="!tfForm.valid"></button>
                     </footer>
                     <br />
                 </p-panel>

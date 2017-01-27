@@ -243,7 +243,7 @@ export class DetailsComponent implements OnInit {
                     res.result.map(item => {
                         let newItem = {
                             label: item.name,
-                            value: item.id,
+                            value: item.formSchemaId,
                             entityIdentifierId: item.entityIdentifierId
                         };
                         this.calibrationFormItems.push(newItem);
@@ -262,7 +262,7 @@ export class DetailsComponent implements OnInit {
                                 .filter(filter => filter.name === resFromPrev.calibrationForm)[0];
 
                             if (selectedCalibrationFormInfo) {
-                                this.selectedFormItem = selectedCalibrationFormInfo.id;
+                                this.selectedFormItem = selectedCalibrationFormInfo.formSchemaId;
                             }
 
                             // this.onCronInit();
@@ -294,7 +294,7 @@ export class DetailsComponent implements OnInit {
         let calibrationFormMap: IEquipmentTypeFormMap;
         if (this.selectedFormItem) {
             let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
-                .filter(filter => filter.id === this.selectedFormItem)[0];
+                .filter(filter => filter.formSchemaId === this.selectedFormItem)[0];
             calibrationFormMap = {
                 equipmentTypeId: this.model.id,
                 formSchemaCategoryId: selectedCalibrationFormInfo.id,
@@ -433,7 +433,7 @@ export class DetailsComponent implements OnInit {
             }
             if (this.selectedSubTypeFormItem){
                 selectedCalibrationFormInfo = this.calibrationFormsList
-                    .filter(filter => filter.id === this.selectedSubTypeFormItem)[0];
+                    .filter(filter => filter.formSchemaId === this.selectedSubTypeFormItem)[0];
                 calibrationFormMap = {
                     equipmentTypeId: this.model.id,
                     formSchemaCategoryId: selectedCalibrationFormInfo.id,
