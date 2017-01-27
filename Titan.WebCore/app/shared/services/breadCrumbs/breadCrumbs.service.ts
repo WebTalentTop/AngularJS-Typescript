@@ -65,6 +65,20 @@ export class BreadCrumbsService {
         //User Details Page
         this.userDetailsPage();
 
+        //FunctionGroup Page
+        this.functionGroupPage();
+        //FunctionGroup Add Page
+        this.functionGroupAddPage();
+        //FunctionGroup Details Page
+        this.functionGroupDetailsPage();
+
+        //Tenant Page
+        this.tenantPage();
+        //Tenant Add Page
+        this.tenantAddPage();
+        //Tenant Details Page
+        this.tenantDetailsPage();
+
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
 
@@ -671,7 +685,7 @@ export class BreadCrumbsService {
     }
 
     private userPageBCItems() {
-        let menuItem = { label: 'User', routerLink: ['/user'] };
+        let menuItem = { label: 'Users', routerLink: ['/user'] };
         return menuItem;
     }
 
@@ -702,6 +716,96 @@ export class BreadCrumbsService {
 
     private userDetailsPageBCItems() {
         let menuItem = { label: 'User Details', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    // FunctionGroup Page Bread Crumbs
+    private functionGroupPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupPageBCItems() {
+        let menuItem = { label: 'Function Group', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
+    private functionGroupAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.functionGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupAddPageBCItems() {
+        let menuItem = { label: 'FunctionGroup Add', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
+    private functionGroupDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.functionGroupPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'FunctionGroupDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private functionGroupDetailsPageBCItems() {
+        let menuItem = { label: 'FunctionGroup Details', routerLink: ['/functionGroup'] };
+        return menuItem;
+    }
+
+    // Tenant Page Bread Crumbs
+    private tenantPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TenantHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private tenantPageBCItems() {
+        let menuItem = { label: 'Tenant', routerLink: ['/tenant'] };
+        return menuItem;
+    }
+
+    private tenantAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.tenantPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TenantAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private tenantAddPageBCItems() {
+        let menuItem = { label: 'Tenant Add', routerLink: ['/tenant'] };
+        return menuItem;
+    }
+
+    private tenantDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.tenantPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TenantDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private tenantDetailsPageBCItems() {
+        let menuItem = { label: 'Tenant Details', routerLink: ['/tenant'] };
         return menuItem;
     }
 

@@ -22,7 +22,7 @@ export class AddComponent {
     phoneNumber:string;
     userName: string;
     selectedDepartmentId: any;
-    currentUser: IUserProfile
+    currentUser: IUserProfile;
     tenantId: any;
     departments: any;
     displayName:string;
@@ -39,13 +39,13 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
     
-    constructor(private breadCrumbsService: BreadCrumbsService,
-
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private userservice: UserService,
         private userprofileservice: UserProfileService,
         private functiongroupservice: FunctionGroupService,
         private departmentservice: DepartmentService,
-                private router: Router) {
+        private router: Router) {
 
     }
         breadcrumbs: MenuItem[];
@@ -60,15 +60,13 @@ export class AddComponent {
             //});
             this.getDepartments();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
-        let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
-            filter.pageName === 'TestFacilitiesAddPage'
+        let functionGroupAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'FunctionGroupAddPage'
         )[0];
         this.breadcrumbs = [];
-        this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
-
+        this.breadcrumbs = functionGroupAddBreadCrumb.items;
 
         this.breadcrumbsHome = { routerLink: ['/'] };
-
         this.currentUser = this.userprofileservice.getCurrentUserProfile();
 
         }

@@ -9,12 +9,12 @@
               <div class="body">
                   <div class="ui-grid-row">
                       <div class="md-inputfield ui-g-12 ui-md-6">
-                          <input type="text" pInputText name="name" [(ngModel)]="name"
+                          <input type="text" pInputText name="name" id="name" [(ngModel)]="name"
                                  minlength="3"  required style="width:100%">
                           <label>Test Name <span >*</span></label>
                       </div>
                       <div class="md-inputfield ui-g-12 ui-md-6">
-                          <input type="text" pInputText [(ngModel)]="number" name="number"
+                          <input type="text" pInputText [(ngModel)]="number" name="number" id="number"
                                  class="form-control" style="width:100%">
 
                           <label>Test Number</label>
@@ -23,44 +23,44 @@
                   <div class="ui-grid-row ">
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Project Code :</p>
-                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" id="projectCodes" >
                         </p-dropdown>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Build Levels :</p>
-                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels">
+                        <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="buildLevels"  (onChange)="onBuildLevelChange($event)" name="buildLevels" id="buildLevels">
                         </p-dropdown>
                     </div>
                   </div>
                   <div class="ui-grid-row ">
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Vehicle :</p>
-                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" >
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="vehicle" (onChange)="onvehicleChange($event)" name="vehicle" id="vehicle">
                         </p-dropdown>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Test Facility :</p>
-                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" >
+                        <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="testFacilities"  (onChange)="onTestFacilityChange($event)" name="testFacilities" id="testFacilities">
                         </p-dropdown>
                     </div>
                   </div><br /><br />
                   <div class="ui-grid-row">
                       <div class="md-inputfield ui-g-12 ui-md-6">
-                          <input type="text" pInputText name="purpose" [(ngModel)]="purpose" style="width:100%">
+                          <input type="text" pInputText name="purpose"  id="purpose" [(ngModel)]="purpose" style="width:100%">
                           <label>Purpose</label>
                       </div>
                       <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [(ngModel)]="dueDate" name="dueDate" [showIcon]="true"></p-calendar>
+                        <p-calendar [(ngModel)]="dueDate" name="dueDate"  id="dueDate" [showIcon]="true"></p-calendar>
                         <label>Due Date :</label>
                       </div>
                   </div><br /><br />
                   <div class="ui-grid-row " style="color:#777">
                       <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate" [showIcon]="true"></p-calendar>
+                        <p-calendar [(ngModel)]="plannedStartDate" name="plannedStartDate"  id="plannedStartDate" [showIcon]="true"></p-calendar>
                         <label>Planned Start Date :</label>
                       </div>
                       <div class="ui-g-12 ui-md-6 md-inputfield">
-                        <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate" [showIcon]="true" ></p-calendar>
+                        <p-calendar [(ngModel)]="plannedEndDate" name="plannedEndDate"  id="plannedEndDate" [showIcon]="true" ></p-calendar>
                         <label>Planned End Date :</label>
                       </div>
                   </div><br /><br />
@@ -69,7 +69,7 @@
                         <label style="color:#777">Description</label>
                       </div>
                       <div class="ui-g-12 ui-md-12 md-inputfield">
-                          <p-editor [(ngModel)]="description" name="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                          <p-editor [(ngModel)]="description" name="description"  id="description" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                               <header>
                                   <select class="ql-size">
                                       <option value="small"></option>
@@ -89,7 +89,7 @@
                   </div>
               </div>
               <footer>
-                  <button id="create" pButton type="button" icon="ui-icon-save"  class="green-btn" label="Save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
+                  <button id="save" name="save" pButton type="button" icon="ui-icon-save"  class="green-btn" label="Save" [disabled]="!tfForm.valid" (click)="onTestRequestSubmit()"></button>
               </footer><br />
             </p-panel>
             <br />
@@ -102,40 +102,40 @@
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Step :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="projectCodes" (onChange)="onProjectCodeChange($event)" name="projectCodes"  id="projectCodes">
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Test Stage :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testStages"  (onChange)="onTestStageChange($event)" name="testStages">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="testStages"  (onChange)="onTestStageChange($event)" name="testStages"  id="testStages">
                               </p-dropdown>
                           </div>
                         </div>
                         <div class="ui-grid-row ">
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Activity :</p>
-                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntries" >
+                              <p-dropdown   [style]="{'width':'100%','color':'#777'}" [options]="hourEntries" (onChange)="onHourEntryChange($event)" name="hourEntries"  id="hourEntries" >
                               </p-dropdown>
                           </div>
                           <div class="ui-g-12 ui-md-6">
                               <p style="color:#777">Down Time :</p>
-                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="downTimeReason"  (onChange)="onDownTimeReasonChange($event)" name="downTimeReason">
+                              <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="downTimeReason"  (onChange)="onDownTimeReasonChange($event)" name="downTimeReason"  id="downTimeReason">
                               </p-dropdown>
                           </div>
                         </div><br />
                         <div class="ui-grid-row">
                             <div class="md-inputfield ui-g-12 ui-md-6">
-                                <input type="text" pInputText name="purpose" [(ngModel)]="purpose" style="width:100%">
+                                <input type="text" pInputText name="purpose"  id="purpose" [(ngModel)]="purpose" style="width:100%">
                                 <label>Estimate Duration</label>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row " style="color:#777">
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="startTime" name="startTime" [showIcon]="true"></p-calendar>
+                              <p-calendar [(ngModel)]="startTime" name="startTime"  id="startTime" [showIcon]="true"></p-calendar>
                               <label>Actual Start Date :</label>
                             </div>
                             <div class="ui-g-12 ui-md-6 md-inputfield">
-                              <p-calendar [(ngModel)]="endTime" name="endTime" [showIcon]="true" ></p-calendar>
+                              <p-calendar [(ngModel)]="endTime" name="endTime"  id="endTime" [showIcon]="true" ></p-calendar>
                               <label>Actual End Date :</label>
                             </div>
                         </div><br />
@@ -144,7 +144,7 @@
                               <label style="color:#777">Notes</label>
                             </div>
                             <div class="ui-g-12 ui-md-12 md-inputfield">
-                                <p-editor [(ngModel)]="model.notes" name="notes" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
+                                <p-editor [(ngModel)]="model.notes" name="notes"  id="notes" [style]="{'min-height':'160px'}" placeholder="Max 500 characters. ">
                                     <header>
                                         <select class="ql-size">
                                             <option value="small"></option>
@@ -250,7 +250,7 @@
                                 <p-column header="Comments" sortable="true"></p-column>
                             </p-dataTable>
                         </div>
-                        <button class="btn btn-success" pButton icon="ui-icon-add" label="Attachment">
+                        <button class="btn btn-success" pButton icon="ui-icon-add" label="Attachment"  id="addattach"  name="addattach">
                         </button>
                     </div>
                 </div>
@@ -262,17 +262,17 @@
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Test Templates :</p>
-                                <p-multiSelect [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates">
+                                <p-multiSelect [style]="{'width':'100%','color':'#777'}" [options]="testTemplates" (onChange)="onTestTemplateChange($event)" name="testTemplates" id="testTemplates">
                                 </p-multiSelect>
                             </div>
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Test Procedures :</p>
-                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures">
+                                <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="procedures" (onChange)="onProcedureChange($event)" name="procedures"  id="procedures">
                                 </p-dropdown>
                             </div>
                         </div><br /><br />
                         <div class="ui-grid-row ">
-                            <button id="add" pButton type="button" icon="ui-icon-save" label="Add" (click)="onAddProcedure()"></button>
+                            <button id="addprocedure" name="addprocedure" pButton type="button" icon="ui-icon-save" label="Add" (click)="onAddProcedure()"></button>
                         </div><br /><br />
                         <div class="ui-grid-row">
                             <p-dataTable [value]="selectedProcedures" expandableRows="true" [paginator]="true" rows="15" (onRowExpand)="onLoadProcedureSteps($event)">
@@ -334,7 +334,7 @@
         <form name="tForm2" enctype="application/x-www-form-urlencoded">
           <p-dialog header="Add Comment" [(visible)]="displayCommentDialog" [responsive]="true" showEffect="fade" [modal]="true" width="400">
                   <div class="ui-grid-row">
-                      <p-editor [(ngModel)]="comment" name="comment" [style]="{'height':'320px'}">
+                      <p-editor [(ngModel)]="comment" name="comment" id="comment" [style]="{'height':'320px'}">
                           <header>
                               <select class="ql-size">
                                   <option value="small"></option>
@@ -353,8 +353,8 @@
                   </div>
                   <footer>
                       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                          <button type="button" pButton icon="fa-close" (click)="displayCommentDialog=false" label="Cancel"></button>
-                          <button type="button" pButton icon="ui-icon-comment" (click)="AddLogComment()" label="Add Comment"></button>
+                          <button type="button" id="commentcancel" name="commentcancel" pButton icon="fa-close" (click)="displayCommentDialog=false" label="Cancel"></button>
+                          <button type="button" id="commentadd" name="commentadd" pButton icon="ui-icon-comment" (click)="AddLogComment()" label="Add Comment"></button>
                       </div>
                   </footer>
               </p-dialog>
@@ -362,7 +362,7 @@
                   <header class="with-controls">
                       <p class="ui-panel-title">Log/Comment List</p>
                       <p class="controls">
-                        <button pButton type="button" icon="ui-icon-add" label="Add Comment"  class="blue-grey-btn"
+                        <button pButton type="button" icon="ui-icon-add" label="Add Comment" id="addcomment" name="addcomment"  class="blue-grey-btn"
                               (click)="displayCommentDialog=true"></button>
                       </p>
                   </header>
