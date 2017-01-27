@@ -33,16 +33,13 @@ export class DetailsComponent {
         createdOn: '',
         modifiedOn: ''
     };
-
-        breadcrumbs: MenuItem[];
-        breadcrumbsHome: MenuItem;
-        
+     
     msgs: Message[];
     uploadedFiles: any[] = [];
 
-
-    //public BuildLevelDetails: any;
     public BuildLevelId: string;
+        breadcrumbs: MenuItem[];
+        breadcrumbsHome: MenuItem;
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,

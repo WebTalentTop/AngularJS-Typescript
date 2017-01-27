@@ -1,4 +1,6 @@
 <div class="ui-g-12">
+        <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+<br />
     <div class="card card-w-title">
                 <h3> User Details</h3>
 
@@ -6,7 +8,7 @@
             <div class="subsection">
 
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-
+                    <p-growl [value]="msgs"></p-growl>
                     <!-- Begin Panel - Test Facility Name and Location -->
 
                     <p-panel header="Information">
@@ -33,8 +35,14 @@
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Department :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" required (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
 
+                                </div>
+                                <div class="ui-g-12 ui-md-6">
+                                    <label>Default Tenant </label>
+                                    <input type="text" style="width:100%" pInputText name="defaultTenantName" id="defaultTenantName" [(ngModel)]="userProfile.defaultTenantName"
+                                           minlength="3" class="form-control" required row="20">
+                                  
                                 </div>
                             </div><br /><br />
 
@@ -45,7 +53,7 @@
                                     <label>Email Address</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.firstName">
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.phoneNumber">
                                     <label>Phone Number</label>
                                 </div>
                             </div>

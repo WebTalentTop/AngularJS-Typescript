@@ -3,14 +3,14 @@
       <h1>Tenant</h1>
         <p-panel>
             <header class="with-controls">
-                <p class="ui-panel-title">Users</p>
+                <p class="ui-panel-title">Tenant List</p>
                 <p class="controls">
-                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Assign Tenant"></button>
+                    <button pButton type="button" class="blue-grey-btn" [routerLink]="['add']" id="add" icon="ui-icon-add" label="Create New Tenant"></button>
                 </p>
             </header>
           <p-dataTable [value]="tenants" [paginator]="true" rows="15" [responsive]="true">
 
-              <p-column header="Tenant Name" sortable="true">
+              <p-column header="Tenant Name" sortable="true" [filter]="true">
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
                <a routerLink="details/{{userrow.id}}">{{userrow.name}}</a>

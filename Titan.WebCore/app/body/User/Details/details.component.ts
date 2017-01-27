@@ -1,8 +1,9 @@
-import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
+import { UserProfileService } from '../../../shared/services/userProfile.service';
+import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
 import { titanApiUrl } from '../../../shared/services/apiurlconst/titanapiurl';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
-import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
-import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule, MenuItem } from 'primeng/primeng';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import { DataTable, Header, Footer, TabViewModule, LazyLoadEvent,MenuItem, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, MessagesModule, Message, DropdownModule, GrowlModule} from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,37 +19,13 @@ declare var $: JQueryStatic;
     templateUrl: 'app/body/User/Details/details.component.html'
 })
 export class DetailsComponent {
-   // ngAfterViewInit() {
-   //   //  var editor = new Quill('#editor');
-   //     var quill = new Quill('#editor-container', {
-   //         modules: {
-   //             toolbar: [
-   //                 [{ header: [1, 2, true] }],
-   //                 ['bold', 'italic', 'underline'],
-   //                 ['image', 'code-block']
-   //             ]
-   //         },
-   //         placeholder: 'Compose an epic...',
-   //         theme: 'snow'  // or 'bubble'
-   //     });
-   //    // quill.g
-   // }
-   //// qui
-   // username: string;
-   // details:string;
+
     Sensors: any;
     fileData: any[] = [];
     userTenants: any;
     displayTenantDialog: boolean = false;
     uploadedFiles: any[] = [];
-   // TestFacilityAttachments: ITestFacilityAttachment[];
-       // hourEntries: any;
-   // downTimeReasons: any;
-   // estimateDuration: any;
-   // formConfiguration:any;
-   // formObject:any;
-   // formEquipmentObject: any;
-   // TimeEntryTypeId: any;
+    msgs: Message[] = [];
     selectedSensorTypeId: any;
     comment: any;
     sensorRequests: any;
@@ -74,13 +51,16 @@ export class DetailsComponent {
    userId: any;
    tenantId: any;
    userFunctionGroups: any;
+   defaultTenantId: any;
+   userName: any;
    functionGroupsPerUserList: any;
-   userProfile: any = {
+   //userProfile: any = {
       
-       firstName: ' ',
-       lastName: ' ',
+   //    firstName: ' ',
+   //    lastName: ' ',
      
-   };
+   //};
+   userProfile: IUserProfile;
    departmentId: any;
 
    // filepath: string = "TestFacility";
@@ -100,11 +80,12 @@ export class DetailsComponent {
 
    // msgs:Message[];
    // uploadedFiles: any[] = [];
-
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route:ActivatedRoute,
-        private dataService: TestRequestSensorService,
-        private equipmenttypeservice: EquipmentTypeService,
+        private userProfileService: UserProfileService,       
         private userservice: UserService,
         private router: Router
         
@@ -116,7 +97,18 @@ export class DetailsComponent {
          // this.entityId = this.id;
           console.log("---- TF Details ID Param -----", this.id);
          // this.fileData= this.fileInfo[];
+
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let userDetailsBreadCrumb = breadC.filter(filter =>
+                filter.pageName === 'UserDetailsPage'
+            )[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = userDetailsBreadCrumb.items;
+
+            this.breadcrumbsHome = { routerLink: ['/'] };
     }
+    
    handleChange(event)
    {
 
@@ -129,12 +121,17 @@ export class DetailsComponent {
        this.getTimeZones();
        this.getTitanRoles();
        this.getTenants();
+       this.getTenantId();
        //get the departmentId through taskId
        //get sensors by department and entityId
        this.userservice.getUserDetailsById(this.userId)
            .subscribe(userresult => {
                this.userProfile = userresult.result;
                this.selectedDepartmentId = userresult.result.departmentId;
+               this.selectedTimeZoneId = userresult.result.defaultTimeZoneId;
+               this.selectedTitanRoleId = userresult.result.roleId;
+               this.userName = userresult.result.username;
+               this.defaultTenantId = userresult.result.defaultTenantId;
                this.userservice.GetUserFunctionGroupsByUser(this.userId).subscribe(res => {
                    if (res.isSuccess) {
                        this.userFunctionGroups = res.result;
@@ -149,7 +146,10 @@ export class DetailsComponent {
 
    }
   
-  
+   getTenantId()
+   {
+       this.userProfile = this.userProfileService.getCurrentUserProfile();
+   }
 
    onSensorChange(event) {
        console.log('------event------------', event)
@@ -175,7 +175,7 @@ export class DetailsComponent {
    }
    onAddFunctionGroup()
    {
-       let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+       let tenantId = this.userProfile.defaultTenantId;
        this.displayFunctionGroupDialog = false;
        let functionGroupName = this.functionGroups.filter(funcGroup => { funcGroup.id == this.selectedFunctionGroupId }).functionGroupName;
        let userFunctionGroupModel = {
@@ -193,11 +193,6 @@ export class DetailsComponent {
                    if (res.isSuccess) {
                        this.userFunctionGroups = res.result;
                    }
-
-                   //  let filterfuntiongroups = res.result.filter(user => user.id == this.userId);
-                   //   console.log('--------filtered-------', filterfuntiongroups);
-                   //    this.userFunctionGroups = res.result.filter(user => user.id == this.userId)[0].functionGroupMapping.$values;
-                   // this.functionGroupsPerUserList = res.result.filter(user => user.id == this.userId).functionGroupMapping;
                });
 
            }
@@ -256,20 +251,7 @@ export class DetailsComponent {
        });
 
    }
-   //onDownTimeReasonChange(event) {
-   //    console.log('------event------------', event)
-   //    this.selectedDownTimeReasonId = (event.value);
-   //    //   this.EquipmentSubType.calibrationform = (event);
-
-   //}
-
-   //onHourEntryChange(event) {
-   //    console.log('------event------------', event)
-   //    this.selectedTimeEntryTypeId = (event.value);
-   //    //   this.EquipmentSubType.calibrationform = (event);
-
-   //}
-   getFunctionGroups() {
+  getFunctionGroups() {
        //    userRoles
        this.userservice.getAllFunctionGroups().subscribe(response => {
            this.functionGroups = new Array();
@@ -323,10 +305,10 @@ export class DetailsComponent {
                    label: "--Select--",
                    value: null
                });
-               for (let template of response.$values) {
+               for (let template of response.result) {
                    var temp = {
-                       label: template.name,
-                       value: template.name
+                       label: template.displayName,
+                       value: template.standardName
                    }
                    resultMap.push(temp);
                }
@@ -379,57 +361,7 @@ export class DetailsComponent {
            console.log(response);
        });
    }
-   //getDownTimeReasons() {
-   //    //    userRoles
-   //    this.dataService.GetAllDownTimeReasons().subscribe(response => {
-   //        this.downTimeReasons = new Array();
-   //        if (response != null) {
-   //            var resultMap = new Array();
-   //            resultMap.push({
-   //                label: "--Select--",
-   //                value: null
-   //            });
-   //            for (let template of response.$values) {
-   //                var temp = {
-   //                    label: template.name,
-   //                    value: template.id
-   //                }
-   //                resultMap.push(temp);
-   //            }
-   //            this.downTimeReasons = resultMap;
-   //        }
-   //        console.log(response);
-   //    });
-   //}
-   //getHourEntryByEntityIdentifierId() {
-   //    //    userRoles
-   //    this.dataService.getHourEntryByEntityIdentifierId(this.id).subscribe(response => {
-   //        this.hourEntries = new Array();
-   //        if (response != null) {
-   //            var resultMap = new Array();
-   //            resultMap.push({
-   //                label: "--Select--",
-   //                value: null
-   //            });
-   //            for (let template of response) {
-   //                var temp = {
-   //                    label: template.name,
-   //                    value: template.id
-   //                }
-   //                resultMap.push(temp);
-   //            }
-   //            this.hourEntries = resultMap;
-   //        }
-
-   //        console.log(response);
-   //    });
-   //}
-   //selectFile($event): void {
-   //    var inputValue = $event.target;
-   //    this.file = inputValue.files[0];
-   //    console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
-   //}
-  
+   
    onSubmit(formRef) {
        //formRef.isDeleted = false;
        let userFormData: any = {
@@ -439,15 +371,23 @@ export class DetailsComponent {
            lastName: formRef.lastName,
            emailAddress: formRef.emailAddress,
            defaultTimeZoneId: this.selectedTimeZoneId,
-           departmentId: this.selectedDepartmentId
-            
-
+           departmentId: this.selectedDepartmentId,
+           roleId : this.selectedTitanRoleId,
+           PhoneNumber: formRef.phoneNumber,
+           username: this.userName,
+           defaultTenantId: this.defaultTenantId
 
        };
        this.userservice.postUpdate(userFormData).subscribe(res => {
            if (res.isSuccess)
            {
-
+               this.msgs = [];
+               this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+           }
+           else
+           {
+               this.msgs = [];
+               this.msgs.push({ severity: 'warn', summary: res.message, detail: 'Some thing went wrong.' });
            }
        });
       

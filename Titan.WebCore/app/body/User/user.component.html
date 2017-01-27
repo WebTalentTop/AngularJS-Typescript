@@ -1,4 +1,6 @@
 <div class="ui-g-12">
+    <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+    <br />
     <div class="card card-w-title">
       <h2> Create New User</h2>
       <br />
@@ -23,7 +25,7 @@
                       {{userrow.lastName}}
                   </template>-->
               </p-column>
-              <p-column header="Role" field="lastName" sortable="true">
+              <p-column header="Role" field="roleName" sortable="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
 
                   </template>-->

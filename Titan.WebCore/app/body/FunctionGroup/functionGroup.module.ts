@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FunctionGroupComponent } from "./functionGroup.component";
 import { TenantService } from '../../shared/services/tenant.service';
+import { UserProfileService } from '../../shared/services/userProfile.service';
+import { IUserProfile } from '../../shared/services/definitions/IUserProfile';
 import { GridModule } from '../../shared/UIComponents/GridComponent/grid.module';
 import { DataTableModule, TabViewModule, InputTextModule, InputTextareaModule, PanelModule, MessagesModule, ButtonModule, DropdownModule } from 'primeng/primeng';
 
@@ -15,7 +17,7 @@ import functionGroupRoutes from "./functionGroup.routes";
 
 
     imports: [DialogModule, EditorModule, SharedModule, CommonModule, RouterModule, DataTableModule, PanelModule, ButtonModule, InputTextModule, DropdownModule, MessagesModule, InputTextareaModule, TabViewModule, functionGroupRoutes],
-    providers: [TestFacilityService, TenantService, UserService],
+    providers: [TestFacilityService, TenantService, UserProfileService, UserService],
 
     declarations: [FunctionGroupComponent]
 })

@@ -98,8 +98,8 @@ export class AddComponent {
         let tenantModel = {
 
             Name: formRef.name,
-          
-    HostAddress : '',
+
+            HostAddress: formRef.url,
     FavIconUrl: '',
     DefaultTimeZone: '',
     LookupKey: '',

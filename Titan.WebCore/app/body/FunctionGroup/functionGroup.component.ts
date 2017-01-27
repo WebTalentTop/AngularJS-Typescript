@@ -1,5 +1,7 @@
 import { TestFacilityService } from '../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { UserService } from '../../shared/services/user.service';
+import { UserProfileService } from '../../shared/services/userProfile.service';
+import { IUserProfile } from '../../shared/services/definitions/IUserProfile';
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { PanelModule, LazyLoadEvent, Message, MessagesModule } from 'primeng/primeng';
 import { Component } from '@angular/core';
@@ -16,6 +18,7 @@ export class FunctionGroupComponent {
     gridData = [];
     confInfo:any = {};
     cols = [];
+    currentUser: IUserProfile;
     gridFilter = {};
     testRequestId: any;
     HasTasks: boolean = false;
@@ -27,7 +30,7 @@ export class FunctionGroupComponent {
     pendingTasks: any;
     functionGroups: any;
     msgs: Message[] = [];
-    constructor(private service: TestFacilityService, private userservice: UserService, private route: ActivatedRoute, private router: Router) {
+    constructor(private service: TestFacilityService, private userservice: UserService, private userprofileservice: UserProfileService, private route: ActivatedRoute, private router: Router) {
         //this.route.queryParams.subscribe(params => {
 
         //    this.added = params['page'];
@@ -42,7 +45,9 @@ export class FunctionGroupComponent {
 
     ngOnInit() {
         let resData: any;
-        let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+        this.currentUser = this.userprofileservice.getCurrentUserProfile();
+
+        let tenantId = this.currentUser.defaultTenantId;
         this.userservice.getAllFunctionGroups()
             .subscribe(res => {
                 this.functionGroups = res.$values;

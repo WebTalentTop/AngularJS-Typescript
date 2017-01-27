@@ -4,7 +4,8 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { TitanUserProfileService } from '../../../shared/services/titanUserProfile.service';
+import { UserProfileService } from '../../../shared/services/userProfile.service';
+import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
 import { UserService } from '../../../shared/services/user.service';
 @Component({
     selector: 'add-user',
@@ -21,6 +22,7 @@ export class AddComponent {
     selectedUserId: any;
     tenantId: any;
     users: any;
+    currentUser: IUserProfile;
     displayName:string;
     notificationMsgs: Message[] = [];
     testFacility = {
@@ -35,12 +37,11 @@ export class AddComponent {
     //constructor(private dataService: PlatformService) {
     //        }
 
-    constructor(private breadCrumbsService: BreadCrumbsService,
-
+    constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private userservice: UserService,
-        private userprofileservice: TitanUserProfileService,
-
-                private router: Router) {
+        private userprofileservice: UserProfileService,
+        private router: Router) {
 
     }
         breadcrumbs: MenuItem[];
@@ -55,14 +56,14 @@ export class AddComponent {
             //});
             this.getUsers();
         let breadC = this.breadCrumbsService.getBreadCrumbs();
-        let testFacilitiesAddBreadCrumb = breadC.filter(filter =>
-            filter.pageName === 'TestFacilitiesAddPage'
+        let userAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'UserAddPage'
         )[0];
         this.breadcrumbs = [];
-        this.breadcrumbs = testFacilitiesAddBreadCrumb.items;
-
+        this.breadcrumbs = userAddBreadCrumb.items;
 
         this.breadcrumbsHome = { routerLink: ['/'] };
+        this.currentUser = this.userprofileservice.getCurrentUserProfile();
 
         }
     onUserChange(event) {
@@ -92,8 +93,8 @@ export class AddComponent {
     }
     onSubmit(formRef) {
        
-      //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
-        let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+        //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
+        let tenantId = this.currentUser.defaultTenantId;
         let userTenantModel = {
 
             userId: this.selectedUserId,
