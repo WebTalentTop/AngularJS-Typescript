@@ -84,6 +84,7 @@ export class DetailsComponent {
    functionGroupTenants: any;
    selectedTenantId: any;
    tenants: any;
+   msgs: Message[] = [];
    functionGroupsPerUserList: any;
    functionGroup: any = {
 
@@ -450,9 +451,13 @@ export class DetailsComponent {
            departmentId: this.selectedDepartmentId
        };
        this.userservice.postUpdate(userFormData).subscribe(res => {
-           if (res.isSuccess)
-           {
-
+           if (res.isSuccess) {
+               this.msgs = [];
+               this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
+           }
+           else {
+               this.msgs = [];
+               this.msgs.push({ severity: 'warn', summary: res.message, detail: 'Some thing went wrong.' });
            }
        });
 
