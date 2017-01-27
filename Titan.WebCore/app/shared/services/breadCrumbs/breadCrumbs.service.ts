@@ -32,9 +32,9 @@ export class BreadCrumbsService {
 
         //TestFacilities Page
         this.testFacilitiesPage();
-        //Test Facilities Add
+        //Test Facilities Add Page
         this.testFacilitiesAddPage();
-        //Test Facilities Details
+        //Test Facilities Details Page
         this.testFacilitiesDetailsPage();
 
         //Equipment Page
@@ -53,10 +53,17 @@ export class BreadCrumbsService {
 
         //TestTemplate Page
         this.testTemplatePage();
-        //TestTemplate Add
+        //TestTemplate Add Page
         this.testTemplateAddPage();
         //TestTemplate Details
         this.testTemplateDetailsPage();
+
+        //User Page
+        this.userPage();
+        //User Add Page
+        this.userAddPage();
+        //User Details Page
+        this.userDetailsPage();
 
         // Admin Vehicle Home Page
         this.adminVehicleHomePage();
@@ -653,6 +660,51 @@ export class BreadCrumbsService {
         return menuItem;
     }
 
+    // User Page Bread Crumbs
+    private userPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userPageBCItems() {
+        let menuItem = { label: 'User', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    private userAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.userPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userAddPageBCItems() {
+        let menuItem = { label: 'User Add', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    private userDetailsPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.userPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'UserDetailsPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private userDetailsPageBCItems() {
+        let menuItem = { label: 'User Details', routerLink: ['/user'] };
+        return menuItem;
+    }
+
 
     // Admin Vehicle Home Page Bread Crumbs
     private adminVehicleHomePage() {
@@ -1073,7 +1125,7 @@ export class BreadCrumbsService {
     }
 
     private adminTitanRolePageBCItems() {
-        let menuItem = { label: 'TitanRole', routerLink: ['/admin/vehicle/titanRole'] };
+        let menuItem = { label: 'Titan Role', routerLink: ['/admin/vehicle/titanRole'] };
         return menuItem;
     }
 

@@ -5,6 +5,7 @@ import { FormsModule} from '@angular/forms';
 import { UserProfileService } from '../../../shared/services/userProfile.service';
 import { EquipmentTypeService } from '../../../shared/services/Containers/EquipmentTypeService/equipmentType.service';
 import { UserService } from '../../../shared/services/user.service';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 import {
 
@@ -23,7 +24,7 @@ import detailsRoutes from "./details.routes";
         CheckboxModule,  FormsModule, SpinnerModule, PaginatorModule, EditorModule, DataTableModule,
         TabViewModule, CalendarModule, ButtonModule, InputTextareaModule, DropdownModule, InputTextModule, PanelModule,
         FileUploadModule, GrowlModule, DialogModule, BreadcrumbModule, detailsRoutes],
-    providers: [EquipmentTypeService, UserService, UserProfileService],
+    providers: [EquipmentTypeService, UserService, UserProfileService, BreadCrumbsService],
     declarations: [DetailsComponent]
 })
 
