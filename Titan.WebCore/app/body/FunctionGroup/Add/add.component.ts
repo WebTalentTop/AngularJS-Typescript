@@ -4,7 +4,8 @@ import { DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, Inpu
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
-import { TitanUserProfileService } from '../../../shared/services/titanUserProfile.service';
+import { UserProfileService } from '../../../shared/services/userProfile.service';
+import { IUserProfile } from '../../../shared/services/definitions/IUserProfile';
 import { FunctionGroupService } from '../../../shared/services/functionGroup.service';
 import { DepartmentService } from '../../../shared/services/department.service';
 import { UserService } from '../../../shared/services/user.service';
@@ -21,6 +22,7 @@ export class AddComponent {
     phoneNumber:string;
     userName: string;
     selectedDepartmentId: any;
+    currentUser: IUserProfile
     tenantId: any;
     departments: any;
     displayName:string;
@@ -40,7 +42,7 @@ export class AddComponent {
     constructor(private breadCrumbsService: BreadCrumbsService,
 
         private userservice: UserService,
-        private userprofileservice: TitanUserProfileService,
+        private userprofileservice: UserProfileService,
         private functiongroupservice: FunctionGroupService,
         private departmentservice: DepartmentService,
                 private router: Router) {
@@ -66,6 +68,8 @@ export class AddComponent {
 
 
         this.breadcrumbsHome = { routerLink: ['/'] };
+
+        this.currentUser = this.userprofileservice.getCurrentUserProfile();
 
         }
     onDepartmentChange(event) {
@@ -95,8 +99,8 @@ export class AddComponent {
     }
     onSubmit(formRef) {
        
-      //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
-        let tenantId = "FDC1A91F-75F4-4B2F-BA8A-9C2D731EBE4D";
+        //  formData.defaultTimeZoneId = formRef.defaultTimeZoneId;
+        let tenantId = this.currentUser.defaultTenantId;
         let functionGroupModel = {
 
             Name: formRef.name,
