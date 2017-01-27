@@ -15,10 +15,7 @@
         <p-tabPanel header="Information" id='details'>
 
             <p-growl [value]="msgs"></p-growl>
-            <!--<div class="row">
-                <img [src]="http://localhost:9998/equipment/GetEquipmentBarcode/CODE128" />
-                <a href="http://localhost:9998/equipment/GetEquipmentBarcode/CODE128"></a>
-            </div>-->
+        
 
                 <div class="subsection">
                     <form #tfForm="ngForm" (ngSubmit)="onEquipmentSave(tfForm.value)">
