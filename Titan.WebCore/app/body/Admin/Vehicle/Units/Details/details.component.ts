@@ -6,6 +6,7 @@ import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaMod
 import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Validators } from '@angular/forms';
 import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
+import {LoggerService} from "../../../../../shared/services/logger/logger.service";
 
 @Component({
     selector: 'units-detail',
@@ -44,6 +45,7 @@ export class DetailsComponent {
 
     constructor(
         private breadCrumbsService: BreadCrumbsService,
+        private ls: LoggerService,
         private route: ActivatedRoute,
         private router: Router,
         private service: UnitsService
@@ -83,7 +85,8 @@ export class DetailsComponent {
 
     onSubmit(formRef) {
 
-        this.service.postUpdate(this.UnitsDetails).subscribe(UnitsDetails => {
+        this.service.postUpdate(this.UnitsDetails).subscribe(unitsDetails => {
+            
         });
          this.msgs = [];
          this.msgs.push({ severity: 'success', summary: 'Saved', detail: '' });
