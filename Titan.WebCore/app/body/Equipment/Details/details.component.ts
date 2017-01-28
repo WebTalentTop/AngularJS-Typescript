@@ -163,7 +163,7 @@ export class DetailsComponent {
                     this.model.lastCalibrationDate = null;
                 else
                     this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
-                if (res.result.calibrationFrequencyCronExpression == null) {
+                if (res.result.calibrationFrequencyCronExpression == null || res.result.calibrationFrequencyCronExpression == "") {
                     let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === this.model.equipmentTypeId)[0].frequency;
                     if (frequencyvar != null && frequencyvar != "") {
                         this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
