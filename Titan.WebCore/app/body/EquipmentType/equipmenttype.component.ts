@@ -34,11 +34,11 @@ export class EquipmentTypeComponent {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();
-            //let equipmentTypeBreadCrumb = breadC.filter(filter =>
-            //    filter.pageName === 'EquipmentTypeHomePage')[0];
+            let equipmentTypeBreadCrumb = breadC.filter(filter =>
+               filter.pageName === 'EquipmentTypeHomePage')[0];
 
             this.breadcrumbs = [];
-            //this.breadcrumbs = equipmentTypeBreadCrumb.items;
+            this.breadcrumbs = equipmentTypeBreadCrumb.items;
 
             this.breadcrumbsHome = { routerLink: ['/'] };
         });

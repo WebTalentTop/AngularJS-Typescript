@@ -633,6 +633,7 @@ export class BreadCrumbsService {
     private testTemplatePage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TestTemplateHomePage', items: menuItems };
@@ -647,6 +648,7 @@ export class BreadCrumbsService {
     private testTemplateAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.testTemplatePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -662,6 +664,7 @@ export class BreadCrumbsService {
     private testTemplateDetailsPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.testTemplatePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -678,6 +681,7 @@ export class BreadCrumbsService {
     private userPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'UserHomePage', items: menuItems };
@@ -692,6 +696,7 @@ export class BreadCrumbsService {
     private userAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.userPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -707,6 +712,7 @@ export class BreadCrumbsService {
     private userDetailsPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.userPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -723,6 +729,7 @@ export class BreadCrumbsService {
     private functionGroupPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'FunctionGroupHomePage', items: menuItems };
@@ -737,6 +744,7 @@ export class BreadCrumbsService {
     private functionGroupAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.functionGroupPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -752,6 +760,7 @@ export class BreadCrumbsService {
     private functionGroupDetailsPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.functionGroupPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -768,6 +777,7 @@ export class BreadCrumbsService {
     private tenantPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
         bcInfoItems = { pageName: 'TenantHomePage', items: menuItems };
@@ -782,6 +792,7 @@ export class BreadCrumbsService {
     private tenantAddPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.tenantPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
@@ -797,6 +808,7 @@ export class BreadCrumbsService {
     private tenantDetailsPage() {
         let menuItems = [];
         menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.adminHomePageBCItems());
         menuItems.push(this.tenantPageBCItems());
 
         let bcInfoItems: IBreadCrumbsInfo;
