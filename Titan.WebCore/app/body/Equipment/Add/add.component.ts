@@ -321,8 +321,8 @@ export class AddComponent {
 
         };
 
-        this.msgs = [];
-        this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
+        //this.msgs = [];
+        //this.msgs.push({ severity: 'success', summary: 'Comment saved', detail: '' });
 
 
         this.service.postAdd(model).subscribe(res => {
@@ -330,6 +330,12 @@ export class AddComponent {
 
                 this.router.navigate(['equipment/details/', res.result.id]);
             }
+            else
+            {
+                this.msgs = [];
+        this.msgs.push({ severity: 'warn', summary: 'This Equipment exists', detail: '' });
+
+}
         });
     }
 

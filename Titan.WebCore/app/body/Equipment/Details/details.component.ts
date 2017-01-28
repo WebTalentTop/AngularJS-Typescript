@@ -145,8 +145,8 @@ export class DetailsComponent {
 
                 this.model.equipmentTypeId = res.result.equipmentTypeId;
                 this.selectedEquipmentTypeId = res.result.equipmentTypeId;
-                if (res.result.purchasePrice == 0)
-                    this.model.purchaseDate = null;
+                if (res.result.purchasePrice == "0.00")
+                    this.model.purchasePrice = null;
                 else
                     this.model.purchasePrice = res.result.purchasePrice;
                 if (res.result.purchaseDate == null)
@@ -476,8 +476,8 @@ export class DetailsComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                       // label: template.name + "(" + template.frequencyDescription + ")",
-                       label: template.name,
+                        label: template.name + "(" + template.frequencyDescription + ")",
+                       //label: template.name,
                         value: template.id,
                         frequency: template.frequency
                     }
@@ -498,6 +498,9 @@ export class DetailsComponent {
             this.msgs.push({ severity: 'error', summary: 'Please select Equipment Type', detail: '' });
             return null;
         }
+        var priceDecimal = 0;
+        if (formRef.purchasePrice == null)
+        { formRef.purchasePrice = priceDecimal; }
         //  formRef.isDeleted = false;
         let cronexp: any;
         if (this.isMaintenaceFrequencySelected) {

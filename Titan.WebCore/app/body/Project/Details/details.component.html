@@ -11,6 +11,11 @@
                              minlength="3"  maxlength="10" required style="width:100%">
                       <label>Project Code *</label>
                   </div>
+                  <div class="md-inputfield ui-g-12 ui-md-6">
+                      <input type="text" pInputText name="EstimatedCost" id="EstimatedCost" [(ngModel)]="ProjectDetails.estimatedCost" #EstimatedCostRef
+                             style="width:100%">
+                      <label>Estimated Cost</label>
+                  </div>
                 </div>
                 <div class="ui-grid-row">
                    <div class="ui-g-12 ui-md-6">
@@ -19,9 +24,7 @@
                                   [style]="{'width':'100%'}"></p-dropdown>
                       
                   </div>
-                </div><br />
-                <div class="ui-grid-row">
-                    <div class="ui-g-12 ui-md-6">
+                  <div class="ui-g-12 ui-md-6">
                         <!--<p-dropdown [options]="markets" (onChange)="onMarketChange($event)" name="categories" id="categories"
                                      [style]="{'width':'100%'}"></p-dropdown>-->
                         <p style="color:#777">Market :</p>
@@ -30,11 +33,20 @@
                         </p-multiSelect>
                         
                     </div>
+                </div><br />
+                <div class="ui-grid-row">
+                    
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Grade :</p>
                         <p-dropdown [options]="grades" (onChange)="onGradeChange($event)" name="grades" id="grades"  [(ngModel)]="selectedGradeId"
                                      [style]="{'width':'100%'}"></p-dropdown>
                         
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                         <p style="color:#777">Model Name :</p>
+                        <p-dropdown [options]="modelNames" (onChange)="onModelNameChange($event)" name="modelNames" id="modelNames"  [(ngModel)]="selectedModelNameId"
+                                     [style]="{'width':'100%'}"></p-dropdown>
+                       
                     </div>
                 </div><br />
                 <div class="ui-grid-row">
@@ -44,12 +56,7 @@
                                     [style]="{'width':'100%'}"></p-dropdown>
                         
                     </div>
-                    <div class="ui-g-12 ui-md-6">
-                         <p style="color:#777">Model Name :</p>
-                        <p-dropdown [options]="modelNames" (onChange)="onModelNameChange($event)" name="modelNames" id="modelNames"  [(ngModel)]="selectedModelNameId"
-                                     [style]="{'width':'100%'}"></p-dropdown>
-                       
-                    </div>
+                    
                 </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="ui-g-12 ui-md-6 md-inputfield">
@@ -71,14 +78,6 @@
                         <label>Actual End Date :</label>
                     </div>
                 </div><br /><br />
-                <div class="ui-grid-row">
-                  <div class="md-inputfield ui-g-12 ui-md-6">
-                      <input type="text" pInputText name="EstimatedCost" id="EstimatedCost" [(ngModel)]="ProjectDetails.estimatedCost" #EstimatedCostRef
-                             style="width:100%">
-                      <label>Estimated Cost</label>
-                  </div>
-                </div>
-                <br /><br />
                 <div class="ui-grid-row">
                       <div class="ui-g-12 ui-md-12" >
                         <label style="color:#777">Description</label>

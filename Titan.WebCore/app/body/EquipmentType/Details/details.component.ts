@@ -75,8 +75,8 @@ export class DetailsComponent implements OnInit {
     selectedMaintenanceFrequency: any;
     cities: SelectItem[];
     selectedcity: any;
-    isCronControlInitialized: boolean;
-    isSubTypeCronControlInitialized: boolean;
+    isCronControlInitialized: boolean = false;
+    isSubTypeCronControlInitialized: boolean = false;
     added: any;
     selectedSubTypeMaintenanceFrequency: any;
     selectedstring: string = null;
@@ -113,11 +113,11 @@ export class DetailsComponent implements OnInit {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();
-            //let equipmentTypeDetailsBreadCrumb = breadC.filter(filter =>
-            //  filter.pageName === 'EquipmentTypeDetailsPage')[0];
+            let equipmentTypeDetailsBreadCrumb = breadC.filter(filter =>
+             filter.pageName === 'EquipmentTypeDetailsPage')[0];
 
             this.breadcrumbs = [];
-            //this.breadcrumbs = equipmentTypeDetailsBreadCrumb.items;
+            this.breadcrumbs = equipmentTypeDetailsBreadCrumb.items;
 
             this.breadcrumbsHome = {routerLink: ['/']};
         });
@@ -256,6 +256,10 @@ export class DetailsComponent implements OnInit {
                             this.model.name = resFromPrev.name;
                             this.model.description = resFromPrev.description;
                             this.model.frequency = resFromPrev.frequency;
+                            if (this.model.frequency != null)
+                            { this.isMaintenaceFrequencySelected = true; }
+                            else
+                            { this.isMaintenaceFrequencySelected = false; }
                             this.frequencyInit(this.model.frequency);
 
                             let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = this.calibrationFormsList
@@ -345,16 +349,17 @@ export class DetailsComponent implements OnInit {
         }
     }
 
-    showSubTypeHideCronPicker() {
+    showSubTypeHideCronPicker(subfrequency) {
         console.log("--inside cronpicker show hide");
-
+        var selfRef = this;
+        this.isSubTypeMaintenanceFrequencySelected = subfrequency;
         if (this.isSubTypeMaintenanceFrequencySelected) {
             if (!this.isSubTypeCronControlInitialized) {
-                $("#selector").cron({
+                $("#cronselector").cron({
 
-                    initial: this.selectedMaintenanceFrequency,
+                    initial: this.selectedSubTypeMaintenanceFrequency,
                     onChange: function () {
-                        this.selectedMaintenanceFrequency = $(this).cron("value");
+                        selfRef.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
                     }, useGentleSelect: false
                 });
             }
@@ -365,7 +370,7 @@ export class DetailsComponent implements OnInit {
 
 
     frequencyInit(cronExp) {
-        var angularRef = this;
+      //  var angularRef = this;
         if (cronExp != null && cronExp != "") {
             this.selectedMaintenanceFrequency = cronExp;
 
@@ -374,9 +379,10 @@ export class DetailsComponent implements OnInit {
 
                 initial: this.selectedMaintenanceFrequency,
                 onChange: function () {
-                    angularRef.selectedMaintenanceFrequency = $(this).cron("value");
+                    this.selectedMaintenanceFrequency = $(this).cron("value");
                 }, useGentleSelect: false
             });
+            this.isCronControlInitialized = true;
         }
         else {
             this.isMaintenaceFrequencySelected = false;
@@ -389,8 +395,9 @@ export class DetailsComponent implements OnInit {
         this.selectedCalibration = null;
         this.EquipmentSubType = new PrimeEquipmentSubType(false, '');
         this.displayDialog = true;
-        this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
-
+        this.isSubTypeCronControlInitialized = false;
+        //this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+        this.EquipmentSubType.frequency = "";
         this.onCronInit(this.EquipmentSubType.frequency);
     }
 
@@ -413,6 +420,7 @@ export class DetailsComponent implements OnInit {
     }
 
     save() {
+        var selfRef = this;
         //   this.EquipmentSubType = EquipmentSubType.name;
         if (this.newsubType) {
             let selectedCalibrationFormInfo: IFormSchemaCategoryCalibrationForms = {
@@ -544,7 +552,7 @@ export class DetailsComponent implements OnInit {
                 },
                 useGentleSelect: false
             });
-
+            this.isSubTypeCronControlInitialized = true;
         }
         else {
             this.isSubTypeMaintenanceFrequencySelected = false;

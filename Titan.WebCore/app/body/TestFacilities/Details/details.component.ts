@@ -283,15 +283,7 @@ export class DetailsComponent implements AfterViewInit {
 
     }
 
-    onTestFacilityDelete() {
-        if (this.IsTestFacilityDelete)
-            this.testFacilityService.DeleteTestFacility(this.id).subscribe(res => {
-                    this.IsTestFacilityDelete = true;
-                    console.log('-----delete-------', res);
-                }
-            );
-
-    }
+  
 
     downloadAttachment(attachment) {
 
@@ -729,12 +721,7 @@ export class DetailsComponent implements AfterViewInit {
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
-                if (res.testFacility.isDeleted) {
-                    this.IsTestFacilityDelete = true;
-                }
-                else {
-                    this.IsTestFacilityDelete = false;
-                }
+                this.IsTestFacilityDelete = res.testFacility.isDeleted;
                 //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
                 if (res.testFacility.nextMaintenanceDate != null) {
@@ -1143,6 +1130,7 @@ export class DetailsComponent implements AfterViewInit {
         formData.id = this.id;
         formData.description = formRef.description;
         formData.name = formRef.name;
+        formData.isDeleted = this.IsTestFacilityDelete;
         formData.operatingHourId = this.selectedOperatingHour;
         formData.lastMaintenanceDate = this.testFacility.lastMaintenanceDate;
         if (this.isMaintenaceFrequencySelected) {

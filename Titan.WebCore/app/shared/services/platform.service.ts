@@ -56,7 +56,7 @@ export class PlatformService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${PlatformApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err))
+            // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)

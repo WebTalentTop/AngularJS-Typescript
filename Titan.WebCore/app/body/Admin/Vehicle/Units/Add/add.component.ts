@@ -53,7 +53,7 @@ export class AddComponent {
         let added: any="true";
         console.log(formData);
         this.service.postAdd(formData).subscribe(res => {
-            console.log('--------------res result------------', +res)
+            console.log('--------------res result------------', res)
 
             // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {

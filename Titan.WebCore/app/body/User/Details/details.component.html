@@ -31,22 +31,8 @@
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
 
-                            </div>
-                            <div class="ui-grid-row ">
-                                <div class="ui-g-12 ui-md-6">
-                                    <p style="color:#777">Department :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" required (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
-
-                                </div>
-                                <div class="ui-g-12 ui-md-6">
-                                    <label>Default Tenant </label>
-                                    <input type="text" style="width:100%" pInputText name="defaultTenantName" id="defaultTenantName" [(ngModel)]="userProfile.defaultTenantName"
-                                           minlength="3" class="form-control" required row="20">
-                                  
-                                </div>
                             </div><br /><br />
-
-                            <div class="ui-grid-row ">
+                             <div class="ui-grid-row ">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="emailAddress"  id="emailAddress" [(ngModel)]="userProfile.emailAddress"
                                          >
@@ -56,17 +42,32 @@
                                     <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.phoneNumber">
                                     <label>Phone Number</label>
                                 </div>
+                            </div><br /><br />
+                            <div class="ui-grid-row ">
+                                <div class=" md-inputfield ui-g-12 ui-md-6">
+                                    
+                                    <input type="text" style="width:100%" pInputText name="defaultTenantName" id="defaultTenantName" [(ngModel)]="userProfile.defaultTenantName"
+                                           minlength="3" class="form-control" required row="20">
+                                    <label>Default Tenant *</label>
+                                </div>
                             </div>
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
-                                    <p style="color:#777">Role :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)" [(ngModel)]="userProfile.roleId"  name="titanRoles"  id="titanRoles" [autoWidth]="false"></p-dropdown>
+                                    <p style="color:#777">Role *</p>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)" [(ngModel)]="userProfile.roleId"  name="titanRoles"  id="titanRoles" [autoWidth]="false" required></p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Time Zone :</p>
                                     <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="timeZones" (onChange)="onTimeZoneChange($event)" [(ngModel)]="userProfile.defaultTimeZoneId" name="timeZones"  id="timeZones" [autoWidth]="false"></p-dropdown>
                                 </div>
                             </div>
+                                                       <div class="ui-grid-row ">
+                                <div class="ui-g-12 ui-md-6">
+                                    <p style="color:#777">Department :</p>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" required (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
+
+                                </div>
+                             </div>
 
 
                         </div>

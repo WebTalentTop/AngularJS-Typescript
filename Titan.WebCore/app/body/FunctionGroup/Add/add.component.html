@@ -16,22 +16,18 @@
 
                     <div class="body">
 
-                        <!-- Begin Name -->
-
-                      
-                        <br /><br />
-                     
+                  
 
                         <div class="ui-grid-row">
 
-                            <div class="ui-g-12 ui-md-6">
+                            <div class="md-inputfield ui-g-12 ui-md-6">
                                 <!--<p style="color:#777">Name :</p>-->
 
                                 <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
                                        minlength="3" class="form-control" required row="20" style="width:100%">
                                 <label>Name <span>*</span></label>
                             </div>
-                        </div><br /><br />
+                        </div><br />
 
                         <div class="ui-grid-row">
 
@@ -39,7 +35,7 @@
                                 <p style="color:#777">Departments :</p>
                                 <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" [(ngModel)]="selectedDepartmentId" (onChange)="onDepartmentChange($event)" name="departments" id="departments" [autoWidth]="false"></p-dropdown>
                             </div>
-                        </div><br /><br />
+                        </div><br />
                     </div>
 
                     <footer>

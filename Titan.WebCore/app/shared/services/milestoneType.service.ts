@@ -24,7 +24,9 @@ export class MilestoneTypeService {
     };
     private currentUser: IUserProfile;
 
-    constructor(private http: Http, private userProfileService: UserProfileService) {
+    constructor(
+        private http: Http, 
+        private userProfileService: UserProfileService) {
         this.currentUser = this.userProfileService.getCurrentUserProfile();
         this.headers.append("TenantId", this.currentUser.defaultTenantId);
         this.headers.append("UserId", this.currentUser.id);
@@ -49,7 +51,7 @@ export class MilestoneTypeService {
     postAdd(filterBody): Observable<any> {
         console.log("-------- Post Customers FilterBody --------", filterBody);
         return this.http.post(`${MilestoneTypeApiUrl.postCreatedUrl}`, filterBody, { headers: this.headers })
-            .map(this.getJson).catch(err => Observable.throw(err))
+            // .map(this.getJson).catch(err => Observable.throw(err))
             .map(this.getJson);
 
         //this.checkErrors)
