@@ -560,7 +560,7 @@ export class DetailsComponent implements OnInit {
                 },
                 useGentleSelect: false
             });
-            this.isSubTypeCronControlInitialized = true;
+            selfRef.isSubTypeCronControlInitialized = true;
         }
         else {
             this.isSubTypeMaintenanceFrequencySelected = false;
@@ -584,8 +584,10 @@ export class DetailsComponent implements OnInit {
         if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "") {
             this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
             selfRef.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
+           // this.isSubTypeCronControlInitialized = false;
             selfRef.isSubTypeMaintenanceFrequencySelected = true;
-            this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
+            
+           // this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
             //  this.onCronInit();
 
         }
@@ -595,7 +597,7 @@ export class DetailsComponent implements OnInit {
            // this.EquipmentSubType.frequency = "0 0 1 1 *";
             selfRef.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
             selfRef.isSubTypeMaintenanceFrequencySelected = true;
-            this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
+            //this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
             
             if (!this.isSubTypeCronControlInitialized) {
                 this.isSubTypeCronControlInitialized = true;
