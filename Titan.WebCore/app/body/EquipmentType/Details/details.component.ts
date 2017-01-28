@@ -585,6 +585,7 @@ export class DetailsComponent implements OnInit {
             this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
             selfRef.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
             selfRef.isSubTypeMaintenanceFrequencySelected = true;
+            this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
             //  this.onCronInit();
 
         }
@@ -594,10 +595,13 @@ export class DetailsComponent implements OnInit {
            // this.EquipmentSubType.frequency = "0 0 1 1 *";
             selfRef.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
             selfRef.isSubTypeMaintenanceFrequencySelected = true;
+            this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
+            
             if (!this.isSubTypeCronControlInitialized) {
                 this.isSubTypeCronControlInitialized = true;
                 //this.onCronInit();
             }
+            
         }
  //       this.onCronInit(this.EquipmentSubType.frequency);
 
