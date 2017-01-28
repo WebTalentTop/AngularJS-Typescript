@@ -59,20 +59,15 @@
                   <p>Please select  tenants.</p>
 
                   <!-- Begin Users -->
-
-
                   <div class="input-row">
 
-                      <label>
-                          <b>Tenants :</b>
-
-                          <div class="ui-g-8">
-                              <p-dropdown [options]="tenants" [style]="{'width':'100%'}" [(ngModel)]="selectedTenantId" (onChange)="onTenantChange($event)" name="tenants" id="tenants" [autoWidth]="false"></p-dropdown>
-                          </div>
-                      </label>
-
+                      <div class="ui-g-4"><b>Users :</b></div>
+                      <div class="ui-g-8">
+                          <p-dropdown [options]="tenants" [style]="{'width':'100%'}" [(ngModel)]="selectedTenantId" (onChange)="onTenantChange($event)" name="tenants" id="tenants" [autoWidth]="false"></p-dropdown>
+                      </div>
                   </div>
 
+                 
                   <!-- End Users -->
                   <!-- Begin Role -->
                   <!-- End Role -->

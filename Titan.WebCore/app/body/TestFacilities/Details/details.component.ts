@@ -303,6 +303,7 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     loadAttachmentsTabViews(me) {
+        this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
         me.getCategories();
         me.getTestFacilityAttachmentServiceById();
     }
