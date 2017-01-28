@@ -6,6 +6,14 @@ import { EquipmentService } from '../../../shared/services/Containers/EquipmentS
 import { TestFacilityService } from '../../../shared/services/Containers/TestFacilityService/testFacility.service';
 import { DataTable, TabViewModule, LazyLoadEvent, ButtonModule, InputTextareaModule, InputTextModule, PanelModule, FileUploadModule, Message, GrowlModule, MenuItem } from 'primeng/primeng';
 import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
+import {LoggerService} from "../../../shared/services/logger/logger.service";
+import {EntityIdentifierService} from "../../../shared/services/entityIdentifier.service";
+import {IFormSchemaCategory} from "../../../shared/services/definitions/IFormSchemaCateogry";
+import {ITitanSelectItem} from "../../../shared/services/definitions/ITitanSelectItem";
+import {IFormSchema, IFormSchemaGridMF} from "../../../shared/services/definitions/IFormSchema";
+import {FormSchemaCategoryService} from "../../../shared/services/formSchemaCategory.service";
+import {FormSchemaService} from "../../../shared/services/formSchema.service";
+import {FormInstanceService} from "../../../shared/services/formInstance.service";
 
 declare var cron: any;
 declare var useGentleSelect: any;
@@ -97,12 +105,60 @@ export class DetailsComponent {
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
 
+    //region Form Related Variable
+    entityIdentifierName: string = 'Equipment';
+    entityIdentifierInfo: any = {};
+    formSchemaCategories: IFormSchemaCategory[] = [];
+    formSchemaCategoryList: ITitanSelectItem[];
+    formSchemaInfo: any = {};
+    formSchemaData: IFormSchema[] = [];// new FormSchema('', []);
+    //comment: any;
+    testFacilityLogComments: any;
+    formSchemaDataGridMF: IFormSchemaGridMF[] = [];
+    selectedMaintenanceForm: IFormSchemaGridMF;
+
+    //region Grid -- FormInstance Filled
+
+    gridFormInstanceData: any[] = [];
+    formInstanceUpdateView: boolean = false;
+    formInstanceUpdateData: any;
+    selectedGridFormInstance: any;
+    formInstanceUpdateNotes: string;
+    formInstanceId: string;
+    //endregion
+
+    selectedFormSchemaFP: any;
+    fieldsFP: any[] = [];
+
+    displayPreviewSelectedForm: boolean = false;
+
+
+    // Form Display
+    selectedFormSchemaCategory;
+    selectedFormFields: any[] = [];
+    selectedFormName: string;
+    // End of Form Display
+
+    // FormInstance variables
+    displayFormInsanceForm: boolean = false;
+    formInstanceFormSchemaVersionId: string;
+    formInstanceFormSchema: any;
+    formInstanceFields: any[]
+
+    //endregion End Of Form Related Variables
+
     constructor(
         private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private testfacilityservice: TestFacilityService,
-        private service: EquipmentService
+        private service: EquipmentService,
+        private ls: LoggerService,
+        private entityIdentifierService: EntityIdentifierService,
+        private formSchemaCategoryService: FormSchemaCategoryService,
+        private formSchemaService: FormSchemaService,
+        private formInstanceService: FormInstanceService
     ) {
+        this.ls.setShow(true);
         this.route.queryParams.subscribe(params => {
 
             this.added = params['page'];
@@ -121,8 +177,7 @@ export class DetailsComponent {
         this.model.id = this.id;
     }
 
-   handleChange(event)
-   {
+   handleChange(event) {
 
    }
 
@@ -210,6 +265,7 @@ export class DetailsComponent {
 
             });
 
+        this.getEntityIdentifierInfo();
 
         // this.dataService.getEquipmentsByIdusing(this.id)
         //  .subscribe(res =>
@@ -218,6 +274,7 @@ export class DetailsComponent {
 
         // });
     }
+
     frequencyInit() {
         if (this.model.calibrationFrequencyCronExpression != null) {
             this.selectedMaintenanceFrequency = this.model.calibrationFrequencyCronExpression;
@@ -237,8 +294,8 @@ export class DetailsComponent {
         }
 
     }
-    printBarCode()
-    {
+
+    printBarCode() {
       //  var barcode = window.open("http://localhost:9998/api/Equipment/GetEquipmentBarcodeTemplate/" + this.id, "_blank", "menubar=0,resizable=0,width=200,height=200");
         var barcode = window.open("", "", "width=200,height=200");
 
@@ -248,6 +305,7 @@ export class DetailsComponent {
         barcode.print();
         barcode.close();
     }
+
     showHideCronPicker() {
         console.log("--inside cronpicker show hide");
         if (this.isMaintenaceFrequencySelected) {
@@ -264,6 +322,7 @@ export class DetailsComponent {
             // Hide the cron
         }
     }
+
     displayAssignManufacturerDialogBox() {
         this.displayAssignManufacturerDialog = true;
         this.selectedEquipmentManufacturerId = null;
@@ -283,6 +342,7 @@ export class DetailsComponent {
 
 
     }
+
     GetLogCommentsByEquipmentId() {
         this.service.getLogComments(this.id)
             .subscribe(res => {
@@ -290,10 +350,12 @@ export class DetailsComponent {
             });
 
     }
+
     onMaintenanceFrequencyChange(event) {
         this.selectedMaintenanceFrequency = (event.value);
 
     }
+
     AddLogComment() {
         if (this.comment == null || this.comment == '') {
             this.msgs = [];
@@ -313,6 +375,7 @@ export class DetailsComponent {
         this.msgs.push({ severity: 'info', summary: 'Comment saved', detail: '' });
 
     }
+
     displayClear() {
         this.displayAssignManufacturerDialog = true;
         this.selectedEquipmentManufacturerId = null;
@@ -329,6 +392,7 @@ export class DetailsComponent {
         this.manufacturerState = '';
         this.manufacturerCity = '';
     }
+
     onAddManufacturer() {
 
 
@@ -375,6 +439,7 @@ export class DetailsComponent {
 
 
     }
+
     onEquipmentManufacturerChange(event) {
         this.selectedEquipmentManufacturerId = (event.value);
         this.service.getManufaturerDetailsById(this.selectedEquipmentManufacturerId).subscribe(res => {
@@ -393,6 +458,7 @@ export class DetailsComponent {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     getEquipmentManufacturers() {
         //    userRoles
         this.service.getEquipmentManufacturers().subscribe(response => {
@@ -435,11 +501,13 @@ export class DetailsComponent {
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     onTestFacilityChange(event) {
         this.selectedTestFacilityId = (event.value);
         //   this.EquipmentSubType.calibrationform = (event);
 
     }
+
     getTestFacilities() {
         //    userRoles
         this.testfacilityservice.getTestFacilities().subscribe(response => {
@@ -462,6 +530,7 @@ export class DetailsComponent {
             }
         });
     }
+
     getEquipmentTypes() {
         //    userRoles
         this.service.getEquipmentTypes().subscribe(response => {
@@ -487,6 +556,7 @@ export class DetailsComponent {
             }
         });
     }
+
     onEquipmentSave(formRef) {
         if (formRef.name == null || formRef.name == "") {
             this.msgs = [];
@@ -558,5 +628,179 @@ export class DetailsComponent {
         this.comment = '';
         this.displayCommentDialog = true;
     }
+
+    private getEntityIdentifierInfo() {
+        this.getGridFormInstanceInformationData();
+        // Getting Entity Identifier Id first To get All The Form Categories
+        this.entityIdentifierService.getByNameForForms(this.entityIdentifierName)
+            .subscribe(res => {
+                if (res.isSuccess) {
+
+                    this.ls.logConsole("EntityIdentifierInfo Call ----------", res);
+                    this.entityIdentifierInfo = res.result;
+
+                    // Getting All the Form Schema Categories with The EntityIdentifierId
+                    this.formSchemaCategoryService.getByEntityIdentifierId(this.entityIdentifierInfo.id)
+                        .subscribe(fsCategory => {
+                            this.ls.logConsole("FormSchemaCategoryInfo ----------", fsCategory);
+                            if (fsCategory.isSuccess) {
+                                this.ls.logConsole("Form Schema Category List-------------", res);
+                                this.formSchemaCategories = fsCategory.result;
+                                let listFormSchemaCaterory = fsCategory.result.map(newRes => {
+                                    return {
+                                        label: newRes.name,
+                                        value: newRes.id,
+                                        entityIdentifierId: newRes.entityIdentifierId
+                                    };
+                                });
+                                this.formSchemaCategoryList = [];
+                                this.formSchemaCategoryList.push({label: 'Select Category', value: null});
+                                this.formSchemaCategoryList = this.formSchemaCategoryList.concat(listFormSchemaCaterory);
+                                this.ls.logConsole("FormSchemaCategoryList ---------", this.formSchemaCategoryList);
+                                this.ls.logConsole("ListFormSchemaCategory -----------", listFormSchemaCaterory);
+
+                                let fscIds = fsCategory.result.map(fsc => fsc.id);
+                                // Getting all the FormSchema created by the FormSchemaCategory by the EntityIdentifierId
+                                this.ls.logConsole("Form Schema Category Ids -----", fscIds);
+
+                                this.formSchemaService.getFormSchemaGridByEntityIdentifierId(this.entityIdentifierInfo.id)
+                                    .subscribe(res => {
+                                        if (res.isSuccess) {
+                                            this.ls.logConsole("FSGridByEntityIdentifierId ----------", res.result);
+                                            this.formSchemaDataGridMF = res.result;
+                                            this.formSchemaDataGridMF = this.formSchemaDataGridMF.map(x => {
+                                                x.createdOn = moment(x.createdOn).format("MM-DD-YYYY").toString();
+                                                return x;
+                                            })
+                                        }
+
+                                    });
+
+                                this.formSchemaService.getByFormSchemaCategoryId(fscIds[1])
+                                    .subscribe(formSchemaResult => {
+                                        this.ls.logConsole("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        this.formSchemaData = formSchemaResult.result;
+                                        this.ls.logConsole("FormSchemaData ----------", this.formSchemaData);
+
+                                    });
+                                this.formSchemaService.getByFormSchemaCategoryIdCol(fscIds)
+                                    .subscribe(formSchemaResult => {
+                                        this.ls.logConsole("FormSchema Result by FormSchemaCategory ------", formSchemaResult);
+                                        if (formSchemaResult.isSuccess) {
+                                            this.formSchemaData = formSchemaResult.result;
+                                            this.ls.logConsole("FormSchemaData ----------", this.formSchemaData);
+                                        }
+                                        else {
+                                            this.formSchemaData = [];
+                                        }
+
+                                    });
+                            }
+                        });
+                }
+                else {
+                    //Add a message to the user and maybe after certain seconds take them to home page or ...
+                    //this.msgs.push({})
+                }
+            })
+    }
+
+    private getGridFormInstanceInformationData() {
+        // Getting Grid for FormInstance by this TestFacility Id
+        this.formInstanceService.getGridByEntityId(this.id)
+            .subscribe(res => {
+                this.ls.logConsole("GridFormInstance Data ------", res);
+                if (res.isSuccess) {
+                    this.gridFormInstanceData = res.result;
+                }
+            });
+    }
+
+
+    closeFormPreviewDialog() {
+        this.displayPreviewSelectedForm = false;
+        this.selectedFormName = '';
+        this.selectedFormFields = [];
+        this.ls.logConsole("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
+        this.ls.logConsole("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
+        this.ls.logConsole("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
+    }
+
+
+    // Entering data to the form to create a Form Instance
+    showFormInstance(formSchema) {
+        this.ls.logConsole("ShowFOrmInstance ----", formSchema);
+        this.selectedFormName = formSchema.name;
+        this.formInstanceFormSchemaVersionId = formSchema.formSchemaVersion.id;
+        this.formInstanceFields = formSchema.fields.$values;
+        //this.formInstanceFormSchema = formSchema;*/
+        this.displayFormInsanceForm = true;
+    }
+
+    closeFormInstanceDialog() {
+        this.displayFormInsanceForm = false;
+        this.selectedFormName = '';
+        this.formInstanceFormSchemaVersionId = '';
+        this.formInstanceFields = [];
+        this.getGridFormInstanceInformationData();
+    }
+
+
+    createInstance(item) {
+        this.selectedMaintenanceForm = item;
+        //this.ls.logConsole("Create Instance -=----", item);
+        this.getFormSchemaInfoSelectedByGridMF(false);
+    }
+
+    maintenanceFormRowSelect(item) {
+        this.ls.logConsole("MaintenanceFormRowSelect --------", item);
+        this.selectedMaintenanceForm = item;
+        this.ls.logConsole("Selected Maintenance Item -------", this.selectedMaintenanceForm);
+        this.getFormSchemaInfoSelectedByGridMF(true);
+    }
+
+    selectedFormToView(formName, formSchemaItems) {
+        this.selectedFormName = formName;
+        this.selectedFormSchemaFP = formSchemaItems;
+        this.displayPreviewSelectedForm = true;
+        // this.ls.logConsole("FormName -------", this.selectedFormName);
+        //this.ls.logConsole("Form Schema To View clicked ----", this.selectedFormSchemaFP);
+        //his.loggerService.logConsole("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
+    }
+
+    getFormSchemaInfoSelectedByGridMF(formToView) {
+        this.formSchemaService.getById(this.selectedMaintenanceForm.id)
+            .subscribe(res => {
+                this.ls.logConsole("After selection from the MF ----", res);
+                let formSchema = res.result;
+                let f = formSchema.fields.$values;
+                this.fieldsFP = f;
+                this.ls.logConsole("FormSchema by Selected Form-----", formSchema);
+                if (formToView) {
+                    this.selectedFormToView(this.selectedMaintenanceForm.name, res.result);
+                }
+                else {
+                    this.showFormInstance(formSchema);
+                }
+            })
+    }
+
+    maintenanceInformationFormRowSelect(event) {
+        this.formInstanceUpdateView = true;
+        this.selectedMaintenanceForm = this.formSchemaDataGridMF.filter(filter => filter.id === this.selectedGridFormInstance.formSchemaId)[0];
+        this.formInstanceId = this.selectedGridFormInstance.id;
+        console.log("FormSchemaGridMF---------", this.formSchemaDataGridMF);
+        console.log("SelectedGridFormInstance --------", this.selectedGridFormInstance);
+        console.log("SelectedMaintance form -----", this.selectedMaintenanceForm);
+
+        this.formInstanceUpdateNotes = this.selectedGridFormInstance.notes;
+
+        this.formInstanceService.getById(this.selectedGridFormInstance.id)
+            .subscribe(res => {
+                this.formInstanceUpdateData = res.result;
+                this.getFormSchemaInfoSelectedByGridMF(false);
+            });
+    }
+
 
 }
