@@ -113,11 +113,11 @@ export class DetailsComponent implements OnInit {
 
             this.added = params['page'];
             let breadC = this.breadCrumbsService.getBreadCrumbs();
-            //let equipmentTypeDetailsBreadCrumb = breadC.filter(filter =>
-            //  filter.pageName === 'EquipmentTypeDetailsPage')[0];
+            let equipmentTypeDetailsBreadCrumb = breadC.filter(filter =>
+             filter.pageName === 'EquipmentTypeDetailsPage')[0];
 
             this.breadcrumbs = [];
-            //this.breadcrumbs = equipmentTypeDetailsBreadCrumb.items;
+            this.breadcrumbs = equipmentTypeDetailsBreadCrumb.items;
 
             this.breadcrumbsHome = {routerLink: ['/']};
         });
