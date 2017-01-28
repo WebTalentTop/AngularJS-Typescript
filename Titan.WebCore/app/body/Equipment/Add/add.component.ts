@@ -333,7 +333,7 @@ export class AddComponent {
             else
             {
                 this.msgs = [];
-        this.msgs.push({ severity: 'warn', summary: 'Equipment same name exists', detail: '' });
+        this.msgs.push({ severity: 'warn', summary: 'This Equipment exists', detail: '' });
 
 }
         });

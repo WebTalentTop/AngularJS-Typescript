@@ -101,7 +101,7 @@ export class AddComponent {
 
             Name: formRef.name,
 
-            HostAddress: formRef.url,
+            HostAddress: '',
     FavIconUrl: '',
     DefaultTimeZone: '',
     LookupKey: '',
