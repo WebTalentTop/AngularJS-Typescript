@@ -52,7 +52,7 @@ export class ModelNameComponent {
 
         if (this.added == 1) {
             this.msgs = [];
-            this.msgs.push({ severity: 'Success', summary: 'Success', detail: '' });
+            this.msgs.push({ severity: 'Success', summary: 'Added', detail: '' });
         }
        
         let resData:any;

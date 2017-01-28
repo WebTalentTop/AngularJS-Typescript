@@ -9,28 +9,7 @@
         <h1>{{title}}</h1>
         <div class="ui-grid-row color_container">         
             <p-accordion>
-                <p-accordionTab header="Catalogs" [selected]='true'>
-                    <div class="ui-g-12 ui-md-6 ui-lg-3">
-                        <a [routerLink]="['/admin/vehicle/buildLevel']">
-                            <div class="ui-g card colorbox colorbox-4">
-                                <div class="ui-g-12">
-                                    <span class="colorbox-count">Category</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                   
-                    <div class="ui-g-12 ui-md-6 ui-lg-3">
-                        <a [routerLink]="['/admin/vehicle/units']">
-                            <div class="ui-g card colorbox colorbox-4">
-
-                                <div class="ui-g-12">
-                                    <span class="colorbox-count">Units</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>               
-                </p-accordionTab>
+                
                 <p-accordionTab header="Project" [selected]='true'>
                         <div class="ui-g-12 ui-md-6 ui-lg-3">
                             <a [routerLink]="['/admin/vehicle/buildLevel']">
@@ -423,6 +402,28 @@
                             </div>
                             </a>
                         </div>
+                </p-accordionTab>
+                <p-accordionTab header="Catalogs" [selected]='true'>
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <a [routerLink]="['/admin/vehicle/buildLevel']">
+                            <div class="ui-g card colorbox colorbox-4">
+                                <div class="ui-g-12">
+                                    <span class="colorbox-count">Category</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                   
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <a [routerLink]="['/admin/vehicle/units']">
+                            <div class="ui-g card colorbox colorbox-4">
+
+                                <div class="ui-g-12">
+                                    <span class="colorbox-count">Units</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>               
                 </p-accordionTab>
             </p-accordion>
         </div>

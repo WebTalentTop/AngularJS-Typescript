@@ -16,19 +16,23 @@
                     <div class="body">
 
                         <!-- Begin Name -->
-
-                      
-                        <br /><br />
                         <div class="ui-grid-row">
-
-                            <div class="ui-g-12 ui-md-6">
-                                <!--<p style="color:#777">Name :</p>-->
-
-                                <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
+                            <div class="md-inputfield ui-g-12 ui-md-6">
+                                 <input type="text" id="name" pInputText name="name" [(ngModel)]="name"
                                        minlength="3" class="form-control" required row="20" style="width:100%">
                                 <label>Name <span>*</span></label>
-                            </div>
-                        </div><br /><br />
+                             </div>
+                             <div class="md-inputfield ui-g-12 ui-md-6">
+                                 <input type="text" id="url" pInputText name="url" [(ngModel)]="url"
+                                       minlength="3" class="form-control" required row="20" style="width:100%">
+                                <label>Url <span>*</span></label>
+                             </div>
+                        </div>
+                        <br /><br />
+                        
+
+                            
+                        
 
                         <!--<div class="ui-grid-row">
 

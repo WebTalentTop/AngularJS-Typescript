@@ -53,7 +53,7 @@ export class ProjectRoleComponent {
 
         if (this.added == 1) {
             this.msgs = [];
-            this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+            this.msgs.push({ severity: 'success', summary: 'Added', detail: '' });
         }
        
         let resData:any;

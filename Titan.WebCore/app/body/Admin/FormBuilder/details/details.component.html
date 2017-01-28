@@ -135,6 +135,19 @@
                 </div>
             </div>
         </div>
+         <div class="ui-g ui-fluid from-group">
+             <div class="ui-g-12">
+                 <div class="ui-g-3">
+                     Has Attachments
+                 </div>
+                 <div class="ui-g-9">
+                     <p-toggleButton
+                        [(ngModel)]="hasAttachments"
+                        [style]="{'width': '150px'}">
+                     </p-toggleButton>
+                 </div>
+             </div>
+         </div>
         </p-panel><br />
         <p-panel header="Drag and Drop the form fields here">
         <div class="ui-g ui-fluid form-group" style="min-height: 200px;" pDroppable="inputs"

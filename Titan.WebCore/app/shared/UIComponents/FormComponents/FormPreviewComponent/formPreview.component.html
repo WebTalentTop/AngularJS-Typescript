@@ -37,6 +37,9 @@
                     </div>
 
                 </div>
+                <div class="ui-g-12" *ngIf="selectedInputList[selectedInputList.length-1].fieldDataType.name === 'Attachment' ">
+                    <p-fileUpload></p-fileUpload>
+                </div>
             </div>
 
             <!-- Original Html Tags
