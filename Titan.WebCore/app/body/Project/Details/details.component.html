@@ -19,9 +19,7 @@
                                   [style]="{'width':'100%'}"></p-dropdown>
                       
                   </div>
-                </div><br />
-                <div class="ui-grid-row">
-                    <div class="ui-g-12 ui-md-6">
+                  <div class="ui-g-12 ui-md-6">
                         <!--<p-dropdown [options]="markets" (onChange)="onMarketChange($event)" name="categories" id="categories"
                                      [style]="{'width':'100%'}"></p-dropdown>-->
                         <p style="color:#777">Market :</p>
@@ -30,11 +28,20 @@
                         </p-multiSelect>
                         
                     </div>
+                </div><br />
+                <div class="ui-grid-row">
+                    
                     <div class="ui-g-12 ui-md-6">
                         <p style="color:#777">Grade :</p>
                         <p-dropdown [options]="grades" (onChange)="onGradeChange($event)" name="grades" id="grades"  [(ngModel)]="selectedGradeId"
                                      [style]="{'width':'100%'}"></p-dropdown>
                         
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                         <p style="color:#777">Model Name :</p>
+                        <p-dropdown [options]="modelNames" (onChange)="onModelNameChange($event)" name="modelNames" id="modelNames"  [(ngModel)]="selectedModelNameId"
+                                     [style]="{'width':'100%'}"></p-dropdown>
+                       
                     </div>
                 </div><br />
                 <div class="ui-grid-row">
@@ -44,12 +51,7 @@
                                     [style]="{'width':'100%'}"></p-dropdown>
                         
                     </div>
-                    <div class="ui-g-12 ui-md-6">
-                         <p style="color:#777">Model Name :</p>
-                        <p-dropdown [options]="modelNames" (onChange)="onModelNameChange($event)" name="modelNames" id="modelNames"  [(ngModel)]="selectedModelNameId"
-                                     [style]="{'width':'100%'}"></p-dropdown>
-                       
-                    </div>
+                    
                 </div><br /><br />
                 <div class="ui-grid-row">
                   <div class="ui-g-12 ui-md-6 md-inputfield">
