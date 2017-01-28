@@ -10,4 +10,5 @@ export class TorqueSheetApiUrl {
     public static postTorqueSheetUrl: string = titanApiUrl + 'TorqueSheet/Post?submitForApproval=';
     public static getTorqueSheetsByTorqueBookIdUrl: string = titanApiUrl + 'TorqueSheet/GetTorqueSheetsByTorqueBook?torqueBookId=';
     public static getTorqueBooksTorqueSheetNamesUrl: string = titanApiUrl + 'TorqueSheetName/GetAll?torqueBookId=';
+    public static torqueSheetNamePostUrl: string = titanApiUrl + 'TorqueSheetName/Post';
 }

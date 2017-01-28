@@ -2,11 +2,9 @@
     <div class="ui-g-12">
         <div class="card card-w-title">
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-
-                <h2> Create New Torque Sheet </h2><br />
                 <p-panel>
                     <header  class="with-controls">
-                        <p class="ui-panel-title">Torque Sheet</p>
+                        <p class="ui-panel-title">Create New Torque Sheet</p>
                         <p class="controls">
                             <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
                         </p>
@@ -59,3 +57,5 @@
         </div>
     </div>
 </div>
+<email-component *ngIf="displayApproverEmail" emailDialogHeader="Send Approver Request Email" sendEmailLabelText="Send Approver Email"
+    [displayApproverEmail]="displayApproverEmail" [emailContent]="approverEmailContent" (onSendEmailComplete)="onSendEmailComplete($event)" (onCancelSendEmailComplete)="onSendEmailCancelComplete($event)"></email-component>

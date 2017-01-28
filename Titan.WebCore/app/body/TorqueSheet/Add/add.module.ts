@@ -8,6 +8,7 @@ import { ButtonModule, InputTextareaModule,InputTextModule, PanelModule, Dropdow
      } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
+import { EmailModule } from '../../../shared/UIComponents/EmailComponent/email.module';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import addRoutes from "./add.routes";
         PanelModule, 
         ButtonModule,
         DropdownModule, 
+        EmailModule,
         //RadioButtonModule,
         //MultiSelectModule,
         addRoutes

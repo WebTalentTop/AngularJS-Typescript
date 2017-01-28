@@ -25,7 +25,7 @@ export class TorquesheetService extends BaseService{
     }
     
     getTorqueSheet(id: string, getCurrentVersionOrLatestVersion: string): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetUrl}` + id + '&getCurrentVersionOrLatestVersion=' + getCurrentVersionOrLatestVersion )
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetUrl}` + id + '&getCurrentVersionOrLatestVersion=' + getCurrentVersionOrLatestVersion, { headers: this.headers } )
             .map(super.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -33,7 +33,7 @@ export class TorquesheetService extends BaseService{
     }
 
     postTorqueSheet(torqueSheetBody, submitForApproval:boolean): Observable<any> {
-        return this.http.post(`${TorqueSheetApiUrl.postTorqueSheetUrl}` + submitForApproval.toString(), torqueSheetBody)
+        return this.http.post(`${TorqueSheetApiUrl.postTorqueSheetUrl}` + submitForApproval.toString(), torqueSheetBody, { headers: this.headers })
             .map(super.getJson)
         //.chec
         // .catch(err => Observable.throw(err))
@@ -41,7 +41,7 @@ export class TorquesheetService extends BaseService{
     }
 
     getTorqueBooksTorqueSheetNames(torqueBookId): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getTorqueBooksTorqueSheetNamesUrl }`+ torqueBookId)
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueBooksTorqueSheetNamesUrl}` + torqueBookId, { headers: this.headers })
             .map(super.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -49,7 +49,7 @@ export class TorquesheetService extends BaseService{
     }
 
     getTorqueSheets(torqueBookId): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetsByTorqueBookIdUrl }`+ torqueBookId)
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetsByTorqueBookIdUrl}` + torqueBookId, { headers: this.headers })
             .map(super.getJson);
         //this.checkErrors)
         //.catch(err => Observable.throw(err))
@@ -57,32 +57,37 @@ export class TorquesheetService extends BaseService{
     }
 
     getAllTorqueSheetTemplates(): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getAllTorqueSheetTemplatesUrl}`)
+        return this.http.get(`${TorqueSheetApiUrl.getAllTorqueSheetTemplatesUrl}`, { headers: this.headers })
             .map(super.getJson);
     }
 
     postTorqueSheetTemplate(TorqueSheetTemplateBody): Observable<any> {
-        return this.http.post(`${TorqueSheetApiUrl.torqueSheetTemplatePostUrl}`, TorqueSheetTemplateBody)
+        return this.http.post(`${TorqueSheetApiUrl.torqueSheetTemplatePostUrl}`, TorqueSheetTemplateBody, { headers: this.headers })
             .map(super.getJson)
     }
 
     getTorqueSheetTemplate(id): Observable<any> {
-        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetTemplatesUrl}` + id)
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetTemplatesUrl}` + id, { headers: this.headers })
             .map(super.getJson);
     }
 
     putTorqueSheetTemplate(filterBody): Observable<any> {
-        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetTemplateUrl}`, filterBody)
+        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetTemplateUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
     }
 
     putTorqueSheet(status:string, filterBody): Observable<any> {
-        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}` + status, filterBody)
+        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}` + status, filterBody, { headers: this.headers })
             .map(this.getJson)
     }
 
     createNewTorqueSheetVersion(filterBody): Observable<any> {
-        return this.http.post(`${TorqueSheetApiUrl.postNewTorqueSheetVersionUrl}`, filterBody)
+        return this.http.post(`${TorqueSheetApiUrl.postNewTorqueSheetVersionUrl}`, filterBody, { headers: this.headers })
             .map(this.getJson)
+    }
+
+    postTorqueSheetName(torqueSheetNameBody): Observable<any> {
+        return this.http.post(`${TorqueSheetApiUrl.torqueSheetNamePostUrl}`, torqueSheetNameBody, { headers: this.headers })
+            .map(super.getJson)
     }
 }

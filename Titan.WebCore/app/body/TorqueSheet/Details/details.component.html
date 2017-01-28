@@ -4,31 +4,36 @@
             <h2>Edit Torque Sheet</h2><br />
             <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                 <p-panel>
-                    <header  class="with-controls">
+                    <header class="with-controls">
                         <p class="ui-panel-title">Torque Sheet</p>
                         <p class="controls">
                             <button pButton type="button" class="blue-grey-btn" icon="ui-icon-insert-photo" style="width:auto" label="Insert Picture" id="addpicture" (click)="onInsertPictueClick()"></button>
                         </p>
                     </header>
                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px" *ngIf="torqueSheetDetails">
-                        
+
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
                                 <span [class]="latestVersionStyle">{{latestVersionText}}</span>
                             </div>
-                            
+
                         </div>
                         <div class="ui-grid-row ">
                             <div class="ui-g-12 ui-md-6">
-                              <p style="color:#777">Torque Sheet Name *:</p>
-                              <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId" 
-                                            name="newTorqueSheetNameId" required #newTorqueSheetNameRef 
-                                            [style]="{'width':'100%','color':'#777'}">
-                                </p-dropdown>
+                                <p style="color:#777">Torque Sheet Name *:</p>
+                                <div class="ui-g-9">
+                                    <p-dropdown [options]="torqueSheetNames" [(ngModel)]="torqueSheetDetails.nameId"
+                                                name="newTorqueSheetNameId" required #newTorqueSheetNameRef
+                                                [style]="{'width':'100%','color':'#777'}">
+                                    </p-dropdown>
+                                </div>
+                                <div class="ui-g-3">
+                                    <button id="addNewTorqueSheetNameBtn" pButton type="button" class="blue-grey-btn" icon="ui-icon-plus" label="Add New" (click)="onAddNewTorqueSheetName()">  </button>
+                                </div>
                             </div>
                             <div class="ui-g-12 ui-md-6" *ngIf="torqueSheetDetails.otherVersions">
-                              <p style="color:#777">Other Versions :</p>
-                              <p-dropdown [options]="torqueSheetDetails.otherVersions" [(ngModel)]="otherVersionId" 
+                                <p style="color:#777">Other Versions :</p>
+                                <p-dropdown [options]="torqueSheetDetails.otherVersions" [(ngModel)]="otherVersionId"
                                             name="otherVersion" (onChange)="onVersionChange()"
                                             [style]="{'width':'100%'}">
                                 </p-dropdown>
@@ -37,12 +42,12 @@
                         <div class="ui-grid-row">
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Torque Sheet Status : {{torqueSheetDetails.torqueSheetStatus}}</p>
-     
+
                             </div>
                             <div class="ui-g-12 ui-md-6">
                                 <p style="color:#777">Version : {{torqueSheetDetails.version}}</p>
                             </div>
-                           
+
                         </div><br />
                         <div class="hidden" style="display:none">
                             <input type="file" name="image" id="fileSelector" #fileSelector (change)="onPictureSelect()" />
@@ -57,11 +62,11 @@
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
                                 <button id="add" pButton type="submit" class="green-btn" icon="ui-icon-save" [disabled]="!tfForm.form.valid" label="Save" *ngIf="torqueSheetDetails.isSaveVersionVisible">  </button>
-                                <button id="submit" pButton type="button"  class="blue-grey-btn" icon="ui-icon-email"  label="Submit For Approval" (click)="onSubmitForApproval()" *ngIf="torqueSheetDetails.isSubmitForApprovalVisible">  </button>
-                                <button id="approve" pButton type="button"  class="blue-grey-btn"  icon="ui-icon-check" label="Approve" (click)="onApprove()" *ngIf="torqueSheetDetails.isApproveVersionVisible">  </button>
-                                <button id="reject" pButton type="button"  class="blue-grey-btn"  icon="ui-icon-eject" label="Reject" (click)="onReject()" *ngIf="torqueSheetDetails.isRejectVersionVisible">  </button>
-                                <button id="createNewVersion" pButton type="button" class="blue-grey-btn" icon="ui-icon-close"   label="Create New Version" (click)="onCreateNewVersion()" *ngIf="torqueSheetDetails.isRequestForNewVersionVisible">  </button>
-                                <button id="cancel" pButton type="button"  class="blue-grey-btn" icon="ui-icon-close"  label="Cancel" (click)="onCancel()">  </button>
+                                <button id="submit" pButton type="button" class="blue-grey-btn" icon="ui-icon-email" label="Submit For Approval" (click)="onSubmitForApproval()" *ngIf="torqueSheetDetails.isSubmitForApprovalVisible">  </button>
+                                <button id="approve" pButton type="button" class="blue-grey-btn" icon="ui-icon-check" label="Approve" (click)="onApprove()" *ngIf="torqueSheetDetails.isApproveVersionVisible">  </button>
+                                <button id="reject" pButton type="button" class="blue-grey-btn" icon="ui-icon-eject" label="Reject" (click)="onReject()" *ngIf="torqueSheetDetails.isRejectVersionVisible">  </button>
+                                <button id="createNewVersion" pButton type="button" class="blue-grey-btn" icon="ui-icon-close" label="Create New Version" (click)="onCreateNewVersion()" *ngIf="torqueSheetDetails.isRequestForNewVersionVisible">  </button>
+                                <button id="cancel" pButton type="button" class="blue-grey-btn" icon="ui-icon-close" label="Cancel" (click)="onCancel()">  </button>
                             </div>
                         </div>
                     </div><br />
@@ -73,29 +78,25 @@
     </div>
 </div>
 
-<p-dialog header="Send Email" [(visible)]="displayApproverEmail" modal="modal" showEffect="fade" width="700">
-    <form #sendApproverEmailForm>
+<email-component *ngIf="displayApproverEmail" emailDialogHeader="Send Approver Request Email" sendEmailLabelText="Send Approver Email"
+                 [displayApproverEmail]="displayApproverEmail" [emailContent]="approverEmailContent" (onSendEmailComplete)="onSendEmailComplete($event)" (onCancelSendEmailComplete)="onSendEmailCancelComplete($event)"></email-component>
+
+<p-dialog header="Add New Torquesheet name" [(visible)]="displayAddNewTorqueSheetName" modal="modal" showEffect="fade" width="700">
+    <form #newTorqueSheetNameForm="ngForm">
         <div class="ui-grid-row">
-            <div class="ui-grid-col-2"><b>To:</b></div>
+            <div class="ui-grid-col-2"><b>Torque Sheet Name:</b></div>
             <div class="ui-grid-col-10">
-                <p-autoComplete [(ngModel)]="filteredSelectedApprovers" [suggestions]="filteredApprovers"
-                                (completeMethod)="filterApprovers($event)" styleClass="wid100" name="approverTo"
-                                [minLength]="1" placeholder="Search by Name" field="displayName" id="autoCompleteApprover" [multiple]="true">
-                </p-autoComplete>
+                <input type="text" pInputText name="newTorqueSheetName" [(ngModel)]="newTorqueSheetName" #newTorqueSheetNameRef
+                       style="width:100%">
             </div>
         </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-2"><b>Subject:</b></div>
-            <div class="ui-grid-col-10">
-                <p-editor name="subjectEditor" [(ngModel)]="subject" [style]="{'height':'320px'}"></p-editor>
-            </div>
-        </div>
+        <br />
     </form>
     <br />
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="onSendEmailCancel()" label="Cancel"></button>
-            <button type="button" pButton icon="ui-icon-save" (click)="onSendEmail()" label="Send Email Request"></button>
+            <button type="button" pButton icon="ui-icon-close" (click)="onAddNewTSNCancel()" label="Cancel"></button>
+            <button type="button" pButton icon="ui-icon-save" (click)="onAddNewTSN()" label="Add" [disabled]="!newTorqueSheetNameForm.form.valid"></button>
         </div>
     </footer>
 </p-dialog>

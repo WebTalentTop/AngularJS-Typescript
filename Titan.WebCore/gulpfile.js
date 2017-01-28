@@ -155,6 +155,12 @@ gulp.task("tsCompile", ['tsClean'], function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(root_path.webroot + "app/"));
 });
+
+gulp.task('tsCompileAndCopytsToWWWRoot', ['tsCompile'], function () {
+    gulp.src(root_path.app + "**/*.ts", { base: root_path.app })
+        .pipe(gulp.dest(root_path.webroot + "app/"));
+});
+
 gulp.task("moment", function () {
     gulp.src(root_path.nmSrc + "moment/**/*")
         .pipe(gulp.dest(root_path.package_lib + "moment/"));

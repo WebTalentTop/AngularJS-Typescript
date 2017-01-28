@@ -2,8 +2,8 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
-import { UserService } from '../../../shared/services/user.service';
 import { ITorqueSheet } from '../../../shared/services/definitions/ITorqueSheet';
+import { IEmail } from '../../../shared/services/definitions/IEmail';
 import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
@@ -15,9 +15,8 @@ export class DetailsComponent {
     torqueSheetDetails: ITorqueSheet;
     landingFrom: string;
     identifierId: string;
-    public selectedApprovers: Array<any> = new Array();
-    public filteredApprovers: Array<any> = new Array();
-    public filteredSelectedApprovers: Array<any> = new Array();
+
+    public approverEmailContent: IEmail;
     public displayApproverEmail: boolean;
     public subject: string;
     public torqueSheetNames: any;
@@ -30,6 +29,8 @@ export class DetailsComponent {
     PICTURE_COLUMNCOUNT: number = 10;
     public torqueSheetId: string;
     public getCurrentVersionOrLatestVersion: string;
+    public displayAddNewTorqueSheetName: boolean;
+    public newTorqueSheetName: string;
     public get latestVersionStyle() {
         return (this.torqueSheetDetails != null && this.torqueSheetDetails.isUserViewingLatestVersion) ? "latestVersion" : "oldVersion";
     }
@@ -46,7 +47,7 @@ export class DetailsComponent {
     //@Input() fromTorqueBookId: string;
     //@Output() onAddComplete: EventEmitter<any> = new EventEmitter<any>();
     //@Output() onCancelComplete: EventEmitter<any> = new EventEmitter<any>();
-    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService, private userService: UserService) {
+    constructor(private service: TorquesheetService, private route: ActivatedRoute, private router: Router, private confirmationService: ConfirmationService) {
         //this.torqueSheetDetails = <ITorqueSheet>{};
         this.route.params.subscribe(params => {
             //this.torqueSheetDetails.id = params['id'];
@@ -56,13 +57,6 @@ export class DetailsComponent {
             //this.getTorqueBooksTorqueSheetNames(params['torqueBookId']);
             this.landingFrom = params['landingFrom'];
             this.identifierId = params['identifierId']; 
-        });
-    }
-
-    filterApprovers(event) {
-        this.userService.filterUserByName(event.query).subscribe(filteredList => {
-            if (filteredList.isSuccess)
-                this.filteredApprovers = filteredList.result;
         });
     }
 
@@ -255,6 +249,8 @@ export class DetailsComponent {
     }
 
     onSubmitForApproval() {
+        this.approverEmailContent = <IEmail>{};
+        this.approverEmailContent.subject = "Reg: Approval of TorqueSheet";//+ this.torqueSheetDetails.name
         this.displayApproverEmail = true;
     }
 
@@ -262,11 +258,12 @@ export class DetailsComponent {
         this.saveTorqueSheet("Approve");
     }
 
-    onSendEmailCancel() {
+    onSendEmailCancelComplete(event) {
         this.displayApproverEmail = false;
     }
 
-    onSendEmail() {
+    onSendEmailComplete(emailContent) {
+        this.approverEmailContent = emailContent;
         this.displayApproverEmail = false;
         this.saveTorqueSheet("Submit");
     }
@@ -306,5 +303,28 @@ export class DetailsComponent {
             this.router.navigate(["/project/detailsmain/", this.identifierId]);
 
         }
+    }
+
+    onAddNewTorqueSheetName() {
+        this.displayAddNewTorqueSheetName = true;
+    }
+
+    onAddNewTSN() {
+        var newTorqueSheetNameDto = {
+            name: this.newTorqueSheetName
+        };
+        this.service.postTorqueSheetName(newTorqueSheetNameDto).subscribe(res => {
+            if (res.isSuccess) {
+                this.displayAddNewTorqueSheetName = false;
+                this.torqueSheetNames.push({
+                    label: res.result.name,
+                    value: res.result.id
+                });
+                this.torqueSheetDetails.nameId = res.result.id;
+            }
+        });
+    }
+    onAddNewTSNCancel() {
+        this.displayAddNewTorqueSheetName = false;
     }
 }
