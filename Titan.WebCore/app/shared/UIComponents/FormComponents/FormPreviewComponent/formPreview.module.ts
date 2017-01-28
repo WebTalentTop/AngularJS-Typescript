@@ -4,7 +4,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DataTableModule, DragDropModule, DialogModule, InputTextModule, SpinnerModule, DropdownModule, RadioButtonModule, ButtonModule, CheckboxModule, CalendarModule } from 'primeng/primeng';
+import {
+    DataTableModule,
+    DragDropModule,
+    DialogModule,
+    InputTextModule,
+    SpinnerModule,
+    DropdownModule,
+    RadioButtonModule,
+    ButtonModule,
+    CheckboxModule,
+    CalendarModule,
+    FileUploadModule
+} from 'primeng/primeng';
 import { FormPreviewComponent } from './formPreview.component';
 
 @NgModule({
@@ -20,7 +32,8 @@ import { FormPreviewComponent } from './formPreview.component';
         RadioButtonModule,
         ButtonModule,
         CheckboxModule,
-        CalendarModule
+        CalendarModule,
+        FileUploadModule
     ],
     declarations: [FormPreviewComponent],
     exports: [FormPreviewComponent, CommonModule]

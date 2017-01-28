@@ -104,6 +104,10 @@ export class DetailsComponent {
     displayNumberBoxMod: boolean = false;
     displayTextAreaBoxMod: boolean = false;
     displaySaveFormMessage: boolean = false;
+
+    // attachment to be enabled or disabled for the form
+    hasAttachments: boolean = false;
+    originalyHasAttachments: boolean = false;
     //endregion
 
     msgs:Message[] = [];
@@ -185,6 +189,10 @@ export class DetailsComponent {
             formSchemaField.data = m.data.$values.map(x => { return {name: x.value, value: x.value}});
             formSchemaField.formSchemaFieldDataTypeData = formSchemaField.data.map(d => d.name);
 
+            if (m.fieldDataType.name === "Attachment") {
+                this.hasAttachments = true;
+                this.originalyHasAttachments = true;
+            }
             if (m.fieldDataType.name === "CheckBox") {
                 formSchemaField.checkBoxData = formSchemaField.formSchemaFieldDataTypeData.join("\n");
             }
@@ -531,8 +539,7 @@ export class DetailsComponent {
 
         formSchemaData.fields.map(item => {
             let fieldDataType: any = item;
-            if (fieldDataType.fieldDataType.name === "TextAreaBox")
-            {
+            if (fieldDataType.fieldDataType.name === "TextAreaBox") {
                 item.data = [];
                 item.formSchemaFieldDataTypeData = [];
             }
@@ -561,6 +568,33 @@ export class DetailsComponent {
                 this.ls.logConsole("selectBoxData --------", item.data);
             }
         });
+
+        if (this.originalyHasAttachments) {
+            if (!this.hasAttachments) {
+                formSchemaData.fields = formSchemaData.fields.filter(x => x.fieldDataType.name != "Attachment");
+            }
+        }
+        if (this.originalyHasAttachments === false && this.hasAttachments === true) {
+            let attachmentField = this.formFieldDataTypeList.filter(item => item.name === "Attachment")[0];
+            this.ls.logConsole("Attachment Field filtering from formFieldDataTypeList --------", attachmentField);
+            let attachment: IFormSchemaField = {
+                id: '',
+                formSchemaVersionId: 0,
+                name: 'New Attachment',
+                label: '',
+                isRequired: false,
+                maxLength: 0,
+                order: 0,
+                checkBoxData: '',
+                radioBoxData: '',
+                selectBoxData: '',
+                formSchemaFieldDataTypeData: [],
+                formSchemaFieldDataTypeId: ''
+            };
+
+            attachment.formSchemaFieldDataTypeId = attachmentField.id;
+            formSchemaData.fields.push(attachment);
+        }
 
         let formSchemaUpdateForm: IFormSchemaUpdateModel = new FormSchemaUpdateModel("","",[]);
         formSchemaUpdateForm.name = formSchemaData.name;

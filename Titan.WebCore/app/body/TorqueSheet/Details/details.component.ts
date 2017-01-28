@@ -2,7 +2,7 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TorquesheetService } from '../../../shared/services/torquesheet.service';
-import { ITorqueSheet } from '../../../shared/services/definitions/ITorqueSheet';
+import { ITorqueSheet, ITorqueSheetEmailNotification } from '../../../shared/services/definitions/ITorqueSheet';
 import { IEmail } from '../../../shared/services/definitions/IEmail';
 import { ConfirmationService } from 'primeng/primeng';
 
@@ -251,7 +251,12 @@ export class DetailsComponent {
     onSubmitForApproval() {
         this.approverEmailContent = <IEmail>{};
         this.approverEmailContent.subject = "Reg: Approval of TorqueSheet";//+ this.torqueSheetDetails.name
-        this.displayApproverEmail = true;
+        this.service.getTorqueSheetApprovalRequestEmailContent(this.torqueSheetDetails.nameId).subscribe(a => {
+            if (a.isSuccess) {
+                this.approverEmailContent.body = a.result;
+                this.displayApproverEmail = true;
+            }
+        });
     }
 
     onApprove() {
@@ -265,7 +270,16 @@ export class DetailsComponent {
     onSendEmailComplete(emailContent) {
         this.approverEmailContent = emailContent;
         this.displayApproverEmail = false;
-        this.saveTorqueSheet("Submit");
+        this.torqueSheetDetails.contents = JSON.stringify(this.spreadInstance.toJSON());
+        var torqueSheetEmailDetails = <ITorqueSheetEmailNotification>{};
+        torqueSheetEmailDetails = JSON.parse(JSON.stringify(this.torqueSheetDetails));
+        torqueSheetEmailDetails.emailDto = emailContent;
+        this.service.putTorqueSheetApprovalRequest("Submit", torqueSheetEmailDetails).subscribe(res => {
+            if (res.isSuccess) {
+                this.torqueSheetDetails = res.result;
+                this.torqueSheetDetails.otherVersions = this.torqueSheetDetails.otherVersions.$values;
+            }
+        });
     }
 
     onReject() {

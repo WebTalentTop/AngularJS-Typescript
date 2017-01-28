@@ -269,7 +269,7 @@ export class FormInstanceComponent {
         this.formInstance.formInstanceStateId = 'BF798F6C-B846-403A-9A8E-29F008978754';
         this.ls.logConsole("FormInstance Values ----------", this.formInstance);
 
-        /*var postResult = this.formInstanceService.postAdd(this.formInstance)
+        var postResult = this.formInstanceService.postAdd(this.formInstance)
             .subscribe(dataResult => {
                 this.ls.logConsole("DataResult From Post ----------", dataResult);
                 this.ls.logConsole("Post Result Data -----------", postResult);
@@ -279,7 +279,7 @@ export class FormInstanceComponent {
                     this.closeForm();
                 }
                 return dataResult;
-            });*/
+            });
     }
 
 

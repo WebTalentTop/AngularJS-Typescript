@@ -13,7 +13,7 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><b>Subject:</b></div>
             <div class="ui-grid-col-10">
-                <input type="text" pInputText name="emailSubject" [(ngModel)]="emailContent.subject" #emailSubjectRef
+                <input type="text" pInputText name="emailSubject" [(ngModel)]="subject" #emailSubjectRef
                        style="width:100%">
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><b>Content:</b></div>
             <div class="ui-grid-col-10">
-                <p-editor name="bodyEditor" [(ngModel)]="emailContent.emailBody" [style]="{'height':'320px'}"></p-editor>
+                <p-editor name="bodyEditor" [(ngModel)]="text" [style]="{'height':'320px'}"></p-editor>
             </div>
         </div>
     </form>

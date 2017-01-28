@@ -48,6 +48,14 @@ export class TorquesheetService extends BaseService{
         //.map(this.getJson);
     }
 
+    getTorqueSheetApprovalRequestEmailContent(torqueSheetNameId): Observable<any> {
+        return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetApprovalRequestEmailContentUrl}` + torqueSheetNameId, { headers: this.headers })
+            .map(super.getJson);
+        //this.checkErrors)
+        //.catch(err => Observable.throw(err))
+        //.map(this.getJson);
+    }
+
     getTorqueSheets(torqueBookId): Observable<any> {
         return this.http.get(`${TorqueSheetApiUrl.getTorqueSheetsByTorqueBookIdUrl}` + torqueBookId, { headers: this.headers })
             .map(super.getJson);
@@ -78,6 +86,11 @@ export class TorquesheetService extends BaseService{
 
     putTorqueSheet(status:string, filterBody): Observable<any> {
         return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetUrl}` + status, filterBody, { headers: this.headers })
+            .map(this.getJson)
+    }
+
+    putTorqueSheetApprovalRequest(status: string, filterBody): Observable<any> {
+        return this.http.put(`${TorqueSheetApiUrl.putTorqueSheetApprovalRequestUrl}` + status, filterBody, { headers: this.headers })
             .map(this.getJson)
     }
 

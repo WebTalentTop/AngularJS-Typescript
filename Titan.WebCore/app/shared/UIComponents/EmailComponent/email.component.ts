@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import {
     LazyLoadEvent, GrowlModule, InputTextModule, ConfirmDialogModule,
     ConfirmationService, DialogModule, EditorModule, SharedModule, AutoCompleteModule, Message
@@ -15,7 +15,7 @@ import { UserService } from '../../../shared/services/user.service';
     selector: 'email-component',
     templateUrl: 'app/shared/UIComponents/EmailComponent/email.component.html'
 })
-export class EmailComponent {
+export class EmailComponent implements OnChanges{
     @Input()
     emailDialogHeader: string = "Send Email";
     @Input()
@@ -23,7 +23,8 @@ export class EmailComponent {
 
     @Input()
     emailContent: IEmail;
-    
+    public text: string;
+    public subject: string;
     @Input()
     sendEmailLabelText: string = "Send Email";
     public filteredToEmailAddresses: IUserProfile[];
@@ -34,6 +35,16 @@ export class EmailComponent {
     msgs: Message[];
     
     constructor(private confirmationService: ConfirmationService, private userService: UserService) { }
+
+    ngOnChanges(changes: SimpleChanges) {
+        var temp = changes;
+        if (changes["emailContent"].currentValue != undefined) {
+            this.text = changes["emailContent"].currentValue.body;
+            this.subject = changes["emailContent"].currentValue.subject;
+        }
+        else
+            this.text = "";
+    }
 
     ngOnInit() { 
         if (this.emailContent != undefined)
@@ -56,6 +67,8 @@ export class EmailComponent {
         //newEmail.subject = this.emailSubject;
         //newEmail.emailBody = this.emailBody;
         //newEmail.to = this.selectedToEmailAddresses;
+        this.emailContent.subject = this.subject;
+        this.emailContent.body = this.text;
         this.onSendEmailComplete.emit(this.emailContent);
     }
 }

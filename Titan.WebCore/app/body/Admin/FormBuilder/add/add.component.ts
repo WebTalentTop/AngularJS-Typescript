@@ -151,6 +151,14 @@ export class AddFormComponent {
     //region Drag Events
     dragStart(event, item: IFormSchemaFieldDataType) {
         this.draggedItem = item;
+
+        if (this.draggedItem.name === "TextBox") {
+            this.formInputData.maxLength = 100;
+        }
+
+        if (this.draggedItem.name === "TextAreaBox") {
+            this.formInputData.maxLength = 2000;
+        }
     }
 
     dragEnd(event) {
@@ -196,6 +204,39 @@ export class AddFormComponent {
         }
     }
 
+    /*handleAttachmentToggelChange(event) {
+        this.ls.logConsole("Toggle Event variable ------", event);
+        if (event.checked) {
+            this.addAttachmentToSlectedInputlist();
+        }
+        //this.formInputData.formSchemaFieldDataTypeId = this.draggedItem.id;
+    }
+
+    addAttachmentToSlectedInputlist() {
+        let attachment: IFormSchemaField = {
+            id: '',
+            formSchemaVersionId: 0,
+            name: 'Attachment',
+            label: '',
+            isRequired: false,
+            maxLength: 0,
+            order: 0,
+            checkBoxData: '',
+            radioBoxData: '',
+            selectBoxData: '',
+            formSchemaFieldDataTypeData: [],
+            formSchemaFieldDataTypeId: ''
+        };
+
+        let attachmentField = JSON.parse(JSON.stringify(this.draggableList.formFieldDataTypeList.filter(item => item.name === "Attachment")[0]));
+        this.ls.logConsole("Attachment Field --------", attachmentField);
+        //attachmentField.name = "Attachment";
+
+        this.draggableList.selectedInputList.push(attachmentField);
+
+        this.ls.logConsole("Selected Input",'');
+    }
+*/
     checkFieldDataType(id): IFormSchemaFieldDataType {
         let fieldDataType: IFormSchemaFieldDataType = this.formFieldDataTypeList.filter(x => {
             if (x.id === id) {
@@ -445,6 +486,8 @@ export class AddFormComponent {
     saveForm() {
         let formSchemaData: IFormSchema = new FormSchema('',false, []);
 
+
+
         formSchemaData.name = this.formName;
         formSchemaData.fields = this.draggableList.selectedInputList;
         formSchemaData.formSchemaCategoryIds.push(this.selectedFormSchemaCategory);
@@ -452,6 +495,29 @@ export class AddFormComponent {
         formSchemaData.formSchemaEntityEvents.push({
             entityEventId: this.selectedEntityEvent
         });
+
+        if(this.hasAttachments) {
+            let attachmentField = this.draggableList.formFieldDataTypeList.filter(item => item.name === "Attachment")[0];
+            this.ls.logConsole("Attachment field ---------", attachmentField);
+            let attachment: IFormSchemaField = {
+                id: '',
+                formSchemaVersionId: 0,
+                name: 'Attachment',
+                label: '',
+                isRequired: false,
+                maxLength: 0,
+                order: 0,
+                checkBoxData: '',
+                radioBoxData: '',
+                selectBoxData: '',
+                formSchemaFieldDataTypeData: [],
+                formSchemaFieldDataTypeId: ''
+            };
+
+            attachment.formSchemaFieldDataTypeId = attachmentField.id;
+
+            this.draggableList.selectedInputList.push(attachment);
+        }
 
 
         this.ls.logConsole("Form to sent ---------", formSchemaData);
