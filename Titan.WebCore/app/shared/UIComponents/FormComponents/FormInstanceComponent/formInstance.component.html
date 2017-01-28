@@ -1,7 +1,6 @@
 <script src="formInstance.component.ts"></script>
 <div class="ui-g-12" *ngIf="selectedInputList.length > 0">
     <h3>{{formName}}</h3>
-    <pre>{{formInstance | json}}</pre>
     <form #fiForm="ngForm" (ngSubmit)="collectForm(fiForm)">
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-12 ui-md-4" *ngFor="let formInput of formFieldDataItemList">
