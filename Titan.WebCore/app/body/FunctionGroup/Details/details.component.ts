@@ -250,7 +250,7 @@ export class DetailsComponent {
         //  };
         this.tenantservice.postAddFunctionGroupToTenant(Tenant, this.functionGroupId).subscribe(res => {
             if (res.isSuccess) {
-                // this.selectedFunctionGroupId = null;
+                this.selectedTenantId = null;
 
                 this.functionGroupservice.getTenantUserFunctionGroupsById(this.functionGroupId).subscribe(res => {
                     this.functionGroupTenants = res.result.functionGroupTenants.$values;
@@ -286,7 +286,7 @@ export class DetailsComponent {
         };
         this.functionGroupservice.postAssignUserFunctionGroup(userFunctionGroupModel).subscribe(res => {
             if (res.isSuccess) {
-                // this.selectedFunctionGroupId = null;
+                this.selectedUserId = null;
                 this.functionGroupservice.getTenantUserFunctionGroupsById(this.functionGroupId).subscribe(res => {
                     // this.functionGroupTenants = res.result.functionGroupTenants.$values;
                     this.functionGroupUsers = res.result.functionGroupUsers.$values;
