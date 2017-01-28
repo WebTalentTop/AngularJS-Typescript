@@ -1365,7 +1365,6 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
-
     closeFormPreviewDialog() {
         this.displayPreviewSelectedForm = false;
         this.selectedFormName = '';
@@ -1374,7 +1373,6 @@ export class DetailsComponent implements AfterViewInit {
         this.loggerService.logConsole("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
         this.loggerService.logConsole("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
     }
-
 
     // Entering data to the form to create a Form Instance
     showFormInstance(formSchema) {
