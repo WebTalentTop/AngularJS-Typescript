@@ -14,28 +14,28 @@
           </header>
           <p-dataTable [value]="allUsers" [paginator]="true" rows="15" [responsive]="true">
 
-              <p-column header="First Name" sortable="true">
+              <p-column header="First Name" sortable="true" [filter]="true" filterMatchMode="contains">
                   <template let-userrow="rowData" pTemplate type="body">
                       <!--<a routerLink="details/{{id}}"><i class="fa ui-icon-add"></i>Add New Sensor Request</a>-->
                <a routerLink="details/{{userrow.userId}}">{{userrow.firstName}}</a>
                       </template>
              </p-column>
-              <p-column header="Last Name" field="lastName" sortable="true">
+              <p-column header="Last Name" field="lastName" sortable="true" [filter]="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
                       {{userrow.lastName}}
                   </template>-->
               </p-column>
-              <p-column header="Role" field="roleName" sortable="true">
+              <p-column header="Role" field="roleName" sortable="true" [filter]="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
 
                   </template>-->
               </p-column>
-              <p-column header="Last Logged On" field="lastLoggedIn" sortable="true">
+              <p-column header="Last Logged On" field="lastLoggedIn" sortable="true" [filter]="true">
                   <!--<template let-taskrow="rowData" pTemplate type="body">
 
         </template>-->
               </p-column>
-              <p-column header="Department" field="departmentName" sortable="true">
+              <p-column header="Department" field="departmentName" sortable="true" [filter]="true">
                   <!--<template let-userrow="rowData" pTemplate type="body">
 
                     </template>-->
