@@ -1159,12 +1159,7 @@ export class DetailsComponent implements AfterViewInit {
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-                        if (res.testFacility.isDeleted) {
-                            this.IsTestFacilityDelete = true;
-                        }
-                        else {
-                            this.IsTestFacilityDelete = false;
-                        }
+                        this.IsTestFacilityDelete = res.testFacility.isDeleted;
                         //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                         this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                         // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {

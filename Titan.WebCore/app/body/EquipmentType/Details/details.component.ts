@@ -352,11 +352,11 @@ export class DetailsComponent implements OnInit {
         }
     }
 
-    showSubTypeHideCronPicker(subfrequency) {
+    showSubTypeHideCronPicker() {
         console.log("--inside cronpicker show hide");
         var selfRef = this;
-        selfRef.isSubTypeMaintenanceFrequencySelected = subfrequency;
-
+        // selfRef.isSubTypeMaintenanceFrequencySelected;
+        this.isSubTypeMaintenanceFrequencySelected = selfRef.isSubTypeMaintenanceFrequencySelected;
         if (selfRef.isSubTypeMaintenanceFrequencySelected) {
             if (!this.isSubTypeCronControlInitialized) {
                 $("#cronselector").cron({
@@ -364,9 +364,32 @@ export class DetailsComponent implements OnInit {
                     initial: this.selectedSubTypeMaintenanceFrequency,
                     onChange: function () {
                         selfRef.selectedSubTypeMaintenanceFrequency = $(this).cron("value");
-                    }, useGentleSelect: false
+                    },
+                    //bind: {
+                    //    set: function ($element, value) {
+                    //        $element.html(this.selectedSubTypeMaintenanceFrequency);
+                    //    }
+                    //},
+                    useGentleSelect: false
                 });
                 this.isSubTypeCronControlInitialized = true;
+            }
+            else
+            {
+                this.isSubTypeMaintenanceFrequencySelected = true;
+                //$("#cronselector").cron({                   
+                //    bind: {
+                //        set: function ($element, value) {
+                //            $element.html(selfRef.selectedSubTypeMaintenanceFrequency);
+                //        }
+                //    },
+                //    useGentleSelect: false
+                //});
+             //   $('#cronselector').html(this.selectedSubTypeMaintenanceFrequency);
+               // var cron_field = $('#cronselector').html()
+            //cron_field.cron("value", "");
+            // Updating the value of an existing cron object
+           // cron_field.cron("value", "12 23 * * *");
             }
         } else {
             // Hide the cron
@@ -401,12 +424,13 @@ export class DetailsComponent implements OnInit {
         this.selectedCalibration = null;
         this.EquipmentSubType = new PrimeEquipmentSubType(false, '');
         this.displayDialog = true;
-        this.isSubTypeCronControlInitialized = false;
-        this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+       // this.isSubTypeCronControlInitialized = false;
+       // this.selectedSubTypeMaintenanceFrequency = "0 0 1 1 *";
+        // this.isSubTypeMaintenanceFrequencySelected = false;
         this.isSubTypeMaintenanceFrequencySelected = false;
         this.EquipmentSubType.frequency = "";
-        this.showSubTypeHideCronPicker(this.isSubTypeMaintenanceFrequencySelected);
-       // this.onCronInit(this.EquipmentSubType.frequency);
+       // this.showSubTypeHideCronPicker(this.isSubTypeMaintenanceFrequencySelected);
+        //9this.onCronInit(this.EquipmentSubType.frequency);
     }
 
     showDialogToAddForm() {
@@ -560,7 +584,7 @@ export class DetailsComponent implements OnInit {
                 },
                 useGentleSelect: false
             });
-            selfRef.isSubTypeCronControlInitialized = true;
+            this.isSubTypeCronControlInitialized = true;
         }
         else {
             this.isSubTypeMaintenanceFrequencySelected = false;
@@ -583,12 +607,15 @@ export class DetailsComponent implements OnInit {
         //     this.cronInitialized = true;
         if (this.EquipmentSubType.frequency != null && this.EquipmentSubType.frequency != "") {
             this.EquipmentSubType.frequency = this.EquipmentSubType.frequency;
-            selfRef.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
+            this.selectedSubTypeMaintenanceFrequency = this.EquipmentSubType.frequency;
            // this.isSubTypeCronControlInitialized = false;
+            //  this.isSubTypeCronControlInitialized = false;
             selfRef.isSubTypeMaintenanceFrequencySelected = true;
-            
-           // this.showSubTypeHideCronPicker(selfRef.isSubTypeMaintenanceFrequencySelected);
-            //  this.onCronInit();
+          //  this.showSubTypeHideCronPicker();
+          //  this.isSubTypeMaintenanceFrequencySelected = true;
+
+           //  this.showSubTypeHideCronPicker();
+          //  this.onCronInit(this.selectedSubTypeMaintenanceFrequency);
 
         }
         else {
