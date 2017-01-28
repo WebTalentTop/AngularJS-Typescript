@@ -18,7 +18,7 @@
 
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                         <div *ngIf="hasNextMaintenanceDate==true">
-                            <h2>Next Maintainence Date: {{testFacility.nextMaintenanceDate}}</h2>
+                            <h2>Next Maintainence Date: {{testFacility.nextMaintenanceReadableString}}</h2>
                             <!-- Begin Panel - Test Facility Name and Location -->
                         </div>
                         <p-panel header="Information">
@@ -162,7 +162,7 @@
 
                                     <p-checkbox name="groupname" value="IsTestFacilityDelete" id="IsTestFacilityDelete"
                                                 label="Do you want retire this testFacility?"
-                                                [(ngModel)]="IsTestFacilityDelete" (onChange)="onTestFacilityDelete()"
+                                                [(ngModel)]="IsTestFacilityDelete" 
                                                 binary="true"></p-checkbox>
 
                                 </div>
