@@ -54,8 +54,9 @@ export class AddComponent {
         
         this.service.postAdd(formData).subscribe(res => {
                 if (res.isSuccess) {
-                    this.router.navigate(["/admin/vehicle/modelYear"], {queryParams: {page: 1}});
-
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+                setTimeout(()=>this.router.navigate(["admin/vehicle/modelYear"], { queryParams: { page: 1 } }),2000);
                 }
 
             }
