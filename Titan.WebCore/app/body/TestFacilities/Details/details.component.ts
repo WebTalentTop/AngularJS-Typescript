@@ -42,7 +42,6 @@ declare var cron: any;
 })
 export class DetailsComponent implements AfterViewInit {
 
-    //region Class variables
     hasNextMaintenanceDate: boolean = false;
     isMaintenaceFrequencySelected: boolean = false;
     isCronControlInitialized: boolean = false;
@@ -180,7 +179,6 @@ export class DetailsComponent implements AfterViewInit {
         {loaded: false, method: this.loadAttachmentsTabViews},
         {loaded: false, method: this.loadLogsTabViews}
     ];
-    //endregion
 
     constructor(private breadCrumbsService: BreadCrumbsService,
                 private loggerService: LoggerService,
@@ -283,7 +281,15 @@ export class DetailsComponent implements AfterViewInit {
 
     }
 
-  
+    onTestFacilityDelete() {
+        if (this.IsTestFacilityDelete)
+            this.testFacilityService.DeleteTestFacility(this.id).subscribe(res => {
+                    this.IsTestFacilityDelete = true;
+                    console.log('-----delete-------', res);
+                }
+            );
+
+    }
 
     downloadAttachment(attachment) {
 
@@ -303,7 +309,6 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     loadAttachmentsTabViews(me) {
-        this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
         me.getCategories();
         me.getTestFacilityAttachmentServiceById();
     }
@@ -313,6 +318,7 @@ export class DetailsComponent implements AfterViewInit {
         me.getUserRoles();
         //me.getTestFacilities();
         me.testFacilities = [];
+        debugger;
         me.testFacilities.push({
             label: me.testFacility.name,
             value: me.testFacility.id
@@ -452,9 +458,6 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     onCategoryChange(event) {
-        if (event.value == null)
-        { this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80'; }
-        else
         this.selectedCategory = (event.value);
     }
 
@@ -530,6 +533,9 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.getLogComments(this.id)
             .subscribe(res => {
                 this.testFacilityLogComments = res;
+                for (let tflc of this.testFacilityLogComments) {
+                    tflc.createdOn = moment(tflc.createdOn).format("MM-DD-YYYY [at] HH:mm").toString()
+                }
             });
 
     }
@@ -725,11 +731,17 @@ export class DetailsComponent implements AfterViewInit {
                 this.addressid = res.address.id
                 this.testFacility = res.testFacility;
                 this.frequencyInit();
-                this.IsTestFacilityDelete = res.testFacility.isDeleted;
+                if (res.testFacility.isDeleted) {
+                    this.IsTestFacilityDelete = true;
+                }
+                else {
+                    this.IsTestFacilityDelete = false;
+                }
                 //  onMaintenanceNeeded();
                 this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
                 if (res.testFacility.nextMaintenanceDate != null) {
                     this.hasNextMaintenanceDate = true;
+                    this.testFacility.nextMaintenanceDate = moment(res.testFacility.nextMaintenanceDate).format("MM-DD-YYYY [at] HH:mm").toString();
                 }
                 //  this.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                 this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
@@ -1068,7 +1080,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityService.PostLogComments(this.id, JSON.stringify(this.comment)).subscribe(filteredList => {
             this.testFacilityService.getLogComments(this.id)
                 .subscribe(res => {
-                    this.testFacilityLogComments = res;
+                    this.testFacilityLogComments = res;                   
                 });
 
         });
@@ -1134,7 +1146,6 @@ export class DetailsComponent implements AfterViewInit {
         formData.id = this.id;
         formData.description = formRef.description;
         formData.name = formRef.name;
-        formData.isDeleted = this.IsTestFacilityDelete;
         formData.operatingHourId = this.selectedOperatingHour;
         formData.lastMaintenanceDate = this.testFacility.lastMaintenanceDate;
         if (this.isMaintenaceFrequencySelected) {
@@ -1162,12 +1173,18 @@ export class DetailsComponent implements AfterViewInit {
                         this.addressid = res.address.id
                         this.testFacility = res.testFacility;
                         this.testFacility.maintenanceFrequency = res.testFacility.maintenanceFrequency;
-                        this.IsTestFacilityDelete = res.testFacility.isDeleted;
+                        if (res.testFacility.isDeleted) {
+                            this.IsTestFacilityDelete = true;
+                        }
+                        else {
+                            this.IsTestFacilityDelete = false;
+                        }
                         //this.lastMaintenanceDate = res.testFacility.lastMaintenanceDate;
                         this.testFacility.lastMaintenanceDate = new Date(res.testFacility.lastMaintenanceDate);
                         // if (res.testFacility.lastMaintenanceDate != null && res.testFacility.maintenanceFrequency != null) {
                         if (res.testFacility.nextMaintenanceDate != null) {
                             this.hasNextMaintenanceDate = true;
+                            this.testFacility.nextMaintenanceDate = moment(res.testFacility.nextMaintenanceDate).format("MM-DD-YYYY [at] HH:mm").toString();
                         }
 
 
@@ -1270,7 +1287,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityAttachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 this.TestFacilityAttachments = TestFacilityAttachments;
-                this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
+                this.selectedCategory = null;
             });
 
         this.msgs = [];
@@ -1364,6 +1381,7 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
+
     closeFormPreviewDialog() {
         this.displayPreviewSelectedForm = false;
         this.selectedFormName = '';
@@ -1372,6 +1390,7 @@ export class DetailsComponent implements AfterViewInit {
         this.loggerService.logConsole("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
         this.loggerService.logConsole("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
     }
+
 
     // Entering data to the form to create a Form Instance
     showFormInstance(formSchema) {

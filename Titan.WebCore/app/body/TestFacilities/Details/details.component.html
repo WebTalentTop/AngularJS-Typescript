@@ -18,7 +18,7 @@
 
                     <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
                         <div *ngIf="hasNextMaintenanceDate==true">
-                            <h2>Next Maintainence Date: {{testFacility.nextMaintenanceReadableString}}</h2>
+                            <h2>Next Maintainence Date: {{testFacility.nextMaintenanceDate}}</h2>
                             <!-- Begin Panel - Test Facility Name and Location -->
                         </div>
                         <p-panel header="Information">
@@ -160,16 +160,16 @@
 
                                 <div class="input-row md-spaced">
 
-                                    <p-checkbox name="testfacilitydelete" value="IsTestFacilityDelete" id="IsTestFacilityDelete"
+                                    <p-checkbox name="groupname" value="IsTestFacilityDelete" id="IsTestFacilityDelete"
                                                 label="Do you want retire this testFacility?"
-                                                [(ngModel)]="IsTestFacilityDelete" 
+                                                [(ngModel)]="IsTestFacilityDelete" (onChange)="onTestFacilityDelete()"
                                                 binary="true"></p-checkbox>
 
                                 </div>
                               </div>
                             <footer>
                                 <p>* indicates required field</p>
-                                <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save" name="save"
+                                <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save"
                                         icon="ui-icon-save"  class="green-btn" ></button>
                             </footer>
                             <br />
@@ -620,8 +620,8 @@
                           [(visible)]="displayPreviewSelectedForm"
                           modal="true"
                           responsive="true"
-                          [style]="{'overflow':'scroll', 'width': '70%'}">
-                    <div class="card card-w-title"  style="width:1200px">
+                          width="1200">
+                    <div class="card card-w-title">
                         <form-preview *ngIf="selectedFormSchemaFP"
 
                                       [formSchema]="selectedFormSchemaFP"

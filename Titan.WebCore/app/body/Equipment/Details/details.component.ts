@@ -144,11 +144,6 @@ export class DetailsComponent {
                 //  this.selectedEquipmentObj.frequency = "generic"; //res.result.calibrationFrequencyCronExpression;
 
                 this.model.equipmentTypeId = res.result.equipmentTypeId;
-                this.selectedEquipmentTypeId = res.result.equipmentTypeId;
-                if (res.result.purchasePrice == "0.00")
-                    this.model.purchasePrice = null;
-                else
-                    this.model.purchasePrice = res.result.purchasePrice;
                 if (res.result.purchaseDate == null)
                     this.model.purchaseDate = null;
                 else
@@ -163,21 +158,9 @@ export class DetailsComponent {
                     this.model.lastCalibrationDate = null;
                 else
                     this.model.lastCalibrationDate = new Date(res.result.lastCalibrationDate);
-                if (res.result.calibrationFrequencyCronExpression == null || res.result.calibrationFrequencyCronExpression == "") {
-                    let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === this.model.equipmentTypeId)[0].frequency;
-                    if (frequencyvar != null && frequencyvar != "") {
-                        this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
 
-                        this.isMaintenaceFrequencySelected = true;
-                        // this.frequencyInit();
-                    } else
-                    { this.model.calibrationFrequencyCronExpression = null; this.isMaintenaceFrequencySelected = false; }
-                }
-                else
-                { this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression; this.isMaintenaceFrequencySelected = true; }
-               // 
-               
                 this.frequencyInit();
+                this.model.calibrationFrequencyCronExpression = res.result.calibrationFrequencyCronExpression;
                 //if (res.testFacility.nextMaintenanceDate != null) {
                 //    this.hasNextMaintenanceDate = true;
                 //}
@@ -221,7 +204,7 @@ export class DetailsComponent {
     frequencyInit() {
         if (this.model.calibrationFrequencyCronExpression != null) {
             this.selectedMaintenanceFrequency = this.model.calibrationFrequencyCronExpression;
-            //this.isMaintenaceFrequencySelected = true;
+//this.isMaintenaceFrequencySelected = true;
             $("#selector").cron({
 
                 initial: this.selectedMaintenanceFrequency,
@@ -233,7 +216,7 @@ export class DetailsComponent {
         }
         else {
             this.selectedMaintenanceFrequency = "0 0 1 1 *";
-            //this.isMaintenaceFrequencySelected = false;
+            this.isMaintenaceFrequencySelected = false;
         }
 
     }
@@ -287,6 +270,9 @@ export class DetailsComponent {
         this.service.getLogComments(this.id)
             .subscribe(res => {
                 this.equipmentLogComments = res;
+                for (let elc of this.equipmentLogComments) {
+                    elc.createdOn = moment(elc.createdOn).format("MM-DD-YYYY [at] HH:mm").toString()
+                } 
             });
 
     }
@@ -421,14 +407,9 @@ export class DetailsComponent {
 
         let frequencyvar: any = this.equipmentTypes.filter(eType => eType.value === event.value)[0].frequency;
         if (frequencyvar != null && frequencyvar != "") {
-            this.selectedMaintenanceFrequency = frequencyvar;
             this.model.calibrationFrequencyCronExpression = frequencyvar;//event.frequency;
             this.isMaintenaceFrequencySelected = true;
-          //  this.frequencyInit();
-        }
-        else
-        {
-            this.isMaintenaceFrequencySelected = false;
+            this.frequencyInit();
         }
 
         // this.selectedCalibrationFrequency = event.
@@ -476,14 +457,13 @@ export class DetailsComponent {
                 });
                 for (let template of response.$values) {
                     var temp = {
-                        label: (template.frequencyDescription == null) ? template.name : template.name +"(" + template.frequencyDescription + ")",
-                       //label: template.name,
+                        label: template.name + "(" + template.frequencyDescription + ")",
                         value: template.id,
                         frequency: template.frequency
                     }
                     this.equipmentTypes.push(temp);
                 }
-                this.equipmentTypes = this.equipmentTypes;               
+                this.equipmentTypes = this.equipmentTypes;
             }
         });
     }
@@ -498,9 +478,6 @@ export class DetailsComponent {
             this.msgs.push({ severity: 'error', summary: 'Please select Equipment Type', detail: '' });
             return null;
         }
-        var priceDecimal = 0;
-        if (formRef.purchasePrice == null)
-        { formRef.purchasePrice = priceDecimal; }
         //  formRef.isDeleted = false;
         let cronexp: any;
         if (this.isMaintenaceFrequencySelected) {
