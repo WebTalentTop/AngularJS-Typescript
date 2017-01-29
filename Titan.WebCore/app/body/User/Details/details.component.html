@@ -1,6 +1,4 @@
 <div class="ui-g-12">
-        <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
-<br />
     <div class="card card-w-title">
                 <h3> User Details</h3>
 
@@ -8,7 +6,7 @@
             <div class="subsection">
 
                 <form #tfForm="ngForm" (ngSubmit)="onSubmit(tfForm.value)">
-                    <p-growl [value]="msgs"></p-growl>
+
                     <!-- Begin Panel - Test Facility Name and Location -->
 
                     <p-panel header="Information">
@@ -31,50 +29,43 @@
                                 </div>
                                 <!--<p class="helper error" *ngIf="firstNameRef.errors?.required || firstNameRef.errors?.minlength">At least three characters</p>-->
 
+                            </div>
+                            <div class="ui-grid-row ">
+                                <div class="ui-g-12 ui-md-6">
+                                    <p style="color:#777">Department :</p>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
+
+                                </div>
                             </div><br /><br />
-                             <div class="ui-grid-row ">
+
+                            <div class="ui-grid-row ">
                                 <div class="md-inputfield ui-g-12 ui-md-6">
                                     <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="emailAddress"  id="emailAddress" [(ngModel)]="userProfile.emailAddress"
                                          >
                                     <label>Email Address</label>
                                 </div>
                                 <div class="md-inputfield ui-g-12 ui-md-6">
-                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.phoneNumber">
+                                    <input type="text" style="width:100%" pInputText class="form-control"  row="20" name="phoneNumber"  id="phoneNumber" [(ngModel)]="userProfile.firstName">
                                     <label>Phone Number</label>
-                                </div>
-                            </div><br /><br />
-                            <div class="ui-grid-row ">
-                                <div class=" md-inputfield ui-g-12 ui-md-6">
-                                    
-                                    <input type="text" style="width:100%" pInputText name="defaultTenantName" id="defaultTenantName" [(ngModel)]="userProfile.defaultTenantName"
-                                           minlength="3" class="form-control" required row="20">
-                                    <label>Default Tenant *</label>
                                 </div>
                             </div>
                             <div class="ui-grid-row ">
                                 <div class="ui-g-12 ui-md-6">
-                                    <p style="color:#777">Role *</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)" [(ngModel)]="userProfile.roleId"  name="titanRoles"  id="titanRoles" [autoWidth]="false" required></p-dropdown>
+                                    <p style="color:#777">Role :</p>
+                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="titanRoles" (onChange)="onTitanRoleChange($event)"  name="titanRoles"  id="titanRoles" [autoWidth]="false"></p-dropdown>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
                                     <p style="color:#777">Time Zone :</p>
                                     <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="timeZones" (onChange)="onTimeZoneChange($event)" [(ngModel)]="userProfile.defaultTimeZoneId" name="timeZones"  id="timeZones" [autoWidth]="false"></p-dropdown>
                                 </div>
                             </div>
-                                                       <div class="ui-grid-row ">
-                                <div class="ui-g-12 ui-md-6">
-                                    <p style="color:#777">Department :</p>
-                                    <p-dropdown [style]="{'width':'100%','color':'#777'}" [options]="departments" required (onChange)="onDepartmentChange($event)" [(ngModel)]="userProfile.departmentId" name="departments"  id="departments" [autoWidth]="false"></p-dropdown>
-
-                                </div>
-                             </div>
 
 
                         </div>
 
                         <footer>
                             <p>* indicates required field</p>
-                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save" name="save" class="green-btn" icon="ui-icon-save"></button>
+                            <button pButton type="submit" [disabled]="!tfForm.valid" label="Save" id="save" class="green-btn" icon="ui-icon-save"></button>
                         </footer><br />
 
                     </p-panel>
@@ -137,7 +128,7 @@
                 <!-- End Dialog - Assign User Role -->
                 <!-- Begin Panel - Test Facility Users -->
 
-                <p-panel header="Function Group">
+                <p-panel>
 
                     <!--<header class="with-controls">
                         <p class="ui-panel-title"> Function Groups </p>
@@ -149,11 +140,11 @@
                         <p-dataTable [value]="userFunctionGroups" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                             <p-column field="name" header="Function Group Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
-                            <p-column header="Action">
+                            <!--<p-column header="Action">
                                 <template let-FunctionGroup="rowData" pTemplate type="body">
                                     <button pButton type="button" class="red-btn" icon="ui-icon-remove-circle" (click)="onRemoveFunctionGroupMap(FunctionGroup)" label="Delete"></button>
                                 </template>
-                            </p-column>
+                            </p-column>-->
                         </p-dataTable>
 
                     </div>
@@ -181,15 +172,15 @@
 
                     <div class="input-row">
 
-                            <div class="ui-g-4">
+                        <label>
                             <b>Tenants :</b>
-                            </div>
+
                             <div class="ui-g-8">
                                 <p-dropdown [options]="tenants" [style]="{'width':'100%'}" (onChange)="onTenantChange($event)" name="tenants"  id="tenants" [autoWidth]="false"></p-dropdown>
                             </div>
-                        
+                        </label>
 
-                    </div><br />
+                    </div>
 
                     <!-- End Users -->
                     <!-- Begin Role -->
@@ -225,7 +216,7 @@
 
                         <p-dataTable [value]="userTenants" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
                             <p-column field="tenantName" header="Tenant Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
-                            <p-column field="isInheritedPermission" header="User Permission" sortable="true"></p-column>
+                            <p-column field="isInheritedPermission" header="Inherited Permission" sortable="true"></p-column>
                             <!--<p-column field="role" header="Role" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>-->
                             <p-column header="Action">                                
                                 <template let-UserTenant="rowData" pTemplate type="body">
