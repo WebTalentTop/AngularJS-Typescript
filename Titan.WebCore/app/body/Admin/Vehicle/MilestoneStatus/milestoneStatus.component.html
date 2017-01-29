@@ -7,9 +7,6 @@
           <button pButton type="button" [routerLink]="['add']" id="add" name="add"  icon="ui-icon-add" label="Add New Milestone Status"></button>
         </header>
         <div class="ui-grid-row">
-            <div class="ui-messages-success">
-            <p-messages [value]="msgs"></p-messages>
-            </div>
             <grid-data [gridData]="gridData"
                        [cols]='cols'
                        [confInfo]="confInfo"
