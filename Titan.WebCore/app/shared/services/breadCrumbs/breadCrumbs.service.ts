@@ -65,6 +65,9 @@ export class BreadCrumbsService {
         //User Details Page
         this.userDetailsPage();
 
+        //Project Page
+        this.projectPage();
+
         //TestRequest Page
         this.testRequestPage();
         //TestRequest Add Page
@@ -729,6 +732,22 @@ export class BreadCrumbsService {
         let menuItem = { label: 'User Details', routerLink: ['/user'] };
         return menuItem;
     }
+
+    // Project Page Bread Crumbs
+    private projectPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'ProjectHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private projectPageBCItems() {
+        let menuItem = { label: 'Project', routerLink: ['/project'] };
+        return menuItem;
+    }
+
 
     // TestRequest Page Bread Crumbs
     private testRequestPage() {
