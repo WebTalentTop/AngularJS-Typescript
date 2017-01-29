@@ -1,11 +1,12 @@
 <div class="ui-g">
     <div class="ui-g-12">
+  <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
+        <br />
         <header>
             <h1>Equipment Details</h1>
             <button pButton type="button" id="barcode" icon="ui-icon-add" label="Print BarCode" (click)="printBarCode()"></button>
         </header>
-  <p-breadcrumb [model]="breadcrumbs"></p-breadcrumb>
-        <br />
+ 
         <div class="card card-w-title">
            
             <!--<img src="data:image/jpeg;base64,{{image}}" alt="Barcode">
