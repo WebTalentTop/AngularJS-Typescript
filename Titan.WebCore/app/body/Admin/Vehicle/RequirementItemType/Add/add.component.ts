@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { RequirementItemTypeService } from '../../../../../shared/services/requirementItemType.service';
 import { Validators } from '@angular/forms';
-import { SelectItem, MenuItem } from 'primeng/primeng';
+import { SelectItem, MenuItem, Message } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
@@ -15,7 +15,7 @@ export class AddComponent {
     username: string;
     description:string;
     added: any;
-    
+    msgs: Message[];
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
     constructor(
@@ -62,7 +62,9 @@ export class AddComponent {
             // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/admin/vehicle/requirementItemType"], { queryParams: { page: 1 } });
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+                setTimeout(()=>this.router.navigate(["admin/vehicle/requirementItemType"], { queryParams: { page: 1 } }),2000);
                
             }
            
