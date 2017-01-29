@@ -17,8 +17,9 @@ import { Message, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridComponent } from '../../../shared/UIComponents/GridComponent/grid.component';
-import { SelectItem, ConfirmationService } from 'primeng/primeng';
+import { SelectItem, ConfirmationService, MenuItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 declare var $: JQueryStatic;
 
 @Component({
@@ -102,7 +103,11 @@ export class AddComponent implements AfterViewInit {
     msgs: Message[];
     uploadedFiles: any[] = [];
 
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
     constructor(
+        private breadCrumbsService: BreadCrumbsService,
         private route: ActivatedRoute,
         private dataService: TimeEntryService,
         private testfacilityservice: TestFacilityService,
@@ -124,6 +129,16 @@ export class AddComponent implements AfterViewInit {
     ) {
         this.route.params.subscribe(params => this.id = params['id']);
         this.entityId = this.id;
+
+        let breadC = this.breadCrumbsService.getBreadCrumbs();
+        let testRequestAddBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'TestRequestAddPage'
+        )[0];
+        this.breadcrumbs = [];
+        this.breadcrumbs = testRequestAddBreadCrumb.items;
+
+
+        this.breadcrumbsHome = { routerLink: ['/'] };
     }
     handleChange(event) {
     }

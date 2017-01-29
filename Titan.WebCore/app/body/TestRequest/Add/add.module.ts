@@ -19,15 +19,22 @@ import { TestRequestService } from '../../../shared/services/Containers/TestRequ
 import { TestRequestSensorService } from '../../../shared/services/testrequestsensor.service';
 import { GridModule } from '../../../shared/UIComponents/GridComponent/grid.module';
 import { ConfirmationService } from 'primeng/primeng';
-import { EditorModule, SharedModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, InputTextModule, CalendarModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
+import { BreadcrumbModule, EditorModule, SharedModule, DataTableModule, TabViewModule, ButtonModule, 
+    InputTextareaModule, InputTextModule, CalendarModule, CheckboxModule, DialogModule, MultiSelectModule, 
+    ConfirmDialogModule, DropdownModule, PanelModule, MessagesModule, GrowlModule } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./add.routes";
+import { BreadCrumbsService } from '../../../shared/services/breadCrumbs/breadCrumbs.service';
 
 @NgModule({
-    imports: [EditorModule, SharedModule, MultiSelectModule, CommonModule, RouterModule, FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, DropdownModule, MessagesModule, GrowlModule, addRoutes],
+    imports: [BreadcrumbModule, EditorModule, SharedModule, MultiSelectModule, CommonModule, RouterModule, 
+    FormsModule, DataTableModule, TabViewModule, ButtonModule, InputTextareaModule, CheckboxModule, DialogModule, 
+    MultiSelectModule, ConfirmDialogModule, CalendarModule, GridModule, InputTextModule, PanelModule, 
+    DropdownModule, MessagesModule, GrowlModule, addRoutes],
 
-    providers: [TimeEntryService, EquipmentTypeService, ConfirmationService, TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, TestStatusService, TestModeService,
-        TestTypeService, TestFacilityService, TestTemplateService, TestRequestService, DepartmentService],
+    providers: [BreadCrumbsService,TimeEntryService, EquipmentTypeService, ConfirmationService, TestModeService, 
+    TestRequestSensorService, TestVerificationMethodService, BuildLevelService, ProjectService, TestRoleService, 
+    TestStatusService, TestTypeService, TestFacilityService, TestTemplateService, TestRequestService, DepartmentService],
     declarations: [AddComponent]
 })
 

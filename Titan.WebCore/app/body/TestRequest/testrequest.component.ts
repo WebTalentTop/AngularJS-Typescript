@@ -3,9 +3,10 @@ import { TestRequestService } from '../../shared/services/Containers/TestRequest
 import { LoggerService } from './../../shared/services/logger/logger.service';
 import { LazyLoadEvent, Message, MessagesModule, MenuItem } from 'primeng/primeng';
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Params } from '@angular/router';
 import { GridComponent } from '../../shared/UIComponents/GridComponent/grid.component';
 import { titanApiUrl } from '../../shared/services/apiurlconst/titanapiurl';
+import {BreadCrumbsService} from '../../shared/services/breadCrumbs/breadCrumbs.service';
 
 
 declare var $: JQueryStatic;
@@ -15,6 +16,24 @@ declare var fullcalendardef: FullCalendar.Calendar;
     templateUrl: 'app/body/TestRequest/testRequest.component.html'
 })
 export class TestRequestComponent implements AfterViewInit {
+    added: any;
+    msgs: Message[] = [];
+
+    breadcrumbs: MenuItem[];
+    breadcrumbsHome: MenuItem;
+
+    constructor(
+    private breadCrumbsService: BreadCrumbsService)
+    {
+            let breadC = this.breadCrumbsService.getBreadCrumbs();
+            let testRequestBreadCrumb = breadC.filter(filter =>
+            filter.pageName === 'TestRequestHomePage')[0];
+
+            this.breadcrumbs = [];
+            this.breadcrumbs = testRequestBreadCrumb.items;
+
+            this.breadcrumbsHome = {routerLink: ['/']};
+        }
 
     ngAfterViewInit() {
         $('#calendar').fullCalendar({

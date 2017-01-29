@@ -65,6 +65,11 @@ export class BreadCrumbsService {
         //User Details Page
         this.userDetailsPage();
 
+        //TestRequest Page
+        this.testRequestPage();
+        //TestRequest Add Page
+        this.testRequestAddPage();
+
         //FunctionGroup Page
         this.functionGroupPage();
         //FunctionGroup Add Page
@@ -722,6 +727,36 @@ export class BreadCrumbsService {
 
     private userDetailsPageBCItems() {
         let menuItem = { label: 'User Details', routerLink: ['/user'] };
+        return menuItem;
+    }
+
+    // TestRequest Page Bread Crumbs
+    private testRequestPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequestHomePage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private testRequestPageBCItems() {
+        let menuItem = { label: 'Test Request', routerLink: ['/testRequest'] };
+        return menuItem;
+    }
+
+    private testRequestAddPage() {
+        let menuItems = [];
+        menuItems.push(this.homeBreadCrumbItem());
+        menuItems.push(this.testRequestPageBCItems());
+
+        let bcInfoItems: IBreadCrumbsInfo;
+        bcInfoItems = { pageName: 'TestRequestAddPage', items: menuItems };
+        this.addToBreadCrumbs(bcInfoItems);
+    }
+
+    private testRequestAddPageBCItems() {
+        let menuItem = { label: 'TestRequest Add', routerLink: ['/testRequest'] };
         return menuItem;
     }
 
