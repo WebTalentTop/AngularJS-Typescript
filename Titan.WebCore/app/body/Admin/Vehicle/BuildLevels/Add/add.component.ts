@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { BuildLevelService } from '../../../../../shared/services/Containers/BuildLevelService/buildLevel.service';
 import { Validators } from '@angular/forms';
-import { SelectItem, MenuItem } from 'primeng/primeng';
+import { SelectItem, MenuItem, Message } from 'primeng/primeng';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { BreadCrumbsService } from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 //import { DataTable,PanelMenuModule, PanelModule ,InputTextModule,InputTextareaModule, ButtonModule } from 'primeng/primeng';
@@ -18,6 +18,7 @@ export class AddComponent {
 
         breadcrumbs: MenuItem[];
         breadcrumbsHome: MenuItem;
+        msgs: Message[];
     constructor(
     private breadCrumbsService: BreadCrumbsService,
     private service: BuildLevelService, 

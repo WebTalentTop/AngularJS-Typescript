@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ModelYearService} from '../../../../../shared/services/modelYear.service';
 import {Validators} from '@angular/forms';
-import {SelectItem, MenuItem} from 'primeng/primeng';
+import {SelectItem, MenuItem, Message} from 'primeng/primeng';
 import {Router, Params, ActivatedRoute} from '@angular/router';
 import {BreadCrumbsService} from '../../../../../shared/services/breadCrumbs/breadCrumbs.service';
 
@@ -14,7 +14,7 @@ export class AddComponent {
     username: string;
     description:string;
     added: any;
-    
+    msgs: Message[]; 
     breadcrumbs: MenuItem[];
     breadcrumbsHome: MenuItem;
 
