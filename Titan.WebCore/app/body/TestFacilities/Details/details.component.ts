@@ -1267,7 +1267,7 @@ export class DetailsComponent implements AfterViewInit {
         this.testFacilityAttachmentservice.getByIdusing(this.id)
             .subscribe(TestFacilityAttachments => {
                 this.TestFacilityAttachments = TestFacilityAttachments;
-                this.selectedCategory = null;
+                this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80';
             });
 
         this.msgs = [];
