@@ -6,6 +6,6 @@ export class TitanUserApiUrl {
     public static postUpdateUrl: string = titanApiUrl + 'titanUser/put';
     public static getByIdUrl: string = titanApiUrl + 'titanUser/get';
     public static getProfileByIdUrl: string = titanApiUrl + 'titanUser/Profile';
-    public static getAllowedTenantsListUrl: string = titanApiUrl + 'titanUser/allowedTenantsList/';
+    public static getAllowedTenantsListUrl: string = titanApiUrl + 'titanUser/allowedTenantsList';
     public static putSetDefaultTenantIdUrl: string = titanApiUrl + 'titanUser/setDefaultTenant/';
 }

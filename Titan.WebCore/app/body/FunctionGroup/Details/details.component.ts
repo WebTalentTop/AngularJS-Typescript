@@ -172,7 +172,7 @@ export class DetailsComponent {
 
             });
     }
-
+    
     onUserChange(event) {
         this.selectedUserId = event.value;
     }

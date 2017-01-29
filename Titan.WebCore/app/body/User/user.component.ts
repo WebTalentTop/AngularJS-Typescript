@@ -43,8 +43,8 @@ export class UserComponent {
         private router: Router) {
 
             this.route.queryParams.subscribe(params => {
-
             this.added = params['page'];
+            
             let breadC = this.breadCrumbsService.getBreadCrumbs();
             let userBreadCrumb = breadC.filter(filter =>
                 filter.pageName === 'UserHomePage')[0];
