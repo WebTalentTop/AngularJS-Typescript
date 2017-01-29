@@ -1,7 +1,7 @@
 /**
  * Created by ZeroInfinity on 12/19/2016.
  */
-import { Component, Input} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import { FormSchemaFieldDataTypeService } from '../../../services/formSchemaFieldDataType.service';
 import { IFormSchemaFieldDataType } from '../../../services/definitions/IFormSchemaFieldDataType';
 import { IFormSchemaField } from "../../../services/definitions/IFormSchemaField";
@@ -14,7 +14,7 @@ import {IFormSchema} from "../../../services/definitions/IFormSchema";
     templateUrl: 'app/shared/UIComponents/FormComponents/FormPreviewComponent/formPreview.component.html'
 })
 
-export class FormPreviewComponent {
+export class FormPreviewComponent implements OnChanges {
     @Input() formName:string;
     @Input() formSchema:any;
     @Input() fields:any[] = [];
@@ -28,13 +28,13 @@ export class FormPreviewComponent {
         this.ls.setShow(true);
     }
 
-    ngOnInit() {
+    ngOnChanges (changes) {
         //this.selectedInputList = this.formSchema.fields;
         this.ls.logConsole("Form Schema Passed on -----------", this.formSchema);
         this.ls.logConsole("FormSchemaCategoryList --------", this.formSchemaCategoryList);
         this.ls.logConsole("SelectedInputList passed -------", this.selectedInputList);
         this.ls.logConsole("FormName passed ----", this.formName);
-
+        this.ls.logConsole("Form Preview Fields ------------", this.fields);
         let items = this.fields.map(x => {
             let item:IFormSchemaField = x;
             item.data = x.data.$values;
@@ -49,6 +49,7 @@ export class FormPreviewComponent {
             }
 
             this.ls.logConsole("Field Item info ----", item);
+            return item;
         })
         this.selectedInputList = this.fields;
         this.ls.logConsole("Fields Extracted -----", this.fields);
@@ -61,6 +62,10 @@ export class FormPreviewComponent {
                     console.log("FormFieldDataTypeList itself -----------", this.formFieldDataTypeList);
                 }
             })
+    }
+
+    ngOnInit() {
+
     }
 
     checkFieldDataType(id): IFormSchemaFieldDataType {

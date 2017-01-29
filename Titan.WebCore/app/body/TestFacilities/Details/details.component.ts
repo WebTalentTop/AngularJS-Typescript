@@ -1369,6 +1369,7 @@ export class DetailsComponent implements AfterViewInit {
         this.displayPreviewSelectedForm = false;
         this.selectedFormName = '';
         this.selectedFormFields = [];
+        this.fieldsFP = [];
         this.loggerService.logConsole("After Closed Dialog FormName -------", this.selectedFormName || "reseted");
         this.loggerService.logConsole("After Closed Dialog Form Schema To View clicked ----", this.selectedFormFields || "reseted");
         this.loggerService.logConsole("After Closed Dialog PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm || "reseted");
@@ -1406,16 +1407,8 @@ export class DetailsComponent implements AfterViewInit {
         this.getFormSchemaInfoSelectedByGridMF(true);
     }
 
-    selectedFormToView(formName, formSchemaItems) {
-        this.selectedFormName = formName;
-        this.selectedFormSchemaFP = formSchemaItems;
-        this.displayPreviewSelectedForm = true;
-        // this.loggerService.logConsole("FormName -------", this.selectedFormName);
-        //this.loggerService.logConsole("Form Schema To View clicked ----", this.selectedFormSchemaFP);
-        //his.loggerService.logConsole("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
-    }
-
     getFormSchemaInfoSelectedByGridMF(formToView) {
+        this.fieldsFP = [];
         this.formSchemaService.getById(this.selectedMaintenanceForm.id)
             .subscribe(res => {
                 this.loggerService.logConsole("After selection from the MF ----", res);
@@ -1449,6 +1442,14 @@ export class DetailsComponent implements AfterViewInit {
             });
     }
 
+    selectedFormToView(formName, formSchemaItems) {
+        this.selectedFormName = formName;
+        this.selectedFormSchemaFP = formSchemaItems;
+        this.displayPreviewSelectedForm = true;
+        // this.loggerService.logConsole("FormName -------", this.selectedFormName);
+        //this.loggerService.logConsole("Form Schema To View clicked ----", this.selectedFormSchemaFP);
+        //his.loggerService.logConsole("PreviewSelectedForm dialog display -------", this.displayPreviewSelectedForm);
+    }
     addCommentButton(event) {
         this.comment = '';
         this.displayCommentDialog = true;
