@@ -1,6 +1,8 @@
 /**
  * Created by ZeroInfinity on 12/10/2016.
  */
+import { IEmail } from './IEmail';
+
 export interface ITorqueSheet {
     id: string;
     nameId: string;
@@ -25,4 +27,8 @@ export interface ITorqueSheet {
     isRejectVersionVisible: boolean;
     otherVersions: any;
     isUserViewingLatestVersion: boolean;
+}
+
+export interface ITorqueSheetEmailNotification extends ITorqueSheet {
+    emailDto: IEmail;
 }

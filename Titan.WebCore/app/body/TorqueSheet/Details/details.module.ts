@@ -11,6 +11,7 @@ import {
 } from 'primeng/primeng';
 import { RouterModule } from "@angular/router";
 import addRoutes from "./details.routes";
+import { EmailModule } from '../../../shared/UIComponents/EmailComponent/email.module';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import addRoutes from "./details.routes";
         ButtonModule,
         DropdownModule,
         ConfirmDialogModule,
+        EmailModule,
         //RadioButtonModule,
         //MultiSelectModule,
         addRoutes, DialogModule, EditorModule, AutoCompleteModule, SharedModule
