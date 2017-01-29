@@ -63,8 +63,9 @@ export class AddComponent {
             // this.router.navigate(["/vehicle/projectStatus/", res]);
             if (res.isSuccess) {
                 //this.router.navigate([], {q})
-                this.router.navigate(["/admin/vehicle/projectStatus"], { queryParams: { page: 1 } });
-               
+                this.msgs = [];
+                this.msgs.push({ severity: 'success', summary: 'Success', detail: '' });
+                setTimeout(()=>this.router.navigate(["admin/vehicle/projectStatus"], { queryParams: { page: 1 } }),2000);
             }
            
         }
