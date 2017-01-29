@@ -452,6 +452,9 @@ export class DetailsComponent implements AfterViewInit {
     }
 
     onCategoryChange(event) {
+        if (event.value == null)
+        { this.selectedCategory = 'a366476b-1249-4c9b-b3b8-072cbab81e80'; }
+        else
         this.selectedCategory = (event.value);
     }
 
